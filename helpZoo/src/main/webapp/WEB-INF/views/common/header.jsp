@@ -202,7 +202,8 @@
 
           <li><a href="#portfolio">리뷰해ZOO</a></li>
           <li><a href="#pricing">구독해ZOO</a></li>
-          <li><a href="#contact">기부센터</a></li>
+          <li><a href="#contact">고객센터</a></li>
+          <li><a href="#contact">마이페이지</a></li>
 
         </ul>
       </nav><!-- .nav-menu -->
