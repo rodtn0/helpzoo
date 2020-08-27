@@ -58,21 +58,21 @@
 
       <!-- The main logo is shown in mobile version only. The centered nav-logo in nav menu is displayed in desktop view  -->
       <div class="logo d-block d-lg-none">
-        <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
+        <a href="index.html"><img src="/helpzoo/resources/images/도와주100.png" alt="" class="img-fluid"></a>
       </div>
 
       <nav class="nav-menu d-none d-lg-block">
         <ul class="nav-inner">
           <li><a href="#services">펀딩하기</a></li>
           <li><a href="#services">기부하기</a></li>
-           <li class="drop-down"><a href="">리뷰</a>
+           <li class="drop-down"><a href="">후기게시판</a>
             <ul>
-              <li><a href="#about">펀딩 리뷰</a></li>
-              <li><a href="#team">기부 리뷰</a></li>
+              <li><a href="#about">펀딩 후기게시판</a></li>
+              <li><a href="#team">기부 후기게시판</a></li>
             </ul>
           </li>
 
-          <li class="nav-logo active"><a href="index.html"><img src="/helpzoo/resources/images/도와주150.png" alt="" class="img-fluid" id="logo"></a></li>
+          <li class="nav-logo active"><a href="index.html"><img src="/helpzoo/resources/images/도와주100.png" alt="" class="img-fluid" id="logo"></a></li>
 
 		  <li class="drop-down"><a href="">공지</a>
             <ul>
