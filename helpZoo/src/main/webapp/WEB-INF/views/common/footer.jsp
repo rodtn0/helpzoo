@@ -10,9 +10,9 @@
 	/*--------------------------------------------------------------
 	# Footer
 	--------------------------------------------------------------*/
-		#footer {
+		/* #footer { */
 		  /* background: url("../img/footer-bg.jpg") center center no-repeat; */
-		  background-color: #1abc9c;
+		 /*  background-color: #1abc9c;
 		  color: #fff;
 		  font-size: 14px;
 		  position: relative;
@@ -25,12 +25,12 @@
 		  right: 0;
 		  top: 0;
 		  bottom: 0;
-		  background: rgba(0, 0, 0, 0.5); /* 0.5:투명도 */
+		  background: rgba(0, 0, 0, 0.5);
 		  z-index: 1;
-		}
+		}*/
 		
 		/* footer패딩 조절로 높이 줄이기 */
-		#footer .footer-top {
+		/* #footer .footer-top {
 		  position: relative;
 		  z-index: 2;
 		  text-align: center;
@@ -56,7 +56,7 @@
 		  font-style: italic;
 		  margin: 30px 0 0 0;
 		  padding: 0;
-		}
+		} */
 		
 	/* 	#footer .footer-top .footer-newsletter {
 		  text-align: center;
@@ -124,7 +124,7 @@
 		  text-decoration: none;
 		} */
 		
-		#footer .footer-bottom {
+		/* #footer .footer-bottom {
 		  border-top: 1px solid rgba(0, 0, 0, 0.1);
 		  z-index: 2;
 		  position: relative;
@@ -140,7 +140,7 @@
 		  text-align: center;
 		  font-size: 13px;
 		  padding-top: 5px;
-		}
+		} */
 	
 	</style>
 </head>
@@ -149,7 +149,7 @@
 <!-- ======= Footer ======= -->
   <footer id="footer">
 
-    <div class="footer-top">
+    <!-- <div class="footer-top">
 
     	<div class="container">
 
@@ -157,12 +157,12 @@
           <div class="col-lg-6">
             <a href="#header" class="scrollto footer-logo"><img src="/helpzoo/resources/images/도와주400.png" alt=""></a>
             <h3>HelpZoo</h3>
-            <p>도와ZOO(주)</p>
+            <h3>도와ZOO(주)</h3>
             <span>서울특별시 중구 남대문로 120</span><br>
             <span>Tel : 1661-8282 /</span>
             <span>사업자 번호 : 123-45-56789</span>
           </div>
-        </div>
+        </div> -->
 
 		<!-- 메일주소 적는 란  -->
         <!--  <div class="row footer-newsletter justify-content-center">
@@ -182,11 +182,18 @@
           <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
         </div> -->
 
-      </div>
-    </div> 
+   <!--    </div>
+    </div>  -->
     
 
     <div class="container footer-bottom clearfix">
+      <div class="information">
+	      <h3>도와ZOO(주)</h3>
+	            <span>서울특별시 중구 남대문로 120</span><br>
+	            <span>Tel : 1661-8282 /</span>
+	            <span>사업자 번호 : 123-45-56789</span>
+	      </div>
+	      <br>
       <div class="copyright">
         &copy; Copyright <strong><span>helpzoo</span></strong>. All Rights Reserved
       </div>

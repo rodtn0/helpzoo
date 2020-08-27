@@ -96,6 +96,21 @@ h1, h2, h3, h4, h5, h6 {
   max-height: 40px;
 }
 
+#header .btn-get-started{
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 14px 30px;
+  border-radius: 3px;
+  transition: 0.5s;
+  margin: 10px;
+  color: #fff;
+  background: #1abc9c;
+}
+
 @media (max-width: 992px) {
   #header {
     height: 70px;
@@ -1602,13 +1617,13 @@ section {
 --------------------------------------------------------------*/
 #footer {
   /* background: url("../img/footer-bg.jpg") center center no-repeat; */
-  background: #9DCDC8;
+  background: #1abc9c;
   color: #fff;
   font-size: 14px;
   position: relative;
 }
 
-#footer::before {
+/* #footer::before {
   content: "";
   position: absolute;
   left: 0;
@@ -1711,14 +1726,18 @@ section {
   background: #5ab652;
   color: #fff;
   text-decoration: none;
-}
+} */
 
 #footer .footer-bottom {
-  border-top: 1px solid #222222;
+  border-top: 1px solid #1abc9c;
   z-index: 2;
   position: relative;
   padding-top: 40px;
   padding-bottom: 40px;
+}
+
+#footer .information {
+  text-align: center;
 }
 
 #footer .copyright {
@@ -1729,4 +1748,12 @@ section {
   text-align: center;
   font-size: 13px;
   padding-top: 5px;
+}
+
+#footer .credits a{
+	color: white;
+}
+
+#footer .credits a: nhover{
+	color: black;
 }
