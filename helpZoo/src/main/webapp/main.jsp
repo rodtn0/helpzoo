@@ -14,10 +14,11 @@
 <body>
   <!-- ======= Hero Section ======= -->
   <section id="hero">
+  	<img src="/helpzoo/resources/images/helpzoomainImg.jpg" alt="" width="100%">
     <div class="hero-container">
-      <a href="index.html" class="hero-logo" data-aos="zoom-in"><img src="assets/img/hero-logo.png" alt=""></a>
-      <h1 data-aos="zoom-in">Welcome To Knight Studios</h1>
-      <h2 data-aos="fade-up">We are team of talanted designers making websites with Bootstrap</h2>
+      <a href="index.html" class="hero-logo" data-aos="zoom-in"><!-- <img src="/helpzoo/resources/images/도와주400.png" alt=""> --></a>
+      <h1 data-aos="zoom-in">Welcome To HelpZoo</h1>
+      <h2 data-aos="fade-up">Crowdfunding and donations for animals</h2>
       <a data-aos="fade-up" href="#logo" class="btn-get-started scrollto">Get Started</a>
     </div>
   </section><!-- End Hero -->
