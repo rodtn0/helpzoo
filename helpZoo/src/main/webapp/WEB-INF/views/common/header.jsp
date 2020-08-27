@@ -91,8 +91,9 @@
 
         </ul>
       </nav><!-- .nav-menu -->
-
+		
     </div>
+		<span><button id="loginBtn">로그인</button></span>
   </header><!-- End Header -->
 
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
