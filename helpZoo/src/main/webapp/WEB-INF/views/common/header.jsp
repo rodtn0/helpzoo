@@ -63,37 +63,37 @@
 
       <nav class="nav-menu d-none d-lg-block">
         <ul class="nav-inner">
-          <li><a href="#services">펀딩하기</a></li>
-          <li><a href="#services">기부하기</a></li>
-           <li class="drop-down"><a href="">후기게시판</a>
+          <li><a href="${contextPath}/member/funding">펀딩하기</a></li>
+          <li><a href="${contextPath}/member/donation">기부하기</a></li>
+           <li class="drop-down"><a href="${contextPath}/board/review">후기게시판</a>
             <ul>
-              <li><a href="#about">펀딩 후기게시판</a></li>
-              <li><a href="#team">기부 후기게시판</a></li>
+              <li><a href="${contextPath}/board/fundingReview">펀딩 후기게시판</a></li>
+              <li><a href="${contextPath}/board/donationReview">기부 후기게시판</a></li>
             </ul>
           </li>
 
-          <li class="nav-logo active"><a href="index.html"><img src="/helpzoo/resources/images/도와주100.png" alt="" class="img-fluid" id="logo"></a></li>
+          <li class="nav-logo active"><a href="main.jsp"><img src="/helpzoo/resources/images/도와주100.png" alt="" class="img-fluid" id="logo"></a></li>
 
-		  <li class="drop-down"><a href="">공지</a>
+		  <li class="drop-down"><a href="${contextPath}/notice">공지</a>
             <ul>
-              <li><a href="#about">공지사항</a></li>
-              <li><a href="#team">이벤트</a></li>
+              <li><a href="${contextPath}/notice">공지사항</a></li>
+              <li><a href="${contextPath}/event">이벤트</a></li>
             </ul>
           </li>
-          <li class="drop-down"><a href="">고객센터</a>
+          <li class="drop-down"><a href="${contextPath}/service/faq">고객센터</a>
             <ul>
-              <li><a href="#about">FAQ</a></li>
-              <li><a href="#team">Q&A</a></li>
+              <li><a href="${contextPath}/service/faq">FAQ</a></li>
+              <li><a href="${contextPath}/service/qna">Q&A</a></li>
             </ul>
           </li>
-          <li><a href="#pricing">구독하기</a></li>
-          <li><a href="#contact">마이페이지</a></li>
+          <li><a href="${contextPath}/subscribe">구독하기</a></li>
+          <li><a href=" ${contextPath}/member/mypage">마이페이지</a></li>
 
         </ul>
       </nav><!-- .nav-menu -->
 		
     </div>
-		<span><button id="loginBtn">로그인</button></span>
+		<span><a href="${contextPath}/member/login" class="btn-get-started scrollto">로그인</a></span>
   </header><!-- End Header -->
 
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
