@@ -24,7 +24,7 @@ public class FAQController {
 		List<Board> boardList = faqService.selectList(type);
 		
 		for(Board b : boardList) {
-			System.out.println();
+		System.out.println(b);
 		}
 		return "board/faqMain";
 	}
