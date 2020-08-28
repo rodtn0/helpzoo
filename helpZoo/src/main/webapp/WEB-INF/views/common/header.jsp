@@ -8,13 +8,15 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Inner Page - Knight Bootstrap Template</title>
+  <title>도와ZOO</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
+  
+     <!-- core tag 추가 -->
+    <!-- c:set은 변수 선언 -->
+    <!-- context Path를 프로젝트 전체에서 간단히 사용할 수 있도록 변수 선언 -->
+    <c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application"/>
 
-  
-  
-  
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
@@ -48,7 +50,15 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  
+   <!-- CSS -->
+   <link rel="stylesheet" href="${contextPath}/resources/css/style.css">
 </head>
+<style>
+	* {
+ 	font-family: "LotteMartDream";
+	}
+</style>
 
 <body>
 
@@ -93,7 +103,8 @@
       </nav><!-- .nav-menu -->
 		
     </div>
-		<span><a href="${contextPath}/member/login" class="btn-get-started scrollto">로그인</a></span>
+    						<!-- class="btn-get-started scrollto" -->
+		<span><a href="${contextPath}/member/login">로그인</a></span>
   </header><!-- End Header -->
 
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>

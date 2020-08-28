@@ -24,13 +24,13 @@
   </section><!-- End Hero -->
   
 	<jsp:include page="WEB-INF/views/common/header.jsp"/>
-	<div id="main">
+	<div id="content" >
 	
 		<h1>
-			Hello world!?s
+			도와주(ZOO)
 		</h1>
 	
-		<P>  The time on the server is ${serverTime}. </P>
+		<P> 반려동물 펀딩&기부 관련 사이트 도와주(ZOO) 프로젝트의 맡겨조 팀입니다~! </P>
 	
 	</div>
 	
