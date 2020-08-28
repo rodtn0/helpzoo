@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+/* index */
+body{
+width: 100%;
+margin: auto;
+}
+
+/* content */
+#content{
+width: 100%;
+padding-top:150px;
+}
+
+/* ----------- font ------------------*/
+  /* 롯데마트 드림체 */
+  @font-face {
+  font-family: "LotteMartDream";
+  font-style: normal;
+  font-weight: 400;
+  src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff') format('woff');
+  }
+  
+  /* 레코체 */
+    @font-face {
+    font-family: "Recipekorea";
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/Recipekorea.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+

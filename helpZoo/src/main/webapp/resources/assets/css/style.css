@@ -8,6 +8,11 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+
+*{
+ font-family: font-family: "LotteMartDream";
+}
+
 body {
   font-family: "Open Sans", sans-serif;
   color: #555555;
@@ -121,6 +126,7 @@ h1, h2, h3, h4, h5, h6 {
 # Navigation Menu
 --------------------------------------------------------------*/
 /* Desktop Navigation */
+
 .nav-menu {
   width: 100%;
 }
