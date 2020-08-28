@@ -22,12 +22,13 @@
 	-->
 	<typeAliases>
 		<typeAlias type="com.project.helpzoo.model.vo.Donation" alias="Donation" />
+		<typeAlias type="com.project.helpzoo.board.model.vo.Board" alias="Board" />
 	</typeAliases>
 	
 	<!-- mapper.xml 파일을 등록하는 태그  -->
 	<mappers>
 		<mapper resource="/mappers/donation-mappers.xml" />	
-		
+		<mapper resource="/mappers/faq-mappers.xml" />
 	</mappers>
 	
 </configuration>
