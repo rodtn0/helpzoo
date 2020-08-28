@@ -21,13 +21,12 @@
 		ex) Member VO의 정식 이름(풀네임) : com.kh.spring.member.model.vo.Member 
 	-->
 	<typeAliases>
-					
+		<typeAlias type="com.project.helpzoo.model.vo.Donation" alias="Donation" />
 	</typeAliases>
 	
 	<!-- mapper.xml 파일을 등록하는 태그  -->
 	<mappers>
-	<!-- mapper라는 자원은 어디에 있는가? -->
-	<!--  / : resources 폴더 -->
+		<mapper resource="/mappers/donation-mappers.xml" />	
 		
 	</mappers>
 	

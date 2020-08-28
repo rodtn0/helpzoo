@@ -64,7 +64,7 @@
       <nav class="nav-menu d-none d-lg-block">
         <ul class="nav-inner">
           <li><a href="${contextPath}/member/funding">펀딩하기</a></li>
-          <li><a href="${contextPath}/member/donation">기부하기</a></li>
+          <li><a href="${contextPath}/donation/donationMain">기부하기</a></li>
            <li class="drop-down"><a href="${contextPath}/board/review">후기게시판</a>
             <ul>
               <li><a href="${contextPath}/board/fundingReview">펀딩 후기게시판</a></li>
