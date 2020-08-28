@@ -23,5 +23,19 @@ public class DonationController {
 		return "donation/donationDetail";
 		
 	}
+	
+	// 기부 등록페이지 이동
+	@RequestMapping("donationRegistration")
+	public String donationRegistration() {
+		return "donation/donationRegistration";
+		
+	}
+	
+	// 기부 결제페이지 이동
+	@RequestMapping("donationPayment")
+	public String donationPayment() {
+		return "donation/donationPayment";
+		
+	}
 
 }
