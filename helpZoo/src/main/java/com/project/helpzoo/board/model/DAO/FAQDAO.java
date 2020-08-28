@@ -17,5 +17,4 @@ public class FAQDAO {
 	public List<Board> selectList(int type) {
 		return sqlSession.selectOne("faqMapper.selectFAQ", type);
 	}
-
 }
