@@ -24,8 +24,7 @@
   </section><!-- End Hero -->
   
 	<jsp:include page="WEB-INF/views/common/header.jsp"/>
-	<div id="content" >
-	
+	<div id="content" class="container">
 		<h1>
 			도와주(ZOO)
 		</h1>
