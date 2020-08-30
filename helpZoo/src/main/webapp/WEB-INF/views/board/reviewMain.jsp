@@ -8,18 +8,40 @@
 <title>후기 게시판</title>
 
 	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/categoryCss/css/style.css" />
+	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/categoryCss/css/demo.css" />
+	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/categoryCss/css/font-awesome.css" />
+	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/categoryCss/css/noJS.css" />
+	
+	<style>
+		.container .btn-get-started {
+		  font-family: "Montserrat", sans-serif;
+		  text-transform: uppercase;
+		  font-weight: 400;
+		  font-size: 16px;
+		  letter-spacing: 1px;
+		  display: inline-block;
+		  padding: 14px 30px;
+		  border-radius: 3px;
+		  transition: 0.5s;
+		  margin: 10px;
+		  color: #fff;
+		  background: #7fcdcd;
+		}
+	</style>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"/>
+	
 	<div class="container">
+	
 	
 		<section class="main">
 				<div class="wrapper-demo">
 					<div id="dd" class="wrapper-dropdown-1" tabindex="1">
-						<span>Gender</span>
+						<span>분류 없음</span>
 					    <ul class="dropdown" tabindex="1">
-					        <li><a href="#">Male</a></li>
-					        <li><a href="#">Female</a></li>
+					        <li><a href="#">펀딩 후기 게시판</a></li>
+					        <li><a href="#">기부 후기 게시판</a></li>
 					    </ul>
 					</div>
 				​</div>
@@ -49,7 +71,10 @@
 				
 			</tbody>
 		</table>
+		
+		<a href="#" class="btn-get-started scrollto">글작성</a>
 	</div>
+	
 		
 	
 	<jsp:include page="../common/footer.jsp"/>
