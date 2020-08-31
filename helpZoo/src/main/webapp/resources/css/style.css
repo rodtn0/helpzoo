@@ -11,6 +11,9 @@ margin: auto;
 width: 100%;
 padding-top:150px;
 }
+footer{
+	position:absolute;
+}
 
 /* ----------- font ------------------*/
   /* 롯데마트 드림체 */
