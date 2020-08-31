@@ -7,6 +7,7 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 
-@Autowired
-private JavaMailSender mailSender;
+//@Autowired
+//private Javamail mailSender;
 
 @Controller
 @RequestMapping("/member/*")
@@ -67,7 +68,7 @@ public class MemberController {
 		"인증번호를 입력해주시면 회원가입 진행이 완료됩니다.";
 		
 		try {
-			MimeMessage message = mailSender.createMimeMessage();
+			//MimeMessage message = mailSender.createMimeMessage();
 			
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 			
@@ -78,7 +79,7 @@ public class MemberController {
 		
 		
 		
-		return mv;
+		//return mv;
 		
 	}
 	
