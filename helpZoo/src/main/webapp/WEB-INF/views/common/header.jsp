@@ -49,6 +49,9 @@
   
    <!-- CSS -->
    <link rel="stylesheet" href="${contextPath}/resources/css/style.css">
+   
+      <!-- sweetalert : alert창을 꾸밀 수 있게 해주는 라이브러리 https://sweetalert.js.org/ -->
+     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <style>
 	* {
@@ -57,7 +60,17 @@
 </style>
 
 <body>
-
+	<!-- sweetalert -->
+		<c:if test="${!empty msg}">
+		<script>
+			swal({
+				title : "${msg}",
+				icon : "${status}",
+				text : "${text}"});
+		</script>
+		<c:remove var="msg"/>
+	</c:if>
+	
 	<!-- ======= Header ======= -->
   <header id="header" class="d-flex align-items-center">
     <div class="container">
@@ -82,8 +95,8 @@
 
 		  <li class="drop-down"><a href="${contextPath}/notice">공지</a>
             <ul>
-              <li><a href="${contextPath}/notice">공지사항</a></li>
-              <li><a href="${contextPath}/event">이벤트</a></li>
+				<li><a href="${contextPath}/notice/noticeList">공지사항</a></li>
+				<li><a href="${contextPath}/event/eventList">이벤트</a></li>
             </ul>
           </li>
           <li class="drop-down"><a href="${contextPath}/service/faq">고객센터</a>

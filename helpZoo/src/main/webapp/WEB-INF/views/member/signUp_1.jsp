@@ -4,13 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>약관 동의</title>
+<title>회원가입 - 약관 동의</title>
 <link rel="stylesheet" href="${contextPath}/resources/css/signUp.css">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
-  	<div id="context">
-  	<div class="container">
     <div class="row justify-content-md-center">
         <div style="position: absolute; top: 50%; height: 778.98px; margin-top: -389.49px;">
             <div class="card" style="width: 40rem;">
@@ -542,26 +540,25 @@
                                 </div>
                             </div>
                             <div class="col-12 text-center">
-                                <button type="submit" name="register" style="opacity: 90%; font-size: 16px;
+                                <button type="submit" name="register" style="opacity: 90%; font-size: 16px; border: white;
                                 	background-color:#97ecec" 
                                     class="btn btn-lg btn-primary btn-block" value="register">회원가입</button>
                             </div>
-                        </form>
 			                    </div>
+                        </form>
 			                </div>
 			            </div>
 			        </div>
 			    </div>
-			</div>
 		    <script>
 		    	function validate(){
-		    		if(!$("#agree").prop("checked")){
-		    			swal("약관에 동의해주세요.");
+		    		if(!$("#agree").prop("checked") || (!$("#agree2").prop("checked"))){
+		    			swal({
+		    				  icon: "error",
+		    				  title : "약관에 모두 동의해주세요."
+		    				});
 			   			return false; 
-		    		}else if(! $("#agree2").prop("checked")){
-		    			swal("약관에 동의해주세요.");
-			   			return false; 
-		    		}else
+		    		}
 		    		return true;
 		    	}
 		    </script>

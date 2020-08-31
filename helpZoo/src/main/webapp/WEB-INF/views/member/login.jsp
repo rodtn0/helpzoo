@@ -13,7 +13,7 @@
 		<div class="login-page">
 		  <div class="form">
 			<h1 id="loginTxt">로그인</h1><br>
-		    <form class="register-form">
+		    <form class="register-form" method="POST" action="login" onsubmit="return fnLogin();">
 		      <input type="text" placeholder="name"/>
 		      <input type="password" placeholder="password"/>
 		      <input type="text" placeholder="email address"/>
@@ -31,5 +31,13 @@
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+	
+	<script>
+		function fnLogin(){
+			
+		}
+	
+	
+	</script>
 </body>
 </html>
