@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -73,10 +75,10 @@
 	        <div class="ui-tabs">
 	            <ul>
 	                <li class="active">
-	                    <a href="#">공지</a>
+	                    <a href="${contextPath}/notice/noticeList">공지</a>
 	                </li>
 	                <li>
-	                    <a href="#">이벤트</a>
+	                    <a href="${contextPath}/event/eventList">이벤트</a>
 	                </li>
 	            </ul>
 	        </div>

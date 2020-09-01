@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -73,79 +75,50 @@
 	        <div class="ui-tabs">
 	            <ul>
 	                <li class="active">
-	                    <a href="#">공지</a>
+	                    <a href="${contextPath}/notice/noticeList">공지사항</a>
 	                </li>
 	                <li>
-	                    <a href="#">이벤트</a>
+	                    <a href="${contextPath}/event/eventList">이벤트</a>
 	                </li>
 	            </ul>
 	        </div>
 	
 	        <!-- 게시판 리스트 -->
 	        <div class="board-main">
-	            <ul>
-	                <li>
-	                    <a class="article" href="#">
-	                        <em class="category">공지</em>
-	                        <div class="info">
-	                            <h3 class="title">공지사항1</h3>
-	                            <span class="author">admin</span>
-	                            <span class="created-at">2020.08.28</span>
-	                        </div>
-	                    </a>
-	                </li>
-	                <li>
-	                    <a class="article" href="#">
-	                        <em class="category">공지</em>
-	                        <div class="info">
-	                            <h3 class="title">공지사항2</h3>
-	                            <span class="author">admin</span>
-	                            <span class="created-at">2020.08.28</span>
-	                        </div>
-	                    </a>
-	                </li>
-	                <li>
-	                    <a class="article" href="#">
-	                        <em class="category">공지</em>
-	                        <div class="info">
-	                            <h3 class="title">공지사항3</h3>
-	                            <span class="author">admin</span>
-	                            <span class="created-at">2020.08.28</span>
-	                        </div>
-	                    </a>
-	                </li>
-	                <li>
-	                    <a class="article" href="#">
-	                        <em class="category">공지</em>
-	                        <div class="info">
-	                            <h3 class="title">공지사항4</h3>
-	                            <span class="author">admin</span>
-	                            <span class="created-at">2020.08.28</span>
-	                        </div>
-	                    </a>
-	                </li>
-	                <li>
-	                    <a class="article" href="#">
-	                        <em class="category">공지</em>
-	                        <div class="info">
-	                            <h3 class="title">공지사항5</h3>
-	                            <span class="author">admin</span>
-	                            <span class="created-at">2020.08.28</span>
-	                        </div>
-	                    </a>
-	                </li>
-	                <li>
-	                    <a class="article" href="#">
-	                        <em class="category">공지</em>
-	                        <div class="info">
-	                            <h3 class="title">공지사항6</h3>
-	                            <span class="author">admin</span>
-	                            <span class="created-at">2020.08.28</span>
-	                        </div>
-	                    </a>
-	                </li>
-	            </ul>
+	        	<c:choose>
+	        		<c:when test="${empty noticeList}">
+	        			<ul>
+		        			<li>
+			                    <a class="article" href="#">
+			                        <em class="category">공지사항</em>
+			                        <div class="info">
+			                            <h3 class="title">공지사항이 없습니다.</h3>
+			                            <span class="author">admin</span>
+			                        </div>
+			                    </a>
+		        			</li>
+	        			</ul>
+	        		</c:when>
+	        		
+	        		<c:otherwise>
+						<ul>
+							<c:forEach var="notice" items="${noticeList}">
+				                <li>
+				                    <a class="article" href="#">
+				                        <em class="category">${notice.boardName}</em>
+				                        <div class="info">
+				                            <h3 class="title">${notice.boardTitle}</h3>
+				                            <span class="author">${notice.boardWriter}</span>
+				                            <span class="created-at">${notice.boardCreateDate}</span>
+				                        </div>
+				                    </a>
+				                </li>
+							</c:forEach>
+						</ul>
+	        		</c:otherwise>
+	        	</c:choose>
 	        </div>
+	        
 	    </main>
 	<jsp:include page="../common/footer.jsp"/>
 </body>
