@@ -19,6 +19,7 @@
     	SELECT *
 		FROM v_board
 		WHERE board_type = #{type}
+		ORDER BY BOARD_NO DESC
     </select>
 
 </mapper>

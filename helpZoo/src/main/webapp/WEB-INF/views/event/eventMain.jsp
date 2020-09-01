@@ -75,7 +75,7 @@
 	        <div class="ui-tabs">
 	            <ul>
 	                <li class="active">
-	                    <a href="${contextPath}/notice/noticeList">공지</a>
+	                    <a href="${contextPath}/notice/noticeList">공지사항</a>
 	                </li>
 	                <li>
 	                    <a href="${contextPath}/event/eventList">이벤트</a>
