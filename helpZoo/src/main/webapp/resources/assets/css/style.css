@@ -10,11 +10,11 @@
 --------------------------------------------------------------*/
 
 *{
- font-family: font-family: "LotteMartDream";
+ font-family: "LotteMartDream";
 }
 
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: "LotteMartDream";
   color: #555555;
 }
 
@@ -28,7 +28,7 @@ a:hover {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Montserrat", sans-serif;
+  font-family: "LotteMartDream";
 }
 
 /*--------------------------------------------------------------
@@ -102,7 +102,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #header .btn-get-started{
-  font-family: "Montserrat", sans-serif;
+  font-family: "LotteMartDream";
   text-transform: uppercase;
   font-weight: 400;
   font-size: 16px;
@@ -161,7 +161,7 @@ h1, h2, h3, h4, h5, h6 {
   transition: 0.3s;
   font-size: 15px;
   text-transform: uppercase;
-  font-family: "Open Sans", sans-serif;
+  font-family: "LotteMartDream";
 }
 
 .nav-menu a:hover, .nav-menu .active > a, .nav-menu li:hover > a {
@@ -207,7 +207,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-menu .drop-down > a:after {
   content: "\ea99";
-  font-family: IcoFont;
+  font-family: "LotteMartDream";
   padding-left: 5px;
 }
 
@@ -228,7 +228,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-menu .drop-down .drop-down > a:after {
   content: "\eaa0";
-  font-family: IcoFont;
+  font-family: "LotteMartDream";
   position: absolute;
   right: 15px;
 }
@@ -291,7 +291,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .mobile-nav .drop-down > a:after {
   content: "\ea99";
-  font-family: IcoFont;
+  font-family: "LotteMartDream";
   padding-left: 10px;
   position: absolute;
   right: 15px;
@@ -389,7 +389,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #hero .btn-get-started {
-  font-family: "Montserrat", sans-serif;
+  font-family: "LotteMartDream";
   text-transform: uppercase;
   font-weight: 400;
   font-size: 16px;
@@ -640,7 +640,7 @@ section {
 .why-us .accordion-list a {
   display: block;
   position: relative;
-  font-family: "Poppins", sans-serif;
+  font-family: "LotteMartDream";
   font-size: 16px;
   line-height: 24px;
   font-weight: 500;
@@ -1187,7 +1187,7 @@ section {
   font-size: 42px;
   color: #151515;
   font-weight: 700;
-  font-family: "Open Sans", sans-serif;
+  font-family: "LotteMartDream";
   margin-bottom: 20px;
 }
 
@@ -1240,7 +1240,7 @@ section {
   color: #7cc576;
   font-size: 14px;
   font-weight: 400;
-  font-family: "Montserrat", sans-serif;
+  font-family: "LotteMartDream";
   font-weight: 600;
   transition: 0.3s;
 }
@@ -1623,7 +1623,7 @@ section {
 --------------------------------------------------------------*/
 #footer {
   /* background: url("../img/footer-bg.jpg") center center no-repeat; */
-  background: #fff; 
+  background: #d1d1d1; 
   color:  #grey; 
   font-size: 14px;
   position: relative;
@@ -1735,7 +1735,7 @@ section {
 } */
 
 #footer .footer-bottom {
-  border-top: 1px solid #fff;
+  border-top: 1px solid #d1d1d1;
   z-index: 2;
   position: relative;
   padding-top: 40px;
