@@ -91,7 +91,7 @@
             </ul>
           </li>
 
-          <li class="nav-logo active"><a href="main.jsp"><img src="/helpzoo/resources/images/도와주100.png" alt="" class="img-fluid" id="logo"></a></li>
+          <li class="nav-logo active"><a href="${contextPath}"><img src="/helpzoo/resources/images/도와주100.png" alt="" class="img-fluid" id="logo"></a></li>
 
 		  <li class="drop-down"><a href="${contextPath}/notice">공지</a>
             <ul>
