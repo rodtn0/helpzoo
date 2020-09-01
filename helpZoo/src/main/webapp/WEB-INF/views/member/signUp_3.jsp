@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입 - 이메일 인증</title>
+<title>회원가입 - 인증번호 받기</title>
 </head>
 <style>
 	#authTxt{
@@ -21,15 +21,15 @@
             <div class="card" style="width: 40rem;">
                 <div class="card-body">
                         <div class="col-12">
-                        <form action="authEmail" method="POST">
-                          	<div id="authTxt">이메일 인증</div><br>
+                        <form action="joinAuth/${dice}" method="POST">
+                          	<div id="authTxt">인증번호 입력</div><br>
 							<div class="col-12 text-center">
-							<span style="color:#7fcdcd; font-weight:bold;">이메일을 인증받아야 회원가입 절차를 진행할 수 있습니다.</span><br>
-							이메일 : <input type="email" name="authEmail" placeholder="이메일 주소를 입력하세요."><br><br>
+							<span style="color:#7fcdcd; font-weight:bold;">메일로 입력받은 인증번호를 입력하세요.</span><br>
+							인증번호 : <input type="number" name="authEmail" placeholder="인증번호를 입력하세요."><br><br>
                             <div class="col-12 text-center">
                                 <button type="submit" name="authBtn" style="opacity: 90%; font-size: 16px; border: white;
                                 	background-color:#97ecec"
-                                    class="btn btn-lg btn-primary btn-block" value="authBtn">이메일 인증받기</button>
+                                    class="btn btn-lg btn-primary btn-block" value="successBtn">인증번호 전송</button>
                             </div>
 			                    </div>
 			                </div>
