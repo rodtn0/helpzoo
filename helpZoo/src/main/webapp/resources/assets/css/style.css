@@ -1623,8 +1623,8 @@ section {
 --------------------------------------------------------------*/
 #footer {
   /* background: url("../img/footer-bg.jpg") center center no-repeat; */
-  background: #1abc9c;
-  color: #fff;
+  background: #fff; 
+  color:  #grey; 
   font-size: 14px;
   position: relative;
 }
@@ -1735,7 +1735,7 @@ section {
 } */
 
 #footer .footer-bottom {
-  border-top: 1px solid #1abc9c;
+  border-top: 1px solid #fff;
   z-index: 2;
   position: relative;
   padding-top: 40px;
@@ -1757,7 +1757,7 @@ section {
 }
 
 #footer .credits a{
-	color: white;
+	color: #grey;
 }
 
 #footer .credits a: nhover{

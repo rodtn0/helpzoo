@@ -12,6 +12,10 @@
 	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/categoryCss/css/font-awesome.css" />
 	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/categoryCss/css/noJS.css" />
 	
+	
+	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/vendor/bootstrap/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/vendor/bootstrap/bootstrap.min.css" />
+	
 	<style>
 		.container .btn-get-started {
 		  font-family: "Montserrat", sans-serif;
@@ -27,14 +31,35 @@
 		  color: #fff;
 		  background: #7fcdcd;
 		}
+		
+		/* .container > a {
+			float : right;
+		} */
+		
+		#dd{
+			float : left;
+		}
+		
+		.containers table{
+			
+			clear : both;
+		}
+		
+		.main{
+			width : 1140px;
+		}
+		
+		
 	</style>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"/>
 	
+		
+		
 	<div class="container">
 	
-	
+		
 		<section class="main">
 				<div class="wrapper-demo">
 					<div id="dd" class="wrapper-dropdown-1" tabindex="1">
@@ -46,6 +71,22 @@
 					</div>
 				​</div>
 		</section>
+		
+		<!-- Split button -->
+		<!-- <div class="btn-group">
+		  <button type="button" class="btn btn-danger">Action</button>
+		  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+		    <span class="caret"></span>
+		    <span class="sr-only">Toggle Dropdown</span>
+		  </button>
+		  <ul class="dropdown-menu" role="menu">
+		    <li><a href="#">Action</a></li>
+		    <li><a href="#">Another action</a></li>
+		    <li><a href="#">Something else here</a></li>
+		    <li class="divider"></li>
+		    <li><a href="#">Separated link</a></li>
+		  </ul>
+		</div> -->
 			
 			
 		<table class="table .table-hover">
