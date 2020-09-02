@@ -99,10 +99,10 @@
 				<li><a href="${contextPath}/event/eventList">이벤트</a></li>
             </ul>
           </li>
-          <li class="drop-down"><a href="${contextPath}/service/faq">고객센터</a>
+          <li class="drop-down"><a href="${contextPath}/faq/faqList">고객센터</a>
             <ul>
-              <li><a href="${contextPath}/service/faq">FAQ</a></li>
-              <li><a href="${contextPath}/service/qna">Q&A</a></li>
+              <li><a href="${contextPath}/faq/faqList">FAQ</a></li>
+              <li><a href="${contextPath}/qna/qnaList">Q&A</a></li>
             </ul>
           </li>
           <li><a href="${contextPath}/subscribe">구독하기</a></li>

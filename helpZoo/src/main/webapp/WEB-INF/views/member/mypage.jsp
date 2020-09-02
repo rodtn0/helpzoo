@@ -4,20 +4,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입 - 회원 정보 입력</title>
+<title>마이페이지</title>
 </head>
 <style>
-#joinTxt{
-font-family: "Recipekorea";
-text-align : center;
+#myPageTit{
+	font-family: "Recipekorea";
 }
 </style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="row justify-content-md-center">
-	<div id="joinTxt"><h1>회원가입</h1></div>
+	<h1 id="myPageTit">마이페이지</h1>
+	
 	</div>
-	이메일 : <input type="email" name="memberEmail">
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

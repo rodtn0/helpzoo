@@ -25,7 +25,7 @@
                           	<div id="authTxt">인증번호 입력</div><br>
 							<div class="col-12 text-center">
 							<span style="color:#7fcdcd; font-weight:bold;">메일로 입력받은 인증번호를 입력하세요.</span><br>
-							인증번호 : <input type="number" name="authEmail" placeholder="인증번호를 입력하세요."><br><br>
+							인증번호 : <input type="number" name="authCode" placeholder="인증번호를 입력하세요."><br><br>
                             <div class="col-12 text-center">
                                 <button type="submit" name="authBtn" style="opacity: 90%; font-size: 16px; border: white;
                                 	background-color:#97ecec"

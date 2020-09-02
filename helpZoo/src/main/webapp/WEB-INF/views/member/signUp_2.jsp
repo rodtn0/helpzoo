@@ -25,7 +25,7 @@
                           	<div id="authTxt">이메일 인증</div><br>
 							<div class="col-12 text-center">
 							<span style="color:#7fcdcd; font-weight:bold;">이메일을 인증받아야 회원가입 절차를 진행할 수 있습니다.</span><br>
-							이메일 : <input type="email" name="authEmail" placeholder="이메일 주소를 입력하세요."><br><br>
+							이메일 : <input type="email" name="memberEmail" placeholder="이메일 주소를 입력하세요."><br><br>
                             <div class="col-12 text-center">
                                 <button type="submit" name="authBtn" style="opacity: 90%; font-size: 16px; border: white;
                                 	background-color:#97ecec"
