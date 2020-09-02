@@ -24,13 +24,8 @@
   </section><!-- End Hero -->
   
 	<jsp:include page="WEB-INF/views/common/header.jsp"/>
-	<div id="content" class="container">
-		<h1>
-			도와주(ZOO)
-		</h1>
-	
-		<P> 반려동물 펀딩&기부 관련 사이트 도와주(ZOO) 프로젝트의 맡겨조 팀입니다~! </P>
-	
+	<div class="row justify-content-md-center">
+		<h1> 도와주(ZOO)</h1>
 	</div>
 	
 	<jsp:include page="WEB-INF/views/common/footer.jsp"/>

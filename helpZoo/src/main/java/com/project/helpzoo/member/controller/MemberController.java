@@ -53,16 +53,17 @@ public class MemberController {
 	}	
 	
 	// 이메일 인증 처리 메소드
-	@RequestMapping(value="authEmail", method=RequestMethod.POST)
-	public ModelAndView mailSending(HttpServletRequest request, String authEmail, HttpServletResponse resEmail) 
+	@RequestMapping("authEmail")
+	public ModelAndView mailSending(HttpServletRequest request, String memberEmail, HttpServletResponse resEmail) 
 	throws IOException{
 		Random r = new Random();
 		//이메일로 인증 코드를 받음(난수)
 		int dice = r.nextInt(4589362) + 49311; 
 		
-		String setfrom = "mjungpp@gmail.com";
-		String tomail = request.getParameter("authEmail");
-		String title = "회원가입 인증 이메일입니다.";
+		String setfrom = "helpzooFinal@gmail.com"; // 보내는 사람 이메일
+		String tomail = request.getParameter("memberEmail"); // 받는 사람 이메일 설정
+		String title = "도와주(Zoo) 반려동물 크라우드 펀딩&기부 회원가입 인증 이메일입니다."; // 메일 제목(타이틀)
+		// 메일 내용
 		String content = System.getProperty("line.separator")+
 		System.getProperty("line.separator")+
 		System.getProperty("안녕하세요. 도와주(Zoo) 반려동물 크라우드 펀딩 & 기부 웹사이트입니다.")+
@@ -72,14 +73,14 @@ public class MemberController {
 		+ "인증번호는 " + dice + "입니다."+
 		System.getProperty("line.separator")+
 		System.getProperty("line.separator")+
-		"인증번호를 입력해주시면 회원가입 진행이 완료됩니다.";
+		"인증번호를 입력해주시면 회원가입이 진행됩니다.";
 		
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 			
-			messageHelper.setFrom(setfrom);
-			messageHelper.setTo(tomail);
+			messageHelper.setFrom(setfrom); // 보내는 사람 이메일
+			messageHelper.setTo(tomail); // 받는 사람 이메일
 			messageHelper.setSubject(title); // 메일 제목 (생략 가능)
 			messageHelper.setText(content); // 메일 내용
 			
@@ -92,6 +93,7 @@ public class MemberController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/member/signUp_3");
 		mv.addObject("dice", dice);
+		mv.addObject("memberEmail", memberEmail);
 		
 		System.out.println("mv :" + mv);
 		
@@ -107,21 +109,21 @@ public class MemberController {
 	// 이메일로 받은 인증번호를 입력하고 전송 버튼을 누르면 맵핑되는 메소드
 	// 내가 입력한 인증번호와 메일로 입력한 인증번호가 맞는지 확인해서 맞으면 회원가입 페이지로 넘어가고
 	// 틀리면 이전 페이지로 이동되게 함.
-	@RequestMapping(value = "joinAuth/${dice}", method = RequestMethod.POST)
-	public ModelAndView joinAuth(String authEmail, @PathVariable String dice, HttpServletResponse resEqauls)
+	@RequestMapping("joinAuth/{dice}")
+	public ModelAndView joinAuth(String authCode, @PathVariable String dice, HttpServletResponse resEqauls)
 	throws IOException{
 		
-		System.out.println("마지막 이메일 인증 : " + authEmail);
+		System.out.println("마지막 이메일 인증 : " + authCode);
 		System.out.println("마지막 dice : " + dice);
 		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/member/join");
-		mv.addObject("memberEmail",authEmail);
+		mv.addObject("memberEmail", authCode);
 		
-		if(authEmail.equals(dice)) {
+		if(authCode.equals(dice)) {
 			// 인증번호가 일치할 경우 인증번호가 맞다는 창을 출력하고 회원가입 창으로 이동함.
-			mv.setViewName("member/signUp_4");
-			mv.addObject("memberEmail", authEmail);
+			mv.setViewName("/member/signUp_4");
+			mv.addObject("memberEmail", authCode);
 			
 			// 만약 인증번호가 같다면, 이메일을 회원가입 페이지로 같이 넘겨 이메일을 따로 작성할 필요 없게 구현함.
 			resEqauls.setContentType("text/html; charset=UTF-8");
@@ -131,7 +133,7 @@ public class MemberController {
 			
 			return mv;
 			
-		}else if(authEmail != dice) {
+		}else if(authCode != dice) {
 			ModelAndView mv2 = new ModelAndView();
 			mv2.setViewName("member/signUp_3");
 			
