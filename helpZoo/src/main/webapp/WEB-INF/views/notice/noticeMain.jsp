@@ -128,17 +128,19 @@
 	<jsp:include page="../common/footer.jsp"/>
 	
 	<script>
-		/* var test = "${notice.boardNo}";
-		$test.each(function(index, item) {
-			console.log($(item.val()));
-		}); */
 		
+		/* 공지사항 상세페이지 */
 		$(function() {
 			$('.board-main .article').on('click', function() {
 				
-				var boardNo = $(this).parent().children().eq(0).text();
+				var boardNo = $(this).children().eq(0).text();
 				
-				console.log(boardNo.val());
+				console.log(boardNo);
+				
+				var boardUrl =
+					"${contextPath}/notice/5/" + boardNo;
+					
+				location.href = boardUrl;
 				
 			});
 		});

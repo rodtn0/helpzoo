@@ -12,4 +12,10 @@ public interface NoticeService {
 	 */
 	public abstract List<Board> selectList(int type);
 
+	/** 공지사항 상세 조회
+	 * @param boardNo
+	 * @return board
+	 */
+	public abstract Board selectNotice(int boardNo);
+
 }

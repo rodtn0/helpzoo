@@ -7,14 +7,14 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>ê³µì§ì¬í­ ìì¸íì´ì§</title>
+    <title>공지사항 상세페이지</title>
     <style>
         .header, .contents{
             margin: 0 auto;
             max-width: 800px;
         }
 
-        /* ìì¸íì´ì§ í¤ë */
+        /* 상세페이지 헤더 */
         .header .title{
             font-size: 22px;
             font-weight: 500;
@@ -24,12 +24,12 @@
             border-bottom: 1px solid rgba(0,0,0,.1);
         }
 
-        /* ìì¸íì´ì§ contents */
+        /* 상세페이지 contents */
         .contents{
             padding-bottom: 30px;
         }
 
-        /* ìì¸íì´ì§ íë¨ */
+        /* 상세페이지 하단 */
         .board-bottom{
             display: flex;
             background-color: #FAFAFA;
@@ -55,30 +55,30 @@
 	<jsp:include page="../common/header.jsp"/>
     <main class="board notice">
         
-        <!-- ìì¸íì´ì§ í¤ë -->
+        <!-- 상세페이지 헤더 -->
         <div class="header">
-            <p class="title">[ê³µì§]në²ì§¸ ê³µì§ìëë¤.</p>
+            <p class="title">${board.boardTitle}</p>
             <div class="info">
-                <span class="user-info">admin
-                <br>2020-09-02</span>
+                <span class="user-info">${board.boardWriter}
+                <br>${board.boardCreateDate}</span>
             </div>
         </div>
 
         <p class="hr"/>
 
-        <!-- ìì¸íì´ì§ contents -->
+        <!-- 상세페이지 contents -->
         <div class="contents">
-            ìì¸íì´ì§
+            	${board.boardContent}
         </div>
         
-        <!-- ìì¸íì´ì§ íë¨ -->
+        <!-- 상세페이지 하단 -->
         <div class="board-bottom">
             <button class="toList" onclick="history.back()">
-                ëª©ë¡ì¼ë¡ ëìê°ê¸°
+               	 목록으로 돌아가기
             </button>
         </div>
         
     </main>
-   	<jsp:include page="../common/footer.jsp"/>
+    <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>
