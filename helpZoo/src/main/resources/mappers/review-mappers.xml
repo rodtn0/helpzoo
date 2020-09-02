@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper>
+  <cache-ref namespace="reviewMapper"/>
+  
+	  <resultMap id="fundingReviewResultSet" type="Review">
+	  
+	  	<id property="reviewNo" column="FUNDING_REVIEW_NO"/>
+	  	
+	  	<result property="reviewTitle" column="FUNDING_REVIEW_TITLE"/>
+	  	<result property="reviewContent" column="FUNDING_REVIEW_CONTENT"/>
+	  	<result property="readCount" column="FUNDING_REVIEW_READ_COUNT"/>
+	  	<result property="reviewCreateDate" column="FUNDING_REVIEW_CREATE_DT"/>
+	  	<result property="reviewModifyDate" column="FUNDING_REVIEW_MODIFY_DT"/>
+	  	<result property="reviewStatus" column="FUNDING_REVIEW_STATUS"/>
+	  	<result property="projectNo" column="FUNDING_BOARD_NO"/>
+	  	<result property="reviewType" column="REVIEW_TYPE"/>
+	  	<result property="reviewWriter" column="FUNDING_REVIEW_WRITER"/>
+	  
+	  </resultMap>
+	  
+	  <resultMap id="donationReviewResultSet" type="Review">
+	  
+	  	<id property="reviewNo" column="DONATION_REVIEW_NO"/>
+	  	
+	  	<result property="reviewTitle" column="DONATION_REVIEW_TITLE"/>
+	  	<result property="reviewContent" column="DONATION_REVIEW_CONTENT"/>
+	  	<result property="readCount" column="DONATION_REVIEW_READ_COUNT"/>
+	  	<result property="reviewCreateDate" column="DONATION_REVIEW_CREATE_DT"/>
+	  	<result property="reviewModifyDate" column="DONATION_REVIEW_MODIFY_DT"/>
+	  	<result property="reviewStatus" column="DONATION_REVIEW_STATUS"/>
+	  	<result property="projectNo" column="DONATION_BOARD_NO"/>
+	  	<result property="reviewType" column="REVIEW_TYPE"/>
+	  	<result property="reviewWriter" column="DONATION_REVIEW_WRITER"/>
+	  
+	  </resultMap>
+  
+  	  <!-- 펀딩 리뷰 게시판 목록 조회 -->
+  	  <select id="selectFundingList" parameterType="_int" resultMap="fundingReviewResultSet">
+  	  	SELECT 
+  	  </select>
+</mapper>
