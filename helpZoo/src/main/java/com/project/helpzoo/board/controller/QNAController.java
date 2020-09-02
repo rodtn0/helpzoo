@@ -30,12 +30,13 @@ public class QNAController {
 		
 		List<QNABoard> qnaList = qnaService.selectList(pInfo);
 		
-//		for(QNABoard b : qnaList) {
-//			System.out.println(b);
-//		}
+		for(QNABoard b : qnaList) {
+			System.out.println(b);
+		}
 		
 		model.addAttribute("qnaList", qnaList);
-		model.addAttribute("listCount", pInfo.getListCount()+1);
+		model.addAttribute("listCount", pInfo.getListCount());
+		model.addAttribute("pInfo", pInfo);
 		
 		return "board/qnaMain";
 	}
