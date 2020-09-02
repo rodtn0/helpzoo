@@ -12,13 +12,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.project.helpzoo.member.model.service.MemberService;
+import com.project.helpzoo.member.model.vo.Member;
 
 
+@SessionAttributes({"memberEmail"})
 @Controller
 @RequestMapping("/member/*")
 
@@ -26,6 +31,9 @@ public class MemberController {
 	
 	@Autowired
 	private JavaMailSender mailSender;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	// 로그인 화면으로 전환하는 메소드
 	@RequestMapping("login")
@@ -35,8 +43,16 @@ public class MemberController {
 	}
 	// 로그인 실행 메소드
 	@RequestMapping("loginAction")
-	public String loginAction() {
-		return null;
+	public String loginAction(@ModelAttribute Member member) {
+		
+		try {
+			Member loginMember = memberService.login(member);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "redirect:/";
 	}
 	
 	// 회원 가입 약관동의 화면으로 전환하는 메소드 (회원가입 1)
@@ -98,9 +114,9 @@ public class MemberController {
 		System.out.println("mv :" + mv);
 		
 		resEmail.setContentType("text/html; charset=UTF-8");
-		PrintWriter outEmail = resEmail.getWriter();
-		outEmail.println("<script>alert('이메일이 발송되었습니다. 인증번호를 입력해주세요.');</script>");
-		outEmail.flush();
+        PrintWriter out_email = resEmail.getWriter();
+        out_email.println("<script>alert('이메일이 발송되었습니다. 인증번호를 입력해주세요.');</script>");
+        out_email.flush();
 		
 		return mv;
 		
@@ -117,14 +133,12 @@ public class MemberController {
 		System.out.println("마지막 dice : " + dice);
 		
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/member/join");
-		mv.addObject("memberEmail", authCode);
+		mv.setViewName("member/join");
 		
 		if(authCode.equals(dice)) {
 			// 인증번호가 일치할 경우 인증번호가 맞다는 창을 출력하고 회원가입 창으로 이동함.
-			mv.setViewName("/member/signUp_4");
-			mv.addObject("memberEmail", authCode);
-			
+			mv.setViewName("member/signUp_4");
+
 			// 만약 인증번호가 같다면, 이메일을 회원가입 페이지로 같이 넘겨 이메일을 따로 작성할 필요 없게 구현함.
 			resEqauls.setContentType("text/html; charset=UTF-8");
 			PrintWriter outEquals = resEqauls.getWriter();
@@ -147,6 +161,12 @@ public class MemberController {
 		}
 		return mv;
 		
+	}
+	
+	@RequestMapping(value="signUpAction", method = RequestMethod.GET)
+	public String signUpAction() {
+		
+		return "redirect:/";
 	}
 	
 	// 마이 페이지로 이동하는 Controller
