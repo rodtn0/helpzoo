@@ -10,13 +10,13 @@ import com.project.helpzoo.board.model.service.FAQService;
 import com.project.helpzoo.board.model.vo.Board;
 
 @Controller
-@RequestMapping("/service/*")
+@RequestMapping("/faq/*")
 public class FAQController {
 
 	@Autowired
 	private FAQService faqService;
 	// FAQ 메인 페이지로 이동
-	@RequestMapping("faq")
+	@RequestMapping("faqList")
 	public String faqMain() {
 		
 		int type = 3;
