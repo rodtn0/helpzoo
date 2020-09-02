@@ -101,6 +101,9 @@
   
   </head>
   <body>
+  
+	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+  
     <div class="container">
       <div class="row funding-pageSelector">
         <div class="col-lg-2 col-sm-2 col-md-2 funding_menu"></div>
@@ -121,13 +124,13 @@
     >
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="dodo5.jpg" class="d-block w-100" alt="..." />
+          <img src="${contextPath}/resources/images/dodo5.jpg" class="d-block w-100" alt="..." />
         </div>
         <div class="carousel-item">
-          <img src="dodo5.jpg" class="d-block w-100" alt="..." />
+          <img src="${contextPath}/resources/images/dodo5.jpg" class="d-block w-100" alt="..." />
         </div>
         <div class="carousel-item">
-          <img src="dodo5.jpg" class="d-block w-100" alt="..." />
+          <img src="${contextPath}/resources/images/dodo5.jpg" class="d-block w-100" alt="..." />
         </div>
       </div>
       <a
@@ -153,27 +156,27 @@
     <div class="img-container container category-wrap">
       <div class="row">
         <div class="col-lg-2 col-sm-2 col-md-2">
-          <img src="dodo5.jpg" class="circleImg" />
+          <img src="${contextPath}/resources/images/dodo5.jpg" class="circleImg" />
           <div class="category-context">전체보기</div>
         </div>
         <div class="col-lg-2 col-sm-2 col-md-2 ">
-          <img src="dodo5.jpg" class="circleImg" />
+          <img src="${contextPath}/resources/images/dodo5.jpg" class="circleImg" />
           <div class="category-context">전체보기</div>
         </div>
         <div class="col-lg-2 col-sm-2 col-md-2">
-          <img src="dodo5.jpg" class="circleImg" />
+          <img src="${contextPath}/resources/images/dodo5.jpg" class="circleImg" />
           <div class="category-context">전체보기</div>
         </div>
         <div class="col-lg-2 col-sm-2 col-md-2">
-          <img src="dodo5.jpg" class="circleImg" />
+          <img src="${contextPath}/resources/images/dodo5.jpg" class="circleImg" />
           <div class="category-context">전체보기</div>
         </div>
         <div class="col-lg-2 col-sm-2 col-md-2">
-          <img src="dodo5.jpg" class="circleImg" />
+          <img src="${contextPath}/resources/images/dodo5.jpg" class="circleImg" />
           <div class="category-context">전체보기</div>
         </div>
         <div class="col-lg-2 col-sm-2 col-md-2">
-          <img src="dodo5.jpg" class="circleImg" />
+          <img src="${contextPath}/resources/images/dodo5.jpg" class="circleImg" />
           <div class="category-context">전체보기</div>
         </div>
       </div>
@@ -207,7 +210,7 @@
     </div>
     <div class="card-deck">
       <div class="card">
-        <img src="dodo5.jpg" class="card-img-top" alt="...">
+        <img src="${contextPath}/resources/images/dodo5.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">도와주 도와주</h5>
           <p class="card-text">봄날의 피부가 청춘 것이다. 위하여, 남는 불러 군영과 장식하는 갑 보라. 열매를 있는 낙원을 아름다우냐? 주며, 물방아 용감하고 생명을 것은 말이다. 그들은 용감하고 뜨고, 발휘하기 넣는 안고, 얼음 청춘에서만 뿐이다. 우는 용기가 있으며, 몸이 품으며, 뛰노는 그들에게 보라. 뭇 할지라도 피가 과실이 무엇을 .</p>
@@ -215,7 +218,7 @@
         </div>
       </div>
       <div class="card">
-        <img src="dodo5.jpg" class="card-img-top" alt="...">
+        <img src="${contextPath}/resources/images/dodo5.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">도와주 도와주</h5>
           <p class="card-text">봄날의 피부가 청춘 것이다. 위하여, 남는 불러 군영과 장식하는 갑 보라. 열매를 있는 낙원을 아름다우냐? 주며, 물방아 용감하고 생명을 것은 말이다. 그들은 용감하고 뜨고, 발휘하기 넣는 안고, 얼음 청춘에서만 뿐이다. 우는 용기가 있으며, 몸이 품으며, 뛰노는 그들에게 보라. 뭇 할지라도 피가 과실이 무엇을 심장의 오직 청춘 봄바</p>
@@ -223,7 +226,7 @@
         </div>
       </div>
       <div class="card">
-        <img src="dodo5.jpg" class="card-img-top" alt="...">
+        <img src="${contextPath}/resources/images/dodo5.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">도와주 도와주</h5>
           <p class="card-text">>봄날의 피부가 청춘 것이다. 위하여, 남는 불러 군영과 장식하는 갑 보라. 열매를 있는 낙원을 아름다우냐? 주며, 물방아 용감하고 생명을 것은 말이다. 그들은 용감하고 뜨고, 발휘하기 넣는 안고, 얼음 청춘에서만 뿐이다. 우는 용기가 있으며, 몸이 품으며, 뛰노는 그들에게 보라. 뭇 할지라도 피가 과실이 무엇을 .</p>
@@ -239,7 +242,7 @@
 
     <div class="card-deck">
       <div class="card">
-        <img src="dodo5.jpg" class="card-img-top" alt="...">
+        <img src="${contextPath}/resources/images/dodo5.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">도와주 도와주</h5>
           <p class="card-text">봄날의 피부가 청춘 것이다. 위하여, 남는 불러 군영과 장식하는 갑 보라. 열매를 있는 낙원을 아름다우냐? 주며, 물방아 용감하고 생명을 것은 말이다. 그들은 용감하고 뜨고, 발휘하기 넣는 안고, 얼음 청춘에서만 뿐이다. 우는 용기가 있으며, 몸이 품으며, 뛰노는 그들에게 보라. 뭇 할지라도 피가 과실이 무엇을 .</p>
@@ -247,7 +250,7 @@
         </div>
       </div>
       <div class="card">
-        <img src="dodo5.jpg" class="card-img-top" alt="...">
+        <img src="${contextPath}/resources/images/dodo5.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">도와주 도와주</h5>
           <p class="card-text">봄날의 피부가 청춘 것이다. 위하여, 남는 불러 군영과 장식하는 갑 보라. 열매를 있는 낙원을 아름다우냐? 주며, 물방아 용감하고 생명을 것은 말이다. 그들은 용감하고 뜨고, 발휘하기 넣는 안고, 얼음 청춘에서만 뿐이다. 우는 용기가 있으며, 몸이 품으며, 뛰노는 그들에게 보라. 뭇 할지라도 피가 과실이 무엇을 .</p>
@@ -255,7 +258,7 @@
         </div>
       </div>
       <div class="card">
-        <img src="dodo5.jpg" class="card-img-top" alt="...">
+        <img src="${contextPath}/resources/images/dodo5.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">도와주 도와주</h5>
           <p class="card-text">봄날의 피부가 청춘 것이다. 위하여, 남는 불러 군영과 장식하는 갑 보라. 열매를 있는 낙원을 아름다우냐? 주며, 물방아 용감하고 생명을 것은 말이다. 그들은 용감하고 뜨고, 발휘하기 넣는 안고, 얼음 청춘에서만 뿐이다. 우는 용기가 있으며, 몸이 품으며, 뛰노는 그들에게 보라. 뭇 할지라도 피가 과실이 무엇을 .</p>
@@ -264,7 +267,7 @@
       </div>
     </div>
 
-
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
   </body>
 </html>

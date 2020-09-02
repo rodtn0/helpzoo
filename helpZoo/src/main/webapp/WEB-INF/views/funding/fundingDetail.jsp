@@ -91,6 +91,7 @@
     </style>
   </head>
   <body>
+  <jsp:include page="/WEB-INF/views/common/header.jsp"/>
     <div class="co">
       <img src="dodo5.jpg" class="funding_item_logo" />
 
@@ -197,4 +198,8 @@
     </div>
         </div>
     </div>
+    
+    
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+    
   </body>
