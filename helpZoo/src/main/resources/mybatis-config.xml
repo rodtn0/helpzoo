@@ -29,6 +29,8 @@
 	<mappers>
 		<mapper resource="/mappers/donation-mappers.xml" />	
 		<mapper resource="/mappers/faq-mappers.xml" />
+		<mapper resource="/mappers/notice-mappers.xml"/>
+		<mapper resource="/mappers/event-mappers.xml"/>
 	</mappers>
 	
 </configuration>
