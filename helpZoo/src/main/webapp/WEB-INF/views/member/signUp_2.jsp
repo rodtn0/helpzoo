@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입 - 이메일 인증</title>
+    <!-- Main css -->
+    <link rel="stylesheet" href="css/register.css">
 </head>
 <style>
 	#authTxt{
@@ -31,11 +33,11 @@
                                 	background-color:#97ecec"
                                     class="btn btn-lg btn-primary btn-block" value="authBtn">이메일 인증받기</button>
                             </div>
-			                    </div>
+	                    </div>
+	                    </form>
 			                </div>
 			            </div>
 			        </div>
-                    </form>
 			    </div>
 	</div>
 	</div>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -35,6 +36,15 @@ public class NoticeController {
 		model.addAttribute("noticeList", noticeList);
 		
 		return "notice/noticeMain";
+	}
+	
+	//공지사항 상세 조회
+	@RequestMapping("{boardNo}")
+	public String noticeView() {
+		
+		int type = 5;
+		
+		return "notice/noticeView";
 	}
 	
 	

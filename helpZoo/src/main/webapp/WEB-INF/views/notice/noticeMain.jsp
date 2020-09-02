@@ -59,6 +59,10 @@
         .board-main .info{
             padding-bottom: 20px;
         }
+        
+        .article .boardNo{
+        	display: none;
+        }
     </style>
 </head>
 
@@ -89,7 +93,7 @@
 	        		<c:when test="${empty noticeList}">
 	        			<ul>
 		        			<li>
-			                    <a class="article" href="#">
+			                    <a class="article">
 			                        <em class="category">공지사항</em>
 			                        <div class="info">
 			                            <h3 class="title">공지사항이 없습니다.</h3>
@@ -104,7 +108,8 @@
 						<ul>
 							<c:forEach var="notice" items="${noticeList}">
 				                <li>
-				                    <a class="article" href="#">
+				                    <a class="article">
+				                    	<span class="boardNo">${notice.boardNo}</span>
 				                        <em class="category">${notice.boardName}</em>
 				                        <div class="info">
 				                            <h3 class="title">${notice.boardTitle}</h3>
@@ -121,5 +126,24 @@
 	        
 	    </main>
 	<jsp:include page="../common/footer.jsp"/>
+	
+	<script>
+		/* var test = "${notice.boardNo}";
+		$test.each(function(index, item) {
+			console.log($(item.val()));
+		}); */
+		
+		$(function() {
+			$('.board-main .article').on('click', function() {
+				
+				var boardNo = $(this).parent().children().eq(0).text();
+				
+				console.log(boardNo.val());
+				
+			});
+		});
+		
+	</script>
+	
 </body>
 </html>
