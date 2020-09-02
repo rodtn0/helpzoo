@@ -15,7 +15,7 @@
      <!-- core tag 추가 -->
     <!-- c:set은 변수 선언 -->
     <!-- context Path를 프로젝트 전체에서 간단히 사용할 수 있도록 변수 선언 -->
-    <c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application"/>
+  <c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application"/>
 
   
   <c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application"/>
