@@ -86,8 +86,8 @@
           <li><a href="${contextPath}/donation/donationMain">기부하기</a></li>
            <li class="drop-down"><a href="${contextPath}/board/review">후기게시판</a>
             <ul>
-              <li><a href="${contextPath}/board/fundingReview">펀딩 후기게시판</a></li>
-              <li><a href="${contextPath}/board/donationReview">기부 후기게시판</a></li>
+              <li><a href="${contextPath}/board/review/1">펀딩 후기게시판</a></li>
+              <li><a href="${contextPath}/board/review/2">기부 후기게시판</a></li>
             </ul>
           </li>
 
