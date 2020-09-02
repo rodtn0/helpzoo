@@ -23,6 +23,7 @@
 	<typeAliases>
 		<typeAlias type="com.project.helpzoo.model.vo.Donation" alias="Donation" />
 		<typeAlias type="com.project.helpzoo.board.model.vo.Board" alias="Board" />
+		<typeAlias type="com.project.helpzoo.board.model.vo.QNABoard" alias="QNABoard" />
 	</typeAliases>
 	
 	<!-- mapper.xml 파일을 등록하는 태그  -->
@@ -31,6 +32,7 @@
 		<mapper resource="/mappers/faq-mappers.xml" />
 		<mapper resource="/mappers/notice-mappers.xml"/>
 		<mapper resource="/mappers/event-mappers.xml"/>
+		<mapper resource="/mappers/qna-mappers.xml"/>
 	</mappers>
 	
 </configuration>
