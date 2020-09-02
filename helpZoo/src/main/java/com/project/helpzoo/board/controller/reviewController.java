@@ -7,8 +7,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/board/*")
 public class reviewController {
 
-	@RequestMapping("review")
-	public String reviewPg() {
-		return "board/reviewMain";
+	// 펀딩 후기 게시판 버튼 누르면 페이지 전환
+	@RequestMapping("review/1")
+	public String fundingReviewList() {
+		return "board/fundingReviewList";
+	}
+	
+	// 기부 후기 게시판 버튼 누르면 페이지 전환
+	@RequestMapping("review/2")
+	public String donationREviewList() {
+		return "board/donationReviewList";
 	}
 }
