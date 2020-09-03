@@ -22,4 +22,9 @@
 		WHERE MEMBER_ID=#{memberId}
 		AND MEMBER_STATUS='Y'
 	</select>
+	<insert id="signUp" parameterType="Member">
+		INSERT INTO MEMBER VALUES(SEQ_MNO.NEXTVAL, #{memberId}, #{memberPwd},
+		#{memberName}, #{memberPhone}, #{memberEmail}, #{memberAddress}, #{memberPetType},
+		#{memberPetName}, SYSDATE, DEFAULT, DEFAULT)
+	</insert>
 </mapper>

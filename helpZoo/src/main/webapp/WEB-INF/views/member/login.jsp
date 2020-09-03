@@ -14,13 +14,6 @@
 		<div class="login-page">
 		  <div class="form">
 			<h1 id="loginTxt">로그인</h1><br>
-		    <form class="register-form" method="POST" action="login" onsubmit="return fnLogin();">
-		      <input type="text" placeholder="name"/>
-		      <input type="password" placeholder="password"/>
-		      <input type="text" placeholder="email address"/>
-		      <button>create</button>
-		      <p class="message">Already registered? <a href="#">Sign In</a></p>
-		    </form>
 		    <form class="login-form" action="loginAction" method="post">
 		      <input type="text" name="memberId" placeholder="아이디"/>
 		      <input type="password" name="memberPwd" placeholder="비밀번호"/>
@@ -41,13 +34,5 @@
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
-	
-	<script>
-		function fnLogin(){
-			
-		}
-	
-	
-	</script>
 </body>
 </html>
