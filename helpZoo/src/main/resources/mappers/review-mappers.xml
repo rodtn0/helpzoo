@@ -14,7 +14,10 @@
 	  	<result property="projectNo" column="FUNDING_BOARD_NO"/>
 	  	<result property="reviewType" column="REVIEW_TYPE"/>
 	  	<result property="reviewWriter" column="FUNDING_REVIEW_WRITER"/>
-	  
+	  	
+	  	<result property="fundingTitle" column="FUNDING_TITLE"/>
+	  	<result property="memberId" column="MEMBER_ID"/>
+	  	
 	  </resultMap>
 	  
 	  <resultMap id="donationReviewResultSet" type="Review">
@@ -33,7 +36,12 @@
 	  </resultMap>
   
   	  <!-- 펀딩 리뷰 게시판 목록 조회 -->
-  	  <select id="selectFundingList" parameterType="_int" resultMap="fundingReviewResultSet">
-  	  	SELECT 
+  	  <select id="selectFundingList" resultMap="fundingReviewResultSet">
+  	  	SELECT FUNDING_REVIEW_NO, FUNDING_TITLE, FUNDING_REVIEW_TITLE, MEMBER_ID, 
+        FUNDING_REVIEW_READ_COUNT, FUNDING_REVIEW_CREATE_DT
+		FROM REVIEW_FUNDING
+		JOIN MEMBER ON(FUNDING_REVIEW_WRITER = MEMBER_NO)
+		JOIN FUNDING_PROJECT ON(FUNDING_BOARD_NO = FUNDING_ID)
+		WHERE FUNDING_REVIEW_STATUS ='Y' 
   	  </select>
 </mapper>

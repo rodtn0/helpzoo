@@ -15,8 +15,8 @@ public class ReviewServiceImpl implements ReviewService{
 	private ReviewDAO reivewDAO;
 
 	// 펀딩 리뷰 게시글 목록 조회 Service 구현
-	public List<Review> selectFundingList(int type) {
-		return reivewDAO.selectFundingList(type);
+	public List<Review> selectFundingList() {
+		return reivewDAO.selectFundingList();
 	}
 	
 }
