@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.helpzoo.board.model.service.QNAService;
 import com.project.helpzoo.board.model.vo.PageInfo;
@@ -55,7 +56,7 @@ public class QNAController {
 	public String insertAction(QNABoard qnaBoard, Model model,
 			@RequestParam(value="images", required=false) List<MultipartFile> images,
 			HttpServletRequest request,
-			Redirect) {
+			RedirectAttributes rdAttr) {
 		
 		// Member loginMember = (Member) model.getAttribute("loginMember");
 		
