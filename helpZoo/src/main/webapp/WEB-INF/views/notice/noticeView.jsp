@@ -56,7 +56,7 @@
     <main class="board notice">
         
         <!-- 상세페이지 헤더 -->
-        <div class="header">
+        <div data-aos="fade-down" class="header">
             <p class="title">${board.boardTitle}</p>
             <div class="info">
                 <span class="user-info">${board.boardWriter}
@@ -67,15 +67,15 @@
         <p class="hr"/>
 
         <!-- 상세페이지 contents -->
-        <div class="contents">
+        <div data-aos="fade-up" class="contents">
             	${board.boardContent}
         </div>
         
         <!-- 상세페이지 하단 -->
         <div class="board-bottom">
-            <button class="toList" onclick="history.back()">
+            <a data-aos="zoom-in" class="btn btn-info float-right" onclick="history.back()">
                	 목록으로 돌아가기
-            </button>
+            </a>
         </div>
         
     </main>
