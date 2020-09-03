@@ -66,7 +66,7 @@
 						<span>분류 없음</span>
 					    <ul class="dropdown" tabindex="1">
 					        <li><a href="#">펀딩 후기 게시판</a></li>
-					        <li><a href="#">기부 후기 게시판</a></li>
+					        <li><a href="${contextPath}/board/review/2">기부 후기 게시판</a></li>
 					    </ul>
 					</div>
 				​</div>
@@ -112,7 +112,7 @@
 							<tr>
 								<td>펀딩 리뷰</td>
 								<td>${fundingList.reviewNo}</td>
-								<td>${fundingList.fundingTitle}</td>
+								<td>${fundingList.projectTitle}</td>
 								<td>${fundingList.reviewTitle}</td>
 								<td>${fundingList.memberId}</td>
 								<td>${fundingList.readCount}</td>
