@@ -17,7 +17,7 @@
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 .form input {
-  font-family: "Roboto", sans-serif;
+  font-family: "LotteMartDream";
   outline: 0;
   background: #f2f2f2;
   width: 100%;
@@ -28,7 +28,7 @@
   font-size: 14px;
 }
 .form button {
-  font-family: "Roboto", sans-serif;
+  font-family: "LotteMartDream";
   text-transform: uppercase;
   outline: 0;
   background: #4CAF50;
@@ -95,16 +95,17 @@ body {
   background: -moz-linear-gradient(right, #97ecec, #ffffff);
   background: -o-linear-gradient(right, #97ecec, #ffffff);
   background: linear-gradient(to left, #97ecec, #ffffff);
-  font-family: "Roboto", sans-serif;
+  font-family: 'LotteMartDream';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;      
 }
 #loginTxt{
-font-family: "Recipekorea";
+	font-family: "Recipekorea";
 }
 
 #loginBtn{
 	background-color: #7fcdcd;
+	font-family: "LotteMartDream";
 }
 #registerTxt{
 	color: #7fcdcd;

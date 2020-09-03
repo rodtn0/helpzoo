@@ -11,54 +11,6 @@ list-type-ulli {
   margin: 0;
   padding: 0; }
 
-/* Montserrat-300 - latin */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 300;
-  src: url("../fonts/montserrat/Montserrat-Light.ttf");
-  /* IE9 Compat Modes */ }
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 400;
-  src: url("../fonts/montserrat/Montserrat-Regular.ttf");
-  /* IE9 Compat Modes */ }
-@font-face {
-  font-family: 'Montserrat';
-  font-style: italic;
-  font-weight: 400;
-  src: url("../fonts/montserrat/Montserrat-Italic.ttf");
-  /* IE9 Compat Modes */ }
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 500;
-  src: url("../fonts/montserrat/Montserrat-Medium.ttf");
-  /* IE9 Compat Modes */ }
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 600;
-  src: url("../fonts/montserrat/Montserrat-SemiBold.ttf");
-  /* IE9 Compat Modes */ }
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 700;
-  src: url("../fonts/montserrat/Montserrat-Bold.ttf");
-  /* IE9 Compat Modes */ }
-@font-face {
-  font-family: 'Montserrat';
-  font-style: italic;
-  font-weight: 700;
-  src: url("../fonts/montserrat/Montserrat-BoldItalic.ttf");
-  /* IE9 Compat Modes */ }
-@font-face {
-  font-family: 'Montserrat';
-  font-style: italic;
-  font-weight: 900;
-  src: url("../fonts/montserrat/montserrat-v12-latin-900.ttf"), url("../fonts/montserrat/montserrat-v12-latin-900.eot") format("embedded-opentype"), url("../fonts/montserrat/montserrat-v12-latin-900.svg") format("woff2"), url("../fonts/montserrat/montserrat-v12-latin-900.woff") format("woff"), url("../fonts/montserrat/montserrat-v12-latin-900.woff2") format("truetype"); }
 a:focus, a:active {
   text-decoration: none;
   outline: none;
@@ -124,7 +76,7 @@ h2 {
   padding: 0;
   font-weight: 900;
   color: #222;
-  font-family: 'Montserrat';
+  font-family: "LotteMartDream";
   font-size: 24px;
   text-transform: uppercase;
   text-align: center;
@@ -138,7 +90,7 @@ body {
   line-height: 1.8;
   color: #222;
   font-weight: 400;
-  font-family: 'Montserrat';
+  font-family: "LotteMartDream";
   background-image: url("../images/signup-bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -323,7 +275,7 @@ input[type=checkbox]:not(old):checked + label > span:before {
   font-size: 11px;
   line-height: 1.2;
   text-align: center;
-  font-family: 'Material-Design-Iconic-Font';
+  font-family: "LotteMartDream";
   font-weight: bold; }
 
 .label-agree-term {
@@ -375,54 +327,6 @@ list-type-ulli {
   margin: 0;
   padding: 0; }
 
-/* Montserrat-300 - latin */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 300;
-  src: url("../fonts/montserrat/Montserrat-Light.ttf");
-  /* IE9 Compat Modes */ }
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 400;
-  src: url("../fonts/montserrat/Montserrat-Regular.ttf");
-  /* IE9 Compat Modes */ }
-@font-face {
-  font-family: 'Montserrat';
-  font-style: italic;
-  font-weight: 400;
-  src: url("../fonts/montserrat/Montserrat-Italic.ttf");
-  /* IE9 Compat Modes */ }
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 500;
-  src: url("../fonts/montserrat/Montserrat-Medium.ttf");
-  /* IE9 Compat Modes */ }
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 600;
-  src: url("../fonts/montserrat/Montserrat-SemiBold.ttf");
-  /* IE9 Compat Modes */ }
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 700;
-  src: url("../fonts/montserrat/Montserrat-Bold.ttf");
-  /* IE9 Compat Modes */ }
-@font-face {
-  font-family: 'Montserrat';
-  font-style: italic;
-  font-weight: 700;
-  src: url("../fonts/montserrat/Montserrat-BoldItalic.ttf");
-  /* IE9 Compat Modes */ }
-@font-face {
-  font-family: 'Montserrat';
-  font-style: italic;
-  font-weight: 900;
-  src: url("../fonts/montserrat/montserrat-v12-latin-900.ttf"), url("../fonts/montserrat/montserrat-v12-latin-900.eot") format("embedded-opentype"), url("../fonts/montserrat/montserrat-v12-latin-900.svg") format("woff2"), url("../fonts/montserrat/montserrat-v12-latin-900.woff") format("woff"), url("../fonts/montserrat/montserrat-v12-latin-900.woff2") format("truetype"); }
 a:focus, a:active {
   text-decoration: none;
   outline: none;
@@ -488,7 +392,7 @@ h2 {
   padding: 0;
   font-weight: 900;
   color: #222;
-  font-family: 'Montserrat';
+  font-family: "LotteMartDream";
   font-size: 24px;
   text-transform: uppercase;
   text-align: center;
@@ -502,7 +406,7 @@ body {
   line-height: 1.8;
   color: #222;
   font-weight: 400;
-  font-family: 'Montserrat';
+  font-family: "LotteMartDream";
   background-image: url("../images/signup-bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -687,7 +591,7 @@ input[type=checkbox]:not(old):checked + label > span:before {
   font-size: 11px;
   line-height: 1.2;
   text-align: center;
-  font-family: 'Material-Design-Iconic-Font';
+  font-family: "LotteMartDream";
   font-weight: bold; }
 
 .label-agree-term {

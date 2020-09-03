@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -110,10 +110,16 @@
 
         </ul>
       </nav><!-- .nav-menu -->
-		
     </div>
-    						<!-- class="btn-get-started scrollto" -->
-		<span><a href="${contextPath}/member/login">로그인</a></span>
+      	<c:choose>
+      		<c:when test="${ empty sessionScope.loginMember}">
+           <a class="nav-link" href="${contextPath}/member/login">로그인</a>
+           </c:when>
+           <c:otherwise>
+            <a class="nav-link" href="${contextPath}/member/mypage">${loginMember.memberName}</a>
+             <a class="nav-link" href="${contextPath}/member/logout">Logout</a>
+           </c:otherwise>
+      	</c:choose>	
   </header><!-- End Header -->
 
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
