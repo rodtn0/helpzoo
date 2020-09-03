@@ -21,5 +21,20 @@
 		WHERE board_type = #{type}
 		ORDER BY BOARD_NO DESC
     </select>
+    
+    <!-- 공지사항 글 조회 -->
+    <select id="selectNotice" parameterType="_int" resultMap="boardResultSet">
+    	SELECT *
+		FROM V_BOARD
+		WHERE BOARD_NO = #{boardNo}
+		AND BOARD_STATUS = 'Y'
+    </select>
+    
+    <!-- 공지사항 조회 수 증가 -->
+    <update id="increaseCount" parameterType="_int">
+    	UPDATE BOARD
+		SET READ_COUNT = READ_COUNT+1
+		WHERE BOARD_NO = #{boardNo}
+    </update>
 
 </mapper>

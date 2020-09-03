@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,7 +19,8 @@ public class NoticeController {
 	@Autowired
 	private NoticeService noticeService;
 	
-	//공지사항 리스트
+	//공지사항 리스트 --------------------------------------------------------------------------------
+	// helpzoo/notice/noticeList
 	@RequestMapping("noticeList")
 	public String noticeMain(@RequestParam(value="cp", required=false, defaultValue="1") int cp,
 			Model model) {
@@ -35,6 +37,22 @@ public class NoticeController {
 		model.addAttribute("noticeList", noticeList);
 		
 		return "notice/noticeMain";
+	}
+	
+	//공지사항 상세 조회 --------------------------------------------------------------------------------
+	// /notice/5/33
+	@RequestMapping("5/{boardNo}")
+	public String noticeView(@PathVariable int boardNo, Model model) {
+		
+		int type = 5;
+		
+		Board board = noticeService.selectNotice(boardNo);
+		
+		System.out.println("상세조회 결과 : " + board);
+		
+		model.addAttribute("board", board);
+		
+		return "notice/noticeView";
 	}
 	
 	
