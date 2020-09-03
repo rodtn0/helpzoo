@@ -12,11 +12,12 @@ import com.project.helpzoo.board.model.vo.Review;
 public class ReviewServiceImpl implements ReviewService{
 	
 	@Autowired
-	private ReviewDAO reivewDAO;
+	private ReviewDAO reviewDAO;
 
 	// 펀딩 리뷰 게시글 목록 조회 Service 구현
-	public List<Review> selectFundingList() {
-		return reivewDAO.selectFundingList();
+	public List<Review> selectReviewList(int type) {
+		
+		return reviewDAO.selectReviewList(type);
 	}
 	
 }

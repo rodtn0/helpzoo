@@ -15,7 +15,7 @@
 	  	<result property="reviewType" column="REVIEW_TYPE"/>
 	  	<result property="reviewWriter" column="FUNDING_REVIEW_WRITER"/>
 	  	
-	  	<result property="fundingTitle" column="FUNDING_TITLE"/>
+	  	<result property="projectTitle" column="FUNDING_TITLE"/>
 	  	<result property="memberId" column="MEMBER_ID"/>
 	  	
 	  </resultMap>
@@ -33,6 +33,8 @@
 	  	<result property="reviewType" column="REVIEW_TYPE"/>
 	  	<result property="reviewWriter" column="DONATION_REVIEW_WRITER"/>
 	  
+	  	<result property="projectTitle" column="DONATION_BOARD_TITLE"/>
+	  	<result property="memberId" column="MEMBER_ID"/>
 	  </resultMap>
   
   	  <!-- 펀딩 리뷰 게시판 목록 조회 -->
@@ -43,5 +45,15 @@
 		JOIN MEMBER ON(FUNDING_REVIEW_WRITER = MEMBER_NO)
 		JOIN FUNDING_PROJECT ON(FUNDING_BOARD_NO = FUNDING_ID)
 		WHERE FUNDING_REVIEW_STATUS ='Y' 
+  	  </select>
+  	  
+  	  <!-- 기부 리뷰 게시판 목록 조회 -->
+  	  <select id="selectDonationList" resultMap="donationReviewResultSet">
+  	  	SELECT DONATION_REVIEW_NO, DONATION_BOARD_TITLE, DONATION_REVIEW_TITLE, MEMBER_ID, 
+        DONATION_REVIEW_READ_COUNT, DONATION_REVIEW_CREATE_DT
+		FROM REVIEW_DONATION
+		JOIN MEMBER ON(DONATION_REVIEW_WRITER = MEMBER_NO)
+		JOIN DONATION_BOARD USING(DONATION_BOARD_NO)
+		WHERE DONATION_REVIEW_STATUS ='Y' 
   	  </select>
 </mapper>

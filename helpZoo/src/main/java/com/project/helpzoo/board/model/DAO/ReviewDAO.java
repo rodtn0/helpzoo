@@ -18,8 +18,13 @@ public class ReviewDAO {
 	 * @param type
 	 * @return fList
 	 */
-	public List<Review> selectFundingList() {
-		return sqlSession.selectList("reviewMapper.selectFundingList");
+	public List<Review> selectReviewList(int type) {
+		String mapperId = null;
+		
+		if(type == 1) mapperId = "reviewMapper.selectFundingList";
+		else		  mapperId = "reviewMapper.selectDonationList";
+		
+		return sqlSession.selectList(mapperId);
 	}
 
 }

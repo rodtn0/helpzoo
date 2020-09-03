@@ -14,7 +14,7 @@ public class Review {
 	private int reviewType;
 	private int reviewWriter;
 	
-	private String fundingTitle;
+	private String projectTitle;
 	private String memberId;
 	
 	public Review() {
@@ -102,16 +102,16 @@ public class Review {
 		this.reviewWriter = reviewWriter;
 	}
 	
-	
 
-	public String getFundingTitle() {
-		return fundingTitle;
+
+	public String getProjectTitle() {
+		return projectTitle;
 	}
 
 
 
-	public void setFundingTitle(String fundingTitle) {
-		this.fundingTitle = fundingTitle;
+	public void setProjectTitle(String projectTitle) {
+		this.projectTitle = projectTitle;
 	}
 
 
@@ -133,7 +133,7 @@ public class Review {
 		return "Review [reviewNo=" + reviewNo + ", reviewTitle=" + reviewTitle + ", reviewContent=" + reviewContent
 				+ ", readCount=" + readCount + ", reviewCreateDate=" + reviewCreateDate + ", reviewModifyDate="
 				+ reviewModifyDate + ", reviewStatus=" + reviewStatus + ", projectNo=" + projectNo + ", reviewType="
-				+ reviewType + ", reviewWriter=" + reviewWriter + ", fundingTitle=" + fundingTitle + ", memberId="
+				+ reviewType + ", reviewWriter=" + reviewWriter + ", projectTitle=" + projectTitle + ", memberId="
 				+ memberId + "]";
 	}
 
