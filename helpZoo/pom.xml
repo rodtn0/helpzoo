@@ -52,6 +52,24 @@
 		    <!-- properties 태그에 작성된 spring 버전을 따름 -->
 		</dependency>
 		
+		
+		<!-- 하이버네이트 모듈 -->
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-entitymanager</artifactId>
+		    <version>5.4.10.Final</version>
+		</dependency>
+				
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		<!-- Spring과 Mybatis를 연결하는 모듈 -->
 		<!-- mybatis-spring -->
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
