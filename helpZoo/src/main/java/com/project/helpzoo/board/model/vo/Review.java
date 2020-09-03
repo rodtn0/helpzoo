@@ -14,23 +14,13 @@ public class Review {
 	private int reviewType;
 	private int reviewWriter;
 	
+	private String fundingTitle;
+	private String memberId;
+	
 	public Review() {
 	}
 
-	public Review(int reviewNo, String reviewTitle, String reviewContent, int readCount, Date reviewCreateDate,
-			Date reviewModifyDate, char reviewStatus, int projectNo, int reviewType, int reviewWriter) {
-		super();
-		this.reviewNo = reviewNo;
-		this.reviewTitle = reviewTitle;
-		this.reviewContent = reviewContent;
-		this.readCount = readCount;
-		this.reviewCreateDate = reviewCreateDate;
-		this.reviewModifyDate = reviewModifyDate;
-		this.reviewStatus = reviewStatus;
-		this.projectNo = projectNo;
-		this.reviewType = reviewType;
-		this.reviewWriter = reviewWriter;
-	}
+	
 
 	public int getReviewNo() {
 		return reviewNo;
@@ -111,15 +101,44 @@ public class Review {
 	public void setReviewWriter(int reviewWriter) {
 		this.reviewWriter = reviewWriter;
 	}
+	
+	
+
+	public String getFundingTitle() {
+		return fundingTitle;
+	}
+
+
+
+	public void setFundingTitle(String fundingTitle) {
+		this.fundingTitle = fundingTitle;
+	}
+
+
+
+	public String getMemberId() {
+		return memberId;
+	}
+
+
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+
+
 
 	@Override
 	public String toString() {
 		return "Review [reviewNo=" + reviewNo + ", reviewTitle=" + reviewTitle + ", reviewContent=" + reviewContent
 				+ ", readCount=" + readCount + ", reviewCreateDate=" + reviewCreateDate + ", reviewModifyDate="
 				+ reviewModifyDate + ", reviewStatus=" + reviewStatus + ", projectNo=" + projectNo + ", reviewType="
-				+ reviewType + ", reviewWriter=" + reviewWriter + "]";
+				+ reviewType + ", reviewWriter=" + reviewWriter + ", fundingTitle=" + fundingTitle + ", memberId="
+				+ memberId + "]";
 	}
-	
+
+
+
 	
 	
 	

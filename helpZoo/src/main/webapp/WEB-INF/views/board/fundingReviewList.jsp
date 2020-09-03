@@ -102,16 +102,26 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>펀딩 후기</td>
-					<td>9999</td>
-					<td>강아지 방석 펀딩</td>
-					<td>참여 잘한것같아요</td>
-					<td>user01</td>
-					<td>1</td>
-					<td>2020-09-01</td>
-				</tr>
+				<c:choose>
+					<c:when test="${empty fReview}">
+						<tr><td colspan="7">존재하는 게시글이 없습니다.</td></tr>
+					</c:when>
+					
+					<c:otherwise>
+						<c:forEach var="fundingList" items="${fReview}">
+							<tr>
+								<td>펀딩 리뷰</td>
+								<td>${fundingList.reviewNo}</td>
+								<td>${fundingList.fundingTitle}</td>
+								<td>${fundingList.reviewTitle}</td>
+								<td>${fundingList.memberId}</td>
+								<td>${fundingList.readCount}</td>
+								<td>${fundingList.reviewCreateDate}</td>
+							</tr>
+						</c:forEach>
+					</c:otherwise>
 				
+				</c:choose>
 			</tbody>
 		</table>
 		

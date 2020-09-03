@@ -18,8 +18,8 @@ public class ReviewDAO {
 	 * @param type
 	 * @return fList
 	 */
-	public List<Review> selectFundingList(int type) {
-		return sqlSession.selectList("reviewMapper.selectFundingList", type);
+	public List<Review> selectFundingList() {
+		return sqlSession.selectList("reviewMapper.selectFundingList");
 	}
 
 }

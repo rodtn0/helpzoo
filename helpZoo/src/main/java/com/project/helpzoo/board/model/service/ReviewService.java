@@ -11,7 +11,7 @@ public interface ReviewService {
 	 * @param type
 	 * @return fReview
 	 */
-	public abstract List<Review> selectFundingList(int type);
+	public abstract List<Review> selectFundingList();
 
 	
 }
