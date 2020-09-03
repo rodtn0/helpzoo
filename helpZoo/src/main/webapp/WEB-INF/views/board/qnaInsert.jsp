@@ -40,12 +40,14 @@
 			</div>
 
 			<hr>
-			<form action="insertAction" method="post" role="form" onsubmit="return validate();">
+			<form action="insertAction" method="post" role="form"
+			encType="multipart/form-data" onsubmit="return validate();">
 
 				<div class="form-inline mb-2">
 					<label class="input-group-addon mr-3 insert-label">제목</label> 
 					<input type="text" class="form-control" id="title" name="qnaTitle" size="70"
-					autocomplete="off" style= "height: 27px;">
+					autocomplete="off" value ="${loginMember.memberId }님의 질문입니다." style= "height: 27px;"
+					disabled>
 				</div>
 
 				<div class="form-inline mb-2">
@@ -63,13 +65,6 @@
 				</div>  
 
 				<hr>
-
-<!-- 				<div class="form-inline mb-2">
-					<label class="input-group-addon mr-3 insert-label">썸네일</label>
-					<div class="boardImg" id="titleImgArea">
-						<img id="titleImg" width="200" height="200">
-					</div>
-				</div> -->
 
 				<div class="form-inline mb-2">
 					<label class="input-group-addon mr-3 insert-label">업로드<br>이미지</label>
@@ -111,7 +106,7 @@
 
 				<div class="text-center">
 					<button type="submit" class="btn btn-info"><i class="fas fa-file-signature"></i> 등록</button>
-					<button type="reset" class="btn btn-info"><i class="fas fa-window-close"></i> 취소</button>
+					<button type="reset" class="btn btn-info" href="${header.referer}"><i class="fas fa-window-close"></i> 취소</button>
 					<%-- <a class="btn btn-primary float-right" href="${header.referer}">목록으로</a> --%>
 				</div>
 

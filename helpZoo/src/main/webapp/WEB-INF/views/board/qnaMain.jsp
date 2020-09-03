@@ -134,7 +134,10 @@
        </c:choose>
 	</tbody>
    </table>
+   
+   	<c:if test="${!empty loginMember }">
    	<a class="btn btn-info float-right" href="insert"><i class="fas fa-pencil-alt"></i> 글쓰기</a>
+   	</c:if>
    	<br><br>
    	
     <ul id="paging">

@@ -19,8 +19,6 @@ public class QNABoard {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
-
 	public QNABoard(int qnaNo, int originNo, int groupOrd, int groupLayer, String qnaTitle, String qnaContent,
 			int readCount, Timestamp qnaCreateDate, Timestamp qnaModifyDate, String qnaWriter) {
 		super();
@@ -35,8 +33,6 @@ public class QNABoard {
 		this.qnaModifyDate = qnaModifyDate;
 		this.qnaWriter = qnaWriter;
 	}
-
-
 
 	public int getQnaNo() {
 		return qnaNo;
