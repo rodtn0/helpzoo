@@ -49,8 +49,16 @@
 	}
 	
 	/* 눌렀을 때 색깔 유지 */
-	li.active-color { color:#7fcdcd; }
-	    
+/* 	li.active-color { color:#7fcdcd; } */
+	
+	.ec-common-rwd-image{
+	width: 15px;
+    height: 15px;
+	}
+	.ec-common-rwd-image2{
+	width: 26px;
+    height: 14px;
+	}
 	</style>
 	
 <script src="https://kit.fontawesome.com/13be1766f6.js" crossorigin="anonymous"></script>
@@ -88,20 +96,30 @@
 		  	<c:otherwise>
 		  		<c:forEach var="qnaBoard" items="${qnaList}" varStatus="vs">
 			    <tr>
+       			<jsp:useBean id="now" class="java.util.Date"/>
+       			<%-- Date now = new Date(); (현재시간) --%>
+       			<fmt:formatDate var="today" value="${now}" pattern="yyyy-MM-dd"/>
+       			<fmt:formatDate var="createDate" value="${qnaBoard.qnaCreateDate}" pattern="yyyy-MM-dd"/>
+       			<fmt:formatDate var="createTime" value="${qnaBoard.qnaCreateDate}" pattern="hh:mm:ss"/>
 			      <th scope="row">${listCount-( (pInfo.currentPage-1) * pInfo.limit)-vs.index}</th>
-			      <td><i class="fas fa-lock"></i> ${qnaBoard.qnaTitle}</td>
+			      <td>
+			      <c:choose>
+			      	<c:when test="${today == createDate}">
+			      	<img class="ec-common-rwd-image" src="<%=request.getContextPath()%>/resources/images/lock.png"> ${qnaBoard.qnaTitle}
+			      	<img class="ec-common-rwd-image2" src="<%=request.getContextPath()%>/resources/images/lastnew.png">
+			      	</c:when>
+			      	<c:otherwise>
+			      	<img class="ec-common-rwd-image" src="<%=request.getContextPath()%>/resources/images/lock.png"> ${qnaBoard.qnaTitle}
+	         		</c:otherwise>
+			      </c:choose>
+			      </td>
 			      <td>${qnaBoard.qnaWriter}</td>
  	              <td>
-        			<jsp:useBean id="now" class="java.util.Date"/>
-        			<%-- Date now = new Date(); (현재시간) --%>
-        			<fmt:formatDate var="today" value="${now}" pattern="yyyy-MM-dd"/>
-        			<fmt:formatDate var="createDate" value="${qnaBoard.qnaCreateDate}" pattern="yyyy-MM-dd"/>
-        			<fmt:formatDate var="createTime" value="${qnaBoard.qnaCreateDate}" pattern="hh:mm:ss"/>
         						
          			<c:choose>
          					
 	         			<c:when test="${today == createDate}">
-	         				${createTime}
+	         			${createTime}
 	         			</c:when>
 	         			<c:otherwise>
 	         			${createDate}
@@ -116,7 +134,7 @@
        </c:choose>
 	</tbody>
    </table>
-   	<a class="btn btn-info float-right " href="#"><i class="fas fa-pencil-alt"></i> 글쓰기</a>
+   	<a class="btn btn-info float-right" href="insert"><i class="fas fa-pencil-alt"></i> 글쓰기</a>
    	<br><br>
    	
     <ul id="paging">
