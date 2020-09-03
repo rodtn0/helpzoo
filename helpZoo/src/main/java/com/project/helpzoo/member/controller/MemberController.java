@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,18 +13,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.helpzoo.member.model.service.MemberService;
 import com.project.helpzoo.member.model.vo.Member;
 
-
-@SessionAttributes({"memberEmail"})
+@SessionAttributes({"loginMember","memberEmail"})
 @Controller
 @RequestMapping("/member/*")
 
@@ -43,15 +46,36 @@ public class MemberController {
 	}
 	// 로그인 실행 메소드
 	@RequestMapping("loginAction")
-	public String loginAction(@ModelAttribute Member member) {
+	public String loginAction(@ModelAttribute Member member, Model model, RedirectAttributes rdAttr,
+			String saveId, HttpServletResponse response) {
 		
-		try {
-			Member loginMember = memberService.login(member);
+		Member loginMember = memberService.login(member);
+		System.out.println(loginMember);
+		
+		if(loginMember == null) {
+			rdAttr.addFlashAttribute("status", "error");
+			rdAttr.addFlashAttribute("msg", "로그인 실패");
+			rdAttr.addFlashAttribute("text", "아이디 또는 비밀번호를 확인해주세요.");
+		}else {
+			model.addAttribute("loginMember", loginMember);
+			Cookie cookie = new Cookie("saveId", member.getMemberId());
 			
-		}catch(Exception e) {
-			e.printStackTrace();
+			if(saveId != null) {
+				cookie.setMaxAge(60*60*24*7);
+			}else {
+				cookie.setMaxAge(0);
+			}
+			response.addCookie(cookie);
 		}
+		System.out.println(loginMember);
 		
+		return "redirect:/";
+	}
+	
+	// 로그아웃 (세션 만료)
+	@RequestMapping("logout")
+	public String logout(SessionStatus status) {
+		status.setComplete();
 		return "redirect:/";
 	}
 	
@@ -163,8 +187,36 @@ public class MemberController {
 		
 	}
 	
-	@RequestMapping(value="signUpAction", method = RequestMethod.GET)
-	public String signUpAction() {
+	
+	// 회원가입 
+	@RequestMapping(value="signUpAction", method = RequestMethod.POST)
+	public String signUpAction(Member signUpMember, RedirectAttributes rdAttr) {
+		
+		System.out.println(signUpMember);
+		
+		try {
+			int result = memberService.signUp(signUpMember);
+			String status = null;
+			String msg = null;
+			String txt = null;
+			
+			if(result >0) {
+				status="success";
+				msg="가입 성공";
+				txt="이제 로그인해서 도와주(Zoo)를 이용해보세요.";
+				
+			}else {
+				status="error";
+				msg="가입 실패";
+				
+			}
+			rdAttr.addFlashAttribute("status", status);
+			rdAttr.addFlashAttribute("msg", msg);
+			rdAttr.addFlashAttribute("txt", txt);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 		return "redirect:/";
 	}

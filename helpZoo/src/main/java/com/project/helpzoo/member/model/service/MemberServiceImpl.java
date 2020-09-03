@@ -1,8 +1,11 @@
 package com.project.helpzoo.member.model.service;
 
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.project.helpzoo.member.model.dao.MemberDAO;
 import com.project.helpzoo.member.model.vo.Member;
@@ -32,6 +35,23 @@ public class MemberServiceImpl implements MemberService{
 		}
 		
 		return loginMember;
+	}
+
+	
+	// 회원가입 Service 구현
+	@Transactional(rollbackFor = SQLException.class)
+	@Override
+	public int signUp(Member signUpMember) {
+		
+		String encPwd = bcPwd.encode(signUpMember.getMemberPwd());
+		
+		signUpMember.setMemberPwd(encPwd);
+		
+		System.out.println(signUpMember.getMemberPwd());
+		
+		int result = memberDAO.signUp(signUpMember);
+		
+		return result;
 	}
 
 }
