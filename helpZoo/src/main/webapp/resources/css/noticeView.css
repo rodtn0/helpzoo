@@ -2,11 +2,17 @@
 
 .header, .contents{
     margin: 0 auto;
+    padding: 64px 16px 48px 16px;
     max-width: 800px;
 }
 
 /* 상세페이지 헤더 */
+.header{
+    padding-bottom: 10px;
+}
+
 .header .title{
+	line-height: 52px;
     font-size: 22px;
     font-weight: 500;
 }
@@ -17,6 +23,7 @@
 
 /* 상세페이지 contents */
 .contents{
+	padding-top: 30px;
     padding-bottom: 30px;
 }
 
