@@ -65,7 +65,7 @@
 					<div id="dd" class="wrapper-dropdown-1" tabindex="1">
 						<span>분류 없음</span>
 					    <ul class="dropdown" tabindex="1">
-					        <li><a href="#">펀딩 후기 게시판</a></li>
+					        <li><a href="${contextPath}/board/review/1">펀딩 후기 게시판</a></li>
 					        <li><a href="#">기부 후기 게시판</a></li>
 					    </ul>
 					</div>
@@ -97,20 +97,30 @@
 					<th>프로젝트명</th>
 					<th>제목</th>
 					<th>작성자</th>
+					<th>조회수</th>
 					<th>작성일</th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr>
-					<td>펀딩 후기</td>
-					<td>9999</td>
-					<td>강아지 방석 펀딩</td>
-					<td>참여 잘한것같아요</td>
-					<td>펀딩 후기</td>
-					<td>펀딩 후기</td>
-				</tr>
+			<c:choose>
+					<c:when test="${empty dReview}">
+						<tr><td colspan="7">존재하는 게시글이 없습니다.</td></tr>
+					</c:when>
+					
+					<c:otherwise>
+						<c:forEach var="donationList" items="${dReview}">
+							<tr>
+								<td>펀딩 리뷰</td>
+								<td>${donationList.reviewNo}</td>
+								<td>${donationList.projectTitle}</td>
+								<td>${donationList.reviewTitle}</td>
+								<td>${donationList.memberId}</td>
+								<td>${donationList.readCount}</td>
+								<td>${donationList.reviewCreateDate}</td>
+							</tr>
+						</c:forEach>
+					</c:otherwise>
 				
-			</tbody>
+				</c:choose>
 		</table>
 		
 		<a href="#" class="btn-get-started scrollto">글작성</a>

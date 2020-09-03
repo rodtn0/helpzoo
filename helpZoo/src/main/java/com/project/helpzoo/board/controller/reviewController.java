@@ -20,27 +20,32 @@ public class reviewController {
 	@Autowired //의존성 주입
 	private ReviewService reviewService;
 	
-	// 펀딩 후기 게시판, 기부 후기 게시판 버튼 누르면 페이지 전환
+	// 펀딩 후기 게시판, 기부 후기 게시판 버튼 누르면 주소에 맞게 목록 조회.
 	@RequestMapping("review/{type}")
 	public String fundingReviewList(@PathVariable int type, Model model) {
 		
 		String path = null;
-		List<Review> fReview= null;
+		List<Review> fReview = null;
+		List<Review> dReview = null;
 		
 		if(type == 1) {
 			
 			// 펀딩 후기글 리스트 조회
-			fReview = reviewService.selectFundingList();
+			fReview = reviewService.selectReviewList(type);
 			System.out.println(fReview);
 			
 			path = "fundingReviewList";
 			
 			
 		}else		  {
+			dReview = reviewService.selectReviewList(type);
+			System.out.println(dReview);
+			
 			path = "donationReviewList";
 		}
 		
 		model.addAttribute("fReview", fReview);
+		model.addAttribute("dReview", dReview);
 		
 		return "board/" + path;
 	}
