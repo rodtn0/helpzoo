@@ -39,8 +39,9 @@
     SELECT SEQ_QNO.NEXTVAL FROM DUAL
     </select>
     
-    <insert id="insertBoard" parameterType="qnaBoard">
-    	INSERT INTO QNA_BOARD(#{qnaNo}, #{qnaNo}, 0, 0, #{qnaTitle},
+    <!-- 게시글 삽입 -->
+    <insert id="insertBoard" parameterType="QNABoard">
+    	INSERT INTO QNA_BOARD VALUES( #{qnaNo}, #{qnaNo}, 0, 0, #{qnaTitle},
     	#{qnaContent}, DEFAULT, DEFAULT, DEFAULT, #{qnaWriter})
     </insert>
   
