@@ -45,9 +45,8 @@
 
 				<c:otherwise>
 					<ul>
-						<c:set var="num" value="100"/>
 						<c:forEach var="notice" items="${noticeList}">
-							<li data-aos="fade-up" data-aos-delay="${num}"><a class="article" href="#">
+							<li data-aos="fade-up"><a class="article" href="#">
 								<span class="boardNo">${notice.boardNo}</span>
 								<em class="category">${notice.boardName}</em>
 								<div class="info">
