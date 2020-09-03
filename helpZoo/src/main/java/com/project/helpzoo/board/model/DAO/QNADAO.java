@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.project.helpzoo.board.model.vo.Attachment;
 import com.project.helpzoo.board.model.vo.PageInfo;
 import com.project.helpzoo.board.model.vo.QNABoard;
 
@@ -41,6 +42,31 @@ public class QNADAO {
 										// 10개 만큼 건너 띄고 나서 10개다.
 										// 라고 해석
 		return sqlSession.selectList("qnaMapper.selectList", null, rowBounds);
+	}
+
+	/** 글 번호 가져오기
+	 * @return
+	 */
+	public int selectNexNo() {
+		return sqlSession.selectOne("qnaMapper.selectNextNo", null);
+	}
+
+	
+	/** 글 삽입
+	 * @param qnaBoard
+	 * @return
+	 */
+	public int insertBoard(QNABoard qnaBoard) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("qnaMapper.insertBoard", qnaBoard);
+	}
+
+	/** 파일 정보 삽입
+	 * @param at
+	 * @return
+	 */
+	public int insertAttachment(Attachment at) {
+		return sqlSession.insert("qnaMapper.insertAttachment", at);
 	}
 	
 
