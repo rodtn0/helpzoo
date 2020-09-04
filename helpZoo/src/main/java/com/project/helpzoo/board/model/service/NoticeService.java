@@ -3,6 +3,7 @@ package com.project.helpzoo.board.model.service;
 import java.util.List;
 
 import com.project.helpzoo.board.model.vo.Board;
+import com.project.helpzoo.board.model.vo.PageInfo;
 
 public interface NoticeService {
 
@@ -17,5 +18,12 @@ public interface NoticeService {
 	 * @return board
 	 */
 	public abstract Board selectNotice(int boardNo);
+
+	/** 페이징 처리용 service
+	 * @param type
+	 * @param cp
+	 * @return pInfo
+	 */
+	public abstract PageInfo pagination(int type, int cp);
 
 }

@@ -70,6 +70,9 @@
 			<div class="pagination">
 				<div class="page">
 					<div class="desktop-only">
+						<button class="prev-page icon-chevron-double-left" disabled>
+                			<span class="text-hidden">맨 처음 목록</span>
+						</button>
 						<button class="prev-page icon-chevron-left" disabled>
                 			<span class="text-hidden">이전 목록</span>
               			</button>
@@ -121,7 +124,8 @@
 				console.log(boardNo);
 				
 				var boardUrl =
-					"${contextPath}/notice/5/" + boardNo;
+					"${contextPath}/notice/${pInfo.boardType}/"
+						+ boardNo + "?cp=${pInfo.currentPage}";
 					
 				location.href = boardUrl;
 				

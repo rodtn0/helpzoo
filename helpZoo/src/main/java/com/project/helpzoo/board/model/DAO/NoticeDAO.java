@@ -14,6 +14,14 @@ public class NoticeDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
+	/** 전체 게시글 수 조회
+	 * @param type
+	 * @return listCount
+	 */
+	public int getListCount(int type) {
+		return sqlSession.selectOne("noticeMapper.getListCount", type);
+	}
+
 	/** 공지사항 목록 조회 dao
 	 * @param type
 	 * @return noticeList
@@ -38,5 +46,6 @@ public class NoticeDAO {
 	public int increaseCount(int boardNo) {
 		return sqlSession.update("noticeMapper.increaseCount", boardNo);
 	}
+
 
 }
