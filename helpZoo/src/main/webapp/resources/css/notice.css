@@ -240,6 +240,10 @@
     content: "\276F";
 }
 
+.icon-chevron-double-left:before {
+    content: "\276E";
+}
+
 .board-footer .pagination button {
 	border: 0;
 	padding: 0;

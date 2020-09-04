@@ -85,6 +85,9 @@
               			<button class="prev-page icon-chevron-right">
                 			<span class="text-hidden">다음 목록</span>
               			</button>
+						<button class="prev-page icon-chevron-double-right" disabled>
+                			<span class="text-hidden">맨 마지막 목록</span>
+						</button>
 					</div>
 				</div>
 			</div>
