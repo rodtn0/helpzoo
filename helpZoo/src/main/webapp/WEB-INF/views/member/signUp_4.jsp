@@ -25,7 +25,7 @@ border: none;
             <!-- <img src="images/signup-bg.jpg" alt=""> -->
             <div class="container">
                 <div class="signup-content">
-                    <form method="POST" action="../signUpAction" id="signup-form" class="signup-form" onsubmit="return validate();">
+                    <form method="POST" action="../signUpAction" name="signUpForm" class="signup-form" onsubmit="return validate();">
                
                         <h2 class="form-title">회원 정보 입력</h2><br>
                        <!--  <h5 style="text-align:center;">정말 마지막 단계에요! 회원 정보를 입력하면 가입이 완료됩니다.</h5>-->
@@ -74,7 +74,7 @@ border: none;
 	                    </div>
 	                    
                         <div class="form-group">
-                            <input type="email" class="form-input" name="memberEmail" id="email" value="${memberEmail}" placeholder="Your Email" disabled/>
+                            <input type="email" class="form-input" name="memberEmail" id="email" value="${memberEmail}">
                         </div>
                         
                         <div class="row mb-3 form-row">
@@ -150,11 +150,48 @@ border: none;
         </section>
     </div>
     <script>
+    var signUpCheck = {
+    		"id" : false,
+    		"pwd1" : false,
+    		"pwd2" : false,
+    		"name" : false,
+    		"phone2" : false
+    };
+    
+    // ******* 실시간 유효성 검사 *******
+    // 정규 표현식
+    var $id = $("#id");
+    var $pwd1 = $("#pwd1");
+    var $pwd2 = $("pwd2");
+    var $pwd = $("#pwd1, #pwd2");
+    var $name = $("#name");
+    var $phone2 = $("#phone2");
+    var $phone3 = $("#phone3");
+    
+    // 아이디 유효성 검사
+    // #id라는 요소에 on(입력) 이벤트가 발생했을 때 함수를 수행하겠다.
+    $id("input", function() {
+    	
+    	signUpCheck.id = false;
+    	
+    	// 영어 대/소문자 + 숫자 총 6~12글자
+    	var regExp = /^[a-zA-Z\d]{6,12}$/;
+    	
+    	if(!regExp.test($id.val())){
+    		
+    		
+    	}else{
+    		
+    	}
+    	
+    });
+    
+    
 	function validate(){
 		
 		// 모든 입력 값이 유효할 경우
+		// 커맨드 객체를 이용하여 파라미터를 한번에 받을 수 있도록 하기 위해
 		// 입력된 전화번호, 주소를 하나의 문자열로 합쳐 form 태그 끝에 hidden 타입으로 추가하는 작업
-		// 왜? -> 커맨드 객체를 이용하여 파라미터를 한번에 받을 수 있도록 하기 위해
 		
 		$memberPhone = $("<input>", {type : "hidden", name: "memberPhone",
 						value : $("#phone1").val()+"-"+$("#phone2").val() + "-" +
@@ -166,6 +203,7 @@ border: none;
 		
 		// append : form 태그의 자식 중 마지막에 추가함
 		$("form[name='signUpForm']").append($memberPhone, $memberAddress);
+	}
     </script>
     <!-- JS -->
     <!--  
