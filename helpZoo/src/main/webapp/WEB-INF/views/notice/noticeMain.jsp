@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <link href="${contextPath}/resources/css/notice.css" rel="stylesheet" />
+<script src="https://kit.fontawesome.com/6473591abd.js" crossorigin="anonymous"></script>
 <title>도와zoo 공지사항</title>
 </head>
 <body>
@@ -45,8 +46,8 @@
 
 				<c:otherwise>
 					<ul>
-						<c:forEach var="notice" items="${noticeList}">
-							<li data-aos="fade-up"><a class="article" href="#">
+						<c:forEach var="notice" items="${noticeList}" varStatus="status">
+							<li data-aos="fade-up" data-aos-delay="${(status.index+1)*100}"><a class="article" href="#">
 								<span class="boardNo">${notice.boardNo}</span>
 								<em class="category">${notice.boardName}</em>
 								<div class="info">
@@ -67,7 +68,7 @@
 		<div class="board-footer">
 		
 			<!-- 페이징 -->
-			<div class="pagination">
+			<!-- <div class="pagination">
 				<div class="page">
 					<div class="desktop-only">
 						<button class="prev-page icon-chevron-double-left" disabled>
@@ -88,6 +89,70 @@
 						<button class="prev-page icon-chevron-double-right" disabled>
                 			<span class="text-hidden">맨 마지막 목록</span>
 						</button>
+					</div>
+				</div>
+			</div> -->
+			
+			<div class="pagination">
+				<div class="page">
+					<div class="desktop-only">
+						<c:if test="${pInfo.currentPage > pInfo.pagingBarSize}">
+							
+							<!-- 맨 처음으로 -->
+							<%-- <i class="fas fa-angle-double-left">
+								<a class="first-page" href="${pInfo.boardType}?cp=1"/>
+							</i> --%>
+							
+							<!-- 이전으로 -->
+							<fmt:parseNumber var="operand1"
+									value="${(pInfo.currentPage - 1)/pInfo.pagingBarSize}"
+									integerOnly="true"/>
+									
+							<c:set var="prev" value="${operand1 * 10}"/>
+							<button class="prev-page icon-chevron-left" onclick="location.href='?cp=${prev}'">
+	                			<span class="text-hidden">이전 목록</span>
+	              			</button>
+							<%-- <i class="fas fa-angle-left">
+								<fmt:parseNumber var="operand1"
+									value="${(pInfo.currentPage - 1)/pInfo.pagingBarSize}"
+									integerOnly="true"/>
+									
+								<c:set var="prev" value="${operand1 * 10}"/>
+								
+								<a class="prev-page" href="${pInfo.boardType}?cp=${prev}"/>
+							</i> --%>
+						</c:if>
+						
+						<!-- 각 페이지 번호 -->
+						<c:forEach var="p" begin="${pInfo.startPage}" end="${pInfo.endPage}">
+							<c:choose>
+								<c:when test="${p == pInfo.currentPage}">
+			              			<a class="current" href="#">${p}</a>
+								</c:when>
+								<c:otherwise>
+			              			<a href="?cp=${p}">${p}</a>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						
+						<c:if test="${pInfo.maxPage > pInfo.endPage}">
+							
+							<!-- 다음으로 -->
+							<fmt:parseNumber var="operand2"
+									value="${(pInfo.currentPage + pInfo.pagingBarSize - 1)/ pInfo.pagingBarSize}"
+									integerOnly="true"/>
+							<c:set var="next" value="${operand2 * pInfo.pagingBarSize + 1}"/>
+							<button class="next-page icon-chevron-right" onclick="location.href='?cp=${next}'">
+                				<span class="text-hidden">다음 목록2</span>
+              				</button>
+							
+							<!-- 맨 끝으로 -->
+							<%-- <i class="fas fa-angle-double-right">
+								<a class="last-page" href="${pInfo.boardType}?cp=${pInfo.maxPage}"></a>
+							</i> --%>
+						
+						</c:if>
+
 					</div>
 				</div>
 			</div>

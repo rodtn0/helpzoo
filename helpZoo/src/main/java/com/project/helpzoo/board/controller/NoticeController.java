@@ -30,12 +30,12 @@ public class NoticeController {
 		
 		PageInfo pInfo = noticeService.pagination(type, cp);
 		
-		List<Board> noticeList = noticeService.selectList(type);
+		List<Board> noticeList = noticeService.selectList(pInfo);
 		
 		//목록 조회 확인용 test
-		for(Board b : noticeList) {
-			System.out.println("공지사항 리스트 : " + b);
-		}
+//		for(Board b : noticeList) {
+//			System.out.println("공지사항 리스트 : " + b);
+//		}
 		
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("pInfo", pInfo);

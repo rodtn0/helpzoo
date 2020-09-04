@@ -34,8 +34,8 @@ public class NoticeServiceImpl implements NoticeService{
 	
 	// 공지사항 목록 조회 service 구현
 	@Override
-	public List<Board> selectList(int type) {
-		return noticeDAO.selectList(type);
+	public List<Board> selectList(PageInfo pInfo) {
+		return noticeDAO.selectList(pInfo);
 	}
 
 	// 공지사항 상세 조회

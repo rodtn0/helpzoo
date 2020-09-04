@@ -221,15 +221,15 @@
 	top: 0;
 }
 
-/* .board-footer .pagination .prev-page {
+.board-footer .pagination .next-page {
 	margin-left: 16px;
 	left: 0;
 	position: static;
 	top: 0;
-} */
+}
 
 .icon-chevron-double-left:before {
-    content: "\276E";
+    content: "\2770";
 }
 
 .icon-chevron-left:before {
@@ -240,8 +240,8 @@
     content: "\276F";
 }
 
-.icon-chevron-double-left:before {
-    content: "\276E";
+.icon-chevron-double-right:before {
+    content: "\2771";
 }
 
 .board-footer .pagination button {

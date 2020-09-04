@@ -11,7 +11,7 @@ public interface NoticeService {
 	 * @param type
 	 * @return noticeList
 	 */
-	public abstract List<Board> selectList(int type);
+	public abstract List<Board> selectList(PageInfo pInfo);
 
 	/** 공지사항 상세 조회
 	 * @param boardNo
