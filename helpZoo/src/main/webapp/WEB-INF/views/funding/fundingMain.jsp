@@ -185,6 +185,41 @@
     <br />
     <br />
 
+
+
+
+
+<script>
+
+$(document).ready(function() {
+	
+	
+	$.ajax({
+	    url:"${contextPath}/funding/selectList?cp=1",
+	    type: "GET",
+	    dataType: "json",
+	    success: function(result){
+	       
+	    	console.log(result)
+	    	
+	    }
+	});
+	
+	
+	
+});
+
+
+
+
+
+
+</script>
+
+
+
+
+
     <div class="container">
       <div class="sight_all">
         <span class="select_all">
@@ -266,7 +301,17 @@
         </div>
       </div>
     </div>
-
+   
+   
+   <ul id="list-guestbook">
+    </ul>
+   
+   
+<script type="text/javascript">
+</script>
+	
+	
+	
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
   </body>

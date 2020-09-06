@@ -49,8 +49,8 @@ public class Order {
 		return id;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setId(long l) {
+		this.id = l;
 	}
 
 	public Date getOrderDate() {
@@ -108,6 +108,10 @@ public class Order {
 		this.deliveryId2 = deliveryId2;
 		this.member_no = member_no;
 	}
+
+
+
+	
 	
 
 }
