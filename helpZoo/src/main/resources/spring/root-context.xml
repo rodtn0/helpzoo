@@ -20,6 +20,8 @@
 	<!-- 
 		BasicDataSource dataSource = new BasicDataSource();
 	 -->
+	 
+	 
 																	<!-- destroy-method="close" -->
 							<!-- conn.close()와 같은 느낌, 주어진 SqlSession 작업이 종료되면 close 하라는 의미 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
@@ -63,7 +65,7 @@
 	</bean>
 	
 	<!-- 트랜잭션 처리를 위한 트랜잭션 매니저 추가 -->
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<!-- ref에 참조는 위에서 생성한 dataSource -->
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
@@ -110,4 +112,28 @@
 	 		사이즈가 이보다 클 경우 이 사이즈 이상의 데이터는 파일에 저장됩니다. 
 			 기본값은 10240 바이트.
 	 -->	
+	 
+	 
+    <!-- JPA 예외를 스프링 예외로 변환 -->
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="com.project.helpzoo.funding.model.vo"/> <!-- @Entity 탐색 시작 위치 -->
+        <property name="jpaVendorAdapter">
+            <!-- 하이버네이트 구현체 사용 -->
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+        </property>
+        <property name="jpaProperties"> <!-- 하이버네이트 상세 설정 -->
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop> <!-- 방언 -->
+                <prop key="hibernate.show_sql">true</prop>                   <!-- SQL 보기 -->
+                <prop key="hibernate.format_sql">true</prop>                 <!-- SQL 정렬해서 보기 -->
+                <prop key="hibernate.use_sql_comments">true</prop>           <!-- SQL 코멘트 보기 -->
+                <prop key="hibernate.id.new_generator_mappings">true</prop>  <!-- 새 버전의 ID 생성 옵션 -->
+            </props>
+        </property>
+    </bean>
+	 
+	 
 </beans>
