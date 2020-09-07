@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.project.helpzoo.funding.model.dao.FundingDAO;
 import com.project.helpzoo.funding.model.service.FundingService;
 
 
@@ -29,8 +30,6 @@ public class FundingController {
 	@RequestMapping("fundingMain")
 	public String fundingMain() {
 	
-		
-		
 		
 		
 		return "funding/fundingMain";

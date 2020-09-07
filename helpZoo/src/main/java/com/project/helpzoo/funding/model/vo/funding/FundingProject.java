@@ -1,7 +1,9 @@
 package com.project.helpzoo.funding.model.vo.funding;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -12,9 +14,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.project.helpzoo.funding.model.vo.order.Reward;
 
 
 @SequenceGenerator(
@@ -81,6 +86,8 @@ public class FundingProject {
 	@JoinColumn(name = "INDI_OR_COPARATION_ID", insertable = false, updatable = false)
 	private IndiOrCoparation indiOrCoparation;
 	
+	@OneToMany (mappedBy = "fundingProject")
+	private List<Reward> reward;
 	
 	
 	@OneToOne (fetch = FetchType.LAZY)

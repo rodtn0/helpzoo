@@ -195,7 +195,7 @@ $(document).ready(function() {
 	
 	
 	$.ajax({
-	    url:"${contextPath}/funding/selectList?cp=1",
+	    url:"${contextPath}/fundingApi/selectList",
 	    type: "GET",
 	    dataType: "json",
 	    success: function(result){
