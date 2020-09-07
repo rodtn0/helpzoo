@@ -75,7 +75,7 @@ public class QNAServiceImpl implements QNAService{
 			
 			Attachment at = null;
 			
-			String filePath = "resources/uploadImages";
+			String filePath = "/resources/uploadImages";
 			
 			for(int i=0; i<images.size(); i++) {
 				if(!images.get(i).getOriginalFilename().equals("")) {
@@ -85,7 +85,7 @@ public class QNAServiceImpl implements QNAService{
 					String changeFileName = rename(images.get(i).getOriginalFilename());
 				
 					at = new Attachment(qnaBoard.getQnaNo(), images.get(i).getOriginalFilename(),
-							filePath ,changeFileName, i);
+							changeFileName, filePath, i);
 					
 					result = qnaDAO.insertAttachment(at);
 					
@@ -96,6 +96,9 @@ public class QNAServiceImpl implements QNAService{
 			// 디비에 저장이 되었다면
 			if(result > 0) {
 				for(int i=0; i<images.size(); i++) {
+					
+					System.out.println("ser: " + savePath);
+					System.out.println("ser: " + files.get(i).getFileChangeName());
 					
 					if(!images.get(i).getOriginalFilename().equals("")) {
 						// transferTo(경로) : 지정한 경로에 업로드된 바이트 상태의 파일을 
@@ -129,6 +132,30 @@ public class QNAServiceImpl implements QNAService{
     	
     	return result;
     }
+    
+    // Q&A 상세 조회 Service / 조회수 증가
+    @Transactional(rollbackFor= Exception.class)
+    @Override
+    public QNABoard selectBoard(int qnaNo) {
+    	
+    	QNABoard board = qnaDAO.selectBoard(qnaNo);
+    	
+    	if(board != null) {
+    		int result = qnaDAO.increaseCount(qnaNo);
+    		
+    		if(result > 0 ) {
+    			board.setReadCount(board.getReadCount() +1 );
+    		}
+    	}
+    	return board;
+    }
+    
+    // 게시글 이미지 조회 Service 구현
+	@Override
+	public List<Attachment> selectFiles(int qnaNo) {
+		return qnaDAO.selectFiles(qnaNo);
+	}
+    
     
     // 파일명 변경
     // 200821152611_12345.jpg

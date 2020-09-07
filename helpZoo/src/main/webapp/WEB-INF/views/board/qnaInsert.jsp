@@ -27,7 +27,7 @@
     height: 30px;
     font-size: small !important;
 	}
-	
+
 </style>
 <script src="https://kit.fontawesome.com/13be1766f6.js" crossorigin="anonymous"></script>
 <body>
@@ -47,7 +47,7 @@
 					<label class="input-group-addon mr-3 insert-label">제목</label> 
 					<input type="text" class="form-control" id="title" name="qnaTitle" size="70"
 					autocomplete="off" value ="${loginMember.memberId }님의 질문입니다." style= "height: 27px;"
-					disabled>
+					readonly>
 				</div>
 
 				<div class="form-inline mb-2">
@@ -106,7 +106,7 @@
 
 				<div class="text-center">
 					<button type="submit" class="btn btn-info"><i class="fas fa-file-signature"></i> 등록</button>
-					<button type="reset" class="btn btn-info" href="${header.referer}"><i class="fas fa-window-close"></i> 취소</button>
+					<button type="reset" class="btn btn-info" onclick="history.back()"><i class="fas fa-window-close"></i> 취소</button>
 					<%-- <a class="btn btn-primary float-right" href="${header.referer}">목록으로</a> --%>
 				</div>
 
