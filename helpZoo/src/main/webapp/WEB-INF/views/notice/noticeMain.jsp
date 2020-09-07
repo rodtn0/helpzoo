@@ -99,9 +99,9 @@
 						<c:if test="${pInfo.currentPage > pInfo.pagingBarSize}">
 							
 							<!-- 맨 처음으로 -->
-							<%-- <i class="fas fa-angle-double-left">
-								<a class="first-page" href="${pInfo.boardType}?cp=1"/>
-							</i> --%>
+							<i class="fas fa-angle-double-left">
+								<a class="first-page" href="?cp=1"/>
+							</i>
 							
 							<!-- 이전으로 -->
 							<fmt:parseNumber var="operand1"
