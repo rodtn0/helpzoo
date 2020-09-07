@@ -51,4 +51,19 @@
 			SEQ_QFNO.NEXTVAL, #{parentBoardNo}, #{fileOriginName}, #{fileChangeName}, #{filePath}, #{fileLevel}
 			)
   	</insert>
+  	
+  	<select id="selectBoard" parameterType="_int" resultMap="qnaBoardResultSet">
+  		SELECT * FROM Q_BOARD WHERE QNA_NO=#{qnaNo}
+  	</select>
+  	
+  	<update id="increaseCount" parameterType="_int">
+  	UPDATE QNA_BOARD SET READ_COUNT = READ_COUNT +1 
+  	WHERE QNA_NO=#{qnaNo}
+  	</update>
+  	
+  	<select id="selectFiles" parameterType="_int" resultMap="attachmentResultSet">
+  	SELECT * FROM Q_ATTACHMENT
+  	WHERE PARENT_BOARD_NO = #{qnoNo}
+  	ORDER BY FILE_LEVEL
+  	</select>
 </mapper>

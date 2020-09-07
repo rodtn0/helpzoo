@@ -68,6 +68,32 @@ public class QNADAO {
 	public int insertAttachment(Attachment at) {
 		return sqlSession.insert("qnaMapper.insertAttachment", at);
 	}
+
+	/** 게시글 상세 조회 구현
+	 * @param qnaNo
+	 * @return
+	 */
+	public QNABoard selectBoard(int qnaNo) {
+		return sqlSession.selectOne("qnaMapper.selectBoard", qnaNo);
+							// 단일행이기 때문에 SelectOne
+	}
+
+	/** 게시글 조회 수 증가
+	 * @param qnaNo
+	 * @return
+	 */
+	public int increaseCount(int qnaNo) {
+		return sqlSession.update("qnaMapper.increaseCount", qnaNo);
+	}
+
+	
+	/** 게시글 이미지 조회 Service 구현
+	 * @param qnaNo
+	 * @return
+	 */
+	public List<Attachment> selectFiles(int qnaNo) {
+		return sqlSession.selectList("qnaMapper.selectFiles", qnaNo);
+	}
 	
 
 }
