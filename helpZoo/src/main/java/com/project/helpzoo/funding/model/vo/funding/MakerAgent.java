@@ -1,4 +1,4 @@
-package com.project.helpzoo.funding.model.vo;
+package com.project.helpzoo.funding.model.vo.funding;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
