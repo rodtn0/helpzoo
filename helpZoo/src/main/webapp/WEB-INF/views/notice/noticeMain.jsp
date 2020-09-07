@@ -99,17 +99,18 @@
 						<c:if test="${pInfo.currentPage > pInfo.pagingBarSize}">
 							
 							<!-- 맨 처음으로 -->
-							<i class="fas fa-angle-double-left">
+							<button class="fas fa-angle-double-left" onclick="location.href='?cp=1'"/>
+							<!-- <i class="fas fa-angle-double-left">
 								<a class="first-page" href="?cp=1"/>
-							</i>
+							</i> -->
 							
 							<!-- 이전으로 -->
 							<fmt:parseNumber var="operand1"
-									value="${(pInfo.currentPage - 1)/pInfo.pagingBarSize}"
+									value="${(pInfo.currentPage-1)/pInfo.pagingBarSize}"
 									integerOnly="true"/>
 									
 							<c:set var="prev" value="${operand1 * 10}"/>
-							<button class="prev-page icon-chevron-left" onclick="location.href='?cp=${prev}'">
+							<button class="prev-page fas fa-angle-left" onclick="location.href='?cp=${prev}'">
 	                			<span class="text-hidden">이전 목록</span>
 	              			</button>
 							<%-- <i class="fas fa-angle-left">
@@ -142,11 +143,12 @@
 									value="${(pInfo.currentPage + pInfo.pagingBarSize - 1)/ pInfo.pagingBarSize}"
 									integerOnly="true"/>
 							<c:set var="next" value="${operand2 * pInfo.pagingBarSize + 1}"/>
-							<button class="next-page icon-chevron-right" onclick="location.href='?cp=${next}'">
+							<button class="next-page fas fa-angle-right" onclick="location.href='?cp=${next}'">
                 				<span class="text-hidden">다음 목록2</span>
               				</button>
 							
 							<!-- 맨 끝으로 -->
+							<button class="fas fa-angle-double-right" onclick="location.href='?cp=${pInfo.maxPage}'"/>
 							<%-- <i class="fas fa-angle-double-right">
 								<a class="last-page" href="${pInfo.boardType}?cp=${pInfo.maxPage}"></a>
 							</i> --%>
