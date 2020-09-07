@@ -68,14 +68,8 @@
 	    <artifactId>spring-orm</artifactId>
 	    <version>5.2.8.RELEASE</version>
 	</dependency>
-	
-		<dependency>
-		  <groupId>org.slf4j</groupId>
-		  <artifactId>slf4j-log4j12</artifactId>
-		  <version>1.6.1</version>
-		</dependency>
-							
-							
+			
+			
 		
 		
 		
@@ -167,22 +161,12 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 				
-		
-		<!-- AspectJ AOP 기능을 사용하기 위한 언어 문법을  지원하는 라이브러리-->
-		<!-- aspectjrt : AspectJ 런타임 유틸 -->
+		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>${org.aspectj-version}</version>
 		</dependency>	
-		
-		<!--  Aspect Weaver : aspect의 바탕으로 aspect를 구성한 코드를 생성, 삽입하는 유틸 -->
-		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
-			<dependency>
-			    <groupId>org.aspectj</groupId>
-			    <artifactId>aspectjweaver</artifactId>
-			    <version>${org.aspectj-version}</version>
-			</dependency>
 		
 		<!-- Logging -->
 		<dependency>
@@ -333,7 +317,6 @@
                     <mainClass>org.test.int1.Main</mainClass>
                 </configuration>
             </plugin>
-			
         </plugins>
     </build>
 </project>

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.project.helpzoo.board.model.vo.Attachment;
 import com.project.helpzoo.board.model.vo.PageInfo;
 import com.project.helpzoo.board.model.vo.QNABoard;
 
@@ -19,11 +18,5 @@ public interface QNAService {
 	// qna 작성
 	public abstract int insertBoard(QNABoard qnaBoard, String savePath,
 			List<MultipartFile> images);
-	
-	// qna 상세 조회
-	public abstract QNABoard selectBoard(int qnaNo);
-
-	// qna 상세조회 파일 가져오기
-	public abstract List<Attachment> selectFiles(int qnaNo);
 
 }
