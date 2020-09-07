@@ -6,22 +6,29 @@
 <head>
 <meta charset="UTF-8">
 <title>펀딩 후기 게시판</title>
-
+	
+	<!-- 분류 관련 css -->
 	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/categoryCss/css/style.css" />
 	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/categoryCss/css/demo.css" />
 	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/categoryCss/css/font-awesome.css" />
 	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/categoryCss/css/noJS.css" />
 	
 	
-	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/vendor/bootstrap/bootstrap.css" />
-	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/vendor/bootstrap/bootstrap.min.css" />
+<%-- 	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/vendor/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/vendor/bootstrap/css/bootstrap.min.css" /> --%>
+<%-- <link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/vendor/bootstrap/css/bootstrap-reboot.css" />
+	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/vendor/bootstrap/css/bootstrap-reboot.min.css" /> --%>
+  
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	
 	
 	<style>
+
 		.container .btn-get-started {
 		  font-family: "Montserrat", sans-serif;
 		  text-transform: uppercase;
 		  font-weight: 400;
-		  font-size: 16px;
+		  font-size: 18px;
 		  letter-spacing: 1px;
 		  display: inline-block;
 		  padding: 14px 30px;
@@ -49,6 +56,55 @@
 			width : 1140px;
 		}
 		
+	
+		
+		.paginationz{
+			position: absolute;
+			left: 50%;
+			top: 100%;
+			transform: translate(-50%,-50%);
+			margin: 0;
+			padding: 10px;
+			background-color: #fff;
+			border-radius: 40px;
+			/* box-shadow: 0 5px 25px 0 rgba(0,0,0,.5); */
+		}
+		
+		.paginationz li {
+			display: inline-block;
+			list-style: none;
+		}
+		
+		.paginationz a{
+			display: block;
+			width: 40px;
+			height: 40px;
+			line-height: 40px;
+			background-color: #fff;
+			text-align: center;
+			text-decoration: none;
+			color: #252525;
+			border-radius: 4px;
+			margin: 5px;
+			box-shadow: inset 0 5px 10px rgba(0,0,0,.1), 0 2px 5px rgba(0,0,0,.5);
+			transition: all .3s ease;
+		}
+			
+		&:hover, &.active{
+			color: #fff;
+			background-color: #7fcdcd;
+		}
+			
+		&:first-child a{
+			border-radius: 40px 0 0 40px;
+		}
+		
+		&:last-child a{
+			border-radius: 0 40px 40px 0;
+		}
+        
+        
+		
 		
 	</style>
 </head>
@@ -56,11 +112,11 @@
 	<jsp:include page="../common/header.jsp"/>
 	
 		
-		
+	<br>
 	<div class="container">
 	
 		
-		<section class="main">
+		<div class="main">
 				<div class="wrapper-demo">
 					<div id="dd" class="wrapper-dropdown-1" tabindex="1">
 						<span>분류 없음</span>
@@ -70,7 +126,7 @@
 					    </ul>
 					</div>
 				​</div>
-		</section>
+		</div>
 		
 		<!-- Split button -->
 		<!-- <div class="btn-group">
@@ -88,6 +144,7 @@
 		  </ul>
 		</div> -->
 			
+		<br><br>
 			
 		<table class="table .table-hover">
 			<thead>
@@ -125,8 +182,73 @@
 			</tbody>
 		</table>
 		
+		
+		<c:if test="${!empty loginMember }">
 		<a href="#" class="btn-get-started scrollto">글작성</a>
+		</c:if>
+		
+		<!-- <nav>
+		  <ul class="pagination">
+		    <li>
+		      <a href="#" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+		      </a>
+		    </li>
+		    <li><a href="#">1</a></li>
+		    <li><a href="#">2</a></li>
+		    <li><a href="#">3</a></li>
+		    <li><a href="#">4</a></li>
+		    <li><a href="#">5</a></li>
+		    <li>
+		      <a href="#" aria-label="Next">
+		        <span aria-hidden="true">&raquo;</span>
+		      </a>
+		    </li>
+		  </ul>
+		</nav> -->
+		
+		<br><br>
+		<!-- Start Pagination -->
+		<div class="my-4">
+			<ul class="paginationz">
+				
+				<!-- 맨 처음으로(<<) -->
+				<c:if test="${pInfo.currentPage > pInfo.pagingBarSize}">
+				<li><a href="${pInfo.boardType}?cp=1">&lt;&lt;</a></li>
+				</c:if>
+				
+				<!-- 이전으로(<) -->
+				<!-- prev 생성 식 : (현재 페이지 -1) / 페이징바 사이즈(10) * 10 -->
+	            <!-- fmt 태그를 이용한 소수점 제거 -->
+				<li><a href="#0">&lt;</a></li>
+				
+				<c:forEach var="p" begin="${pInfo.startPage}" end="${pInfo.endPage}">
+					<c:choose>
+						<c:when test="${p == pInfo.currentPage}">
+							<li><a class="active">${p}</a></li>
+						</c:when>
+						
+						<c:otherwise>
+							<li><a href="${pInfo.boardType}?cp=${p}">${p}</a></li>
+						</c:otherwise>
+						
+					</c:choose>
+				</c:forEach>
+				
+				
+				<!-- 다음으로(>) -->
+				<li><a href="#0">&gt;</a></li>
+				
+				<!-- 맨 끝으로(>>) -->
+				<li><a href="#0">&gt;&gt;</a></li>
+			</ul>
+			<!-- End Pagination -->
+		</div>
 	</div>
+	
+		<br><br>
+	
+	
 	
 		
 	
