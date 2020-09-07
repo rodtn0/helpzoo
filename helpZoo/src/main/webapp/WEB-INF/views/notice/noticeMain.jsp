@@ -175,7 +175,15 @@
 						<button class="btn-search dense" type="submit">검색</button>
 					</div>
 				</form>
+				
 			</div>
+
+				<!-- 공지사항 작성 버튼 -->
+				<c:if test="${loginMember.memberNo == 1}">
+					<div class="insert-notice">
+						<a data-aos="zoom-in" class="insertBtn" onclick="location.href='${contextPath}/notice/5/insertView'">글작성</a>
+					</div>
+				</c:if>
 			
 		</div>
 		

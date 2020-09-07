@@ -59,5 +59,11 @@ public class NoticeController {
 		return "notice/noticeView";
 	}
 	
+	@RequestMapping("{type}/insertView")
+	public String insertView() {
+		
+		return "notice/insertView";
+		
+	}
 	
 }

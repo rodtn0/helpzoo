@@ -33,7 +33,7 @@
         
         <!-- 상세페이지 하단 -->
         <div class="board-bottom">
-            <a data-aos="zoom-in" class="toList" onclick="history.back()">
+            <a data-aos="zoom-in" class="toListBtn" onclick="history.back()">
                	 목록으로 돌아가기
             </a>
         </div>
