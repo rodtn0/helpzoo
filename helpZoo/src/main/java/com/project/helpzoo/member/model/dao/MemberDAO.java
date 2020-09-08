@@ -30,13 +30,4 @@ public class MemberDAO {
 		return sqlSession.insert("memberMapper.signUp",signUpMember);
 	}
 
-	/** 아이디 중복 검사 DAO
-	 * @param memberId
-	 * @return result
-	 */
-	public int idDupCheck(String memberId) {
-		
-		return sqlSession.selectOne("memberMapper.idDupCheck", memberId);
-	}
-
 }

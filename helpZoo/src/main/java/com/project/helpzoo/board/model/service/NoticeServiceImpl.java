@@ -8,34 +8,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.project.helpzoo.board.model.DAO.NoticeDAO;
 import com.project.helpzoo.board.model.vo.Board;
-import com.project.helpzoo.board.model.vo.PageInfo;
 
 @Service
 public class NoticeServiceImpl implements NoticeService{
 
 	@Autowired
 	private NoticeDAO noticeDAO;
-
-	@Autowired
-	private PageInfo pInfo; 
-	
-	// 페이징 처리용 service 구현
-	@Override
-	public PageInfo pagination(int type, int cp) {
-		
-		int listCount = noticeDAO.getListCount(type);
-		
-		pInfo.setPageInfo(cp, listCount, type);
-		
-		System.out.println("pInfo : " + pInfo);
-		
-		return pInfo;
-	}
 	
 	// 공지사항 목록 조회 service 구현
 	@Override
-	public List<Board> selectList(PageInfo pInfo) {
-		return noticeDAO.selectList(pInfo);
+	public List<Board> selectList(int type) {
+		return noticeDAO.selectList(type);
 	}
 
 	// 공지사항 상세 조회
@@ -59,7 +42,6 @@ public class NoticeServiceImpl implements NoticeService{
 		
 		return board;
 	}
-
 
 	
 	

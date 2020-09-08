@@ -13,8 +13,8 @@
 	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/categoryCss/css/noJS.css" />
 	
 	
-	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/vendor/bootstrap/bootstrap.css" />
-	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/vendor/bootstrap/bootstrap.min.css" />
+	<%-- <link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/vendor/bootstrap/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/assets/vendor/bootstrap/bootstrap.min.css" /> --%>
 	
 	<style>
 		.container .btn-get-started {
@@ -49,6 +49,51 @@
 			width : 1140px;
 		}
 		
+		.paginationz{
+			position: absolute;
+			left: 50%;
+			top: 100%;
+			transform: translate(-50%,-50%);
+			margin: 0;
+			padding: 10px;
+			background-color: #fff;
+			border-radius: 40px;
+			/* box-shadow: 0 5px 25px 0 rgba(0,0,0,.5); */
+		}
+		
+		.paginationz li {
+			display: inline-block;
+			list-style: none;
+		}
+		
+		.paginationz a{
+			display: block;
+			width: 40px;
+			height: 40px;
+			line-height: 40px;
+			background-color: #fff;
+			text-align: center;
+			text-decoration: none;
+			color: #252525;
+			border-radius: 4px;
+			margin: 5px;
+			box-shadow: inset 0 5px 10px rgba(0,0,0,.1), 0 2px 5px rgba(0,0,0,.5);
+			transition: all .3s ease;
+		}
+			
+		&:hover, &.active{
+			color: #fff;
+			background-color: #7fcdcd;
+		}
+			
+		&:first-child a{
+			border-radius: 40px 0 0 40px;
+		}
+		
+		&:last-child a{
+			border-radius: 0 40px 40px 0;
+		}
+		
 		
 	</style>
 </head>
@@ -56,11 +101,11 @@
 	<jsp:include page="../common/header.jsp"/>
 	
 		
-		
+	<br>
 	<div class="container">
 	
 		
-		<section class="main">
+		<div class="main">
 				<div class="wrapper-demo">
 					<div id="dd" class="wrapper-dropdown-1" tabindex="1">
 						<span>분류 없음</span>
@@ -70,7 +115,7 @@
 					    </ul>
 					</div>
 				​</div>
-		</section>
+		</div>
 		
 		<!-- Split button -->
 		<!-- <div class="btn-group">
@@ -87,7 +132,8 @@
 		    <li><a href="#">Separated link</a></li>
 		  </ul>
 		</div> -->
-			
+		
+		<br><br>	
 			
 		<table class="table .table-hover">
 			<thead>
@@ -124,6 +170,26 @@
 		</table>
 		
 		<a href="#" class="btn-get-started scrollto">글작성</a>
+		
+		
+		<br><br>
+			<!-- Start Pagination -->
+			<div class="my-4">
+				<ul class="paginationz">
+					<li><a href="#0">&lt;&lt;</a></li>
+					<li><a href="#0">&lt;</a></li>
+					<li><a class="active" href="#0">1</a></li>
+					<li><a href="#0">2</a></li>
+					<li><a href="#0">3</a></li>
+					<li><a href="#0">4</a></li>
+					<li><a href="#0">&gt;</a></li>
+					<li><a href="#0">&gt;&gt;</a></li>
+				</ul>
+				<!-- End Pagination -->
+			</div>
+		</div>
+		
+		<br><br>
 	</div>
 	
 		

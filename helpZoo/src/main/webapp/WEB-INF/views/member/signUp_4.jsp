@@ -31,20 +31,16 @@ border: none;
                        <!--  <h5 style="text-align:center;">정말 마지막 단계에요! 회원 정보를 입력하면 가입이 완료됩니다.</h5>-->
                         <div class="form-group">
                             <input type="text" class="form-input" name="memberId" id="id" placeholder="아이디를 입력해주세요." maxlength="12"/>
-                        	<span id="checkId"></span>
                         </div>
                         <div class="form-group">
                             <input type="password" class="form-input" name="memberPwd" id="pwd1" placeholder="비밀번호"/>
                             <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
-                            <span id="checkPwd1"></span>
                         </div>
                         <div class="form-group">
                             <input type="password" class="form-input" id="pwd2" placeholder="비밀번호 확인"/>
-                            <span id="checkPwd2"></span>
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-input" name="memberName" id="name" placeholder="이름을 입력해주세요."/>
-                        	<span id="checkName"></span>
                         </div>
                             <!-- 전화번호 -->
                     <div class="row mb-3 form-row">
@@ -78,7 +74,7 @@ border: none;
 	                    </div>
 	                    
                         <div class="form-group">
-                            <input type="email" class="form-input" name="memberEmail" id="email" value="${memberEmail}" disabled>
+                            <input type="email" class="form-input" name="memberEmail" id="email" value="${memberEmail}">
                         </div>
                         
                         <div class="row mb-3 form-row">
@@ -165,16 +161,16 @@ border: none;
     // ******* 실시간 유효성 검사 *******
     // 정규 표현식
     var $id = $("#id");
-    var $pwd = $("#pwd1, #pwd2");
     var $pwd1 = $("#pwd1");
     var $pwd2 = $("pwd2");
+    var $pwd = $("#pwd1, #pwd2");
     var $name = $("#name");
     var $phone2 = $("#phone2");
     var $phone3 = $("#phone3");
     
     // 아이디 유효성 검사
     // #id라는 요소에 on(입력) 이벤트가 발생했을 때 함수를 수행하겠다.
-    $id.on("input", function() {
+    $id("input", function() {
     	
     	signUpCheck.id = false;
     	
@@ -182,127 +178,20 @@ border: none;
     	var regExp = /^[a-zA-Z\d]{6,12}$/;
     	
     	if(!regExp.test($id.val())){
-    		$("#checkId").text("아이디 형식이 유효하지 않습니다. 아이디는 영어 대/소문자 + 숫자 총 6~12글자로 입력해주세요.").css("color","red");
-    		signUpCheck.id = false;
-    		if($id.val().length == 0)	$("#checkId").text("");
+    		
     		
     	}else{
-    		$.ajax({
-    			url : "../idDupCheck",
-    			data : {"memberId" : $id.val()},
-    			type : "GET",
-    			success  : function(result){
-    				if(result == 0){
-    		    		$("#checkId").text("사용 가능한 아이디입니다.").css("color","#7fcdcd");   		
-    		    		signUpCheck.id = true;
-    				}else{
-    		    		$("#checkId").text("이미 사용중인 아이디입니다.").css("color","red");   	
-    					signUpCheck.id = false;
-    				}
-    			}, error : function(){
-    				console.log("아이디 중복 검사 실패");
-    			}
-    		});
+    		
     	}
+    	
     });
     
-    // 비밀번호 유효성 검사 및 일치 검사
-    $pwd.on("input", function() {
-    	var regExp = /^[A-Za-z0-9]{6,12}$/;
-    	
-    	// 비밀번호 1 유효성 검사
-    	if(!regExp.test($("#pwd1").val())){
-    		$("#checkPwd1").text("비밀번호 형식이 유효하지 않습니다. 비밀번호는 영어 대/소문자 + 숫자 총 6~12글자로 입력해주세요.").css("color", "red");
-    		signUpCheck.pwd1 = false;
-    		if($pwd1.val().length == 0)	$("#checkPwd1").text("");
-    	}else{
-    		$("#checkPwd1").text("유효한 비밀번호 형식입니다.").css("color", "#7fcdcd");
-    		signUpCheck.pwd1 = true;
-    	}
-    	
-    	// ----------------------------------------- 지금 안됨 ------------------
-    	// 비밀번호 1이 유효하지 않은 상태로 비밀번호 2 작성시
-	    if(!signUpCheck.pwd1 && pwd2.val().length > 0){
-	    	swal("유효한 비밀번호를 입력해주세요.");
-	    	$pwd2.val("");
-	    	$pwd1.focus();
-	    	
-	    // 비밀번호 1이 유효한 상태로 비밀번호 2 작성시
-	    }else if(signUpCheck.pwd1 && pwd2.val().length >0){
-	    	if($("#pwd1").val().trim() != $("#pwd2").val().trim()){
-	    		$("#checkPwd2").text("비밀번호 불일치").css("color", "red");
-	    		signUpCheck.pwd2 = false;
-	    	}else{
-	    		$("#checkPwd2").text("비밀번호 일치").css("color", "#7fcdcd");
-	    		signUpCheck.pwd2 = true;
-	    	}
-	    }
-    });
- 	// ----------------------------------------- 지금 안됨 ------------------
- 	
- 	// 이름 유효성 검사
- 	$name.on("input", function() {
- 		var regExp = /^[가-힣A-Za-z]{2,}$/; // 한글, 또는 영어 대/소문자 2글자 이상
- 		
- 		if(!regExp.test($name.val())){
- 			$("#checkName").text("한글 또는 영어 대/소문자로 2글자 이상 입력하세요.").css("color", "red");
- 			signUpCheck.name = false;
- 			if($name.val().length == 0)	$("#checkName").text("");
- 		}else{
- 			$("#checkName").text("유효한 아이디 형식입니다.").css("color", "#7fcdcd");
- 			signUpCheck.name = true;
- 		}
- 	});
- 	
- 	// 전화번호 유효성 검사
- 	$(".phone").on("input", function() {
- 		// 전화번호 input 태그에 숫자 4글자 이상 입력하지 못하도록 이벤트 설정
- 		if($(this).val().length > $(this).prop("maxLength")){
- 			$(this).val($(this).val().slice(0, $(this).prop("maxLength")));
- 		}
- 		
- 		var regExp1 = /^\d{3,4}$/;
- 		var regExp2 = /^\d{4,4}$/; 
- 		
- 		if(!regExp1.test($phone2.val()) || !regExp2.test($phone3.val())){
- 			$("#checkPhone").text("전화번호가 유효하지 않습니다.").css("color", "red");
- 			signUpCheck.phone2 = false;
- 			if($phone2.val().length == 0 || $phone3.val().length == 0)	$("#checkPhone").text("");
- 			
- 		}else{
- 			$("#checkPhone").text("유효한 전화번호입니다.").css("color", "#7fcdcd");
- 			signUpCheck.phone2 = true;
- 			if($phone2.val().length == 0 || $phone3.val().length == 0)	$("#checkPhone").text("");
- 		}
- 	});
     
 	function validate(){
 		
 		// 모든 입력 값이 유효할 경우
 		// 커맨드 객체를 이용하여 파라미터를 한번에 받을 수 있도록 하기 위해
 		// 입력된 전화번호, 주소를 하나의 문자열로 합쳐 form 태그 끝에 hidden 타입으로 추가하는 작업
-		
-		for(var key in signUpCheck){
-			if(!signUpCheck[key]){
-				var msg;
-				switch(key){
-				case "id" : msg="아이디가 "; break;
-				case "pwd1" : case "pwd2" : msg="비밀번호가 "; break;
-				case "name" : msg="이름이 "; break;
-				case "phone2" : msg="전화번호가 "; break;
-	
-				}
-				swal({
-					  icon: "error",
-					  text : msg + "유효하지 않습니다."
-					});
-				var el = "#" + key;
-				$(el).focus();
-				return false;
-			}
-		}
-		// 모든 값이 유효할 경우 입력된 전화번호와 주소를 하나의 문자열로 합쳐 form 태그 끝에 hidden 타입으로 추가함.
-		// 커맨드 객체를 이용하여 파라미터를 한번에 받을수 있도록 하기 위함.
 		
 		$memberPhone = $("<input>", {type : "hidden", name: "memberPhone",
 						value : $("#phone1").val()+"-"+$("#phone2").val() + "-" +

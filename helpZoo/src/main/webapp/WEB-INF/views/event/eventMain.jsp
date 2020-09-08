@@ -6,18 +6,69 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<link href="${contextPath}/resources/css/event.css" rel="stylesheet" />
-<title>도와zoo 이벤트 게시판</title>
+    <meta charset="UTF-8">
+    <title>도와zoo 이벤트 게시판</title>
+    <style>
+        body li{
+            list-style: none;
+        }
+
+        a {
+            text-decoration:none;
+            color: black;
+        }
+
+        .ui-header, .board-main{
+            margin: 0 auto;
+            max-width: 800px;
+
+        }
+
+        .ui-header .title{
+            text-align: center;
+            font-size: 48px;
+            font-weight: 700;
+        }
+
+        /* 공지사항 타이틀 */
+        .ui-header{
+        }
+
+        /* 공지 / 이벤트 네비게이션 */
+        .ui-tabs ul{
+            padding: 0;
+        }
+
+        .ui-tabs li{
+            display: inline-block;
+            padding: 20px 20px 0 20px;
+        }
+
+        .ui-tabs{
+            text-align: center;
+            border-bottom: 1px solid rgba(0,0,0,.1);
+        }
+
+        /* 게시판 리스트 */
+
+        .board-main li{
+            border-bottom: 1px solid rgba(0,0,0,.1);
+            padding-top: 20px;
+        }
+
+        .board-main .info{
+            padding-bottom: 20px;
+        }
+    </style>
 </head>
 
 <body>
 	<jsp:include page="../common/header.jsp"/>
-	    <main class="board zoo">
+	    <main class="board wzui">
 	
 	        <!-- 공지사항 타이틀 -->
 	        <div class="ui-header">
-	            <h2 data-aos="fade-down" class="title">이벤트</h2>
+	            <h2 class="title">이벤트</h2>
 	        </div>
 	
 	        <!-- 공지 / 이벤트 네비게이션 -->
@@ -35,7 +86,7 @@
 	        <!-- 게시판 리스트 -->
 	        <div class="board-main">
 	            <ul>
-	                <li data-aos="fade-up" data-aos-delay="100">
+	                <li>
 	                    <a class="article" href="#">
 	                        <em class="category">진행중</em>
 	                        <div class="info">
@@ -45,7 +96,7 @@
 	                        </div>
 	                    </a>
 	                </li>
-	                <li data-aos="fade-up" data-aos-delay="200">
+	                <li>
 	                    <a class="article" href="#">
 	                        <em class="category">진행중</em>
 	                        <div class="info">
@@ -55,7 +106,7 @@
 	                        </div>
 	                    </a>
 	                </li>
-	                <li data-aos="fade-up" data-aos-delay="300">
+	                <li>
 	                    <a class="article" href="#">
 	                        <em class="category">진행중</em>
 	                        <div class="info">
@@ -65,7 +116,7 @@
 	                        </div>
 	                    </a>
 	                </li>
-	                <li data-aos="fade-up" data-aos-delay="400">
+	                <li>
 	                    <a class="article" href="#">
 	                        <em class="category">종료</em>
 	                        <div class="info">
@@ -75,7 +126,7 @@
 	                        </div>
 	                    </a>
 	                </li>
-	                <li data-aos="fade-up" data-aos-delay="500">
+	                <li>
 	                    <a class="article" href="#">
 	                        <em class="category">종료</em>
 	                        <div class="info">
@@ -85,7 +136,7 @@
 	                        </div>
 	                    </a>
 	                </li>
-	                <li data-aos="fade-up" data-aos-delay="600">
+	                <li>
 	                    <a class="article" href="#">
 	                        <em class="category">종료</em>
 	                        <div class="info">
