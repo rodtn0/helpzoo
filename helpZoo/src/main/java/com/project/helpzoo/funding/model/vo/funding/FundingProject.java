@@ -1,6 +1,6 @@
 package com.project.helpzoo.funding.model.vo.funding;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -65,7 +65,7 @@ public class FundingProject {
 	private String summary;
 	
 	@Column(name="FUNDING_STORY")
-	private String stroy;
+	private String story;
 	
 	@Column(name="FUNDING_START_DAY")
 	private String startDay;
@@ -75,6 +75,12 @@ public class FundingProject {
 	
 	@Column(name="MEMBER_NO")
 	private int memberNo;
+	
+	@Column(name="READ_COUNT")
+	private int readCount;
+	
+	@Column(name="LIKE_COUNT")
+	private int likeCount;
 	
 	
 	@ManyToOne (fetch = FetchType.LAZY)
@@ -100,7 +106,7 @@ public class FundingProject {
 	public String toString() {
 		return "FundingProject [id=" + id + ", title=" + title + ", plan=" + plan + ", goalAmount=" + goalAmount
 				+ ", managerName=" + managerName + ", managerEmail=" + managerEmail + ", endDay=" + endDay + ", tag="
-				+ tag + ", summary=" + summary + ", stroy=" + stroy + ", startDay=" + startDay + ", status=" + status
+				+ tag + ", summary=" + summary + ", stroy=" + story + ", startDay=" + startDay + ", status=" + status
 				+ ", memberNo=" + memberNo + ", category=" + category + ", indiOrCoparation=" + indiOrCoparation
 				+ ", fundingMaker=" + fundingMaker + "]";
 	}
@@ -217,14 +223,14 @@ public class FundingProject {
 
 
 
-	public String getStroy() {
-		return stroy;
+	public String getstory() {
+		return story;
 	}
 
 
 
-	public void setStroy(String stroy) {
-		this.stroy = stroy;
+	public void setStory(String story) {
+		this.story = story;
 	}
 
 
@@ -302,7 +308,7 @@ public class FundingProject {
 
 
 	public FundingProject(long id, String title, String plan, int goalAmount, String managerName, String managerEmail,
-			Date endDay, String tag, String summary, String stroy, String startDay, String status, int memberNo,
+			Date endDay, String tag, String summary, String story, String startDay, String status, int memberNo,
 			FundingCategory category, IndiOrCoparation indiOrCoparation, FundingMaker fundingMaker) {
 		super();
 		this.id = id;
@@ -314,7 +320,7 @@ public class FundingProject {
 		this.endDay = endDay;
 		this.tag = tag;
 		this.summary = summary;
-		this.stroy = stroy;
+		this.story = story;
 		this.startDay = startDay;
 		this.status = status;
 		this.memberNo = memberNo;

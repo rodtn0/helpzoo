@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.project.helpzoo.funding.model.service.FundingService;
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.funding.model.vo.search.FundingSearch;
@@ -30,13 +31,16 @@ public class FundingApiController {
 	
 		
 		
-		List<FundingProject> fundingList = service.selectList(cp, orderSearch);
+		List<FundingMainViewDto> mainViewList = service.selectList(cp, orderSearch);
 		
 		
 		
+			
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd").create();
 		
 		
-		return null;
+		
+		return gson.toJson(mainViewList);
 	}
 	
 	

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.project.helpzoo.funding.api.FundingMainViewDto;
 import com.project.helpzoo.funding.model.dao.FundingDAO;
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.funding.model.vo.search.FundingSearch;
@@ -25,7 +26,7 @@ public class FundingServiceImpl implements FundingService {
 	
 	
 	@Override
-	public List<FundingProject> selectList(int cp, FundingSearch fundingSearch) {
+	public List<FundingMainViewDto> selectList(int cp, FundingSearch fundingSearch) {
 		
 		return dao.selectList(cp,fundingSearch);
 	}

@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -191,23 +192,6 @@
 
 <script>
 
-$(document).ready(function() {
-	
-	
-	$.ajax({
-	    url:"${contextPath}/fundingApi/selectList",
-	    type: "GET",
-	    dataType: "json",
-	    success: function(result){
-	       
-	    	console.log(result)
-	    	
-	    }
-	});
-	
-	
-	
-});
 
 
 
@@ -243,6 +227,9 @@ $(document).ready(function() {
 
       <hr />
     </div>
+    
+  
+              
     <div class="card-deck">
       <div class="card">
         <img src="${contextPath}/resources/images/dodo5.jpg" class="card-img-top" alt="...">
@@ -252,6 +239,8 @@ $(document).ready(function() {
           <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
         </div>
       </div>
+      
+      
       <div class="card">
         <img src="${contextPath}/resources/images/dodo5.jpg" class="card-img-top" alt="...">
         <div class="card-body">
@@ -260,38 +249,9 @@ $(document).ready(function() {
           <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
         </div>
       </div>
-      <div class="card">
-        <img src="${contextPath}/resources/images/dodo5.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">도와주 도와주</h5>
-          <p class="card-text">>봄날의 피부가 청춘 것이다. 위하여, 남는 불러 군영과 장식하는 갑 보라. 열매를 있는 낙원을 아름다우냐? 주며, 물방아 용감하고 생명을 것은 말이다. 그들은 용감하고 뜨고, 발휘하기 넣는 안고, 얼음 청춘에서만 뿐이다. 우는 용기가 있으며, 몸이 품으며, 뛰노는 그들에게 보라. 뭇 할지라도 피가 과실이 무엇을 .</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-      </div>
-    </div>
-
-
-    <br>
-    <br>
-
-
-    <div class="card-deck">
-      <div class="card">
-        <img src="${contextPath}/resources/images/dodo5.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">도와주 도와주</h5>
-          <p class="card-text">봄날의 피부가 청춘 것이다. 위하여, 남는 불러 군영과 장식하는 갑 보라. 열매를 있는 낙원을 아름다우냐? 주며, 물방아 용감하고 생명을 것은 말이다. 그들은 용감하고 뜨고, 발휘하기 넣는 안고, 얼음 청춘에서만 뿐이다. 우는 용기가 있으며, 몸이 품으며, 뛰노는 그들에게 보라. 뭇 할지라도 피가 과실이 무엇을 .</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-      </div>
-      <div class="card">
-        <img src="${contextPath}/resources/images/dodo5.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">도와주 도와주</h5>
-          <p class="card-text">봄날의 피부가 청춘 것이다. 위하여, 남는 불러 군영과 장식하는 갑 보라. 열매를 있는 낙원을 아름다우냐? 주며, 물방아 용감하고 생명을 것은 말이다. 그들은 용감하고 뜨고, 발휘하기 넣는 안고, 얼음 청춘에서만 뿐이다. 우는 용기가 있으며, 몸이 품으며, 뛰노는 그들에게 보라. 뭇 할지라도 피가 과실이 무엇을 .</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-      </div>
+      
+      
+      
       <div class="card">
         <img src="${contextPath}/resources/images/dodo5.jpg" class="card-img-top" alt="...">
         <div class="card-body">
@@ -301,6 +261,77 @@ $(document).ready(function() {
         </div>
       </div>
     </div>
+    
+    
+    <div id="cocoacard">
+    
+    </div>
+    
+
+
+	
+	
+	<script>
+
+	
+	$(document).ready(function() {
+		
+		$.ajax({
+			url:"${contextPath}/fundingApi/selectList",
+			dataType : "json",
+			success : function(list) {
+				console.log(list);
+			
+			$.each(list,function(index,item){
+				
+				var $cardDeck = $("<div class='card-deck'>"); // 행
+				var $tempImg = $("<img src='${contextPath}/resources/images/dodo5.jpg' class='card-img-top' alt='...'>")
+				var $card = $("<div class='card'>");
+				var $cardBody = $("<div class='card-body'>")
+				var $cardTitle = $("<h5 class='card-title'>").text(item.fundingTitle);
+				var $cardStory = $("<p class='card-text'>").text(item.fundingSummary);
+				var $cardSmallForm = $("<p class='card-text'>")
+				var $cardSmallCategory = $("<small class='text-muted'>").text(item.category)
+				var $cardSmallAchievement = $("<small class='text-muted'>").text("달성률 : " + item.achievementRate + "%")
+				var $cardSmallOrderAmount = $("<small class='text-muted'>").text("총 참여금액 :  " + item.totalOrderAmount)
+				
+				
+				$cardSmallForm.append($cardSmallCategory,$cardSmallAchievement,$cardSmallOrderAmount)
+				
+				$cardBody.append($cardTitle,$cardStory,$cardSmallForm)
+				
+				$card.append($tempImg,$cardBody);
+
+					if(index%3 == 0){				
+						$cardDeck.append($card);
+					}
+				
+					
+					
+					
+				$("#cocoacard").append($cardDeck)
+				
+				
+			});
+				
+				
+				
+			}, error : function(){
+				console.log("ajax 통신 실패");
+			}
+				});
+		
+		
+		
+	});
+
+	
+	
+	
+	</script>
+	
+
+
    
    
    <ul id="list-guestbook">
