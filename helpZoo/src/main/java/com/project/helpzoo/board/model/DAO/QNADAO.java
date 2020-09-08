@@ -66,6 +66,8 @@ public class QNADAO {
 	 * @return
 	 */
 	public int insertAttachment(Attachment at) {
+		System.out.println(at.getParentBoardNo());
+		
 		return sqlSession.insert("qnaMapper.insertAttachment", at);
 	}
 
@@ -101,6 +103,48 @@ public class QNADAO {
 	 */
 	public String selectQuestionId(int qnaNo) {
 		return sqlSession.selectOne("qnaMapper.selectQuestionId", qnaNo);
+	}
+
+	
+	/** qna 수정
+	 * @param upqnaBoard
+	 * @return
+	 */
+	public int updateQNABoard(QNABoard upqnaBoard) {
+		return sqlSession.update("qnaMapper.updateQNABoard", upqnaBoard);
+	}
+
+	/** qna 파일 수정
+	 * @param at
+	 * @return
+	 */
+	public int updateAttachment(Attachment at) {
+		return sqlSession.update("qnaMapper.updateAttachment", at);
+	}
+
+	/** 파일 1개 정보 삭제
+	 * @param fileNo
+	 * @return
+	 */
+	public int deleteAttachment2(int fileNo) {
+		return sqlSession.delete("qnaMapper.deleteAttachment2", fileNo);
+	}
+
+	
+	/** qna 삭제
+	 * @param qnaNo
+	 * @return
+	 */
+	public int deleteBoard(int qnaNo) {
+		return sqlSession.delete("qnaMapper.deleteBoard", qnaNo);
+	}
+
+	/** 검색 조건이 추가된 페이징 처리 DAO
+	 * @param id
+	 * @return
+	 */
+	public int getSearchListCount(String id) {
+		return sqlSession.selectOne("qnaMapper.getSearchListCount", id);
 	}
 	
 

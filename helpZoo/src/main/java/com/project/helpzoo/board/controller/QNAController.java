@@ -168,14 +168,87 @@ public class QNAController {
 	}
 	
 	// 게시글 수정
-	
 	@RequestMapping("{qnaNo}/updateAction")
 	public ModelAndView updateAction(@PathVariable int qnaNo,
 									ModelAndView mv, QNABoard upqnaBoard,
-									int cp) {
+									@RequestParam(value="images", required=false) List<MultipartFile> images,
+									int cp, boolean[] deleteImages,
+									HttpServletRequest request,
+									RedirectAttributes rdAttr) {
 		
 		upqnaBoard.setQnaNo(qnaNo);
+		// 이미지 수정
+		// -------------------------------------------------------------
+		// 파일 이름이 출력된 경우 == 이미지가 수정된 경우
+		for(int i=0; i<images.size(); i++) {
+			System.out.println("images[" + i + "] :" + images.get(i).getOriginalFilename());
+		}
 		
+		String savePath = request.getSession().getServletContext().getRealPath("resources/uploadImages");
+
+		int result = qnaService.updateBoard(upqnaBoard, savePath, images, deleteImages);
+		
+		String status = null;
+		String msg = null;
+		String url = null;
+		
+		if(result > 0) {
+			status = "success";
+			msg = "게시물 수정 성공";
+			// http://localhost:8080/helpzoo/qna/37/update?cp=1
+			// http://localhost:8080/helpzoo/qna/37?cp=1
+			url = "../" + qnaNo + "?cp=" + cp;
+		}else {
+			status = "error";
+			msg = "게시물 수정 실패";
+			url = request.getHeader("referer");
+		}
+		
+		mv.setViewName("redirect:" + url);
+		
+		rdAttr.addFlashAttribute("status",status);
+        rdAttr.addFlashAttribute("msg",msg);
+		
+		return mv;
+	}
+
+	
+	// 게시물 삭제
+	@RequestMapping("{qnaNo}/delete")
+	public ModelAndView deleteBoard(@PathVariable int qnaNo,
+										ModelAndView mv, RedirectAttributes rdAttr,
+										HttpServletRequest request) {
+		
+		int result = qnaService.deleteBoard(qnaNo);
+		
+		String status = null;
+		String msg = null;
+		String url = null;
+		
+		if(result > 0) {
+			status = "success";
+			msg = "게시글이 삭제되었습니다.";
+			url = "../qnaList";
+		}else {
+			status = "error";
+			msg = "게시글 삭제 실패";
+			url = request.getHeader("referer");
+		}
+		
+		rdAttr.addFlashAttribute("status", status);
+		rdAttr.addFlashAttribute("msg", msg);
+		
+		mv.setViewName("redirect:" + url);
+		
+		return mv;
+	}
+	
+	@RequestMapping("search")
+	public String search(@RequestParam(value="cp", required= false, defaultValue="1") int cp,
+						String id){
+		System.out.println(id);
+		
+		PageInfo pInfo = qnaService.pagination(cp, id);
 		return null;
 	}
 	

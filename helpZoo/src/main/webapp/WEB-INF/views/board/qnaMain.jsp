@@ -12,6 +12,7 @@
 	<style>
 	#paging {
 		text-align:center;
+		padding-left: 0px;
 	}
 	#paging li {
 		display:inline;
@@ -62,6 +63,54 @@
 	#content:hover{
 		color: red;
 	}
+	.search-box{
+	  padding: 6px;
+	  position: relative;
+	  top: 50%;
+	  left: 50%;
+	  transform: translate(-50%,-50%);
+	  height: 30px;
+	  background-color: #fff;
+	  border: 1px solid #51e3d4;
+	  border-radius: 30px;
+	  transition: 0.4s;
+	  width:30px;
+	  float: left;
+	}
+	.search-box:hover{
+	  box-shadow: 0px 0px .5px 1px #51e3d4;
+	  width: 282px;
+	}
+	.search-btn{
+	  text-decoration: none;
+	  float: right;
+	  background-color: #fff;
+	  border-radius: 50%;
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  color: #51e3d4;
+	}
+	.search-box:hover > .search-btn{
+	  background-color: #fff;
+	}
+	.search-txt{
+	  display: flex;
+	  padding: 0;
+	  width: 0px;
+	  border:none;
+	  background: none;
+	  outline: none;
+	  float: left;
+	  font-size: 1rem;
+	  line-height: 0px;
+	  transition: .4s;
+	}
+	.search-box:hover > .search-txt{
+	  width: 240px;
+	  padding: 0 6px;
+	}
+	
 	</style>
 	
 	
@@ -80,7 +129,7 @@
 	</div> --%>
 	<br>
 	<div class="container">
-		<table class="table table-sm" id="list-table">
+		<table class="table table-sm mb-4" id="list-table">
 		  <thead>
 		    <tr>
 		      <th scope="col">글번호</th>
@@ -139,7 +188,12 @@
        </c:choose>
 	</tbody>
    </table>
-   
+    <div class="search-box mt-3">
+      <input type="text" class="search-txt" name="id" placeholder="본인 아이디를 입력해주세요.">
+      <a class="search-btn" id="searchBtn" href="#">
+        <i class="fas fa-search"></i>
+      </a>
+    </div>
    	<c:if test="${!empty loginMember }">
    	<a class="btn btn-info float-right" href="insert"><i class="fas fa-pencil-alt"></i> 글쓰기</a>
    	</c:if>
@@ -235,6 +289,27 @@
 			}
 		});
 	});
+	
+	// -----------------검색 버튼 동작 --------------------
+	$("#searchBtn").on("click",function(){
+		
+		var searchUrl = "";
+		var $id = $("input[name='id']");
+		
+		if($id.val().trim().length==0){
+			alert("검색할 아이디를 입력하세요.");
+		}else{
+			searchUrl = "search?id=" +$id.val();
+			location.href = searchUrl;
+		}
+	});
+	
+	//------------------검색창 엔터 이벤트 -------------------
+	$("input[name='id']").on("keyup",function(event){
+		if(event.keyCode==13){
+			$("#searchBtn").click();
+		}
+	})
 	
 	
 </script>
