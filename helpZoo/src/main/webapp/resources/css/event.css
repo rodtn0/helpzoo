@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+body li{
+    list-style: none;
+}
+
+a {
+    text-decoration:none;
+    color: black;
+}
+
+.ui-header {
+	margin: 0 auto;
+	padding: 64px 16px 48px 16px;
+	text-align: center;
+	max-width: 800px;
+}
+
+.ui-header .title {
+	line-height: 52px;
+	font-size: 40px;
+	font-weight: 700;
+}
+
+      /* 공지사항 타이틀 */
+.ui-header{
+}
+
+/* 공지 / 이벤트 네비게이션 */
+.ui-tabs ul{
+    padding: 0;
+}
+
+.ui-tabs li{
+	margin: 0 9px;
+    display: inline-block;
+    /* padding: 20px 20px 0 20px; */
+    height: 48px
+}
+
+.ui-tabs{
+    text-align: center;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+}
+
+/* 게시판 리스트 */
+
+.board-main{
+	margin: 0 auto;
+	padding-top: 17px;
+	padding-right: 16px;
+	padding-left: 16px;
+	max-width: 800px;
+	min-width: 632px !important;
+}
+
+.board-main li{
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    padding-top: 20px;
+}
+
+.board-main .info{
+    padding-bottom: 20px;
+}

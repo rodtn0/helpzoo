@@ -48,6 +48,9 @@
     font-size: small !important;
 	}
 	
+	/* 눌렀을 때 색깔 유지 */
+/* 	li.active-color { color:#7fcdcd; } */
+	
 	.ec-common-rwd-image{
 	width: 15px;
     height: 15px;
@@ -56,14 +59,7 @@
 	width: 26px;
     height: 14px;
 	}
-	#list-table td{
-		cursor :pointer;
-	}
-	#content:hover{
-		color: red;
-	}
 	</style>
-	
 	
 <script src="https://kit.fontawesome.com/13be1766f6.js" crossorigin="anonymous"></script>
 <body>
@@ -80,7 +76,7 @@
 	</div> --%>
 	<br>
 	<div class="container">
-		<table class="table table-sm" id="list-table">
+		<table class="table table-sm">
 		  <thead>
 		    <tr>
 		      <th scope="col">글번호</th>
@@ -105,9 +101,8 @@
        			<fmt:formatDate var="today" value="${now}" pattern="yyyy-MM-dd"/>
        			<fmt:formatDate var="createDate" value="${qnaBoard.qnaCreateDate}" pattern="yyyy-MM-dd"/>
        			<fmt:formatDate var="createTime" value="${qnaBoard.qnaCreateDate}" pattern="hh:mm:ss"/>
-       			<input type="hidden" name="qnaNo" value="${qnaBoard.qnaNo}">
 			      <th scope="row">${listCount-( (pInfo.currentPage-1) * pInfo.limit)-vs.index}</th>
-			      <td id="content">
+			      <td>
 			      <c:choose>
 			      	<c:when test="${today == createDate}">
 			      	<img class="ec-common-rwd-image" src="<%=request.getContextPath()%>/resources/images/lock.png"> ${qnaBoard.qnaTitle}
@@ -192,48 +187,9 @@
 	<jsp:include page="../common/footer.jsp"/>
 	
 	<script>
-	// 게시글 상세보기 기능 구현
-	$(function(){
-		$("#list-table td").on("click",function(){
-			var id= $(this).parent().children().eq(3).text();
-			
-			if((${empty loginMember.memberId })){
-				alert("로그인 후 조회하세요.");
-			}else{
-				var loginId = "${loginMember.memberId}";
-			
-				console.log(id);
-				console.log(loginId);
-				
-				var questionId = "";
-				
-				// ajax에서 멤버 아이디를 가져와야됨.
-				// QNA번호를 보내서
-				$.ajax({
-					url : "",
-					async : false, // 화면 로딩 시 동기식
-					success : function(memberId){ 
-						questionId = memberId;
-					}
-				})
-				
-				
-				
-				if(id == loginId || loginId == "admin" || loginId == questionId){
-					// 글 번호
-					var qnaNo = $(this).parent().children().eq(0).val();
-					
-					var qnaUrl= "${contextPath}/qna/" + qnaNo + "?cp=${pInfo.currentPage}";
-					
-					location.href = qnaUrl;
-				}else{
-					alert("회원이 작성하신 글이 아닙니다.");
-				}
-			}
-		});
+	$("li").click(function() {
+	    toggleClass(".active-color");
 	});
-	
-	
 </script>
 </body>
 </html>

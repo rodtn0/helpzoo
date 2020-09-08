@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.helpzoo.board.model.service.NoticeService;
 import com.project.helpzoo.board.model.vo.Board;
+import com.project.helpzoo.board.model.vo.PageInfo;
 
 @Controller
 @RequestMapping("/notice/*")
@@ -27,24 +28,27 @@ public class NoticeController {
 		
 		int type = 5; //보드타입: 공지사항 5번
 		
-		List<Board> noticeList = noticeService.selectList(type);
+		PageInfo pInfo = noticeService.pagination(type, cp);
+		
+		List<Board> noticeList = noticeService.selectList(pInfo);
 		
 		//목록 조회 확인용 test
-		for(Board b : noticeList) {
-			System.out.println("공지사항 리스트 : " + b);
-		}
+//		for(Board b : noticeList) {
+//			System.out.println("공지사항 리스트 : " + b);
+//		}
 		
 		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("pInfo", pInfo);
 		
 		return "notice/noticeMain";
 	}
 	
 	//공지사항 상세 조회 --------------------------------------------------------------------------------
 	// /notice/5/33
-	@RequestMapping("5/{boardNo}")
-	public String noticeView(@PathVariable int boardNo, Model model) {
+	@RequestMapping("{type}/{boardNo}")
+	public String noticeView(@PathVariable int type, @PathVariable int boardNo, Model model) {
 		
-		int type = 5;
+//		int type = 5;
 		
 		Board board = noticeService.selectNotice(boardNo);
 		
@@ -55,5 +59,11 @@ public class NoticeController {
 		return "notice/noticeView";
 	}
 	
+	@RequestMapping("{type}/insertView")
+	public String insertView() {
+		
+		return "notice/insertView";
+		
+	}
 	
 }
