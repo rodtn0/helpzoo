@@ -1,6 +1,6 @@
-package com.project.helpzoo.funding.model.vo;
+package com.project.helpzoo.funding.model.vo.funding;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -25,6 +25,8 @@ import javax.persistence.Table;
 @Table(name="FUNDING_PROJECT")
 public class FundingProject {
 	
+	
+
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,
@@ -97,6 +99,8 @@ public class FundingProject {
 	}
 
 
+	
+	
 
 	public long getId() {
 		return id;

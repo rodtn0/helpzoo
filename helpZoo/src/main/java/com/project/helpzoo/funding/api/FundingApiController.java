@@ -1,49 +1,36 @@
-package com.project.helpzoo.funding.controller;
+package com.project.helpzoo.funding.api;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.project.helpzoo.funding.HibernateProxyTypeAdapter;
 import com.project.helpzoo.funding.model.service.FundingService;
-import com.project.helpzoo.funding.model.vo.FundingProject;
-
-
+import com.project.helpzoo.funding.model.vo.funding.FundingProject;
+import com.project.helpzoo.funding.model.vo.search.FundingSearch;
 
 @Controller
-@RequestMapping("/funding/*")
-public class fundingController {
+@RequestMapping("/fundingApi/*")
+public class FundingApiController {
+
+	
 	
 	@Autowired
 	private FundingService service;
 	
 	
-	
-	@RequestMapping("fundingMain")
-	public String fundingMain() {
-	
-		
-		
-		
-		
-		return "funding/fundingMain";
-	}
-	
-	
-	
 	@ResponseBody
-	@RequestMapping(value =  "selectList" , produces="text/plain;charset=UTF-8"
- )
-	public String selectList(int cp) {
+	@RequestMapping(value =  "selectList" , produces="text/plain;charset=UTF-8")
+	public String selectList(@RequestParam(value="cp", required=false, defaultValue = "1") int cp
+			,FundingSearch orderSearch) {
 	
 		
 		
-		List<FundingProject> fundingList = service.selectList(cp);
+		List<FundingProject> fundingList = service.selectList(cp, orderSearch);
 		
 		
 		Gson gson = new Gson();
@@ -58,8 +45,4 @@ public class fundingController {
 	}
 	
 	
-	
-	
-	
-
 }
