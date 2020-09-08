@@ -29,4 +29,17 @@ public interface QNAService {
 	// qna 질문 쓴 memberId 가져오기
 	public abstract String selectQuestionId(int qnaNo);
 
+	// qna 수정
+	public abstract int updateBoard(QNABoard upqnaBoard, String savePath, List<MultipartFile> images, boolean[] deleteImages);
+
+	// qna 삭제
+	public abstract int deleteBoard(int qnaNo);
+
+	/** 검색 조건이 추가된 페이징 처리 Service
+	 * @param cp
+	 * @param id
+	 * @return
+	 */
+	public abstract PageInfo pagination(int cp, String id);
+
 }
