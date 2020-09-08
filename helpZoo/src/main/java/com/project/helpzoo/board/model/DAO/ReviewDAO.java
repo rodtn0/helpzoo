@@ -42,10 +42,11 @@ public class ReviewDAO {
 		
 		String mapperId = null;
 		
+		System.out.println(pInfo.getBoardType());
 		if(pInfo.getBoardType() == 1) mapperId = "reviewMapper.selectFundingList";
 		else		  				  mapperId = "reviewMapper.selectDonationList";
 		
-		return sqlSession.selectList(mapperId, rowBounds);
+		return sqlSession.selectList(mapperId, null, rowBounds);
 	}
 
 	

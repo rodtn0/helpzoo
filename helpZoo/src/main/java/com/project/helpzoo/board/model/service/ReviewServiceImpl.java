@@ -27,7 +27,7 @@ public class ReviewServiceImpl implements ReviewService{
 		
 		// 전체 게시글 수 조회
 		int  listCount = reviewDAO.getListCount(type);
-		
+		System.out.println(listCount);
 		// setPageInfo 호출
 		pInfo.setPageInfo(cp, listCount, type);
 		
@@ -35,7 +35,7 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 	
 	
-	// 펀딩 리뷰 게시글 목록 조회 Service 구현
+	// 리뷰 게시글 목록 조회 Service 구현
 	@Override
 	public List<Review> selectReviewList(PageInfo pInfo) {
 		return reviewDAO.selectReviewList(pInfo);
