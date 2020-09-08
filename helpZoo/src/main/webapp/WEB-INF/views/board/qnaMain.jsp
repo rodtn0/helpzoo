@@ -197,7 +197,7 @@
 		$("#list-table td").on("click",function(){
 			var id= $(this).parent().children().eq(3).text();
 			
-			if((${empty loginMember.memberId })){
+			if(${ empty loginMember.memberId }){
 				alert("로그인 후 조회하세요.");
 			}else{
 				var loginId = "${loginMember.memberId}";
@@ -205,30 +205,33 @@
 				console.log(id);
 				console.log(loginId);
 				
-				var questionId = "";
+				// 글 번호
+				var qnaNo = $(this).parent().children().eq(0).val();
 				
+				var questionId = "";
 				// ajax에서 멤버 아이디를 가져와야됨.
 				// QNA번호를 보내서
+				
 				$.ajax({
-					url : "",
+					url : "${contextPath}/qna/identification",
 					async : false, // 화면 로딩 시 동기식
+					data : {"qnaNo" : qnaNo},
 					success : function(memberId){ 
+						
 						questionId = memberId;
+						
+						if(id == loginId || loginId == "admin" || loginId == questionId){
+							// 글 번호
+							
+							var qnaUrl= "${contextPath}/qna/" + qnaNo + "?cp=${pInfo.currentPage}";
+							
+							location.href = qnaUrl;
+							
+						}else{
+							alert("회원이 작성하신 글이 아닙니다.");
+						}
 					}
 				})
-				
-				
-				
-				if(id == loginId || loginId == "admin" || loginId == questionId){
-					// 글 번호
-					var qnaNo = $(this).parent().children().eq(0).val();
-					
-					var qnaUrl= "${contextPath}/qna/" + qnaNo + "?cp=${pInfo.currentPage}";
-					
-					location.href = qnaUrl;
-				}else{
-					alert("회원이 작성하신 글이 아닙니다.");
-				}
 			}
 		});
 	});

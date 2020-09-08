@@ -26,4 +26,7 @@ public interface QNAService {
 	// qna 상세조회 파일 가져오기
 	public abstract List<Attachment> selectFiles(int qnaNo);
 
+	// qna 질문 쓴 memberId 가져오기
+	public abstract String selectQuestionId(int qnaNo);
+
 }

@@ -90,7 +90,9 @@ public class QNAServiceImpl implements QNAService{
 					result = qnaDAO.insertAttachment(at);
 					
 				}
+				
 				files.add(at);
+				
 			}
 			// 파일을 서버에 저장
 			// 디비에 저장이 되었다면
@@ -156,7 +158,13 @@ public class QNAServiceImpl implements QNAService{
 		return qnaDAO.selectFiles(qnaNo);
 	}
     
-    
+	// qna 질문 쓴 memberId 가져오기
+	@Override
+	public String selectQuestionId(int qnaNo) {
+		
+		return qnaDAO.selectQuestionId(qnaNo);
+	}
+
     // 파일명 변경
     // 200821152611_12345.jpg
     public String rename(String originFileName) {

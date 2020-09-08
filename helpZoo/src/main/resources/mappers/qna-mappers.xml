@@ -5,9 +5,9 @@
 	<!-- resultMap : 필드, 컬럼 매핑  -->
 	<resultMap type="QNABoard" id="qnaBoardResultSet">
         <id property="qnaNo" column="QNA_NO"/>
-        <result property="originNo" column="ORIGINNO"/>
-        <result property="groupOrd" column="GROUPORD"/>
-        <result property="groupLayer" column="GROUPLAYER"/>
+        <result property="originNo" column="QNA_ORIGIN_NO"/>
+        <result property="groupOrd" column="QNA_GROUP_ORD"/>
+        <result property="groupLayer" column="QNA_GROUP_LAYER"/>
         <result property="qnaTitle" column="QNA_TITLE"/>
         <result property="qnaContent" column="QNA_CONTENT"/>
         <result property="readCount" column="READ_COUNT"/>
@@ -65,5 +65,10 @@
   	SELECT * FROM Q_ATTACHMENT
   	WHERE PARENT_BOARD_NO = #{qnoNo}
   	ORDER BY FILE_LEVEL
+  	</select>
+  	
+  	<select id="selectQuestionId" parameterType="_int" resultType="string">
+  	SELECT MEMBER_ID FROM Q_BOARD
+	WHERE QNA_NO = (SELECT QNA_ORIGIN_NO FROM Q_BOARD WHERE QNA_NO = #{qnaNo})
   	</select>
 </mapper>
