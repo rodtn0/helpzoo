@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>게시글 수정</title>
 </head>
 
 <style>
@@ -46,7 +47,7 @@
 			</div>
 
 			<hr>
-			<form action="insertAction" method="post" role="form"
+			<form action="updateAction?cp=${param.cp}" method="post" role="form"
 			encType="multipart/form-data" onsubmit="return validate();">
 
 				<div class="form-inline mb-2">
@@ -63,7 +64,7 @@
 
 
 				<div class="form-inline mb-2">
-					<label class="input-group-addon mr-3 insert-label">작성일</label>
+					<label class="input-group-addon mr-3 insert-label">수정일</label>
 					<h5 class="my-0" id="today">
 						<jsp:useBean id="now" class="java.util.Date" />
 						<fmt:formatDate value="${now}" pattern="yyyy-MM-dd"/>
@@ -71,21 +72,42 @@
 				</div>  
 
 				<hr>
-
+				
+				<!-- 기존 이미지 배치 준비 -->
+				<!----  기존 이미지를 서버에서 조회한 후 레벨별로 
+				이미지 출력에 필요한 src 경로를 담은 변수를 생성---->
+				
+				<c:forEach var="at" items="${files}" varStatus="vs">
+					<c:choose>
+						<c:when test="${at.fileLevel == 0 }">
+							<c:set var="contentImgSrc1" value="${contextPath}${at.filePath}/${at.fileChangeName}"/>						
+						</c:when>
+						<c:when test="${at.fileLevel == 1 }">
+							<c:set var="contentImgSrc2" value="${contextPath}${at.filePath}/${at.fileChangeName}"/>						
+						</c:when>
+						<c:when test="${at.fileLevel == 2 }">
+							<c:set var="contentImgSrc3" value="${contextPath}${at.filePath}/${at.fileChangeName}"/>						
+						</c:when>
+					</c:choose>
+				</c:forEach>
+				
 				<div class="form-inline mb-2">
 					<label class="input-group-addon mr-3 insert-label">업로드<br>이미지</label>
 					<div class="mr-2 boardImg" id="contentImgArea1">
-						<img id="contentImg1" width="150" height="150">
+						<img id="contentImg1" width="150" height="150"
+							<c:if test="${!empty contentImgSrc1}"> src="${contentImgSrc1}" </c:if>>
 						<button type="button" class="deleteImg btn btn-outline-secondary"><i class="fas fa-times"></i> 삭제</button>
 					</div>
 
 					<div class="mr-2 boardImg" id="contentImgArea2">
-						<img id="contentImg2" width="150" height="150">
+						<img id="contentImg2" width="150" height="150"
+							<c:if test="${!empty contentImgSrc2}"> src="${contentImgSrc2}" </c:if>>
 						<button type="button" class="deleteImg btn btn-outline-secondary"><i class="fas fa-times"></i> 삭제</button>
 					</div>
 
 					<div class="mr-2 boardImg" id="contentImgArea3">
-						<img id="contentImg3" width="150" height="150">
+						<img id="contentImg3" width="150" height="150"
+							<c:if test="${!empty contentImgSrc3}"> src="${contentImgSrc3}" </c:if>>
 						<button type="button" class="deleteImg btn btn-outline-secondary"><i class="fas fa-times"></i> 삭제</button>
 					</div>
 				</div>
@@ -221,7 +243,13 @@
 				return false;
 			}
 			
-
+			for(var i=0; i<deleteImages.length; i++){
+				var $deleteImage = $("<input>", {type: "hidden",
+												 name: "deleteImages",
+												 value : deleteImages[i]});
+				// form 태그 제일 마지막 자식으로 추가
+				$("form").append($deleteImage);
+			}
 		}
 	</script>
 </body>
