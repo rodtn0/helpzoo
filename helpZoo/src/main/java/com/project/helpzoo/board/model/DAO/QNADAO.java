@@ -94,6 +94,14 @@ public class QNADAO {
 	public List<Attachment> selectFiles(int qnaNo) {
 		return sqlSession.selectList("qnaMapper.selectFiles", qnaNo);
 	}
+
+	/** qna 질문 쓴 memberId 가져오기 구현
+	 * @param qnaNo
+	 * @return
+	 */
+	public String selectQuestionId(int qnaNo) {
+		return sqlSession.selectOne("qnaMapper.selectQuestionId", qnaNo);
+	}
 	
 
 }

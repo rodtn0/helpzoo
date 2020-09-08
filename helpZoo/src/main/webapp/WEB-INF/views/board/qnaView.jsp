@@ -41,6 +41,12 @@
   		background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
 	}
 	
+	.btn{
+	width: 75px;
+    height: 30px;
+    font-size: small !important;
+	}
+	
 </style>
 
 <script src="https://kit.fontawesome.com/13be1766f6.js" crossorigin="anonymous"></script>
@@ -114,12 +120,17 @@
 				
 				<div>
 					<div class="float-right">
-						<a class="btn btn-primary" 
+						<a class="btn btn-info" 
 							href="">목록으로</a>
 	                	
 	                	<!-- 글 작성자와 로그인한 회원이 같을 경우 -->
-						<a href="" class="btn btn-primary ml-1 mr-1">수정</a>
-						<a href="" class="btn btn-primary">삭제</a> 
+	                	<c:if test= "${qnaBoard.qnaWriter == sessionScope.loginMember.memberId }">
+	                		<c:url var="updateUrl" value ="${qnaBoard.qnaNo}/update">
+	                			<c:param name="cp" value="${param.cp}"/>
+	                		</c:url>
+							<a href="${updateUrl}" class="btn btn-info ml-1 mr-1">수정</a>
+							<a href="" class="btn btn-info">삭제</a> 
+	                	</c:if>
 					</div>
 				</div>
 			</div>
