@@ -20,7 +20,7 @@ public class NoticeController {
 	@Autowired
 	private NoticeService noticeService;
 	
-	//공지사항 리스트 --------------------------------------------------------------------------------
+	// 공지사항 리스트 --------------------------------------------------------------------------------
 	// helpzoo/notice/noticeList
 	@RequestMapping("noticeList")
 	public String noticeMain(@RequestParam(value="cp", required=false, defaultValue="1") int cp,
@@ -43,7 +43,7 @@ public class NoticeController {
 		return "notice/noticeMain";
 	}
 	
-	//공지사항 상세 조회 --------------------------------------------------------------------------------
+	// 공지사항 상세 조회 --------------------------------------------------------------------------------
 	// /notice/5/33
 	@RequestMapping("{type}/{boardNo}")
 	public String noticeView(@PathVariable int type, @PathVariable int boardNo, Model model) {
@@ -59,6 +59,7 @@ public class NoticeController {
 		return "notice/noticeView";
 	}
 	
+	// 공지사항 글 작성 뷰 -------------------------------------------------------------------------------------
 	@RequestMapping("{type}/insertView")
 	public String insertView() {
 		

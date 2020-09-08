@@ -20,7 +20,9 @@
             <p class="title">${board.boardTitle}</p>
             <div class="info">
                 <span class="user-info">${board.boardWriter}
-                <br>${board.boardCreateDate}</span>
+                <br>작성일 : ${board.boardCreateDate}
+                <br>수정일 : ${board.boardModifyDate}</span>
+                <span class="readCount">조회수 : ${board.readCount}</span>
             </div>
         </div>
 

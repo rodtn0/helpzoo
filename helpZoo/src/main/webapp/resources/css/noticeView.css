@@ -14,11 +14,16 @@
 .header .title{
 	line-height: 52px;
     font-size: 22px;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .hr{
     border-bottom: 1px solid rgba(0,0,0,.1);
+}
+
+.info .readCount{
+	display: grid;
+	float: right;
 }
 
 /* 상세페이지 contents */
