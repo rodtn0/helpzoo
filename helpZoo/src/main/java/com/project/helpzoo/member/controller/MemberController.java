@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
@@ -157,7 +158,6 @@ public class MemberController {
 		System.out.println("마지막 dice : " + dice);
 		
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("member/join");
 		
 		if(authCode.equals(dice)) {
 			// 인증번호가 일치할 경우 인증번호가 맞다는 창을 출력하고 회원가입 창으로 이동함.
@@ -225,5 +225,12 @@ public class MemberController {
 	@RequestMapping("mypage")
 	public String myPage() {
 		return "member/mypage";
+	}
+	
+	@ResponseBody
+	@RequestMapping("idDupCheck")
+	public String idDupCheck(String memberId) {
+		int result = memberService.idDupCheck(memberId);
+		return result + "";
 	}
 }

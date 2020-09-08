@@ -71,4 +71,28 @@
   	SELECT MEMBER_ID FROM Q_BOARD
 	WHERE QNA_NO = (SELECT QNA_ORIGIN_NO FROM Q_BOARD WHERE QNA_NO = #{qnaNo})
   	</select>
+  	
+  	<update id="updateQNABoard" parameterType="QNABoard">
+  	UPDATE QNA_BOARD SET QNA_CONTENT=#{qnaContent}, QNA_MODIFY_DT = SYSDATE WHERE QNA_NO = #{qnaNo}
+  	</update>
+  	
+  	<update id="updateAttachment" parameterType="Attachment">
+  	UPDATE Q_ATTACHMENT SET
+  	FILE_ORIGIN_NAME=#{fileOriginName},
+  	FILE_CHANGE_NAME=#{fileChangeName}
+  	WHERE FILE_NO= #{fileNo}
+  	</update>
+  	
+  	<delete id="deleteAttachment2" parameterType="_int">
+  	DELETE FROM Q_ATTACHMENT WHERE FILE_NO = #{fileNo}
+  	</delete>
+  	
+  	<delete id="deleteBoard" parameterType="_int">
+  	DELETE FROM QNA_BOARD WHERE QNA_NO=#{qnaNo}
+  	</delete>
+  	
+  	<select id="getSearchListCount" parameterType="string" resultType="_int">
+  	SELECT COUNT(*) FROM QNA_BOARD
+  	WHERE 
+  	</select>
 </mapper>
