@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,6 +60,8 @@
 			background-color: #fff;
 			border-radius: 40px;
 			/* box-shadow: 0 5px 25px 0 rgba(0,0,0,.5); */
+			
+			width : 800px;
 		}
 		
 		.paginationz li {
@@ -155,7 +158,7 @@
 					<c:otherwise>
 						<c:forEach var="donationList" items="${dReview}">
 							<tr>
-								<td>펀딩 리뷰</td>
+								<td>기부 리뷰</td>
 								<td>${donationList.reviewNo}</td>
 								<td>${donationList.projectTitle}</td>
 								<td>${donationList.reviewTitle}</td>
@@ -169,21 +172,54 @@
 				</c:choose>
 		</table>
 		
+		<c:if test="${!empty loginMember }">
 		<a href="#" class="btn-get-started scrollto">글작성</a>
-		
+		</c:if>
 		
 		<br><br>
 			<!-- Start Pagination -->
 			<div class="my-4">
 				<ul class="paginationz">
-					<li><a href="#0">&lt;&lt;</a></li>
-					<li><a href="#0">&lt;</a></li>
-					<li><a class="active" href="#0">1</a></li>
-					<li><a href="#0">2</a></li>
-					<li><a href="#0">3</a></li>
-					<li><a href="#0">4</a></li>
-					<li><a href="#0">&gt;</a></li>
-					<li><a href="#0">&gt;&gt;</a></li>
+					<c:if test="${pInfo.currentPage > pInfo.pagingBarSize}">
+					
+					<!-- 맨 처음으로(<<)  -->
+					<li>
+						<a href="${pInfo.boardType}?cp=1">&lt;&lt;</a>
+					</li>
+					
+					<!-- 이전으로(<) -->
+					<fmt:parseNumber var="operand1" value="${(pInfo.currentPage-1)/pInfo.pagingBarSize}" integerOnly="true"/>
+					<c:set var="prev" value="${operand1 * 10}"/>
+					<li>
+						<a href="${pInfo.boardType}?cp=${prev}">&lt;</a>
+					</li>
+					
+					<!-- 10개 페이지 목록 -->
+					</c:if>
+					<c:forEach var="p" begin="${pInfo.startPage}" end="${pInfo.endPage}">
+					<c:choose>
+						<c:when test="${p == pInfo.currentPage}">
+							<li><a class="active" href="${p}">${p}</a></li>
+						</c:when>
+						
+						<c:otherwise>
+							<li><a href="${pInfo.boardType}?cp=${p}">${p}</a></li>
+						</c:otherwise>
+						
+					</c:choose>
+					</c:forEach>
+					
+					<!-- 다음으로 -->
+					<c:if test="${pInfo.maxPage > pInfo.endPage}">	
+					
+					<fmt:parseNumber var="operand2" value="${(pInfo.currentPage + (pInfo.pagingBarSize - 1))/pInfo.pagingBarSize}" integerOnly="true"/>
+					<c:set var="next" value="${operand2 * pInfo.pagingBarSize + 1}"/>	
+					<li><a href="${pInfo.boardType}?cp=${next}">&gt;</a></li>
+					
+					<!-- 맨 마지막 페이지로 -->
+					<li><a href="${pInfo.boardType}?cp=${pInfo.maxPage}">&gt;&gt;</a></li>
+					
+					</c:if>
 				</ul>
 				<!-- End Pagination -->
 			</div>
