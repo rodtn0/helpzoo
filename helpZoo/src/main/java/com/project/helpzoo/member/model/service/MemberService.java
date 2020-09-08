@@ -16,4 +16,10 @@ public interface MemberService {
 	 */
 	public abstract int signUp(Member signUpMember);
 
+	/** 아이디 중복 검사 Service
+	 * @param memberId
+	 * @return result
+	 */
+	public abstract int idDupCheck(String memberId);
+
 }
