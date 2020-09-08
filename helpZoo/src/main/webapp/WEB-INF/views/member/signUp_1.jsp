@@ -7,6 +7,24 @@
 <title>회원가입 - 약관 동의</title>
 <link rel="stylesheet" href="${contextPath}/resources/css/signUp.css">
 </head>
+<style>
+	.grid-container {
+	  display: grid;
+	  grid-template-columns: 1fr;
+	  grid-template-rows: 1fr 1fr 1fr;
+	  gap: 1px 1px;
+	  grid-template-areas:
+	    "header"
+	    "section"
+	    "footer";
+	}
+	
+	.header { grid-area: header; }
+	
+	.section { grid-area: section; }
+	
+	.footer { grid-area: footer; }
+</style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
     <div class="row justify-content-md-center">
@@ -550,17 +568,17 @@
 			            </div>
 			        </div>
 			    </div>
-		    <script>
-		    	function validate(){
-		    		if(!$("#agree").prop("checked") || (!$("#agree2").prop("checked"))){
-		    			swal({
-		    				  icon: "error",
-		    				  title : "약관에 모두 동의해주세요."
-		    				});
-			   			return false; 
-		    		}
-		    		return true;
-		    	}
-		    </script>
+	    <script>
+	    	function validate(){
+	    		if(!$("#agree").prop("checked") || (!$("#agree2").prop("checked"))){
+	    			swal({
+	    				  icon: "error",
+	    				  title : "약관에 모두 동의해주세요."
+	    				});
+		   			return false; 
+	    		}
+	    		return true;
+	    	}
+	    </script>
 </body>
 </html>

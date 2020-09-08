@@ -9,8 +9,10 @@
 <link rel="stylesheet" href="${contextPath}/resources/css/login.css">
 </head>
 <body>
+	<div class="header">
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
-	<div id="content">
+	</div>
+	 <div class="content">
 		<div class="login-page">
 		  <div class="form">
 			<h1 id="loginTxt">로그인</h1><br>
@@ -32,7 +34,7 @@
 		    </form>
 		  </div>
 		</div>
-	</div>
+		</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

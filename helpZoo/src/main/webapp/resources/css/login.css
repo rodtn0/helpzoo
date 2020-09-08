@@ -97,7 +97,7 @@ body {
   background: linear-gradient(to left, #97ecec, #ffffff);
   font-family: 'LotteMartDream';
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;      
+  -moz-osx-font-smoothing: grayscale;
 }
 #loginTxt{
 	font-family: "Recipekorea";
