@@ -33,15 +33,10 @@ public class FundingApiController {
 		List<FundingProject> fundingList = service.selectList(cp, orderSearch);
 		
 		
-		Gson gson = new Gson();
 		
 		
-		for(FundingProject fn: fundingList) {
-			System.out.println("펀딩리스트 : " + fn.getGoalAmount());
-		}
 		
-		
-		return gson.toJson(fundingList);
+		return null;
 	}
 	
 	
