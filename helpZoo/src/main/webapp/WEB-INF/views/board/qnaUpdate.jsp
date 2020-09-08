@@ -129,7 +129,7 @@
 						<label for="content">내용</label>
 					</div>
 					<textarea class="form-control" id="content" name="qnaContent"
-						rows="10" style="resize: none;"></textarea>
+						rows="10" style="resize: none;">${qnaBoard.qnaContent}</textarea>
 				</div>
 
 
