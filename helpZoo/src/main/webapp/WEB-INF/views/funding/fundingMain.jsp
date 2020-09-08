@@ -34,6 +34,11 @@
     integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc"
     crossorigin="anonymous"
   />
+  
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="https://raw.githubusercontent.com/anseki/eager-image-loader/master/eager-image-loader.min.js"></script> 
+  
 
     <style>
       body {
@@ -95,7 +100,13 @@
       .now{
         color: black;
       }
-
+	
+	
+		.loadingDiv{
+			
+		}
+		
+		
 
     </style>
 
@@ -228,40 +239,75 @@
       <hr />
     </div>
     
-  
-              
+  	<div class='loadingDiv'>
+  	
+  	
     <div class="card-deck">
       <div class="card">
-        <img src="${contextPath}/resources/images/dodo5.jpg" class="card-img-top" alt="...">
+        <img src="${contextPath}/resources/images/coco.png" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">도와주 도와주</h5>
-          <p class="card-text">봄날의 피부가 청춘 것이다. 위하여, 남는 불러 군영과 장식하는 갑 보라. 열매를 있는 낙원을 아름다우냐? 주며, 물방아 용감하고 생명을 것은 말이다. 그들은 용감하고 뜨고, 발휘하기 넣는 안고, 얼음 청춘에서만 뿐이다. 우는 용기가 있으며, 몸이 품으며, 뛰노는 그들에게 보라. 뭇 할지라도 피가 과실이 무엇을 .</p>
+          <p class="card-text">봄날의 피부가 청춘 것이다. 위하여, 남는 불러 군영과 장식하는 갑 보라. 열매를 있는 낙원을 아름다우냐? 주며, 물방아 용감하고 생명을 것은 말이다. 그들은 용감하고 뜨고, 발휘하기 넣는 안고, 얼음을 .</p>
           <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
         </div>
       </div>
-      
-      
       <div class="card">
-        <img src="${contextPath}/resources/images/dodo5.jpg" class="card-img-top" alt="...">
+        <img src="${contextPath}/resources/images/coco.png" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">도와주 도와주</h5>
-          <p class="card-text">봄날의 피부가 청춘 것이다. 위하여, 남는 불러 군영과 장식하는 갑 보라. 열매를 있는 낙원을 아름다우냐? 주며, 물방아 용감하고 생명을 것은 말이다. 그들은 용감하고 뜨고, 발휘하기 넣는 안고, 얼음 청춘에서만 뿐이다. 우는 용기가 있으며, 몸이 품으며, 뛰노는 그들에게 보라. 뭇 할지라도 피가 과실이 무엇을 심장의 오직 청춘 봄바</p>
+          <p class="card-text">봄날의 피부가 청춘 것이다. 위하여, 남는 불러 군영과 장식하는 갑 보라. 열매를 있는 낙원을 아름다우냐? 주며, 물방아 용감하고 생명을 것은 말이다. 그들은 용감하고 뜨고, 발휘하기 넣는 안고, 얼음 청춘에서만 뿐이다. 우는 용기가 있으며, 춘 봄바</p>
           <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
         </div>
       </div>
-      
-      
-      
       <div class="card">
-        <img src="${contextPath}/resources/images/dodo5.jpg" class="card-img-top" alt="...">
+        <img src="${contextPath}/resources/images/coco.png" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">도와주 도와주</h5>
-          <p class="card-text">봄날의 피부가 청춘 것이다. 위하여, 남는 불러 군영과 장식하는 갑 보라. 열매를 있는 낙원을 아름다우냐? 주며, 물방아 용감하고 생명을 것은 말이다. 그들은 용감하고 뜨고, 발휘하기 넣는 안고, 얼음 청춘에서만 뿐이다. 우는 용기가 있으며, 몸이 품으며, 뛰노는 그들에게 보라. 뭇 할지라도 피가 과실이 무엇을 .</p>
+          <p class="card-text">>봄날의 피부가 청춘 것이다. 위하여, 남는 불러 군영과 장식하는 갑 보라. 열매를 있는 낙원을 아름다우냐? 주며, 물방아 용감하고 생명을 것은 말이다. 그들은 용감하고 뜨고, 발휘하기 넣는 안고, 얼음 청춘에서만 뿐이다. 우는 용 .</p>
           <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
         </div>
       </div>
     </div>
     
+    
+       <div class="card-deck">
+      <div class="card">
+        <img src="${contextPath}/resources/images/coco.png" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">도와주 도와주</h5>
+          <p class="card-text">봄날의 피부가 청춘 것이다. 위하여, 남는 불러 군영과 장식하는 갑 보라. 열매를 있는 낙원을 아름다우냐? 주며, 물방아 용감하고 생명을 것은 말이다. 그들은 용감하고 뜨고, 발휘하기 넣는 안고, 얼음 청춘에서만 뿐이다. 우는 용기가 있으며, 몸이 품으며, 뛰노는 그들에게 보라. 뭇 할지라도 피가 과실이 무엇을 .</p>
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="${contextPath}/resources/images/coco.png" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">도와주 도와주</h5>
+          <p class="card-text">봄날의 피부가 청춘 것이다. 위하여, 남는 불러 군영과 장식하는 갑 보라. 열매를 있는 낙원을 아름다우냐? 주며, 물방아 용감하고 생명을 것은 말이다. 그들은 용감하고 뜨고바</p>
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="${contextPath}/resources/images/coco.png" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">도와주 도와주</h5>
+          <p class="card-text">>봄날의 피부가 청춘 것이다. 위하여, 남는 불러 군영과 장식하는 갑 보라. 열매를 있는 낙원을 아름다우냐? 주며, 물방아 용감하고 생명을 것은 말이다. 그들은 용감하고 뜨고, 발휘하기 넣는 안고, 얼음 청춘에서만 뿐이다. 우는 용기가 있으며, 몸이 품으며, 뛰노는 그들에게 보라. 뭇 할지라도 피가 과실이 무엇을 .</p>
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+  	
+  	</div>
+  
+   
     
     <div id="cocoacard">
     
@@ -272,9 +318,48 @@
 	
 	
 	<script>
+	var z = new Array();
 
+	var y = 0;
 	
-	$(document).ready(function() {
+	
+	
+	var $loading = $('.loadingDiv').hide();
+	
+	$('.loadingDiv').fadeOut('fast')	
+	
+	
+	$(document)
+	  .ajaxStart(function () {
+	    $loading.show();
+	  })
+	  .ajaxStop(function () {
+	    $loading.hide();
+	    
+	    
+	    $(".card").click(function(){
+
+	        var a =  $(this).children().first().val();
+	        
+	       
+	        
+	        var url = "${contextPath}/funding/fundingView/"+a;
+	        
+	        
+	        location.href = url;
+	        
+	        
+	        
+	        
+
+	     })
+	    
+	    
+	  });
+	
+	
+	
+		$(document).ready(function() {
 		
 		$.ajax({
 			url:"${contextPath}/fundingApi/selectList",
@@ -284,9 +369,12 @@
 			
 			$.each(list,function(index,item){
 				
-				var $cardDeck = $("<div class='card-deck'>"); // 행
+				var value = $("<input type='hidden' value= "+item.fundingNo+">")
+				
+				
 				var $tempImg = $("<img src='${contextPath}/resources/images/dodo5.jpg' class='card-img-top' alt='...'>")
-				var $card = $("<div class='card'>");
+				var $card = $("<div class='card' >");
+				var $boardValue = value;
 				var $cardBody = $("<div class='card-body'>")
 				var $cardTitle = $("<h5 class='card-title'>").text(item.fundingTitle);
 				var $cardStory = $("<p class='card-text'>").text(item.fundingSummary);
@@ -296,24 +384,59 @@
 				var $cardSmallOrderAmount = $("<small class='text-muted'>").text("총 참여금액 :  " + item.totalOrderAmount)
 				
 				
+				
+				
 				$cardSmallForm.append($cardSmallCategory,$cardSmallAchievement,$cardSmallOrderAmount)
 				
 				$cardBody.append($cardTitle,$cardStory,$cardSmallForm)
 				
-				$card.append($tempImg,$cardBody);
-
-					if(index%3 == 0){				
-						$cardDeck.append($card);
-					}
-				
+				$card.append($boardValue,$tempImg,$cardBody);
+			
+				z[y++] = $card;
 					
+			
 					
-					
-				$("#cocoacard").append($cardDeck)
-				
 				
 			});
-				
+
+				 // 행
+			
+			      var kk = 0;
+			      var xx = new Array();
+
+				for(var i = 0; i<z.length-2; i++){
+					
+					var $cardDeck = $("<div class='card-deck'>");
+					
+					if(i%3 == 0){
+          
+						$cardDeck.append(z[(i)],z[(i+1)],z[(i+2)]);
+            			
+						
+						
+			          	xx[kk++] = $cardDeck;
+			          	
+			          	
+					}
+					console.log(xx[kk]);
+					
+				}
+
+        for(var i = 0; i<xx.length; i++ ){
+
+          $("#cocoacard").append(xx[i]);
+
+        }
+        
+        if(xx.length == 0){
+        	
+        	$("#cocoacard").after("<h1>헉..프로젝트가 등록되어 있지 않습니다!</h1>")
+        	
+        	
+        }
+        
+
+			
 				
 				
 			}, error : function(){
@@ -325,8 +448,18 @@
 		
 	});
 
+		window.onload = function() {
+
 	
+		$(".card").click(function(){
+
+       var a =  $(this).children().first().val;
+       
+       console.log(a);
+
+    })
 	
+	}
 	
 	</script>
 	
