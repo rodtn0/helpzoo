@@ -4,7 +4,6 @@
   
 	  <resultMap id="fundingReviewResultSet" type="Review"> 
 	  	<id property="reviewNo" column="FUNDING_REVIEW_NO"/>
-	  	
 	  	<result property="reviewTitle" column="FUNDING_REVIEW_TITLE"/>
 	  	<result property="reviewContent" column="FUNDING_REVIEW_CONTENT"/>
 	  	<result property="readCount" column="FUNDING_REVIEW_READ_COUNT"/>
@@ -17,7 +16,8 @@
 	  	
 	  	<result property="projectTitle" column="FUNDING_TITLE"/>
 	  	<result property="memberId" column="MEMBER_ID"/>
-	  	
+	  	<result property="filePath" column="FILE_PATH"/>
+	  	<result property="fileChangeName" column="FILE_CHANGE_NAME"/>
 	  </resultMap>
 	  
 	  <resultMap id="donationReviewResultSet" type="Review">
@@ -85,11 +85,11 @@
   	  </select>
   	  
   	  <!-- 펀딩 구매내역 조회 -->
-  	  <select id="fundingBuy" resultType="_int">
+  	  <select id="fundingBuy" parameterType="_int" resultType="_int">
   	  	SELECT COUNT(*) FROM MEMBER
 		JOIN ORDERS USING(MEMBER_NO)
 		WHERE ORDER_STATUS = 'N'
-		AND MEMBER_NO='${memberNo}'
+		AND MEMBER_NO= #{memberNo}
   	  </select>
   	  
   	  <!-- 기부 구매내역 조회 -->
@@ -97,7 +97,14 @@
   	  </select> -->
   	  
   	  <!-- 펀딩 게시글 상세조회 -->
-  	  <!-- <select id="fReviewView" resultType="fundingReviewResultSet">
-  	  	
-  	  </select> -->
+  	  <select id="fReviewView" parameterType="_int" resultMap="fundingReviewResultSet">
+  	  	SELECT FUNDING_REVIEW_TITLE, FUNDING_REVIEW_CONTENT, FUNDING_REVIEW_READ_COUNT,
+        	   FUNDING_REVIEW_CREATE_DT, FUNDING_REVIEW_MODIFY_DT, FUNDING_TITLE, MEMBER_ID, FILE_PATH, FILE_CHANGE_NAME
+		FROM REVIEW_FUNDING
+		JOIN MEMBER ON(FUNDING_REVIEW_WRITER = MEMBER_NO)
+		JOIN FUNDING_IMAGE ON(FUNDING_BOARD_NO = FUNDING_ID)
+		JOIN FUNDING_PROJECT ON(FUNDING_BOARD_NO = FUNDING_PROJECT.FUNDING_ID)
+		WHERE FUNDING_REVIEW_NO = #{reviewNo}
+		AND FUNDING_REVIEW_STATUS = 'Y'
+  	  </select>
 </mapper>

@@ -93,7 +93,7 @@
 									<a class="btn btn-primary" href="#">Action</a>
 								</p>
 							</div>
-					</div>
+						</div>
 				</div>
 			</div>
 		</div>
