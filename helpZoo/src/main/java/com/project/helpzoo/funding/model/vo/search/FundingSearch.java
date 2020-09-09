@@ -3,7 +3,7 @@ package com.project.helpzoo.funding.model.vo.search;
 public class FundingSearch {
 
 	
-	   private  String searchText; // 회원 이름
+	   private  String searchText; 
 	   private  SearchStatus fundingStatus; 
 	   private  SearchSort searchSort;
 	   
