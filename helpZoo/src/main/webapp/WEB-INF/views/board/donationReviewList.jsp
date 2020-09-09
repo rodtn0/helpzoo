@@ -120,25 +120,10 @@
 				​</div>
 		</div>
 		
-		<!-- Split button -->
-		<!-- <div class="btn-group">
-		  <button type="button" class="btn btn-danger">Action</button>
-		  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-		    <span class="caret"></span>
-		    <span class="sr-only">Toggle Dropdown</span>
-		  </button>
-		  <ul class="dropdown-menu" role="menu">
-		    <li><a href="#">Action</a></li>
-		    <li><a href="#">Another action</a></li>
-		    <li><a href="#">Something else here</a></li>
-		    <li class="divider"></li>
-		    <li><a href="#">Separated link</a></li>
-		  </ul>
-		</div> -->
 		
 		<br><br>	
 			
-		<table class="table .table-hover">
+		<table class="table .table-hover" id="list-table">
 			<thead>
 				<tr>
 					<th>분류</th>
@@ -172,8 +157,8 @@
 				</c:choose>
 		</table>
 		
-		<c:if test="${!empty loginMember }">
-		<a href="#" class="btn-get-started scrollto">글작성</a>
+		<c:if test="${!empty loginMember && dBuyCount >= 1}">
+		<a href="${contextPath}/board/writeView/2" class="btn-get-started scrollto">글작성</a>
 		</c:if>
 		
 		<br><br>
@@ -228,8 +213,22 @@
 		<br><br>
 	</div>
 	
-		
-	
 	<jsp:include page="../common/footer.jsp"/>
+	
+	<script>
+	$(function(){
+		$("#list-table td").on("click", function(){
+			
+			var rBoardNo = $(this).parent().children().eq(1).text();
+			
+			var reviewViewUrl = "${contextPath}/board/review/2/" + rBoardNo + "?cp=${pInfo.currentPage}";
+			
+			location.href = reviewViewUrl;
+		});
+		
+		
+	});
+	
+	</script>
 </body>
 </html>

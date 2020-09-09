@@ -40,6 +40,7 @@ public class reviewController {
 		List<Review> fReview = null;
 		List<Review> dReview = null;
 		int fBuyCount = 0;
+		int dBuyCount = 0;
 		
 		// 세션에 저장된 로그인 멤버 정보 가져오기
 		Member loginMember = (Member)model.getAttribute("loginMember");
@@ -63,14 +64,15 @@ public class reviewController {
 			dReview = reviewService.selectReviewList(pInfo);
 			System.out.println("기부 리뷰 게시글 : " +  dReview);
 			
-			// 기부 개수 조회
-			//int dBuyCount = reviewService.buyCount(type, loginMember);
-			
+			// --- 기부 참여 프로젝트 개수 조회
+			dBuyCount = reviewService.buyCount(type, loginMember);
+			System.out.println("기부 참여 개수 : " + dBuyCount);
 			
 			path = "donationReviewList";
 		}
 		
 		model.addAttribute("fBuyCount", fBuyCount);
+		model.addAttribute("dBuyCount", dBuyCount);
 		model.addAttribute("pInfo", pInfo);
 		model.addAttribute("fReview", fReview);
 		model.addAttribute("dReview", dReview);
@@ -79,32 +81,51 @@ public class reviewController {
 	}
 	
 	
-	// 후기 글 작성 화면 이동
+	// 후기 글 작성 화면 이동 --> 해당 회원이 구매한 프로젝트가 화면에 떠야하므로 회원정보 가져오기
 	@RequestMapping("writeView/{type}")
-	public String writeReviewView() {
+	public String writeReviewView(@PathVariable int type, Model model) {
 		// 타입이 1이면 펀딩 리뷰작성/ 2면 기부 리뷰작성 화면으로 전환. -> 펀딩게시물/기부게시물에서도 '후기쓰러가기' 버튼에 각각 타입으로 주소 주면됨
-		return "board/reviewWrite";
+		//String path = null;
+		
+		Member loginMember = (Member)model.getAttribute("loginMember");
+		
+		if(type == 1) {
+			List<Review> fInfo = reviewService.selectInfo(type, loginMember);
+		}else {
+			
+		}
+		return "board/fReviewWrite";
 	}
 	
 	// 후기 글 상세 조회(펀딩,기부 type으로 구분)
 	// board/review/1/510?cp=1
+	// board/review/2/100?cp=10
 	@RequestMapping("review/{type}/{rBoardNo}")
 	public String reviewView(@PathVariable int type, @PathVariable int rBoardNo, Model model) {
 		
 		System.out.println("type : " + type);
 		System.out.println("rBoardNo : "+ rBoardNo);
-		//String path = null;
+		
+		String path = null;
+		
 		Review fReviewView = null;
+		Review dReviewView = null;
 		
 		if(type == 1) {
-			
 			fReviewView = reviewService.selectReviewVeiw(type, rBoardNo);
-			System.out.println("상세조회할 글 정보 : " + fReviewView);
+			System.out.println("상세조회할 글 정보(펀딩) : " + fReviewView);
+			path = "fReviewView";
+		}else {
+			dReviewView = reviewService.selectReviewVeiw(type, rBoardNo);
+			System.out.println("상세조회할 글 정보(기부) : " + dReviewView);
+			path = "dReviewView";
+			
 		}
 		
 		model.addAttribute("fReviewView", fReviewView);
+		model.addAttribute("dReviewView", dReviewView);
 		
-		return "board/fReviewView";
+		return "board/" + path;
 	}
 	
 	
