@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.project.helpzoo.funding.model.vo.funding.Reward;
+
 @Entity
 @SequenceGenerator(
 		name = "ORDER_REWARD_SEQ_GENERATOR",

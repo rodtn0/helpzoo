@@ -2,32 +2,28 @@ package com.project.helpzoo.funding.model.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.transaction.Transactional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.util.StringUtils;
 
-import com.project.helpzoo.funding.api.FundingMainViewDto;
-import com.project.helpzoo.funding.model.vo.funding.FundingCategory;
+import com.project.helpzoo.funding.dto.FundingDetailViewDto;
+import com.project.helpzoo.funding.dto.FundingMainViewDto;
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.funding.model.vo.funding.QFundingCategory;
 import com.project.helpzoo.funding.model.vo.funding.QFundingMaker;
 import com.project.helpzoo.funding.model.vo.funding.QFundingProject;
-import com.project.helpzoo.funding.model.vo.order.Orders;
+import com.project.helpzoo.funding.model.vo.funding.QReward;
 import com.project.helpzoo.funding.model.vo.order.QOrderReward;
-import com.project.helpzoo.funding.model.vo.order.QReward;
 import com.project.helpzoo.funding.model.vo.search.FundingSearch;
 import com.project.helpzoo.funding.model.vo.search.SearchSort;
 import com.project.helpzoo.funding.model.vo.search.SearchStatus;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 @Repository
@@ -36,6 +32,9 @@ public class FundingDAO {
 
 	@PersistenceContext
 	private EntityManager em;
+	
+	
+
 
 	/** 처음 펀딩 페이지에 왔을때 검색 List를 반환하는 메소드 입니다.
 	 * @param cp
@@ -44,6 +43,8 @@ public class FundingDAO {
 	 */
 	public List<FundingMainViewDto> selectList(int cp, FundingSearch fundingSearch) {
 
+
+		
 		JPAQueryFactory query = new JPAQueryFactory(em);
 
 		QFundingProject funding = QFundingProject.fundingProject;
@@ -55,7 +56,7 @@ public class FundingDAO {
 		QReward reward = QReward.reward;
 
 		QOrderReward orderReward = QOrderReward.orderReward;
-
+		
 		List<Tuple> result = query
 				.select(funding.id,
 						funding.title, category.category_name, maker.name, funding.goalAmount, reward.price,
@@ -184,6 +185,90 @@ public class FundingDAO {
 
 		return em.createQuery("select f from FundingProject f where f.status = 'Y' ", FundingProject.class).getResultList();
 
+	}
+
+
+
+
+	public FundingDetailViewDto selectFunding(int fundingNo) {
+		
+
+		
+		JPAQueryFactory query = new JPAQueryFactory(em);
+
+		QFundingProject funding = QFundingProject.fundingProject;
+
+		QFundingCategory category = QFundingCategory.fundingCategory;
+
+		QFundingMaker maker = QFundingMaker.fundingMaker;
+
+		QReward reward = QReward.reward;
+
+		QOrderReward orderReward = QOrderReward.orderReward;
+		
+		
+		
+			Long no = Long.valueOf(fundingNo);
+
+			
+			List<Tuple> result  = query
+					.select(funding.id,
+							funding.story, 
+							funding.goalAmount,
+							reward.id,
+							reward.title, 
+							reward.content, 
+							reward.price, 
+							reward.amount,
+							funding.fundingMaker,
+							maker.sns,
+							funding.readCount,
+							funding.likeCount,
+							maker.kakaoURL)
+					.from(funding)
+					.leftJoin(funding.reward, reward)
+					.leftJoin(funding.fundingMaker, maker)
+					.leftJoin(orderReward).on(reward.id.eq(orderReward.reward.id))
+					.where(funding.id.eq(no))
+					
+					.fetch();
+		
+			
+			
+			Optional<String[]> member = Optional.empty();  //서포터
+			
+			FundingDetailViewDto detailView = null;
+			
+		for (Tuple tuple : result) {
+		
+			int totalOrderAmount = 0;
+			if(  tuple.get(orderReward.count.sum())!= null && tuple.get(reward.price)!=null ) {
+			totalOrderAmount =  tuple.get(orderReward.count.sum())*tuple.get(reward.price);
+			}
+			System.out.println(
+			tuple.get(reward.id) +" "+
+			tuple.get(orderReward.count.sum())
+			);
+			detailView = new FundingDetailViewDto(tuple.get(funding.story), tuple.get(reward.rewardSeq), 
+					
+					tuple.get(reward.content)	, tuple.get(reward.title), 
+					
+					tuple.get(reward.price),tuple.get(reward.amount),
+					
+					totalOrderAmount, (int)(((double)totalOrderAmount/tuple.get(funding.goalAmount))*100), 
+					
+					member, //현재 서포터 값을 선언하지 않았기 때문에 Optional로 널처리 함.
+					
+					tuple.get(maker.name), tuple.get(maker.sns), tuple.get(maker.kakaoURL));
+		
+		}
+		
+		System.out.println(detailView);
+		
+		
+		
+		
+		return null;
 	}
 
 }

@@ -10,7 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.project.helpzoo.funding.api.FundingMainViewDto;
+import com.project.helpzoo.funding.dto.FundingDetailViewDto;
+import com.project.helpzoo.funding.dto.FundingMainViewDto;
 import com.project.helpzoo.funding.model.dao.FundingDAO;
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.funding.model.vo.search.FundingSearch;
@@ -32,10 +33,6 @@ public class FundingServiceImpl implements FundingService {
 	}
 
 
-	
-	
-	
-	
 	/**
 	 * 
 	 * 매일 24시마다 각 프로젝트를 확인하여 기간이 만료된 프로젝트의 상태를 N으로 변환한다.
@@ -62,14 +59,16 @@ public class FundingServiceImpl implements FundingService {
 					logger.info(fp.getFundingMaker() + "의 " + 
 					fp.getTitle() + "프로젝트가 만료되었습니다." );
 			
-				}
-
 			}
-			
-			
-			
+		}
+	}
+
+
+
+	@Override
+	public FundingDetailViewDto selectFunding(int fundingNo) {
 		
-		
+		return dao.selectFunding(fundingNo);
 	}
 	
 	
