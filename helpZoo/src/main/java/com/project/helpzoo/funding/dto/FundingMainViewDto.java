@@ -1,4 +1,4 @@
-package com.project.helpzoo.funding.api;
+package com.project.helpzoo.funding.dto;
 
 import java.sql.Date;
 

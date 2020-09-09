@@ -19,8 +19,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.project.helpzoo.funding.model.vo.order.Reward;
-
 
 @SequenceGenerator(
 		name = "FUNDING_PROJECT_SEQ_GENERATOR",
