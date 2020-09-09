@@ -97,7 +97,7 @@
   	  </select> -->
   	  
   	  <!-- 펀딩 게시글 상세조회 -->
-  	  <select id="fReviewView" resultType="fundingReviewResultSet">
+  	  <!-- <select id="fReviewView" resultType="fundingReviewResultSet">
   	  	
-  	  </select>
+  	  </select> -->
 </mapper>
