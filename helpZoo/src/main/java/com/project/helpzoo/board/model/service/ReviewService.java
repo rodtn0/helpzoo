@@ -33,6 +33,12 @@ public interface ReviewService {
 	 */
 	public abstract Review selectReviewVeiw(int type, int rBoardNo);
 
+	/** 글작성 페이지에 불러올 프로젝트 이미지, 제목 조회 Service
+	 * @param type
+	 * @return
+	 */
+	public abstract List<Review> selectInfo(int type, Member loginMember);
+
 
 	
 }

@@ -51,7 +51,7 @@ public class ReviewDAO {
 	}
 
 
-	/** 구매 내역 확인 DAO
+	/** 구매(참여) 내역 확인 DAO
 	 * @param type
 	 * @return 
 	 */
@@ -72,6 +72,18 @@ public class ReviewDAO {
 		if(type == 1) mapperId = "reviewMapper.fReviewView";
 		else	  	  mapperId = "reviewMapper.dReviewView";
 		return sqlSession.selectOne(mapperId, rBoardNo);
+	}
+
+
+	/** 글작성 페이지에 불러올 프로젝트 이미지, 제목 조회 DAO
+	 * @param type
+	 * @return
+	 */
+	public List<Review> selectInfo(int type, Member loginMember) {
+		String mapperId = null;
+		if(type == 1) mapperId = "reviewMapper.fInfoSelect";
+		else	  	  mapperId = "reviewMapper.dInfoSelect";
+		return sqlSession.selectList(mapperId, loginMember);
 	}
 
 	
