@@ -42,7 +42,7 @@ $('.navbar-light .dmenu').hover(function () {
 });
 </script>
 </head>
-<body>
+<body style="overflow-x:hidden; overflow-y:auto;">
 		<div class="row">
 		<div class="col-md-12">
 			<div class="row">
@@ -61,7 +61,7 @@ $('.navbar-light .dmenu').hover(function () {
 	        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
 	          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 	            <li class="nav-item">
-	              <a class="nav-link" href="#">회원정보 수정</a>
+	              <a class="nav-link" href="${contextPath}/member/mypage">회원정보 수정</a>
 	            </li>
 	            <li class="nav-item">
 	              <a class="nav-link" href="#">비밀번호 변경</a>
@@ -167,7 +167,7 @@ $('.navbar-light .dmenu').hover(function () {
 								<label for="memberEmail">Email</label>
 							</div>
 							<div class="col-md-6">
-								<input type="email" class="form-control" id="email" name="memberEmail" value="${memberEmail}" disabled>
+								<input type="email" class="form-control" id="email" name="memberEmail" value="${loginMember.memberEmail}" disabled>
 							</div>
 						</div>
 						<br>
@@ -215,8 +215,32 @@ $('.navbar-light .dmenu').hover(function () {
 								$("#postcodify_search_button").postcodifyPopUp();
 							});
 						</script>
-	
-						<!-- 추가정보 -->
+						<!-- 추가정보  1-->
+                        <div class="row mb-3 form-row">
+						<div class="col-md-3">
+							<label for="petType">애완동물 종류</label>
+						</div>
+						<div class="col-md-9">
+						<select name="memberPetType" id="pet-select">
+									<option>--애완동물 종류를 선택해주세요--</option>
+									<option <c:if test="${loginMember.memberPetType == 'dog'}">selected</c:if>>강아지</option>
+									<option <c:if test="${loginMember.memberPetType == 'cat'}">selected</c:if>>고양이</option>
+									<option <c:if test="${loginMember.memberPetType == 'hamster'}">selected</c:if>>햄스터</option>
+									<option <c:if test="${loginMember.memberPetType == 'hedgehog'}">selected</c:if>>고슴도치</option>
+									<option <c:if test="${loginMember.memberPetType == 'rabbit'}">selected</c:if>>토끼</option>
+									<option <c:if test="${loginMember.memberPetType == 'goldfish'}">selected</c:if>>금붕어</option>
+						</select>
+						</div>
+					</div>
+					<!-- 추가정보 2 -->
+                    <div class="row mb-3 form-row">
+						<div class="col-md-3">
+							<label for="petName">애완동물 이름</label>
+						</div>
+						<div class="col-md-9">
+							<input type="text" class="form-control" name="memberPetName" id="petName" value="${loginMember.memberPetName}">
+						</div>
+					</div>
 						<hr class="mb-4">
 						<button class="btn btn-primary btn-lg btn-block" type="submit" id="submitBtn">수정</button><br>
 					</form>
@@ -228,7 +252,8 @@ $('.navbar-light .dmenu').hover(function () {
 				<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 				</div>
 			</div>
-			    <script>
+	
+	<script>
     var signUpCheck = {
     		"id" : false,
     		"pwd1" : false,
