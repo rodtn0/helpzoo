@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
 	<title>도와주(HelpZoo)</title>
@@ -20,8 +21,26 @@
         </div>
 
         <ul class="faq-list">
-
-          <li data-aos="fade-up">
+		<c:choose>
+			<c:when test="${empty faqList}">
+			존재하는 게시글이 없습니다.
+			</c:when>
+			<c:otherwise>
+				<c:forEach var="board" items="${faqList}" varStatus="vs">
+					<li data-aos="fade-up">
+		            <a data-toggle="collapse" class="collapsed" href="#faq${vs.index }">${board.boardTitle}<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-x icon-close"></i></a>
+		            <div id="faq${vs.index }" class="collapse" data-parent=".faq-list">
+		              <p>
+		              <%pageContext.setAttribute("newLine","\n");%>
+            			${fn:replace(board.boardContent,newLine,"<br>")}
+		              </p>
+		            </div>
+		          </li>
+	          	</c:forEach>
+			</c:otherwise>
+		</c:choose>
+		
+          <!-- <li data-aos="fade-up">
             <a data-toggle="collapse" class="collapsed" href="#faq1">Non consectetur a erat nam at lectus urna duis? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-x icon-close"></i></a>
             <div id="faq1" class="collapse" data-parent=".faq-list">
               <p>
@@ -73,7 +92,7 @@
                 Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc eget lorem dolor sed. Ut venenatis tellus in metus vulputate eu scelerisque. Pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. Nibh tellus molestie nunc non blandit massa enim nec.
               </p>
             </div>
-          </li>
+          </li> -->
 
         </ul>
       </div>

@@ -92,7 +92,12 @@
   	</delete>
   	
   	<select id="getSearchListCount" parameterType="string" resultType="_int">
-  	SELECT COUNT(*) FROM QNA_BOARD
-  	WHERE 
+	SELECT COUNT(QNA_ORIGIN_NO) 
+	FROM Q_BOARD WHERE QNA_ORIGIN_NO IN (SELECT QNA_NO FROM Q_BOARD WHERE MEMBER_ID=#{id})
+  	</select>
+  	
+  	<select id="selectSearchList" parameterType="string" resultMap="qnaBoardResultSet">
+  		SELECT *
+		FROM Q_BOARD WHERE QNA_ORIGIN_NO IN (SELECT QNA_NO FROM Q_BOARD WHERE MEMBER_ID=#{id})
   	</select>
 </mapper>

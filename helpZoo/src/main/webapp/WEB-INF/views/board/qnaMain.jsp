@@ -10,6 +10,22 @@
 </head>
 
 	<style>
+		@font-face {
+		 font-family: 'NanumBarunGothic';
+		 font-style: normal;
+		 font-weight: 400;
+		 src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+		 src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
+		}
+            
+	
+	.table tr *{
+	font-family: 'NanumBarunGothic';
+	font-size: 10pt;
+	} 
+	
+            
+
 	#paging {
 		text-align:center;
 		padding-left: 0px;
@@ -35,8 +51,8 @@
 	}
 	#paging li a.now {
 		color:#fff;
-		background-color:#f40;
-		border:1px solid #f40;
+		background-color:#7fcdcd;
+		border:1px solid #7fcdcd;;
 	}
 	#paging li a:hover, #paging li a:focus {
 		color:#fff;
@@ -56,6 +72,10 @@
 	.ec-common-rwd-image2{
 	width: 26px;
     height: 14px;
+	}
+	.ec-common-rwd-image3{
+	width: 15px;
+    height: 15px;
 	}
 	#list-table td{
 		cursor :pointer;
@@ -90,6 +110,8 @@
 	  justify-content: center;
 	  align-items: center;
 	  color: #51e3d4;
+	  height: 17px;
+	  width: 15px;
 	}
 	.search-box:hover > .search-btn{
 	  background-color: #fff;
@@ -121,14 +143,16 @@
 	
 	<div class="container">
 	<br>
-	<h3>질문과 답변</h3>
+		<div class="section-title" data-aos="fade-up" style="margin-top: 40px;">
+	          <h2>Question And Answer</h2>
+	    </div>
 	</div>
 	
 <%-- 	<div style="text-align:center; min-height:320px;">
 		<img class="d-block w-100" src="<%=request.getContextPath()%>/resources/images/QNA배너.png">
 	</div> --%>
 	<br>
-	<div class="container">
+	<div class="container table" data-aos="fade-up">
 		<table class="table table-sm mb-4" id="list-table">
 		  <thead>
 		    <tr>
@@ -155,8 +179,13 @@
        			<fmt:formatDate var="createDate" value="${qnaBoard.qnaCreateDate}" pattern="yyyy-MM-dd"/>
        			<fmt:formatDate var="createTime" value="${qnaBoard.qnaCreateDate}" pattern="hh:mm:ss"/>
        			<input type="hidden" name="qnaNo" value="${qnaBoard.qnaNo}">
-			      <th scope="row">${listCount-( (pInfo.currentPage-1) * pInfo.limit)-vs.index}</th>
+			      <th scope="row">${pInfo.listCount-( (pInfo.currentPage-1) * pInfo.limit)-vs.index}</th>
 			      <td id="content">
+			      
+			      <c:if test="${qnaBoard.groupLayer == 1 }">
+					<img class="ec-common-rwd-image3" src="<%=request.getContextPath()%>/resources/images/답글1.png">	      
+			      </c:if>
+			      
 			      <c:choose>
 			      	<c:when test="${today == createDate}">
 			      	<img class="ec-common-rwd-image" src="<%=request.getContextPath()%>/resources/images/lock.png"> ${qnaBoard.qnaTitle}
@@ -219,7 +248,7 @@
    		<c:forEach var="p" begin="${pInfo.startPage}" end="${pInfo.endPage}">
    			<c:choose>
    			<c:when test="${p==pInfo.currentPage}">
-	        <li><a>${p}</a></li>
+	        <li><a class="now">${p}</a></li>
 	        </c:when>
 	        <c:otherwise>
 	        <li><a href="?cp=${p}">${p}</a></li>
