@@ -1,6 +1,7 @@
 package com.project.helpzoo.funding.model.vo.order;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,23 +9,31 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 
 @Entity
 @Table(name="ORDERS")
+@SequenceGenerator(
+		name = "ORDER_SEQ_GENERATOR",
+		sequenceName = "ORDER_SEQ",
+		initialValue = 1, allocationSize = 1)
 public class Orders {
 	
 	
 	@Id
 	@Column(name = "ORDER_ID")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "ORDER_SEQ_GENERATOR")
 	private long id;
 	
 	@Column(name = "ORDER_DATE")
-	private Date orderDate;
+	private Timestamp orderDate;
 	
 	@Column(name = "ORDER_STATUS")
 	private String status;
@@ -67,11 +76,11 @@ public class Orders {
 		this.id = l;
 	}
 
-	public Date getOrderDate() {
+	public Timestamp getOrderDate() {
 		return orderDate;
 	}
 
-	public void setOrderDate(Date orderDate) {
+	public void setOrderDate(Timestamp orderDate) {
 		this.orderDate = orderDate;
 	}
 
@@ -149,7 +158,7 @@ public class Orders {
 				+ ", deliveryId2=" + ", member_no=" + memberId + "]";
 	}
 
-	public Orders(long id, Date orderDate, String status, long deliveryId, long deliveryId2, long member_no) {
+	public Orders(long id, Timestamp orderDate, String status, long deliveryId, long deliveryId2, long member_no) {
 		super();
 		this.id = id;
 		this.orderDate = orderDate;

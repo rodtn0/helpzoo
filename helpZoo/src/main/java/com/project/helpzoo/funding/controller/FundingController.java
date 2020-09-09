@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -39,16 +41,17 @@ public class FundingController {
 	}
 	
 	@RequestMapping("fundingView/{fundingNo}")
-	public String fundingView(@PathVariable int fundingNo) {
+	public String fundingView(@PathVariable int fundingNo, Model model) {
 		
 		
 		FundingDetailViewDto funding = service.selectFunding(fundingNo);
 		
+		model.addAttribute("funding", funding);
 		
 		
 		
 		
-		return null;
+		return "funding/fundingDetail";
 	}
 	
 	

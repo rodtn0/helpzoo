@@ -1,6 +1,7 @@
 package com.project.helpzoo.funding.model.vo.funding;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -54,7 +55,7 @@ public class FundingProject {
 	private String managerEmail;
 	
 	@Column(name="FUNDING_END_DAY")
-	private Date endDay;
+	private Timestamp endDay;
 	
 	@Column(name="FUNDING_SEARCH_TAG")
 	private String tag;
@@ -66,7 +67,7 @@ public class FundingProject {
 	private String story;
 	
 	@Column(name="FUNDING_START_DAY")
-	private String startDay;
+	private Timestamp startDay;
 	
 	@Column(name="FUNDING_STATUS")
 	private String status;
@@ -185,13 +186,13 @@ public class FundingProject {
 
 
 
-	public Date getEndDay() {
+	public Timestamp getEndDay() {
 		return endDay;
 	}
 
 
 
-	public void setEndDay(Date endDay) {
+	public void setEndDay(Timestamp endDay) {
 		this.endDay = endDay;
 	}
 
@@ -233,13 +234,13 @@ public class FundingProject {
 
 
 
-	public String getStartDay() {
+	public Timestamp getStartDay() {
 		return startDay;
 	}
 
 
 
-	public void setStartDay(String startDay) {
+	public void setStartDay(Timestamp startDay) {
 		this.startDay = startDay;
 	}
 
@@ -306,7 +307,7 @@ public class FundingProject {
 
 
 	public FundingProject(long id, String title, String plan, int goalAmount, String managerName, String managerEmail,
-			Date endDay, String tag, String summary, String story, String startDay, String status, int memberNo,
+			Timestamp endDay, String tag, String summary, String story, Timestamp startDay, String status, int memberNo,
 			FundingCategory category, IndiOrCoparation indiOrCoparation, FundingMaker fundingMaker) {
 		super();
 		this.id = id;
