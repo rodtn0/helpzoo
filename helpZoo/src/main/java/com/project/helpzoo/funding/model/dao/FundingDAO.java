@@ -99,10 +99,6 @@ public class FundingDAO {
 			,(int)(((double)totalOrderAmount/tuple.get(funding.goalAmount))*100)
 			);
 		
-		System.out.println(tuple.get(funding.goalAmount));
-		System.out.println(totalOrderAmount);
-		
-		System.out.println((int)(((double)(totalOrderAmount/tuple.get(funding.goalAmount))*100)));
 		
 		mainViewList.add(mainView);
 		}
@@ -220,17 +216,34 @@ public class FundingDAO {
 							reward.content, 
 							reward.price, 
 							reward.amount,
-							funding.fundingMaker,
+							maker.name,
 							maker.sns,
 							funding.readCount,
 							funding.likeCount,
-							maker.kakaoURL)
+							maker.kakaoURL,
+							funding.endDay,
+							funding.startDay,
+							orderReward.count.sum())
 					.from(funding)
 					.leftJoin(funding.reward, reward)
 					.leftJoin(funding.fundingMaker, maker)
 					.leftJoin(orderReward).on(reward.id.eq(orderReward.reward.id))
 					.where(funding.id.eq(no))
-					
+					.groupBy(funding.id,
+							funding.story, 
+							funding.goalAmount,
+							reward.id,
+							reward.title, 
+							reward.content, 
+							reward.price, 
+							reward.amount,
+							maker.name,
+							maker.sns,
+							funding.readCount,
+							funding.likeCount,
+							maker.kakaoURL,
+							funding.endDay,
+							funding.startDay)
 					.fetch();
 		
 			
@@ -242,33 +255,45 @@ public class FundingDAO {
 		for (Tuple tuple : result) {
 		
 			int totalOrderAmount = 0;
+			
 			if(  tuple.get(orderReward.count.sum())!= null && tuple.get(reward.price)!=null ) {
 			totalOrderAmount =  tuple.get(orderReward.count.sum())*tuple.get(reward.price);
 			}
+			
 			System.out.println(
 			tuple.get(reward.id) +" "+
 			tuple.get(orderReward.count.sum())
 			);
-			detailView = new FundingDetailViewDto(tuple.get(funding.story), tuple.get(reward.rewardSeq), 
+			
+			
+			
+			detailView = new FundingDetailViewDto(
+					tuple.get(funding.story), tuple.get(reward.rewardSeq), 
 					
 					tuple.get(reward.content)	, tuple.get(reward.title), 
 					
 					tuple.get(reward.price),tuple.get(reward.amount),
 					
+					tuple.get(funding.goalAmount),
+					
 					totalOrderAmount, (int)(((double)totalOrderAmount/tuple.get(funding.goalAmount))*100), 
 					
 					member, //현재 서포터 값을 선언하지 않았기 때문에 Optional로 널처리 함.
 					
-					tuple.get(maker.name), tuple.get(maker.sns), tuple.get(maker.kakaoURL));
+					tuple.get(maker.name), 
+					tuple.get(maker.sns), 
+					tuple.get(maker.kakaoURL)
+					,tuple.get(funding.likeCount)
+					,tuple.get(funding.endDay),
+					tuple.get(funding.startDay)
+					);
 		
+			
 		}
 		
-		System.out.println(detailView);
 		
 		
-		
-		
-		return null;
+		return detailView;
 	}
 
 }

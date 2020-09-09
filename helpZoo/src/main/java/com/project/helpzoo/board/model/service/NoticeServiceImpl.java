@@ -19,7 +19,7 @@ public class NoticeServiceImpl implements NoticeService{
 	@Autowired
 	private PageInfo pInfo; 
 	
-	// 페이징 처리용 service 구현
+	// 페이징 처리용 service 구현 ----------------------------------------------------
 	@Override
 	public PageInfo pagination(int type, int cp) {
 		
@@ -32,13 +32,13 @@ public class NoticeServiceImpl implements NoticeService{
 		return pInfo;
 	}
 	
-	// 공지사항 목록 조회 service 구현
+	// 공지사항 목록 조회 service 구현 --------------------------------------------------
 	@Override
 	public List<Board> selectList(PageInfo pInfo) {
 		return noticeDAO.selectList(pInfo);
 	}
 
-	// 공지사항 상세 조회
+	// 공지사항 상세 조회 ------------------------------------------------------------
 	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public Board selectNotice(int boardNo) {
@@ -59,8 +59,51 @@ public class NoticeServiceImpl implements NoticeService{
 		
 		return board;
 	}
-
-
 	
+	// 공지사항 글 등록 service ---------------------------------------------------------------
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int insertNotice(Board board) {
+		
+		int result = 0;
+		
+		// board의 시퀀스 얻어오기
+		int boardNo = noticeDAO.selectNextNo();
+		
+		if(boardNo > 0) {
+			// 얻어온 board 시퀀스 값 board객체에 세팅
+			board.setBoardNo(boardNo);
+			
+			// xss 방지 처리
+			board.setBoardTitle(replaceParameter(board.getBoardTitle()));
+			board.setBoardContent(replaceParameter(board.getBoardContent()));
+			
+			// 공지사항 DB에 등록
+			result = noticeDAO.insertNotice(board);
+		}
+		
+		return result;
+	}
+    
+    // 공지사항 글 삭제 service -------------------------------------------------------------
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int deleteNotice(int boardNo) {
+		
+		return noticeDAO.deleteNotice(boardNo);
+	}
+	
+	// XSS 방지 메소드 service -------------------------------------------------------------
+	public String replaceParameter(String param) {
+		String result = param;
+		if(param != null) {
+			result = result.replaceAll("&", "&amp;");
+			result = result.replaceAll("<", "&lt;");
+			result = result.replaceAll(">", "&gt;");
+			result = result.replaceAll("\"", "&quot;");
+		}
+		
+		return result;
+	}
 	
 }

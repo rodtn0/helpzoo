@@ -1,6 +1,7 @@
 package com.project.helpzoo.funding.dto;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class FundingMainViewDto {
 	
@@ -18,7 +19,7 @@ public class FundingMainViewDto {
 	
 	private int reachAmount;
 	
-	private Date fundingEndDate;
+	private Timestamp fundingEndDate;
 
 	private int achievementRate;
 	
@@ -34,7 +35,7 @@ public class FundingMainViewDto {
 
 
 	public FundingMainViewDto(long fundingNo, String fundingTitle, String category, String fundingSummary,
-			String fundingMaker, int totalOrderAmount, int reachAmount, Date fundingEndDate, int achievementRate) {
+			String fundingMaker, int totalOrderAmount, int reachAmount, Timestamp fundingEndDate, int achievementRate) {
 		super();
 		this.fundingNo = fundingNo;
 		this.fundingTitle = fundingTitle;
@@ -74,7 +75,7 @@ public class FundingMainViewDto {
 
 
 	public FundingMainViewDto(String fundingTitle, String category, String fundingMaker, int totalOrderAmount,
-			int reachAmount, Date fundingEndDate) {
+			int reachAmount, Timestamp fundingEndDate) {
 		super();
 		this.fundingTitle = fundingTitle;
 		this.category = category;
@@ -87,7 +88,7 @@ public class FundingMainViewDto {
 	
 	
 	public FundingMainViewDto(String fundingTitle, String category, String fundingSummary, String fundingMaker,
-			int totalOrderAmount, int reachAmount, Date fundingEndDate) {
+			int totalOrderAmount, int reachAmount, Timestamp fundingEndDate) {
 		super();
 		this.fundingTitle = fundingTitle;
 		this.category = category;
@@ -154,11 +155,11 @@ public class FundingMainViewDto {
 		this.reachAmount = reachAmount;
 	}
 
-	public Date getFundingEndDate() {
+	public Timestamp getFundingEndDate() {
 		return fundingEndDate;
 	}
 
-	public void setFundingEndDate(Date fundingEndDate) {
+	public void setFundingEndDate(Timestamp fundingEndDate) {
 		this.fundingEndDate = fundingEndDate;
 	}
 
@@ -192,7 +193,7 @@ public class FundingMainViewDto {
 
 
 	public FundingMainViewDto(String fundingTitle, String category, String fundingSummary, String fundingMaker,
-			int totalOrderAmount, int reachAmount, Date fundingEndDate, int achievementRate) {
+			int totalOrderAmount, int reachAmount, Timestamp fundingEndDate, int achievementRate) {
 		super();
 		this.fundingTitle = fundingTitle;
 		this.category = category;

@@ -43,5 +43,30 @@
 		SET READ_COUNT = READ_COUNT+1
 		WHERE BOARD_NO = #{boardNo}
     </update>
+    
+    <!-- 공지사항 글 번호 조회 -->
+    <select id="selectNextNo" resultType="_int">
+    	SELECT SEQ_BNO.NEXTVAL
+    	FROM DUAL
+    </select>
+    
+    <!-- 공지사항 글 등록 -->
+    <insert id="insertNotice" parameterType="Board">
+    	INSERT INTO BOARD
+    	VALUES(
+    		#{boardNo},
+    		#{boardTitle},
+    		#{boardContent},
+    		DEFAULT, DEFAULT, DEFAULT, DEFAULT,
+    		#{boardWriter},
+    		#{boardType})
+    </insert>
+    
+    <!-- 공지사항 글 삭제 -->
+    <update id="deleteNotice" parameterType="_int">
+    	UPDATE BOARD
+    	SET BOARD_STATUS = 'N'
+    	WHERE BOARD_NO = #{boardNo}
+    </update>
 
 </mapper>

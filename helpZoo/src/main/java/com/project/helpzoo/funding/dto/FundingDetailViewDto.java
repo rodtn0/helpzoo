@@ -1,5 +1,7 @@
 package com.project.helpzoo.funding.dto;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -18,6 +20,8 @@ public class FundingDetailViewDto {
 	
 	private int rewardAmount;
 	
+	private int goalAmount;
+	
 	private int totalOrderAmount;
 	
 	private int achievementRate;
@@ -30,10 +34,159 @@ public class FundingDetailViewDto {
 	
 	private String kakaoUrl;
 
+	private int like;
+	
+	private Timestamp endDay;
+	
+	private Timestamp startDay;
 	
 	
+	
+	
+	
+	
+	public int getGoalAmount() {
+		return goalAmount;
+	}
+
+
+
+	public void setGoalAmount(int goalAmount) {
+		this.goalAmount = goalAmount;
+	}
+
+
+
+	public FundingDetailViewDto(String fundingStroy, Integer fundingRewardSeq, String rewardContent, String rewardTitle,
+			int rewardPrice, int rewardAmount, int goalAmount, int totalOrderAmount, int achievementRate,
+			Optional<String[]> suppoterName, String makerName, String snsUrl, String kakaoUrl, int like, Timestamp endDay,
+			Timestamp startDay) {
+		super();
+		this.fundingStroy = fundingStroy;
+		this.fundingRewardSeq = fundingRewardSeq;
+		this.rewardContent = rewardContent;
+		this.rewardTitle = rewardTitle;
+		this.rewardPrice = rewardPrice;
+		this.rewardAmount = rewardAmount;
+		this.goalAmount = goalAmount;
+		this.totalOrderAmount = totalOrderAmount;
+		this.achievementRate = achievementRate;
+		this.suppoterName = suppoterName;
+		this.makerName = makerName;
+		this.snsUrl = snsUrl;
+		this.kakaoUrl = kakaoUrl;
+		this.like = like;
+		this.endDay = endDay;
+		this.startDay = startDay;
+	}
+
+
+
+	public FundingDetailViewDto(String fundingStroy, Integer fundingRewardSeq, String rewardContent, String rewardTitle,
+			int rewardPrice, int rewardAmount, int totalOrderAmount, int achievementRate,
+			Optional<String[]> suppoterName, String makerName, String snsUrl, String kakaoUrl, int like, Timestamp endDay,
+			Timestamp startDay) {
+		super();
+		this.fundingStroy = fundingStroy;
+		this.fundingRewardSeq = fundingRewardSeq;
+		this.rewardContent = rewardContent;
+		this.rewardTitle = rewardTitle;
+		this.rewardPrice = rewardPrice;
+		this.rewardAmount = rewardAmount;
+		this.totalOrderAmount = totalOrderAmount;
+		this.achievementRate = achievementRate;
+		this.suppoterName = suppoterName;
+		this.makerName = makerName;
+		this.snsUrl = snsUrl;
+		this.kakaoUrl = kakaoUrl;
+		this.like = like;
+		this.endDay = endDay;
+		this.startDay = startDay;
+	}
+
+
+
+	public Timestamp getStartDay() {
+		return startDay;
+	}
+
+
+
+	public void setStartDay(Timestamp startDay) {
+		this.startDay = startDay;
+	}
+
+
+
+	public FundingDetailViewDto(String fundingStroy, Integer fundingRewardSeq, String rewardContent, String rewardTitle,
+			int rewardPrice, int rewardAmount, int totalOrderAmount, int achievementRate,
+			Optional<String[]> suppoterName, String makerName, String snsUrl, String kakaoUrl, int like, Timestamp endDay) {
+		super();
+		this.fundingStroy = fundingStroy;
+		this.fundingRewardSeq = fundingRewardSeq;
+		this.rewardContent = rewardContent;
+		this.rewardTitle = rewardTitle;
+		this.rewardPrice = rewardPrice;
+		this.rewardAmount = rewardAmount;
+		this.totalOrderAmount = totalOrderAmount;
+		this.achievementRate = achievementRate;
+		this.suppoterName = suppoterName;
+		this.makerName = makerName;
+		this.snsUrl = snsUrl;
+		this.kakaoUrl = kakaoUrl;
+		this.like = like;
+		this.endDay = endDay;
+	}
+
+
+
+	public Timestamp getEndDay() {
+		return endDay;
+	}
+
+
+
+	public void setEndDay(Timestamp endDay) {
+		this.endDay = endDay;
+	}
+
+
+
 	public FundingDetailViewDto () {
 		
+	}
+
+
+
+	public int getLike() {
+		return like;
+	}
+
+
+
+	public void setLike(int like) {
+		this.like = like;
+	}
+
+
+
+	public FundingDetailViewDto(String fundingStroy, Integer fundingRewardSeq, String rewardContent, String rewardTitle,
+			int rewardPrice, int rewardAmount, int totalOrderAmount, int achievementRate,
+			Optional<String[]> suppoterName, String makerName, String snsUrl, String kakaoUrl, int like) {
+		super();
+		this.fundingStroy = fundingStroy;
+		this.fundingRewardSeq = fundingRewardSeq;
+		this.rewardContent = rewardContent;
+		this.rewardTitle = rewardTitle;
+		this.rewardPrice = rewardPrice;
+		this.rewardAmount = rewardAmount;
+		this.totalOrderAmount = totalOrderAmount;
+		this.achievementRate = achievementRate;
+		this.suppoterName = suppoterName;
+		this.makerName = makerName;
+		this.snsUrl = snsUrl;
+		this.kakaoUrl = kakaoUrl;
+		this.like = like;
 	}
 
 

@@ -1,5 +1,10 @@
+<%@page import="com.project.helpzoo.funding.dto.FundingDetailViewDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@page import="java.sql.Timestamp"%>
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -91,7 +96,45 @@
     </style>
   </head>
   <body>
+  <c:set var="endDay" value="${funding.endDay }" />
+
+  
   <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+  
+  
+  <%
+  
+  
+ FundingDetailViewDto dto = (FundingDetailViewDto)request.getAttribute("funding");
+  
+ Timestamp t1 = new Timestamp(System.currentTimeMillis());
+ 
+  
+ long nowTime = (t1.getTime() - dto.getEndDay().getTime());
+ 
+ long minute = (nowTime / 1000 ) /60 ; //minute
+ long second = (nowTime / 1000 ) % 60 ; //second
+
+ long day = nowTime/ (1000 * 60 * 60 * 24); // day
+ 
+ long hour = nowTime/ (1000 * 60 * 60); //hour
+ 
+ 
+	String displayTime = null;
+
+ if(day>0){
+	 displayTime = day + "일 ";
+ }else if(hour>0){
+	 displayTime = hour + "시간 ";
+ }else {
+	 displayTime = minute + "분" + second + "초";
+ }
+ 
+ 
+ 
+ %> 
+  
+  
     <div class="co">
       <img src="dodo5.jpg" class="funding_item_logo" />
 
@@ -117,24 +160,26 @@
         <img src="${contextPath}/helpzoo/resources/images/dodo5.jpg" class="funding_thumnail" />
         <br />
         <br />
-        찹쌀같은 식감! 최고의 강아지 사료! 에어 코듀라 스페셜사료 <br />
-        찹쌀같은 식감! 최고의 강아지 사료! 에어 코듀라 스페셜사료 <br />
-        찹쌀같은 식감! 최고의 강아지 사료! 에어 코듀라 스페셜사료 <br />
+       
+       ${funding.fundingStroy}
+       
 
         <div class="project_info">
-          목표 금액 10,000,000원 펀딩기간 2020.08.15-2020.09.07 100% 이상 모이면
+          목표 금액 ${funding.goalAmount }원 펀딩기간 ${funding.startDay}-${funding.endDay}100% 이상 모이면
           펀딩이 성공되는 프로젝트 이 프로젝트는 펀딩 마감일까지 목표 금액이
           100% 모이지 않으면 결제가 진행되지 않습니다.
         </div>
       </div>
       <div class="col-lg-4 col-sm-4 col-md-4">
           
+          
+          
         <br>
-        <h2>10일 남음</h2>
+        <h2>마감까지 <%=displayTime%> 일 남음.</h2>
         <br>
-        <h3>344%달성 </h3>
+        <h3>${funding.achievementRate}%달성 </h3>
         <br>
-        <h3>34,456,000원 펀딩 </h3>
+        <h3>${funding.totalOrderAmount}원 펀딩 </h3>
         <br>
         <h3>391명의 서포터</h3>
         <br>
@@ -146,7 +191,7 @@
             <br>
 
          <button type="button" class="btn btn-primary">
-            <i class="fas fa-heart"></i>       274
+            <i class="fas fa-heart"></i>      ${funding.like}
             </button>
             <button type="button" class="btn btn-primary">
                 <i class="far fa-comment-dots"></i>  문의
@@ -164,7 +209,7 @@
            <div class="card" style="width: 18rem;">
             <img src="${contextPath}/helpzoo/resources/images/dodo5.jpg" class="card-img-top" alt="...">
             <div class="card-body">
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <p class="card-text">${funding.makerName }</p>
             </div>
           </div>
 
