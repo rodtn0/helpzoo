@@ -13,7 +13,7 @@ public interface NoticeService {
 	 */
 	public abstract List<Board> selectList(PageInfo pInfo);
 
-	/** 공지사항 상세 조회
+	/** 공지사항 상세 조회 service
 	 * @param boardNo
 	 * @return board
 	 */
@@ -25,5 +25,17 @@ public interface NoticeService {
 	 * @return pInfo
 	 */
 	public abstract PageInfo pagination(int type, int cp);
+
+	/** 공지사항 글 등록 service
+	 * @param board
+	 * @return result
+	 */
+	public abstract int insertNotice(Board board);
+
+	/** 공지사항 글 삭제 service
+	 * @param boardNo
+	 * @return result
+	 */
+	public abstract int deleteNotice(int boardNo);
 
 }
