@@ -36,6 +36,21 @@
 	  	<result property="projectTitle" column="DONATION_BOARD_TITLE"/>
 	  	<result property="memberId" column="MEMBER_ID"/>
 	  </resultMap>
+	  
+	  <resultMap type="Member" id="mResultSet">
+		<id property="memberNo" column="MEMBER_NO"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="memberPwd" column="MEMBER_PWD"/>
+		<result property="memberName" column="MEMBER_NM"/>
+		<result property="memberPhone" column="MEMBER_PHONE"/>
+		<result property="memberEmail" column="MEMBER_EMAIL"/>
+		<result property="memberAddress" column="MEMBER_ADDR"/>
+		<result property="memberPetType" column="MEMBER_PET_TYPE"/>
+		<result property="memberPetName" column="MEMBER_PET_NAME"/>
+		<result property="memberEnrollDate" column="MEMBER_ENROLL_DATE"/>
+		<result property="memberStatus" column="MEMBER_STATUS"/>
+		<result property="memberGrade" column="MEMBER_GRADE"/>
+	</resultMap>
   
   	  <!-- 펀딩 리뷰 게시판 목록 조회 -->
   	  <select id="selectFundingList" resultMap="fundingReviewResultSet">
@@ -68,4 +83,21 @@
   	  <select id="getDonationListCount" resultType="_int">
 		SELECT COUNT(*) FROM DV_REVIEW
   	  </select>
+  	  
+  	  <!-- 펀딩 구매내역 조회 -->
+  	  <select id="fundingBuy" resultType="_int">
+  	  	SELECT COUNT(*) FROM MEMBER
+		JOIN ORDERS USING(MEMBER_NO)
+		WHERE ORDER_STATUS = 'N'
+		AND MEMBER_NO='${memberNo}'
+  	  </select>
+  	  
+  	  <!-- 기부 구매내역 조회 -->
+  	  <!-- <select id="donationBuy" resultType="_int">
+  	  </select> -->
+  	  
+  	  <!-- 펀딩 게시글 상세조회 -->
+  	  <!-- <select id="fReviewView" resultType="fundingReviewResultSet">
+  	  	
+  	  </select> -->
 </mapper>

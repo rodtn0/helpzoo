@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.project.helpzoo.board.model.vo.PageInfo;
 import com.project.helpzoo.board.model.vo.Review;
+import com.project.helpzoo.member.model.vo.Member;
 
 @Repository
 public class ReviewDAO {
@@ -47,6 +48,30 @@ public class ReviewDAO {
 		else		  				  mapperId = "reviewMapper.selectDonationList";
 		
 		return sqlSession.selectList(mapperId, null, rowBounds);
+	}
+
+
+	/** 구매 내역 확인 DAO
+	 * @param type
+	 * @return 
+	 */
+	public int buyCount(int type, Member loginMember) {
+		String mapperId = null;
+		if(type == 1) mapperId = "reviewMapper.fundingBuy";
+		else		  mapperId = "reviewMapper.donationBuy";
+		return sqlSession.selectOne(mapperId, loginMember);
+	}
+
+
+	/** 리뷰 상세조회 DAO
+	 * @param rBoardNo
+	 * @return 
+	 */
+	public Review selectReviewView(int type, int rBoardNo) {
+		String mapperId = null;
+		if(type == 1) mapperId = "reviewMapper.fReviewView";
+		else	  	  mapperId = "reviewMapper.dReviewView";
+		return sqlSession.selectOne(mapperId, rBoardNo);
 	}
 
 	
