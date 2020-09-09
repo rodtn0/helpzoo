@@ -67,4 +67,11 @@ public class NoticeController {
 		
 	}
 	
+	// 공지사항 글 등록 -------------------------------------------------------------------------------------------
+	@RequestMapping("{type}/insertNotice")
+	public String insertNotice() {
+		
+		return null;
+	}
+	
 }
