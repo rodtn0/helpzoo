@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,8 +22,8 @@ import com.project.helpzoo.funding.model.vo.funding.Reward;
 public class OrderReward {
 
 	
-	@Id @GeneratedValue
 	@Column(name="order_reward_id")
+	@Id @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "ORDER_REWARD_SEQ_GENERATOR")
 	private Long id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
