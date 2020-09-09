@@ -103,9 +103,6 @@ public class QNAServiceImpl implements QNAService{
 			if(result > 0) {
 				for(int i=0; i<images.size(); i++) {
 					
-					System.out.println("ser: " + savePath);
-					System.out.println("ser: " + files.get(i).getFileChangeName());
-					
 					if(!images.get(i).getOriginalFilename().equals("")) {
 						// transferTo(경로) : 지정한 경로에 업로드된 바이트 상태의 파일을 
 						// 실제 파일로 변환해서 저장해라.
@@ -261,7 +258,15 @@ public class QNAServiceImpl implements QNAService{
 		
 		int searchListCount = qnaDAO.getSearchListCount(id);
 		
-		return null;
+		pInfo.setPageInfo(cp, searchListCount);
+		
+		return pInfo;
+	}
+	
+	@Override
+	public List<QNABoard> selectSearchList(String id) {
+		// TODO Auto-generated method stub
+		return qnaDAO.selectSearchList(id);
 	}
     // 파일명 변경
     // 200821152611_12345.jpg
@@ -292,7 +297,6 @@ public class QNAServiceImpl implements QNAService{
     	
     	return result;
     }
-
 
 
 }

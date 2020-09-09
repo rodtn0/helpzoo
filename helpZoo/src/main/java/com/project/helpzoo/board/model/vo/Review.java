@@ -17,6 +17,9 @@ public class Review {
 	private String projectTitle;
 	private String memberId;
 	
+	private String filePath;
+	private String fileChangeName;
+	
 	public Review() {
 	}
 
@@ -125,6 +128,30 @@ public class Review {
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
+	
+
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+	
+
+
+	public String getFileChangeName() {
+		return fileChangeName;
+	}
+
+
+
+	public void setFileChangeName(String fileChangeName) {
+		this.fileChangeName = fileChangeName;
+	}
 
 
 
@@ -134,10 +161,12 @@ public class Review {
 				+ ", readCount=" + readCount + ", reviewCreateDate=" + reviewCreateDate + ", reviewModifyDate="
 				+ reviewModifyDate + ", reviewStatus=" + reviewStatus + ", projectNo=" + projectNo + ", reviewType="
 				+ reviewType + ", reviewWriter=" + reviewWriter + ", projectTitle=" + projectTitle + ", memberId="
-				+ memberId + "]";
+				+ memberId + ", filePath=" + filePath + ", fileChangeName=" + fileChangeName + "]";
 	}
 
 
+
+	
 
 	
 	

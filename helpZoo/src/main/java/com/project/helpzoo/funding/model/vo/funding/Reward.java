@@ -1,4 +1,4 @@
-package com.project.helpzoo.funding.model.vo.order;
+package com.project.helpzoo.funding.model.vo.funding;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +12,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.project.helpzoo.funding.exception.NotEnoughStockException;
-import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 
 
 @Entity
@@ -29,7 +28,7 @@ public class Reward {
 	private Long id;
 	
 	@Column(name="FUNDING_REWARD_SEQ")
-	private Long rewardSeq;
+	private int rewardSeq;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="FUNDING_ID")
@@ -68,6 +67,15 @@ public class Reward {
 		this.amount = restAmount;
 		
 		
+	}
+
+
+
+
+	@Override
+	public String toString() {
+		return "Reward [id=" + id + ", rewardSeq=" + rewardSeq + ", fundingProject=" + fundingProject + ", content="
+				+ content + ", title=" + title + ", price=" + price + ", amount=" + amount + "]";
 	}
 	
 	

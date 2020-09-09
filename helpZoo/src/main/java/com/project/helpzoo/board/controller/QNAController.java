@@ -245,11 +245,21 @@ public class QNAController {
 	
 	@RequestMapping("search")
 	public String search(@RequestParam(value="cp", required= false, defaultValue="1") int cp,
-						String id){
+						String id, Model model){
 		System.out.println(id);
 		
 		PageInfo pInfo = qnaService.pagination(cp, id);
-		return null;
+		
+		List<QNABoard> searchQNA = qnaService.selectSearchList(id);
+		
+		for(QNABoard b : searchQNA) {
+			System.out.println("searchQNA: " + b);
+		}
+		
+		model.addAttribute("qnaList",searchQNA);
+		model.addAttribute("pInfo", pInfo);
+		
+		return "board/qnaMain";
 	}
 	
 }

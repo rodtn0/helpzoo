@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.project.helpzoo.funding.dto.FundingMainViewDto;
 import com.project.helpzoo.funding.model.service.FundingService;
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.funding.model.vo.search.FundingSearch;

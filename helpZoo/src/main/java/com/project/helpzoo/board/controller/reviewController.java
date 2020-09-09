@@ -89,21 +89,22 @@ public class reviewController {
 	// 후기 글 상세 조회(펀딩,기부 type으로 구분)
 	// board/review/1/510?cp=1
 	@RequestMapping("review/{type}/{rBoardNo}")
-	public String reviewView(@PathVariable int type, @PathVariable int rBoardNo) {
+	public String reviewView(@PathVariable int type, @PathVariable int rBoardNo, Model model) {
 		
-		String path = null;
+		System.out.println("type : " + type);
+		System.out.println("rBoardNo : "+ rBoardNo);
+		//String path = null;
+		Review fReviewView = null;
 		
 		if(type == 1) {
 			
-		Review fReviewView = reviewService.selectReviewVeiw(type, rBoardNo);
-			
-		}else {
-			
+			fReviewView = reviewService.selectReviewVeiw(type, rBoardNo);
+			System.out.println("상세조회할 글 정보 : " + fReviewView);
 		}
 		
+		model.addAttribute("fReviewView", fReviewView);
 		
-		
-		return "board/reviewView";
+		return "board/fReviewView";
 	}
 	
 	
