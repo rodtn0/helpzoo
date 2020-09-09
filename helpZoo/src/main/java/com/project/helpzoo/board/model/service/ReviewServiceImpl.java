@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.project.helpzoo.board.model.DAO.ReviewDAO;
 import com.project.helpzoo.board.model.vo.PageInfo;
 import com.project.helpzoo.board.model.vo.Review;
+import com.project.helpzoo.member.model.vo.Member;
 
 @Service
 public class ReviewServiceImpl implements ReviewService{
@@ -40,5 +41,17 @@ public class ReviewServiceImpl implements ReviewService{
 	public List<Review> selectReviewList(PageInfo pInfo) {
 		return reviewDAO.selectReviewList(pInfo);
 		
+	}
+
+	// 구매 여부 확인 Service 구현
+	@Override
+	public int buyCount(int type, Member loginMember) {
+		return reviewDAO.buyCount(type, loginMember);
+	}
+
+	// 리뷰 상세조회 Service 구현
+	@Override
+	public Review selectReviewVeiw(int type, int rBoardNo) {
+		return reviewDAO.selectReviewView(type, rBoardNo);
 	}
 }

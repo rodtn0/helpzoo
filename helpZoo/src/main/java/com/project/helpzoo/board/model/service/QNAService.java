@@ -42,4 +42,11 @@ public interface QNAService {
 	 */
 	public abstract PageInfo pagination(int cp, String id);
 
+	/** 검색 조건이 추가된 목록 조회
+	 * @param pInfo
+	 * @param id
+	 * @return
+	 */
+	public abstract List<QNABoard> selectSearchList(String id);
+
 }

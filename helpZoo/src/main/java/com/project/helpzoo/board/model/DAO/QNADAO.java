@@ -146,6 +146,14 @@ public class QNADAO {
 	public int getSearchListCount(String id) {
 		return sqlSession.selectOne("qnaMapper.getSearchListCount", id);
 	}
+
+	/** 검색 조건이 추가된 목록 조회 DAO
+	 * @param id
+	 * @return
+	 */
+	public List<QNABoard> selectSearchList(String id) {
+		return sqlSession.selectList("qnaMapper.selectSearchList", id);
+	}
 	
 
 }

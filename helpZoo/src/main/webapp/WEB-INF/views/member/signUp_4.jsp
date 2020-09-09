@@ -34,13 +34,12 @@ border: none;
                         	<span id="checkId"></span>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-input" name="memberPwd" id="pwd1" placeholder="비밀번호"/>
-                            <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+                            <input type="password" class="form-input" name="memberPwd" id="pwd1" placeholder="비밀번호를 입력해주세요."/>
                             <span id="checkPwd1"></span>
                         </div>
                         <div class="form-group">
                             <input type="password" class="form-input" id="pwd2" placeholder="비밀번호 확인"/>
-                            <span id="checkPwd2"></span>
+                            <span id="checkPwd2">&nbsp;</span>
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-input" name="memberName" id="name" placeholder="이름을 입력해주세요."/>
@@ -165,9 +164,9 @@ border: none;
     // ******* 실시간 유효성 검사 *******
     // 정규 표현식
     var $id = $("#id");
-    var $pwd = $("#pwd1, #pwd2");
     var $pwd1 = $("#pwd1");
-    var $pwd2 = $("pwd2");
+    var $pwd2 = $("#pwd2");
+    var $pwd = $("#pwd1, #pwd2");
     var $name = $("#name");
     var $phone2 = $("#phone2");
     var $phone3 = $("#phone3");
@@ -206,40 +205,43 @@ border: none;
     	}
     });
     
-    // 비밀번호 유효성 검사 및 일치 검사
-    $pwd.on("input", function() {
-    	var regExp = /^[A-Za-z0-9]{6,12}$/;
-    	
-    	// 비밀번호 1 유효성 검사
-    	if(!regExp.test($("#pwd1").val())){
-    		$("#checkPwd1").text("비밀번호 형식이 유효하지 않습니다. 비밀번호는 영어 대/소문자 + 숫자 총 6~12글자로 입력해주세요.").css("color", "red");
-    		signUpCheck.pwd1 = false;
-    		if($pwd1.val().length == 0)	$("#checkPwd1").text("");
-    	}else{
-    		$("#checkPwd1").text("유효한 비밀번호 형식입니다.").css("color", "#7fcdcd");
-    		signUpCheck.pwd1 = true;
-    	}
-    	
-    	// ----------------------------------------- 지금 안됨 ------------------
-    	// 비밀번호 1이 유효하지 않은 상태로 비밀번호 2 작성시
-	    if(!signUpCheck.pwd1 && pwd2.val().length > 0){
-	    	swal("유효한 비밀번호를 입력해주세요.");
-	    	$pwd2.val("");
-	    	$pwd1.focus();
-	    	
-	    // 비밀번호 1이 유효한 상태로 비밀번호 2 작성시
-	    }else if(signUpCheck.pwd1 && pwd2.val().length >0){
-	    	if($("#pwd1").val().trim() != $("#pwd2").val().trim()){
-	    		$("#checkPwd2").text("비밀번호 불일치").css("color", "red");
-	    		signUpCheck.pwd2 = false;
-	    	}else{
-	    		$("#checkPwd2").text("비밀번호 일치").css("color", "#7fcdcd");
-	    		signUpCheck.pwd2 = true;
-	    	}
-	    }
-    });
- 	// ----------------------------------------- 지금 안됨 ------------------
- 	
+			// 비밀번호 유효성 및 일치 검사
+	$pwd.on("input", function(){
+		//영어 대,소문자 + 숫자, 총 6~12글자
+		var regExp = /^[A-Za-z0-9]{6,12}$/;
+		
+		// 비밀번호1 유효성 검사
+		if(!regExp.test($("#pwd1").val())){ 
+        	$("#checkPwd1").text("비밀번호 형식이 유효하지 않습니다. 비밀번호는 영어 대,소문자 + 숫자, 총 6~12글자로 작성해주세요.").css("color","red");
+        	signUpCheck.pwd1 = false;
+        }else{
+        	$("#checkPwd1").text("유효한 비밀번호 형식입니다.").css("color","#7fcdcd");
+        	signUpCheck.pwd1 = true;
+        }
+			
+		
+		// 비밀번호1이 유효하지 않은 상태로 비밀번호 2를 작성하는 경우
+		if(!signUpCheck.pwd1 && $pwd2.val().length > 0){
+			
+			swal({
+				  icon: "error",
+				  text : "유효한 비밀번호를 작성해 주세요."
+				});
+			$pwd2.val("");
+			$pwd1.focus();
+			
+		}else if(signUpCheck.pwd1 && $pwd2.val().length > 0){
+			if($("#pwd1").val().trim() != $("#pwd2").val().trim()){
+				$("#checkPwd2").text("비밀번호가 일치하지 않습니다.").css("color","red");
+				signUpCheck.pwd2 = false;
+			}else{
+				$("#checkPwd2").text("비밀번호가 일치합니다.").css("color","#7fcdcd");
+				signUpCheck.pwd2 = true;
+			}
+		}
+		
+	});
+
  	// 이름 유효성 검사
  	$name.on("input", function() {
  		var regExp = /^[가-힣A-Za-z]{2,}$/; // 한글, 또는 영어 대/소문자 2글자 이상

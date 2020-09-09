@@ -103,8 +103,7 @@
             </ul>
           </li>
           <li><a href="${contextPath}/subscribe">구독하기</a></li>
-          <li><a href=" ${contextPath}/member/mypage">마이페이지</a></li>
-
+          	<li><a href=" ${contextPath}/member/mypage">마이페이지</a></li>
         </ul>
       </nav><!-- .nav-menu -->
     </div>
