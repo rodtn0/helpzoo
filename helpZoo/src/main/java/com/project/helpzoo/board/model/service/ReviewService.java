@@ -4,10 +4,11 @@ import java.util.List;
 
 import com.project.helpzoo.board.model.vo.PageInfo;
 import com.project.helpzoo.board.model.vo.Review;
+import com.project.helpzoo.member.model.vo.Member;
 
 public interface ReviewService {
 
-	/** 펀딩 리뷰 게시판 페이징 Service
+	/** 리뷰 게시판 페이징 Service
 	 * @param type
 	 * @param cp
 	 * @return pInfo
@@ -19,6 +20,18 @@ public interface ReviewService {
 	 * @return 
 	 */
 	public abstract List<Review> selectReviewList(PageInfo pInfo);
+
+	/** 구매 여부 확인 Service
+	 * @param type
+	 * @return fBuyCount
+	 */
+	public abstract int buyCount(int type, Member loginMember);
+
+	/** 리뷰 상세조회 Service
+	 * @param rBoardNo
+	 * @return
+	 */
+	public abstract Review selectReviewVeiw(int type, int rBoardNo);
 
 
 	

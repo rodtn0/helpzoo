@@ -130,26 +130,10 @@
 					</div>
 				​</div>
 		</div>
-		
-		<!-- Split button -->
-		<!-- <div class="btn-group">
-		  <button type="button" class="btn btn-danger">Action</button>
-		  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-		    <span class="caret"></span>
-		    <span class="sr-only">Toggle Dropdown</span>
-		  </button>
-		  <ul class="dropdown-menu" role="menu">
-		    <li><a href="#">Action</a></li>
-		    <li><a href="#">Another action</a></li>
-		    <li><a href="#">Something else here</a></li>
-		    <li class="divider"></li>
-		    <li><a href="#">Separated link</a></li>
-		  </ul>
-		</div> -->
 			
 		<br><br>
 			
-		<table class="table .table-hover">
+		<table class="table .table-hover" id="list-table">
 			<thead>
 				<tr>
 					<th>분류</th>
@@ -185,30 +169,11 @@
 			</tbody>
 		</table>
 		
-		
-		<c:if test="${!empty loginMember }">
+		<!-- 로그인 + 펀딩구매 내역이 있어야 작성 버튼 보임  -->
+		<c:if test="${!empty loginMember && fBuyCount >= 1}">
 		<a href="${contextPath}/board/writeView/1" class="btn-get-started scrollto">글작성</a>
 		</c:if>
 		
-		<!-- <nav>
-		  <ul class="pagination">
-		    <li>
-		      <a href="#" aria-label="Previous">
-		        <span aria-hidden="true">&laquo;</span>
-		      </a>
-		    </li>
-		    <li><a href="#">1</a></li>
-		    <li><a href="#">2</a></li>
-		    <li><a href="#">3</a></li>
-		    <li><a href="#">4</a></li>
-		    <li><a href="#">5</a></li>
-		    <li>
-		      <a href="#" aria-label="Next">
-		        <span aria-hidden="true">&raquo;</span>
-		      </a>
-		    </li>
-		  </ul>
-		</nav> -->
 		
 		<br><br>
 		<!-- Start Pagination -->
@@ -272,12 +237,24 @@
 		</div>
 	</div>
 	
-		<br><br>
-	
-	
-	
-		
-	
+		<br><br>	
 	<jsp:include page="../common/footer.jsp"/>
+	
+	<script>
+	$(function(){
+		$("#list-table td").on("click", function(){
+			
+			var rBoardNo = $(this).parent().children().eq(1).text();
+			
+			var reviewViewUrl = "${contextPath}/board/review/1/" + rBoardNo + "?cp=${pInfo.currentPage}";
+			
+			location.href = reviewViewUrl;
+		});
+		
+		
+	});
+	
+	</script>
+	
 </body>
 </html>
