@@ -22,4 +22,10 @@ public interface MemberService {
 	 */
 	public abstract int idDupCheck(String memberId);
 
+	/** 회원 정보 수정 Service
+	 * @param upMember
+	 * @return result
+	 */
+	public abstract int updateMember(Member upMember);
+
 }

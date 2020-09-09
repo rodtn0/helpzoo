@@ -37,4 +37,13 @@
 		WHERE MEMBER_ID=#{memberId}
 		AND MEMBER_STATUS='Y'
 	</select>
+	
+	<!-- 회원 정보 수정 -->
+	<update id="updateMember" parameterType="Member">
+	UPDATE MEMBER SET MEMBER_NM=#{memberName},
+	MEMBER_ADDR=#{memberAddress},
+	MEMBER_PET_TYPE=#{memberPetType},
+	MEMBER_PET_NAME=#{memberPetName}
+	WHERE MEMBER_NO = #{memberNo}
+	</update>
 </mapper>

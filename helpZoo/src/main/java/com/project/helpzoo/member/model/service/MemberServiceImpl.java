@@ -55,10 +55,18 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 
-	// 아이디 중복 검사 Service
+	// 아이디 중복 검사 Service 구현
 	public int idDupCheck(String memberId) {
 		
 		return memberDAO.idDupCheck(memberId);
+	}
+
+	
+	// 회원 정보 수정 Service 구현
+	@Override
+	public int updateMember(Member upMember) {
+		
+		return memberDAO.updateMember(upMember);
 	}
 
 }

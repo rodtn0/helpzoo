@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -26,7 +27,7 @@ public class LoginFilter implements Filter{
 	
 	private static final Set<String> NOT_ALLOWED_PATH =
 	Collections.unmodifiableSet(new HashSet<String>
-	(Arrays.asList("login", "logout", "loginAction", "signUp", "signUp2","signUp3","authEmail")));
+	(Arrays.asList("login", "logout", "loginAction", "signUp", "signUp2","signUp3","authEmail","joinAuth/\\w*")));
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -49,13 +50,24 @@ public class LoginFilter implements Filter{
 		boolean isLogin = ((Member)session.getAttribute("loginMember") != null);
 		
 		// 요청 주소가 제외 목록에 있는 값인지 확인
-		boolean isNotAllowedPath = NOT_ALLOWED_PATH.contains(path);
+		//boolean isNotAllowedPath = NOT_ALLOWED_PATH.contains(path);
+		boolean isNotAllowedPath = false;
+		for(String p : NOT_ALLOWED_PATH) {
+			if(Pattern.matches(p, path)) {
+				isNotAllowedPath = true;
+				break;
+			}
+		}
+		
+		System.out.println("path : " + path);
+		System.out.println("isNotAllowedPath : " + isNotAllowedPath);
 		
 		// 로그인이 되거나, 제외 목록 주소가 아닌 경우
 		if(isLogin || isNotAllowedPath){ 
 			chain.doFilter(request, response);
 		}else {
-			session.setAttribute("msg", "로그인 후 이용해주세요.");
+			session.setAttribute("status", "error");
+			session.setAttribute("text", "로그인 후 이용해주세요.");
 			res.sendRedirect(req.getContextPath() + "/member/login");
 		}
 	}
