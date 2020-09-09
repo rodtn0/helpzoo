@@ -88,6 +88,7 @@ public class NoticeController {
 		
 		int result = noticeService.insertNotice(board);
 		
+		// SweetAlert용 변수 선언
 		String status = null;
 		String msg = null;
 		String url = null;
@@ -99,6 +100,35 @@ public class NoticeController {
 		}else {
 			status = "error";
 			msg = "공지사항 등록에 실패했습니다.";
+			url = "/noticeList"; 
+		}
+		
+		rdAttr.addFlashAttribute("status", status);
+		rdAttr.addFlashAttribute("msg", msg);
+		
+		return "redirect:" + url;
+	}
+	
+	// 공지사항 글 삭제 -------------------------------------------------------------------------------------
+	// notice/5/547?cp=1
+	@RequestMapping("{type}/{boardNo}/deleteNotice")
+	public String deleteNotice(@PathVariable int type, @PathVariable int boardNo,
+				RedirectAttributes rdAttr, HttpServletRequest request) {
+		
+		int result = noticeService.deleteNotice(boardNo);
+		
+		// SweetAlert용 변수 선언
+		String status = null;
+		String msg = null;
+		String url = null;
+		
+		if(result > 0) {
+			status = "success";
+			msg = "공지사항이 삭제되었습니다.";
+			url = "../../noticeList";
+		}else {
+			status = "error";
+			msg = "공지사항 삭제에 실패했습니다.";
 			url = request.getHeader("referer"); 
 		}
 		
@@ -107,5 +137,7 @@ public class NoticeController {
 		
 		return "redirect:" + url;
 	}
+	
+	// 공지사항 글 수정 -------------------------------------------------------------------------------------
 	
 }

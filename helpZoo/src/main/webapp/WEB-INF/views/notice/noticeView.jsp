@@ -14,6 +14,7 @@
 
 <body>
 	<jsp:include page="../common/header.jsp"/>
+	
     <main class="board notice">
         
         <!-- 상세페이지 헤더 -->
@@ -43,9 +44,27 @@
             <a data-aos="zoom-in" class="toListBtn" onclick="history.back()">
                	 목록으로 돌아가기
             </a>
+            <c:if test="${loginMember.memberNo == 1}">
+	            <a data-aos="zoom-in" class="toListBtn" onclick="history.back()">
+	               	 수정하기
+	            </a>
+	            <a data-aos="zoom-in" class="toListBtn" id="deleteBtn">
+	               	 삭제하기
+	            </a>
+            	
+            </c:if>
         </div>
         
     </main>
+    
     <jsp:include page="../common/footer.jsp"/>
+    
+    <script>
+ 		$('#deleteBtn').on('click', function() {
+			if(confirm("정말 삭제하시겠습니까?")){
+				location.href="${boardNo}/deleteNotice";
+			}
+		});
+    </script>
 </body>
 </html>

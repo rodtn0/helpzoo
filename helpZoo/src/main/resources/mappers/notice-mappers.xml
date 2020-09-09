@@ -61,5 +61,12 @@
     		#{boardWriter},
     		#{boardType})
     </insert>
+    
+    <!-- 공지사항 글 삭제 -->
+    <update id="deleteNotice" parameterType="_int">
+    	UPDATE BOARD
+    	SET BOARD_STATUS = 'N'
+    	WHERE BOARD_NO = #{boardNo}
+    </update>
 
 </mapper>

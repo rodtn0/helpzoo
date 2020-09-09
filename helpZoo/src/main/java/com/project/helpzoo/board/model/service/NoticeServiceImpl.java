@@ -60,7 +60,7 @@ public class NoticeServiceImpl implements NoticeService{
 		return board;
 	}
 	
-	// 공지사항 글 등록 ---------------------------------------------------------------
+	// 공지사항 글 등록 service ---------------------------------------------------------------
 	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int insertNotice(Board board) {
@@ -84,19 +84,26 @@ public class NoticeServiceImpl implements NoticeService{
 		
 		return result;
 	}
-
-	// XSS 방지 메소드 -----------------------------------------------------
-    public String replaceParameter(String param) {
-        String result = param;
-        if(param != null) {
-            result = result.replaceAll("&", "&amp;");
-            result = result.replaceAll("<", "&lt;");
-            result = result.replaceAll(">", "&gt;");
-            result = result.replaceAll("\"", "&quot;");
-        }
-        
-        return result;
-    }
+    
+    // 공지사항 글 삭제 service -------------------------------------------------------------
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int deleteNotice(int boardNo) {
+		
+		return noticeDAO.deleteNotice(boardNo);
+	}
 	
+	// XSS 방지 메소드 service -------------------------------------------------------------
+	public String replaceParameter(String param) {
+		String result = param;
+		if(param != null) {
+			result = result.replaceAll("&", "&amp;");
+			result = result.replaceAll("<", "&lt;");
+			result = result.replaceAll(">", "&gt;");
+			result = result.replaceAll("\"", "&quot;");
+		}
+		
+		return result;
+	}
 	
 }
