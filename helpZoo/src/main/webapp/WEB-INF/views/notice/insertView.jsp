@@ -24,7 +24,7 @@
 
                 <div>
                     <br>
-                    <label class="contentLabel" for="content" data-aos="zoom-in">내용</label>
+                    <label class="contentLabel" for="content" data-aos="fade-up">내용</label>
                     <textarea name="content" id="content"></textarea>
                     <br>
                 </div>
@@ -33,7 +33,7 @@
                 <div class="btn">
                     <br>
                     <button data-aos="zoom-in" type="submit" class="insertBtn">등록</button>
-                    <button data-aos="zoom-in" class="toListBtn" onclick="history.back()">목록으로</button>
+                	<a data-aos="zoom-in" class="toListBtn" onclick="history.back()">목록으로</a>
                 </div>
 
             </form>
