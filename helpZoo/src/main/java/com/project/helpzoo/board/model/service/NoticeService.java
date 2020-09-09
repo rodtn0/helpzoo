@@ -26,4 +26,10 @@ public interface NoticeService {
 	 */
 	public abstract PageInfo pagination(int type, int cp);
 
+	/** 공지사항 글 등록
+	 * @param board
+	 * @return result
+	 */
+	public abstract int insertNotice(Board board);
+
 }

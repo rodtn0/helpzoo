@@ -262,7 +262,7 @@
 
 .board-footer .pagination .page a.current {
     color: #34383a;
-    font-weight: 1000;
+    font-weight: bolder;
 }
 
 /* 검색창 */

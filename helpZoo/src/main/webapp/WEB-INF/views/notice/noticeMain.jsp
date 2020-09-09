@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -51,7 +52,9 @@
 								<span class="boardNo">${notice.boardNo}</span>
 								<em class="category">${notice.boardName}</em>
 								<div class="info">
-									<h3 class="title">${notice.boardTitle}</h3>
+									<!-- JSTL/JSP 개행문자 처리 -->
+									<% pageContext.setAttribute("newLine", "\n"); %>
+									<h3 class="title">${fn:replace(notice.boardTitle, newLine, "<br>")}</h3>
 									<span class="author">${notice.boardWriter}</span>
 									<span class="created-at">${notice.boardCreateDate}</span>
 								</div>
@@ -68,31 +71,6 @@
 		<div class="board-footer">
 		
 			<!-- 페이징 -->
-			<!-- <div class="pagination">
-				<div class="page">
-					<div class="desktop-only">
-						<button class="prev-page icon-chevron-double-left" disabled>
-                			<span class="text-hidden">맨 처음 목록</span>
-						</button>
-						<button class="prev-page icon-chevron-left" disabled>
-                			<span class="text-hidden">이전 목록</span>
-              			</button>
-              			<a class="current" href="#" >1</a>
-              			<a href="#">2</a>
-              			<a href="#">3</a>
-              			<a href="#">4</a>
-              			<a href="#">5</a>
-              			<a href="#">6</a>
-              			<button class="prev-page icon-chevron-right">
-                			<span class="text-hidden">다음 목록</span>
-              			</button>
-						<button class="prev-page icon-chevron-double-right" disabled>
-                			<span class="text-hidden">맨 마지막 목록</span>
-						</button>
-					</div>
-				</div>
-			</div> -->
-			
 			<div class="pagination">
 				<div class="page">
 					<div class="desktop-only">

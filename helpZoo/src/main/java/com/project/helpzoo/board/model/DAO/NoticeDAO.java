@@ -47,7 +47,7 @@ public class NoticeDAO {
 //		return sqlSession.selectList("noticeMapper.selectList", type);
 	}
 
-	/** 공지사항 글 조회
+	/** 공지사항 글 조회 dao
 	 * @param boardNo
 	 * @return board
 	 */
@@ -56,12 +56,27 @@ public class NoticeDAO {
 	}
 
 	
-	/** 공지사항 조회 수 증가
+	/** 공지사항 조회 수 증가 dao
 	 * @param boardNo
 	 * @return result
 	 */
 	public int increaseCount(int boardNo) {
 		return sqlSession.update("noticeMapper.increaseCount", boardNo);
+	}
+
+	/** 공지사항 글 번호 조회 dao
+	 * @return boardNo
+	 */
+	public int selectNextNo() {
+		return sqlSession.selectOne("noticeMapper.selectNextNo");
+	}
+
+	/** 공지사항 글 등록 dao
+	 * @param board
+	 * @return result
+	 */
+	public int insertNotice(Board board) {
+		return sqlSession.insert("noticeMapper.insertNotice", board);
 	}
 
 

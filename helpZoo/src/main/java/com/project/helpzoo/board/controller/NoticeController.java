@@ -2,17 +2,23 @@ package com.project.helpzoo.board.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.helpzoo.board.model.service.NoticeService;
 import com.project.helpzoo.board.model.vo.Board;
 import com.project.helpzoo.board.model.vo.PageInfo;
+import com.project.helpzoo.member.model.vo.Member;
 
+@SessionAttributes({"loginMember"})
 @Controller
 @RequestMapping("/notice/*")
 public class NoticeController {
@@ -69,9 +75,37 @@ public class NoticeController {
 	
 	// 공지사항 글 등록 -------------------------------------------------------------------------------------------
 	@RequestMapping("{type}/insertNotice")
-	public String insertNotice() {
+	public String insertNotice(@PathVariable int type, Board board, Model model,
+			HttpServletRequest request, RedirectAttributes rdAttr) {
 		
-		return null;
+		Member loginMember = (Member)model.getAttribute("loginMember");
+		
+		System.out.println("board 정보 : " + board);
+		System.out.println("loginMember 정보 : " + loginMember);
+		
+		board.setBoardType(type);
+		board.setBoardWriter(loginMember.getMemberNo()+"");
+		
+		int result = noticeService.insertNotice(board);
+		
+		String status = null;
+		String msg = null;
+		String url = null;
+		
+		if(result > 0) {
+			status = "success";
+			msg = "공지사항이 성공적으로 등록되었습니다.";
+			url = board.getBoardNo() + "?cp=1";
+		}else {
+			status = "error";
+			msg = "공지사항 등록에 실패했습니다.";
+			url = request.getHeader("referer"); 
+		}
+		
+		rdAttr.addFlashAttribute("status", status);
+		rdAttr.addFlashAttribute("msg", msg);
+		
+		return "redirect:" + url;
 	}
 	
 }
