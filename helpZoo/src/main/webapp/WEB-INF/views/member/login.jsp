@@ -30,7 +30,10 @@
 			</div>
 		      <button id="loginBtn" class="btn btn-lg btn-primary btn-block">로그인</button>
 		      <p class="message" style="font-size:16px">아직 계정이 없으신가요?
-		      <a href="signUp" id="registerTxt">회원가입</a></p>
+		      <a href="signUp" id="registerTxt">회원가입</a><br>
+		      <a href="findId" id="registerTxt">아이디 찾기</a> |
+		      <a href="findPassword" id="registerTxt">비밀번호 찾기</a>
+		      </p>
 		    </form>
 		  </div>
 		</div>

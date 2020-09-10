@@ -61,12 +61,4 @@ public class MemberServiceImpl implements MemberService{
 		return memberDAO.idDupCheck(memberId);
 	}
 
-	
-	// 회원 정보 수정 Service 구현
-	@Override
-	public int updateMember(Member upMember) {
-		
-		return memberDAO.updateMember(upMember);
-	}
-
 }

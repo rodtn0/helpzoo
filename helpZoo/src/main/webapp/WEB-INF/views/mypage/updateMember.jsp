@@ -68,10 +68,10 @@ $('.navbar-light .dmenu').hover(function () {
 	        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
 	          <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
 	            <li class="nav-item">
-	              <a class="nav-link" href="${contextPath}/member/mypage">회원정보 수정</a>
+	              <a class="nav-link" href="${contextPath}/mypage/updateMember">회원정보 수정</a>
 	            </li>
 	            <li class="nav-item">
-	              <a class="nav-link" href="${contextPath}/member/changePwd">비밀번호 변경</a>
+	              <a class="nav-link" href="${contextPath}/mypage/changePwd">비밀번호 변경</a>
 	            </li>
 	            <li class="nav-item dropdown dmenu">
 	            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
@@ -101,7 +101,7 @@ $('.navbar-light .dmenu').hover(function () {
 	            </div>
 	          </li>
 	          <li class="nav-item">
-	            <a class="nav-link" href="${contextPath}/member/secession">회원탈퇴</a>
+	            <a class="nav-link" href="${contextPath}/mypage/secession">회원탈퇴</a>
 	          </li>
 	          </ul>
 	        </div>
@@ -124,7 +124,6 @@ $('.navbar-light .dmenu').hover(function () {
 								<!--  --><h5 id="id">${loginMember.memberId}</h5>
 							</div>
 						</div>
-						
 						<!-- 이름 -->
 						<div class="row mb-3 form-row">
 							<div class="col-md-3">
@@ -233,14 +232,14 @@ $('.navbar-light .dmenu').hover(function () {
 						<script>
 						console.log("${loginMember.memberPetType}");
 						</script>
-						<select name="memberPetType" id="pet-select">
+						<select name="memberPetType" id="pet-select" style="height:30px">
 									<option>--반려동물 종류를 선택해주세요--</option>
-									<option <c:if test="${loginMember.memberPetType == 'dog'}">selected</c:if>>강아지</option>
-									<option <c:if test="${loginMember.memberPetType == 'cat'}">selected</c:if>>고양이</option>
-									<option <c:if test="${loginMember.memberPetType == 'hamster'}">selected</c:if>>햄스터</option>
-									<option <c:if test="${loginMember.memberPetType == 'hedgehog'}">selected</c:if>>고슴도치</option>
-									<option <c:if test="${loginMember.memberPetType == 'rabbit'}">selected</c:if>>토끼</option>
-									<option <c:if test="${loginMember.memberPetType == 'goldfish'}">selected</c:if>>금붕어</option>
+									<option <c:if test="${loginMember.memberPetType == 'dog'}">selected</c:if> >강아지</option>
+									<option <c:if test="${loginMember.memberPetType == 'cat'}">selected</c:if> >고양이</option>
+									<option <c:if test="${loginMember.memberPetType == 'hamster'}">selected</c:if> >햄스터</option>
+									<option <c:if test="${loginMember.memberPetType == 'hedgehog'}">selected</c:if> >고슴도치</option>
+									<option <c:if test="${loginMember.memberPetType == 'rabbit'}">selected</c:if> >토끼</option>
+									<option <c:if test="${loginMember.memberPetType == 'goldfish'}">selected</c:if> >금붕어</option>
 						</select>
 						</div>
 					</div>
@@ -304,6 +303,18 @@ $('.navbar-light .dmenu').hover(function () {
 		}else{
 			signUpCheck.phone3 = true;
 		}
+		
+		for(var key in signUpCheck){
+			if(!signUpCheck[key]){
+				swal({
+					  icon: "error",
+					  text : "일부 입력 값이 잘못되었습니다."
+					});
+				var id = "#"+key;
+				$(id).focus;
+				return false;
+			}
+		}
 
 		$memberPhone = $("<input>", {type : "hidden", name: "memberPhone",
 						value : $("#phone1").val()+"-"+$("#phone2").val() + "-" +
@@ -317,7 +328,7 @@ $('.navbar-light .dmenu').hover(function () {
 					$("#address2").val()});
 		
 		// append : form 태그의 자식 중 마지막에 추가함
-		$("form[name='signUpForm']").append($memberPhone, $memberAddress, $memberPetType);
+		$("form[name='updateForm']").append($memberPhone).append($memberAddress).append($memberPetType);
 	}
     </script>
 </body>

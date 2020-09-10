@@ -44,8 +44,7 @@ public class LoginFilter implements Filter{
 		HttpSession session = req.getSession();
 		
 		String path = req.getRequestURI().substring((req.getContextPath() + "/member/").length());
-		
-		
+
 		// 로그인 여부 확인
 		boolean isLogin = ((Member)session.getAttribute("loginMember") != null);
 		

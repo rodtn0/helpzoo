@@ -220,57 +220,13 @@ public class MemberController {
 		
 		return "redirect:/";
 	}
+	
 	@ResponseBody
 	@RequestMapping("idDupCheck")
 	public String idDupCheck(String memberId) {
 		int result = memberService.idDupCheck(memberId);
 		return result + "";
 	}
-	
-	// 마이 페이지로 이동하는 Controller
-	@RequestMapping("mypage")
-	public String myPage() {
-		return "member/mypage";
-	}
-	
-	// 마이 페이지로 이동하는 Controller
-	@RequestMapping("secession")
-	public String secession() {
-		return "member/secession";
-	}	
-	
-	// 회원 정보 수정
-	@RequestMapping("updateAction")
-	public String updateAction(Member upMember, Model model, RedirectAttributes rdAttr, HttpServletRequest request) {
-		
-		// session scope에 있는 로그인 회원 정보를 얻어와 id, name, grade를 추출해서 upMember에 세팅한다.
-		// model은 object 타입이므로 형변환이 필요하다.
-		Member loginMember = (Member)model.getAttribute("loginMember");
-		upMember.setMemberNo(loginMember.getMemberNo());
-		upMember.setMemberEnrollDate(loginMember.getMemberEnrollDate());
-		upMember.setMemberId(loginMember.getMemberId());
-		upMember.setMemberName(loginMember.getMemberName());
-		upMember.setMemberGrade(loginMember.getMemberGrade());
-		
-		int result = memberService.updateMember(upMember);
-		
-		String status = null;
-		String text = null;
-		
-		if(result >0) {
-			status = "success";
-			text = "회원 정보가 수정되었습니다.";
-		}else {
-			status = "error";
-			text = "회원 정보 수정에 실패했습니다.";
-		}
-		rdAttr.addFlashAttribute("status", status);
-		rdAttr.addFlashAttribute("text", text);
-		
-		// return "redirect:mypage"
-		return "redirect:" + request.getHeader("referer");
-		
- 	}
 	
 	
 }
