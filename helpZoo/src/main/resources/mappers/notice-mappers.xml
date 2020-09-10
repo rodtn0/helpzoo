@@ -68,5 +68,15 @@
     	SET BOARD_STATUS = 'N'
     	WHERE BOARD_NO = #{boardNo}
     </update>
+    
+    <!-- 공지사항 글 수정 -->
+    <update id="updateNotice" parameterType="Board">
+    	UPDATE BOARD
+    	SET BOARD_TITLE = #{boardTitle},
+    		BOARD_CONTENT = #{boardContent},
+    		BOARD_MODIFY_DT = SYSDATE
+    	WHERE BOARD_NO = #{boardNo}
+    	AND BOARD_STATUS = 'Y' 
+    </update>
 
 </mapper>

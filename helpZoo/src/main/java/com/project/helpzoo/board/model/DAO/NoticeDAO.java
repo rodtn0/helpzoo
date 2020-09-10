@@ -87,5 +87,13 @@ public class NoticeDAO {
 		return sqlSession.update("noticeMapper.deleteNotice", boardNo);
 	}
 
+	/** 공지사항 글 수정 dao
+	 * @param uBoard
+	 * @return result
+	 */
+	public int updateNotice(Board uBoard) {
+		return sqlSession.update("noticeMapper.updateNotice", uBoard);
+	}
+
 
 }

@@ -38,4 +38,10 @@ public interface NoticeService {
 	 */
 	public abstract int deleteNotice(int boardNo);
 
+	/** 공지사항 글 수정 service
+	 * @param uBoard
+	 * @return result
+	 */
+	public abstract int updateNotice(Board uBoard);
+
 }

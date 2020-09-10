@@ -45,7 +45,7 @@
                	 목록으로 돌아가기
             </a>
             <c:if test="${loginMember.memberNo == 1}">
-	            <a data-aos="zoom-in" class="toListBtn" onclick="history.back()">
+	            <a data-aos="zoom-in" class="toListBtn" onclick="location.href='${board.boardNo}/updateView?cp=${param.cp}'">
 	               	 수정하기
 	            </a>
 	            <a data-aos="zoom-in" class="toListBtn" id="deleteBtn">

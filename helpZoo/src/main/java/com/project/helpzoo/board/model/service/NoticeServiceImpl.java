@@ -93,6 +93,20 @@ public class NoticeServiceImpl implements NoticeService{
 		return noticeDAO.deleteNotice(boardNo);
 	}
 	
+	// 공지사항 글 수정 service 구현 ---------------------------------------------------------
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int updateNotice(Board uBoard) {
+		
+		// xss 방지 처리
+		uBoard.setBoardTitle(replaceParameter(uBoard.getBoardTitle()));
+		uBoard.setBoardContent(replaceParameter(uBoard.getBoardContent()));
+		
+		int result = noticeDAO.updateNotice(uBoard);
+		
+		return result;
+	}
+	
 	// XSS 방지 메소드 service -------------------------------------------------------------
 	public String replaceParameter(String param) {
 		String result = param;
@@ -105,5 +119,10 @@ public class NoticeServiceImpl implements NoticeService{
 		
 		return result;
 	}
-	
+
+
+
+
+
+
 }

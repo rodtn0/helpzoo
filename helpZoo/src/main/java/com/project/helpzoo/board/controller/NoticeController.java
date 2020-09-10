@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.helpzoo.board.model.service.NoticeService;
@@ -138,6 +139,48 @@ public class NoticeController {
 		return "redirect:" + url;
 	}
 	
+	// 공지사항 글 수정 화면 -------------------------------------------------------------------------------------
+	@RequestMapping("{type}/{boardNo}/updateView")
+	public ModelAndView updateView(@PathVariable int boardNo, ModelAndView mv) {
+		
+		// 수정할 게시글 내용 조회
+		Board board = noticeService.selectNotice(boardNo);
+		
+		mv.addObject("board", board);
+		mv.setViewName("notice/updateView");
+		
+		return mv;
+	}
+	
 	// 공지사항 글 수정 -------------------------------------------------------------------------------------
+	@RequestMapping("{type}/{boardNo}/updateNotice")
+	public ModelAndView updateNotice(@PathVariable int type, @PathVariable int boardNo,
+			ModelAndView mv, Board uBoard, int cp, RedirectAttributes rdAttr, HttpServletRequest request) {
+		
+		uBoard.setBoardNo(boardNo);
+		
+		int result = noticeService.updateNotice(uBoard);
+		
+		// SweetAlert용 변수 선언
+		String status = null;
+		String msg = null;
+		String url = null;
+		
+		if(result > 0) {
+			status = "success";
+			msg = "공지사항이 수정되었습니다.";
+			url = "../../noticeList";
+		}else {
+			status = "error";
+			msg = "공지사항 수정에 실패했습니다.";
+			url = request.getHeader("referer"); 
+		}
+		
+		rdAttr.addFlashAttribute("status", status);
+		rdAttr.addFlashAttribute("msg", msg);
+		mv.setViewName("redirect:" + url);
+		
+		return mv;
+	}
 	
 }
