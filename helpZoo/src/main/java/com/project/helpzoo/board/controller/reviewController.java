@@ -81,7 +81,7 @@ public class reviewController {
 	}
 	
 	
-	// 후기 글 작성 화면 이동 --> 해당 회원이 구매한 프로젝트가 화면에 떠야하므로 회원정보 가져오기
+	// 후기 글 작성 화면 이동 --> 해당 회원이 구매한 프로젝트가 화면에 떠야하므로 회원정보 가져오기(프로젝트 테이블에서 조회)
 	@RequestMapping("writeView/{type}")
 	public String writeReviewView(@PathVariable int type, Model model) {
 		// 타입이 1이면 펀딩 리뷰작성/ 2면 기부 리뷰작성 화면으로 전환. -> 펀딩게시물/기부게시물에서도 '후기쓰러가기' 버튼에 각각 타입으로 주소 주면됨
@@ -89,11 +89,17 @@ public class reviewController {
 		
 		Member loginMember = (Member)model.getAttribute("loginMember");
 		
+		
 		if(type == 1) {
 			List<Review> fInfo = reviewService.selectInfo(type, loginMember);
+			System.out.println("fInfo : " + fInfo);
+			
+			model.addAttribute("fInfo", fInfo);
 		}else {
 			
 		}
+		
+		
 		return "board/fReviewWrite";
 	}
 	
