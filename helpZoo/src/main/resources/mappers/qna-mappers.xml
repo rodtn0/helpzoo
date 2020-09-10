@@ -124,7 +124,4 @@
   	SELECT COUNT(QNA_ORIGIN_NO) FROM Q_BOARD WHERE QNA_ORIGIN_NO = #{qnaNo}
   	</select>
   	
-  	<select id="selectBoard" parameterType="string" resultMap="qnaBoardResultSet2">
-  	
-  	</select>
 </mapper>
