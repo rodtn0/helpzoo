@@ -21,5 +21,22 @@ public class MyPageServiceImpl implements MyPageService{
 		
 		return myPageDAO.updateMember(upMember);
 	}
+
+	// 회원 탈퇴 Service 구현
+	@Override
+	public int deleteMember(Member loginMember) {
+		
+		String savePwd = myPageDAO.selectPwd(loginMember.getMemberNo());
+		
+		int result = 0;
+		
+		if(savePwd != null) {
+			if(bcPwd.matches(loginMember.getMemberPwd(), savePwd)) {
+				result = myPageDAO.deleteMember(loginMember);
+			}
+		}
+		
+		return result;
+	}
 	
 }

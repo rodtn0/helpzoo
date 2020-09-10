@@ -12,4 +12,10 @@ public interface MyPageService {
 	 */
 	public abstract int updateMember(Member upMember);
 
+	/** 회원 탈퇴 Service
+	 * @param loginMember
+	 * @return result
+	 */
+	public abstract int deleteMember(Member loginMember);
+
 }

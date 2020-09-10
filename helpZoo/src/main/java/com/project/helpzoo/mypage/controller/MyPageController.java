@@ -7,12 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.helpzoo.member.model.vo.Member;
 import com.project.helpzoo.mypage.model.service.MyPageService;
 
-@SessionAttributes("loginMember")
+@SessionAttributes({"loginMember"})
 @Controller
 @RequestMapping("/mypage/*")
 public class MyPageController {
@@ -36,7 +37,12 @@ public class MyPageController {
 	@RequestMapping("secession")
 	public String secession() {
 		return "mypage/secession";
-	}	
+	}
+	// 회원 탈퇴 완료 페이지로 이동
+	@RequestMapping("secessionComplete")
+	public String secessionSuccess() {
+		return "mypage/secessionSuccess";
+	}
 	
 	// 회원 정보 수정
 	@RequestMapping("updateAction")
@@ -78,10 +84,37 @@ public class MyPageController {
  	}
 	
 	// 회원 탈퇴
-	@RequestMapping("secessionAction")
-	public String secessionAction() {
+	@RequestMapping("deleteMember")
+	public String deleteMember(String memberPwd, Model model, RedirectAttributes rdAttr,
+			SessionStatus SessionStatus) {
 		
+		Member loginMember = (Member)model.getAttribute("loginMember");
+		loginMember.setMemberPwd(memberPwd);
 		
+		int result = mypageService.deleteMember(loginMember);
+		
+		String status = null;
+		String msg = null;
+		String text = null;
+		String path = null;
+		
+		if(result >0) {
+			status = "success";
+			msg = "회원 탈퇴 성공";
+			SessionStatus.setComplete();
+			path = "redirect:secessionComplete";
+		}else {
+			status = "error";
+			msg = "회원 탈퇴 실패";
+			text = "올바른 비밀번호가 입력되었는지 확인해주세요.";
+			path = "redirect:secession";
+
+		}
+		rdAttr.addFlashAttribute("status", status);
+		rdAttr.addFlashAttribute("msg", msg);
+		rdAttr.addFlashAttribute("text", text);
+		
+		return path;
 	}
 	
 }

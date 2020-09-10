@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="memberMapper">
+<mapper namespace="mypageMapper">
 	<resultMap type="Member" id="memberResultSet">
 	<id property="memberNo" column="MEMBER_NO"/>
 	<result property="memberId" column="MEMBER_ID"/>
@@ -15,27 +15,29 @@
 	<result property="memberStatus" column="MEMBER_STATUS"/>
 	<result property="memberGrade" column="MEMBER_GRADE"/>
 	</resultMap>
+		
+	<!-- 회원 정보 수정 -->
+	<update id="updateMember" parameterType="Member">
+	UPDATE MEMBER SET MEMBER_NM=#{memberName},
+	MEMBER_PHONE=#{memberPhone},
+	MEMBER_EMAIL=#{memberEmail},
+	MEMBER_ADDR=#{memberAddress},
+	MEMBER_PET_TYPE=#{memberPetType},
+	MEMBER_PET_NAME=#{memberPetName}
+	WHERE MEMBER_NO = #{memberNo}
+	</update>
 	
-	<!-- 로그인-->
-	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
-		SELECT * 
-		FROM MEMBER
-		WHERE MEMBER_ID=#{memberId}
-		AND MEMBER_STATUS='Y'
+	<!-- 비밀번호 조회 -->
+	<select id="selectPwd" parameterType="_int" resultType="string">
+	SELECT MEMBER_PWD
+	FROM MEMBER
+	WHERE MEMBER_NO=#{memberNo}
 	</select>
 	
-	<!-- 회원 가입 -->
-	<insert id="signUp" parameterType="Member">
-		INSERT INTO MEMBER VALUES(SEQ_MNO.NEXTVAL, #{memberId}, #{memberPwd},
-		#{memberName}, #{memberPhone}, #{memberEmail}, #{memberAddress}, #{memberPetType},
-		#{memberPetName}, SYSDATE, DEFAULT, DEFAULT)
-	</insert>
-	
-	<!-- 아이디 중복 검사 -->
-	<select id="idDupCheck" parameterType="string" resultType="_int">
-		SELECT COUNT(*) FROM MEMBER
-		WHERE MEMBER_ID=#{memberId}
-		AND MEMBER_STATUS='Y'
-	</select>
+	<!-- 회원 탈퇴 -->
+	<update id="deleteMember" parameterType="Member">
+	UPDATE MEMBER SET MEMBER_STATUS = 'N'
+	WHERE MEMBER_NO=#{memberNo}
+	</update>
 	
 </mapper>

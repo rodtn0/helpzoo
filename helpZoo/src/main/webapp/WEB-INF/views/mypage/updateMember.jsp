@@ -32,9 +32,6 @@
 	background-color:#7fcdcd;
 	border:none;
 	}
-	ul{
-	text-align:center;
-	}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
@@ -182,9 +179,6 @@ $('.navbar-light .dmenu').hover(function () {
 					<!-- 오픈소스 도로명 주소 API -->
 					<!-- https://www.poesis.org/postcodify/ -->
 					<div class="row mb-3 form-row">
-						<script>
-						console.log("${loginMember.memberAddress}");
-						</script>
 						<c:set var="address" value="${fn:split(loginMember.memberAddress, ',')}"/>
 					
 						<div class="col-md-3">
@@ -229,17 +223,14 @@ $('.navbar-light .dmenu').hover(function () {
 							<label for="petType">반려동물 종류</label>
 						</div>
 						<div class="col-md-9">
-						<script>
-						console.log("${loginMember.memberPetType}");
-						</script>
 						<select name="memberPetType" id="pet-select" style="height:30px">
-									<option>--반려동물 종류를 선택해주세요--</option>
-									<option <c:if test="${loginMember.memberPetType == 'dog'}">selected</c:if> >강아지</option>
-									<option <c:if test="${loginMember.memberPetType == 'cat'}">selected</c:if> >고양이</option>
-									<option <c:if test="${loginMember.memberPetType == 'hamster'}">selected</c:if> >햄스터</option>
-									<option <c:if test="${loginMember.memberPetType == 'hedgehog'}">selected</c:if> >고슴도치</option>
-									<option <c:if test="${loginMember.memberPetType == 'rabbit'}">selected</c:if> >토끼</option>
-									<option <c:if test="${loginMember.memberPetType == 'goldfish'}">selected</c:if> >금붕어</option>
+									<option value="">--반려동물 종류를 선택해주세요--</option>
+									<option <c:if test="${loginMember.memberPetType == 'dog'}">selected</c:if> value="dog">강아지</option>
+									<option <c:if test="${loginMember.memberPetType == 'cat'}">selected</c:if> value="cat">고양이</option>
+									<option <c:if test="${loginMember.memberPetType == 'hamster'}">selected</c:if> value="hamster">햄스터</option>
+									<option <c:if test="${loginMember.memberPetType == 'hedgehog'}">selected</c:if> value="hedgehog">고슴도치</option>
+									<option <c:if test="${loginMember.memberPetType == 'rabbit'}">selected</c:if> value="rabbit">토끼</option>
+									<option <c:if test="${loginMember.memberPetType == 'goldfish'}">selected</c:if> value="goldfish">금붕어</option>
 						</select>
 						</div>
 					</div>
@@ -320,15 +311,12 @@ $('.navbar-light .dmenu').hover(function () {
 						value : $("#phone1").val()+"-"+$("#phone2").val() + "-" +
 								$("#phone3").val()});
 		
-		$memberPetType = $("<input>", {type:"hidden", name:"memberPetType",
-						value : $("#pet-select").val()});
-		
 		$memberAddress = $("<input>", {type : "hidden", name: "memberAddress",
 			value : $("#post").val()+","+$("#address1").val() + "," +
 					$("#address2").val()});
 		
 		// append : form 태그의 자식 중 마지막에 추가함
-		$("form[name='updateForm']").append($memberPhone).append($memberAddress).append($memberPetType);
+		$("form[name='updateForm']").append($memberPhone).append($memberAddress);
 	}
     </script>
 </body>
