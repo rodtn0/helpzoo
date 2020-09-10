@@ -12,20 +12,18 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Helpzoo Admin</title>
-  
-   <!-- core tag 추가 -->
-   <!-- c:set은 변수 선언 -->
-   <!-- context Path를 프로젝트 전체에서 간단히 사용할 수 있도록 변수 선언 -->
-   <c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application"/>
+  <title>SB Admin 2 - Tables</title>
 
-  <!-- Custom fonts for this template-->
+  <c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application"/>
+
+  <!-- Custom fonts for this template -->
   <link href="${contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-  <!-- Custom styles for this template-->
+  <!-- Custom styles for this template -->
   <link href="${contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
-  
+
+  <!-- Custom styles for this page -->
   <link href="${contextPath}/resources/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
@@ -50,7 +48,7 @@
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="index.html">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
@@ -73,8 +71,8 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Components:</h6>
-            <a class="collapse-item" href="buttons.html">펀딩</a>
-            <a class="collapse-item" href="cards.html">기부</a>
+            <a class="collapse-item" href="buttons.html">Buttons</a>
+            <a class="collapse-item" href="cards.html">Cards</a>
           </div>
         </div>
       </li>
@@ -90,7 +88,7 @@
             <h6 class="collapse-header">Custom Utilities:</h6>
             <a class="collapse-item" href="utilities-color.html">후기</a>
             <a class="collapse-item" href="utilities-color.html">FAQ</a>
-            <a class="collapse-item" href="${contextPath}/admin/faq/faqList">Q&A</a>
+            <a class="collapse-item" href="${contextPath}/admin/qna/qnaList">Q&A</a>
             <a class="collapse-item" href="utilities-animation.html">공지사항</a>
             <a class="collapse-item" href="utilities-other.html">이벤트</a>
             <a class="collapse-item" href="utilities-other.html">구독하기</a>
@@ -134,7 +132,7 @@
       </li>
 
       <!-- Nav Item - Tables -->
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link" href="tables.html">
           <i class="fas fa-fw fa-table"></i>
           <span>Tables</span></a>
@@ -161,9 +159,11 @@
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
           <!-- Sidebar Toggle (Topbar) -->
-          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-            <i class="fa fa-bars"></i>
-          </button>
+          <form class="form-inline">
+            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+              <i class="fa fa-bars"></i>
+            </button>
+          </form>
 
           <!-- Topbar Search -->
           <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
@@ -339,48 +339,3 @@
 
         </nav>
         <!-- End of Topbar -->
-
-  <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
-
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Bootstrap core JavaScript-->
-<%--   <script src="${contextPath}/resources/vendor/jquery/jquery.min.js"></script>
-  <script src="${contextPath}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Core plugin JavaScript-->
-  <script src="${contextPath}/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-  <!-- Custom scripts for all pages-->
-  <script src="${contextPath}/resources/js/sb-admin-2.min.js"></script>
-
-  <!-- Page level plugins -->
-  <script src="${contextPath}/resources/vendor/chart.js/Chart.min.js"></script>
-
-  <!-- Page level custom scripts -->
-  <script src="${contextPath}/resources/js/demo/chart-area-demo.js"></script>
-  <script src="${contextPath}/resources/js/demo/chart-pie-demo.js"></script> --%>
-
-</body>
-
-</html>

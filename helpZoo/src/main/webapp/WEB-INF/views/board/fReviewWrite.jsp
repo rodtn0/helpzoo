@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,10 +83,20 @@
 			<div class="col-md-4">
 				<div class="row">
 						<div class="card">
+							<select id="selectProject">
+								<option selected>리뷰할 프로젝트를 선택해주세요.</option>
+								<c:if test="${!empty fInfo}">
+									<c:forEach var="fInfo" items="${fInfo}">
+										<option value="${fInfo.projectNo}">${fInfo.projectTitle}</option>
+									</c:forEach>
+								</c:if>
+								
+							</select>
+							
 							<img class="card-img-top" alt="Bootstrap Thumbnail First" src="https://www.layoutit.com/img/people-q-c-600-200-1.jpg" />
 							<div class="card-block">
 								<h5 class="card-title">
-									펀딩 프로젝트
+									프로젝트번호.펀딩 프로젝트
 								</h5>
 								<p class="card-text">
 									프로젝트명

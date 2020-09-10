@@ -23,8 +23,6 @@
 	font-family: 'NanumBarunGothic';
 	font-size: 10pt;
 	} 
-	
-            
 
 	#paging {
 		text-align:center;
@@ -167,7 +165,7 @@
 		  <!-- else if -->
 		  	<c:choose>
 		  		<c:when test="${empty qnaList }">
-		  			<tr><td colsepan="4"> 존재하는 게시글이 없습니다.</td></tr>
+		  			<tr><td colspan="4"> 존재하는 게시글이 없습니다.</td></tr>
 		  		</c:when>
 		  		
 		  	<c:otherwise>

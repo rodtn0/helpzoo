@@ -11,7 +11,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>펀딩 참여 후기 페이지</title>
+  <title>기부 참여 후기 페이지</title>
 
   <c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application"/>
   <!-- Bootstrap core CSS -->
@@ -35,19 +35,19 @@
       <div class="col-lg-8">
 
         <!-- Title -->
-        <h2 class="mt-4">${fReviewView.reviewTitle}</h2>
+        <h2 class="mt-4">${dReviewView.reviewTitle}</h2>
 
         <!-- Author -->
         <p class="lead">
           by
-          <a>${fReviewView.memberId}</a>
+          <a>${dReviewView.memberId}</a>
         </p>
 
         <hr>
 
         <!-- Date/Time -->
-        <p>작성일 : ${fReviewView.reviewCreateDate} / 수정일 : ${fReviewView.reviewModifyDate}</p>
-        <p>조회수 : ${fReviewView.readCount}</p>
+        <p>작성일 : ${dReviewView.reviewCreateDate} / 수정일 : ${dReviewView.reviewModifyDate}</p>
+        <p>조회수 : ${dReviewView.readCount}</p>
 
         <hr>
 
@@ -58,7 +58,7 @@
 
         <!-- Post Content -->
 
-        <p>${fReviewView.reviewContent}</p>
+        <p>${dReviewView.reviewContent}</p>
 
 
         <hr>
@@ -135,14 +135,14 @@
           <div class="card-body">
             <div class="row">
                	<div class="card">
-               		<c:set var="src" value="${contextPath}${fReviewView.filePath}/${fReviewView.fileChangeName}"/>
+               		<c:set var="src" value="${contextPath}${dReviewView.filePath}/${dReviewView.fileChangeName}"/>
 					<img class="card-img-top" alt="Bootstrap Thumbnail First" src="${src}" />
 					<div class="card-block">
 						<h5 class="card-title">
-							${fReviewView.projectTitle}
+							${dReviewView.projectTitle}
 						</h5>
 						<p class="card-text">
-							${fReviewView.projectTitle}
+							${dReviewView.projectTitle}
 						</p>
 						<p>
 							<a class="btn btn-primary" href="#">이동하기</a>

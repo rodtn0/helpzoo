@@ -25,6 +25,19 @@
     	<result property="fileLevel" column="FILE_LEVEL"/>
     </resultMap>
     
+  	<resultMap type="QNABoard2" id="qnaBoardResultSet2">
+        <id property="qnaNo" column="QNA_NO"/>
+        <result property="originNo" column="QNA_ORIGIN_NO"/>
+        <result property="groupOrd" column="QNA_GROUP_ORD"/>
+        <result property="groupLayer" column="QNA_GROUP_LAYER"/>
+        <result property="qnaTitle" column="QNA_TITLE"/>
+        <result property="qnaContent" column="QNA_CONTENT"/>
+        <result property="readCount" column="READ_COUNT"/>
+        <result property="qnaCreateDate" column="QNA_CREATE_DT"/>
+        <result property="qnaModifyDate" column="QNA_MODIFY_DT"/>
+        <result property="qnaWriter" column="MEMBER_ID"/>
+    </resultMap>
+    
     <!-- 게시글 수 조회 -->
     <select id="getListCount" resultType="_int">
     SELECT COUNT(*) FROM QNA_BOARD 
@@ -100,4 +113,15 @@
   		SELECT *
 		FROM Q_BOARD WHERE QNA_ORIGIN_NO IN (SELECT QNA_NO FROM Q_BOARD WHERE MEMBER_ID=#{id})
   	</select>
+  	
+  	<!-- QNA ADMIN -->
+  	
+  	<select id="QuestionList" resultMap="qnaBoardResultSet2">
+  		SELECT * FROM Q_BOARD WHERE QNA_GROUP_LAYER = 0
+  	</select>
+  	
+  	<select id="selectAnswer" parameterType="_int" resultType="_int">
+  	SELECT COUNT(QNA_ORIGIN_NO) FROM Q_BOARD WHERE QNA_ORIGIN_NO = #{qnaNo}
+  	</select>
+  	
 </mapper>
