@@ -113,7 +113,7 @@
            <a class="nav-link" href="${contextPath}/member/login">로그인</a>
            </c:when>
            <c:otherwise>
-            <a class="nav-link" href="${contextPath}/member/mypage">${loginMember.memberName}</a>
+             <a class="nav-link" href="${contextPath}/mypage/updateMember">${loginMember.memberName}</a>
              <a class="nav-link" href="${contextPath}/member/logout">Logout</a>
            </c:otherwise>
       	</c:choose>	
