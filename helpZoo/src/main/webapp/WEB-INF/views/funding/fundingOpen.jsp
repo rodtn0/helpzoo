@@ -64,6 +64,7 @@
       <div class="helpZoo_project"><span class="open_title">도와ZOO</span></div>
 
       <div class="project_open_introduce_container">
+      <form action="${contextPath}/funding/fundingOpenDetail"></form>
         <div class="open_intent_message">메이커 정보</div>
         안녕하세요 메이커님, 본격적으로 프로젝트 작성을 시작하기 전에 간단한
         정보를 입력하세요.
@@ -106,6 +107,7 @@
         <button
           type="button"
           class="btn btn-primary col-md-12 col-sm-12 col-xs-12 btn-lg funding_btn"
+          onclick = "location.href = '${contextPath}/funding/fundingOpenDetail' "
         >
           시작하기
         </button>
