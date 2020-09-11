@@ -13,6 +13,7 @@ public class MyPageServiceImpl implements MyPageService{
 	@Autowired
 	private MyPageDAO myPageDAO;
 	
+	@Autowired
 	private BCryptPasswordEncoder bcPwd;
 	
 	// 회원 정보 수정 Service 구현
@@ -29,7 +30,8 @@ public class MyPageServiceImpl implements MyPageService{
 		String savePwd = myPageDAO.selectPwd(loginMember.getMemberNo());
 		
 		int result = 0;
-		
+		System.out.println("savepwd :" +savePwd);
+		System.out.println("memberPwd :"+loginMember.getMemberPwd());
 		if(savePwd != null) {
 			if(bcPwd.matches(loginMember.getMemberPwd(), savePwd)) {
 				result = myPageDAO.deleteMember(loginMember);
