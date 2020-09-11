@@ -1,6 +1,11 @@
 package com.project.helpzoo.board.model.vo;
 
 import java.sql.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class Review {
 	private int reviewNo;
@@ -158,11 +163,25 @@ public class Review {
 
 	@Override
 	public String toString() {
-		return "Review [reviewNo=" + reviewNo + ", reviewTitle=" + reviewTitle + ", reviewContent=" + reviewContent
-				+ ", readCount=" + readCount + ", reviewCreateDate=" + reviewCreateDate + ", reviewModifyDate="
-				+ reviewModifyDate + ", reviewStatus=" + reviewStatus + ", projectNo=" + projectNo + ", reviewType="
-				+ reviewType + ", reviewWriter=" + reviewWriter + ", projectTitle=" + projectTitle + ", memberId="
-				+ memberId + ", filePath=" + filePath + ", fileChangeName=" + fileChangeName + "]";
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("reviewNo", reviewNo);
+		map.put("reviewTitle", reviewTitle);
+		map.put("reviewContent", reviewContent);
+		map.put("readCount", readCount);
+		map.put("reviewCreateDate", reviewCreateDate);
+		map.put("reviewModifyDate", reviewModifyDate);
+		map.put("reviewStatus", reviewStatus);
+		map.put("projectNo", projectNo);
+		map.put("reviewType", reviewType);
+		map.put("reviewWriter", reviewWriter);
+		map.put("projectTitle", projectTitle);
+		map.put("memberId", memberId);
+		map.put("filePath", filePath);
+		map.put("fileChangeName", fileChangeName);
+		
+		
+		return gson.toJson(map);
 	}
 
 

@@ -2,13 +2,18 @@ package com.project.helpzoo.board.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.helpzoo.board.model.service.ReviewService;
 import com.project.helpzoo.board.model.vo.PageInfo;
@@ -85,7 +90,7 @@ public class reviewController {
 	@RequestMapping("writeView/{type}")
 	public String writeReviewView(@PathVariable int type, Model model) {
 		// 타입이 1이면 펀딩 리뷰작성/ 2면 기부 리뷰작성 화면으로 전환. -> 펀딩게시물/기부게시물에서도 '후기쓰러가기' 버튼에 각각 타입으로 주소 주면됨
-		//String path = null;
+		String path = null;
 		
 		Member loginMember = (Member)model.getAttribute("loginMember");
 		
@@ -95,12 +100,20 @@ public class reviewController {
 			System.out.println("fInfo : " + fInfo);
 			
 			model.addAttribute("fInfo", fInfo);
-		}else {
 			
+			path = "fReviewWrite";
+			
+		}else {
+			List<Review> dInfo = reviewService.selectInfo(type, loginMember);
+			System.out.println("dInfo : " + dInfo);
+			
+			model.addAttribute("dInfo", dInfo);
+			
+			path = "dReviewWrite";
 		}
 		
 		
-		return "board/fReviewWrite";
+		return "board/" + path;
 	}
 	
 	// 후기 글 상세 조회(펀딩,기부 type으로 구분)
@@ -136,11 +149,63 @@ public class reviewController {
 	
 	
 	// 후기 글 쓰기
-	//@RequestMapping("writeView/{type}/upload")
-	//public String insertReview(@PathVariable int type) {
+	@RequestMapping(value="writeView/{type}/upload", method=RequestMethod.POST)
+	public String insertReview(@PathVariable int type, Review review, Model model,
+							   @RequestParam(value="images", required=false) List<MultipartFile> images,
+							   RedirectAttributes rdAttr, HttpServletRequest request) {
 		
 		// 제목, 내용, 작성자 필요
-	//	return "";
-	//}
+		
+		// 세션에 있는 로그인 정보 얻어오기
+		Member loginMember = (Member)model.getAttribute("loginMember");
+		
+		review.setReviewWriter(loginMember.getMemberNo());
+		
+		for(int i=0; i<images.size(); i++) {
+			System.out.println("images[" + i + "] : " + images.get(i).getOriginalFilename());
+		}
+		
+		System.out.println(review);
+		
+		// 파일을 저장할 서버 컴퓨터의 로컬 경로
+		String savePath = request.getSession().getServletContext().getRealPath("resources/uploadImages");
+		
+		// 게시글 삽입
+		int result = reviewService.insertReview(type, review, images, savePath);
+		
+		String status = null;
+		String msg = null;
+		String path = null;
+		
+		System.out.println("삽입 결과 : " + result);
+		
+		if(result > 0 && type == 1) {
+			status = "success";
+			msg = "게시글 등록 성공";
+			path = "";
+			model.addAttribute("review", review);
+		}else {
+			status = "error";
+			msg = "게시글 등록 실패";
+			path = "";
+		}
+		
+		rdAttr.addFlashAttribute("status", status);
+		rdAttr.addFlashAttribute("msg", msg);
+		
+		return "";
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

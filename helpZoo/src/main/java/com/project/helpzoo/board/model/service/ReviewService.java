@@ -2,6 +2,8 @@ package com.project.helpzoo.board.model.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.project.helpzoo.board.model.vo.PageInfo;
 import com.project.helpzoo.board.model.vo.Review;
 import com.project.helpzoo.member.model.vo.Member;
@@ -38,6 +40,14 @@ public interface ReviewService {
 	 * @return
 	 */
 	public abstract List<Review> selectInfo(int type, Member loginMember);
+
+	/** 게시글 작성 Service
+	 * @param review
+	 * @param images
+	 * @param savePath
+	 * @return result
+	 */
+	public abstract int insertReview(int type, Review review, List<MultipartFile> images, String savePath);
 
 
 	

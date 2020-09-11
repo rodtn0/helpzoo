@@ -6,7 +6,9 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.project.helpzoo.board.model.vo.Attachment;
 import com.project.helpzoo.board.model.vo.PageInfo;
 import com.project.helpzoo.board.model.vo.Review;
 import com.project.helpzoo.member.model.vo.Member;
@@ -84,6 +86,55 @@ public class ReviewDAO {
 		if(type == 1) mapperId = "reviewMapper.fInfoSelect";
 		else	  	  mapperId = "reviewMapper.dInfoSelect";
 		return sqlSession.selectList(mapperId, loginMember);
+	}
+
+
+	/** 게시글 작성 DAO
+	 * @param review
+	 * @param images
+	 * @param savePath
+	 * @return result
+	 */
+	public int insertReview(int type, Review review) {
+		String mapperId = null;
+		if(type == 1) mapperId = "reviewMapper.insertFundingReview";
+		else		  mapperId = "reviewMapper.insertDonationReview";
+		return sqlSession.insert(mapperId, review);
+	}
+
+	
+	/** 시퀀스 얻어오기 DAO
+	 * @return reviewNo
+	 */
+	public int selectNextNo(int type) {
+		String mapperId = null;
+		if(type == 1) mapperId = "reviewMapper.selectNextFNo";
+		else		  mapperId = "reviewMapper.selectNextDNo";
+		return sqlSession.selectOne(mapperId);
+	}
+
+
+	/** 게시글 이미지 삽입
+	 * @param at
+	 * @return result
+	 */
+	public int insertImages(int type, Attachment at) {
+		String mapperId = null;
+		if(type == 1) mapperId = "reviewMapper.insertFundingImages";
+		else		  mapperId = "reviewMapper.insertDonationImages";
+		return sqlSession.insert(mapperId, at);
+	}
+
+
+	/**  파일 저장 오류 시 DB에 저장된 내용 삭제 DAO
+	 * @param type
+	 * @param reviewNo
+	 */
+	public void deleteAttachment(int type, int reviewNo) {
+		String mapperId = null;
+		if(type == 1) mapperId = "reviewMapper.deleteFundingImages";
+		else		  mapperId = "reviewMapper.deleteDonationImages";
+		sqlSession.delete(mapperId, reviewNo);
 	}
 
 	

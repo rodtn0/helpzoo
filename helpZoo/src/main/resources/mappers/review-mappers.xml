@@ -20,6 +20,14 @@
 	  	<result property="fileChangeName" column="FILE_CHANGE_NAME"/>
 	  </resultMap>
 	  
+	  <resultMap id="frResultSet" type="Review">
+	  	<result property="projectNo" column="FUNDING_ID"/>
+	  	<result property="projectTitle" column="FUNDING_TITLE"/>
+	  	<result property="memberId" column="MEMBER_ID"/>
+	  	<result property="filePath" column="FILE_PATH"/>
+	  	<result property="fileChangeName" column="FILE_CHANGE_NAME"/>
+	  </resultMap>
+	  
 	  <resultMap id="donationReviewResultSet" type="Review">
 	  	<id property="reviewNo" column="DONATION_REVIEW_NO"/>
 	  	<result property="reviewTitle" column="DONATION_REVIEW_TITLE"/>
@@ -38,6 +46,13 @@
 	  	<result property="fileChangeName" column="DONATION_FILE_CHANGE_NAME"/>
 	  </resultMap>
 	  
+	   <resultMap id="drResultSet" type="Review">
+	  	<result property="projectNo" column="DONATION_BOARD_NO"/>
+	  	<result property="projectTitle" column="DONATION_BOARD_TITLE"/>
+	  	<result property="filePath" column="DONATION_FILE_PATH"/>
+	  	<result property="fileChangeName" column="DONATION_FILE_CHANGE_NAME"/>
+	  </resultMap>
+	  
 	  <resultMap type="Member" id="mResultSet">
 		<id property="memberNo" column="MEMBER_NO"/>
 		<result property="memberId" column="MEMBER_ID"/>
@@ -52,6 +67,15 @@
 		<result property="memberStatus" column="MEMBER_STATUS"/>
 		<result property="memberGrade" column="MEMBER_GRADE"/>
 	</resultMap>
+	
+	<resultMap type="Attachment" id="attachmentResultSet">
+    	<id property="fileNo" column="FILE_NO"/>
+    	<result property="parentBoardNo" column="PARENT_BOARD_NO"/>
+    	<result property="fileOriginName" column="FILE_ORIGIN_NAME"/>
+    	<result property="fileChangeName" column="FILE_CHANGE_NAME"/>
+    	<result property="filePath" column="FILE_PATH"/>
+    	<result property="fileLevel" column="FILE_LEVEL"/>
+    </resultMap>
   
   	  <!-- 펀딩 리뷰 게시판 목록 조회 -->
   	  <select id="selectFundingList" resultMap="fundingReviewResultSet">
@@ -125,8 +149,8 @@
   	  </select>
   	  
   	  <!-- 글 작성 화면에 들어갈 funding 이미지, 제목 조회 (해당 회원이 구매한 프로젝트) -->
-  	  <select id="fInfoSelect" parameterType="_int" resultMap="fundingReviewResultSet">
-  	  	SELECT FUNDING_TITLE, I.FILE_PATH, I.FILE_CHANGE_NAME, O.FUNDING_ID
+  	  <select id="fInfoSelect" parameterType="_int" resultMap="frResultSet">
+  	  	SELECT FUNDING_TITLE, I.FILE_PATH, I.FILE_CHANGE_NAME, O.FUNDING_ID, M.MEMBER_ID
 		FROM MEMBER M
 		LEFT JOIN ORDERS O ON (O.MEMBER_NO = M.MEMBER_NO)
 		LEFT JOIN FUNDING_PROJECT F ON(F.FUNDING_ID = O.FUNDING_ID)
@@ -135,13 +159,65 @@
   	  </select>
   	  
   	  <!-- 글 작성 화면에 들어갈 donation 이미지, 제목 조회 (해당 회원이 구매한 프로젝트) -->
-  	  <select id="dInfoSelect" parameterType="_int" resultMap="donationReviewResultSet">
-  	  	  SELECT DONATION_BOARD_TITLE, DONATION_FILE_PATH, DONATION_FILE_CHANGE_NAME
-		  FROM REVIEW_DONATION
-		  JOIN MEMBER ON(DONATION_REVIEW_WRITER = MEMBER_NO)
-		  JOIN DONATION_ATTACHMENT ON(DONATION_BOARD_NO = DONATION_PARENT_BOARD_NO)
-		  JOIN DONATION_BOARD USING(DONATION_BOARD_NO)
-		  WHERE DONATION_REVIEW_NO = #{reviewNo}
-		  AND DONATION_REVIEW_STATUS = 'Y'
+  	  <select id="dInfoSelect" parameterType="_int" resultMap="drResultSet">
+  	  	  SELECT DB.DONATION_BOARD_NO, DB.DONATION_BOARD_TITLE, DA.DONATION_FILE_PATH, DA.DONATION_FILE_CHANGE_NAME
+		  FROM DONATION_INFO DI
+		  LEFT JOIN DONATION_ATTACHMENT DA ON(DA.DONATION_PARENT_BOARD_NO = DI.INFO_BOARD_NO)
+	      LEFT JOIN DONATION_BOARD DB ON(DB.DONATION_BOARD_NO = DI.INFO_BOARD_NO)
+		  WHERE DI.INFO_MEMBER_NO = #{memberNo}
+		  AND DONATION_BOARD_STATUS = 'Y'
   	  </select>
+  	  
+  	  <!-- 펀딩 리뷰 SEQ_BNO 얻어오기 -->
+	  <select id="selectNextFNo" resultType="_int">
+		SELECT SEQ_F_RNO.NEXTVAL FROM DUAL
+	  </select>
+	  
+	   <!-- 기부 리뷰 SEQ_BNO 얻어오기 -->
+	  <select id="selectNextDNo" resultType="_int">
+		SELECT SEQ_D_RNO.NEXTVAL FROM DUAL
+	  </select>
+	  
+	  <!-- 펀딩 리뷰 삽입 -->
+	  <insert id="insertFundingReview" parameterType="Review">
+	  	INSERT INTO REVIEW_FUNDING VALUES(#{reviewNo}, #{reviewTitle},
+				#{reviewContent}, DEFAULT, DEFAULT, DEFAULT, DEFAULT,
+				#{projectNo}, #{reviewWriter})
+	  </insert>
+	  
+	   <!-- 기부 리뷰 삽입 -->
+	  <insert id="insertDonationReview" parameterType="Review">
+	  	INSERT INTO REVIEW_DONATION VALUES(#{reviewNo}, #{reviewTitle},
+				#{reviewContent}, DEFAULT, DEFAULT, DEFAULT, DEFAULT,
+				#{projectNo}, #{reviewWriter})
+	  </insert>
+	  
+	  <!-- 펀딩 리뷰 이미지 삽입 -->
+	  <insert id="insertFundingImages" parameterType="Attachment">
+		INSERT INTO FR_ATTACHMENT VALUES(
+			SEQ_FIMG_NO.NEXTVAL, #{parentBoardNo},
+			#{fileOriginName}, #{fileChangeName}, #{filePath}, #{fileLevel}
+		)
+	  </insert>
+	  
+	   <!-- 기부 리뷰 이미지 삽입 -->
+	  <insert id="insertDonationImages" parameterType="Attachment">
+		INSERT INTO DR_ATTACHMENT VALUES(
+			SEQ_DIMG_NO.NEXTVAL, #{parentBoardNo},
+			#{fileOriginName}, #{fileChangeName}, #{filePath}, #{fileLevel}
+		)
+	  </insert>
+	  
+	  
+	  <!-- 펀딩 리뷰 파일 정보 삭제 -->
+	  <delete id="deleteFundingImages" parameterType="_int">
+		DELETE FROM FR_ATTACHMENT
+		WHERE PARENT_RE_NO = #{reviewNo}
+	  </delete>
+	  
+	   <!-- 기부 리뷰 파일 정보 삭제 -->
+	  <delete id="deleteDonationImages" parameterType="_int">
+		DELETE FROM DR_ATTACHMENT
+		WHERE PARENT_RE_NO = #{reviewNo}
+	  </delete>
 </mapper>
