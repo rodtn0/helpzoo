@@ -106,8 +106,7 @@
 					<div>
 						<label for="content">내용</label>
 					</div>
-					<textarea class="form-control" id="content" name="qnaContent"
-						rows="10" style="resize: none;"></textarea>
+<textarea class="form-control" id="content" name="qnaContent" rows="10" style="resize: none;"></textarea>
 				</div>
 
 
