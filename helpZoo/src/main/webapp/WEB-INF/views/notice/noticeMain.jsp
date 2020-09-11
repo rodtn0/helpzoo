@@ -150,7 +150,7 @@
 					<div class="field">
 						<label class="text-hidden" for="">검색창</label>
 						<input id="searchTextInBoard" name="searchTextInBoard" class="search-form" type="text" value="" />
-						<button class="btn-search dense" type="submit">검색</button>
+						<button class="btn-search dense" id="searchBtn" type="submit">검색</button>
 					</div>
 				</form>
 				
@@ -171,7 +171,7 @@
 	
 	<script>
 		
-		/* 공지사항 상세페이지 */
+		// 공지사항 상세페이지
 		$(function() {
 			$('.board-main .article').on('click', function() {
 				
@@ -188,6 +188,30 @@
 			});
 		});
 		
+		// 검색 동작 -------------------------------------------------------------------------------------
+		$('#searchBtn').on('click', function() {
+			let searchUrl = "";
+			
+			const $sKey = $('#searchSelectInBoard');
+			const $sVal = $('#searchTextInBoard');
+			
+			console.log($sKey.val());
+			console.log($sVal.val());
+			
+			if($sVal.val().trim().length == 0){
+				searchUrl = "${contextPath}/notice/${pInfo.boardType}";
+			}else{
+				searchUrl = "../search/${pInfo.boardType}?";
+				
+				if($sVal.val().trim().length != 0){
+					searchUrl += "sKey=" + $sKey.val() + "&sVal=" + $sVal.val();
+				}
+			}
+			
+			location.href = searchUrl;
+			
+		});
+
 	</script>
 	
 </body>

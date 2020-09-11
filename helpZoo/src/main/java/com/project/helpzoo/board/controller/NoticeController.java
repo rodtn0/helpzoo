@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.project.helpzoo.board.model.service.NoticeService;
 import com.project.helpzoo.board.model.vo.Board;
 import com.project.helpzoo.board.model.vo.PageInfo;
+import com.project.helpzoo.board.model.vo.Search;
 import com.project.helpzoo.member.model.vo.Member;
 
 @SessionAttributes({"loginMember"})
@@ -182,5 +183,19 @@ public class NoticeController {
 		
 		return mv;
 	}
+	
+	// 공지사항 검색 ---------------------------------------------------------------------
+	@RequestMapping("search/{type}")
+	public String search(@PathVariable int type,
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+			Search search, Model model) {
+		
+		System.out.println("type:"+ type);
+		System.out.println("search:"+ search);
+		
+		return null;
+	}
+	
+	
 	
 }
