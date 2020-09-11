@@ -30,6 +30,16 @@
  	<!-- sweetalert : alert창을 꾸밀 수 있게 해주는 라이브러리 https://sweetalert.js.org/ -->
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   
+  <!-- 달력 -->
+	<link href='${contextPath}/resources/packages/core/main.css' rel='stylesheet' />
+	<link href='${contextPath}/resources/packages/daygrid/main.css' rel='stylesheet' />
+	<link href='${contextPath}/resources/packages/list/main.css' rel='stylesheet' />
+	<script src='${contextPath}/resources/packages/core/main.js'></script>
+	<script src='${contextPath}/resources/packages/interaction/main.js'></script>
+	<script src='${contextPath}/resources/packages/daygrid/main.js'></script>
+	<script src='${contextPath}/resources/packages/list/main.js'></script>
+	<script src='${contextPath}/resources/packages/google-calendar/main.js'></script>
+  <!-- 달력 여기까지 -->
   <style>
   .bg-gradient-primary{
   background-color: #1fcdcd !important;
