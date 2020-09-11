@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -37,18 +37,18 @@
 
     <style>
       .helpZoo_project {
-        padding: 3% 42% 6%;
+        padding: 2% 45% 6%;
 
         color: black;
       }
 
       .open_title {
-        font-size: 2rem;
+        font-size: 1.5rem;
         font-weight: bold;
       }
 
       .project_open_introduce_container {
-        padding: 0% 13% 0%;
+        padding: 0% 12% 0%;
       }
 
       .open_intent_message {
@@ -56,60 +56,184 @@
         font-weight: bold;
         margin-bottom: 2%;
       }
+
+      input {
+        margin-top: 1.1%;
+      }
+
+      .star {
+        color: red;
+      }
+
+      .fa-check-circle {
+        font-size: 1.5rem;
+        color: #c0c0c0;
+      }
+
+      .hiddencheck {
+        display: none;
+      }
+
+      .infogray {
+        color: #696969;
+      }
+
+      .popoking {
+        font-size: 2rem;
+      }
+
+      .certificationCheck {
+        color: #00a0a0;
+      }
+
+      .mintclick {
+        background-color: #00a0a0;
+        border: none;
+      }
+
+      .mintclick:hover {
+        background-color: #008080;
+      }
     </style>
   </head>
 
+  <!--
+        color: #51fcc5;-->
   <body>
     <div class="container">
       <div class="helpZoo_project"><span class="open_title">도와ZOO</span></div>
 
       <div class="project_open_introduce_container">
+        <form action="${contextPath}/funding/fundingOpenDetail"></form>
         <div class="open_intent_message">메이커 정보</div>
         안녕하세요 메이커님, 본격적으로 프로젝트 작성을 시작하기 전에 간단한
         정보를 입력하세요.
 
         <br />
         <br />
-        메이커명
+        메이커(기업)명 <span class="star">*</span>
         <br />
-        <input type="text" />
+        <div class="input-group input-group-lg">
+          <div class="input-group-prepend"></div>
+          <input
+            type="text"
+            class="form-control"
+            aria-label="Large"
+            aria-describedby="inputGroup-sizing-sm"
+          />
+        </div>
 
         <br />
         <br />
-        개인 - 사업자 구분
+        개인 · 사업자 구분 <span class="star">*</span>
         <br />
-        <input type="text" />
+        <div class="input-group input-group-lg">
+          <div class="input-group-prepend"></div>
+          <input
+            type="text"
+            class="form-control"
+            aria-label="Large"
+            aria-describedby="inputGroup-sizing-sm"
+          />
+        </div>
 
         <br />
         <br />
-        관리자 명
+        관리자 명 <span class="star">*</span>
         <br />
-        <input type="text" />
+        <div class="input-group input-group-lg">
+          <div class="input-group-prepend"></div>
+          <input
+            type="text"
+            class="form-control"
+            aria-label="Large"
+            aria-describedby="inputGroup-sizing-sm"
+            placeholder="김관리"
+            readonly
+          />
+        </div>
 
         <br />
         <br />
-        관리자 이메일
+        관리자 이메일 <span class="star">*</span>
         <br />
-        <input type="text" />
+        <div class="input-group input-group-lg">
+          <div class="input-group-prepend"></div>
+          <input
+            type="text"
+            class="form-control"
+            aria-label="Large"
+            aria-describedby="inputGroup-sizing-sm"
+            placeholder="jjisanle@gmail.com"
+            readonly
+          />
+        </div>
+        <small class="infogray"
+          >관리자명과 이메일 주소는 로그인 아이디와 연동되어 있으므로 변경을
+          원할 경우 회원 정보 설정에서 변경하세요.</small
+        >
+        <br />
+        <br />
+        관리자 휴대폰 번호 <span class="star">*</span>
+        <br />
+        <div class="input-group input-group-lg">
+          <div class="input-group-prepend"></div>
+          <input
+            type="text"
+            class="form-control"
+            aria-label="Large"
+            aria-describedby="inputGroup-sizing-sm"
+          />
+        </div>
+        <small class="certificationCheck"> 인증을 완료한 회원입니다 </small>
+        <br />
+        <br />
+        <br />
 
-        <br />
-        <br />
-        관리자 휴대폰 번호
-        <br />
-        <input type="text" />
-
-        <br />
+        <i class="fas fa-check-circle" onclick="collectAsign();">
+          								<input type="checkbox" class="hiddencheck" name="collectAsign" />
+        </i>
 
         (필수) 개인 정보 수집 동의 <br />
-        (선택) 와디즈 메이커를 위한 유용한 뉴스레터 받기<br />
+        <br />
+        <br />
+
+        <small class="infogray">
+          <i class="fas fa-paw popoking"></i> &nbsp;지금 시작하면 도와Zoo에서
+          제공하는 가이드를 보내드립니다!</small
+        >
+
+        <br />
+
+        <br />
 
         <button
           type="button"
-          class="btn btn-primary col-md-12 col-sm-12 col-xs-12 btn-lg funding_btn"
+          class="btn btn-primary col-md-5 col-sm-5 col-xs-5 btn-lg funding_btn mintclick"
+          onclick="location.href = '${contextPath}/funding/fundingOpenDetail' "
         >
           시작하기
         </button>
       </div>
+
+      <script>
+        var flag = false;
+
+        function collectAsign() {
+          if (!flag) {
+            $(".fa-check-circle").css("color", "#00a0a0");
+
+            flag = true;
+          } else {
+            $(".fa-check-circle").css("color", "#c0c0c0");
+
+            flag = false;
+
+          }
+
+          
+        }
+      </script>
     </div>
   </body>
 </html>
