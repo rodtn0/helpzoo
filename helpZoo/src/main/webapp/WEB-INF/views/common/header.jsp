@@ -103,7 +103,7 @@
             </ul>
           </li>
           <li><a href="${contextPath}/subscribe">구독하기</a></li>
-          	<li><a href=" ${contextPath}/member/mypage">마이페이지</a></li>
+          	<li><a href=" ${contextPath}/mypage/updateMember">마이페이지</a></li>
           	<li><a href=" ${contextPath}/funding/fundingOpen">펀딩프로젝트 만들기</a></li>
         </ul>
       </nav><!-- .nav-menu -->
@@ -113,7 +113,7 @@
            <a class="nav-link" href="${contextPath}/member/login">로그인</a>
            </c:when>
            <c:otherwise>
-            <a class="nav-link" href="${contextPath}/member/mypage">${loginMember.memberName}</a>
+             <a class="nav-link" href="${contextPath}/mypage/updateMember">${loginMember.memberName}</a>
              <a class="nav-link" href="${contextPath}/member/logout">Logout</a>
            </c:otherwise>
       	</c:choose>	

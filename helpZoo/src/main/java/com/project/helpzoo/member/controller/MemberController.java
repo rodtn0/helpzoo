@@ -30,7 +30,6 @@ import com.project.helpzoo.member.model.vo.Member;
 @SessionAttributes({"loginMember","memberEmail"})
 @Controller
 @RequestMapping("/member/*")
-
 public class MemberController {
 	
 	@Autowired
@@ -58,6 +57,7 @@ public class MemberController {
 			rdAttr.addFlashAttribute("msg", "로그인 실패");
 			rdAttr.addFlashAttribute("text", "아이디 또는 비밀번호를 확인해주세요.");
 		}else {
+
 			model.addAttribute("loginMember", loginMember);
 			Cookie cookie = new Cookie("saveId", member.getMemberId());
 			
@@ -221,16 +221,26 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	// 마이 페이지로 이동하는 Controller
-	@RequestMapping("mypage")
-	public String myPage() {
-		return "member/mypage";
-	}
-	
 	@ResponseBody
 	@RequestMapping("idDupCheck")
 	public String idDupCheck(String memberId) {
 		int result = memberService.idDupCheck(memberId);
 		return result + "";
 	}
+	
+	@RequestMapping("findId")
+	public String findId() {
+		return "member/findId";
+	}
+	
+	@RequestMapping("findIdAction")
+	public String findIdAction(HttpServletResponse response, String memberEmail, Model model) throws Exception {
+		
+		
+		model.addAttribute("memberId", memberService.findIdAction(response, memberEmail));
+		
+		return "member/findIdResult";
+	}
+	
+	
 }
