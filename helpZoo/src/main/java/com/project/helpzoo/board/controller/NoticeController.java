@@ -30,7 +30,7 @@ public class NoticeController {
 	
 	// 공지사항 리스트 --------------------------------------------------------------------------------
 	// helpzoo/notice/noticeList
-	@RequestMapping("noticeList")
+	@RequestMapping("noticeList") 
 	public String noticeMain(@RequestParam(value="cp", required=false, defaultValue="1") int cp,
 			Model model) {
 		
