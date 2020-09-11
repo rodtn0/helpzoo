@@ -1,6 +1,8 @@
 package com.project.helpzoo.board.model.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.project.helpzoo.board.model.DAO.NoticeDAO;
 import com.project.helpzoo.board.model.vo.Board;
 import com.project.helpzoo.board.model.vo.PageInfo;
+import com.project.helpzoo.board.model.vo.Search;
 
 @Service
 public class NoticeServiceImpl implements NoticeService{
@@ -118,6 +121,21 @@ public class NoticeServiceImpl implements NoticeService{
 		}
 		
 		return result;
+	}
+
+	// 검색 조건 추가된 페이지 처리 service 구현 ---------------------------------------------------
+	@Override
+	public PageInfo pagination(int type, int cp, Search search) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("search", search);
+		map.put("type", type);
+		
+		int searchListCount = noticeDAO.getSearchListCount(map);
+
+		pInfo.setPageInfo(cp, searchListCount, type);
+		
+		return pInfo;
 	}
 
 

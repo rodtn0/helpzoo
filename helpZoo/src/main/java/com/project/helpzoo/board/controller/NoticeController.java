@@ -30,7 +30,7 @@ public class NoticeController {
 	
 	// 공지사항 리스트 --------------------------------------------------------------------------------
 	// helpzoo/notice/noticeList
-	@RequestMapping("noticeList") 
+	@RequestMapping("noticeList")
 	public String noticeMain(@RequestParam(value="cp", required=false, defaultValue="1") int cp,
 			Model model) {
 		
@@ -184,7 +184,8 @@ public class NoticeController {
 		return mv;
 	}
 	
-	// 공지사항 검색 ---------------------------------------------------------------------
+	// 공지사항 글 검색 ---------------------------------------------------------------------
+	// search/5?sKey=tc&sVal=검색어
 	@RequestMapping("search/{type}")
 	public String search(@PathVariable int type,
 			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
@@ -192,6 +193,9 @@ public class NoticeController {
 		
 		System.out.println("type:"+ type);
 		System.out.println("search:"+ search);
+		
+		//PageInfo pInfo = noticeService.pagination(type, cp, search);
+		//System.out.println(pInfo);
 		
 		return null;
 	}

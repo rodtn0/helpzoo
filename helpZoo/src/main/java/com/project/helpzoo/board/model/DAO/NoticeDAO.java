@@ -1,6 +1,7 @@
 package com.project.helpzoo.board.model.DAO;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -93,6 +94,14 @@ public class NoticeDAO {
 	 */
 	public int updateNotice(Board uBoard) {
 		return sqlSession.update("noticeMapper.updateNotice", uBoard);
+	}
+
+	/** 검색 조건 추가된 페이지 처리 dao
+	 * @param map
+	 * @return listCount
+	 */
+	public int getSearchListCount(Map<String, Object> map) {
+		return sqlSession.selectOne("noticeMapper.getSearchListCount", map);
 	}
 
 

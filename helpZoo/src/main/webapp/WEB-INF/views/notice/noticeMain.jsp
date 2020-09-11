@@ -138,7 +138,7 @@
 			</div>
 			
 			<!-- 검색창 -->
-			<div class="search">
+			<!-- <div class="search">
 				<form method="post" id="new-board-search">
 					<div class="filter-container">
 						<select id="searchSelectInBoard" class="filter">
@@ -153,15 +153,28 @@
 						<button class="btn-search dense" id="searchBtn" type="submit">검색</button>
 					</div>
 				</form>
-				
+			</div> -->
+			<div class="search">
+				<div class="filter-container">
+					<select id="searchSelectInBoard" class="filter">
+						<option value="tc">제목+내용</option>
+						<option value="t">제목</option>
+						<option value="c">내용</option>
+					</select>
+				</div>
+				<div class="field">
+					<label class="text-hidden" for="">검색창</label>
+					<input id="searchTextInBoard" name="searchTextInBoard" class="search-form" type="text" value="" />
+					<button class="btn-search dense" id="searchBtn" type="submit">검색</button>
+				</div>
 			</div>
 
-				<!-- 공지사항 작성 버튼 -->
-				<c:if test="${loginMember.memberNo == 1}">
-					<div class="insert-notice">
-						<a data-aos="zoom-in" class="insertBtn" onclick="location.href='${contextPath}/notice/5/insertView'">글작성</a>
-					</div>
-				</c:if>
+			<!-- 공지사항 작성 버튼 -->
+			<c:if test="${loginMember.memberNo == 1}">
+				<div class="insert-notice">
+					<a data-aos="zoom-in" class="insertBtn" onclick="location.href='${contextPath}/notice/5/insertView'">글작성</a>
+				</div>
+			</c:if>
 			
 		</div>
 		
@@ -201,7 +214,7 @@
 			if($sVal.val().trim().length == 0){
 				searchUrl = "${contextPath}/notice/${pInfo.boardType}";
 			}else{
-				searchUrl = "../search/${pInfo.boardType}?";
+				searchUrl = "search/${pInfo.boardType}?";
 				
 				if($sVal.val().trim().length != 0){
 					searchUrl += "sKey=" + $sKey.val() + "&sVal=" + $sVal.val();
