@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="adminMapper">
+	<resultMap type="AFunding" id="AFundingResultSet">
+        <result property="fundingNo" column="FUNDING_NO"/>
+        <result property="fundingTitle" column="FUNDING_TITLE"/>
+        <result property="memberName" column="MEMBER_NM"/>
+        <result property="likeCount" column="LIKE_COUNT"/>
+        <result property="readCount" column="READ_COUNT"/>
+        <result property="fundingStatus" column="FUNDING_STATUS"/>
+        <result property="fundingGoal" column="FUNDING_GOAL"/>
+        <result property="fundingSD" column="FUNDING_START_DAY"/>
+        <result property="fundingED" column="FUNDING_END_DAY"/>
+        <result property="currentAmount" column="CURRENT_AMOUNT"/>
+        <result property="fees" column="FEES"/>
+    </resultMap>
+    
+    <select id="selectFunding" resultMap="AFundingResultSet">
+    	SELECT * FROM A_FUNDING
+    </select>
+</mapper>

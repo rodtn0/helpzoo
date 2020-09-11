@@ -58,14 +58,32 @@ public class FundingController {
 	
 	
 	
+	@RequestMapping("fundingOpenDetail")
+	public String fundingOpenDetail() {
+		
+
+		
+		
+		return "funding/fundingOpenDetail";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public void fundingStatusChange() {
 		
 		
 		
-		service.fundingStatusChange();
-		
 	
 		
+	
 	}
 	
 	

@@ -27,7 +27,7 @@ public class LoginFilter implements Filter{
 	
 	private static final Set<String> NOT_ALLOWED_PATH =
 	Collections.unmodifiableSet(new HashSet<String>
-	(Arrays.asList("login", "logout", "loginAction", "findId","findIdAction","signUp", "signUp2","signUp3","authEmail","joinAuth/\\w*")));
+	(Arrays.asList("login", "logout", "loginAction", "idDupCheck","signUpAction","findId","findIdAction","signUp", "signUp2","signUp3","authEmail","joinAuth/\\w*")));
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {

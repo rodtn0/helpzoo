@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
+import javax.persistence.metamodel.SetAttribute;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -190,8 +191,9 @@ public class MemberController {
 	
 	// 회원가입 
 	@RequestMapping(value="signUpAction", method = RequestMethod.POST)
-	public String signUpAction(Member signUpMember, RedirectAttributes rdAttr) {
+	public String signUpAction(Member signUpMember, RedirectAttributes rdAttr, Model model) {
 		
+		signUpMember.setMemberEmail((String)model.getAttribute("memberEmail"));
 		System.out.println(signUpMember);
 		
 		try {
@@ -236,9 +238,8 @@ public class MemberController {
 	@RequestMapping("findIdAction")
 	public String findIdAction(HttpServletResponse response, String memberEmail, Model model) throws Exception {
 		
-		
 		model.addAttribute("memberId", memberService.findIdAction(response, memberEmail));
-		
+
 		return "member/findIdResult";
 	}
 	
