@@ -40,5 +40,14 @@ public class MyPageDAO {
 		return sqlSession.update("mypageMapper.deleteMember", loginMember);
 	}
 
+	/** 비밀번호 변경 DAO
+	 * @param loginMember
+	 * @return result
+	 */
+	public int updatePwd(Member loginMember) {
+		
+		return sqlSession.update("mypageMapper.updatePwd", loginMember);
+	}
+
 	
 }

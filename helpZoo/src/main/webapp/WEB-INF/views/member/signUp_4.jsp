@@ -77,7 +77,12 @@ border: none;
 	                    </div>
 	                    
                         <div class="form-group">
-                            <input type="email" class="form-input" name="memberEmail" id="email" value="${memberEmail}" disabled>
+                         <div class="row mb-3 form-row">
+                        <div class="col-md-3">
+                            <label for="email">이메일 </label>
+                        </div>
+                            <h5 id="email">${memberEmail}</h5>
+                        </div>
                         </div>
                         
                         <div class="row mb-3 form-row">

@@ -118,4 +118,32 @@ public class MyPageController {
 		return path;
 	}
 	
+	@RequestMapping("updatePwd")
+	public String updatePwd(String memberPwd, String newPwd1, Model model) {
+		
+		Member loginMember = (Member)model.getAttribute("loginMember");
+		// Modle에 추가된 Key 값 중 "loginMember"라는 key를 가지는 데이터를 SessionScope로 변경한다.
+		// + Model.getAttribute("loginMember") -> Session에서 "loginMember"라는 key를 가지는
+		// 속성을 얻어와라.
+		
+		// loginMember 객체에 입력된 현재 비밀번호를 세팅해서 전달
+		loginMember.setMemberPwd(memberPwd);
+		
+		// 비밀번호 변경 Service 호출
+		int result = mypageService.updatePwd(loginMember, newPwd1);
+		
+		String status = null;
+		String msg = null;
+		String text = null;
+		
+		if(result >0) {
+			status = "success";
+			text = "비밀번호 변경 성공";
+		}else {
+			status = "error";
+			text = "입력한 현재 비밀번호가 올바른지 확인해주세요.";
+		}
+		
+	}
+	
 }
