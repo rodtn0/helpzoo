@@ -1,5 +1,7 @@
 package com.project.helpzoo.member.model.dao;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -37,6 +39,12 @@ public class MemberDAO {
 	public int idDupCheck(String memberId) {
 		
 		return sqlSession.selectOne("memberMapper.idDupCheck", memberId);
+	}
+	
+	public String findIdAction(HttpServletResponse response, String memberEmail){
+		
+		return sqlSession.selectOne("memberMapper.findId", memberEmail);
+		
 	}
 
 }

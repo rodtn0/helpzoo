@@ -11,7 +11,7 @@
 		}
 	</style>
 </head>
-<body>
+<body style="overflow-x:hidden; overflow-y:auto;">
   <!-- ======= Hero Section ======= -->
   <section id="hero">
   	<img src="/helpzoo/resources/images/helpzoomainImg.jpg" alt="" width="100%">

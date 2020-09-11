@@ -33,8 +33,32 @@ public class AQNADAO {
 	 * @param boardNo
 	 * @return
 	 */
-	public QNABoard selectBoard(int boardNo) {
-		return sqlSession.selectOne("qnaMapper.selectBoard", boardNo);
+	public QNABoard selectBoard(int qnaNo) {
+		return sqlSession.selectOne("qnaMapper.selectQuestionBoard", qnaNo);
+	}
+
+	/** 답변 목록 조회
+	 * @param qnaNo
+	 * @return
+	 */
+	public QNABoard selectAnswerBoard(int qnaNo) {
+		return sqlSession.selectOne("qnaMapper.selectAnswerBoard", qnaNo);
+	}
+
+	/** 답변 작성
+	 * @param qnaNo
+	 * @return
+	 */
+	public int insertAnswer(QNABoard qnaBoard) {
+		return sqlSession.insert("qnaMapper.insertAnswer", qnaBoard);
+	}
+
+	/** 답변할 이메일 가져오기
+	 * @param writer
+	 * @return
+	 */
+	public String selectEmail(String writer) {
+		return sqlSession.selectOne("qnaMapper.selectEmail", writer);
 	}
 
 }

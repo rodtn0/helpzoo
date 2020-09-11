@@ -1,5 +1,7 @@
 package com.project.helpzoo.member.model.service;
 
+import javax.servlet.http.HttpServletResponse;
+
 import com.project.helpzoo.member.model.vo.Member;
 
 public interface MemberService {
@@ -21,5 +23,12 @@ public interface MemberService {
 	 * @return result
 	 */
 	public abstract int idDupCheck(String memberId);
+	
+	/** 아이디 찾기
+	 * @param memberEmail
+	 * @return memberId
+	 * @throws Exception 
+	 */
+	public abstract String findIdAction(HttpServletResponse response, String memberEmail) throws Exception;
 
 }

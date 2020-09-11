@@ -26,10 +26,40 @@
   <!-- Custom styles for this page -->
   <link href="${contextPath}/resources/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+	<script src="${contextPath}/resources/assets/vendor/jquery/jquery.min.js"></script>
+ 	<!-- sweetalert : alert창을 꾸밀 수 있게 해주는 라이브러리 https://sweetalert.js.org/ -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  
+  <!-- 달력 -->
+	<link href='${contextPath}/resources/packages/core/main.css' rel='stylesheet' />
+	<link href='${contextPath}/resources/packages/daygrid/main.css' rel='stylesheet' />
+	<link href='${contextPath}/resources/packages/list/main.css' rel='stylesheet' />
+	<script src='${contextPath}/resources/packages/core/main.js'></script>
+	<script src='${contextPath}/resources/packages/interaction/main.js'></script>
+	<script src='${contextPath}/resources/packages/daygrid/main.js'></script>
+	<script src='${contextPath}/resources/packages/list/main.js'></script>
+	<script src='${contextPath}/resources/packages/google-calendar/main.js'></script>
+  <!-- 달력 여기까지 -->
+  <style>
+  .bg-gradient-primary{
+  background-color: #1fcdcd !important;
+  background-image: none !important;
+  }
+  </style>
 </head>
 
 <body id="page-top">
-
+<!-- sweetalert -->
+		<c:if test="${!empty msg}">
+		<script>
+			swal({
+				title : "${msg}",
+				icon : "${status}",
+				text : "${text}"});
+		</script>
+		<c:remove var="msg"/>
+	</c:if>
+	
   <!-- Page Wrapper -->
   <div id="wrapper">
 
@@ -39,9 +69,9 @@
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
         <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
+          <i class="fas fa-cat"></i><i class="fas fa-dog"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+        <div class="sidebar-brand-text mx-3">Help<sup> ZOO</sup></div>
       </a>
 
       <!-- Divider -->
