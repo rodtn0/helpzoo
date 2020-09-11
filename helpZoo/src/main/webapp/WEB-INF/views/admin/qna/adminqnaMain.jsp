@@ -96,16 +96,16 @@
       
       <script>
       // 게시글 상세보기 기능 구현
-      $(function(){
-    	 $("##dataTable").on("click",function(){
-    		 var boardNo =$(this).parent().children().eq(0).text();
-    		 
+      // 동적
+      // ajax로 (비동기식)으로 페이징 처리!!
+    	 $(document).on("click","#dataTable td",function(){
+    		 var qnaNo =$(this).parent().children().eq(0).text();
+    		 console.log(qnaNo);
     		 // helpzoo/
-    		 var boardUrl = "${contextPath}/admin/qna/"+ boardNo;
+    		 var boardUrl = "${contextPath}/admin/qna/"+ qnaNo;
     		 
-    		 location.hrf = boardUrl;
-    	 });
-      });
+    		 location.href = boardUrl;
+    	});
       </script>
 
 </body>
