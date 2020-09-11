@@ -124,4 +124,20 @@
   	SELECT COUNT(QNA_ORIGIN_NO) FROM Q_BOARD WHERE QNA_ORIGIN_NO = #{qnaNo}
   	</select>
   	
+  	<select id="selectQuestionBoard" parameterType="_int" resultMap="qnaBoardResultSet2">
+  	SELECT * FROM Q_BOARD WHERE QNA_NO=#{qnaNo}
+  	</select>
+  	
+  	<select id="selectAnswerBoard" parameterType="_int" resultMap="qnaBoardResultSet2">
+  	SELECT * FROM Q_BOARD WHERE QNA_ORIGIN_NO=#{qnaNo} AND QNA_GROUP_LAYER = 1
+  	</select>
+  	
+  	<insert id="insertAnswer" parameterType="QNABoard2">
+  	INSERT INTO QNA_BOARD(QNA_NO, QNA_ORIGIN_NO, QNA_GROUP_ORD, QNA_GROUP_LAYER, QNA_TITLE, QNA_CONTENT, QNA_WRITER)
+	VALUES(SEQ_QNO.NEXTVAL, #{qnaNo}, 1, 1, #{qnaTitle}, #{qnaContent}, #{qnaWriter})
+  	</insert>
+  	
+  	<select id="selectEmail" parameterType="string" resultType="string">
+  	SELECT MEMBER_EMAIL FROM MEMBER WHERE MEMBER_ID=#{writer}
+  	</select>
 </mapper>
