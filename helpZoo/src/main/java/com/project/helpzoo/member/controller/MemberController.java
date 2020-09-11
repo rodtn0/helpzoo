@@ -228,5 +228,19 @@ public class MemberController {
 		return result + "";
 	}
 	
+	@RequestMapping("findId")
+	public String findId() {
+		return "member/findId";
+	}
+	
+	@RequestMapping("findIdAction")
+	public String findIdAction(HttpServletResponse response, String memberEmail, Model model) throws Exception {
+		
+		
+		model.addAttribute("memberId", memberService.findIdAction(response, memberEmail));
+		
+		return "member/findIdResult";
+	}
+	
 	
 }

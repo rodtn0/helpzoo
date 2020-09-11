@@ -1,6 +1,9 @@
 package com.project.helpzoo.member.model.service;
 
+import java.io.PrintWriter;
 import java.sql.SQLException;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -60,5 +63,28 @@ public class MemberServiceImpl implements MemberService{
 		
 		return memberDAO.idDupCheck(memberId);
 	}
+
+	
+	// 아이디 찾기
+	@Override
+	public String findIdAction(HttpServletResponse response, String memberEmail) throws Exception{
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		String memberId = memberDAO.findIdAction(response,memberEmail);
+		
+		if(memberId == null) {
+			out.println("<script>");
+			out.println("alert('가입된 아이디가 없습니다.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
+			return null;
+		}else {
+			return memberId;
+		}
+
+	}
+	
+	
 
 }

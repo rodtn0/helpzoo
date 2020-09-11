@@ -38,4 +38,12 @@
 		AND MEMBER_STATUS='Y'
 	</select>
 	
+	<!-- 아이디 찾기 -->
+	<select id="findId" parameterType="String" resultType="String">
+		SELECT MEMBER_ID
+		FROM MEMBER
+		WHERE MEMBER_EMAIL = #{memberEmail}
+		AND MEMBER_STATUS='Y'
+	</select>
+	
 </mapper>

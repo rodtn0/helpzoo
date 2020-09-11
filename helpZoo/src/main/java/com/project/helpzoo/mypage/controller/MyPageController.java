@@ -54,6 +54,7 @@ public class MyPageController {
 		upMember.setMemberNo(loginMember.getMemberNo());
 		upMember.setMemberEnrollDate(loginMember.getMemberEnrollDate());
 		upMember.setMemberId(loginMember.getMemberId());
+		upMember.setMemberEmail(loginMember.getMemberEmail());
 		upMember.setMemberName(loginMember.getMemberName());
 		upMember.setMemberGrade(loginMember.getMemberGrade());
 		

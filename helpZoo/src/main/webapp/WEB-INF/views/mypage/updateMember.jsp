@@ -171,10 +171,9 @@ $('.navbar-light .dmenu').hover(function () {
 								<label for="memberEmail">Email</label>
 							</div>
 							<div class="col-md-6">
-								<input type="email" class="form-control" id="email" name="memberEmail" value="${loginMember.memberEmail}" disabled>
+								<h5 id="email">${loginMember.memberEmail}</h5>
 							</div>
 						</div>
-						<br>
 					<!-- 주소 -->
 					<!-- 오픈소스 도로명 주소 API -->
 					<!-- https://www.poesis.org/postcodify/ -->

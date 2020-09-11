@@ -171,7 +171,7 @@ $('.navbar-light .dmenu').hover(function () {
 					</div>
 				</div>
 						<hr class="mb-4">
-						<button class="btn btn-priamry btn-lg btn-block" id="btn" type="submit">탈퇴</button>
+						<button class="btn btn-priamry btn-lg btn-block" id="btn" type="submit">탈퇴</button><br>
 					</form>
 				</div>
 			<!-- 여기까지 삽입 -->
@@ -183,7 +183,6 @@ $('.navbar-light .dmenu').hover(function () {
 				</div>
 			</div>
 		<script>
-		
 			// submit 동작
 			function validate() {
 	
