@@ -55,15 +55,6 @@ public class FundingController {
 	}
 	
 	
-	@RequestMapping("fundingOpen")
-	public String fundingOpen() {
-	
-		
-		
-		return "funding/fundingOpen";
-	}
-	
-	
 	
 	
 	

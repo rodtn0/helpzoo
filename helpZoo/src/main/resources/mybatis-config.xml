@@ -38,6 +38,7 @@
 		<mapper resource="/mappers/qna-mappers.xml"/>
 		<mapper resource="/mappers/member-mappers.xml"/>
 		<mapper resource="/mappers/review-mappers.xml"/>
+		<mapper resource="/mappers/mypage-mappers.xml"/>
 	</mappers>
 	
 </configuration>

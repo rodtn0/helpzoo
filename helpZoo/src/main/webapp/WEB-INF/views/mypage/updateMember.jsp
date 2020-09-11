@@ -28,6 +28,10 @@
 	background-color:#7fcdcd;
 	border:none;
 	}
+	#postcodify_search_button{
+	background-color:#7fcdcd;
+	border:none;
+	}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
@@ -59,12 +63,12 @@ $('.navbar-light .dmenu').hover(function () {
 	          <span class="navbar-toggler-icon"></span>
 	        </button>
 	        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-	          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+	          <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
 	            <li class="nav-item">
-	              <a class="nav-link" href="${contextPath}/member/mypage">회원정보 수정</a>
+	              <a class="nav-link" href="${contextPath}/mypage/updateMember">회원정보 수정</a>
 	            </li>
 	            <li class="nav-item">
-	              <a class="nav-link" href="#">비밀번호 변경</a>
+	              <a class="nav-link" href="${contextPath}/mypage/changePwd">비밀번호 변경</a>
 	            </li>
 	            <li class="nav-item dropdown dmenu">
 	            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
@@ -94,7 +98,7 @@ $('.navbar-light .dmenu').hover(function () {
 	            </div>
 	          </li>
 	          <li class="nav-item">
-	            <a class="nav-link" href="#">회원탈퇴</a>
+	            <a class="nav-link" href="${contextPath}/mypage/secession">회원탈퇴</a>
 	          </li>
 	          </ul>
 	        </div>
@@ -106,7 +110,7 @@ $('.navbar-light .dmenu').hover(function () {
 			<br><h1 id="mainTxt">${loginMember.memberName}님의 회원 정보 수정</h1>
 			<div class="bg-white rounded shadow-sm container p-3">
 					<form method="POST" action="updateAction" name="updateForm" onsubmit="return validate();" class="form-horizontal" role="form">
-			<hr class="mb-4">
+					<hr class="mb-4">
 						<!-- 아이디 -->
 						<div class="row mb-3 form-row">
 							<div class="col-md-3">
@@ -114,17 +118,17 @@ $('.navbar-light .dmenu').hover(function () {
 							</div>
 							<div class="col-md-6">
 							<!-- loginMember가 session 객체에 존재하면 id를 꺼내와라 -->
-								<h5 id="id">${loginMember.memberId}</h5>
+								<!--  --><h5 id="id">${loginMember.memberId}</h5>
 							</div>
 						</div>
-	
 						<!-- 이름 -->
 						<div class="row mb-3 form-row">
 							<div class="col-md-3">
 								<h6>이름</h6>
 							</div>
 							<div class="col-md-6">
-								<h5 id="name">${loginMember.memberName}</h5>
+							<input type="text" class="form-control" id="name" name="memberName" value="${loginMember.memberName}">
+								<!--  <h5 id="name">${loginMember.memberName}</h5>-->
 							</div>
 						</div>
 	
@@ -167,16 +171,13 @@ $('.navbar-light .dmenu').hover(function () {
 								<label for="memberEmail">Email</label>
 							</div>
 							<div class="col-md-6">
-								<input type="email" class="form-control" id="email" name="memberEmail" value="${loginMember.memberEmail}" disabled>
+								<h5 id="email">${loginMember.memberEmail}</h5>
 							</div>
 						</div>
-						<br>
-	
 					<!-- 주소 -->
 					<!-- 오픈소스 도로명 주소 API -->
 					<!-- https://www.poesis.org/postcodify/ -->
 					<div class="row mb-3 form-row">
-					
 						<c:set var="address" value="${fn:split(loginMember.memberAddress, ',')}"/>
 					
 						<div class="col-md-3">
@@ -218,24 +219,24 @@ $('.navbar-light .dmenu').hover(function () {
 						<!-- 추가정보  1-->
                         <div class="row mb-3 form-row">
 						<div class="col-md-3">
-							<label for="petType">애완동물 종류</label>
+							<label for="petType">반려동물 종류</label>
 						</div>
 						<div class="col-md-9">
-						<select name="memberPetType" id="pet-select">
-									<option>--애완동물 종류를 선택해주세요--</option>
-									<option <c:if test="${loginMember.memberPetType == 'dog'}">selected</c:if>>강아지</option>
-									<option <c:if test="${loginMember.memberPetType == 'cat'}">selected</c:if>>고양이</option>
-									<option <c:if test="${loginMember.memberPetType == 'hamster'}">selected</c:if>>햄스터</option>
-									<option <c:if test="${loginMember.memberPetType == 'hedgehog'}">selected</c:if>>고슴도치</option>
-									<option <c:if test="${loginMember.memberPetType == 'rabbit'}">selected</c:if>>토끼</option>
-									<option <c:if test="${loginMember.memberPetType == 'goldfish'}">selected</c:if>>금붕어</option>
+						<select name="memberPetType" id="pet-select" style="height:30px">
+									<option value="">--반려동물 종류를 선택해주세요--</option>
+									<option <c:if test="${loginMember.memberPetType == 'dog'}">selected</c:if> value="dog">강아지</option>
+									<option <c:if test="${loginMember.memberPetType == 'cat'}">selected</c:if> value="cat">고양이</option>
+									<option <c:if test="${loginMember.memberPetType == 'hamster'}">selected</c:if> value="hamster">햄스터</option>
+									<option <c:if test="${loginMember.memberPetType == 'hedgehog'}">selected</c:if> value="hedgehog">고슴도치</option>
+									<option <c:if test="${loginMember.memberPetType == 'rabbit'}">selected</c:if> value="rabbit">토끼</option>
+									<option <c:if test="${loginMember.memberPetType == 'goldfish'}">selected</c:if> value="goldfish">금붕어</option>
 						</select>
 						</div>
 					</div>
 					<!-- 추가정보 2 -->
                     <div class="row mb-3 form-row">
 						<div class="col-md-3">
-							<label for="petName">애완동물 이름</label>
+							<label for="petName">반려동물 이름</label>
 						</div>
 						<div class="col-md-9">
 							<input type="text" class="form-control" name="memberPetName" id="petName" value="${loginMember.memberPetName}">
@@ -254,49 +255,57 @@ $('.navbar-light .dmenu').hover(function () {
 			</div>
 	
 	<script>
-    var signUpCheck = {
-    		"id" : false,
-    		"pwd1" : false,
-    		"pwd2" : false,
-    		"name" : false,
-    		"phone2" : false
-    };
-    
-    // ******* 실시간 유효성 검사 *******
-    // 정규 표현식
-    var $id = $("#id");
-    var $pwd1 = $("#pwd1");
-    var $pwd2 = $("pwd2");
-    var $pwd = $("#pwd1, #pwd2");
-    var $name = $("#name");
-    var $phone2 = $("#phone2");
-    var $phone3 = $("#phone3");
-    
-    // 아이디 유효성 검사
-    // #id라는 요소에 on(입력) 이벤트가 발생했을 때 함수를 수행하겠다.
-    $id("input", function() {
-    	
-    	signUpCheck.id = false;
-    	
-    	// 영어 대/소문자 + 숫자 총 6~12글자
-    	var regExp = /^[a-zA-Z\d]{6,12}$/;
-    	
-    	if(!regExp.test($id.val())){
-    		
-    		
-    	}else{
-    		
-    	}
-    	
-    });
-    
-    
+	
+	$(".phone").on("input", function() {
+		if ($(this).val().length > $(this).prop("maxLength")) {
+			$(this).val($(this).val().slice(0,$(this).prop("maxLength")));
+		}
+	});
+	
+	// 각 유효성 검사 결과를 저장할 객체
+	var signUpCheck = {		
+			"phone3" : false	
+	}
+	
+    // submit 동작
 	function validate(){
+		var $phone2 = $("#phone2");
+		var $phone3 = $("#phone3");
 		
-		// 모든 입력 값이 유효할 경우
-		// 커맨드 객체를 이용하여 파라미터를 한번에 받을 수 있도록 하기 위해
-		// 입력된 전화번호, 주소를 하나의 문자열로 합쳐 form 태그 끝에 hidden 타입으로 추가하는 작업
+		// 전화번호 관련
+		$(".phone").on("input", function() {
+			
+			if($(this).val().length > $(this).prop("maxLength")){
+				$(this).val($(this).val().slice(0, $(this).prop("maxLength")));
+			}	
+		});
 		
+		var regExp1 = /^\d{3,4}$/;
+		var regExp2 = /^\d{4,4}$/;
+		
+		if(!regExp1.test($phone2.val()) || !regExp2.test($phone3.val())){
+			signUpCheck.phone3 = false;
+			swal({
+				  icon: "error",
+				  text : "유효한 전화번호를 작성해 주세요."
+				});
+			
+		}else{
+			signUpCheck.phone3 = true;
+		}
+		
+		for(var key in signUpCheck){
+			if(!signUpCheck[key]){
+				swal({
+					  icon: "error",
+					  text : "일부 입력 값이 잘못되었습니다."
+					});
+				var id = "#"+key;
+				$(id).focus;
+				return false;
+			}
+		}
+
 		$memberPhone = $("<input>", {type : "hidden", name: "memberPhone",
 						value : $("#phone1").val()+"-"+$("#phone2").val() + "-" +
 								$("#phone3").val()});
@@ -306,7 +315,7 @@ $('.navbar-light .dmenu').hover(function () {
 					$("#address2").val()});
 		
 		// append : form 태그의 자식 중 마지막에 추가함
-		$("form[name='signUpForm']").append($memberPhone, $memberAddress);
+		$("form[name='updateForm']").append($memberPhone).append($memberAddress);
 	}
     </script>
 </body>

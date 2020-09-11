@@ -306,7 +306,9 @@
 			<artifactId>junit</artifactId>
 			<version>4.7</version>
 			<scope>test</scope>
-		</dependency>        
+		</dependency>     
+
+
 	</dependencies>
     <build>
         <plugins>
@@ -343,6 +345,8 @@
                 <configuration>
                     <mainClass>org.test.int1.Main</mainClass>
                 </configuration>
+                
+ 
             </plugin>
             <plugin>
             <groupId>com.mysema.maven</groupId>
@@ -362,7 +366,10 @@
          
         </plugin>
          
-         
+        <plugin>
+			<artifactId>maven-war-plugin</artifactId>
+			<version>3.1.0</version>
+		</plugin>
          
          
 		

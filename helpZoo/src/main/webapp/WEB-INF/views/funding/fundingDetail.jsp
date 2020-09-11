@@ -66,12 +66,12 @@
         text-align: center;
       }
       .co {
-        margin-top: 2%;
+        margin-top: 3%;
       }
 
       .funding_detail_container {
         margin-top: 1.5%;
-        padding: 0% 45% 0%;
+        padding: 1% 13% 1%;
         color: #000;
         font-weight: bold;
       }
@@ -136,7 +136,7 @@
   
   
     <div class="co">
-      <img src="/helpzoo/resources/images/dodo5.jpg" class="funding_item_logo" />
+      <img src="dodo5.jpg" class="funding_item_logo" />
 
       <div class="funding_item_text">
         <p>사료 / 식이용품</p>
@@ -157,7 +157,7 @@
     <div class="container funding_detail_context_container">
         <div class="row">
       <div class="col-lg-8 col-sm-8 col-md-8">
-        <img src="/helpzoo/resources/images/dodo5.jpg" class="funding_thumnail" />
+        <img src="${contextPath}/helpzoo/resources/images/dodo5.jpg" class="funding_thumnail" />
         <br />
         <br />
        
@@ -207,7 +207,7 @@
            메이커 정보
 
            <div class="card" style="width: 18rem;">
-            <img src="/helpzoo/resources/images/dodo5.jpg" class="card-img-top" alt="...">
+            <img src="${contextPath}/helpzoo/resources/images/dodo5.jpg" class="card-img-top" alt="...">
             <div class="card-body">
               <p class="card-text">${funding.makerName }</p>
             </div>
@@ -218,7 +218,7 @@
          리워드 정보
 
           <div class="card" style="width: 18rem;">
-           <img src="/helpzoo/resources/images/dodo5.jpg" class="card-img-top" alt="...">
+           <img src="${contextPath}/helpzoo/resources/images/dodo5.jpg" class="card-img-top" alt="...">
            <div class="card-body">
              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
            </div>
@@ -228,7 +228,7 @@
          메이커 정보
 
          <div class="card" style="width: 18rem;">
-          <img src="/helpzoo/resources/images/dodo5.jpg" class="card-img-top" alt="...">
+          <img src="${contextPath}/helpzoo/resources/images/dodo5.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
           </div>

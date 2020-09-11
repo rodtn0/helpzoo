@@ -6,7 +6,6 @@
 <meta charset="UTF-8">
 <title>회원가입 - 회원 정보 입력</title>
 <link rel="stylesheet" href="${contextPath}/resources/css/register.css">
-</head>
 <style>
 .form-title{
 font-family: "Recipekorea";
@@ -18,6 +17,7 @@ background-color: #7fcdcd;
 border: none;
 }
 </style>
+</head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
  <div class="main">
