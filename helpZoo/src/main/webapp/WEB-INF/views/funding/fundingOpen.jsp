@@ -118,6 +118,8 @@ pageEncoding="UTF-8"%>
           <input
             type="text"
             class="form-control"
+            name ="makerName"
+            id = "makerName"
             aria-label="Large"
             aria-describedby="inputGroup-sizing-sm"
           />
@@ -132,6 +134,8 @@ pageEncoding="UTF-8"%>
           <input
             type="text"
             class="form-control"
+             name ="businessType"
+            id = "businessType"
             aria-label="Large"
             aria-describedby="inputGroup-sizing-sm"
           />
@@ -181,6 +185,8 @@ pageEncoding="UTF-8"%>
           <input
             type="text"
             class="form-control"
+             name ="phone"
+            id = "phone"
             aria-label="Large"
             aria-describedby="inputGroup-sizing-sm"
           />
