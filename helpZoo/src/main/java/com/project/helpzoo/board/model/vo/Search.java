@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class Search {
 
+
 	// field
 	private String[] ct;
 	private String sKey;

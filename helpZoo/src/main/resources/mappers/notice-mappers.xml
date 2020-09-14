@@ -80,7 +80,7 @@
     </update>
     
     <!-- 검색 조건 포함된 전체 게시글 수 조회 -->
-    <select id="getSearchListCount" parameterType="map" resultType="_int">
+    <!-- <select id="getSearchListCount" parameterType="map" resultType="_int">
     	SELECT COUNT(*)
 		FROM v_board
 		WHERE board_type= #{type}
@@ -101,6 +101,62 @@
 			</choose>
 		</if>
 		AND BOARD_STATUS = 'Y'
-    </select>
+    </select> -->
+    <select id="getSearchListCount" parameterType="map" resultType="_int">
+		SELECT count(*)
+		FROM v_board
+		<!-- Map 객체를 사용할 경우 key값을 호출하면 해당 value값을 얻을 수 있음. -->
+		WHERE board_type = #{type}
+		<!-- Map 객체에 존재하는 key값이 search인 요소의 sVal필드 값이 null이 아닐 경우 -->
+		<if test="search.sVal != null">
+			<!-- bind 태그 : 동적 sql 구문 내에서 사용할 변수 선언 -->
+			<bind name="sv" value="'%' + search.sVal + '%'"/>
+			AND
+			
+			<choose>
+				<when test="search.sKey == 'tit'">
+					board_title LIKE #{sv}
+				</when>
+				<when test="search.sKey == 'con'">
+					board_content LIKE #{sv}
+				</when>
+				<otherwise>
+					(BOARD_TITLE LIKE #{sv}
+					OR BOARD_CONTENT LIKE #{sv})
+				</otherwise>
+			</choose>
+		</if>
+		AND BOARD_STATUS = 'Y'
+	</select>
+    
+    
+    <!-- 검색 목록 조회 -->
+    <select id="selectSearchList" parameterType="map" resultMap="boardResultSet">
+    	SELECT *
+    	FROM v_board
+    	<!-- Map 객체를 사용할 경우 key값을 호출하면 해당 value값을 얻을 수 있음. -->
+		WHERE board_type = #{type}
+		<!-- Map 객체에 존재하는 key값이 search인 요소의 sVal필드 값이 null이 아닐 경우 -->
+		<if test="search.sVal != null">
+			<!-- bind 태그 : 동적 sql 구문 내에서 사용할 변수 선언 -->
+			<bind name="sv" value="'%' + search.sVal + '%'"/>
+			AND
+			
+			<choose>
+				<when test="search.sKey == 'tit'">
+					board_title LIKE #{sv}
+				</when>
+				<when test="search.sKey == 'con'">
+					board_content LIKE #{sv}
+				</when>
+				<otherwise>
+					(BOARD_TITLE LIKE #{sv}
+					OR BOARD_CONTENT LIKE #{sv})
+				</otherwise>
+			</choose>
+		</if>
+		AND BOARD_STATUS = 'Y'
+		ORDER BY BOARD_NO DESC
+	</select>
 
 </mapper>

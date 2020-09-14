@@ -131,11 +131,24 @@ public class NoticeServiceImpl implements NoticeService{
 		map.put("search", search);
 		map.put("type", type);
 		
+		System.out.println("map : " + map);
+		
 		int searchListCount = noticeDAO.getSearchListCount(map);
 
 		pInfo.setPageInfo(cp, searchListCount, type);
 		
 		return pInfo;
+	}
+
+	// 검색 목록 조회 service 구현 ----------------------------------------------------------
+	@Override
+	public List<Board> selectSearchList(PageInfo pInfo, Search search) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("search", search);
+		map.put("type", pInfo.getBoardType());
+		
+		return noticeDAO.selectSearchList(pInfo, map);
 	}
 
 

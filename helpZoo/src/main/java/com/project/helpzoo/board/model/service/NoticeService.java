@@ -52,4 +52,11 @@ public interface NoticeService {
 	 */
 	public abstract PageInfo pagination(int type, int cp, Search search);
 
+	/** 검색 목록 조회 service
+	 * @param pInfo
+	 * @param search
+	 * @return noticeList
+	 */
+	public abstract List<Board> selectSearchList(PageInfo pInfo, Search search);
+
 }

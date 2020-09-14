@@ -104,5 +104,25 @@ public class NoticeDAO {
 		return sqlSession.selectOne("noticeMapper.getSearchListCount", map);
 	}
 
+	/** 검색 목록 조회 service 구현 dao
+	 * @param pInfo
+	 * @param map
+	 * @return noticeList
+	 */
+	public List<Board> selectSearchList(PageInfo pInfo, Map<String, Object> map) {
+		// RowBounds
+		// 조회된 내용 중 지정한 만큼의 수를 건너 띄고 나서 
+		// 이후 몇 개를 조회할지를 정할 수 있는 객체
+		
+		// offset : 건너 띌 게시글 수를 지정
+		int offset = (pInfo.getCurrentPage() -1) * pInfo.getLimit();
+						// (1 - 1) * 10 = 0페이지
+						// (2 - 1) * 10 = 10
+						// (3 - 1) * 10 = 20
+		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
+		
+		return sqlSession.selectList("noticeMapper.selectSearchList", map, rowBounds);
+	}
+
 
 }

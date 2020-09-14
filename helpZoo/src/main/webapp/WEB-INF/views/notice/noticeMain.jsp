@@ -157,9 +157,9 @@
 			<div class="search">
 				<div class="filter-container">
 					<select id="searchSelectInBoard" class="filter">
-						<option value="tc">제목+내용</option>
-						<option value="t">제목</option>
-						<option value="c">내용</option>
+						<option value="tit-con">제목+내용</option>
+						<option value="tit">제목</option>
+						<option value="con">내용</option>
 					</select>
 				</div>
 				<div class="field">
@@ -211,11 +211,15 @@
 			console.log($sKey.val());
 			console.log($sVal.val());
 			
+			// 검색어가 없는 경우
 			if($sVal.val().trim().length == 0){
-				searchUrl = "${contextPath}/notice/${pInfo.boardType}";
-			}else{
-				searchUrl = "search/${pInfo.boardType}?";
 				
+				// 게시판 현재페이지로
+				searchUrl = "${contextPath}/notice/noticeList?cp=${pInfo.currentPage}";
+			}else{
+				searchUrl = "${contextPath}/notice/search/${pInfo.boardType}?"; // 검색요청 url
+				
+				// 검색어가 있는 경우
 				if($sVal.val().trim().length != 0){
 					searchUrl += "sKey=" + $sKey.val() + "&sVal=" + $sVal.val();
 				}
@@ -224,7 +228,32 @@
 			location.href = searchUrl;
 			
 		});
+		
+		// 검색값 유지 ---------------------------------------------------------------
+		$(function() {
+			let sKey = "${param.sKey}";
+			let sVal = "${param.sVal}";
+			
+			if(sKey != "" && sVal != ""){
+				$('#searchTextInBoard').val(sVal);
+				
+				$('#searchSelectInBoard > option').each(function(index, item) {
+					if($(item).val() == sKey){
+						$(item).prop('selected', true);
+					}
+				});
+			}
+			
+		});
 
+		// 검색창 엔터 기능 ---------------------------------------------------------------
+		$('#searchTextInBoard').on('keyup', function(event) {
+			console.log(event.keyCode);
+			if(event.keyCode == 13){
+				$('#searchBtn').click();
+			}
+		})
+		
 	</script>
 	
 </body>

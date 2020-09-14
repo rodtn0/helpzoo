@@ -192,12 +192,22 @@ public class NoticeController {
 			Search search, Model model) {
 		
 		System.out.println("type:"+ type);
-		System.out.println("search:"+ search);
+		System.out.println(search);
 		
-		//PageInfo pInfo = noticeService.pagination(type, cp, search);
-		//System.out.println(pInfo);
+		// 게시글 수 조회
+		PageInfo pInfo = noticeService.pagination(type, cp, search);
 		
-		return null;
+		// 게시글 목록 조회
+		List<Board> noticeList = noticeService.selectSearchList(pInfo, search);
+		
+		for(Board b : noticeList) {
+			System.out.println(b);
+		}
+		
+		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("pInfo", pInfo);
+		
+		return "notice/noticeMain";
 	}
 	
 	
