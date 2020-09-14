@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -186,6 +188,49 @@
       .form-group{
           margin-top: 1%;
       }
+      .form-control{
+        margin-top: 0.8%;
+      }
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  margin-top: 1%;
+}
+
+.btn {
+  border: 2px solid gray;
+  color: gray;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.important_info{
+  color: black;
+  font-size: 1.3rem;
+  margin-bottom: 1%;
+}
+.info_discription_title{
+  margin-bottom: 1%;
+}
 
 
 
@@ -232,6 +277,12 @@
       }
 
     </style>
+
+
+</script>
+
+
+
   </head>
   <body>
     <div class="project_create_top_bar">
@@ -285,7 +336,6 @@
           </div>
           </nav>
 
-
      <!-- 빈공간 만들기용 -->
             <div class="col-md-2 col-lg-2 col-sm-2">
   
@@ -293,138 +343,209 @@
 
           <div class="col-md-9 col-lg-9 col-sm-9">
             <div class="container project_open_ready">
-              <h1 class="title_msg">기본 요건</h1>
+              <h1 class="title_msg">메이커 정보</h1>
               <br>
+              <br>
+
+              <div class="important_info">메이커 기본 정보</div>
               <div>
-                펀딩 진행을 위한 기본 요건을 확인하고자 합니다. 심사 시 확인하는 중요한 정보이므로 반드시 정확한 정보를 입력하세요.<br>
-                답변 내용이 사실과 다른 경우, 약정 위반에 따른 불이익이 발생할 수 있습니다.
+                프로젝트 상세 페이지에 노출되는 정보이니, 서포터와 소통이 가능한 정확한 정보를 입력해주세요.
                 <br>
                 <br>
-
-              <div class="funding_open_question ">
-
-                Q1. 리워드가 타 크라우드펀딩사 및 온라인 커머스, 자사 홈페이지 등 다른 판매처에서 유통된 적이 있거나 현재 유통 <br>
-                중인가요? <span class="star">*</span>
-
-              </div>  
-
+            </div>        
+              <br>
               <br>
 
-              <div class="form-check">
-                <input class="form-check-input mint" type="radio" name="circulation" id="circulation" value="option1" checked>
-                <label class="form-check-label " for="exampleRadios1">
-                    &nbsp;    아니요. 다른 곳에서 유통한 적이 없으며 와디즈를 통해 처음 선보이는 제품입니다.
-                </label>
+       <div class="info_discription_title">     메이커명 <span class="star">*</span></div>
+            <small>법인사업자는 법인등기부상 법인명 / 개인 사업자는 주민등록상 성명 또는 상호 / 개인은 주민등록상 성명을 입력하세요.</small>
+                <input class="form-control form-control-lg" type="text" placeholder="메이커 명 입력">
+                <small>40자 남음</small>
+                <br>
+                <br>
+                <br>
+
+                
+                메이커 프로필 이미지 <span class="star">*</span>
+                <br>
+                <div class="upload-btn-wrapper">
+                    <button class="btn"> <i class="fas fa-camera-retro"></i>&nbsp;등록하기</button>
+                    <input type="file" name="myfile" />
+                  </div>
+                  <br>
+                <small>  3MB 이하의 JPEG, PNG 파일
+                사이즈 : 300X300  픽셀 이상
+            </small>
+
+                <br>
+                <br>
+
+
+
+    
+                문의 이메일 <span class="star">*</span><br>
+                <input class="form-control form-control-lg" type="number" placeholder="제목 입력">
+                <br>
+                <br>
+
+                문의 전화번호 <span class="star">*</span><br>
+                <input class="form-control form-control-lg" type="number" placeholder="제목 입력">
+                <br>
+                <br>
+
+
+
+
+                카카오톡 채널(선택사항)<span class="star">*</span><br>
+                <small>엔터를 누르면 태그가 등록됩니다. (최대 10개까지 입력 가능)</small>
+                <input class="form-control form-control-lg" type="number" placeholder="제목 입력">
+                <input class="form-control form-control-lg" type="number" placeholder="제목 입력">
+                <br><br>
+
+
+                홈페이지(선택사항)<span class="star">*</span><br>
+                <small>엔터를 누르면 태그가 등록됩니다. (최대 10개까지 입력 가능)</small>
+                <input class="form-control form-control-lg" type="number" placeholder="제목 입력">
+                <input class="form-control form-control-lg" type="number" placeholder="제목 입력">
+                <br><br>
+
+
+                SNS(선택사항) <span class="star">*</span><br>
+                <small>엔터를 누르면 태그가 등록됩니다. (최대 10개까지 입력 가능)</small>
+                <input class="form-control form-control-lg" type="number" placeholder="제목 입력">
+                <input class="form-control form-control-lg" type="number" placeholder="제목 입력">
+                <input class="form-control form-control-lg" type="number" placeholder="제목 입력">
+                <br><br>
+
+
+
+                <div class="important_info">대표자 정보</div>
+                <div>
+                  정산과 관련된 전자 약정 체결을 위한 정보이니, 정확하게 입력해주세요.
+                  <br>
+                  <br>
+              </div>        
+              정산 정책 확인 <span class="star">*</span><br>
+              <small>와디즈 정산 정책을 반드시 확인하세요.</small>
+                <br>
+
+
+              <div class="upload-btn-wrapper">
+                <button class="btn"> <i class="fas fa-check"></i>&nbsp; 정책 확인하기</button>
+                <input type="file" name="myfile" />
               </div>
 
-              <br>
 
-             <div class="form-check">
-                <input class="form-check-input mint" type="radio" name="circulation" id="circulation" value="option1" >
-                <label class="form-check-label" for="exampleRadios1">
-                    &nbsp;   예, 다른 곳에서 유통한 적이 있습니다. 또는 현재 유통 중입니다.
-                </label>
-              </div>
+              
 
 
 
 
 
-              <br>
-              <br>
 
-              <div class="funding_open_question ">
 
-                Q2. 현재까지 진행된 리워드의 준비 상태 및 앞으로의 계획을 구체적으로 설명해주세요. <span class="star">*</span>
 
-              </div>  
-              <br>
-              <small>
-                1) 리워드가 유형의 제품인 경우 제작 공정에 따른 현재 리워드의 제작 상태 및 제조 시설명과 일일 최대 생산 가능량을 포함한 앞으로의 생산 계획을 작성해주세요.
-                </small>
                 <br>
-                <small>
-                    2) 공연, 영화, 전시 등 무형 서비스인 경우, 장소 대관, 촬영 일정 등의 현재 준비 상태 및 앞으로의 계획을 작성해주세요.
+                <br>
+                
+                사업자 구분 <span class="star">*</span><br>
+               <select class="form-control form-control-lg">
+                 <option>개인</option>
+                <option>사업자 구분 선택</option>
+                <option>개인사업자</option>
+                <option>법인사업자</option>
+              </select>
+                <br>  
+                <br>
+
+
+                
+                대표자명 <span class="star">*</span><br>
+                <small>사업자등록증에 등록된 대표자의 이름과 일치해야 합니다.</small>
+                <input class="form-control form-control-lg" type="number" placeholder="대표자명 입력">
+                
+              
+
+                <br>  
+                <br>
+
+              
+                대표자 이메일 <span class="star">*</span><br>
+                <small>대표자의 이메일로 전자 약정서가 발송됩니다. 전자 약정은 대표자가 직접 진행해야 합니다.</small>
+                <input class="form-control form-control-lg" type="number" placeholder="대표자 이메일 입력">
+                
+              
+
+                <br>  
+                <br>
+
+            
+             
+                
+                대표자 휴대폰 번호 <span class="star">*</span><br>
+                <small>약정의 체결 시 본인확인을 위해 휴대전화 본인인증을 진행합니다. 휴대전화 본인인증이 불가한 경우, 약정의 체결 및 서비스 제공이 불가하니, 반드시 대표자(본인) 명의 휴대폰 번호를 입력하세요.</small>
+                <input class="form-control form-control-lg" type="number" placeholder="대표자 휴대폰 번호 입력">
+                특수문자(-)없이 숫자만 입력해주세요.
+
+                <br>
+                <br>
+                <br>
+
+
+
+                <div class="important_info">세금계산서 발행 및 정산 계좌 정보</div>
+                <br>
+                <div>
+                  세금계산서 발행 이메일 <span class="star">*</span><br>
+                  <small>세금계산서 발행 시, 입력되는 이메일 주소를 입력하세요. (본인의 이메일 주소 또는 세무 대리인의 이메일 주소)</small>
+                  <input class="form-control form-control-lg" type="number" placeholder="이메일 입력">
+                  <br>
+                  <br>
+                  
+                  
+                  계좌 정보 <span class="star">*</span><br>
+                  <small>펀딩 성공시 정산금을 수령할 계좌정보를 입력하세요. <br>
+                    <br>  ・ 개인(사업자)의 경우 본인/사업자 명의 계좌 등록이 가능하며, 법인 사업자의 경우 법인계좌만 등록 가능합니다.
+                    <br> ・ 입금이 가능한 계좌인지 확인 후 입력하세요.
+                    <br> ・ 저축성 예금계좌, 외화예금계좌, CMA계좌, 평생계좌번호(휴대폰 번호) 등은 입금 불가
+                    
                     </small>
 
+                    <select class="form-control form-control-lg">
+                      <option>은행 선택</option>
+                     <option>사업자 구분 선택</option>
+                     <option>개인사업자</option>
+                     <option>법인사업자</option>
+                   </select>
 
-              <br>
-
-              <div class="form-group">
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" 
-                placeholder="내용을 입력하세요."
-                ></textarea>
-                <small>500자</small>
-            </div>        
+                  <input class="form-control form-control-lg" type="number" placeholder="계좌번호 입력">
+                  <small>특수문자(-)없이 숫자만 입력해주세요.</small>
+                  <input class="form-control form-control-lg" type="number" placeholder="예금주 명 입력"> 
+                  <small>예금주 명은 계좌의 예금주와 정확하게 일치해야 합니다.</small>
 
 
-            <br>
-
-            <div class="funding_open_question ">
-
-                Q3. 리워드의 전달 계획을 알려주세요.<span class="star">*</span>
-
-              </div>  
-              <br>
-              <small>
-                1) 리워드의 전달 방법(택배 or SMS 등)을 입력하고, 리워드 제작 및 전달 일정이 변동될 가능성이 있다면 사유를 알려주세요.
-                </small>
                 <br>
-                <small>
-                    2) 발송 업체명 및 일일 최대 발송 가능량을 입력해주세요
-                    </small>
-                    <br>
-                    <small>
-                        3) 공연, 영화, 전시 등 무형 서비스의 경우 좌석수, 일 최대 예약 가능 수량 등을 작성해주세요. aa
-                        </small>
+                <br>
+                <br>
 
-              <br>
+                통장 사본<span class="star">*</span><br>
+                <small>위 계좌 정보와 동일한 명의의 통장 사본을 제출해야 합니다. JPG, JPEG, PNG, PDF / 10MB 이하 파일 1개만 업로드 가능합니다.</small> 
 
-              <div class="form-group">
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" 
-                placeholder="내용을 입력하세요."
-                ></textarea>
-                <small>500자</small>
-            </div>        
+ <br>
+                <br>
+                <hr>
 
-
-
-
-
-              <br>
-              <br>
-
-               <div class="black"> 수수료 정책 안내 </div> 
                 
                 <br>
-                <div class="temp_box container"> 
-               
-                  
-
-
-
-
-     <small>  <b>리워드 기본 수수료는 7% (VAT별도)입니다.</b> <br>
-       
-       
-        ·   부가 서비스 이용 시, 추가 수수료가 발생될 수 있습니다. <br>
-        ·      리워드가 없는 기부후원 프로젝트의 경우, 수수료가 다르게 적용됩니다. <br>
-        ·    자세한 내용은와디즈 수수료 정책을 확인해주세요   <br>
-     
-    
-    </small>
-       
-    </div>
-
-                <br>
-            
                 <br>
                 <br>
+
                 <button
                 type="button"
                 class="btn btn-primary col-md-4 col-sm-4 col-xs-4 btn-lg funding_btn mintclick"
                 onclick="location.href = '${contextPath}/funding/fundingOpenDetail' "
               >저장하기</button>
+
+
      <script>
 
                   var menubarFlag = true;
@@ -491,6 +612,11 @@
 
 
                 </script>
+
+
+
+              
+
 
           </div>
         </div>
