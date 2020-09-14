@@ -35,7 +35,7 @@ public class EventDAO {
 		
 		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
 		
-		return sqlSession.selectList("eventMapper.selectList", pInfo.getBoardType());
+		return sqlSession.selectList("eventMapper.selectList", pInfo.getBoardType(), rowBounds);
 	}
 	
 	/** 이벤트 글 조회 dao
