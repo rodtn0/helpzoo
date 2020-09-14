@@ -90,6 +90,66 @@ public class FundingController {
 	
 	
 	
+	@RequestMapping("fundingOpenRequire")
+	public String fundingOpenRequire() {
+		
+
+		
+		
+		return "funding/fundingOpenReq";
+	}
+	
+	
+	
+	
+	@RequestMapping("fundingOpenInfo")
+	public String fundingOpenInfo() {
+		
+
+		
+		
+		return "funding/fundingOpenInfo";
+	}
+	
+	
+	
+	
+	@RequestMapping("fundingOpenStory")
+	public String fundingOpenStory() {
+		
+
+		
+		
+		return "funding/fundingOpenStory";
+	}
+	
+	
+	
+	
+	@RequestMapping("fundingOpenReward")
+	public String fundingOpenReward() {
+		
+
+		
+		
+		return "funding/fundingRewardDesign";
+	}
+	
+	
+	
+	
+	@RequestMapping("fundingOpenMakerInfo")
+	public String fundingOpenMakerInfo() {
+		
+
+		
+		
+		return "funding/fundingOpenMakerInfo";
+	}
+	
+	
+	
+	
 	
 	
 	

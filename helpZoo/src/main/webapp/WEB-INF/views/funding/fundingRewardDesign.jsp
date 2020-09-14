@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -187,6 +186,44 @@
           margin-top: 1%;
       }
 
+      .temp_box{
+        line-height: 200%;
+      }
+
+
+      .upload-btn-wrapper {
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+      margin-top: 1%;
+      border: 2px solid gray;
+      color: gray;
+      background-color: white;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-size: 20px;
+      font-weight: bold;
+      }
+      .upload-btn-wrapper input[type=file] {
+        font-size: 100px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+        
+      }
+
+      
+.btn {
+
+}
+
+.fa-plus-square{
+  font-size: 1.5rem;
+}
+
+
+
 
 
       .funding_ready_menubar:hover{
@@ -230,6 +267,7 @@
         border: white;
         color: black;
       }
+
 
     </style>
   </head>
@@ -293,109 +331,14 @@
 
           <div class="col-md-9 col-lg-9 col-sm-9">
             <div class="container project_open_ready">
-              <h1 class="title_msg">기본 요건</h1>
+              <h1 class="title_msg">리워드 설계</h1>
               <br>
               <div>
-                펀딩 진행을 위한 기본 요건을 확인하고자 합니다. 심사 시 확인하는 중요한 정보이므로 반드시 정확한 정보를 입력하세요.<br>
-                답변 내용이 사실과 다른 경우, 약정 위반에 따른 불이익이 발생할 수 있습니다.
+                서포터에게 제공할 리워드 내용을 입력하세요. 서포터가 쉽게 펀딩할 수 있는 저렴한 리워드부터 서포터의 보다 빠른 펀딩<br>을 유도할 수 있는 얼리버드 리워드까지 다양한 리워드를 구성하세요.
                 <br>
                 <br>
 
-              <div class="funding_open_question ">
 
-                Q1. 리워드가 타 크라우드펀딩사 및 온라인 커머스, 자사 홈페이지 등 다른 판매처에서 유통된 적이 있거나 현재 유통 <br>
-                중인가요? <span class="star">*</span>
-
-              </div>  
-
-              <br>
-
-              <div class="form-check">
-                <input class="form-check-input mint" type="radio" name="circulation" id="circulation" value="option1" checked>
-                <label class="form-check-label " for="exampleRadios1">
-                    &nbsp;    아니요. 다른 곳에서 유통한 적이 없으며 와디즈를 통해 처음 선보이는 제품입니다.
-                </label>
-              </div>
-
-              <br>
-
-             <div class="form-check">
-                <input class="form-check-input mint" type="radio" name="circulation" id="circulation" value="option1" >
-                <label class="form-check-label" for="exampleRadios1">
-                    &nbsp;   예, 다른 곳에서 유통한 적이 있습니다. 또는 현재 유통 중입니다.
-                </label>
-              </div>
-
-
-
-
-
-              <br>
-              <br>
-
-              <div class="funding_open_question ">
-
-                Q2. 현재까지 진행된 리워드의 준비 상태 및 앞으로의 계획을 구체적으로 설명해주세요. <span class="star">*</span>
-
-              </div>  
-              <br>
-              <small>
-                1) 리워드가 유형의 제품인 경우 제작 공정에 따른 현재 리워드의 제작 상태 및 제조 시설명과 일일 최대 생산 가능량을 포함한 앞으로의 생산 계획을 작성해주세요.
-                </small>
-                <br>
-                <small>
-                    2) 공연, 영화, 전시 등 무형 서비스인 경우, 장소 대관, 촬영 일정 등의 현재 준비 상태 및 앞으로의 계획을 작성해주세요.
-                    </small>
-
-
-              <br>
-
-              <div class="form-group">
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" 
-                placeholder="내용을 입력하세요."
-                ></textarea>
-                <small>500자</small>
-            </div>        
-
-
-            <br>
-
-            <div class="funding_open_question ">
-
-                Q3. 리워드의 전달 계획을 알려주세요.<span class="star">*</span>
-
-              </div>  
-              <br>
-              <small>
-                1) 리워드의 전달 방법(택배 or SMS 등)을 입력하고, 리워드 제작 및 전달 일정이 변동될 가능성이 있다면 사유를 알려주세요.
-                </small>
-                <br>
-                <small>
-                    2) 발송 업체명 및 일일 최대 발송 가능량을 입력해주세요
-                    </small>
-                    <br>
-                    <small>
-                        3) 공연, 영화, 전시 등 무형 서비스의 경우 좌석수, 일 최대 예약 가능 수량 등을 작성해주세요. aa
-                        </small>
-
-              <br>
-
-              <div class="form-group">
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" 
-                placeholder="내용을 입력하세요."
-                ></textarea>
-                <small>500자</small>
-            </div>        
-
-
-
-
-
-              <br>
-              <br>
-
-               <div class="black"> 수수료 정책 안내 </div> 
-                
                 <br>
                 <div class="temp_box container"> 
                
@@ -404,20 +347,29 @@
 
 
 
-     <small>  <b>리워드 기본 수수료는 7% (VAT별도)입니다.</b> <br>
+     <small>  <b>리워드 설계 조건</b> <br><br>
        
        
-        ·   부가 서비스 이용 시, 추가 수수료가 발생될 수 있습니다. <br>
-        ·      리워드가 없는 기부후원 프로젝트의 경우, 수수료가 다르게 적용됩니다. <br>
-        ·    자세한 내용은와디즈 수수료 정책을 확인해주세요   <br>
+     <span class="list">  정렬 순서</span>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;  혜택이 높은 순으로 나오도록 정렬 순서를 등록하세요. <br>
+
+     <span class="list">  제한 수량    </span>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;    생산 및 제공할 수 있는 리워드의 총 수량으로 해당 수량이 모두 펀딩되면 더 이상 펀딩 불가합니다. <br>
+
+     <span class="list">  발송 시작일    </span>    &nbsp;&nbsp;&nbsp;&nbsp;   &nbsp;   프로젝트 종료일 이후부터 3개월 이내로 설계 가능합니다.   <br>
      
-    
     </small>
        
+
+    </div>
+    <br>
+
+    <div class="upload-btn-wrapper">
+      <button class="btn"> <i class="fas fa-plus"></i>&nbsp; 추가하기</button>
+      <input type="file" name="myfile" />
     </div>
 
                 <br>
-            
+                <br>
+                <br>
                 <br>
                 <br>
                 <button
@@ -425,6 +377,9 @@
                 class="btn btn-primary col-md-4 col-sm-4 col-xs-4 btn-lg funding_btn mintclick"
                 onclick="location.href = '${contextPath}/funding/fundingOpenDetail' "
               >저장하기</button>
+
+
+
      <script>
 
                   var menubarFlag = true;
