@@ -1,11 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
+	<style>
+		#postImg{
+			width : 300px;
+			height : 300px;
+		}
+	
+	</style>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
@@ -20,7 +28,9 @@
   <!-- Custom styles for this template -->
   <link href="${contextPath}/resources/reviewViewCss/css/blog-post.css" rel="stylesheet">
 
+	
 </head>
+
 
 <body>
 	<jsp:include page="../common/header.jsp"/>
@@ -51,9 +61,15 @@
 
         <hr>
 
-        <!-- Preview Image -->
-        <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
-
+        <!-- 이미지 란 -->
+        <c:if test="${!empty files}">
+        	<div class="carousel slide m-3" id="carousel-325626">
+	        	<c:forEach var="files" items="${files}">
+	        		<c:set var="src" value="${contextPath}${files.filePath}/${files.fileChangeName}"/>
+	        		<img id="postImg" class="img-fluid rounded" src="${src}" alt="">
+				</c:forEach>
+			</div>
+		</c:if>
         <hr>
 
         <!-- Post Content -->

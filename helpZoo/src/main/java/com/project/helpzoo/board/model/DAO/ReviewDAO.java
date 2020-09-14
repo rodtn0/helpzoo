@@ -137,6 +137,19 @@ public class ReviewDAO {
 		sqlSession.delete(mapperId, reviewNo);
 	}
 
+
+	/** 게시글 상세 조회시 이미지 조회 DAO
+	 * @param type
+	 * @param rBoardNo
+	 * @return files
+	 */
+	public List<Attachment> selectFiles(int type, int rBoardNo) {
+		String mapperId = null;
+		if(type == 1) mapperId = "reviewMapper.selectFundingImages";
+		else		  mapperId = "reviewMapper.selectDonationImages";
+		return sqlSession.selectList(mapperId, rBoardNo);
+	}
+
 	
 	
 }
