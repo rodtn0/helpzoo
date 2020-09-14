@@ -119,7 +119,7 @@ public class MyPageController {
 	}
 	
 	@RequestMapping("updatePwd")
-	public String updatePwd(String memberPwd, String newPwd1, Model model) {
+	public String updatePwd(String memberPwd, String newPwd1, Model model, RedirectAttributes rdAttr) {
 		
 		Member loginMember = (Member)model.getAttribute("loginMember");
 		// Modle에 추가된 Key 값 중 "loginMember"라는 key를 가지는 데이터를 SessionScope로 변경한다.
@@ -138,11 +138,19 @@ public class MyPageController {
 		
 		if(result >0) {
 			status = "success";
-			text = "비밀번호 변경 성공";
+			msg = "비밀번호 변경 성공";
+			text = "비밀번호가 정상적으로 변경되었습니다.";
 		}else {
 			status = "error";
+			msg = "비밀번호 변경 실패";
 			text = "입력한 현재 비밀번호가 올바른지 확인해주세요.";
 		}
+		
+		rdAttr.addFlashAttribute("status", status);
+		rdAttr.addFlashAttribute("msg", msg);
+		rdAttr.addFlashAttribute("text", text);
+		
+		return "redirect:changePwd";
 		
 	}
 	

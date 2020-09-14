@@ -37,29 +37,28 @@
 	.pass_show .ptxt { 
 	
 	position: absolute; 
-	
 	top: 50%; 
-	
 	right: 10px; 
-	
 	z-index: 1; 
-	
 	color: #f36c01; 
-	
 	margin-top: -10px; 
-	
 	cursor: pointer; 
-	
 	transition: .3s ease all; 
+	}
 	
-	} 
 	
+	#modifyBtn{
+	background-color:#7fcdcd;
+	border: none;
+	
+	} 	
 	.pass_show .ptxt:hover{color: #333333;} 
-</style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-<script type="text/javascript">
+	
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
 	$(document).ready(function () {
 	$('.navbar-light .dmenu').hover(function () {
 	        $(this).find('.sm-menu').first().stop(true, true).slideDown(150);
@@ -145,27 +144,30 @@
 					<h5 id="id">${loginMember.memberId}</h5>
 				</div>
 			</div>
-
 			<div class="row mb-3 form-row">
 			<div class="col-md-3">
-		        현재 비밀번호
+		        <h6>현재 비밀번호</h6>
 		    </div>
-		    <div class="col-md-6 form-group pass_show"> 
+		    <div class="col-md-6 form-group pass_show">
                 <input type="password" class="form-control" name="memberPwd" placeholder="현재 비밀번호를 입력해주세요."> 
             </div>
+            </div>
+            <div class="row mb-3 form-row">
 			<div class="col-md-3">
-		        새로운 비밀번호
+		       <h6>새로운 비밀번호</h6>
 		    </div>
             <div class="col-md-6 form-group pass_show"> 
-                <input type="password"class="form-control" id="newPwd1" placeholder="변경할 비밀번호를 입력해주세요."> 
+                <input type="password"class="form-control" id="newPwd1" name="newPwd1" placeholder="변경할 비밀번호를 입력해주세요."> 
             </div> 
-		       <label>Confirm Password</label>
-            <div class="form-group pass_show"> 
-                <input type="password" class="form-control" id="newPwd2" placeholder="비밀번호를 한번 더 입력해주세요."> 
+		    </div>
+            <div class="row mb-3 form-row">
+			<div class="col-md-3">
+		       <h6>비밀번호 확인</h6>
+		    </div>
+            <div class="col-md-6 form-group pass_show"> 
+                <input type="password" class="form-control" id="newPwd2" name="newPwd2" placeholder="비밀번호를 한번 더 입력해주세요."> 
             </div> 
-		            
-				</div>  
-			</div>
+			</div>  
 						<div class="row mb-3 form-row">
 						<hr>
 							- 6~12자의 영어 대/소문자, 숫자를 사용할 수 있습니다.<br>
@@ -174,8 +176,8 @@
 							- 이전에 사용했던 비밀번호나 타 사이트와 다른 비밀번호를 사용하고 비밀번호는 주기적으로 변경해주세요.
 						</div>
 						<hr class="mb-4">
-						<button class="btn btn-primary btn-lg btn-block" type="submit">변경하기</button>
-					</form>
+						<button class="btn btn-primary btn-lg btn-block" id="modifyBtn" type="submit">변경하기</button>
+			</form>
 				</div>
 			<!-- 여기까지 -->
 			</div>
