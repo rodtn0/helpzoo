@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.helpzoo.board.model.service.ReviewService;
+import com.project.helpzoo.board.model.vo.Attachment;
 import com.project.helpzoo.board.model.vo.PageInfo;
 import com.project.helpzoo.board.model.vo.Review;
 import com.project.helpzoo.member.model.vo.Member;
@@ -122,8 +123,8 @@ public class reviewController {
 	@RequestMapping("review/{type}/{rBoardNo}")
 	public String reviewView(@PathVariable int type, @PathVariable int rBoardNo, Model model) {
 		
-		System.out.println("type : " + type);
-		System.out.println("rBoardNo : "+ rBoardNo);
+//		System.out.println("type : " + type);
+//		System.out.println("rBoardNo : "+ rBoardNo);
 		
 		String path = null;
 		
@@ -133,67 +134,91 @@ public class reviewController {
 		if(type == 1) {
 			fReviewView = reviewService.selectReviewVeiw(type, rBoardNo);
 			System.out.println("상세조회할 글 정보(펀딩) : " + fReviewView);
-			path = "fReviewView";
-		}else {
+			
+			if(fReviewView != null) { // 게시글 조회가 된다면
+				//해당 게시글 이미지 조회하기
+				List<Attachment> files = reviewService.selectFiles(type, rBoardNo);
+				System.out.println("files : " + files);
+				if(!files.isEmpty()) {
+					model.addAttribute("files", files);
+				}
+				
+				path = "fReviewView";
+				model.addAttribute("fReviewView", fReviewView);
+			}
+		}else if(type == 2){
+			
 			dReviewView = reviewService.selectReviewVeiw(type, rBoardNo);
 			System.out.println("상세조회할 글 정보(기부) : " + dReviewView);
-			path = "dReviewView";
+				
+			if(dReviewView != null) {
+				List<Attachment> files = reviewService.selectFiles(type, rBoardNo);
+				
+				if(!files.isEmpty()) {
+					model.addAttribute("files", files);
+				}
+			}
+			
+				path = "dReviewView";
+				model.addAttribute("dReviewView", dReviewView);
 			
 		}
-		
-		model.addAttribute("fReviewView", fReviewView);
-		model.addAttribute("dReviewView", dReviewView);
 		
 		return "board/" + path;
 	}
 	
 	
 	// 후기 글 쓰기
-	@RequestMapping(value="writeView/{type}/upload", method=RequestMethod.POST)
+	@RequestMapping(value="writeViewAction/{type}", method=RequestMethod.POST)
 	public String insertReview(@PathVariable int type, Review review, Model model,
 							   @RequestParam(value="images", required=false) List<MultipartFile> images,
 							   RedirectAttributes rdAttr, HttpServletRequest request) {
 		
+		
+		System.out.println("type : " + type);
+
 		// 제목, 내용, 작성자 필요
 		
 		// 세션에 있는 로그인 정보 얻어오기
 		Member loginMember = (Member)model.getAttribute("loginMember");
 		
 		review.setReviewWriter(loginMember.getMemberNo());
+		review.setReviewType(type);
+		
 		
 		for(int i=0; i<images.size(); i++) {
 			System.out.println("images[" + i + "] : " + images.get(i).getOriginalFilename());
 		}
 		
-		System.out.println(review);
+		System.out.println("review : " + review);
 		
 		// 파일을 저장할 서버 컴퓨터의 로컬 경로
 		String savePath = request.getSession().getServletContext().getRealPath("resources/uploadImages");
 		
 		// 게시글 삽입
 		int result = reviewService.insertReview(type, review, images, savePath);
+		System.out.println("삽입 결과 : " + result);
 		
 		String status = null;
 		String msg = null;
 		String path = null;
 		
-		System.out.println("삽입 결과 : " + result);
 		
-		if(result > 0 && type == 1) {
+		if(result > 0) {
 			status = "success";
 			msg = "게시글 등록 성공";
-			path = "";
+			// http://localhost:8095/helpzoo/board/review/1/854?cp=1
+			path = "../review/" + type + "/" + review.getReviewNo() + "?cp=1";
 			model.addAttribute("review", review);
 		}else {
 			status = "error";
 			msg = "게시글 등록 실패";
-			path = "";
 		}
 		
 		rdAttr.addFlashAttribute("status", status);
 		rdAttr.addFlashAttribute("msg", msg);
 		
-		return "";
+		return "redirect:" + path;
 		
 	}
 	

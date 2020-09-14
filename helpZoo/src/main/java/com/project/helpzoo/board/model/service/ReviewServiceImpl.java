@@ -156,4 +156,10 @@ public class ReviewServiceImpl implements ReviewService{
 
         return date + "" + str + ext;
     }
+
+    // 게시글 상세조회시 이미지 조회 Service 구현
+	@Override
+	public List<Attachment> selectFiles(int type, int rBoardNo) {
+		return reviewDAO.selectFiles(type, rBoardNo);
+	}
 }

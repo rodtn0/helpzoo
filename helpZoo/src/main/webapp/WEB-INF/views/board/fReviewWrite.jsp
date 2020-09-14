@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
@@ -28,14 +27,14 @@
 	}
 	
 	
-	#reviewContent{
+	#contentDiv{
 		width : 100%;
 		height : 400px;
 		border : 1px solid #ebecef; 
 		padding : 10px 10px 10px 10px;
 	}
 	
-	#reviewContent textarea{
+	#reviewContent{
 	    width : 100%;
 		height : 100%;
 		padding : 10px 10px 10px 10px;
@@ -68,110 +67,139 @@
 <jsp:include page="../common/header.jsp"/>
 
 <div class="container">
+	
+	<form action="../writeViewAction/1" method="post" role="form"
+		encType="multipart/form-data" onsubmit="return validate();">
+		
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
-				<h3>펀딩 후기 게시판</h3>
+				<h3>펀딩 후기 작성</h3>
 				<hr>
 			</div>
 		</div>
 		
-		<div class="row">
-			<div class="col-md-8">
-				<input id="reviewTitle" type="text" placeholder="제목을 입력해주세요." >
-				
-				<div id="reviewContent">
-					<textarea placeholder="내용을 입력해주세요." cols="100"></textarea>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="row">
-						<div class="card">
-							<select id="selectProject" onchange="selectProejct(this);">
-								<option selected>리뷰할 프로젝트를 선택해주세요.</option>
-								<c:if test="${!empty fInfo}">
-									<c:forEach var="fInfo" items="${fInfo}">
-										<option value="${fInfo.projectNo}">${fInfo.projectTitle}</option>
-									</c:forEach>
-								</c:if>  
-								
-							</select>
-							
-							<img id="imgDiv" class="card-img-top" />
-							<%-- <img id="imgDiv" class="card-img-top" alt="프로젝트 이미지가 존재하지않습니다." 
-								<c:if test="${!empty fInfo[0].fileChangeName}">
-								src="${contextPath}${fInfo[0].filePath}/${fInfo[0].fileChangeName}"}
-								</c:if>/> --%>
-							<div class="card-block">
-								<h5 class="card-title" id="pNo">
-									
-								</h5>
-								<h4 class="card-text" id="pTitle">
-									
-								</h4>
-								<p>
-									<a class="btn btn-primary" href="#">Action</a>
-								</p>
-							</div>
-						</div>
-				</div>
-			</div>
-		</div>
-		
-		<div class="row">
-			<div class="col-md-8">
-				<p>
-				[이미지 첨부하기]
-				</p>
-				
-			</div>
-			<div class="col-md-4">
-			</div>
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="col-md-8" id="imgBlock">
 			<div class="row">
-				<div class="col-md-3 boardImg" id="contentImgArea1">
-					<img id="contentImg1" width="140" height="140"/>
+				<div class="col-md-8">
+					<input id="reviewTitle" name="reviewTitle" type="text" placeholder="제목을 입력해주세요.">
+					
+					<div id="contentDiv">
+						<textarea id="reviewContent" name="reviewContent" placeholder="내용을 입력해주세요." cols="100"></textarea>
+					</div>
 				</div>
-				<div class="col-md-3 boardImg" id="contentImgArea2">
-					<img id="contentImg2" width="140" height="140"/>
+				<div class="col-md-4">
+					<div class="row">
+							<div class="card">
+								<select id="selectProject" name="projectNo" onchange="selectProejct(this);">
+									<option selected>리뷰할 프로젝트를 선택해주세요.</option>
+									<c:if test="${!empty fInfo}">
+										<c:forEach var="fInfo" items="${fInfo}">
+											<option value="${fInfo.projectNo}">${fInfo.projectTitle}</option>
+										</c:forEach>
+									</c:if>  
+									
+								</select>
+								
+								<img id="imgDiv" name="projectImg" class="card-img-top" />
+								<%-- <img id="imgDiv" class="card-img-top" alt="프로젝트 이미지가 존재하지않습니다." 
+									<c:if test="${!empty fInfo[0].fileChangeName}">
+									src="${contextPath}${fInfo[0].filePath}/${fInfo[0].fileChangeName}"}
+									</c:if>/> --%>
+								<div class="card-block">
+									<h5 class="card-title" id="pNo">
+										
+									</h5>
+									<h4 class="card-text" id="pTitle">
+										
+									</h4>
+									<!-- <p>
+										<a class="btn btn-primary" href="#">Action</a>
+									</p> -->
+								</div>
+							</div>
+					</div>
 				</div>
-				<div class="col-md-3 boardImg" id="contentImgArea3">
-					<img id="contentImg3" width="140" height="140"/>
-				</div>
-				<div class="col-md-3 boardImg" id="contentImgArea4">
-					<img id="contentImg4" width="140" height="140"/>
-				</div>
+			
+			
+			
 			</div>
-		</div>
 		
-	</div>
-	
-			<div id="fileArea" class="col-md-3">
-				<input type="file" id="img1" name="images" onchange="LoadImg(this, 1)">
-				<input type="file" id="img2" name="images" onchange="LoadImg(this, 2)">
-				<input type="file" id="img3" name="images" onchange="LoadImg(this, 3)">
-				<input type="file" id="img4" name="images" onchange="LoadImg(this, 4)">
+			<div class="row">
+					<div class="col-md-8">
+						<p>
+						[이미지 첨부하기]
+						</p>
+						
+					</div>
+					<div class="col-md-4">
+					</div>
+				</div>
 			</div>
-	
-	<div class="row">
-		<div class="col-md-8">
-			<div class="col-md-4" id="btnBlock">
-				<a class="btn btn-primary" href="${contextPath}/board/writeView/1/upload">
-					후기 올리기
-				</a>
+			
+			<div class="row">
+				<div class="col-md-8" id="imgBlock">
+					<div class="row">
+						<div class="col-md-3 boardImg" id="contentImgArea1">
+							<img id="contentImg1" width="140" height="140"/>
+						</div>
+						<div class="col-md-3 boardImg" id="contentImgArea2">
+							<img id="contentImg2" width="140" height="140"/>
+						</div>
+						<div class="col-md-3 boardImg" id="contentImgArea3">
+							<img id="contentImg3" width="140" height="140"/>
+						</div>
+						<div class="col-md-3 boardImg" id="contentImgArea4">
+							<img id="contentImg4" width="140" height="140"/>
+						</div>
+					</div>
+				</div>
+				
 			</div>
-		</div>
-	</div>  
+			
+				<div id="fileArea" class="col-md-3">
+					<input type="file" id="img1" name="images" onchange="LoadImg(this, 1)">
+					<input type="file" id="img2" name="images" onchange="LoadImg(this, 2)">
+					<input type="file" id="img3" name="images" onchange="LoadImg(this, 3)">
+					<input type="file" id="img4" name="images" onchange="LoadImg(this, 4)">
+				</div>
+				
+		
+			
+			<div class="row">
+				<div class="col-md-8">
+					<div class="col-md-4" id="btnBlock">
+						<button type="submit" class="btn btn-primary">
+							후기 올리기
+						</button>
+					</div>
+				</div>
+			</div>  
+			
+			
 	
-	
+		</form>
 </div>
 
 
 <script>
+
+
+	// 유효성 검사
+	function validate() {
+		if ($("#reviewTitle").val().trim().length == 0) {
+			alert("제목을 입력해 주세요.");
+			$("#reviewTitle").focus();
+			return false;
+		}
+	
+		if ($("#reviewContent").val().trim().length == 0) {
+			alert("내용을 입력해 주세요.");
+			$("#reviewContent").focus();
+			return false;
+		}
+	}
+	
+	
 	function selectProejct(element){
 		var projectNo = $(element).val();
 		//console.log(projectNo); 선택된 프로젝트 번호 찍어보기
