@@ -162,4 +162,10 @@ public class ReviewServiceImpl implements ReviewService{
 	public List<Attachment> selectFiles(int type, int rBoardNo) {
 		return reviewDAO.selectFiles(type, rBoardNo);
 	}
+
+	// 리뷰 글 삭제 Service 구현
+	@Override
+	public int deleteReview(int type, int reviewNo) {
+		return reviewDAO.deleteReview(type, reviewNo);
+	}
 }
