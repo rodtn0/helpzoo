@@ -56,7 +56,19 @@
 									<% pageContext.setAttribute("newLine", "\n"); %>
 									<h3 class="title">${fn:replace(notice.boardTitle, newLine, "<br>")}</h3>
 									<span class="author">${notice.boardWriter}</span>
-									<span class="created-at">${notice.boardCreateDate}</span>
+									<%-- <span class="created-at">${notice.boardCreateDate}</span> --%>
+									<jsp:useBean id="now" class="java.util.Date"/>
+									<fmt:formatDate var="today" value="${now}" pattern="yyyy-MM-dd"/>
+									<fmt:formatDate var="createDate" value="${notice.boardCreateDate}" pattern="yyyy-MM-dd"/>
+									<fmt:formatDate var="createTime" value="${notice.boardCreateDate}" pattern="hh:mm:ss"/>
+									<span class="created-at">
+										<c:choose>
+											<c:when test="${today == createDate}">
+												${createTime}
+											</c:when>
+											<c:otherwise>${createDate}</c:otherwise>
+										</c:choose>
+									</span>
 								</div>
 							</a></li>
 						</c:forEach>
