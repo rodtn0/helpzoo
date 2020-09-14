@@ -207,7 +207,8 @@ public class reviewController {
 		if(result > 0) {
 			status = "success";
 			msg = "게시글 등록 성공";
-			// http://localhost:8095/helpzoo/board/review/1/854?cp=1
+			// http://localhost:8095/helpzoo/board/writeView/1(글 작성 페이지 주소)
+			// http://localhost:8095/helpzoo/board/review/1/854?cp=1 (작성 완료했을 때 만들고 싶은 주소-상세페이지 주소)
 			path = "../review/" + type + "/" + review.getReviewNo() + "?cp=1";
 			model.addAttribute("review", review);
 		}else {
@@ -222,6 +223,40 @@ public class reviewController {
 		
 	}
 	
+	// 리뷰 삭제
+	// http://localhost:8095/helpzoo/board/review/1/deleteReview/510
+	@RequestMapping(value="review/{type}/deleteReview/{reviewNo}", method=RequestMethod.GET)
+	public String deleteReview(@PathVariable int type, @PathVariable int reviewNo,
+								RedirectAttributes rdAttr, HttpServletRequest request) {
+		
+		System.out.println(reviewNo);
+		
+		// 리뷰 내용 삭제하기(status = 'n')
+		int result = reviewService.deleteReview(type, reviewNo);
+		
+		String status = null;
+		String msg = null;
+		String path = null;
+		
+		if(result > 0) { // 삭제에 성공하면 목록 1페이지로
+			status = "success";
+			msg = "게시글 삭제에 성공했습니다.";
+			
+			// http://localhost:8095/helpzoo/board/review/1/854?cp=1(상세페이지)
+			// http://localhost:8095/helpzoo/board/review/1 (삭제 후 목록 1페이지로 가고싶음)
+			// redirect 시 제일 앞 "/" 기호는 contextPath를 의미함.
+			path = "../";
+		}else {
+			status = "error";
+			msg = "게시글 삭제에 실패했습니다.";
+			path = request.getHeader("referer");
+		}
+		
+			rdAttr.addFlashAttribute("status", status);
+			rdAttr.addFlashAttribute("msg", msg);
+		
+		return "redirect:" + path;
+	}
 	
 	
 	

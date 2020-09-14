@@ -150,6 +150,19 @@ public class ReviewDAO {
 		return sqlSession.selectList(mapperId, rBoardNo);
 	}
 
+
+	/** 리뷰 글 삭제 DAO
+	 * @param type
+	 * @param reviewNo
+	 * @return result
+	 */
+	public int deleteReview(int type, int reviewNo) {
+		String mapperId = null;
+		if(type == 1) mapperId = "reviewMapper.deleteFundingReview";
+		else		  mapperId = "reviewMapper.deleteDonationReview";
+		return sqlSession.delete(mapperId, reviewNo);
+	}
+
 	
 	
 }

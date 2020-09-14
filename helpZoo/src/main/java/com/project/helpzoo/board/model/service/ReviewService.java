@@ -58,6 +58,13 @@ public interface ReviewService {
 	 */
 	public abstract List<Attachment> selectFiles(int type, int rBoardNo);
 
+	/** 리뷰 글 삭제 Service
+	 * @param type
+	 * @param reviewNo
+	 * @return result
+	 */
+	public abstract int deleteReview(int type, int reviewNo);
+
 
 	
 }
