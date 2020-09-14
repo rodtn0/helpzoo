@@ -40,8 +40,8 @@ public class EventController {
 		List<Board> eventList = eventService.selectList(pInfo);
 		
 		//목록 조회 확인용 test
-//		for(Board b : noticeList) {
-//			System.out.println("공지사항 리스트 : " + b);
+//		for(Board e : eventList) {
+//			System.out.println("공지사항 리스트 : " + e);
 //		}
 		
 		model.addAttribute("eventList", eventList);
@@ -67,10 +67,10 @@ public class EventController {
 	}
 	
 	// 이벤트 글 작성 뷰 -------------------------------------------------------------------------------------
-	@RequestMapping("{type}/eventView")
+	@RequestMapping("{type}/insertView")
 	public String insertView() {
 		
-		return "event/eventView";
+		return "event/insertView";
 		
 	}
 	
