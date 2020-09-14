@@ -1,6 +1,8 @@
 package com.project.helpzoo.board.model.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.project.helpzoo.board.model.DAO.NoticeDAO;
 import com.project.helpzoo.board.model.vo.Board;
 import com.project.helpzoo.board.model.vo.PageInfo;
+import com.project.helpzoo.board.model.vo.Search;
 
 @Service
 public class NoticeServiceImpl implements NoticeService{
@@ -93,6 +96,20 @@ public class NoticeServiceImpl implements NoticeService{
 		return noticeDAO.deleteNotice(boardNo);
 	}
 	
+	// 공지사항 글 수정 service 구현 ---------------------------------------------------------
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int updateNotice(Board uBoard) {
+		
+		// xss 방지 처리
+		uBoard.setBoardTitle(replaceParameter(uBoard.getBoardTitle()));
+		uBoard.setBoardContent(replaceParameter(uBoard.getBoardContent()));
+		
+		int result = noticeDAO.updateNotice(uBoard);
+		
+		return result;
+	}
+	
 	// XSS 방지 메소드 service -------------------------------------------------------------
 	public String replaceParameter(String param) {
 		String result = param;
@@ -105,5 +122,38 @@ public class NoticeServiceImpl implements NoticeService{
 		
 		return result;
 	}
-	
+
+	// 검색 조건 추가된 페이지 처리 service 구현 ---------------------------------------------------
+	@Override
+	public PageInfo pagination(int type, int cp, Search search) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("search", search);
+		map.put("type", type);
+		
+		System.out.println("map : " + map);
+		
+		int searchListCount = noticeDAO.getSearchListCount(map);
+
+		pInfo.setPageInfo(cp, searchListCount, type);
+		
+		return pInfo;
+	}
+
+	// 검색 목록 조회 service 구현 ----------------------------------------------------------
+	@Override
+	public List<Board> selectSearchList(PageInfo pInfo, Search search) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("search", search);
+		map.put("type", pInfo.getBoardType());
+		
+		return noticeDAO.selectSearchList(pInfo, map);
+	}
+
+
+
+
+
+
 }

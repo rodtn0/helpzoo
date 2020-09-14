@@ -45,7 +45,7 @@
                	 목록으로 돌아가기
             </a>
             <c:if test="${loginMember.memberNo == 1}">
-	            <a data-aos="zoom-in" class="toListBtn" onclick="history.back()">
+	            <a data-aos="zoom-in" class="toListBtn" onclick="location.href='${board.boardNo}/updateView?cp=${param.cp}'">
 	               	 수정하기
 	            </a>
 	            <a data-aos="zoom-in" class="toListBtn" id="deleteBtn">
@@ -60,11 +60,34 @@
     <jsp:include page="../common/footer.jsp"/>
     
     <script>
- 		$('#deleteBtn').on('click', function() {
+ 		/* $('#deleteBtn').on('click', function() {
 			if(confirm("정말 삭제하시겠습니까?")){
 				location.href="${boardNo}/deleteNotice";
 			}
-		});
+		}); */
+ 		$('#deleteBtn').on('click', function() {
+			swal({
+					title:"정말 삭제하시겠습니까?",
+					icon:"warning",
+					buttons:{
+						cancel:{
+							text : "Cancel",
+							visible : true,
+							value :false
+						},
+						confirm:{
+							text : "Ok",
+							value : true
+						}
+					}
+			}).then((result)=>{
+				if(result){
+					location.href="${boardNo}/deleteNotice";
+				}
+			})
+					
+					
+ 		});
     </script>
 </body>
 </html>

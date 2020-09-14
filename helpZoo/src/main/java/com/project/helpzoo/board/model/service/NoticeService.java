@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.project.helpzoo.board.model.vo.Board;
 import com.project.helpzoo.board.model.vo.PageInfo;
+import com.project.helpzoo.board.model.vo.Search;
 
 public interface NoticeService {
 
@@ -37,5 +38,25 @@ public interface NoticeService {
 	 * @return result
 	 */
 	public abstract int deleteNotice(int boardNo);
+
+	/** 공지사항 글 수정 service
+	 * @param uBoard
+	 * @return result
+	 */
+	public abstract int updateNotice(Board uBoard);
+
+	/** 검색 조건 추가된 페이지 처리 service
+	 * @param type
+	 * @param search
+	 * @return pInfo
+	 */
+	public abstract PageInfo pagination(int type, int cp, Search search);
+
+	/** 검색 목록 조회 service
+	 * @param pInfo
+	 * @param search
+	 * @return noticeList
+	 */
+	public abstract List<Board> selectSearchList(PageInfo pInfo, Search search);
 
 }

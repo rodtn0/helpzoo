@@ -138,7 +138,7 @@
 			</div>
 			
 			<!-- 검색창 -->
-			<div class="search">
+			<!-- <div class="search">
 				<form method="post" id="new-board-search">
 					<div class="filter-container">
 						<select id="searchSelectInBoard" class="filter">
@@ -150,18 +150,31 @@
 					<div class="field">
 						<label class="text-hidden" for="">검색창</label>
 						<input id="searchTextInBoard" name="searchTextInBoard" class="search-form" type="text" value="" />
-						<button class="btn-search dense" type="submit">검색</button>
+						<button class="btn-search dense" id="searchBtn" type="submit">검색</button>
 					</div>
 				</form>
-				
+			</div> -->
+			<div class="search">
+				<div class="filter-container">
+					<select id="searchSelectInBoard" class="filter">
+						<option value="tit-con">제목+내용</option>
+						<option value="tit">제목</option>
+						<option value="con">내용</option>
+					</select>
+				</div>
+				<div class="field">
+					<label class="text-hidden" for="">검색창</label>
+					<input id="searchTextInBoard" name="searchTextInBoard" class="search-form" type="text" value="" />
+					<button class="btn-search dense" id="searchBtn" type="submit">검색</button>
+				</div>
 			</div>
 
-				<!-- 공지사항 작성 버튼 -->
-				<c:if test="${loginMember.memberNo == 1}">
-					<div class="insert-notice">
-						<a data-aos="zoom-in" class="insertBtn" onclick="location.href='${contextPath}/notice/5/insertView'">글작성</a>
-					</div>
-				</c:if>
+			<!-- 공지사항 작성 버튼 -->
+			<c:if test="${loginMember.memberNo == 1}">
+				<div class="insert-notice">
+					<a data-aos="zoom-in" class="insertBtn" onclick="location.href='${contextPath}/notice/5/insertView'">글작성</a>
+				</div>
+			</c:if>
 			
 		</div>
 		
@@ -171,7 +184,7 @@
 	
 	<script>
 		
-		/* 공지사항 상세페이지 */
+		// 공지사항 상세페이지
 		$(function() {
 			$('.board-main .article').on('click', function() {
 				
@@ -187,6 +200,59 @@
 				
 			});
 		});
+		
+		// 검색 동작 -------------------------------------------------------------------------------------
+		$('#searchBtn').on('click', function() {
+			let searchUrl = "";
+			
+			const $sKey = $('#searchSelectInBoard');
+			const $sVal = $('#searchTextInBoard');
+			
+			console.log($sKey.val());
+			console.log($sVal.val());
+			
+			// 검색어가 없는 경우
+			if($sVal.val().trim().length == 0){
+				
+				// 게시판 현재페이지로
+				searchUrl = "${contextPath}/notice/noticeList?cp=${pInfo.currentPage}";
+			}else{
+				searchUrl = "${contextPath}/notice/search/${pInfo.boardType}?"; // 검색요청 url
+				
+				// 검색어가 있는 경우
+				if($sVal.val().trim().length != 0){
+					searchUrl += "sKey=" + $sKey.val() + "&sVal=" + $sVal.val();
+				}
+			}
+			
+			location.href = searchUrl;
+			
+		});
+		
+		// 검색값 유지 ---------------------------------------------------------------
+		$(function() {
+			let sKey = "${param.sKey}";
+			let sVal = "${param.sVal}";
+			
+			if(sKey != "" && sVal != ""){
+				$('#searchTextInBoard').val(sVal);
+				
+				$('#searchSelectInBoard > option').each(function(index, item) {
+					if($(item).val() == sKey){
+						$(item).prop('selected', true);
+					}
+				});
+			}
+			
+		});
+
+		// 검색창 엔터 기능 ---------------------------------------------------------------
+		$('#searchTextInBoard').on('keyup', function(event) {
+			console.log(event.keyCode);
+			if(event.keyCode == 13){
+				$('#searchBtn').click();
+			}
+		})
 		
 	</script>
 	

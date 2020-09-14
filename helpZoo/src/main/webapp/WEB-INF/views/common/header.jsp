@@ -90,7 +90,7 @@
 
           <li class="nav-logo active"><a href="${contextPath}"><img src="/helpzoo/resources/images/도와주100.png" alt="" class="img-fluid" id="logo"></a></li>
 
-		  <li class="drop-down"><a href="${contextPath}/notice">공지</a>
+		  <li class="drop-down"><a href="#">공지</a>
             <ul>
 				<li><a href="${contextPath}/notice/noticeList">공지사항</a></li>
 				<li><a href="${contextPath}/event/eventList">이벤트</a></li>
