@@ -18,6 +18,7 @@ public class MyPageServiceImpl implements MyPageService{
 	private BCryptPasswordEncoder bcPwd;
 	
 	// 회원 정보 수정 Service 구현
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int updateMember(Member upMember) {
 		
@@ -25,6 +26,7 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 
 	// 회원 탈퇴 Service 구현
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int deleteMember(Member loginMember) {
 		
@@ -52,7 +54,7 @@ public class MyPageServiceImpl implements MyPageService{
 		int result = 0;
 		
 		if(savePwd != null) {
-			
+
 			if(bcPwd.matches(loginMember.getMemberPwd(), savePwd)) {
 				
 				// (2) 새로 입력받은 비밀번호로 비밀번호 수정
