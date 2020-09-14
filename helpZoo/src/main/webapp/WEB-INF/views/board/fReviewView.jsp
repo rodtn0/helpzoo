@@ -169,6 +169,13 @@
             </div>
           </div>
         </div>
+        
+        <div id="buttonArea">
+        	<c:if test="${fReviewView.memberId == sessionScope.loginMember.memberId}">
+				<a class="btn btn-primary" href="#">수정</a>
+				<button id="deleteBtn" class="btn btn-primary">삭제</button>
+			</c:if>
+		</div>
 
 
       </div>
@@ -192,6 +199,17 @@
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 	<jsp:include page="../common/footer.jsp"/>
+	
+<script>
+	$("#deleteBtn").on("click", function(){
+		if(confirm("정말 삭제하시겠습니까?")){
+			// http://localhost:8095/helpzoo/board/review/1/859?cp=1
+			// http://localhost:8095/helpzoo/board/review/1/deleteReview/510
+			location.href =	"deleteReview/${fReviewView.reviewNo}";	
+		}
+		
+	});
+</script>
 </body>
 
 </html>
