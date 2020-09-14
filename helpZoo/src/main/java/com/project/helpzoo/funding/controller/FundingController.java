@@ -40,6 +40,23 @@ public class FundingController {
 		return "funding/fundingMain";
 	}
 	
+	
+	
+	@RequestMapping("fundingOpen")
+	public String fundingOpen(String makerName, String businessType, String phone,Model model) {
+		
+		
+		model.addAttribute("makerName",makerName);
+		
+		model.addAttribute("businessType",businessType);
+		
+		model.addAttribute("phone", phone);
+		
+		return "funding/fundingOpen";
+	}
+	
+	
+	
 	@RequestMapping("fundingView/{fundingNo}")
 	public String fundingView(@PathVariable int fundingNo, Model model) {
 		
@@ -53,6 +70,8 @@ public class FundingController {
 		
 		return "funding/fundingDetail";
 	}
+	
+
 	
 	
 	

@@ -97,6 +97,10 @@
 			border-radius: 0 40px 40px 0;
 		}
 		
+		#list-table tr{
+			cursor : pointer;
+		}
+		
 		
 	</style>
 </head>
