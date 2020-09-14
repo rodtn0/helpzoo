@@ -1,0 +1,192 @@
+* { box-sizing: border-box; }
+body {
+  background-color: #eee;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.container {
+  background-color: #fff;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+.container h1 { text-align: center; }
+
+form > .ui-widget{
+  margin-bottom: 20px;
+}
+
+.ui-widget label{
+  display: block;
+  font-weight: bold;
+}
+
+.ui-selectmenu-button.ui-button{
+  width: 100%;
+}
+
+#category.ui-button, #startDate.ui-button,  #endDate.ui-button{
+  background-color: none;
+  width: 35%;
+  text-align: center;
+  display: inline;
+  
+}
+
+.ui-corner-all ui-button{
+  text-align: center;
+
+}
+
+/* .ui-widget select{
+  display: block;
+  width: 100%;
+  border: 2px solid blue;
+}
+
+.ui-widget option{
+  height: 30px;
+  line-height: 30px;
+  display: block;
+  background-color: green;
+  font-size: 2em;
+  text-align: center;
+}
+
+.ui-widget option:hover{
+  background-color: black;
+  color: #fff;
+} */
+
+.ui-selectmenu-button.ui-button{
+  width: 100%;
+}
+
+fieldset{
+  margin-bottom: 20px;
+}
+
+.ui-checkboxradio-label{
+  width: 32%;
+}
+
+#progress{
+  position: relative;
+  height: 32px;
+}
+
+.pct{
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  line-height: 32px;
+  font-size: 12px;
+  color: #444;
+}
+
+
+
+.ck.ck-editor{
+  max-width: 90%;
+}
+.ck-content{
+  height: 500px;
+}
+
+#mainImg{
+
+  height: 250px; 
+  margin-top: 10px;
+  
+}
+
+.filebox label {
+  display: inline-block;
+  padding: .5em .75em;
+  color: #fff;
+  font-size: inherit;
+  line-height: normal;
+  vertical-align: middle;
+  background-color: #5cb85c;
+  cursor: pointer;
+  border: 1px solid #4cae4c;
+  border-radius: .25em;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+}
+
+.filebox label:hover {
+  background-color: #6ed36e;
+}
+
+.filebox label:active {
+  background-color: #367c36;
+}
+
+.filebox input[type="file"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+
+.ck-editor__nested-editable{
+  width: 200px;
+  height: 25px;
+  text-align: left;
+
+
+}
+
+
+
+.popup { display: none; position: fixed; left: 50%; top: 50%; z-index: 100; padding:52px 60px 60px; width: 820px; height: 833px; transform: translate(-50%, -50%); box-sizing: border-box; background: #fff;}
+.popup h2 { padding: 0 0 42px; border-bottom: 3px solid #444; font-weight: normal;font-size:36px; color:#222; text-align: center; line-height: 100%;}
+.popup .close { position: absolute; right:40px; top: 40px; width: 41px; height: 41px; background: url(../../images/btn-close.png) no-repeat; color:transparent;}
+.popup .con { padding: 40px 78px; border-bottom:1px solid #e8e8e8;}
+
+.agree { position: relative; margin: 28px 0 0; padding: 0 30px; height: 60px; border:1px solid #e8e8e8; line-height: 60px;}
+.agree label span { color:#de4f41;}
+.agree a.view { position: absolute; right:30px; top:15px; width: 93px; height: 30px; border:1px solid #ddd; text-align: center; line-height: 30px; border-radius: 3px;}
+
+.dim { display: none;position: fixed; left: 0; top: 0; z-index: 99; width: 100%; height: 100%; background: rgba(0,0,0,0.5);}
+
+
+table.type1 { border-bottom: 1px solid #e8e8e8;}
+table.type1 th,
+table.type1 td { padding: 0 0 20px;}
+table.type1 th { padding-top: 15px; font-size: 14px; color:#222; text-align: left; font-weight: normal; vertical-align: top;}
+table.type1 th span { color:#de4f41; }
+table.type1 th em { color:#999;}
+table.type1 textarea { height: 116px;}
+table.type1 tr:last-child th,
+table.type1 tr:last-child td { padding: 0 0 30px;}
+
+input[type="checkbox"] { position: absolute; left: -3000%;}
+input[type="checkbox"] + label { font-size: 14px; color:#666; }
+input[type="checkbox"] + label:before { content: ""; display: inline-block; width:20px; height:20px; border:1px solid #ddd; margin: 0 10px 0 0; background: #f4f4f4; vertical-align: middle; box-sizing: border-box; transition: all 0.3s;}
+input[type="checkbox"]:checked + label:before { border: 7px solid #666;}
+.txt_center { text-align: center; padding: 30px 0 0;}
+.btn_type1 { display: inline-block;width: 170px; height: 50px; background: #de4f41; line-height: 50px; color:#fff; text-align: center; border-radius: 3px;}
+
+
+body{width:100%; background:#fff; min-width:320px; -webkit-text-size-adjust:none;word-wrap:break-word;word-break:break-all;}
+
+#divId{
+  display: none;
+  margin-left: 25px;
+  color: #999;
+  font-size: small;
+}
+
+#textarea{
+  display: none;
+  width: 80%;
+  height: 100px;
+}
