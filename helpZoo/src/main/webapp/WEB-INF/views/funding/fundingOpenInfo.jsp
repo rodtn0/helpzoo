@@ -41,6 +41,8 @@
         position: fixed;
         border: 1px solid #f0f0f0;
         width: 100%;
+            z-index: 2;
+        background-color: white;
       }
       .span {
         position: fixed;
@@ -58,8 +60,8 @@
         padding-right: 0%;
         border: 1px solid #f0f0f0 ;
         overflow: auto;
-        position: relative;
-        z-index: -1;
+        position: fixed;
+        z-index: 2;
       }
 
       .funding_open_deail_container {
@@ -220,6 +222,49 @@
 }
 
 
+      .funding_ready_menubar:hover{
+
+        cursor: pointer;
+
+
+      }
+      .box{
+        display: block;
+        height: 20%;
+        padding-left: 20%;
+        font-size: 0.84rem;
+        color: black;
+        font-weight: bold;
+        background-color: 				#F8F8F8;
+        line-height: 390%;
+        
+      }
+      .box:hover{
+        text-decoration: none;
+        color: black;
+        cursor: pointer;
+      }
+      .menu_box{
+        height: 300px;
+      }
+
+      .project_open_nav{
+
+        width: 260px;
+      }
+
+      .run{
+        background-color: white;
+        border: white;
+        color: #808080;
+      }
+      .run:hover{
+        background-color: white;
+        border: white;
+        color: black;
+      }
+
+
 
     </style>
 
@@ -263,8 +308,8 @@
 
 
 
-            <div class="funding_ready container align-middle">
-            펀딩준비
+            <div class="funding_ready container align-middle funding_ready_menubar">
+            펀딩준비 <i class="fas fa-chevron-up float-right menuopen"></i>
           </div>
           <div class="funding_ready container">
             새소식  <i class="fas fa-lock float-right"></i>
@@ -280,6 +325,13 @@
             수수료 관리 <i class="fas fa-lock float-right"></i>
           </div>
           </nav>
+          
+          
+          <!-- 빈공간 만들기용 -->
+            <div class="col-md-2 col-lg-2 col-sm-2">
+  
+          </div>
+          
 
           <div class="col-md-9 col-lg-9 col-sm-9">
             <div class="container project_open_ready">
@@ -360,7 +412,72 @@
               >저장하기</button>
 
 
+     <script>
 
+                  var menubarFlag = true;
+
+                  var menuBar = $("<div class='menu_box'></div>");
+
+              var require = $("<a class='box funding_require' href='${contextPath}/funding/fundingOpenRequire' >기본 요건</a>");
+              var fundingInfo = $("<a class='box funding_info' href='${contextPath}/funding/fundingOpenInfo'>기본 정보</a>");
+              var story = $("<a class='box funding_story' href='${contextPath}/funding/fundingOpenStory'>스토리 작성</a>");
+              var reward = $("<a class='box funding_reward_build' href='${contextPath}/funding/fundingOpenReward'>리워드 설계</a>");
+              var makerInfo = $("<a class='box funding_maker_info' href='${contextPath}/funding/fundingOpenMakerInfo'>메이커 정보</a>");
+
+                    $(".funding_ready_menubar").on("click", function() {
+                      console.log( $( this ).text() );
+                      console.log("haha");
+
+                      
+                      if(menubarFlag){
+                      $(".funding_ready_menubar i").remove();
+
+                      $(".funding_ready_menubar").append("<i class='fas fa-chevron-down float-right'></i>")
+                     
+                    
+                      
+                        
+                        menuBar.append(require,fundingInfo,story,reward,makerInfo)
+
+
+                        $(".funding_ready_menubar").after(menuBar);
+                        
+
+
+
+
+
+
+                      menubarFlag = false;
+
+
+
+                      }
+                      else{
+
+                        $(".funding_ready_menubar i").remove();
+
+                      $(".funding_ready_menubar").append("<i class='fas fa-chevron-up float-right'></i>")
+
+                      menuBar.remove();
+
+
+                        
+                      menubarFlag = true;
+
+
+                      }
+
+
+
+
+
+
+                    });
+
+
+
+                </script>
 
 
 

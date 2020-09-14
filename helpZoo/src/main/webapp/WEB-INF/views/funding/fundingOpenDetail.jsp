@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -40,6 +42,8 @@
         position: fixed;
         border: 1px solid #f0f0f0;
         width: 100%;
+        z-index: 2;
+        background-color: white;
       }
       .span {
         position: fixed;
@@ -57,8 +61,9 @@
         padding-right: 0%;
         border: 1px solid #f0f0f0 ;
         overflow: auto;
-        position: relative;
-        z-index: -1;
+        position: fixed;
+        z-index: 2;
+        
       }
 
       .funding_open_deail_container {
@@ -114,6 +119,7 @@
         line-height: 3.5rem;
         font-size: 0.9rem;
         
+        
       }
 
       .title_msg{
@@ -168,6 +174,54 @@
       }
 
 
+
+
+
+
+
+      <!-- 하단에 추가해될 파일들-->
+
+      .funding_ready_menubar:hover{
+
+        cursor: pointer;
+
+
+      }
+      .box{
+        display: block;
+        height: 20%;
+        padding-left: 20%;
+        font-size: 0.84rem;
+        color: black;
+        font-weight: bold;
+        background-color: 				#F8F8F8;
+        line-height: 390%;
+        
+      }
+      .box:hover{
+        text-decoration: none;
+        color: black;
+        cursor: pointer;
+      }
+      .menu_box{
+        height: 300px;
+      }
+
+      .project_open_nav{
+
+        width: 260px;
+      }
+
+      .run{
+        background-color: white;
+        border: white;
+        color: #808080;
+      }
+      .run:hover{
+        background-color: white;
+        border: white;
+        color: black;
+      }
     </style>
   </head>
   <body>
@@ -178,11 +232,36 @@
       <div class="float-right project_create_top_bar_choice"> 
         <button type="button" class="btn btn-outline-primary">미리보기</button>&nbsp;&nbsp;&nbsp;
 
-    나가기    &nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="button" class="btn btn-primary run" data-toggle="modal" data-target="#exampleModal">
+          나가기
+        </button>   &nbsp;&nbsp;&nbsp;&nbsp;
       </div>
 
       <br />
     </div>
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">정말 나가시겠습니까?</h5>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" >취소</button>
+            <button type="button" class="btn btn-primary" onclick="location.href='/'">확인</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
 
     <div>
       <div class="funding_open_deail_container">
@@ -204,9 +283,12 @@
 
 
 
-            <div class="funding_ready container align-middle">
-            펀딩준비
+            <div class="funding_ready container align-middle funding_ready_menubar" >
+            펀딩준비  <i class="fas fa-chevron-up float-right menuopen"></i>
           </div>
+       
+
+
           <div class="funding_ready container">
             새소식  <i class="fas fa-lock float-right"></i>
           </div> <div class="funding_ready container">
@@ -222,9 +304,25 @@
           </div>
           </nav>
 
+
+
+<!--빈공간 만들기용-->
+          <div class="col-md-2 col-lg-2 col-sm-2">
+  
+          </div>
+
+
+
+
+
+
+
+
+
+
           <div class="col-md-9 col-lg-9 col-sm-9">
             <div class="container project_open_ready">
-              <h1 class="title_msg">펀딩준비</h1>
+              <h1 class="title_msg">펀딩준비 </h1>
               <br>
               <div>
               본격적으로 펀딩을 오픈하기 위해 프로젝트에 대한 6가지 메뉴의 필수항목을 작성하세요.
@@ -243,7 +341,7 @@
                 <br>
                 <div class="temp_box2 title_msg container">
                   기본 요건 
-                  <div class="btn btn-outline-secondary float-right">작성하기</div>
+                  <div class="btn btn-outline-secondary float-right" onclick="location.href='${contextPath}/funding/fundingOpenRequire'">작성하기</div>
 
                 </div>
 
@@ -254,30 +352,24 @@
                 <br>
                 <div class="temp_box2 title_msg container">
                   기본 정보 
-                  <div class="btn btn-outline-secondary float-right">작성하기</div>
+                  <div class="btn btn-outline-secondary float-right" onclick="location.href='${contextPath}/funding/fundingOpenInfo'">작성하기</div>
 
                 </div>
                 <br>
                 <div class="temp_box2 title_msg container">
                   스토리 작성
-                  <div class="btn btn-outline-secondary float-right">작성하기</div>
+                  <div class="btn btn-outline-secondary float-right" onclick="location.href='${contextPath}/funding/fundingOpenStory'">작성하기</div>
 
                 </div>
                 <br>
                 <div class="temp_box2 title_msg container">
                   리워드 설계
-                  <div class="btn btn-outline-secondary float-right">작성하기</div>
+                  <div class="btn btn-outline-secondary float-right" onclick="location.href='${contextPath}/funding/fundingOpenReward'">작성하기</div>
 
                 </div>
 
                 <br>
-                <div class="temp_box2 title_msg container">
-                  위험요인 및 정책
-                  <div class="btn btn-outline-secondary float-right">작성하기</div>
-
-                </div>
-                <br>
-                <div class="temp_box2 title_msg container">
+                <div class="temp_box2 title_msg container" onclick="location.href='${contextPath}/funding/fundingOpenRequire'">
                   메이커 정보
                   <div class="btn btn-outline-secondary float-right">작성하기</div>
 
@@ -290,6 +382,94 @@
                 class="btn btn-primary col-md-4 col-sm-4 col-xs-4 btn-lg funding_btn mintclick"
                 onclick="location.href = '${contextPath}/funding/fundingOpenDetail' "
               >제출하기</button>
+
+
+
+	<br>
+	<br>
+	<br>
+	<br>
+
+
+                <!--jsp 파일에 추가해야될 sciprt-->
+                <script>
+
+                  var menubarFlag = true;
+
+                  var menuBar = $("<div class='menu_box'></div>");
+
+              var require = $("<a class='box funding_require' href='${contextPath}/funding/fundingOpenRequire' >기본 요건</a>");
+              var fundingInfo = $("<a class='box funding_info' href='${contextPath}/funding/fundingOpenInfo'>기본 정보</a>");
+              var story = $("<a class='box funding_story' href='${contextPath}/funding/fundingOpenStory'>스토리 작성</a>");
+              var reward = $("<a class='box funding_reward_build' href='${contextPath}/funding/fundingOpenReward'>리워드 설계</a>");
+              var makerInfo = $("<a class='box funding_maker_info' href='${contextPath}/funding/fundingOpenMakerInfo'>메이커 정보</a>");
+
+                    $(".funding_ready_menubar").on("click", function() {
+                      console.log( $( this ).text() );
+                      console.log("haha");
+
+                      
+                      if(menubarFlag){
+                      $(".funding_ready_menubar i").remove();
+
+                      $(".funding_ready_menubar").append("<i class='fas fa-chevron-down float-right'></i>")
+                     
+                    
+                      
+                        
+                        menuBar.append(require,fundingInfo,story,reward,makerInfo)
+
+
+                        $(".funding_ready_menubar").after(menuBar);
+                        
+
+
+
+
+
+
+                      menubarFlag = false;
+
+
+
+                      }
+                      else{
+
+                        $(".funding_ready_menubar i").remove();
+
+                      $(".funding_ready_menubar").append("<i class='fas fa-chevron-up float-right'></i>")
+
+                      menuBar.remove();
+
+
+                        
+                      menubarFlag = true;
+
+
+                      }
+
+
+
+
+
+
+                    });
+
+
+
+                </script>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
           </div>
