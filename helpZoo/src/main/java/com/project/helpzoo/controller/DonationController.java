@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.project.helpzoo.model.service.DonationService;
 import com.project.helpzoo.model.vo.Attachment;
 import com.project.helpzoo.model.vo.Donation;
-import com.project.helpzoo.model.vo.PageInfo;
+import com.project.helpzoo.model.vo.dPageInfo;
 
 
 @Controller
@@ -30,7 +30,7 @@ public class DonationController {
 			@RequestParam(value="cp", required = false, defaultValue = "2") int cp
 			,Model model) {
 		
-		PageInfo pInfo = donationService.pagination(type, cp);
+		dPageInfo pInfo = donationService.pagination(type, cp);
 		
 		List<Donation> donationList = donationService.selectList(pInfo);
 

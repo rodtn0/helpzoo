@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.project.helpzoo.model.dao.DonationDAO;
 import com.project.helpzoo.model.vo.Attachment;
 import com.project.helpzoo.model.vo.Donation;
-import com.project.helpzoo.model.vo.PageInfo;
+import com.project.helpzoo.model.vo.dPageInfo;
 import com.project.helpzoo.model.vo.Search;
 
 import oracle.net.aso.s;
@@ -29,11 +29,11 @@ public class DonationServiceImpl implements DonationService {
 	private DonationDAO donationDAO;
 
 	@Autowired
-	private PageInfo pInfo; // DI 의존성 주입
+	private dPageInfo pInfo; // DI 의존성 주입
 	
 	// 페이징 처리를 위한 Service 구현
 	@Override
-	public PageInfo pagination(int type, int cp) {
+	public dPageInfo pagination(int type, int cp) {
 
 		// 1) 전체 게시글 수 조회
 		int listCount = donationDAO.getListCount(type);
@@ -46,7 +46,7 @@ public class DonationServiceImpl implements DonationService {
 
 	// 게시글 목록 조회 Service 구현
 	@Override
-	public List<Donation> selectList(PageInfo pInfo) {
+	public List<Donation> selectList(dPageInfo pInfo) {
 
 		return donationDAO.selectList(pInfo);
 	}
@@ -353,7 +353,7 @@ public class DonationServiceImpl implements DonationService {
 	
 	// 페이징 처리를 위한 Service 구현 검색 조건 추가
 	@Override
-	public PageInfo pagination(int type, int cp, Search search) {
+	public dPageInfo pagination(int type, int cp, Search search) {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("search",search);
@@ -370,7 +370,7 @@ public class DonationServiceImpl implements DonationService {
 
 	// 검색 목록 조회 Service 구현
 	@Override
-	public List<Donation> selectSearchList(PageInfo pInfo, Search search) {
+	public List<Donation> selectSearchList(dPageInfo pInfo, Search search) {
 		// Mybatis는 파라미터 하나만 보낼 수 있음
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("search", search);

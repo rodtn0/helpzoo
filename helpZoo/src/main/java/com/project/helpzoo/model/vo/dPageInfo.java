@@ -3,7 +3,7 @@ package com.project.helpzoo.model.vo;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PageInfo {
+public class dPageInfo {
 
 	private int currentPage;	// 현재 페이지 번호
 	private int listCount;		// 전체 게시글 수
@@ -16,11 +16,11 @@ public class PageInfo {
 	
 	private int donationType;		// 게시글 타입
 
-	public PageInfo() {
+	public dPageInfo() {
 		super();
 	}
 
-	public PageInfo(int currentPage, int listCount, int limit, int pagingBarSize, int maxPage, int startPage,
+	public dPageInfo(int currentPage, int listCount, int limit, int pagingBarSize, int maxPage, int startPage,
 			int endPage, int donationType) {
 		super();
 		this.currentPage = currentPage;

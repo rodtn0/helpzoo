@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.project.helpzoo.model.vo.Attachment;
 import com.project.helpzoo.model.vo.Donation;
-import com.project.helpzoo.model.vo.PageInfo;
+import com.project.helpzoo.model.vo.dPageInfo;
 
 
 @Repository
@@ -32,7 +32,7 @@ public class DonationDAO {
 	 * @param pInfo
 	 * @return DonationList
 	 */
-	public List<Donation> selectList(PageInfo pInfo) {
+	public List<Donation> selectList(dPageInfo pInfo) {
 
 		// RowBounds
 		// 조회된 내용 중 지정한 만큼의 수를 건너 띄고나서
@@ -176,7 +176,7 @@ public class DonationDAO {
 	 * @param map
 	 * @return DonationList
 	 */
-	public List<Donation> selectSearchList(PageInfo pInfo, Map<String, Object> map) {
+	public List<Donation> selectSearchList(dPageInfo pInfo, Map<String, Object> map) {
 
 		int offset = (pInfo.getCurrentPage()-1)*pInfo.getLimit();
 		
