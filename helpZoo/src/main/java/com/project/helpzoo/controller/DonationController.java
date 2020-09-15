@@ -27,7 +27,7 @@ public class DonationController {
 	// 기부 메인페이지 이동
 	@RequestMapping("donationMain/{type}")
 	public String donationMain(@PathVariable int type, 
-			@RequestParam(value="cp", required = false, defaultValue = "1") int cp
+			@RequestParam(value="cp", required = false, defaultValue = "2") int cp
 			,Model model) {
 		
 		PageInfo pInfo = donationService.pagination(type, cp);

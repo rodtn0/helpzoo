@@ -19,11 +19,7 @@ public interface ReplyService {
 	 */
 	public abstract int insertRelpy(DReply reply);
 
-	/** 답글 삽입
-	 * @param reply
-	 * @return
-	 */
-	public abstract int insertRelpy2(DReply reply);
+	
 
 	/** 댓글 수정
 	 * @param reply
