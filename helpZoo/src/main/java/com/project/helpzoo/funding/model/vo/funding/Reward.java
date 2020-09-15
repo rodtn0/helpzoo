@@ -1,5 +1,7 @@
 package com.project.helpzoo.funding.model.vo.funding;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -49,6 +51,23 @@ public class Reward {
 	private int amount;
 
 	
+	@Column(name = "REWARD_OPTION")
+	private String option;
+	
+	
+	@Column(name = "DELIVERY_PRICE")
+	private int deliveryPrice;
+	
+	@Column(name = "DELIVERY_STARTDAY")
+	private Timestamp deliveryDay;
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	public void addStock(int amount) {
 		this.amount += amount;
@@ -67,6 +86,159 @@ public class Reward {
 		this.amount = restAmount;
 		
 		
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+	public String getOption() {
+		return option;
+	}
+
+
+
+
+	public void setOption(String option) {
+		this.option = option;
+	}
+
+
+
+
+	public int getDeliveryPrice() {
+		return deliveryPrice;
+	}
+
+
+
+
+	public void setDeliveryPrice(int deliveryPrice) {
+		this.deliveryPrice = deliveryPrice;
+	}
+
+
+
+
+	public Timestamp getDeliveryDay() {
+		return deliveryDay;
+	}
+
+
+
+
+	public void setDeliveryDay(Timestamp deliveryDay) {
+		this.deliveryDay = deliveryDay;
+	}
+
+
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+
+
+	public int getRewardSeq() {
+		return rewardSeq;
+	}
+
+
+
+
+	public void setRewardSeq(int rewardSeq) {
+		this.rewardSeq = rewardSeq;
+	}
+
+
+
+
+	public FundingProject getFundingProject() {
+		return fundingProject;
+	}
+
+
+
+
+	public void setFundingProject(FundingProject fundingProject) {
+		this.fundingProject = fundingProject;
+	}
+
+
+
+
+	public String getContent() {
+		return content;
+	}
+
+
+
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+
+
+
+	public String getTitle() {
+		return title;
+	}
+
+
+
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+
+
+
+	public int getPrice() {
+		return price;
+	}
+
+
+
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+
+
+
+	public int getAmount() {
+		return amount;
+	}
+
+
+
+
+	public void setAmount(int amount) {
+		this.amount = amount;
 	}
 
 

@@ -12,11 +12,21 @@ import org.springframework.stereotype.Repository;
 
 import com.project.helpzoo.funding.dto.FundingDetailViewDto;
 import com.project.helpzoo.funding.dto.FundingMainViewDto;
+import com.project.helpzoo.funding.dto.FundingOpenInfoView;
+import com.project.helpzoo.funding.dto.FundingOpenMakerInfoView;
+import com.project.helpzoo.funding.dto.FundingOpenRequireView;
+import com.project.helpzoo.funding.dto.FundingOpenRewardView;
+import com.project.helpzoo.funding.dto.FundingOpenStoryView;
+import com.project.helpzoo.funding.dto.FundingTotalInfoDto;
+import com.project.helpzoo.funding.model.vo.funding.FundingMaker;
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
+import com.project.helpzoo.funding.model.vo.funding.MakerAgent;
+import com.project.helpzoo.funding.model.vo.funding.BusinessType;
 import com.project.helpzoo.funding.model.vo.funding.QFundingCategory;
 import com.project.helpzoo.funding.model.vo.funding.QFundingMaker;
 import com.project.helpzoo.funding.model.vo.funding.QFundingProject;
 import com.project.helpzoo.funding.model.vo.funding.QReward;
+import com.project.helpzoo.funding.model.vo.funding.Reward;
 import com.project.helpzoo.funding.model.vo.order.QOrderReward;
 import com.project.helpzoo.funding.model.vo.search.FundingSearch;
 import com.project.helpzoo.funding.model.vo.search.SearchSort;
@@ -63,6 +73,7 @@ public class FundingDAO {
 						funding.summary,
 						funding.readCount,funding.likeCount,
 						orderReward.count.sum())
+				
 				.from(funding)
 				.leftJoin(funding.reward, reward)
 				.leftJoin(orderReward).on(reward.id.eq(orderReward.reward.id))
@@ -224,11 +235,13 @@ public class FundingDAO {
 							funding.endDay,
 							funding.startDay,
 							orderReward.count.sum())
+					
 					.from(funding)
 					.leftJoin(funding.reward, reward)
 					.leftJoin(funding.fundingMaker, maker)
 					.leftJoin(orderReward).on(reward.id.eq(orderReward.reward.id))
 					.where(funding.id.eq(no))
+					
 					.groupBy(funding.id,
 							funding.story, 
 							funding.goalAmount,
@@ -294,6 +307,216 @@ public class FundingDAO {
 		
 		
 		return detailView;
+	}
+
+
+
+
+	
+	
+	/** 펀딩을 오픈하는 dao. 
+	 * @param makerName
+	 * @param type
+	 * @param phone
+	 * @param memberNo
+	 * @return
+	 */
+	public Long openFunding(String makerName, Long type, int phone, int memberNo) {
+		
+		
+		
+		FundingProject funding = new FundingProject();
+		
+	    BusinessType businessType = 	em.find(BusinessType.class, type);
+		
+		
+	  
+	    FundingMaker maker = new FundingMaker();
+	    
+	    maker.setName(makerName);
+	    
+	    maker.setPhone(phone);
+	    
+	    em.persist(maker);
+	    
+	    
+	    funding.setFundingMaker(maker);
+	    
+	    funding.setBusinessType(businessType);
+		
+	    funding.setMemberNo(memberNo);
+	    
+		em.persist(funding);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		return funding.getId();
+	}
+
+
+
+
+	public FundingOpenRequireView openRequire(Long fundingNo) {
+		
+		
+		System.out.println(fundingNo);
+		
+		FundingProject fundingProject = em.find(FundingProject.class, fundingNo);
+		
+		
+		
+		FundingOpenRequireView requireView = new FundingOpenRequireView(fundingProject.getRewardMakePlan(), fundingProject.getRewardDeliveryPlan());
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		return requireView;
+	}
+
+
+
+
+	public void openRequireSave(Long fundingNo, FundingOpenRequireView fundingOpenRequireView) {
+		
+		
+		
+		FundingProject fundingProject = em.find(FundingProject.class, fundingNo);
+		
+		fundingProject.setRewardDeliveryPlan(fundingOpenRequireView.getRewardDeliveryPlan());
+		
+		fundingProject.setRewardMakePlan(fundingOpenRequireView.getRewardMakePlan());
+		
+		
+		
+		
+	}
+
+
+
+
+	/** 작성중을 확인하는 정보를 가져오는 dto
+	 * @param fundingNo
+	 * @return
+	 */
+	public FundingTotalInfoDto getFundingTotalInfo(Long fundingNo) {
+		
+		
+		FundingProject fundingProject = em.find(FundingProject.class, fundingNo);
+		
+		
+		//기본 정보의 view에 표시될 정보 -작성 확인용-
+		
+		FundingMaker maker = fundingProject.getFundingMaker();
+		
+		MakerAgent agent = maker.getMakerAgent();
+		
+		List<Reward> rewardList = fundingProject.getReward();
+		
+		
+		
+		//기본 정보 뷰
+		FundingOpenInfoView fundingOpenInfoView = getFundingOpenInfoView(fundingProject);
+		//메이커 정보 뷰
+		FundingOpenMakerInfoView fundingOpenMakerInfoView = getFundingOpenMakerInfoView(fundingProject, maker, agent);
+		//기본 요건 뷰
+		FundingOpenRequireView fundingOpenRequireView = getFundingOpenRequireView(fundingProject);
+		//리워드 목록 뷰
+		List<FundingOpenRewardView> fundingOpenRewardView = getFundingOpenRewardView(rewardList);
+		//펀딩 스토리 뷰
+		FundingOpenStoryView fundingOpenStoryView = getFundingOpenStoryView(fundingProject);
+		
+		
+		
+		
+		
+		
+		FundingTotalInfoDto fundingTotalInfoDto = new FundingTotalInfoDto
+		
+		(fundingOpenInfoView, fundingOpenMakerInfoView, fundingOpenRequireView, fundingOpenRewardView, fundingOpenStoryView);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		return fundingTotalInfoDto;
+	}
+
+
+
+
+	private FundingOpenStoryView getFundingOpenStoryView(FundingProject fundingProject) {
+		FundingOpenStoryView fundingOpenStoryView = 
+				new FundingOpenStoryView(fundingProject.getSummary(), fundingProject.getstory());
+		return fundingOpenStoryView;
+	}
+
+
+
+
+	private List<FundingOpenRewardView> getFundingOpenRewardView(List<Reward> rewardList) {
+		List<FundingOpenRewardView> fundingOpenRewardView = new ArrayList<FundingOpenRewardView>();
+		
+		FundingOpenRewardView rewardView = null;
+		
+		for( Reward reward : rewardList ) {
+			rewardView = new FundingOpenRewardView
+		
+		(reward.getPrice(), reward.getTitle(), reward.getContent(), 
+		 reward.getOption(), reward.getDeliveryPrice(), reward.getAmount(), reward.getDeliveryDay());
+			fundingOpenRewardView.add(rewardView);
+		
+		}
+		return fundingOpenRewardView;
+	}
+
+
+
+
+	private FundingOpenRequireView getFundingOpenRequireView(FundingProject fundingProject) {
+		FundingOpenRequireView fundingOpenRequireView 
+		= new FundingOpenRequireView(fundingProject.getRewardMakePlan(), fundingProject.getRewardDeliveryPlan());
+		return fundingOpenRequireView;
+	}
+
+
+
+
+	private FundingOpenMakerInfoView getFundingOpenMakerInfoView(FundingProject fundingProject, FundingMaker maker,
+			MakerAgent agent) {
+		FundingOpenMakerInfoView fundingOpenMakerInfoView = new FundingOpenMakerInfoView
+		
+			(maker.getName(), maker.getEmail(), maker.getPhone(), maker.getKakaoId(), maker.getKakaoURL(), maker.getHomepage1(), maker.getHomepage2(), 
+					
+			maker.getSns(), maker.getSns2(), maker.getSns3(), fundingProject.getBusinessType().getBusinessType(), agent.getName(), agent.getEmail(), agent.getPhone(), 
+			
+			agent.getTexEmail(), agent.getBank(), agent.getAccountNumber(),  agent.getAccountHolder());
+		return fundingOpenMakerInfoView;
+	}
+
+
+
+
+	private FundingOpenInfoView getFundingOpenInfoView(FundingProject fundingProject) {
+		FundingOpenInfoView fundingOpenInfoView = new FundingOpenInfoView(
+				fundingProject.getTitle(), fundingProject.getGoalAmount(), fundingProject.getCategory().getCategory_name()
+				, fundingProject.getEndDay(), fundingProject.getTag());
+		return fundingOpenInfoView;
 	}
 
 }

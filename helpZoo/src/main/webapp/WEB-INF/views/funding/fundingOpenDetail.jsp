@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -228,7 +230,7 @@
     <div class="project_create_top_bar">
       &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/helpZoo/resources/images/도와주60.png" />
 
-      <span class="span"> <i class="fas fa-paw popoking"></i> &nbsp;도래미  </span>
+      <span class="span"> <i class="fas fa-paw popoking"></i> &nbsp;${makerName}  </span>
       <div class="float-right project_create_top_bar_choice"> 
         <button type="button" class="btn btn-outline-primary">미리보기</button>&nbsp;&nbsp;&nbsp;
 
@@ -273,10 +275,10 @@
               <br>
               <br>
 
-              도와주의 <br />
+             ${makerName}의 <br />
               멋진 프로젝트 <br />
               <br>
-              프로젝트 번호 82752
+              프로젝트 번호 ${fundingNo}
               <br>
             </div>
 
@@ -341,7 +343,7 @@
                 <br>
                 <div class="temp_box2 title_msg container">
                   기본 요건 
-                  <div class="btn btn-outline-secondary float-right" onclick="location.href='${contextPath}/funding/fundingOpenRequire'">작성하기</div>
+                  <div class="btn btn-outline-secondary float-right" onclick="location.href='${contextPath}/funding/fundingOpenRequire/${fundingNo}'">작성하기</div>
 
                 </div>
 
@@ -389,6 +391,8 @@
 	<br>
 	<br>
 	<br>
+	
+	
 
 
                 <!--jsp 파일에 추가해야될 sciprt-->
@@ -398,7 +402,7 @@
 
                   var menuBar = $("<div class='menu_box'></div>");
 
-              var require = $("<a class='box funding_require' href='${contextPath}/funding/fundingOpenRequire' >기본 요건</a>");
+              var require = $("<a class='box funding_require' href='${contextPath}/funding/fundingOpenRequire/${fundingNo}' >기본 요건</a>");
               var fundingInfo = $("<a class='box funding_info' href='${contextPath}/funding/fundingOpenInfo'>기본 정보</a>");
               var story = $("<a class='box funding_story' href='${contextPath}/funding/fundingOpenStory'>스토리 작성</a>");
               var reward = $("<a class='box funding_reward_build' href='${contextPath}/funding/fundingOpenReward'>리워드 설계</a>");

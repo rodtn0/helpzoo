@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.project.helpzoo.funding.dto.FundingDetailViewDto;
 import com.project.helpzoo.funding.dto.FundingMainViewDto;
+import com.project.helpzoo.funding.dto.FundingOpenRequireView;
+import com.project.helpzoo.funding.dto.FundingTotalInfoDto;
 import com.project.helpzoo.funding.model.dao.FundingDAO;
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.funding.model.vo.search.FundingSearch;
@@ -70,6 +72,76 @@ public class FundingServiceImpl implements FundingService {
 		
 		return dao.selectFunding(fundingNo);
 	}
+
+	
+	
+	
+
+	@Override
+	public Long openFunding(String makerName, String businessType, int phone, int memberNo) {
+		
+		
+		Long type = 0L;
+		
+		if(businessType.equals("개인")) {
+			type = 1L;
+			
+		}else if (businessType.equals("법인")){
+			type = 2L;
+			
+		}else if (businessType.equals("개인사업자")){
+			type = 3L;
+			
+		}
+		
+	
+		
+		
+		
+		
+		return dao.openFunding(makerName, type, phone, memberNo);
+	}
+
+
+	@Override
+	public FundingOpenRequireView openRequire(Long fundingNo) {
+		
+		
+		
+		
+		
+		return dao.openRequire(fundingNo);
+	}
+
+
+	@Override
+	public void openRequireSave(Long fundingNo, FundingOpenRequireView fundingOpenRequireView) {
+	
+		
+		
+		
+		
+		dao.openRequireSave(fundingNo,fundingOpenRequireView);
+	}
+
+
+	@Override
+	public FundingTotalInfoDto getFundingTotalInfo(Long fundingNo) {
+		
+		
+		
+		
+		
+		return dao.getFundingTotalInfo(fundingNo);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
