@@ -168,4 +168,10 @@ public class ReviewServiceImpl implements ReviewService{
 	public int deleteReview(int type, int reviewNo) {
 		return reviewDAO.deleteReview(type, reviewNo);
 	}
+
+	// 특정 번호의 (펀딩,기부)프로젝트 정보 조회 Service 구현
+	@Override
+	public Review selectInfoOne(int type, Review review) {
+		return reviewDAO.selectInfoOne(type, review);
+	}
 }

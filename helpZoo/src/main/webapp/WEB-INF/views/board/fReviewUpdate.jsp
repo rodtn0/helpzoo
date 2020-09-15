@@ -68,34 +68,34 @@
 
 <div class="container">
 	
-	<form action="../writeViewAction/1" method="post" role="form"
+	<!-- http://localhost:8095/helpzoo/board/review/1/update/859 (수정 페이지)-->
+	<!-- http://localhost:8095/helpzoo/board/review/1/updateAction/859 -->
+	<form action="../updateAction/${reviewNo}" method="post" role="form"
 		encType="multipart/form-data" onsubmit="return validate();">
 		
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
-				<h3>펀딩 후기 작성</h3>
+				<h3>펀딩 후기 수정</h3>
 				<hr>
 			</div>
 		</div>
 		
 			<div class="row">
 				<div class="col-md-8">
-					<input id="reviewTitle" name="reviewTitle" type="text" placeholder="제목을 입력해주세요.">
+					<input id="reviewTitle" name="reviewTitle" type="text" value="${fReviewView.reviewTitle}">
 					
 					<div id="contentDiv">
-						<textarea id="reviewContent" name="reviewContent" placeholder="내용을 입력해주세요." cols="100"></textarea>
+						<textarea id="reviewContent" name="reviewContent" cols="100">${fReviewView.reviewContent}</textarea>
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="row">
 							<div class="card">
 								<select id="selectProject" name="projectNo" onchange="selectProejct(this);">
-									<option selected>리뷰할 프로젝트를 선택해주세요.</option>
 									<c:if test="${!empty fInfo}">
-										<c:forEach var="fInfo" items="${fInfo}">
-											<option value="${fInfo.projectNo}">${fInfo.projectTitle}</option>
-										</c:forEach>
+										<c:set var="fInfo" value="${fInfo}"/>
+											<option value="${fInfo.projectNo}" selected>${fInfo.projectTitle}</option>
 									</c:if>  
 									
 								</select>
@@ -136,22 +136,50 @@
 				</div>
 			</div>
 			
+			<!-- 기존 이미지를 서버에서 조회한 후
+					레벨별로 이미지 출력에 필요한 src 경로를 담은 변수 4개를 생성할 예정.
+				 -->
+				<c:forEach var="at" items="${files}" varStatus="vs">
+					<c:choose>
+						<c:when test="${at.fileLevel == 0}">
+							<c:set var="contentImgSrc1" value="${contextPath}${at.filePath}/${at.fileChangeName}"/>
+						</c:when>
+						<c:when test="${at.fileLevel == 1}">
+							<c:set var="contentImgSrc2" value="${contextPath}${at.filePath}/${at.fileChangeName}"/>
+						</c:when>
+						<c:when test="${at.fileLevel == 2}">
+							<c:set var="contentImgSrc3" value="${contextPath}${at.filePath}/${at.fileChangeName}"/>
+						</c:when>
+						<c:when test="${at.fileLevel == 3}">
+							<c:set var="contentImgSrc4" value="${contextPath}${at.filePath}/${at.fileChangeName}"/>
+						</c:when>
+					</c:choose>	
+				</c:forEach>	
+			
 			<div class="row">
 				<div class="col-md-8" id="imgBlock">
-					<div class="row">
-						<div class="col-md-3 boardImg" id="contentImgArea1">
-							<img id="contentImg1" width="140" height="140"/>
-						</div>
-						<div class="col-md-3 boardImg" id="contentImgArea2">
-							<img id="contentImg2" width="140" height="140"/>
-						</div>
-						<div class="col-md-3 boardImg" id="contentImgArea3">
-							<img id="contentImg3" width="140" height="140"/>
-						</div>
-						<div class="col-md-3 boardImg" id="contentImgArea4">
-							<img id="contentImg4" width="140" height="140"/>
-						</div>
-					</div>
+							<div class="row">
+								<div class="col-md-3 boardImg" id="contentImgArea1">
+									<img id="contentImg1" width="140" height="140" 
+										<c:if test="${!empty contentImgSrc1}">src="${contentImgSrc1}"</c:if>/>
+									<button type="button" class="deleteImg">삭제</button>
+								</div>
+								<div class="col-md-3 boardImg" id="contentImgArea2">
+									<img id="contentImg2" width="140" height="140" 
+										<c:if test="${!empty contentImgSrc2}">src="${contentImgSrc2}"</c:if>/>
+									<button type="button" class="deleteImg">삭제</button>
+								</div>
+								<div class="col-md-3 boardImg" id="contentImgArea3">
+									<img id="contentImg3" width="140" height="140"
+										<c:if test="${!empty contentImgSrc3}">src="${contentImgSrc3}"</c:if>/>
+									<button type="button" class="deleteImg">삭제</button>
+								</div>
+								<div class="col-md-3 boardImg" id="contentImgArea4">
+									<img id="contentImg4" width="140" height="140"
+										<c:if test="${!empty contentImgSrc4}">src="${contentImgSrc4}"</c:if>/>
+									<button type="button" class="deleteImg">삭제</button>
+								</div>
+							</div>
 				</div>
 				
 			</div>
@@ -169,7 +197,7 @@
 				<div class="col-md-8">
 					<div class="col-md-4" id="btnBlock">
 						<button type="submit" class="btn btn-primary">
-							후기 올리기
+							수정 완료하기
 						</button>
 					</div>
 				</div>
@@ -182,7 +210,48 @@
 
 
 <script>
+	//이미지 삭제 버튼 동작
+	$(".deleteImg").on("click", function(event){
+		// event 매개변수 : 이벤트와 이벤트가 발생한 객체에 대한 모든 정보가 담겨있음.
+		event.stopPropagation(); // 삭제버튼 -> 이미지 클릭 -> file태그 클릭 == 이벤트 버블링
+								 // 이벤트 버블링을 멈춤(삭제)
+		
+		// img 태그 삭제 후 재생성
+		//--------------------------------------
+		// 현재 선택한 요소의 이전 요소 선택
+		// console.log($(this).prev());
+		var $el = $(this).prev();
+		
+		// 이미지 태그 삭제
+		// img 태그의 src 속성을 제거 (x)
+		// $el.removeAttr("src"); -> 이미지 영역은 남지만 이미지가 엑스박스로 뜸
+		
+		// 이미지 태그 자체를 삭제 시키고, 그 자리에 새로운 이미지 태그를 추가
+		var $img = $("<img>", {id : $el.attr("id"), width : $el.css("width"), height : $el.css("height")});
+		
+		$el.remove();
+		$(this).before($img); // before() : 이전 위치에 요소 삽입.
+		
+		// 삭제된 이미지의 인덱스와 일치하는 deleteImages 배열의 요소 값을 true로 변경
+		console.log($(".deleteImg").index(this));
+		// $(".deleteImg").index(this) : 
+			//클래스가 deleteImg인 요소들 중 현재 요소(this)의 인덱스 순서를 반환 
+			
+		deleteImages[$(".deleteImg").index(this)] = true;
+		console.log(deleteImages);
+		
+		// input type="file" 태그에 있는 value값 초기화
+		$("#img"+($(".deleteImg").index(this) +1)).val("");
+		// input type="file" 태그의 value 값은 readonly(읽기 전용)이므로
+		// 파일 선택 버튼 시 나타나는 윈도우로만 값을 선택할 수 있음
+		// --> 임의로 value 값을 수정하는 것은 불가능
+		// 단, 초기화는 가능(jquery만)
+	});
+	
+	
 
+	 
+	
 
 	// 유효성 검사
 	function validate() {
@@ -199,7 +268,7 @@
 		}
 	}
 	
-	// 프로젝트 이미지 불러오기
+	
 	function selectProejct(element){
 		var projectNo = $(element).val();
 		//console.log(projectNo); 선택된 프로젝트 번호 찍어보기
@@ -243,16 +312,16 @@
 	$(function(){
 		$("#fileArea").hide();
 		
-		$("#contentImg1").on("click", function(){
+		$("#contentImgArea1").on("click", function(){
 			$("#img1").click();
 		});
-		$("#contentImg2").on("click", function(){
+		$("#contentImgArea2").on("click", function(){
 			$("#img2").click();
 		});
-		$("#contentImg3").on("click", function(){
+		$("#contentImgArea3").on("click", function(){
 			$("#img3").click();
 		});
-		$("#contentImg4").on("click", function(){
+		$("#contentImgArea4").on("click", function(){
 			$("#img4").click();
 		});
 	
@@ -283,7 +352,7 @@
 	        reader.readAsDataURL(value.files[0]);
 	      }
 		
-	}
+	} 
 		
 	
 	
