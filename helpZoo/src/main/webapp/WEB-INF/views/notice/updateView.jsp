@@ -5,13 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <link href="${contextPath}/resources/css/noticeInsertView.css" rel="stylesheet"/>
-<title>공지사항 등록</title>
+<title>공지사항 수정</title>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"/>
 		<div class="insertViewMain">
 		
-            <h3 class="noticeTitleH3" data-aos="fade-down">공지사항 등록</h3>
+            <h3 class="noticeTitleH3" data-aos="fade-down">공지사항 수정</h3>
             
             <form class="insertViewForm" action="updateNotice?cp=${param.cp}" method="post"
             	onsubmit="return validate();">

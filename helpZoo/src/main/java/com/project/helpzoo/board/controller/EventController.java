@@ -113,11 +113,11 @@ public class EventController {
 		// session 회원정보
 		Member loginMember = (Member)model.getAttribute("loginMember");
 		
-		System.out.println("board 정보 : " + board);
-		System.out.println("loginMember 정보 : " + loginMember);
-		
 		board.setBoardType(type);
 		board.setBoardWriter(loginMember.getMemberNo()+"");
+		
+		System.out.println("board 정보 : " + board);
+		System.out.println("loginMember 정보 : " + loginMember);
 		
 		// 파일 업로드시 입력값 확인
 		System.out.println("썸네일 : " + thumbnail.getOriginalFilename());

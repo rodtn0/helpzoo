@@ -5,15 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <link href="${contextPath}/resources/css/noticeInsertView.css" rel="stylesheet"/>
-<title>이벤트 등록</title>
+<title>이벤트 수정</title>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"/>
 		<div class="insertViewMain">
 		
-            <h3 class="noticeTitleH3" data-aos="fade-down">이벤트 등록</h3>
+            <h3 class="noticeTitleH3" data-aos="fade-down">이벤트 수정</h3>
             
-            <form class="insertViewForm" action="insertEvent" method="post"
+            <form class="insertViewForm" action="updateEvent?cp=${param.cp}" method="post"
             	encType="multipart/form-data" onsubmit="return validate();">
                 
                 <hr>
@@ -21,7 +21,7 @@
                 <div>
                     <br>
                     <label class="titleLabel" for="title" data-aos="zoom-in">제목</label>
-                    <input type="text" id="title" name="boardTitle">
+                    <input type="text" id="title" name="boardTitle" value="${board.boardTitle}">
                     <br>
                 </div>
                 
@@ -53,15 +53,15 @@
                 <div>
                     <br>
                     <label class="contentLabel" for="content" data-aos="fade-up">내용</label>
-                    <textarea name="boardContent" id="content"></textarea>
+                    <textarea name="boardContent" id="content">${board.boardContent}</textarea>
                     <br>
                 </div>
 
 
                 <div class="btn">
                     <br>
-                    <button data-aos="zoom-in" type="submit" class="insertBtn" id="insertBtn">등록</button>
-                    <input type="button" data-aos="zoom-in" class="insertBtn" id="toListBtn" onclick="history.back()" value="목록으로">
+                    <button data-aos="zoom-in" type="submit" class="insertBtn" id="insertBtn">수정</button>
+                    <input type="button" data-aos="zoom-in" class="insertBtn" id="toListBtn" onclick="history.back()" value="취소">
                 	<!-- <a data-aos="zoom-in" class="toListBtn" onclick="history.back()">목록으로</a> -->
                 </div>
 
