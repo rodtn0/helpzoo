@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.project.helpzoo.model.vo.Attachment;
 import com.project.helpzoo.model.vo.Donation;
-import com.project.helpzoo.model.vo.PageInfo;
+import com.project.helpzoo.model.vo.dPageInfo;
 import com.project.helpzoo.model.vo.Search;
 
 public interface DonationService {
@@ -17,13 +17,13 @@ public interface DonationService {
 	 * @param search 
 	 * @return pInfo
 	 */
-	public abstract PageInfo pagination(int type, int cp);
+	public abstract dPageInfo pagination(int type, int cp);
 
 	/** 게시글 목록 조회 Service
 	 * @param pInfo
 	 * @return boardList
 	 */
-	public abstract List<Donation> selectList(PageInfo pInfo);
+	public abstract List<Donation> selectList(dPageInfo pInfo);
 
 	/** 게시글  상세 조회 Service
 	 * @param dBoardNo
@@ -80,14 +80,14 @@ public interface DonationService {
 	 * @param search 
 	 * @return pInfo
 	 */
-	public abstract PageInfo pagination(int type, int cp, Search search);
+	public abstract dPageInfo pagination(int type, int cp, Search search);
 
 	/** 검색 목록 조회 Service
 	 * @param pInfo
 	 * @param search
 	 * @return boardList
 	 */
-	public abstract List<Donation> selectSearchList(PageInfo pInfo, Search search);
+	public abstract List<Donation> selectSearchList(dPageInfo pInfo, Search search);
 
 
 }
