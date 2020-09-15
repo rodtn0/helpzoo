@@ -39,20 +39,7 @@ public class ReplyServiceImpl implements ReplyService{
 	}
 	
 	
-	// 답글 삽입
-	@Transactional(rollbackFor = Exception.class)
-	@Override
-	public int insertRelpy2(DReply reply) {
-	  
-		reply.setdReplyContent(
-                replaceParameter(reply.getdReplyContent()));
-
-        // 개행문자 처리 \n -> <br>
-        reply.setdReplyContent(
-                reply.getdReplyContent().replaceAll("\n", "<br>"));
-
-		return replyDAO.insertRelpy2(reply);
-	}
+	
 	
 	
 	// 댓글 수정

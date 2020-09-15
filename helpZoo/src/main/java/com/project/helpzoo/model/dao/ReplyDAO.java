@@ -34,14 +34,7 @@ public class ReplyDAO {
 		return sqlSession.insert("donationMapper.insertRelpy", reply);
 	}
 
-	/** 답글 삽입
-	 * @param reply
-	 * @return
-	 */
-	public int insertRelpy2(DReply reply) {
 
-		return sqlSession.insert("donationMapper.insertRelpy2", reply);
-	}
 
 	/** 댓글 수정
 	 * @param reply

@@ -22,10 +22,10 @@ public class ReplyController {
 
 	// 댓글 조회
 	@ResponseBody
-	@RequestMapping("selectList/{donationNo}")
-	public String selectList(@PathVariable int donationNo) {
+	@RequestMapping("selectList/{dBoardNo}")
+	public String selectList(@PathVariable int dBoardNo) {
 		
-		List<DReply> rList = replyService.selectList(donationNo);
+		List<DReply> rList = replyService.selectList(dBoardNo);
 
 		Gson gson = new GsonBuilder().setDateFormat("yyyy년 MM월 dd일 HH:mm:ss").create();
 
@@ -35,14 +35,14 @@ public class ReplyController {
 	
 	// 댓글 삽입
 	@ResponseBody
-	@RequestMapping(value="insertReply/{boardNo}", 
+	@RequestMapping(value="insertReply/{dBoardNo}", 
 					produces = "application/text; charset=utf-8;")
 	// produces : 응답 데이터의 Mime type, 문자인코딩 지정 속성
 	// -> ajax 통신 시 한글로 된 String을 리턴할 경우 주로 사용함
-	public String insertReply(@PathVariable int boardNo, DReply reply){
+	public String insertReply(@PathVariable int dBoardNo, DReply reply){
 		// reply 커맨드 객체를 이용하여 전달받은 이름, 댓글 내용을 한 객체에 저장
 		// + boardNo도 reply 객체의 parentBoardNo에 저장
-		reply.setParentBoardNo(boardNo);
+		reply.setdBoardNo(dBoardNo);
 		
 		int result = replyService.insertRelpy(reply);
 		
@@ -61,40 +61,16 @@ public class ReplyController {
 	
 	
 	
-	// 답글 삽입
-	@ResponseBody
-	@RequestMapping(value="insertReply2/{boardNo}", 
-					produces = "application/text; charset=utf-8;")
-	// produces : 응답 데이터의 Mime type, 문자인코딩 지정 속성
-	// -> ajax 통신 시 한글로 된 String을 리턴할 경우 주로 사용함
-	public String insertReply2(@PathVariable int boardNo, DReply reply){
-		// reply 커맨드 객체를 이용하여 전달받은 이름, 댓글 내용을 한 객체에 저장
-		// + boardNo도 reply 객체의 parentBoardNo에 저장
-		reply.setParentBoardNo(boardNo);
-		
-		int result = replyService.insertRelpy2(reply);
-		
-		String str = "댓글 삽입 ";
-		
-		if(result>0) {
-			str += "성공";
-			
-		}else {
-			str += "실패";
-		}
-		
-		return str;
-	}
 	
 	
 	
 	// 댓글 수정
 	@ResponseBody
-	@RequestMapping(value="updateReply/{boardNo}", 
+	@RequestMapping(value="updateReply/{dBoardNo}", 
 			produces = "application/text; charset=utf-8;")
-	public String updateReply(@PathVariable int boardNo, DReply reply) {
+	public String updateReply(@PathVariable int dBoardNo, DReply reply) {
 		
-		reply.setParentBoardNo(boardNo);
+		reply.setdBoardNo(dBoardNo);
 		
 		int result = replyService.updateReply(reply);
 		
