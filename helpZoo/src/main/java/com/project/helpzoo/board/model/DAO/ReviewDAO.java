@@ -67,7 +67,7 @@ public class ReviewDAO {
 
 	/** 리뷰 상세조회 DAO
 	 * @param rBoardNo
-	 * @return 
+	 * @return fReviewView/dReviewView
 	 */
 	public Review selectReviewView(int type, int rBoardNo) {
 		String mapperId = null;
@@ -161,6 +161,19 @@ public class ReviewDAO {
 		if(type == 1) mapperId = "reviewMapper.deleteFundingReview";
 		else		  mapperId = "reviewMapper.deleteDonationReview";
 		return sqlSession.delete(mapperId, reviewNo);
+	}
+
+ 
+	/** 특정 번호의 (펀딩,기부)프로젝트 정보 조회 DAO
+	 * @param type
+	 * @param review
+	 * @return fInfo, dInfo
+	 */
+	public Review selectInfoOne(int type, Review review) {
+		String mapperId = null;
+		if(type == 1) mapperId = "reviewMapper.fundingOneInfo";
+		else		  mapperId = "reviewMapper.donationOneInfo";
+		return sqlSession.selectOne(mapperId, review);
 	}
 
 	

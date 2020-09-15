@@ -146,7 +146,7 @@
 
         <!-- Categories Widget -->
         <div class="card my-4">
-          <h5 class="card-header">Crowd Funding</h5>
+          <h5 class="card-header">Donation</h5>
           <div class="card-body">
             <div class="row">
                	<div class="card">
@@ -171,9 +171,10 @@
 		
 		 <div id="buttonArea">
         	<c:if test="${dReviewView.memberId == sessionScope.loginMember.memberId}">
-				<a class="btn btn-primary" href="#">수정</a>
+				<a class="btn btn-primary" href="update/${dReviewView.reviewNo}">수정</a>
 				<button id="deleteBtn" class="btn btn-primary">삭제</button>
 			</c:if>
+				<a class="btn btn-primary" href="#" style="background-color:#7fcdcd">목록으로</a>
 		</div>
 
       </div>

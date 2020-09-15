@@ -80,7 +80,7 @@
         <hr>
 
         <!-- Comments Form -->
-        <div class="card my-4">
+       <div class="card my-4">
           <h5 class="card-header">Leave a Comment:</h5>
           <div class="card-body">
             <form>
@@ -92,7 +92,7 @@
           </div>
         </div>
 
-        <!-- Single Comment -->
+        Single Comment
         <div class="media mb-4">
           <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
           <div class="media-body">
@@ -101,7 +101,7 @@
           </div>
         </div>
 
-        <!-- Comment with nested comments -->
+        Comment with nested comments
         <div class="media mb-4">
           <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
           <div class="media-body">
@@ -172,9 +172,14 @@
         
         <div id="buttonArea">
         	<c:if test="${fReviewView.memberId == sessionScope.loginMember.memberId}">
-				<a class="btn btn-primary" href="#">수정</a>
+        		<!-- http://localhost:8095/helpzoo/board/review/1/858?cp=1 -->
+        		<!-- http://localhost:8095/helpzoo/board/review/1/update/${fReviewView.reviewNo}-->
+				<a class="btn btn-primary" href="update/${fReviewView.reviewNo}">수정</a>
 				<button id="deleteBtn" class="btn btn-primary">삭제</button>
 			</c:if>
+						<!-- http://localhost:8095/helpzoo/board/review/1/881?cp=1 -->
+						<!-- http://localhost:8095/helpzoo/board/review/1 -->
+				<a class="btn btn-primary" href="#" style="background-color:#7fcdcd">목록으로</a>
 		</div>
 
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -258,10 +259,74 @@ public class reviewController {
 		return "redirect:" + path;
 	}
 	
+	// 리뷰 수정 화면 이동(기존 정보 불러오기)
+	@RequestMapping("review/{type}/update/{reviewNo}")
+	public String updateReview(@PathVariable int type, @PathVariable int reviewNo, Review review, Model model) {
+		
+		Member loginMember = (Member)model.getAttribute("loginMember");
+		
+		String path = null;
+		Review fReviewView = null;
+		Review dReviewView = null;
+		
+		// review에 멤버 아이디 저장해서 같이 특정 funding 정보 조회할때 같이 데려가기(id랑 상세조회한 글 번호 가져가야함)
+		review.setMemberId(loginMember.getMemberId());
+		
+		
+		if(type == 1) {
+			
+			fReviewView = reviewService.selectReviewVeiw(type, reviewNo);
+			System.out.println("상세조회할 글 정보(펀딩) : " + fReviewView);
+			
+			Review fInfo = reviewService.selectInfoOne(type, review);
+			System.out.println("펀딩 정보 : " + fInfo);
+			
+			if(fReviewView != null && fInfo != null) { // 게시글 조회가 된다면
+				//해당 게시글 이미지 조회하기
+				List<Attachment> files = reviewService.selectFiles(type, reviewNo);
+				System.out.println("files : " + files);
+				
+				if(!files.isEmpty()) {
+					model.addAttribute("files", files);
+				}
+				
+				path = "fReviewUpdate";
+				model.addAttribute("fInfo", fInfo);
+				model.addAttribute("fReviewView", fReviewView);
+			}
+		}else if(type == 2){
+			
+			dReviewView = reviewService.selectReviewVeiw(type, reviewNo);
+			System.out.println("상세조회할 글 정보(기부) : " + dReviewView);
+			
+			Review dInfo = reviewService.selectInfoOne(type, review);
+			System.out.println("기부 정보 : " + dInfo);
+				
+			if(dReviewView != null && dInfo != null) {
+				List<Attachment> files = reviewService.selectFiles(type, reviewNo);
+				
+				if(!files.isEmpty()) {
+					model.addAttribute("files", files);
+				}
+			}
+			
+				path = "dReviewUpdate";
+				model.addAttribute("ㅇInfo", dInfo);
+				model.addAttribute("dReviewView", dReviewView);
+			
+		}
+		
+		return "board/" + path;
+	}
 	
 	
-	
-	
+	// 리뷰 수정
+				// /board/review/1/updateAction/859
+	@RequestMapping(value="review/{type}/updateAction/{reviewNo}", method=RequestMethod.POST)
+	public String updateAction(@PathVariable int type, @PathVariable int reviewNo) {
+		
+		return "";
+	}
 	
 	
 	
