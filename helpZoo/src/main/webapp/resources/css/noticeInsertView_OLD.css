@@ -42,38 +42,13 @@ hr{
     height: 600px;
 }
 
-// 이미지
-.insertViewForm .images{
-	display: inline-block;
-}
-
-.images .boardImg{
-	display: inline-block;
-	margin: auto;
-	margin-right: 40px;
-}
-
-.images .contentImg:hover{
-	cursor: pointer;
-}
-
-.images .contentImg, .images .deleteImg{
-	display: block;
-}
-
-.images .contentImg{
-	width: 150px;
-	height: 150px;
-	border-radius: 4px;
-}
-
 .btn{
 	/* display: grid; */
 	margin : auto;
     text-align: center;
 }
 
-.btn .insertBtn,.btn .toListBtn, .images .deleteImg{
+.btn .insertBtn,.btn .toListBtn{
 	padding: 0;
 	margin: 0 auto 25px auto;
 	list-style: none;
@@ -81,12 +56,12 @@ hr{
 	border-color: rgba(0,0,0,0.0);
 }
 
-.btn .insertBtn, .images .deleteImg{
+.btn .insertBtn{
 	height: 36px;
 }
 
 
-.btn .insertBtn, .btn .toListBtn ,.images .deleteImg{
+.btn .insertBtn, .btn .toListBtn{
 	padding: 10px 18px 12px 18px;
 	font-size: 14px;
 	font-weight: 400;
@@ -98,17 +73,12 @@ hr{
 	border-radius: 4px;
 }
 
-.btn .toListBtn, .images .deleteImg{
-	padding-top: 10px;
+.btn .toListBtn{
+	padding-top: 12px;
     padding-bottom: 10px;
 }
 
-.images .deleteImg{
-	margin: auto;
-	margin-top: 10px;
-}
-
-.btn .insertBtn:hover, .btn .toListBtn:hover, .images .deleteImg:hover{
+.btn .insertBtn:hover, .btn .toListBtn:hover{
 	transition: all 0.5s ease-in-out;
 	background: #7cc576;
 	color: #fff;

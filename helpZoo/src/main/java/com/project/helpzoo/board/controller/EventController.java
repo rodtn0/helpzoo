@@ -9,12 +9,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.helpzoo.board.model.service.EventService;
+import com.project.helpzoo.board.model.vo.Attachment;
 import com.project.helpzoo.board.model.vo.Board;
 import com.project.helpzoo.board.model.vo.PageInfo;
 import com.project.helpzoo.board.model.vo.Search;
@@ -37,12 +40,20 @@ public class EventController {
 		
 		PageInfo pInfo = eventService.pagination(type, cp);
 		
+		// 이벤트 글 목록
 		List<Board> eventList = eventService.selectList(pInfo);
 		
 		//목록 조회 확인용 test
 //		for(Board e : eventList) {
 //			System.out.println("공지사항 리스트 : " + e);
 //		}
+		
+		// 썸네일 목록
+		if(!eventList.isEmpty()) {
+			List<Attachment> thumList = eventService.selectThumList(eventList);
+			
+			model.addAttribute("thumList", thumList);
+		}
 		
 		model.addAttribute("eventList", eventList);
 		model.addAttribute("pInfo", pInfo);
@@ -53,7 +64,8 @@ public class EventController {
 	// 이벤트 상세 조회 --------------------------------------------------------------------------------
 	// /notice/5/33
 	@RequestMapping("{type}/{boardNo}")
-	public String noticeView(@PathVariable int type, @PathVariable int boardNo, Model model) {
+	public String noticeView(@PathVariable int type, @PathVariable int boardNo,
+			Model model, RedirectAttributes rdAttr, HttpServletRequest request) {
 		
 //		int type = 6;
 		
@@ -61,9 +73,26 @@ public class EventController {
 		
 		System.out.println("상세조회 결과 : " + board);
 		
-		model.addAttribute("board", board);
+		String url = null;
 		
-		return "event/eventView";
+		if(board != null) {
+			
+			List<Attachment> files = eventService.selectFiles(boardNo);
+			
+			if(!files.isEmpty()) {
+				model.addAttribute("files", files);
+			}
+			
+			model.addAttribute("board", board);
+			url = "event/eventView";
+		}else {
+			rdAttr.addFlashAttribute("status", "error");
+			rdAttr.addFlashAttribute("msg", "해당 게시물이 존재하지 않습니다.");
+			url = "redirect:/event/eventList";
+		}
+		
+		
+		return url;
 	}
 	
 	// 이벤트 글 작성 뷰 -------------------------------------------------------------------------------------
@@ -75,10 +104,13 @@ public class EventController {
 	}
 	
 	// 이벤트 글 등록 -------------------------------------------------------------------------------------------
-	@RequestMapping("{type}/insertEvent")
+	@RequestMapping(value = "{type}/insertEvent", method = RequestMethod.POST)
 	public String insertEvent(@PathVariable int type, Board board, Model model,
+			@RequestParam(value = "thumbnail", required = false) MultipartFile thumbnail,
+			@RequestParam(value = "images", required = false) List<MultipartFile> images,
 			HttpServletRequest request, RedirectAttributes rdAttr) {
 		
+		// session 회원정보
 		Member loginMember = (Member)model.getAttribute("loginMember");
 		
 		System.out.println("board 정보 : " + board);
@@ -87,7 +119,20 @@ public class EventController {
 		board.setBoardType(type);
 		board.setBoardWriter(loginMember.getMemberNo()+"");
 		
-		int result = eventService.insertEvent(board);
+		// 파일 업로드시 입력값 확인
+		System.out.println("썸네일 : " + thumbnail.getOriginalFilename());
+		for(int i=0; i<images.size(); i++) {
+			System.out.println("images[" + i + "] : " + images.get(i).getOriginalFilename());
+		}
+		
+		// 썸네일 이미지 정보를 images 리스트 제일 앞에 추가
+		images.add(0, thumbnail);
+		
+		// 파일을 저장할 서버 컴퓨터의 로컬 경로
+		String savePath = request.getSession().getServletContext().getRealPath("resources/uploadImages");
+		
+		// 이벤트 글 등록 service 호출
+		int result = eventService.insertEvent(board, images, savePath);
 		
 		// SweetAlert용 변수 선언
 		String status = null;
@@ -114,7 +159,7 @@ public class EventController {
 	// notice/5/547?cp=1
 	@RequestMapping("{type}/{boardNo}/deleteEvent")
 	public String deleteEvent(@PathVariable int type, @PathVariable int boardNo,
-				RedirectAttributes rdAttr, HttpServletRequest request) {
+			RedirectAttributes rdAttr, HttpServletRequest request) {
 		
 		int result = eventService.deleteEvent(boardNo);
 		

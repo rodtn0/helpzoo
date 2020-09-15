@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.project.helpzoo.board.model.vo.Attachment;
 import com.project.helpzoo.board.model.vo.Board;
 import com.project.helpzoo.board.model.vo.PageInfo;
 
@@ -112,6 +113,37 @@ public class EventDAO {
 		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
 		
 		return sqlSession.selectList("eventMapper.selectSearchList", map, rowBounds);
+	}
+
+	/** 썸네일 목록 조회 dao
+	 * @param eventList
+	 * @return thumList
+	 */
+	public List<Attachment> selectThumList(List<Board> eventList) {
+		return sqlSession.selectList("eventMapper.selectThumList", eventList);
+	}
+
+	/** 이벤트 게시글 이미지 조회 dao
+	 * @param boardNo
+	 * @return files
+	 */
+	public List<Attachment> selectFiles(int boardNo) {
+		return sqlSession.selectList("eventMapper.selectFiles", boardNo);
+	}
+
+	/** 파일 정보 삽입 dao
+	 * @param at
+	 * @return result
+	 */
+	public int insertAttachment(Attachment at) {
+		return sqlSession.insert("eventMapper.insertAttachment", at);
+	}
+
+	/** 파일 저장 오류시 DB에 저장된 내용 삭제 DAO
+	 * @param boardNo
+	 */
+	public void deleteAttachment(int boardNo) {
+		sqlSession.delete("eventMapper.deleteAttachment", boardNo);
 	}
 	
 }
