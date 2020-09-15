@@ -24,6 +24,10 @@ public class MakerAgent {
 	@Column(name="AGENT_ID")
 	private long id;
 	
+	
+	@Column(name="MAKER_AGENT_NAME")
+	private String name;
+	
 	@Column(name="AGENT_PHONE")
 	private int phone;
 	
@@ -36,8 +40,58 @@ public class MakerAgent {
 	@Column(name="ACCOUNT_NUMBER")
 	private int accountNumber;
 	
+	@Column(name="MAKER_AGENT_TEXEMAIL")
+	private String texEmail;
+	
+	@Column(name="MAKER_AGENT_BANK")
+	private String bank;
+	
+	@Column(name="MAKER_AGENT_ACCOUNT_HOLDER")
+	private String accountHolder;
+	
 	@OneToOne(mappedBy = "makerAgent")
 	private FundingMaker fundingMaker;
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public String getAccountHolder() {
+		return accountHolder;
+	}
+
+	public void setAccountHolder(String accountHolder) {
+		this.accountHolder = accountHolder;
+	}
+
+	public String getBank() {
+		return bank;
+	}
+
+	public void setBank(String bank) {
+		this.bank = bank;
+	}
+
+	public String getTexEmail() {
+		return texEmail;
+	}
+
+	public void setTexEmail(String texEmail) {
+		this.texEmail = texEmail;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public long getId() {
 		return id;
@@ -87,11 +141,6 @@ public class MakerAgent {
 		this.fundingMaker = fundingMaker;
 	}
 
-	@Override
-	public String toString() {
-		return "MakerAgent [id=" + id + ", phone=" + phone + ", email=" + email + ", residentNumber=" + residentNumber
-				+ ", accountNumber=" + accountNumber + ", fundingMaker=" + fundingMaker + "]";
-	}
 
 	public MakerAgent(long id, int phone, String email, int residentNumber, int accountNumber,
 			FundingMaker fundingMaker) {
@@ -106,6 +155,13 @@ public class MakerAgent {
 
 	public MakerAgent() {
 		super();
+	}
+
+	@Override
+	public String toString() {
+		return "MakerAgent [id=" + id + ", name=" + name + ", phone=" + phone + ", email=" + email + ", residentNumber="
+				+ residentNumber + ", accountNumber=" + accountNumber + ", texEmail=" + texEmail + ", fundingMaker="
+				+ fundingMaker + "]";
 	}
 	
 	

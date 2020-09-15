@@ -3,16 +3,26 @@ package com.project.helpzoo.funding.model.vo.funding;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+@SequenceGenerator(
+		name = "FUNDING_MAKER_SEQ_GENERATOR",
+		sequenceName = "FUNDING_MAKER_SEQ",
+		initialValue = 1, allocationSize = 1)
 @Entity
 @Table(name="FUNDING_MAKER")
 public class FundingMaker {
 	
+	
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,
+	generator = "FUNDING_MAKER_SEQ_GENERATOR")
 	@Column(name="FUNDING_MAKER_ID")
 	private long id;
 
@@ -23,7 +33,7 @@ public class FundingMaker {
 	private String email;
 	
 	@Column(name="FUNDING_MAKER_PHONE")
-	private String phone;
+	private int phone;
 	
 	@Column(name="FUNDING_MAKER_KAKAO_ID")
 	private String kakaoId;
@@ -40,9 +50,42 @@ public class FundingMaker {
 	@Column(name="FUNDING_MAKER_SNS3")
 	private String sns3;
 	
+	@Column(name="FUNDING_MAKER_HOMEPAGE1")
+	private String homepage1;
+	
+	@Column(name="FUNDING_MAKER_HOMEPAGE2")
+	private String homepage2;
+	
+
+	
+	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name ="AGENT_ID")
 	private MakerAgent makerAgent;
+
+	
+	
+	
+	
+	
+	
+	
+	
+	public String getHomepage1() {
+		return homepage1;
+	}
+
+	public void setHomepage1(String homepage1) {
+		this.homepage1 = homepage1;
+	}
+
+	public String getHomepage2() {
+		return homepage2;
+	}
+
+	public void setHomepage2(String homepage2) {
+		this.homepage2 = homepage2;
+	}
 
 	public long getId() {
 		return id;
@@ -72,11 +115,11 @@ public class FundingMaker {
 		this.email = email;
 	}
 
-	public String getPhone() {
+	public int getPhone() {
 		return phone;
 	}
 
-	public void setPhone(String phone) {
+	public void setPhone(int phone) {
 		this.phone = phone;
 	}
 
@@ -135,7 +178,7 @@ public class FundingMaker {
 				+ ", makerAgent=" + makerAgent + "]";
 	}
 
-	public FundingMaker(long id, String name, String email, String phone, String kakaoId, String kakaoURL, String sns,
+	public FundingMaker(long id, String name, String email, int phone, String kakaoId, String kakaoURL, String sns,
 			String sns2, String sns3, MakerAgent makerAgent) {
 		super();
 		this.id = id;
