@@ -20,5 +20,14 @@ public class AFundingImpl implements AFundingService{
 	public List<AFunding> selectFunding() {
 		return fundingDAO.selectFunding();
 	}
+	@Override
+	public int updateFunding(AFunding funding) {
+		return fundingDAO.updateFunding(funding);
+	}
+	@Override
+	public int deleteFunding(String fundingNo) {
+		// TODO Auto-generated method stub
+		return fundingDAO.deleteFunding(fundingNo);
+	}
 
 }

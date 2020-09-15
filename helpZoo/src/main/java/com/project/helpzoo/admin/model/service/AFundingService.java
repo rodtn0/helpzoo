@@ -8,4 +8,8 @@ public interface AFundingService {
 
 	List<AFunding> selectFunding();
 
+	int updateFunding(AFunding funding);
+
+	int deleteFunding(String fundingNo);
+
 }
