@@ -65,6 +65,13 @@ public interface ReviewService {
 	 */
 	public abstract int deleteReview(int type, int reviewNo);
 
+	/** 특정 번호의 (펀딩,기부)프로젝트 정보 조회 Service
+	 * @param type
+	 * @param review
+	 * @return fInfo,dInfo
+ 	 */
+	public abstract Review selectInfoOne(int type, Review review);
+
 
 	
 }

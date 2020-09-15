@@ -28,6 +28,13 @@
 	  	<result property="fileChangeName" column="FILE_CHANGE_NAME"/>
 	  </resultMap>
 	  
+	  <resultMap id="frResultSet2" type="Review">
+	  	<result property="projectNo" column="FUNDING_ID"/>
+	  	<result property="projectTitle" column="FUNDING_TITLE"/>
+	  	<result property="filePath" column="FILE_PATH"/>
+	  	<result property="fileChangeName" column="FILE_CHANGE_NAME"/>
+	  </resultMap>
+	  
 	  <resultMap id="donationReviewResultSet" type="Review">
 	  	<id property="reviewNo" column="DONATION_REVIEW_NO"/>
 	  	<result property="reviewTitle" column="DONATION_REVIEW_TITLE"/>
@@ -47,6 +54,14 @@
 	  </resultMap>
 	  
 	   <resultMap id="drResultSet" type="Review">
+	  	<result property="projectNo" column="DONATION_BOARD_NO"/>
+	  	<result property="projectTitle" column="DONATION_BOARD_TITLE"/>
+	  	<result property="memberId" column="MEMBER_ID"/>
+	  	<result property="filePath" column="DONATION_FILE_PATH"/>
+	  	<result property="fileChangeName" column="DONATION_FILE_CHANGE_NAME"/>
+	  </resultMap>
+	  
+	  <resultMap id="drResultSet2" type="Review">
 	  	<result property="projectNo" column="DONATION_BOARD_NO"/>
 	  	<result property="projectTitle" column="DONATION_BOARD_TITLE"/>
 	  	<result property="filePath" column="DONATION_FILE_PATH"/>
@@ -81,12 +96,14 @@
     	<result property="fileNo" column="FR_FILE_NO"/>
     	<result property="fileChangeName" column="FR_FILE_C_NAME"/>
     	<result property="filePath" column="FR_FILE_PATH"/>
+    	<result property="fileLevel" column="FR_FILE_LEVEL"/>
     </resultMap>
     
     <resultMap type="Attachment" id="attachmentResultSetD">
     	<result property="fileNo" column="DR_FILE_NO"/>
     	<result property="fileChangeName" column="DR_FILE_C_NAME"/>
     	<result property="filePath" column="DR_FILE_PATH"/>
+    	<result property="fileLevel" column="DR_FILE_LEVEL"/>
     </resultMap>
     
     
@@ -104,11 +121,11 @@
   	  
   	  <!-- 기부 리뷰 게시판 목록 조회 -->
   	  <select id="selectDonationList" resultMap="donationReviewResultSet">
-  	  	SELECT DONATION_REVIEW_NO, DONATION_BOARD_TITLE, DONATION_REVIEW_TITLE, MEMBER_ID, 
-        DONATION_REVIEW_READ_COUNT, DONATION_REVIEW_CREATE_DT
-		FROM REVIEW_DONATION
-		JOIN MEMBER ON(DONATION_REVIEW_WRITER = MEMBER_NO)
-		JOIN DONATION_BOARD USING(DONATION_BOARD_NO)
+		SELECT DONATION_REVIEW_NO, DONATION_BOARD_TITLE, DONATION_REVIEW_TITLE, MEMBER_ID, 
+		        DONATION_REVIEW_READ_COUNT, DONATION_REVIEW_CREATE_DT
+		FROM REVIEW_DONATION RD
+		LEFT JOIN MEMBER M ON(RD.DONATION_REVIEW_WRITER = M.MEMBER_NO)
+		LEFT JOIN DONATION_BOARD DB ON(DB.DONATION_BOARD_NO = RD.DONATION_BOARD_NO)
 		WHERE DONATION_REVIEW_STATUS ='Y' 
 		ORDER BY DONATION_REVIEW_NO DESC
   	  </select>
@@ -238,14 +255,14 @@
 	  
 	  <!-- 펀딩리뷰게시글 상세조회 시 이미지 조회 -->
 	  <select id="selectFundingImages" parameterType="_int" resultMap="attachmentResultSetF">
-	  	SELECT FR_FILE_NO, FR_FILE_C_NAME, FR_FILE_PATH
+	  	SELECT FR_FILE_NO, FR_FILE_C_NAME, FR_FILE_PATH, FR_FILE_LEVEL
 		FROM FR_ATTACHMENT
 		WHERE PARENT_RE_NO = #{rBoardNo}
 	  </select>
 	  
 	  <!-- 기부리뷰게시글 상세조회 시 이미지 조회 -->
 	  <select id="selectDonationImages" parameterType="_int" resultMap="attachmentResultSetD">
-	  	SELECT DR_FILE_NO, DR_FILE_C_NAME, DR_FILE_PATH
+	  	SELECT DR_FILE_NO, DR_FILE_C_NAME, DR_FILE_PATH, DR_FILE_LEVEL
 		FROM DR_ATTACHMENT
 		WHERE PARENT_RE_NO = #{rBoardNo}
 	  </select>
@@ -261,4 +278,26 @@
 	  	UPDATE REVIEW_DONATION SET DONATION_REVIEW_STATUS = 'N'
 		WHERE DONATION_REVIEW_NO = #{reviewNo}
 	  </delete>
+	  
+	  <!-- 특정 번호 (859번) 펀딩 리뷰글 정보 조회 -->
+	  <select id="fundingOneInfo" parameterType="Review" resultMap="frResultSet2">
+	  	SELECT FP.FUNDING_ID, FP.FUNDING_TITLE, FI.FILE_PATH, FI.FILE_CHANGE_NAME
+		FROM REVIEW_FUNDING RF
+		LEFT JOIN MEMBER M ON(RF.FUNDING_REVIEW_WRITER = M.MEMBER_NO)
+		LEFT JOIN FUNDING_PROJECT FP ON(RF.FUNDING_BOARD_NO = FP.FUNDING_ID)
+		LEFT JOIN FUNDING_IMAGE FI ON(FI.PARENT_PROJECT_NO = FP.FUNDING_ID)
+		WHERE MEMBER_ID = #{memberId}
+		AND FUNDING_REVIEW_NO = #{reviewNo}
+	  </select>
+	  
+	  <!-- 특정 번호 (859번) 기부 리뷰글 정보 조회 -->
+	  <select id="donationOneInfo" parameterType="Review" resultMap="drResultSet2">
+	  	SELECT DB.DONATION_BOARD_NO, DB.DONATION_BOARD_TITLE, DA.DONATION_FILE_PATH, DA.DONATION_FILE_CHANGE_NAME
+		FROM REVIEW_DONATION RD
+		LEFT JOIN MEMBER M ON(RD.DONATION_REVIEW_WRITER = M.MEMBER_NO)
+		LEFT JOIN DONATION_BOARD DB ON(RD.DONATION_BOARD_NO = DB.DONATION_BOARD_NO)
+		LEFT JOIN DONATION_ATTACHMENT DA ON(DA.DONATION_PARENT_BOARD_NO = DB.DONATION_BOARD_NO)
+		WHERE MEMBER_ID = #{memberId}
+		AND DONATION_REVIEW_NO = #{reviewNo}
+	  </select>
 </mapper>

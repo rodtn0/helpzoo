@@ -6,14 +6,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="INDI_OR_COPARATION")
+@Table(name="BUSINESS_TYPE")
 
-public class IndiOrCoparation {
+public class BusinessType {
 
 	
 	
 	@Id
-	@Column(name="INDI_OR_COPARATION_ID")
+	@Column(name="BUSINESS_TYPE_ID")
 	private long id;
 	
 	@Column(name="BUSINESS_TYPE")
@@ -24,29 +24,52 @@ public class IndiOrCoparation {
 	}
 
 	public void setId(long id) {
+		
+		
 		this.id = id;
 	}
 
 	public String getBusinessType() {
+		
+		
+		
 		return businessType;
 	}
 
 	public void setBusinessType(String businessType) {
+		
+	
+		
+		
 		this.businessType = businessType;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	@Override
 	public String toString() {
 		return "IndiOrCoparation [id=" + id + ", businessType=" + businessType + "]";
 	}
 
-	public IndiOrCoparation(long id, String businessType) {
+	public BusinessType(long id, String businessType) {
 		super();
 		this.id = id;
 		this.businessType = businessType;
 	}
 
-	public IndiOrCoparation() {
+	public BusinessType() {
 		super();
 	}
 	

@@ -21,6 +21,8 @@
 	-->
 	<typeAliases>
 		<typeAlias type="com.project.helpzoo.model.vo.Donation" alias="Donation" />
+		<typeAlias type="com.project.helpzoo.model.vo.DReply" alias="DReply" />
+		
 		<typeAlias type="com.project.helpzoo.board.model.vo.Board" alias="Board" />
 		<typeAlias type="com.project.helpzoo.board.model.vo.QNABoard" alias="QNABoard" />
 		<typeAlias type="com.project.helpzoo.member.model.vo.Member" alias="Member"/>

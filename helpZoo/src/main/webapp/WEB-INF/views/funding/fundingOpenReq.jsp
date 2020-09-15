@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -289,8 +291,8 @@
      <!-- 빈공간 만들기용 -->
             <div class="col-md-2 col-lg-2 col-sm-2">
   
-          </div>
-
+          </div>		
+	  <form action="${contextPath}/funding/fundingOpenRequire/${fundingNo}" method="POST">
           <div class="col-md-9 col-lg-9 col-sm-9">
             <div class="container project_open_ready">
               <h1 class="title_msg">기본 요건</h1>
@@ -353,7 +355,8 @@
               <div class="form-group">
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" 
                 placeholder="내용을 입력하세요."
-                ></textarea>
+                 name ="rewardMakePlan"
+                >${fundingOpenRequireView.rewardMakePlan} </textarea>
                 <small>500자</small>
             </div>        
 
@@ -383,7 +386,12 @@
               <div class="form-group">
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" 
                 placeholder="내용을 입력하세요."
-                ></textarea>
+                name ="rewardDeliveryPlan"
+                >
+                ${fundingOpenRequireView.rewardDeliveryPlan}
+                
+                
+                </textarea>
                 <small>500자</small>
             </div>        
 
@@ -421,10 +429,27 @@
                 <br>
                 <br>
                 <button
-                type="button"
+                type="submit"
                 class="btn btn-primary col-md-4 col-sm-4 col-xs-4 btn-lg funding_btn mintclick"
-                onclick="location.href = '${contextPath}/funding/fundingOpenDetail' "
               >저장하기</button>
+              
+              
+              
+              
+              
+              
+              
+              </form>
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
      <script>
 
                   var menubarFlag = true;

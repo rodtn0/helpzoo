@@ -2,4 +2,75 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="donationMapper">
 	
+	<resultMap type="Donation" id="donationResultSet">
+        <id property="dBoardNo" column="DONATION_BOARD_NO"/>
+        <result property="dBoardPlan" column="DONATION_BOARD_PLAN"/>
+        <result property="dBoardTitle" column="DONATION_BOARD_TITLE"/>
+        <result property="dBoardQuestion1" column="DONATION_BOARD_QUESTION1"/>
+        <result property="dBoardQuestion2" column="DONATION_BOARD_QUESTION2"/>
+        <result property="dBoardQuestion3" column="DONATION_BOARD_QUESTION3"/>
+        <result property="dBoardQuestion4" column="DONATION_BOARD_QUESTION4"/>
+        <result property="dBoardQuestion5" column="DONATION_BOARD_QUESTION5"/>
+		<result property="dBoardTargetAmount" column="DONATION_BOARD_TARGET_AMOUNT"/>
+		<result property="dBoardCurrentAmount" column="DONATION_BOARD_CURRENT_AMOUNT"/>
+		<result property="dBoardReadCount" column="DONATION_BOARD_READ_COUNT"/>
+		<result property="dBoardCrateDate" column="DONATION_BOARD_CREATE_DT"/>
+		<result property="dBoardModifyDate" column="DONATION_BOARD_MODIFY_DT"/>
+		<result property="dBoardEndDate" column="DONATION_BOARD_START_DT"/>
+		<result property="dBoardStartDate" column="DONATION_BOARD_END_DT"/>
+		<result property="dBoardLikeButton" column="DONATION_BOARD_LIKE_BUTTON"/>
+		<result property="dBoardStatus" column="DONATION_BOARD_STATUS"/>
+		<result property="organizationNo" column="ORGANIZATION_NO"/>
+		<result property="dBoardWriter" column="DONATION_BOARD_WRITER"/>
+		<result property="dBoardCategory" column="DONATION_BOARD_CATEGORY"/>
+		<result property="dBoardType" column="DONATION_BOARD_TYPE"/>
+	</resultMap>
+	
+	
+
+
+	<!-- 전체 게시글 수 조회 -->  
+	<!-- <select id="getListCount" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM V_BOARD
+		WHERE BOARD_TYPE = #{boardType}
+	</select>
+   -->
+  	
+	
+	
+	
+	
+	
+	
+	<resultMap type="DReply" id="dReplyResultSet">
+		<id property="dReplyNo" column="DONATION_REPLY_NO"/>
+        <result property="dReplyContent" column="DONATION_REPLY_CONTENT"/>
+        <result property="dReplyReadCount" column="DONATION_REPLY_READ_COUNT"/>
+        <result property="dReplyWriter" column="DONATION_REPLY_WRITER"/>
+        <result property="dReplyCreateDate" column="DONATION_REPLY_CREATE_DT"/>
+        <result property="dReplyModifyDate" column="DONATION_REPLY_MODIFY_DT"/>
+        <result property="dReplyStatus" column="DONATION_REPLY_STATUS"/>
+        <result property="dBoardNo" column="DONATION_BOARD_NO"/>
+	</resultMap>
+	
+	<select id="selectList" parameterType="_int" resultMap="dReplyResultSet">
+		SELECT * FROM V_REPLY
+		WHERE DONATION_REPLY_STATUS ='Y'
+		AND DONATION_BOARD_NO = #{boardNo}
+		ORDER BY DONATION_BOARD_NO DESC, DONATION_REPLY_NO ASC
+	</select>
+	
+	
+	<insert id="insertRelpy" parameterType="DReply">
+		INSERT INTO DONATION_REPLY(DONATION_REPLY_NO, DONATION_REPLY_CONTENT, DONATION_BOARD_NO, 
+							 DONATION_REPLY_WRITER)
+		VALUES(SEQ_DRPNO.NEXTVAL, #{dReplyContent}, #{dBoardNo}, #{dReplyWriter})
+	</insert>
+	
+	
+	<update id="updateReply" parameterType="DReply">
+		UPDATE DONATION_REPLY SET 
+		DONATION_REPLY_CONTENT = #{dReplyContent}
+		WHERE DONATION_REPLY_NO = #{dReplyNo}
+	</update>
 </mapper>

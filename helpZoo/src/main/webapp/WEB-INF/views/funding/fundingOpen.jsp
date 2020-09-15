@@ -104,7 +104,7 @@ pageEncoding="UTF-8"%>
       <div class="helpZoo_project"><span class="open_title">도와ZOO</span></div>
 
       <div class="project_open_introduce_container">
-        <form action="${contextPath}/funding/fundingOpenDetail"></form>
+        <form action="${contextPath}/funding/fundingOpenDetail" method="POST"></form>
         <div class="open_intent_message">메이커 정보</div>
         안녕하세요 메이커님, 본격적으로 프로젝트 작성을 시작하기 전에 간단한
         정보를 입력하세요.
@@ -113,6 +113,10 @@ pageEncoding="UTF-8"%>
         <br />
         메이커(기업)명 <span class="star">*</span>
         <br />
+        
+        <form action="${contextPath}/funding/fundingOpenDetail" method="POST">
+        
+        
         <div class="input-group input-group-lg">
           <div class="input-group-prepend"></div>
           <input
@@ -214,12 +218,18 @@ pageEncoding="UTF-8"%>
         <br />
 
         <button
-          type="button"
+          type="submit"
           class="btn btn-primary col-md-5 col-sm-5 col-xs-5 btn-lg funding_btn mintclick"
-          onclick="location.href = '${contextPath}/funding/fundingOpenDetail' "
+       
         >
           시작하기
         </button>
+        
+        </form>
+        
+        
+        
+        
       </div>
 
       <script>

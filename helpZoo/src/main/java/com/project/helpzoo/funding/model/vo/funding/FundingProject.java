@@ -81,6 +81,15 @@ public class FundingProject {
 	@Column(name="LIKE_COUNT")
 	private int likeCount;
 	
+	@Column(name="REWARD_MAKE_PLAN")
+	private String rewardMakePlan;
+	
+	@Column(name="REWARD_DELIVERY_PLAN")
+	private String rewardDeliveryPlan;
+	
+	
+	
+	
 	
 	@ManyToOne (fetch = FetchType.LAZY)
 	@JoinColumn(name = "CATEGORY_ID", insertable = false, updatable = false)
@@ -88,8 +97,8 @@ public class FundingProject {
 	
 	
 	@ManyToOne (fetch = FetchType.LAZY)
-	@JoinColumn(name = "INDI_OR_COPARATION_ID", insertable = false, updatable = false)
-	private IndiOrCoparation indiOrCoparation;
+	@JoinColumn(name = "BUSINESS_TYPE_ID", insertable = false, updatable = false)
+	private BusinessType businessType;
 	
 	@OneToMany (mappedBy = "fundingProject")
 	private List<Reward> reward;
@@ -99,20 +108,83 @@ public class FundingProject {
 	@JoinColumn(name="FUNDING_MAKER_ID")
 	private FundingMaker fundingMaker;
 
+	
+	
+	
+	
+	
+	
 
+	
 
-	@Override
-	public String toString() {
-		return "FundingProject [id=" + id + ", title=" + title + ", plan=" + plan + ", goalAmount=" + goalAmount
-				+ ", managerName=" + managerName + ", managerEmail=" + managerEmail + ", endDay=" + endDay + ", tag="
-				+ tag + ", summary=" + summary + ", stroy=" + story + ", startDay=" + startDay + ", status=" + status
-				+ ", memberNo=" + memberNo + ", category=" + category + ", indiOrCoparation=" + indiOrCoparation
-				+ ", fundingMaker=" + fundingMaker + "]";
+	
+	
+
+	public int getReadCount() {
+		return readCount;
 	}
 
 
-	
-	
+
+	public void setReadCount(int readCount) {
+		this.readCount = readCount;
+	}
+
+
+
+	public int getLikeCount() {
+		return likeCount;
+	}
+
+
+
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
+
+
+
+	public String getRewardMakePlan() {
+		return rewardMakePlan;
+	}
+
+
+
+	public void setRewardMakePlan(String rewardMakePlan) {
+		this.rewardMakePlan = rewardMakePlan;
+	}
+
+
+
+	public String getRewardDeliveryPlan() {
+		return rewardDeliveryPlan;
+	}
+
+
+
+	public void setRewardDeliveryPlan(String rewardDeliveryPlan) {
+		this.rewardDeliveryPlan = rewardDeliveryPlan;
+	}
+
+
+
+	public List<Reward> getReward() {
+		return reward;
+	}
+
+
+
+	public void setReward(List<Reward> reward) {
+		this.reward = reward;
+	}
+
+
+
+	public String getStory() {
+		return story;
+	}
+
+
 
 	public long getId() {
 		return id;
@@ -282,14 +354,14 @@ public class FundingProject {
 
 
 
-	public IndiOrCoparation getIndiOrCoparation() {
-		return indiOrCoparation;
+	public BusinessType getBusinessType() {
+		return businessType;
 	}
 
 
 
-	public void setIndiOrCoparation(IndiOrCoparation indiOrCoparation) {
-		this.indiOrCoparation = indiOrCoparation;
+	public void setBusinessType(BusinessType businessType) {
+		this.businessType = businessType;
 	}
 
 
@@ -308,7 +380,7 @@ public class FundingProject {
 
 	public FundingProject(long id, String title, String plan, int goalAmount, String managerName, String managerEmail,
 			Timestamp endDay, String tag, String summary, String story, Timestamp startDay, String status, int memberNo,
-			FundingCategory category, IndiOrCoparation indiOrCoparation, FundingMaker fundingMaker) {
+			FundingCategory category, BusinessType indiOrCoparation, FundingMaker fundingMaker) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -324,7 +396,7 @@ public class FundingProject {
 		this.status = status;
 		this.memberNo = memberNo;
 		this.category = category;
-		this.indiOrCoparation = indiOrCoparation;
+		this.businessType = businessType;
 		this.fundingMaker = fundingMaker;
 	}
 
@@ -332,6 +404,19 @@ public class FundingProject {
 
 	public FundingProject() {
 		super();
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "FundingProject [id=" + id + ", title=" + title + ", plan=" + plan + ", goalAmount=" + goalAmount
+				+ ", managerName=" + managerName + ", managerEmail=" + managerEmail + ", endDay=" + endDay + ", tag="
+				+ tag + ", summary=" + summary + ", story=" + story + ", startDay=" + startDay + ", status=" + status
+				+ ", memberNo=" + memberNo + ", readCount=" + readCount + ", likeCount=" + likeCount
+				+ ", rewardMakePlan=" + rewardMakePlan + ", rewardDeliveryPlan=" + rewardDeliveryPlan + ", category="
+				+ category + ", businessType=" + businessType + ", reward=" + reward + ", fundingMaker=" + fundingMaker
+				+ "]";
 	}
 	
 	
