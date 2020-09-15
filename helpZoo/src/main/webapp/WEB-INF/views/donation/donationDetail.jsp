@@ -281,10 +281,7 @@
 						<!-- About -->
 							<section class="blurb">
 								<h2>기부 리뷰 확인 공간</h2>
-								<p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod amet placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at phasellus sed ultricies.</p>
-								<ul class="actions">
-									<li><a href="#" class="button">페이징 처리 예정</a></li>
-								</ul>
+								<jsp:include page="dReply.jsp"/> 
 							</section>
 
 						<!-- Footer -->

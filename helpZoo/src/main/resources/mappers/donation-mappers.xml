@@ -2,4 +2,61 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="donationMapper">
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<resultMap type="Reply" id="replyResultSet">
+		<id property="dReplyNo" column="DONATION_REPLY_NO"/>
+        <result property="dReplyContent" column="DONATION_REPLY_CONTENT"/>
+        <result property="dReplyReadCount" column="DONATION_REPLY_READ_COUNT"/>
+        <result property="dReplyWriter" column="DONATION_REPLY_WRITER"/>
+        <result property="dReplyCreateDate" column="DONATION_REPLY_CREATE_DT"/>
+        <result property="dReplyModifyDate" column="DONATION_REPLY_MODIFY_DT"/>
+        <result property="dReplyStatus" column="DONATION_REPLY_STATUS"/>
+        <result property="dBoardNo" column="DONATION_BOARD_NO"/>
+	</resultMap>
+	
+	<select id="selectList" parameterType="_int" resultMap="replyResultSet">
+		SELECT * FROM V_REPLY
+		WHERE DONATION_REPLY_STATUS ='Y'
+		AND DONATION_BOARD_NO = #{boardNo}
+		ORDER BY DONATION_BOARD_NO DESC, DONATION_REPLY_NO ASC
+	</select>
+	
+	
+	<insert id="insertRelpy" parameterType="Reply">
+		INSERT INTO DONATION_REPLY(DONATION_REPLY_NO, DONATION_REPLY_CONTENT, DONATION_BOARD_NO, 
+							 DONATION_REPLY_WRITER)
+		VALUES(SEQ_DRPNO.NEXTVAL, #{dReplyContent}, #{dBoardNo}, #{dReplyWriter})
+	</insert>
+	
+	
+	<update id="updateReply" parameterType="Reply">
+		UPDATE DONATION_REPLY SET 
+		DONATION_REPLY_CONTENT = #{dReplyContent}
+		WHERE DONATION_REPLY_NO = #{dReplyNo}
+	</update>
 </mapper>
