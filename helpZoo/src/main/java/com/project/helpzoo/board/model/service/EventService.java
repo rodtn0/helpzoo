@@ -46,7 +46,7 @@ public interface EventService {
 	 * @param uBoard
 	 * @return result
 	 */
-	public abstract int updateEvent(Board uBoard);
+	public abstract int updateEvent(Board uBoard, String savePath, List<MultipartFile> images, boolean[] deleteImages);
 
 	/** 검색 조건 추가된 페이지 처리 service
 	 * @param type

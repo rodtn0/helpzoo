@@ -145,5 +145,21 @@ public class EventDAO {
 	public void deleteAttachment(int boardNo) {
 		sqlSession.delete("eventMapper.deleteAttachment", boardNo);
 	}
+
+	/** 파일정보 수정 dao
+	 * @param at
+	 * @return result
+	 */
+	public int updateAttachment(Attachment at) {
+		return sqlSession.update("eventMapper.updateAttachment", at);
+	}
+
+	/** 파일 1개 정보 삭제 dao
+	 * @param fileNo
+	 * @return result
+	 */
+	public int deleteAttachment2(int fileNo) {
+		return sqlSession.delete("eventMapper.deleteAttachment2", fileNo);
+	}
 	
 }

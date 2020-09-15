@@ -1,5 +1,6 @@
 package com.project.helpzoo.board.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -191,6 +192,11 @@ public class EventController {
 		// 수정할 게시글 내용 조회
 		Board board = eventService.selectEvent(boardNo);
 		
+		if(board != null) {
+			List<Attachment> files = eventService.selectFiles(boardNo);
+			mv.addObject("files", files);
+		}
+		
 		mv.addObject("board", board);
 		mv.setViewName("event/updateView");
 		
@@ -200,11 +206,27 @@ public class EventController {
 	// 이벤트 글 수정 -------------------------------------------------------------------------------------
 	@RequestMapping("{type}/{boardNo}/updateEvent")
 	public ModelAndView updateEvent(@PathVariable int type, @PathVariable int boardNo,
-			ModelAndView mv, Board uBoard, int cp, RedirectAttributes rdAttr, HttpServletRequest request) {
+			ModelAndView mv, Board uBoard, int cp, boolean[] deleteImages,
+			RedirectAttributes rdAttr, HttpServletRequest request,
+			@RequestParam(value="thumbnail", required = false) MultipartFile thumbnail,
+			@RequestParam(value="images", required = false) List<MultipartFile> images) {
+		
+		System.out.println("deleteImages : " + Arrays.toString(deleteImages));
 		
 		uBoard.setBoardNo(boardNo);
+
+		System.out.println("thumbnail : " + thumbnail.getOriginalFilename());
+		for(int i=0; i<images.size(); i++) {
+			System.out.println("images[" + i + "] : " + images.get(i).getOriginalFilename());
+		}
 		
-		int result = eventService.updateEvent(uBoard);
+		// 썸네일 이미지를 images리스트 0번 인덱스에 추가
+		images.add(0, thumbnail);
+		
+		// 파일 저장 경로 설정
+		String savePath = request.getSession().getServletContext().getRealPath("resources/uploadImages");
+		
+		int result = eventService.updateEvent(uBoard, savePath, images, deleteImages);
 		
 		// SweetAlert용 변수 선언
 		String status = null;

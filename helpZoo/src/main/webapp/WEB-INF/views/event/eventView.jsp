@@ -21,8 +21,9 @@
         <div data-aos="fade-down" class="header">
             <p class="title">
             	<!-- JSTL/JSP 개행문자 처리 -->
-	        	<% pageContext.setAttribute("newLine", "\n"); %>
-            	${fn:replace(board.boardTitle, newLine, "<br>")}
+            	${board.boardTitle}
+	        	<%-- <% pageContext.setAttribute("newLine", "\n"); %>
+            	${fn:replace(board.boardTitle, newLine, "<br>")} --%>
             </p>
             <div class="info">
                 <span class="user-info">${board.boardWriter}
@@ -33,6 +34,18 @@
         </div>
 
         <p class="hr"/>
+		
+		<!-- 이미지 -->
+		<c:if test="${!empty files }">
+            <c:forEach var="at" items="${files}" varStatus="vs">
+                <c:set var="src" value="${contextPath}${at.filePath}/${at.fileChangeName}"/>
+
+                <div class="images <c:if test="${vs.index == 0}"> active</c:if>">
+                    <img class="image${vs.index}" src="${src}" style="max-width: 100%; height: auto;"/>
+                    <input type="hidden" value="${at.fileNo}">
+                </div>
+            </c:forEach>
+        </c:if>
 
         <!-- 상세페이지 contents -->
         <div data-aos="fade-up" class="contents">

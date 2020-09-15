@@ -180,4 +180,18 @@
     	WHERE PARENT_BOARD_NO = #{boardNo}
     </delete>
     
+	<!-- 파일 정보 수정 -->
+    <update id="updateAttachment" parameterType="Attachment">
+    	UPDATE ATTACHMENT
+    	SET FILE_ORIGIN_NAME = #{fileOriginName},
+			FILE_CHANGE_NAME = #{fileChangeName}
+		WHERE FILE_NO = #{fileNo}
+    </update>
+    
+    <!-- 파일 1개 정보 삭제 -->
+    <delete id="deleteAttachment2" parameterType="_int">
+    	DELETE FROM ATTACHMENT
+    	WHERE FILE_NO = #{fileNo}
+    </delete>
+    
 </mapper>

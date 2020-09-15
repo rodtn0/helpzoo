@@ -148,13 +148,97 @@ public class EventServiceImpl implements EventService {
 	// 공지사항 글 수정 service 구현 ---------------------------------------------------------
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public int updateEvent(Board uBoard) {
+	public int updateEvent(Board uBoard, String savePath, List<MultipartFile> images, boolean[] deleteImages) {
 		
 		// xss 방지 처리
 		uBoard.setBoardTitle(replaceParameter(uBoard.getBoardTitle()));
 		uBoard.setBoardContent(replaceParameter(uBoard.getBoardContent()));
 		
+		// 게시글만 수정
 		int result = eventDAO.updateEvent(uBoard);
+		
+		if(result > 0) {
+			// 이전 업로드 파일 목록 조회
+			List<Attachment> oldFiles = eventDAO.selectFiles(uBoard.getBoardNo());
+			
+			// 이미지 저장 경로
+			String filePath = "/resources/uploadImages";
+			
+			List<Attachment> files = new ArrayList<Attachment>(); // 파일 정보를 모아놓은 list
+			List<Attachment> removeFiles = new ArrayList<Attachment>(); // 서버측 파일 제거 list
+			
+			Attachment at = null;
+			for(int i=0; i<images.size(); i++) {
+				
+				if(!images.get(i).getOriginalFilename().equals("")) {
+					
+					String changeFileName = rename(images.get(i).getOriginalFilename());
+					
+					at = new Attachment(uBoard.getBoardNo(), images.get(i).getOriginalFilename(),
+										changeFileName, filePath, i);
+					
+					// 기존 이미지가 존재하는 경우 -> update
+					// 기존 이미지가 존재하지 않는 경우 -> insert
+					
+					boolean flag = false; // 기존 이미지가 존재하는 경우 true, 아니면 false
+					for(Attachment old: oldFiles) {
+						if(old.getFileLevel() == i) {
+							// 현재 접근한 이전 파일의 레벨이
+							// 새롭게 업로드된(수정된) 파일의 레벨과 같을 경우
+							// == 이전 파일이 새로운 파일로 수정된 경우
+							
+							flag = true;
+							removeFiles.add(old); // 서버 파일 제거 List에 수정 예정인 이전 파일 정보를 저장
+							
+							at.setFileNo(old.getFileNo());
+							// 이전 파일의 번호를 얻어와 DB상에서 데이터를 수정할 수 있게
+							// 새로운 파일에 번호 세팅
+							break;
+						}
+					}
+					
+					if(flag) {
+						result = eventDAO.updateAttachment(at);
+					}else {
+						result = eventDAO.insertAttachment(at);
+					}
+					
+				}else { // 업로드(수정)된 이미지가 없을 경우
+					if(deleteImages[i]) { // 삭제 버튼이 눌러진 인덱스인 경우
+						for(Attachment old : oldFiles) {
+							if(old.getFileLevel() == i) {
+								result = eventDAO.deleteAttachment2(old.getFileNo());
+								
+								// 서버 측 파일 삭제목록에 해당 파일 정보를 추가
+								removeFiles.add(old);
+							}
+						}
+					}
+					
+				}
+				files.add(at);
+			}
+			// 수정된 이미지를 서버에 저장
+			if(result > 0) {
+				for(int i=0; i<images.size(); i++) {
+					if(!images.get(i).getOriginalFilename().equals("")) {
+						try {
+							// transferTo() : 지정된 경로에 업로드된 파일정보를 실제 파일로 변환하는 메소드
+							images.get(i).transferTo(new File(savePath + "/" + files.get(i).getFileChangeName()));
+						} catch (Exception e) {
+							eventDAO.deleteAttachment(uBoard.getBoardNo());
+						}
+					}
+				}
+			}
+			
+			// 제거 목록에 있는 파일 삭제
+			for(Attachment removeFile : removeFiles) {
+				File rm = new File(savePath + "/" + removeFile.getFileChangeName());
+				rm.delete(); // 파일 삭제
+			}
+			
+		}
 		
 		return result;
 	}
