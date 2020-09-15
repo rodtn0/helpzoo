@@ -18,4 +18,13 @@ public class AFundingDAO {
 		return sqlSession.selectList("adminMapper.selectFunding",null);
 	}
 
+	public int updateFunding(AFunding funding) {
+		return sqlSession.update("adminMapper.updateFunding", funding);
+	}
+
+	public int deleteFunding(String fundingNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("adminMapper.deleteFunding", fundingNo);
+	}
+
 }

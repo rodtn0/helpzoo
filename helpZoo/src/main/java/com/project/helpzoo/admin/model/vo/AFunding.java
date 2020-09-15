@@ -1,5 +1,6 @@
 package com.project.helpzoo.admin.model.vo;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class AFunding {
@@ -11,8 +12,8 @@ public class AFunding {
 	int readCount; // 조회수
 	String fundingStatus; // 펀딩 상태
 	int fundingGoal; // 펀딩 목표 금액
-	Timestamp fundingSD; // 펀딩 시작 날짜
-	Timestamp fundingED; // 펀딩 종료 날짜
+	Date fundingSD; // 펀딩 시작 날짜
+	Date fundingED; // 펀딩 종료 날짜
 	int currentAmount; // 현재금액
 	int fees; // 수수료
 	
@@ -21,8 +22,7 @@ public class AFunding {
 	}
 
 	public AFunding(int fundingNo, String fundingTitle, String memberName, int likeCount, int readCount,
-			String fundingStatus, int fundingGoal, Timestamp fundingSD, Timestamp fundingED, int currentAmount,
-			int fees) {
+			String fundingStatus, int fundingGoal, Date fundingSD, Date fundingED, int currentAmount, int fees) {
 		super();
 		this.fundingNo = fundingNo;
 		this.fundingTitle = fundingTitle;
@@ -93,19 +93,19 @@ public class AFunding {
 		this.fundingGoal = fundingGoal;
 	}
 
-	public Timestamp getFundingSD() {
+	public Date getFundingSD() {
 		return fundingSD;
 	}
 
-	public void setFundingSD(Timestamp fundingSD) {
+	public void setFundingSD(Date fundingSD) {
 		this.fundingSD = fundingSD;
 	}
 
-	public Timestamp getFundingED() {
+	public Date getFundingED() {
 		return fundingED;
 	}
 
-	public void setFundingED(Timestamp fundingED) {
+	public void setFundingED(Date fundingED) {
 		this.fundingED = fundingED;
 	}
 
@@ -132,6 +132,6 @@ public class AFunding {
 				+ ", fundingGoal=" + fundingGoal + ", fundingSD=" + fundingSD + ", fundingED=" + fundingED
 				+ ", currentAmount=" + currentAmount + ", fees=" + fees + "]";
 	}
-	
+
 	
 }

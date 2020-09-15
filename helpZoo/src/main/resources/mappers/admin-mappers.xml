@@ -16,6 +16,15 @@
     </resultMap>
     
     <select id="selectFunding" resultMap="AFundingResultSet">
-    	SELECT * FROM A_FUNDING
+    	SELECT * FROM A_FUNDING WHERE FUNDING_STATUS IN ('Y','S')
     </select>
+    
+    <update id="updateFunding" parameterType="AFunding">
+    	UPDATE FUNDING_PROJECT SET FUNDING_START_DAY=#{fundingSD},
+    	FUNDING_END_DAY=#{fundingED} WHERE FUNDING_ID=#{fundingNo}
+    </update>
+    
+    <update id="deleteFunding" parameterType="string">
+    	UPDATE FUNDING_PROJECT SET FUNDING_STATUS='N' WHERE FUNDING_ID=#{fundingNo}
+    </update>
 </mapper>
