@@ -384,29 +384,30 @@ public class MemberController {
 	public String pwdChangeAction(Member member,HttpServletRequest request, Model model)
 			throws Exception{
 		
-		//String memberPwd = request.getParameter("memberPwd");
 		String memberEmail = (String)model.getAttribute("memberEmail");
-		//member.setMemberPwd(memberPwd);
 		member.setMemberEmail(memberEmail);
-		//System.out.println("modifyMember1 :" + member);
 		
 		int result = memberService.updatePwd(member);
 		
 		String status = null;
 		String text = null;
+		String msg = null;
 		String path = null;
 		
 		if(result >0) {
 			status = "success";
-			text = "비밀번호 변경 성공";
+			msg = "비밀번호 변경 성공";
+			text = "로그인 페이지로 이동합니다.";
 			path = "/member/login";
 		}else {
 			status = "error";
-			text = "비밀번호 변경 실패";
+			msg = "비밀번호 변경 실패";
+			text = "비밀번호 변경에 실패하셨습니다. 이전 페이지로 이동합니다.";
 			path = "/member/pwdChange";
 		}
 		
 		model.addAttribute("status", status);
+		model.addAttribute("msg", msg);
 		model.addAttribute("text", text);
 		
 		return path;

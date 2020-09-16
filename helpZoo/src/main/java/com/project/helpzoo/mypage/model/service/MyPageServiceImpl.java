@@ -1,18 +1,27 @@
 package com.project.helpzoo.mypage.model.service;
 
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.project.helpzoo.board.model.vo.PageInfo;
+import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.member.model.vo.Member;
 import com.project.helpzoo.mypage.model.dao.MyPageDAO;
+import com.project.helpzoo.mypage.model.vo.mPageInfo;
 
 @Service
 public class MyPageServiceImpl implements MyPageService{
 	
 	@Autowired
 	private MyPageDAO myPageDAO;
+	
+	@Autowired
+	private mPageInfo mInfo;
 	
 	@Autowired
 	private BCryptPasswordEncoder bcPwd;
@@ -71,5 +80,30 @@ public class MyPageServiceImpl implements MyPageService{
 		}
 				return result;
 	}
+	
+	// 페이징 처리를 위한 Service 구현
+	@Override
+	public mPageInfo pagination(int cp, Member loginMember) {
+		
+		int listCount = myPageDAO.getListCount(loginMember);
+		System.out.println("listCount:" +listCount);
+		int type = 1;
+		System.out.println("cp:"+cp);
+		System.out.println("listCount:"+listCount);
+		System.out.println("type:"+type);
+		
+		mInfo.setPageInfo(cp, listCount, type);
+		
+		
+		return mInfo;
+	}
+	
+	// 내가 주최한 리스트 출력 서비스 구현
+	@Override
+	public List<FundingProject> selectList(mPageInfo mInfo, Member loginMember) {
+		
+		return myPageDAO.selectList(mInfo, loginMember);
+	}
+
 	
 }

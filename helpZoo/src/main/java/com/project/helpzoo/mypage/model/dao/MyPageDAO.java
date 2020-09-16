@@ -1,10 +1,15 @@
 package com.project.helpzoo.mypage.model.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.member.model.vo.Member;
+import com.project.helpzoo.mypage.model.vo.mPageInfo;
 
 @Repository
 public class MyPageDAO {
@@ -49,5 +54,30 @@ public class MyPageDAO {
 		return sqlSession.update("mypageMapper.updatePwd", loginMember);
 	}
 
+	/** 전체 게시글 수 조회
+	 * @param type
+	 * @param loginMember
+	 */
+	public int getListCount(Member loginMember) {
+		
+		return sqlSession.selectOne("mypageMapper.getListCount", loginMember);
+	}
+
+	/** 내가 주최한 펀딩 리스트 조회
+	 * @param mInfo
+	 * @return mInfo
+	 */
+	public List<FundingProject> selectList(mPageInfo mInfo, Member loginMember) {
+		
+		int offset = (mInfo.getCurrentPage()-1)*mInfo.getLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, mInfo.getLimit());
+		
+		return sqlSession.selectList("mypageMapper.selectList", null, rowBounds);
+		
+	}
+
+
+	
 	
 }

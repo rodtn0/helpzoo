@@ -1,6 +1,11 @@
 package com.project.helpzoo.mypage.model.service;
 
+import java.util.List;
+
+import com.project.helpzoo.board.model.vo.PageInfo;
+import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.member.model.vo.Member;
+import com.project.helpzoo.mypage.model.vo.mPageInfo;
 
 public interface MyPageService {
 
@@ -24,5 +29,20 @@ public interface MyPageService {
 	 * @return result
 	 */
 	public abstract int updatePwd(Member loginMember, String newPwd1);
+	
+	/** 페이징 처리를 위한 Service
+	 * @param type
+	 * @param cp
+	 * @param loginMember
+	 * @return
+	 */
+	public abstract mPageInfo pagination(int cp, Member loginMember);
+
+	/** 내가 주최한 게시글 리스트 Service
+	 * @param mInfo
+	 * @param loginMember 
+	 * @return fdListbyMe
+	 */
+	public abstract List<FundingProject> selectList(mPageInfo mInfo, Member loginMember);
 
 }

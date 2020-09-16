@@ -26,7 +26,6 @@ border: none;
             <div class="container">
                 <div class="signup-content">
                     <form method="POST" action="../signUpAction" name="signUpForm" class="signup-form" onsubmit="return validate();">
-               
                         <h2 class="form-title">회원 정보 입력</h2><br>
                        <!--  <h5 style="text-align:center;">정말 마지막 단계에요! 회원 정보를 입력하면 가입이 완료됩니다.</h5>-->
                         <div class="form-group">

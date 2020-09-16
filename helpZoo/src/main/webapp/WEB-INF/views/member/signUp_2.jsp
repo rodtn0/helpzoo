@@ -89,18 +89,20 @@
 			
 			for(var key in signUpCheck){
 				if(!signUpCheck[key]){
+
 					var msg;
 					switch(key){
-					case "email" : msg="이메일이 "; break;
+					case "email" : msg="입력하신 이메일은 "; break;
 					}
-				}
-				swal(msg + "유효하지 않습니다.");
+				
+				swal(msg + "사용 불가한 이메일입니다.");
 				
 				var el = "#" + key;
 				$(el).focus();
 				return false;
 			}
 			
+			}
 		}
 	
 	</script>

@@ -1,17 +1,24 @@
 package com.project.helpzoo.mypage.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.project.helpzoo.board.model.vo.PageInfo;
+import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.member.model.vo.Member;
 import com.project.helpzoo.mypage.model.service.MyPageService;
+import com.project.helpzoo.mypage.model.vo.mPageInfo;
 
 @SessionAttributes({"loginMember"})
 @Controller
@@ -151,7 +158,35 @@ public class MyPageController {
 		rdAttr.addFlashAttribute("text", text);
 		
 		return "redirect:changePwd";
+	}
+	
+	// 내가 주최한 펀딩 리스트로 이동하는 Controller
+	@RequestMapping("fundingList/{type}")
+	public String fundingList(@PathVariable int type, @RequestParam(value="cp", required = false,
+			defaultValue = "1")int cp,Model model) {
 		
+		// (1) Pagination(페이징 처리)에 사용될 클래스 PageInfo 작성 후 bean 등록
+		
+		// (2) PageInfo 초기 세팅
+		Member loginMember = (Member)model.getAttribute("loginMember");
+		System.out.println(loginMember);
+		mPageInfo mInfo = mypageService.pagination(cp, loginMember);
+		System.out.println(mInfo);
+		
+		List<FundingProject> fdListbyMe = mypageService.selectList(mInfo, loginMember);
+		
+		System.out.println(fdListbyMe);
+		
+		
+		model.addAttribute("fdListbyMe", fdListbyMe);
+		model.addAttribute("mInfo", mInfo);
+		
+		System.out.println("fdListbyMe" + fdListbyMe);
+		System.out.println();
+		
+		
+		return "mypage/fundingList";
+		//return null;
 	}
 	
 }

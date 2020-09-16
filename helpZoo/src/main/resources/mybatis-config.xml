@@ -22,7 +22,6 @@
 	<typeAliases>
 		<typeAlias type="com.project.helpzoo.model.vo.Donation" alias="Donation" />
 		<typeAlias type="com.project.helpzoo.model.vo.DReply" alias="DReply" />
-		
 		<typeAlias type="com.project.helpzoo.board.model.vo.Board" alias="Board" />
 		<typeAlias type="com.project.helpzoo.board.model.vo.QNABoard" alias="QNABoard" />
 		<typeAlias type="com.project.helpzoo.member.model.vo.Member" alias="Member"/>
@@ -30,6 +29,7 @@
 		<typeAlias type="com.project.helpzoo.board.model.vo.Attachment" alias="Attachment"/>
 		<typeAlias type="com.project.helpzoo.admin.model.vo.QNABoard" alias="QNABoard2"/>
 		<typeAlias type="com.project.helpzoo.admin.model.vo.AFunding" alias="AFunding"/>
+		<typeAlias type="com.project.helpzoo.funding.model.vo.funding.FundingProject" alias="project"/>
 	</typeAliases>
 	
 	<!-- mapper.xml 파일을 등록하는 태그  -->
