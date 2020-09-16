@@ -85,6 +85,12 @@
 	border-bottom: 1px solid rgba(0, 0, 0, .1);
 }
 
+.board .board-main .article:after {
+	display: block;
+    clear: both;
+    content: "";
+}
+
 .board-main .article .boardNo{
     display: none;
 }
@@ -104,7 +110,6 @@
 }
 
 .board-main .article .info .title {
-	width: 100%;
 	padding: 0;
 	margin: 0;
 	margin-right: 200px;
@@ -115,6 +120,17 @@
 	color: #1d2129;
 	vertical-align: baseline;
 	margin-right: 200px;
+}
+
+.board-main .article .thumb {
+	float: right;
+    margin-bottom: 16px;
+    background-color: #eaeaea;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: cover;
+    padding-bottom: 75px;
+    width: 100px;
 }
 
 .board-main .article .info .author, .board-main .article .info .created-at

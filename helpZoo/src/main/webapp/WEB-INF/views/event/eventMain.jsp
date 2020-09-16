@@ -52,6 +52,13 @@
 								<span class="boardNo">${event.boardNo}</span>
 								<em class="category">${event.boardName}</em>
 								<div class="info">
+									<!-- <div class="thumb" style="background-image:url(https://cdn.wadiz.kr/ft/images/green001/2020/0914/20200914151925930_0.png/wadiz/resize/400/format/jpg/quality/80/optimize)"></div> -->
+									<c:forEach items="${thumList}" var="th">
+										<c:if test="${th.parentBoardNo==event.boardNo}">
+											<c:set var="src" value="${contextPath}${th.filePath}/${th.fileChangeName}"/>
+											<div class="thumb" style="background-image:url(${src})"></div>
+										</c:if>
+									</c:forEach>
 									<!-- JSTL/JSP 개행문자 처리 -->
 									<% pageContext.setAttribute("newLine", "\n"); %>
 									<h3 class="title">${fn:replace(event.boardTitle, newLine, "<br>")}</h3>
@@ -70,14 +77,6 @@
 										</c:choose>
 									</span>
 								</div>
-								<c:forEach items="${thumList}" var="th">
-									<c:if test="${th.parentBoardNo==event.boardNo}">
-										<c:set var="src" value="${contextPath}${th.filePath}/${th.fileChangeName}"/>
-										<div style="width: 120px; max-height: 120px; float: right; line-height: 7.5;">
-											<img src="${src}" style="width: 100%; height: 100%">
-										</div>
-									</c:if>
-								</c:forEach>
 							</a></li>
 						</c:forEach>
 					</ul>
