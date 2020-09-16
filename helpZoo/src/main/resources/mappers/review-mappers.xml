@@ -94,6 +94,8 @@
     
     <resultMap type="Attachment" id="attachmentResultSetF">
     	<result property="fileNo" column="FR_FILE_NO"/>
+    	<result property="parentBoardNo" column="PARENT_RE_NO"/>
+    	<result property="fileOriginName" column="FR_FILE_O_NAME"/>
     	<result property="fileChangeName" column="FR_FILE_C_NAME"/>
     	<result property="filePath" column="FR_FILE_PATH"/>
     	<result property="fileLevel" column="FR_FILE_LEVEL"/>
@@ -101,6 +103,8 @@
     
     <resultMap type="Attachment" id="attachmentResultSetD">
     	<result property="fileNo" column="DR_FILE_NO"/>
+    	<result property="parentBoardNo" column="PARENT_RE_NO"/>
+    	<result property="fileOriginName" column="DR_FILE_O_NAME"/>
     	<result property="fileChangeName" column="DR_FILE_C_NAME"/>
     	<result property="filePath" column="DR_FILE_PATH"/>
     	<result property="fileLevel" column="DR_FILE_LEVEL"/>
@@ -255,16 +259,18 @@
 	  
 	  <!-- 펀딩리뷰게시글 상세조회 시 이미지 조회 -->
 	  <select id="selectFundingImages" parameterType="_int" resultMap="attachmentResultSetF">
-	  	SELECT FR_FILE_NO, FR_FILE_C_NAME, FR_FILE_PATH, FR_FILE_LEVEL
+	  	SELECT *
 		FROM FR_ATTACHMENT
 		WHERE PARENT_RE_NO = #{rBoardNo}
+		ORDER BY FR_FILE_LEVEL
 	  </select>
 	  
 	  <!-- 기부리뷰게시글 상세조회 시 이미지 조회 -->
 	  <select id="selectDonationImages" parameterType="_int" resultMap="attachmentResultSetD">
-	  	SELECT DR_FILE_NO, DR_FILE_C_NAME, DR_FILE_PATH, DR_FILE_LEVEL
+	  	SELECT *
 		FROM DR_ATTACHMENT
 		WHERE PARENT_RE_NO = #{rBoardNo}
+		ORDER BY DR_FILE_LEVEL
 	  </select>
 	  
 	  <!-- 펀딩 리뷰 삭제 -->
@@ -300,4 +306,52 @@
 		WHERE MEMBER_ID = #{memberId}
 		AND DONATION_REVIEW_NO = #{reviewNo}
 	  </select>
+	  
+	  <!-- 펀딩 리뷰 게시글(제목,타이틀,수정일) 업데이트 -->
+	  <update id="updateFundingReview" parameterType="Review">
+	  	UPDATE REVIEW_FUNDING
+		SET FUNDING_REVIEW_TITLE = #{reviewTitle}, FUNDING_REVIEW_CONTENT = #{reviewContent},
+      		FUNDING_REVIEW_MODIFY_DT = SYSDATE
+		WHERE FUNDING_REVIEW_NO = #{reviewNo}
+	  </update>
+	  
+	  <!-- 기부 리뷰 게시글(제목,타이틀,수정일) 업데이트 -->
+	  <update id="updateDonationReview" parameterType="Review">
+	  	UPDATE REVIEW_DONATION
+		SET DONATION_REVIEW_TITLE = #{reviewTitle}, DONATION_REVIEW_CONTENT = #{reviewContent},
+      		DONATION_REVIEW_MODIFY_DT = SYSDATE
+		WHERE DONATION_REVIEW_NO = #{reviewNo}
+	  </update>
+	  
+	  <!-- 펀딩 리뷰 이미지 업데이트 -->
+	  <update id="updateFundingImages" parameterType="Attachment">
+	  	UPDATE FR_ATTACHMENT
+		SET FR_FILE_O_NAME = #{fileOriginName}, FR_FILE_C_NAME= #{fileChangeName}, FR_FILE_LEVEL= #{fileLevel}
+		WHERE FR_FILE_NO = #{fileNo}
+	  </update>
+	  
+	  <!-- 기부 리뷰 이미지 업데이트 -->
+	  <update id="updateDonationImages" parameterType="Attachment">
+	  	UPDATE DR_ATTACHMENT
+		SET DR_FILE_O_NAME = #{fileOriginName}, DR_FILE_C_NAME= #{fileChangeName}, DR_FILE_LEVEL= #{fileLevel}
+		WHERE DR_FILE_NO = #{fileNo}
+	  </update>
+	  
+	  <!-- 수정시 펀딩리뷰 이미지 삭제 -->
+	  <delete id="deleteFundingImages2" parameterType="_int">
+	  	DELETE FROM FR_ATTACHMENT
+	  	WHERE FR_FILE_NO = #{fileNo}
+	  </delete>
+	  
+	  <!-- 수정시 기부리뷰 이미지 삭제 -->
+	  <delete id="deleteDonationImages2" parameterType="_int">
+	  	DELETE FROM DR_ATTACHMENT
+	  	WHERE DR_FILE_NO = #{fileNo}
+	  </delete>
+	  
+	
+	  
+	  
+	  
+	  
 </mapper>

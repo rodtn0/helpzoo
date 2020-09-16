@@ -69,8 +69,8 @@
 <div class="container">
 	
 	<!-- http://localhost:8095/helpzoo/board/review/1/update/859 (수정 페이지)-->
-	<!-- http://localhost:8095/helpzoo/board/review/1/updateAction/859 -->
-	<form action="../updateAction/${reviewNo}" method="post" role="form"
+	<!-- http://localhost:8095/helpzoo/board/review/1/updateAction/859?cp=1 -->
+	<form action="../updateAction/${fReviewView.reviewNo}?cp=${param.cp}" method="post" role="form"
 		encType="multipart/form-data" onsubmit="return validate();">
 		
 	<div class="container-fluid">
@@ -100,7 +100,7 @@
 									
 								</select>
 								
-								<img id="imgDiv" name="projectImg" class="card-img-top" />
+								<img id="imgDiv" name="projectImg" class="card-img-top" src="${contextPath}${dInfo.filePath}/${dInfo.fileChangeName}"/>
 								<%-- <img id="imgDiv" class="card-img-top" alt="프로젝트 이미지가 존재하지않습니다." 
 									<c:if test="${!empty fInfo[0].fileChangeName}">
 									src="${contextPath}${fInfo[0].filePath}/${fInfo[0].fileChangeName}"}
@@ -210,6 +210,13 @@
 
 
 <script>
+	var deleteImages = []; //삭제될 이미지 정보를 담을 배열
+	
+	// 이미지 삭제 버튼의 수만큼 배열을 만들고 모두 false로 초기화
+	for(var i=0 ; i<$(".deleteImg").length ; i++){
+		deleteImages.push(false);
+	}
+
 	//이미지 삭제 버튼 동작
 	$(".deleteImg").on("click", function(event){
 		// event 매개변수 : 이벤트와 이벤트가 발생한 객체에 대한 모든 정보가 담겨있음.
@@ -219,7 +226,7 @@
 		// img 태그 삭제 후 재생성
 		//--------------------------------------
 		// 현재 선택한 요소의 이전 요소 선택
-		// console.log($(this).prev());
+		console.log($(this).prev());
 		var $el = $(this).prev();
 		
 		// 이미지 태그 삭제
@@ -240,7 +247,8 @@
 		deleteImages[$(".deleteImg").index(this)] = true;
 		console.log(deleteImages);
 		
-		// input type="file" 태그에 있는 value값 초기화
+		// input type="file" 태그에 있는 value값 초기화  
+		/// 현재 선택된 요소의 인덱스에 + 1해서 #img1, #img2 이런식으로 완성해줌 -> #img2.val("") -> 초기화 시켜줌 
 		$("#img"+($(".deleteImg").index(this) +1)).val("");
 		// input type="file" 태그의 value 값은 readonly(읽기 전용)이므로
 		// 파일 선택 버튼 시 나타나는 윈도우로만 값을 선택할 수 있음
@@ -266,6 +274,18 @@
 			$("#reviewContent").focus();
 			return false;
 		}
+		
+		// deleteImages 배열을 input 태그로 만들어 form 태그 내부에 추가하여
+		// 서버로 데이터 전달
+		for(var i=0; i<deleteImages.length ; i++){
+			var $deleteImage = $("<input>", {type : "hidden", 
+											 name : "deleteImages",
+											 value : deleteImages[i]});
+			// form태그 제일 마지막 자식으로 추가
+			$("form").append($deleteImage);
+			
+		}
+		
 	}
 	
 	

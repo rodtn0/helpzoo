@@ -72,6 +72,16 @@ public interface ReviewService {
  	 */
 	public abstract Review selectInfoOne(int type, Review review);
 
+	/** 리뷰 수정 Service
+	 * @param review
+	 * @param savePath
+	 * @param images
+	 * @param deleteImages
+	 * @return result
+	 */
+	public abstract int updateReview(int type, Review review, String savePath, List<MultipartFile> images,
+			boolean[] deleteImages);
+
 
 	
 }

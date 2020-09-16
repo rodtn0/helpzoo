@@ -150,8 +150,18 @@
           <div class="card-body">
             <div class="row">
                	<div class="card">
-               		<c:set var="src" value="${contextPath}${dReviewView.filePath}/${dReviewView.fileChangeName}"/>
-					<img class="card-img-top" alt="Bootstrap Thumbnail First" src="${src}" />
+               		<c:if test="${!empty dReviewView.filePath}">
+	               		<c:set var="src" value="${contextPath}${dReviewView.filePath}/${dReviewView.fileChangeName}"/>
+						<img class="card-img-top" alt="" src="${src}" />
+					</c:if>
+					
+					<c:if test="${empty dReviewView.filePath}">
+	               		<c:set var="src" value="${contextPath}/resources/uploadImages/NoImage.png"/>
+						<img class="card-img-top" src="${src}" />
+					</c:if>
+					
+					<br>
+					
 					<div class="card-block">
 						<h5 class="card-title">
 							${dReviewView.projectTitle}
@@ -171,7 +181,7 @@
 		
 		 <div id="buttonArea">
         	<c:if test="${dReviewView.memberId == sessionScope.loginMember.memberId}">
-				<a class="btn btn-primary" href="update/${dReviewView.reviewNo}">수정</a>
+				<a class="btn btn-primary" href="update/${dReviewView.reviewNo}?cp=${param.cp}">수정</a>
 				<button id="deleteBtn" class="btn btn-primary">삭제</button>
 			</c:if>
 				<a class="btn btn-primary" href="#" style="background-color:#7fcdcd">목록으로</a>
