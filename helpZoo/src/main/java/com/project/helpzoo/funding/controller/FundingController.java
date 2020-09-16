@@ -115,8 +115,7 @@ public class FundingController {
 		
 		Member loginMember = (Member)model.getAttribute("loginMember");
 		
-		System.out.println(loginMember);
-		
+	
 		
 		int memberNo = loginMember.getMemberNo();
 
@@ -128,7 +127,20 @@ public class FundingController {
 		model.addAttribute("makerName", makerName);
 		
 		
+		model.addAttribute("OpenInfoStatus", "작성 전");
 		
+		model.addAttribute("OpenMakerInfo", "작성 전");
+		
+		model.addAttribute("OpenRequire", "작성 전");
+
+		model.addAttribute("OpenReward", "작성 전");
+		
+		model.addAttribute("OpenStory", "작성 전");
+		
+		model.addAttribute("allSatis", "작성 전");
+		
+		
+		System.out.println(fundingNo + "저는 펀딩넘버입니다.");
 		
 		
 		
@@ -148,40 +160,8 @@ public class FundingController {
 		
 		
 		
-		FundingTotalInfoDto fundingTotalInfoDto = service.getFundingTotalInfo(fundingNo);
-		
-		
-		FundingOpenInfoView fundingOpenInfoView = fundingTotalInfoDto.getFundingOpenInfoView();
-		
-		FundingOpenMakerInfoView fundingOpenMakerInfoView = fundingTotalInfoDto.getFundingOpenMakerInfoView();
-		
-		FundingOpenRequireView fundingOpenRequireView = fundingTotalInfoDto.getFundingOpenRequireView();
-		
-		List<FundingOpenRewardView> fundingOpenRewardView = fundingTotalInfoDto.getFundingOpenRewardView();
-		
-		FundingOpenStoryView fundingOpenStoryView = fundingTotalInfoDto.getFundingOpenStoryView();
-		
-		
-		
-		
-		model.addAttribute("fundingNo", fundingNo);
-		
-		model.addAttribute("makerName", makerName);
-		
-		model.addAttribute("fundingOpenInfoView", fundingOpenInfoView);
-		
-		model.addAttribute("fundingOpenMakerInfoView", fundingOpenMakerInfoView);
-		
-		model.addAttribute("fundingOpenRequireView", fundingOpenRequireView);
-		
-		model.addAttribute("fundingOpenRewardView ", fundingOpenRewardView);
-		
-		model.addAttribute("fundingOpenStoryView", fundingOpenStoryView);
-		
-		
-		
-		
-		
+			openDetailViewMake(fundingNo, model);
+	
 		
 		
 		
@@ -189,7 +169,78 @@ public class FundingController {
 		
 		return "funding/fundingOpenDetail";
 	}
-	
+
+
+
+
+
+
+	private void openDetailViewMake(Long fundingNo, Model model) {
+		
+		
+			System.out.println(fundingNo + "저는 펀딩넘버입니다. 99999");
+		
+		
+			FundingTotalInfoDto fundingTotalInfoDto = service.getFundingTotalInfo(fundingNo);
+			
+			
+			FundingOpenInfoView fundingOpenInfoView = fundingTotalInfoDto.getFundingOpenInfoView();
+			
+			FundingOpenMakerInfoView fundingOpenMakerInfoView = fundingTotalInfoDto.getFundingOpenMakerInfoView();
+			
+			FundingOpenRequireView fundingOpenRequireView = fundingTotalInfoDto.getFundingOpenRequireView();
+			
+			List<FundingOpenRewardView> fundingOpenRewardView = fundingTotalInfoDto.getFundingOpenRewardView();
+			
+			FundingOpenStoryView fundingOpenStoryView = fundingTotalInfoDto.getFundingOpenStoryView();
+			
+			
+			String rewardStatus = null;
+			
+			if(fundingOpenRewardView.isEmpty()) {
+				rewardStatus = "작성 전";
+			}else {
+				rewardStatus = "작성 후";
+			}
+			
+			
+			String allSatis =null;
+			
+			if(fundingTotalInfoDto.isSatisfied()) {
+				
+				allSatis = "작성 완료";
+				
+			}else {
+				
+				allSatis = "작성 중";
+			}
+			
+			
+			
+			model.addAttribute("makerName", fundingOpenMakerInfoView.getName());
+			
+			
+			
+			
+			model.addAttribute("OpenInfoStatus", fundingOpenInfoView.isSatisfied());
+			
+			model.addAttribute("OpenMakerInfo", fundingOpenMakerInfoView.isSatisfied());
+			
+			model.addAttribute("OpenRequire", fundingOpenRequireView.isSatisfied());
+
+			model.addAttribute("OpenReward", rewardStatus);
+			
+			model.addAttribute("OpenStory", fundingOpenStoryView.isSatisfied());
+			
+			model.addAttribute("allSatis", allSatis);
+	}
+
+
+
+
+
+
+
 	
 	
 	
@@ -216,6 +267,11 @@ public class FundingController {
 		
 		model.addAttribute("fundingOpenRequireView", fundingOpenRequireView);
 		
+		model.addAttribute("rewardDeliveryPlan", fundingOpenRequireView.getRewardDeliveryPlan());
+		
+		model.addAttribute("rewardMakePlan", fundingOpenRequireView.getRewardMakePlan());
+		
+		
 		
 		
 		return "funding/fundingOpenReq";
@@ -228,22 +284,25 @@ public class FundingController {
 	 * @return
 	 */
 	@RequestMapping(value ="fundingOpenRequire/{fundingNo}", method = RequestMethod.POST)
-	public String fundingOpenRequireSave(Model model,@PathVariable Long fundingNo) {
+	public String fundingOpenRequireSave(Model model,@PathVariable Long fundingNo ,String rewardDeliveryPlan
+					,String rewardMakePlan
+			) {
 		
 		
 		
+											
+		System.out.println("컨트롤러 딜리버리" + rewardDeliveryPlan);
 		
-		String rewardDeliveryPlan = (String)model.getAttribute("rewardDeliveryPlan");
 		
-		String rewardMakePlan = (String)model.getAttribute("rewardMakePlan");
 		
 		
 		FundingOpenRequireView fundingOpenRequireView = new FundingOpenRequireView(rewardMakePlan, rewardDeliveryPlan);
 		
-		
 		service.openRequireSave(fundingNo,fundingOpenRequireView);
 		
 		
+		
+		openDetailViewMake(fundingNo, model);
 		
 		
 		

@@ -62,6 +62,13 @@ public class MakerAgent {
 	
 	
 	public String getAccountHolder() {
+		
+		if( accountHolder == null) {
+			
+			accountHolder= "";
+							}
+		
+		
 		return accountHolder;
 	}
 
@@ -70,6 +77,13 @@ public class MakerAgent {
 	}
 
 	public String getBank() {
+		
+		
+		if( bank == null) {
+			
+			bank= "";
+							}
+		
 		return bank;
 	}
 
@@ -78,6 +92,13 @@ public class MakerAgent {
 	}
 
 	public String getTexEmail() {
+		
+		
+	if( texEmail == null) {
+			
+		texEmail	= "";
+							}
+		
 		return texEmail;
 	}
 
@@ -86,6 +107,12 @@ public class MakerAgent {
 	}
 
 	public String getName() {
+		
+		if( name == null) {
+			
+			name	= "";
+								}
+		
 		return name;
 	}
 
@@ -110,6 +137,12 @@ public class MakerAgent {
 	}
 
 	public String getEmail() {
+		
+		if( email == null) {
+			
+			email	= "";
+								}
+		
 		return email;
 	}
 
@@ -160,8 +193,7 @@ public class MakerAgent {
 	@Override
 	public String toString() {
 		return "MakerAgent [id=" + id + ", name=" + name + ", phone=" + phone + ", email=" + email + ", residentNumber="
-				+ residentNumber + ", accountNumber=" + accountNumber + ", texEmail=" + texEmail + ", fundingMaker="
-				+ fundingMaker + "]";
+				+ residentNumber + ", accountNumber=" + accountNumber + ", texEmail=" + texEmail + ", ]";
 	}
 	
 	

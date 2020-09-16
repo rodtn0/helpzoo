@@ -35,7 +35,6 @@ public class FundingOpenRewardView {
 	
 	
 	
-	
 	public FundingOpenRewardView(int price, String title, String content, String option, int deleveryPrice,
 			int rewardAmount, Timestamp deliveryDay) {
 		super();

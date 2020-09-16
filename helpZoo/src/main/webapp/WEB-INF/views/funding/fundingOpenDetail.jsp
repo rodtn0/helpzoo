@@ -5,11 +5,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
+
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <title>타이틀</title>
-
+<meta http-equiv="expires" content="-1" >
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -224,6 +225,14 @@
         border: white;
         color: black;
       }
+      
+       .smallMint{
+      	color :  #00a0a0 ;
+
+      	font-size: small;
+      	
+      }
+      
     </style>
   </head>
   <body>
@@ -336,13 +345,13 @@
                   <br>
                   <br>
 
-                  <i class="fas fa-paw popoking"></i>    펀딩 준비 작성 중 <br>
+                  <i class="fas fa-paw popoking"></i>    펀딩 준비 &nbsp; <small class="smallMint">작성 중 </small>	 <br>
      <small>   필수 항목을 모두 작성 후 저장하기 버튼을 클릭해주세요. 작성 중 > 작성 완료 상태로 변경되어야 최종 제출이 가능합니다. </small>
                 </div>
 
                 <br>
                 <div class="temp_box2 title_msg container">
-                  기본 요건 
+                  기본 요건  &nbsp; 	<small class="smallMint">	${OpenRequire} </small>
                   <div class="btn btn-outline-secondary float-right" onclick="location.href='${contextPath}/funding/fundingOpenRequire/${fundingNo}'">작성하기</div>
 
                 </div>
@@ -353,26 +362,26 @@
                 
                 <br>
                 <div class="temp_box2 title_msg container">
-                  기본 정보 
+                  기본 정보 	&nbsp;	<small class="smallMint"> ${OpenInfoStatus} </small>
                   <div class="btn btn-outline-secondary float-right" onclick="location.href='${contextPath}/funding/fundingOpenInfo'">작성하기</div>
 
                 </div>
                 <br>
                 <div class="temp_box2 title_msg container">
-                  스토리 작성
+                  스토리 작성	&nbsp;	 <small class="smallMint"> ${OpenStory} </small>
                   <div class="btn btn-outline-secondary float-right" onclick="location.href='${contextPath}/funding/fundingOpenStory'">작성하기</div>
 
                 </div>
                 <br>
                 <div class="temp_box2 title_msg container">
-                  리워드 설계
+                  리워드 설계	&nbsp;	<small class="smallMint">${OpenReward} </small>
                   <div class="btn btn-outline-secondary float-right" onclick="location.href='${contextPath}/funding/fundingOpenReward'">작성하기</div>
 
                 </div>
 
                 <br>
                 <div class="temp_box2 title_msg container" onclick="location.href='${contextPath}/funding/fundingOpenRequire'">
-                  메이커 정보
+                  메이커 정보	&nbsp;	<small class="smallMint">${OpenMakerInfo} </small>
                   <div class="btn btn-outline-secondary float-right">작성하기</div>
 
                 </div>

@@ -59,6 +59,13 @@
 		text-align : center;
 	}
 
+	#imgDiv{
+			width : 200px;
+			position : absolute;
+			right : 0;
+			left : 25%;
+			top : 15%;
+	}
 	
 
 </style>
@@ -100,7 +107,7 @@
 									
 								</select>
 								
-								<img id="imgDiv" name="projectImg" class="card-img-top" src="${contextPath}${dInfo.filePath}/${dInfo.fileChangeName}"/>
+								<img id="imgDiv" name="projectImg" class="card-img-top" src="${contextPath}${dReviewView.filePath}/${dReviewView.fileChangeName}"/>
 								<%-- <img id="imgDiv" class="card-img-top" alt="프로젝트 이미지가 존재하지않습니다." 
 									<c:if test="${!empty fInfo[0].fileChangeName}">
 									src="${contextPath}${fInfo[0].filePath}/${fInfo[0].fileChangeName}"}
