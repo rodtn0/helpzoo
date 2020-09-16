@@ -7,7 +7,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<link href="${contextPath}/resources/css/notice.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/event.css" rel="stylesheet" />
 <script src="https://kit.fontawesome.com/6473591abd.js" crossorigin="anonymous"></script>
 <title>도와zoo 이벤트 게시판</title>
 </head>
