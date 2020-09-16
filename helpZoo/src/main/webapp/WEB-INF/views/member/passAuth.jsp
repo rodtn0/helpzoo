@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>비밀번호 찾기</title>
+<title>인증번호 입력</title>
 <link rel="stylesheet" href="${contextPath}/resources/css/login.css">
 <style>
 	#findPwdTxt{
@@ -25,7 +25,7 @@
 		<div class="login-page">
 		  <div class="form">
 			<h1 id="findPwdTxt">인증번호 입력</h1><br>
-		    <form class="login-form" action="passAuth" method="post">
+		    <form class="login-form" action="passAuthAction" method="post">
 		      <input type="number" name="authCode" placeholder="인증번호 입력"/>
       			<div class="checkbox mb-3">
 			</div>

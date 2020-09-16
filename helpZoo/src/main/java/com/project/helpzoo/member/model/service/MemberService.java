@@ -40,11 +40,12 @@ public interface MemberService {
 	 */
 	public abstract int emailDupCheck(String memberEmail);
 
-	/** 비밀번호 변경 
-	 * @param map
+
+	/** 비밀번호 변경
 	 * @param member
+	 * @return member
 	 */
-	public abstract int pwdChangeAction(Map<String, Object> map, Member member);
+	public abstract int updatePwd(Member member);
 
 
 }

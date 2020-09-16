@@ -29,7 +29,7 @@ public class LoginFilter implements Filter{
 	Collections.unmodifiableSet(new HashSet<String>
 	(Arrays.asList("login", "logout", "loginAction", "idDupCheck","signUpAction","findId","findIdAction","signUp", "signUp2","signUp3","authEmail",
 			"joinAuth/\\w*","findPassword","emailDupCheck","findPasswordAction",
-			"passAuth","pwdChange")));
+			"passAuthAction","pwdChange")));
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {

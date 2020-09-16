@@ -33,7 +33,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.project.helpzoo.member.model.service.MemberService;
 import com.project.helpzoo.member.model.vo.Member;
 
-@SessionAttributes({"loginMember","memberEmail","dice"})
+@SessionAttributes({"loginMember","memberEmail","dice", "msg"})
 @Controller
 @RequestMapping("/member/*")
 public class MemberController {
@@ -57,6 +57,7 @@ public class MemberController {
 			String saveId, HttpServletResponse response) {
 		
 		Member loginMember = memberService.login(member);
+		
 		System.out.println(loginMember);
 		
 		if(loginMember == null) {
@@ -102,7 +103,7 @@ public class MemberController {
 	
 	// 이메일 인증 처리 메소드
 	@RequestMapping("authEmail")
-	public ModelAndView mailSending(HttpServletRequest request, String memberEmail, HttpServletResponse resEmail) 
+	public ModelAndView mailSending(HttpServletRequest request, String memberEmail, HttpServletResponse resEmail, Model model) 
 	throws IOException{
 		Random r = new Random();
 		//이메일로 인증 코드를 받음(난수)
@@ -268,18 +269,18 @@ public class MemberController {
 	// 비밀번호 찾기 액션
 	@RequestMapping("findPasswordAction")
 	public ModelAndView findPasswordAction(HttpServletRequest request, String memberId, String memberEmail
-			,HttpServletResponse responseEmail) throws IOException{
+			,HttpServletResponse responseEmail, Model model) throws IOException{
 		
 		Random r = new Random();
 		int dice = r.nextInt(157211)+48271;
 		
 		String setfrom = "helpzooFinal@gmail.com";
 		String tomail = request.getParameter("memberEmail");
-		String title = "비밀번호 찾기 인증 코드입니다.";
+		String title = "도와주(HelpZoo)비밀번호 찾기 인증 코드입니다.";
 		String content =
 				System.getProperty("line.separator") +
 				System.getProperty("line.separator") +
-				System.getProperty("line.separator")+"안녕하세요. 도와주(Zoo) 반려동물 크라우드 펀딩 & 기부 웹사이트입니다." +
+				System.getProperty("line.separator")+"안녕하세요. 도와주(HelpZoo) 반려동물 크라우드 펀딩 & 기부 웹사이트입니다." +
 				System.getProperty("line.separator") +
 				System.getProperty("line.separator") +
 				"비밀번호 찾기 인증 번호는" + dice + "입니다." +
@@ -312,16 +313,26 @@ public class MemberController {
 		// mv 값이 넘어왔는지 확인
 		System.out.println("mv : " + mv);
 		
-		responseEmail.setContentType("text/html; charset=UTF-8");
-		PrintWriter outEmail = responseEmail.getWriter();
-		outEmail.println("<script>alert('이메일이 발송되었습니다. 발송된 인증코드를 입력해주세요.')");
-		outEmail.flush();
+		//responseEmail.setContentType("text/html; charset=UTF-8");
+		//PrintWriter outEmail = responseEmail.getWriter();
+		//outEmail.println("<script>alert('이메일이 발송되었습니다. 발송된 인증코드를 입력해주세요.')");
+		//outEmail.flush();
+		
+		String status = "success";
+		String msg="이메일 전송";
+		String text = "이메일이 발송되었습니다. 발송된 인증코드를 입력해주세요.";
+		
+		model.addAttribute("status", status);
+		model.addAttribute("msg", msg);
+		model.addAttribute("text", text);
+		
 		
 		return mv;
 	}
 	
-	@RequestMapping(value="passAuth", method = RequestMethod.POST)
-	public ModelAndView passAuth(String authCode, HttpServletRequest request, HttpServletResponse responseEmail, Model model) throws IOException{
+	@RequestMapping(value="passAuthAction", method = RequestMethod.POST)
+	public ModelAndView passAuth(String authCode, HttpServletRequest request, HttpServletResponse responseEmail, Model model
+			) throws IOException{
 		
 		System.out.println("마지막 authCode :" + authCode);
 		System.out.println("마지막 dice : " + (int)model.getAttribute("dice"));
@@ -331,26 +342,33 @@ public class MemberController {
 		int dice = (int)model.getAttribute("dice");
 		String memberEmail = (String)model.getAttribute("memberEmail");
 		
-		if(authCode.equals(dice)) {
+		if(authCode.equals(dice+"")) {
 			mv.setViewName("/member/pwdChange");
 			mv.addObject("memberEmail", memberEmail);
 			
-			// 인증번호가 일치하면 이메일을 비밀번호 변경 페이지로 이동하게 함.
-			responseEmail.setContentType("text/html; charset=UTF-8");
-			PrintWriter outEquals = responseEmail.getWriter();
-			outEquals.println("<script>alert('인증번호가 일치하였습니다. 비밀번호 변경 페이지로 이동합니다.');</script>");
-			outEquals.flush();
+			String status = "success";
+			String msg="인증번호 일치";
+			String text = "인증번호가 일치합니다. 비밀번호 변경 페이지로 이동합니다.";
+			
+			model.addAttribute("status", status);
+			model.addAttribute("msg", msg);
+			model.addAttribute("text", text);
 			
 			return mv;
 			
-		}else if(!authCode.equals(dice)){
+		}else if(!(authCode.equals(dice+""))){
 			
 			ModelAndView mv2 = new ModelAndView();
 			mv2.setViewName("/member/passAuth");
-			responseEmail.setContentType("text/html; charset=UTF-8");
-			PrintWriter outEquals = responseEmail.getWriter();
-			outEquals.println("<script>alert('인증번호가 일치하지 않습니다. 인증번호 입력 페이지로 이동합니다.');</script>");
-			outEquals.flush();
+			
+			String status = "error";
+			String msg="인증번호 불일치";
+			String text = "인증번호가 일치하지 않습니다. 인증번호를 다시 입력해주세요.";
+			
+			model.addAttribute("status", status);
+			model.addAttribute("msg", msg);
+			model.addAttribute("text", text);
+			
 			
 			return mv2;
 			
@@ -363,43 +381,35 @@ public class MemberController {
 
 	// 변경할 비밀번호를 입력한 후에 확인 버튼을 입력하면 넘어오는 컨트롤러
 	@RequestMapping(value="pwdChange", method = RequestMethod.POST)
-	public ModelAndView pwdChangeAction(HttpServletRequest request,
-			Member member, HttpServletResponse response, RedirectAttributes rdAttr, Model model) throws Exception{
+	public String pwdChangeAction(Member member,HttpServletRequest request, Model model)
+			throws Exception{
 		
-		String memberPwd = request.getParameter("memberPwd");
+		//String memberPwd = request.getParameter("memberPwd");
 		String memberEmail = (String)model.getAttribute("memberEmail");
-
-		member.setMemberPwd(memberPwd);
+		//member.setMemberPwd(memberPwd);
+		member.setMemberEmail(memberEmail);
+		//System.out.println("modifyMember1 :" + member);
 		
-		Map<String, Object> map = new HashMap<>();
-		
-		map.put("memberEmail",member.getMemberEmail());
-		map.put("memberPwd", member.getMemberPwd());
-		
-		int result = memberService.pwdChangeAction(map, member);
-		
-		ModelAndView mv = new ModelAndView();
-		
+		int result = memberService.updatePwd(member);
 		
 		String status = null;
-		String msg = null;
 		String text = null;
+		String path = null;
 		
 		if(result >0) {
 			status = "success";
-			msg="비밀번호 변경 성공";
-			text = "로그인 후 이용하세요.";
-			
-			mv.setViewName("/member/login");
-			
+			text = "비밀번호 변경 성공";
+			path = "/member/login";
 		}else {
-			status = "success";
-			msg="비밀번호 변경 실패";
-			
-			mv.setViewName("/member/findPassword");
+			status = "error";
+			text = "비밀번호 변경 실패";
+			path = "/member/pwdChange";
 		}
 		
-		return mv;
+		model.addAttribute("status", status);
+		model.addAttribute("text", text);
+		
+		return path;
 	}
 	
 	

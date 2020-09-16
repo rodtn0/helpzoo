@@ -19,13 +19,14 @@
 		    <form class="login-form" action="loginAction" method="post">
 		      <input type="text" name="memberId" placeholder="아이디" required autofocus value="${cookie.saveId.value}"/>
 		      <input type="password" name="memberPwd" placeholder="비밀번호"/>
-      			<div class="checkbox mb-3">
+			<div class="checkbox mb-3">
 				<label> 
 				<!-- form 태그 안에 존재 -->
 					<input type="checkbox" name="saveId"
 						<c:if test="${!empty cookie.saveId.value}">
 							checked
-						</c:if>>아이디 저장
+						</c:if>
+					> 아이디 저장
 				</label>
 			</div>
 		      <button id="loginBtn" class="btn btn-lg btn-primary btn-block">로그인</button>

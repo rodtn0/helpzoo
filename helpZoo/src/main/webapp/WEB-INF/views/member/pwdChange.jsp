@@ -26,7 +26,7 @@
 		  <div class="form">
 			<h1 id="findPwdTxt">비밀번호 변경</h1><br>
 		    <form class="login-form" action="pwdChange" method="post">
-		      <input type="text" name="memberPwd" placeholder="변경할 비밀번호 입력"/>
+		      <input type="password" name="memberPwd" placeholder="변경할 비밀번호 입력"/>
       			<div class="checkbox mb-3">
 			</div>
 		      <button id="loginBtn" class="btn btn-lg btn-primary btn-block">비밀번호 변경</button>

@@ -96,14 +96,16 @@ public class MemberServiceImpl implements MemberService{
 		return memberDAO.emailDupCheck(memberEmail);
 	}
 
-	// 비밀번호 재설정 Service 구현
 	@Override
-	public int pwdChangeAction(Map<String, Object> map, Member member) {
+	public int updatePwd(Member member) {
 		
-		int result = memberDAO.pwdChangeAction(map, member);
+		String encPwd = bcPwd.encode(member.getMemberPwd());
+		member.setMemberPwd(encPwd);
+		//System.out.println(member.getMemberPwd());
 		
+		int result = memberDAO.updatePwd2(member);
+
 		return result;
-		
 	}
 
 

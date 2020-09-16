@@ -68,16 +68,12 @@ public class MemberDAO {
 	}
 
 	/** 비밀번호 변경 DAO
-	 * @param map
 	 * @param member
-	 * @return
+	 * @return result
 	 */
-	public int pwdChangeAction(Map<String, Object> map, Member member) {
+	public int updatePwd2(Member member) {
 		
-		map.get("memberPwd");
-		map.get("memberEmail");
-		
-		return sqlSession.update("memberMapper.pwdChange", map);
+		return sqlSession.update("memberMapper.updatePwd2", member);
 	}
 	
 	
