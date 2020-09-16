@@ -80,28 +80,6 @@
     </update>
     
     <!-- 검색 조건 포함된 전체 게시글 수 조회 -->
-    <!-- <select id="getSearchListCount" parameterType="map" resultType="_int">
-    	SELECT COUNT(*)
-		FROM v_board
-		WHERE board_type= #{type}
-		<if test="search.sVal != null">
-			<bind name="sv" value="'%' + search.sVal + '%'"/>
-			AND
-			<choose>
-				<when test="search.sKey == 't'">
-					board_title LIKE #{sv}
-				</when>
-				<when test="search.sKey == 'c'">
-					BOARD_CONTENT LIKE #{sv}
-				</when>
-				<otherwise>
-					(board_title LIKE #{sv}
-					 OR BOARD_CONTENT LIKE #{sv})
-				</otherwise>
-			</choose>
-		</if>
-		AND BOARD_STATUS = 'Y'
-    </select> -->
     <select id="getSearchListCount" parameterType="map" resultType="_int">
 		SELECT count(*)
 		FROM v_board
