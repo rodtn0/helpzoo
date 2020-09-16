@@ -70,6 +70,14 @@
 										</c:choose>
 									</span>
 								</div>
+								<c:forEach items="${thumList}" var="th">
+									<c:if test="${th.parentBoardNo==event.boardNo}">
+										<c:set var="src" value="${contextPath}${th.filePath}/${th.fileChangeName}"/>
+										<div style="width: 120px; max-height: 120px; float: right; line-height: 7.5;">
+											<img src="${src}" style="width: 100%; height: 100%">
+										</div>
+									</c:if>
+								</c:forEach>
 							</a></li>
 						</c:forEach>
 					</ul>
