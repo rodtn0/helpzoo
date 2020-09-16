@@ -3,6 +3,7 @@ package com.project.helpzoo.funding.model.vo.funding;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -31,6 +32,10 @@ public class BusinessType {
 
 	public String getBusinessType() {
 		
+		
+		if(businessType == null) {
+			businessType = "";
+		}
 		
 		
 		return businessType;

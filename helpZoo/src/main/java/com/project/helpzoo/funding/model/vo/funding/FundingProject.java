@@ -92,12 +92,12 @@ public class FundingProject {
 	
 	
 	@ManyToOne (fetch = FetchType.LAZY)
-	@JoinColumn(name = "CATEGORY_ID", insertable = false, updatable = false)
+	@JoinColumn(name = "CATEGORY_ID")
 	private FundingCategory category;
 	
 	
-	@ManyToOne (fetch = FetchType.LAZY)
-	@JoinColumn(name = "BUSINESS_TYPE_ID", insertable = false, updatable = false)
+	@ManyToOne (fetch = FetchType.LAZY )
+	@JoinColumn(name = "BUSINESS_TYPE_ID")
 	private BusinessType businessType;
 	
 	@OneToMany (mappedBy = "fundingProject")
@@ -145,6 +145,13 @@ public class FundingProject {
 
 
 	public String getRewardMakePlan() {
+		
+		if(rewardMakePlan == null) {
+			
+			rewardMakePlan = "";
+		}
+		
+		
 		return rewardMakePlan;
 	}
 
@@ -157,6 +164,14 @@ public class FundingProject {
 
 
 	public String getRewardDeliveryPlan() {
+		
+		if(rewardDeliveryPlan == null) {
+			
+			rewardDeliveryPlan = "";
+		}
+		
+		
+		
 		return rewardDeliveryPlan;
 	}
 
@@ -181,12 +196,21 @@ public class FundingProject {
 
 
 	public String getStory() {
+		
+		if(story == null) {
+			
+			story = "";
+		}
+		
 		return story;
 	}
 
 
 
 	public long getId() {
+		
+	
+		
 		return id;
 	}
 
@@ -199,6 +223,13 @@ public class FundingProject {
 
 
 	public String getTitle() {
+		
+		if(title == null) {
+			
+			title = "";
+		}
+		
+		
 		return title;
 	}
 
@@ -211,6 +242,14 @@ public class FundingProject {
 
 
 	public String getPlan() {
+		
+		if(plan == null) {
+			
+			plan = "";
+		}
+		
+		
+		
 		return plan;
 	}
 
@@ -235,6 +274,13 @@ public class FundingProject {
 
 
 	public String getManagerName() {
+		
+		
+	if(managerName == null) {
+			
+		managerName = "";
+		}
+		
 		return managerName;
 	}
 
@@ -247,6 +293,14 @@ public class FundingProject {
 
 
 	public String getManagerEmail() {
+		
+		
+		if(managerEmail == null) {
+			
+			managerEmail = "";
+			}
+		
+		
 		return managerEmail;
 	}
 
@@ -271,6 +325,14 @@ public class FundingProject {
 
 
 	public String getTag() {
+		
+		
+	if(tag == null) {
+			
+		tag = "";
+			}
+		
+		
 		return tag;
 	}
 
@@ -283,6 +345,15 @@ public class FundingProject {
 
 
 	public String getSummary() {
+		
+		
+		if(summary == null) {
+			
+			summary = "";
+				}
+			
+		
+		
 		return summary;
 	}
 
@@ -295,6 +366,13 @@ public class FundingProject {
 
 
 	public String getstory() {
+		
+		if(story == null) {
+			
+			story = "";
+				}
+		
+		
 		return story;
 	}
 
@@ -319,6 +397,12 @@ public class FundingProject {
 
 
 	public String getStatus() {
+		
+if(status == null) {
+			
+	status = "";
+				}
+		
 		return status;
 	}
 
@@ -343,6 +427,11 @@ public class FundingProject {
 
 
 	public FundingCategory getCategory() {
+		
+		if(category == null) {
+			category =new FundingCategory(1L);
+		}
+		
 		return category;
 	}
 
@@ -355,6 +444,12 @@ public class FundingProject {
 
 
 	public BusinessType getBusinessType() {
+		
+		if(businessType == null) {
+			businessType =new BusinessType();
+		}
+		
+		
 		return businessType;
 	}
 

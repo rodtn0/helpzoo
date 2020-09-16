@@ -17,6 +17,33 @@ public class FundingOpenRequireView {
 	
 	
 	
+public String isSatisfied() {
+		
+		
+	Boolean rewardMakePlanEmpty = rewardMakePlan.trim().isEmpty();
+	
+	Boolean rewardDeliveryplanEmpty = rewardDeliveryPlan.trim().isEmpty();
+	
+	
+		
+		
+		
+		
+	if	(rewardMakePlanEmpty&&rewardDeliveryplanEmpty) {
+		return "작성 전";
+	}
+	
+	else if (rewardMakePlanEmpty||rewardDeliveryplanEmpty){
+		return "작성 중";
+	}else {
+		return "작성 완료";
+	}
+	
+	
+	
+		
+	}
+	
 	
 	
 	
