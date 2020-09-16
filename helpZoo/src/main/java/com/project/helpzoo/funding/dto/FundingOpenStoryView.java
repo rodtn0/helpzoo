@@ -22,6 +22,28 @@ public class FundingOpenStoryView {
 		
 	}
 	
+	public String isSatisfied() {
+		
+		
+		Boolean fundingSummaryIsEmpty = fundingSummary.trim().isEmpty();
+		Boolean fundingStoryIsEmpty = fundingStory.trim().isEmpty();
+		
+		
+	if	(fundingStoryIsEmpty&&fundingSummaryIsEmpty	) {
+		return "작성 전";
+	}
+	
+	else if (fundingStoryIsEmpty||fundingSummaryIsEmpty){
+		return "작성 중";
+	}else {
+		return "작성 완료";
+	}
+	
+	
+	
+		
+	}
+	
 	
 	
 	public FundingOpenStoryView(String fundingSummary, String fundingStory) {

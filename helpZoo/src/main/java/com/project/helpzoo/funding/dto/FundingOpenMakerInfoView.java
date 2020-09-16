@@ -3,7 +3,7 @@ package com.project.helpzoo.funding.dto;
 public class FundingOpenMakerInfoView {
 	
 	
-	private String name;
+	private String name	;
 	
 	private String email;
 	
@@ -60,28 +60,25 @@ public class FundingOpenMakerInfoView {
 	// 필요 조건을 충족했는가.
 	public String isSatisfied() {
 		
-		Boolean makerNameIsEmpty = name.isEmpty();
-		Boolean emailIsEmpty = email.isEmpty();
-		Boolean phoneIsEmpty = phone==0;
+		Boolean emailIsEmpty = email.trim().isEmpty();
 
 
 //사업자		
-		Boolean businessTypeIsEmpty = businessType.isEmpty();
-		Boolean agentNameIsEmpty = agentName.isEmpty();
-		Boolean agentEmailIsEmpty = agentEmail.isEmpty();
+		Boolean agentNameIsEmpty = agentName.trim().isEmpty();
+		Boolean agentEmailIsEmpty = agentEmail.trim().isEmpty();
 		Boolean agentPhoneIsEmpty = agentPhone ==0;
-		Boolean taxEmailIsEmpty = taxEmail.isEmpty();
-		Boolean bankIsEmpty = bank.isEmpty();
+		Boolean taxEmailIsEmpty = taxEmail.trim().isEmpty();
+		Boolean bankIsEmpty = bank.trim().isEmpty();
 		Boolean accountIsEmpty = accountNumber ==0;
-		Boolean accountHolderIsEmpty = accountHolder.isEmpty();
+		Boolean accountHolderIsEmpty = accountHolder.trim().isEmpty();
 		
 		
-		if(makerNameIsEmpty&&emailIsEmpty&&phoneIsEmpty&&businessTypeIsEmpty&&agentNameIsEmpty&&agentEmailIsEmpty&&agentPhoneIsEmpty
+		if(emailIsEmpty&&agentNameIsEmpty&&agentEmailIsEmpty&&agentPhoneIsEmpty
 				&&taxEmailIsEmpty&&bankIsEmpty&&accountIsEmpty&&accountHolderIsEmpty) {
 			
 			return "작성 전";
 			
-		}else if(makerNameIsEmpty||emailIsEmpty||phoneIsEmpty||businessTypeIsEmpty||agentNameIsEmpty||agentEmailIsEmpty||agentPhoneIsEmpty
+		}else if(emailIsEmpty||agentNameIsEmpty||agentEmailIsEmpty||agentPhoneIsEmpty
 				||taxEmailIsEmpty||bankIsEmpty||accountIsEmpty||accountHolderIsEmpty) {
 			
 			return "작성 중";

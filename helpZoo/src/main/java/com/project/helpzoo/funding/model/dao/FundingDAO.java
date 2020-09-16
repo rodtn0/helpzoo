@@ -327,11 +327,13 @@ public class FundingDAO {
 		
 		FundingProject funding = new FundingProject();
 		
-	    BusinessType businessType = 	em.find(BusinessType.class, type);
 		
+		
+	    BusinessType businessType = em.find(BusinessType.class, type);
 		
 	  
 	    FundingMaker maker = new FundingMaker();
+	    
 	    
 	    maker.setName(makerName);
 	    
@@ -340,16 +342,31 @@ public class FundingDAO {
 	    em.persist(maker);
 	    
 	    
+	    MakerAgent makerAgent = new MakerAgent();
+	    
+	    em.persist(makerAgent);
+	    
+	    maker.setMakerAgent(makerAgent);
+	    
+	    
+	    
+	    
+	    
+	    
 	    funding.setFundingMaker(maker);
 	    
 	    funding.setBusinessType(businessType);
 		
+	  
+	    
 	    funding.setMemberNo(memberNo);
 	    
 		em.persist(funding);
 		
 		
+		System.out.println(funding.getBusinessType() + "저는 펀딩의 비즈니스 타입입니다.");
 		
+		System.out.println(funding.getBusinessType().getBusinessType() + "저는 펀딩의 비즈니스 타입2입니다.");
 		
 		
 		
@@ -398,7 +415,9 @@ public class FundingDAO {
 		fundingProject.setRewardMakePlan(fundingOpenRequireView.getRewardMakePlan());
 		
 		
-		
+		System.out.println(fundingProject.getRewardDeliveryPlan() + "리콰이어 플랜");
+		System.out.println(fundingProject.getRewardMakePlan() + " 메이크플랜");
+	
 		
 	}
 
@@ -413,6 +432,8 @@ public class FundingDAO {
 		
 		
 		FundingProject fundingProject = em.find(FundingProject.class, fundingNo);
+		
+		System.out.println(fundingProject);
 		
 		
 		//기본 정보의 view에 표시될 정보 -작성 확인용-
@@ -499,6 +520,11 @@ public class FundingDAO {
 
 	private FundingOpenMakerInfoView getFundingOpenMakerInfoView(FundingProject fundingProject, FundingMaker maker,
 			MakerAgent agent) {
+		
+		
+		
+		
+		
 		FundingOpenMakerInfoView fundingOpenMakerInfoView = new FundingOpenMakerInfoView
 		
 			(maker.getName(), maker.getEmail(), maker.getPhone(), maker.getKakaoId(), maker.getKakaoURL(), maker.getHomepage1(), maker.getHomepage2(), 
@@ -513,7 +539,12 @@ public class FundingDAO {
 
 
 	private FundingOpenInfoView getFundingOpenInfoView(FundingProject fundingProject) {
+		
+		Optional.ofNullable(fundingProject.getTitle());
+		
+		
 		FundingOpenInfoView fundingOpenInfoView = new FundingOpenInfoView(
+				
 				fundingProject.getTitle(), fundingProject.getGoalAmount(), fundingProject.getCategory().getCategory_name()
 				, fundingProject.getEndDay(), fundingProject.getTag());
 		return fundingOpenInfoView;

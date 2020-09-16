@@ -71,7 +71,6 @@ public class FundingOpenInfoView {
 		
 		Boolean titleEmpty = fundingTitle.trim().isEmpty();
 		Boolean fundingGoalIsEmpty = fundingGoal==0;
-		Boolean categoryEmpty = category.trim().isEmpty();
 		Boolean fundingEndDayEmpty = fundingEndDay==null;
 		Boolean tagIsEmpty = fundingTag.isEmpty();
 		
@@ -79,11 +78,11 @@ public class FundingOpenInfoView {
 		
 		
 		
-	if	(titleEmpty&&fundingGoalIsEmpty&&categoryEmpty&&fundingEndDayEmpty&&tagIsEmpty) {
+	if	(titleEmpty&&fundingGoalIsEmpty&&fundingEndDayEmpty&&tagIsEmpty) {
 		return "작성 전";
 	}
 	
-	else if (!titleEmpty||fundingGoalIsEmpty||categoryEmpty||fundingEndDayEmpty||tagIsEmpty){
+	else if (!titleEmpty||fundingGoalIsEmpty||fundingEndDayEmpty||tagIsEmpty){
 		return "작성 중";
 	}else {
 		return "작성 완료";
