@@ -27,7 +27,9 @@ public class LoginFilter implements Filter{
 	
 	private static final Set<String> NOT_ALLOWED_PATH =
 	Collections.unmodifiableSet(new HashSet<String>
-	(Arrays.asList("login", "logout", "loginAction", "idDupCheck","signUpAction","findId","findIdAction","signUp", "signUp2","signUp3","authEmail","joinAuth/\\w*")));
+	(Arrays.asList("login", "logout", "loginAction", "idDupCheck","signUpAction","findId","findIdAction","signUp", "signUp2","signUp3","authEmail",
+			"joinAuth/\\w*","findPassword","emailDupCheck","findPasswordAction",
+			"passAuth","pwdChange")));
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -66,7 +68,7 @@ public class LoginFilter implements Filter{
 			chain.doFilter(request, response);
 		}else {
 			session.setAttribute("status", "error");
-			session.setAttribute("text", "로그인 후 이용해주세요.");
+			session.setAttribute("msg", "로그인 후 이용해주세요.");
 			res.sendRedirect(req.getContextPath() + "/member/login");
 		}
 	}

@@ -2,6 +2,8 @@ package com.project.helpzoo.member.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -9,16 +11,19 @@ import javax.persistence.metamodel.SetAttribute;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -28,7 +33,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.project.helpzoo.member.model.service.MemberService;
 import com.project.helpzoo.member.model.vo.Member;
 
-@SessionAttributes({"loginMember","memberEmail"})
+@SessionAttributes({"loginMember","memberEmail","dice"})
 @Controller
 @RequestMapping("/member/*")
 public class MemberController {
@@ -38,6 +43,7 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
+	
 	
 	// 로그인 화면으로 전환하는 메소드
 	@RequestMapping("login")
@@ -107,8 +113,7 @@ public class MemberController {
 		String title = "도와주(Zoo) 반려동물 크라우드 펀딩&기부 회원가입 인증 이메일입니다."; // 메일 제목(타이틀)
 		// 메일 내용
 		String content = System.getProperty("line.separator")+
-		System.getProperty("line.separator")+
-		System.getProperty("안녕하세요. 도와주(Zoo) 반려동물 크라우드 펀딩 & 기부 웹사이트입니다.")+
+		System.getProperty("line.separator")+"안녕하세요. 도와주(Zoo) 반려동물 크라우드 펀딩 & 기부 웹사이트입니다." +
 		System.getProperty("line.separator")+
 		System.getProperty("line.separator")+
 		System.getProperty("line.separator")
@@ -200,12 +205,12 @@ public class MemberController {
 			int result = memberService.signUp(signUpMember);
 			String status = null;
 			String msg = null;
-			String txt = null;
+			String text = null;
 			
 			if(result >0) {
 				status="success";
 				msg="가입 성공";
-				txt="이제 로그인해서 도와주(Zoo)를 이용해보세요.";
+				text="이제 로그인해서 도와주(Zoo)를 이용해보세요.";
 				
 			}else {
 				status="error";
@@ -214,7 +219,7 @@ public class MemberController {
 			}
 			rdAttr.addFlashAttribute("status", status);
 			rdAttr.addFlashAttribute("msg", msg);
-			rdAttr.addFlashAttribute("txt", txt);
+			rdAttr.addFlashAttribute("text", text);
 			
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -241,6 +246,160 @@ public class MemberController {
 		model.addAttribute("memberId", memberService.findIdAction(response, memberEmail));
 
 		return "member/findIdResult";
+	}
+	
+	// 이메일 유효성 검사 Controller
+	@ResponseBody
+	@RequestMapping("emailDupCheck")
+	public String emailDupCheck(String memberEmail) {
+		
+		int result = memberService.emailDupCheck(memberEmail);
+		
+		return result + "";
+	}
+	
+	// 비밀번호 찾기 페이지 이동 
+	@RequestMapping("findPassword")
+	public String findPassword() {
+		
+		return "member/findPassword";
+	}
+	
+	// 비밀번호 찾기 액션
+	@RequestMapping("findPasswordAction")
+	public ModelAndView findPasswordAction(HttpServletRequest request, String memberId, String memberEmail
+			,HttpServletResponse responseEmail) throws IOException{
+		
+		Random r = new Random();
+		int dice = r.nextInt(157211)+48271;
+		
+		String setfrom = "helpzooFinal@gmail.com";
+		String tomail = request.getParameter("memberEmail");
+		String title = "비밀번호 찾기 인증 코드입니다.";
+		String content =
+				System.getProperty("line.separator") +
+				System.getProperty("line.separator") +
+				System.getProperty("line.separator")+"안녕하세요. 도와주(Zoo) 반려동물 크라우드 펀딩 & 기부 웹사이트입니다." +
+				System.getProperty("line.separator") +
+				System.getProperty("line.separator") +
+				"비밀번호 찾기 인증 번호는" + dice + "입니다." +
+				System.getProperty("line.separator") +
+				System.getProperty("line.separator") +
+				"받으신 인증번호를 홈페이지에 입력해주시면 비밀번호 재설정이 가능합니다.";
+		
+		try {
+			
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "utf-8");
+			
+			messageHelper.setFrom(setfrom); // 보내는 사람(생략하면 정상작동 X)
+			messageHelper.setTo(tomail); // 받는사람 이메일
+			messageHelper.setSubject(title); // 메일 제목 (생략 가능)
+			messageHelper.setText(content); // 메일 내용
+			
+			mailSender.send(message);
+			
+			
+		}catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("member/passAuth");
+		mv.addObject("dice", dice);
+		mv.addObject("memberEmail", memberEmail);
+		
+		// mv 값이 넘어왔는지 확인
+		System.out.println("mv : " + mv);
+		
+		responseEmail.setContentType("text/html; charset=UTF-8");
+		PrintWriter outEmail = responseEmail.getWriter();
+		outEmail.println("<script>alert('이메일이 발송되었습니다. 발송된 인증코드를 입력해주세요.')");
+		outEmail.flush();
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="passAuth", method = RequestMethod.POST)
+	public ModelAndView passAuth(String authCode, HttpServletRequest request, HttpServletResponse responseEmail, Model model) throws IOException{
+		
+		System.out.println("마지막 authCode :" + authCode);
+		System.out.println("마지막 dice : " + (int)model.getAttribute("dice"));
+		
+		ModelAndView mv = new ModelAndView();	
+		
+		int dice = (int)model.getAttribute("dice");
+		String memberEmail = (String)model.getAttribute("memberEmail");
+		
+		if(authCode.equals(dice)) {
+			mv.setViewName("/member/pwdChange");
+			mv.addObject("memberEmail", memberEmail);
+			
+			// 인증번호가 일치하면 이메일을 비밀번호 변경 페이지로 이동하게 함.
+			responseEmail.setContentType("text/html; charset=UTF-8");
+			PrintWriter outEquals = responseEmail.getWriter();
+			outEquals.println("<script>alert('인증번호가 일치하였습니다. 비밀번호 변경 페이지로 이동합니다.');</script>");
+			outEquals.flush();
+			
+			return mv;
+			
+		}else if(!authCode.equals(dice)){
+			
+			ModelAndView mv2 = new ModelAndView();
+			mv2.setViewName("/member/passAuth");
+			responseEmail.setContentType("text/html; charset=UTF-8");
+			PrintWriter outEquals = responseEmail.getWriter();
+			outEquals.println("<script>alert('인증번호가 일치하지 않습니다. 인증번호 입력 페이지로 이동합니다.');</script>");
+			outEquals.flush();
+			
+			return mv2;
+			
+		}
+		return mv;
+		
+	}
+	
+	
+
+	// 변경할 비밀번호를 입력한 후에 확인 버튼을 입력하면 넘어오는 컨트롤러
+	@RequestMapping(value="pwdChange", method = RequestMethod.POST)
+	public ModelAndView pwdChangeAction(HttpServletRequest request,
+			Member member, HttpServletResponse response, RedirectAttributes rdAttr, Model model) throws Exception{
+		
+		String memberPwd = request.getParameter("memberPwd");
+		String memberEmail = (String)model.getAttribute("memberEmail");
+
+		member.setMemberPwd(memberPwd);
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("memberEmail",member.getMemberEmail());
+		map.put("memberPwd", member.getMemberPwd());
+		
+		int result = memberService.pwdChangeAction(map, member);
+		
+		ModelAndView mv = new ModelAndView();
+		
+		
+		String status = null;
+		String msg = null;
+		String text = null;
+		
+		if(result >0) {
+			status = "success";
+			msg="비밀번호 변경 성공";
+			text = "로그인 후 이용하세요.";
+			
+			mv.setViewName("/member/login");
+			
+		}else {
+			status = "success";
+			msg="비밀번호 변경 실패";
+			
+			mv.setViewName("/member/findPassword");
+		}
+		
+		return mv;
 	}
 	
 	

@@ -1,5 +1,7 @@
 package com.project.helpzoo.member.model.dao;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -46,5 +48,38 @@ public class MemberDAO {
 		return sqlSession.selectOne("memberMapper.findId", memberEmail);
 		
 	}
+ 
+	/** 이메일 중복 검사 DAO
+	 * @param memberEmail
+	 * @return result
+	 */
+	public int emailDupCheck(String memberEmail) {
+		
+		return sqlSession.selectOne("memberMapper.emailDupCheck", memberEmail);
+	}
+	
+	/** 비밀번호 변경 DAO
+	 * @param loginMember
+	 * @return loginMember
+	 */
+	public int updatePwd(Member member) {
+		
+		return sqlSession.update("mypageMapper.updatePwd", member);
+	}
+
+	/** 비밀번호 변경 DAO
+	 * @param map
+	 * @param member
+	 * @return
+	 */
+	public int pwdChangeAction(Map<String, Object> map, Member member) {
+		
+		map.get("memberPwd");
+		map.get("memberEmail");
+		
+		return sqlSession.update("memberMapper.pwdChange", map);
+	}
+	
+	
 
 }

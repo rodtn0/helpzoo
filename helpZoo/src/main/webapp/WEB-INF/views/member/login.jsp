@@ -8,7 +8,7 @@
 <title>로그인 페이지</title>
 <link rel="stylesheet" href="${contextPath}/resources/css/login.css">
 </head>
-<body>
+<body style="overflow-x:hidden; overflow-y:auto;">
 	<div class="header">
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	</div>

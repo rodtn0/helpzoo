@@ -1,5 +1,8 @@
 package com.project.helpzoo.member.model.service;
 
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.project.helpzoo.member.model.vo.Member;
@@ -30,5 +33,18 @@ public interface MemberService {
 	 * @throws Exception 
 	 */
 	public abstract String findIdAction(HttpServletResponse response, String memberEmail) throws Exception;
+
+	/** 이메일 찾기
+	 * @param memberEmail
+	 * @return result
+	 */
+	public abstract int emailDupCheck(String memberEmail);
+
+	/** 비밀번호 변경 
+	 * @param map
+	 * @param member
+	 */
+	public abstract int pwdChangeAction(Map<String, Object> map, Member member);
+
 
 }

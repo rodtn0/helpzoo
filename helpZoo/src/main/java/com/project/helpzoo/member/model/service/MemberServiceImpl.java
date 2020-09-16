@@ -2,13 +2,17 @@ package com.project.helpzoo.member.model.service;
 
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.project.helpzoo.member.model.dao.MemberDAO;
 import com.project.helpzoo.member.model.vo.Member;
@@ -84,7 +88,24 @@ public class MemberServiceImpl implements MemberService{
 		}
 
 	}
-	
-	
+
+	// 이메일 중복 검사 Service 구현
+	@Override
+	public int emailDupCheck(String memberEmail) {
+		
+		return memberDAO.emailDupCheck(memberEmail);
+	}
+
+	// 비밀번호 재설정 Service 구현
+	@Override
+	public int pwdChangeAction(Map<String, Object> map, Member member) {
+		
+		int result = memberDAO.pwdChangeAction(map, member);
+		
+		return result;
+		
+	}
+
+
 
 }
