@@ -58,6 +58,14 @@
 	#pNo, #pTitle{
 		text-align : center;
 	}
+	
+	#imgDiv{
+		width : 200px;
+		position : absolute;
+		right : 0;
+		left : 25%;
+		top : 15%;
+	}
 
 	
 
@@ -89,6 +97,7 @@
 						<textarea id="reviewContent" name="reviewContent" cols="100">${fReviewView.reviewContent}</textarea>
 					</div>
 				</div>
+				
 				<div class="col-md-4">
 					<div class="row">
 							<div class="card">
@@ -100,7 +109,16 @@
 									
 								</select>
 								
-								<img id="imgDiv" name="projectImg" class="card-img-top" src="${contextPath}${dInfo.filePath}/${dInfo.fileChangeName}"/>
+								<c:choose>
+									<c:when test="${!empty fReviewView.filePath}">
+									<img id="imgDiv" name="projectImg" class="card-img-top" src="${contextPath}${fReviewView.filePath}/${fReviewView.fileChangeName}"/>
+									</c:when>
+									<c:otherwise>
+									<img id="imgDiv" name="projectImg" class="card-img-top" src="${contextPath}/resources/uploadImages/NoImage.png"/>
+									</c:otherwise>
+								</c:choose>
+								
+								
 								<%-- <img id="imgDiv" class="card-img-top" alt="프로젝트 이미지가 존재하지않습니다." 
 									<c:if test="${!empty fInfo[0].fileChangeName}">
 									src="${contextPath}${fInfo[0].filePath}/${fInfo[0].fileChangeName}"}

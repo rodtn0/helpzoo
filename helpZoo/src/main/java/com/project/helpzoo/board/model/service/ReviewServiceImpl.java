@@ -56,9 +56,20 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	// 리뷰 상세조회 Service 구현
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public Review selectReviewVeiw(int type, int rBoardNo) {
-		return reviewDAO.selectReviewView(type, rBoardNo);
+		
+		Review review = reviewDAO.selectReviewView(type, rBoardNo);
+		
+		if(review != null) {
+			int result = reviewDAO.increaseCount(type, rBoardNo);
+			
+			if(result > 0) {
+				review.setReadCount(review.getReadCount() + 1);
+			}
+		}
+		return review;
 	}
 
 	// 글작성 페이지에 불러올 프로젝트 이미지, 제목 조회 Service 구현
@@ -164,6 +175,7 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	// 리뷰 글 삭제 Service 구현
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int deleteReview(int type, int reviewNo) {
 		return reviewDAO.deleteReview(type, reviewNo);
@@ -176,6 +188,7 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	// 리뷰 수정 Service 구현
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int updateReview(int type, Review review, String savePath, List<MultipartFile> images, boolean[] deleteImages) {
 		

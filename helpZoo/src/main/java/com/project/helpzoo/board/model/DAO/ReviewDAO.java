@@ -212,6 +212,19 @@ public class ReviewDAO {
 		return sqlSession.delete(mapperId, fileNo);
 	}
 
+	
+	/** 조회수 증가 DAO
+	 * @param type
+	 * @param rBoardNo
+	 * @return result
+	 */
+	public int increaseCount(int type, int rBoardNo) {
+		String mapperId = null;
+		if(type == 1) mapperId = "reviewMapper.increaseCountF";
+		else		  mapperId = "reviewMapper.increaseCountD";
+		return sqlSession.delete(mapperId, rBoardNo);
+	}
+
 
 
 	
