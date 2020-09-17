@@ -59,6 +59,13 @@
 		text-align : center;
 	}
 
+	#imgDiv{
+			width : 200px;
+			position : absolute;
+			right : 0;
+			left : 25%;
+			top : 15%;
+	}
 	
 
 </style>
@@ -70,7 +77,7 @@
 	
 	<!-- http://localhost:8095/helpzoo/board/review/1/update/859 (수정 페이지)-->
 	<!-- http://localhost:8095/helpzoo/board/review/1/updateAction/859 -->
-	<form action="../updateAction/${reviewNo}" method="post" role="form"
+	<form action="../updateAction/${dReviewView.reviewNo}?cp=${param.cp}" method="post" role="form"
 		encType="multipart/form-data" onsubmit="return validate();">
 		
 	<div class="container-fluid">
@@ -94,13 +101,13 @@
 							<div class="card">
 								<select id="selectProject" name="projectNo" onchange="selectProejct(this);">
 									<c:if test="${!empty dInfo}">
-										<c:set var="fInfo" value="${dInfo}"/>
+										<c:set var="dInfo" value="${dInfo}"/>
 											<option value="${dInfo.projectNo}" selected>${dInfo.projectTitle}</option>
 									</c:if>  
 									
 								</select>
 								
-								<img id="imgDiv" name="projectImg" class="card-img-top" />
+								<img id="imgDiv" name="projectImg" class="card-img-top" src="${contextPath}${dReviewView.filePath}/${dReviewView.fileChangeName}"/>
 								<%-- <img id="imgDiv" class="card-img-top" alt="프로젝트 이미지가 존재하지않습니다." 
 									<c:if test="${!empty fInfo[0].fileChangeName}">
 									src="${contextPath}${fInfo[0].filePath}/${fInfo[0].fileChangeName}"}
@@ -210,6 +217,13 @@
 
 
 <script>
+	var deleteImages = []; //삭제될 이미지 정보를 담을 배열
+	
+	// 이미지 삭제 버튼의 수만큼 배열을 만들고 모두 false로 초기화
+	for(var i=0 ; i<$(".deleteImg").length ; i++){
+		deleteImages.push(false);
+	}
+	
 	//이미지 삭제 버튼 동작
 	$(".deleteImg").on("click", function(event){
 		// event 매개변수 : 이벤트와 이벤트가 발생한 객체에 대한 모든 정보가 담겨있음.
@@ -265,6 +279,17 @@
 			alert("내용을 입력해 주세요.");
 			$("#reviewContent").focus();
 			return false;
+		}
+		
+		// deleteImages 배열을 input 태그로 만들어 form 태그 내부에 추가하여
+		// 서버로 데이터 전달
+		for(var i=0; i<deleteImages.length ; i++){
+			var $deleteImage = $("<input>", {type : "hidden", 
+											 name : "deleteImages",
+											 value : deleteImages[i]});
+			// form태그 제일 마지막 자식으로 추가
+			$("form").append($deleteImage);
+			
 		}
 	}
 	

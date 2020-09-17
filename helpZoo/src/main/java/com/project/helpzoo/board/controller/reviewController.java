@@ -1,5 +1,6 @@
 package com.project.helpzoo.board.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.helpzoo.board.model.service.ReviewService;
@@ -311,7 +313,7 @@ public class reviewController {
 			}
 			
 				path = "dReviewUpdate";
-				model.addAttribute("ㅇInfo", dInfo);
+				model.addAttribute("dInfo", dInfo);
 				model.addAttribute("dReviewView", dReviewView);
 			
 		}
@@ -322,10 +324,62 @@ public class reviewController {
 	
 	// 리뷰 수정
 				// /board/review/1/updateAction/859
-	@RequestMapping(value="review/{type}/updateAction/{reviewNo}", method=RequestMethod.POST)
-	public String updateAction(@PathVariable int type, @PathVariable int reviewNo) {
+	@RequestMapping("review/{type}/updateAction/{reviewNo}")
+	public ModelAndView updateAction(@PathVariable int type, @PathVariable int reviewNo,
+								 ModelAndView mv,
+								 Review review, int cp, boolean[] deleteImages,
+								 RedirectAttributes rdAttr,
+								 HttpServletRequest request,
+								 @RequestParam(value="images", required = false) List<MultipartFile> images) {
 		
-		return "";
+		System.out.println("cp : " + cp);
+		
+		System.out.println("deleteImages : " + Arrays.toString(deleteImages));
+		
+		review.setReviewNo(reviewNo);
+		
+		// 이미지 수정
+		// -------------------------------------------------------------------------------
+				
+		// 업로드된 파일 이름 확인
+		// -> 파일 이름이 출력된 경우 == 이미지가 수정된 경우
+		for(int i=0; i<images.size() ; i++) {
+			System.out.println("images[" + i + "] : " + images.get(i).getOriginalFilename() );
+		}
+		
+		// 파일 저장 경로 설정
+		String savePath = request.getSession().getServletContext().getRealPath("resources/uploadImages");
+		
+		int result = reviewService.updateReview(type, review, savePath, images, deleteImages);
+		// -------------------------------------------------------------------------------
+		//int result = boardService.updateBoard(upBoard);
+		
+		String status = null;
+		String msg = null;
+		String url = null;
+		
+		// 수정 성공 시 상세조회 화면으로
+		// 현재 : http://localhost:8095/helpzoo/board/review/1/update/860
+		// 상세 : http://localhost:8095/helpzoo/board/review/1/881?cp=1
+		if(result > 0) {
+			status = "success";
+			msg = "게시글 수정에 성공하였습니다.";
+			url = "../" + reviewNo + "?cp=" + cp;
+			//(나)mv.setViewName("redirect:/board/" + type + "/" + boardNo + "?cp=" + cp);
+		}else {
+			// 실패 시 이전 요청주소(수정화면)
+			
+			status = "error";
+			msg = "게시글 수정에 실패했습니다.";
+			url = request.getHeader("referer");
+			//(나)mv.setViewName("redirect:" + request.getHeader("referer"));
+		}
+		
+		mv.setViewName("redirect:" + url);
+		rdAttr.addFlashAttribute("status", status);
+		rdAttr.addFlashAttribute("msg", msg);
+				
+		return mv;
 	}
 	
 	

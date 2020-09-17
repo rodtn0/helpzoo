@@ -29,7 +29,23 @@ public class FundingTotalInfoDto {
 	}
 	
 	
+public Boolean isSatisfied() {
 	
+		Boolean infoSatis	 = fundingOpenInfoView.isSatisfied().equals("작성 완료");
+		Boolean makerInfoSatis = fundingOpenMakerInfoView.isSatisfied().equals("작성 완료");
+		Boolean requireSatis = fundingOpenRequireView.isSatisfied().equals("작성 완료");
+		Boolean rewardSatis = !fundingOpenRewardView.isEmpty();
+		Boolean storySatis = fundingOpenStoryView.isSatisfied().equals("작성 완료");
+		Boolean allSatis = null;
+		
+		if(infoSatis&&makerInfoSatis&&requireSatis&&rewardSatis&&storySatis) {
+			allSatis = true;
+		}else {
+			allSatis = false;
+		}
+		return allSatis;
+		
+	}
 	
 	
 	public FundingTotalInfoDto(FundingOpenInfoView fundingOpenInfoView,

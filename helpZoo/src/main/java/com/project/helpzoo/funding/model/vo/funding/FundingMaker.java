@@ -72,6 +72,13 @@ public class FundingMaker {
 	
 	
 	public String getHomepage1() {
+		
+	if(homepage1 == null) {
+			
+		homepage1 = "";
+				}
+		
+		
 		return homepage1;
 	}
 
@@ -80,6 +87,13 @@ public class FundingMaker {
 	}
 
 	public String getHomepage2() {
+		
+		
+		if(homepage2 == null) {
+			
+			homepage2 = "";
+					}
+		
 		return homepage2;
 	}
 
@@ -100,6 +114,13 @@ public class FundingMaker {
 	}
 
 	public String getName() {
+		
+if(name == null) {
+			
+	name = "";
+					}
+		
+		
 		return name;
 	}
 
@@ -108,6 +129,12 @@ public class FundingMaker {
 	}
 
 	public String getEmail() {
+		
+		if(email == null) {
+			
+			email = "";
+							}
+		
 		return email;
 	}
 
@@ -124,6 +151,12 @@ public class FundingMaker {
 	}
 
 	public String getKakaoId() {
+		
+			if(kakaoId == null) {
+			
+				kakaoId = "";
+							}
+		
 		return kakaoId;
 	}
 
@@ -132,6 +165,12 @@ public class FundingMaker {
 	}
 
 	public String getKakaoURL() {
+		
+		if(kakaoURL == null) {
+			
+			kakaoURL = "";
+						}
+		
 		return kakaoURL;
 	}
 
@@ -140,6 +179,12 @@ public class FundingMaker {
 	}
 
 	public String getSns() {
+		
+	if(sns == null) {
+			
+		sns = "";
+						}
+		
 		return sns;
 	}
 
@@ -148,6 +193,12 @@ public class FundingMaker {
 	}
 
 	public String getSns2() {
+		
+		if( sns2 == null) {
+			
+			 sns2 = "";
+							}
+		
 		return sns2;
 	}
 
@@ -156,6 +207,13 @@ public class FundingMaker {
 	}
 
 	public String getSns3() {
+		
+		
+		if( sns3 == null) {
+			
+			sns3 = "";
+							}
+		
 		return sns3;
 	}
 
@@ -164,6 +222,16 @@ public class FundingMaker {
 	}
 
 	public MakerAgent getMakerAgent() {
+		
+		
+		if(makerAgent == null) {
+			
+			makerAgent = new MakerAgent();
+			
+		}
+		
+			
+		
 		return makerAgent;
 	}
 

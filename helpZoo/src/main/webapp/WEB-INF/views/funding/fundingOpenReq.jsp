@@ -8,7 +8,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>타이틀</title>
-
+<meta http-equiv="expires" content="-1" >
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -378,7 +378,7 @@
                     </small>
                     <br>
                     <small>
-                        3) 공연, 영화, 전시 등 무형 서비스의 경우 좌석수, 일 최대 예약 가능 수량 등을 작성해주세요. aa
+                        3) 공연, 영화, 전시 등 무형 서비스의 경우 좌석수, 일 최대 예약 가능 수량 등을 작성해주세요. 
                         </small>
 
               <br>

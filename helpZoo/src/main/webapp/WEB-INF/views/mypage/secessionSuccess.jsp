@@ -28,7 +28,6 @@
 	height:80px;
 	}
 	.background{
-	background-color:#f0f0f0;
 	text-align:center;
 	}
 	#mainBtn{
@@ -115,12 +114,10 @@ $('.navbar-light .dmenu').hover(function () {
 			<br><h3 id="mainTxt">회원 탈퇴가 완료되었습니다.</h3><br>
 			<!-- 가운데 영역 삽입 -->
 			<div class="col-md-12 background">
-			<hr>
 			<h4>그동안 도와주(Helpzoo)를 이용해 주셔서 감사합니다.</h4>
-			<h5>보다 나은 서비스로 찾아뵙겠습니다.</h5><br>
+			<h6>보다 나은 서비스로 찾아뵙겠습니다.</h6><br>
 			<button id="mainBtn" type="button"class="btn btn-primary"
-       		onclick="button_click();">도와주(Zoo) 첫화면</button><br>
-       		<hr>
+       		onclick="button_click();">도와주(Zoo) 첫화면</button><br><br>
        		<!-- 여기까지 -->
        		</div>
 			</div>

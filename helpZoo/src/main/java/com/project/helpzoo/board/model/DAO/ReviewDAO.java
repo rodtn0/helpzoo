@@ -176,6 +176,57 @@ public class ReviewDAO {
 		return sqlSession.selectOne(mapperId, review);
 	}
 
+
+	/** 리뷰 수정 DAO
+	 * @param review
+	 * @return result
+	 */
+	public int updateReview(int type, Review review) {
+		String mapperId = null;
+		if(type == 1) mapperId = "reviewMapper.updateFundingReview";
+		else		  mapperId = "reviewMapper.updateDonationReview";
+		return sqlSession.update(mapperId, review);
+	}
+
+
+	/** 수정시 이미지 업데이트 DAO
+	 * @param at
+	 * @return result
+	 */
+	public int updateAttachment(int type, Attachment at) {
+		String mapperId = null;
+		if(type == 1) mapperId = "reviewMapper.updateFundingImages";
+		else		  mapperId = "reviewMapper.updateDonationImages";
+		return sqlSession.update(mapperId, at);
+	}
+
+
+	/** 수정시 기존 이미지 삭제 DAO
+	 * @param fileNo
+	 * @return result
+	 */
+	public int deleteAttachment2(int type, int fileNo) {
+		String mapperId = null;
+		if(type == 1) mapperId = "reviewMapper.deleteFundingImages2";
+		else		  mapperId = "reviewMapper.deleteDonationImages2";
+		return sqlSession.delete(mapperId, fileNo);
+	}
+
+	
+	/** 조회수 증가 DAO
+	 * @param type
+	 * @param rBoardNo
+	 * @return result
+	 */
+	public int increaseCount(int type, int rBoardNo) {
+		String mapperId = null;
+		if(type == 1) mapperId = "reviewMapper.increaseCountF";
+		else		  mapperId = "reviewMapper.increaseCountD";
+		return sqlSession.delete(mapperId, rBoardNo);
+	}
+
+
+
 	
 	
 }

@@ -30,6 +30,18 @@ public class FundingCategory {
 	
 	
 	
+	public FundingCategory(long id) {
+		super();
+		this.id = id;
+	}
+
+
+
+
+
+
+
+
 	public long getId() {
 		return id;
 	}
@@ -39,6 +51,12 @@ public class FundingCategory {
 	}
 
 	public String getCategory_name() {
+		
+		if(category_name == null) {
+			category_name = "";
+		}
+		
+		
 		return category_name;
 	}
 

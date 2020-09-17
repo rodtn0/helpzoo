@@ -103,8 +103,10 @@
             </ul>
           </li>
           <li><a href="${contextPath}/subscribe">구독하기</a></li>
-          	<li><a href=" ${contextPath}/mypage/updateMember">마이페이지</a></li>
-          	<li><a href=" ${contextPath}/funding/fundingOpen">펀딩프로젝트 만들기</a></li>
+          <li><a href=" ${contextPath}/funding/fundingOpen">펀딩프로젝트 만들기</a></li>
+          <c:if test="${!empty loginMember}">
+          <li><a href=" ${contextPath}/mypage/updateMember">마이페이지</a></li>
+          </c:if>
         </ul>
       </nav><!-- .nav-menu -->
     </div>
