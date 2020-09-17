@@ -22,6 +22,7 @@ import com.project.helpzoo.funding.model.vo.funding.FundingMaker;
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.funding.model.vo.funding.MakerAgent;
 import com.project.helpzoo.funding.model.vo.funding.BusinessType;
+import com.project.helpzoo.funding.model.vo.funding.FundingCategory;
 import com.project.helpzoo.funding.model.vo.funding.QFundingCategory;
 import com.project.helpzoo.funding.model.vo.funding.QFundingMaker;
 import com.project.helpzoo.funding.model.vo.funding.QFundingProject;
@@ -415,8 +416,7 @@ public class FundingDAO {
 		fundingProject.setRewardMakePlan(fundingOpenRequireView.getRewardMakePlan());
 		
 		
-		System.out.println(fundingProject.getRewardDeliveryPlan() + "리콰이어 플랜");
-		System.out.println(fundingProject.getRewardMakePlan() + " 메이크플랜");
+		
 	
 		
 	}
@@ -447,15 +447,15 @@ public class FundingDAO {
 		
 		
 		//기본 정보 뷰
-		FundingOpenInfoView fundingOpenInfoView = getFundingOpenInfoView(fundingProject);
+		FundingOpenInfoView fundingOpenInfoView = getFundingOpenInfoView(fundingProject.getId());
 		//메이커 정보 뷰
-		FundingOpenMakerInfoView fundingOpenMakerInfoView = getFundingOpenMakerInfoView(fundingProject, maker, agent);
+		FundingOpenMakerInfoView fundingOpenMakerInfoView = getFundingOpenMakerInfoView(fundingProject.getId(), maker.getId(), agent.getId());
 		//기본 요건 뷰
-		FundingOpenRequireView fundingOpenRequireView = getFundingOpenRequireView(fundingProject);
+		FundingOpenRequireView fundingOpenRequireView = getFundingOpenRequireView(fundingProject.getId());
 		//리워드 목록 뷰
-		List<FundingOpenRewardView> fundingOpenRewardView = getFundingOpenRewardView(rewardList);
+		List<FundingOpenRewardView> fundingOpenRewardView = getFundingOpenRewardView(fundingProject.getId());
 		//펀딩 스토리 뷰
-		FundingOpenStoryView fundingOpenStoryView = getFundingOpenStoryView(fundingProject);
+		FundingOpenStoryView fundingOpenStoryView = getFundingOpenStoryView(fundingProject.getId());
 		
 		
 		
@@ -481,17 +481,32 @@ public class FundingDAO {
 
 
 
-	private FundingOpenStoryView getFundingOpenStoryView(FundingProject fundingProject) {
+	private FundingOpenStoryView getFundingOpenStoryView(long fundingNo) {
+		
+		
+		FundingProject funding = em.find(FundingProject.class, fundingNo);
+		
 		FundingOpenStoryView fundingOpenStoryView = 
-				new FundingOpenStoryView(fundingProject.getSummary(), fundingProject.getstory());
+				new FundingOpenStoryView(funding.getSummary(), funding.getstory());
 		return fundingOpenStoryView;
 	}
 
 
 
 
-	private List<FundingOpenRewardView> getFundingOpenRewardView(List<Reward> rewardList) {
+	private List<FundingOpenRewardView> getFundingOpenRewardView(long fundingNo) {
+		
+		FundingProject funding = em.find(FundingProject.class, fundingNo);
+		
+		
+		List<Reward> rewardList = new ArrayList<Reward>();
+		
+		rewardList = funding.getReward();
+		
+		
 		List<FundingOpenRewardView> fundingOpenRewardView = new ArrayList<FundingOpenRewardView>();
+		
+		
 		
 		FundingOpenRewardView rewardView = null;
 		
@@ -509,19 +524,27 @@ public class FundingDAO {
 
 
 
-	private FundingOpenRequireView getFundingOpenRequireView(FundingProject fundingProject) {
+	private FundingOpenRequireView getFundingOpenRequireView(long fundingNo) {
+		
+		FundingProject funding = em.find(FundingProject.class, fundingNo);
+		
 		FundingOpenRequireView fundingOpenRequireView 
-		= new FundingOpenRequireView(fundingProject.getRewardMakePlan(), fundingProject.getRewardDeliveryPlan());
+		= new FundingOpenRequireView(funding.getRewardMakePlan(), funding.getRewardDeliveryPlan());
 		return fundingOpenRequireView;
 	}
 
 
 
 
-	private FundingOpenMakerInfoView getFundingOpenMakerInfoView(FundingProject fundingProject, FundingMaker maker,
-			MakerAgent agent) {
+	private FundingOpenMakerInfoView getFundingOpenMakerInfoView(long fundingNo, long makerNo,
+			long agentNo) {
 		
 		
+		FundingProject funding = em.find(FundingProject.class, fundingNo);
+		
+		FundingMaker maker = em.find(FundingMaker.class, makerNo);
+		
+		MakerAgent agent = em.find(MakerAgent.class, agentNo);
 		
 		
 		
@@ -529,7 +552,7 @@ public class FundingDAO {
 		
 			(maker.getName(), maker.getEmail(), maker.getPhone(), maker.getKakaoId(), maker.getKakaoURL(), maker.getHomepage1(), maker.getHomepage2(), 
 					
-			maker.getSns(), maker.getSns2(), maker.getSns3(), fundingProject.getBusinessType().getBusinessType(), agent.getName(), agent.getEmail(), agent.getPhone(), 
+			maker.getSns(), maker.getSns2(), maker.getSns3(), funding.getBusinessType().getBusinessType(), agent.getName(), agent.getEmail(), agent.getPhone(), 
 			
 			agent.getTexEmail(), agent.getBank(), agent.getAccountNumber(),  agent.getAccountHolder());
 		return fundingOpenMakerInfoView;
@@ -538,16 +561,55 @@ public class FundingDAO {
 
 
 
-	private FundingOpenInfoView getFundingOpenInfoView(FundingProject fundingProject) {
+	private FundingOpenInfoView getFundingOpenInfoView(long fundingNo) {
 		
-		Optional.ofNullable(fundingProject.getTitle());
+		
+		FundingProject funding = em.find(FundingProject.class, fundingNo);
+		
 		
 		
 		FundingOpenInfoView fundingOpenInfoView = new FundingOpenInfoView(
 				
-				fundingProject.getTitle(), fundingProject.getGoalAmount(), fundingProject.getCategory().getCategory_name()
-				, fundingProject.getEndDay(), fundingProject.getTag());
+				funding.getTitle(), funding.getGoalAmount(), funding.getCategory().getId()
+				, funding.getEndDay(), funding.getTag());
 		return fundingOpenInfoView;
+	}
+
+
+
+
+	public void openInfoSave(Long fundingNo, FundingOpenInfoView fundingOpenInfoView) {
+		
+		
+			FundingProject funding = em.find(FundingProject.class, fundingNo);
+			
+			FundingCategory category = em.find(FundingCategory.class,fundingOpenInfoView.getCategory());
+			
+			
+			funding.setTitle(fundingOpenInfoView.getFundingTitle());
+			
+			funding.setCategory(category);
+		
+			funding.setGoalAmount(fundingOpenInfoView.getFundingGoal());
+		
+			funding.setEndDay(fundingOpenInfoView.getFundingEndDay());
+		
+			funding.setTag(fundingOpenInfoView.getFundingTag());
+			
+	}
+
+
+
+
+	public FundingOpenInfoView openInfo(Long fundingNo) {
+		
+		
+		
+		
+		
+		
+		
+		return getFundingOpenInfoView(fundingNo);
 	}
 
 }

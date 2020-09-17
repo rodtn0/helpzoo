@@ -292,7 +292,7 @@
             <div class="col-md-2 col-lg-2 col-sm-2">
   
           </div>		
-	  <form action="${contextPath}/funding/fundingOpenRequire/${fundingNo}" method="POST">
+	  <form action="${contextPath}/funding/fundingOpenRequireSubmit/${fundingNo}" method="GET">
           <div class="col-md-9 col-lg-9 col-sm-9">
             <div class="container project_open_ready">
               <h1 class="title_msg">기본 요건</h1>

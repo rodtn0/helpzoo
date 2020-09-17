@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.project.helpzoo.funding.dto.FundingDetailViewDto;
 import com.project.helpzoo.funding.dto.FundingMainViewDto;
+import com.project.helpzoo.funding.dto.FundingOpenInfoView;
 import com.project.helpzoo.funding.dto.FundingOpenRequireView;
 import com.project.helpzoo.funding.dto.FundingTotalInfoDto;
 import com.project.helpzoo.funding.model.dao.FundingDAO;
@@ -131,6 +132,31 @@ public class FundingServiceImpl implements FundingService {
 		
 		
 		return dao.getFundingTotalInfo(fundingNo);
+	}
+
+
+	@Override
+	public void openInfoSave(Long fundingNo, FundingOpenInfoView fundingOpenInfoView) {
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		dao.openInfoSave(fundingNo,fundingOpenInfoView);
+		
+	}
+
+
+	@Override
+	public FundingOpenInfoView openInfo(Long fundingNo) {
+		
+		
+		
+		return dao.openInfo(fundingNo);
 	}
 	
 	
