@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.project.helpzoo.funding.dto.FundingDetailViewDto;
 import com.project.helpzoo.funding.dto.FundingMainViewDto;
+import com.project.helpzoo.funding.dto.FundingOpenInfoView;
 import com.project.helpzoo.funding.dto.FundingOpenRequireView;
 import com.project.helpzoo.funding.dto.FundingTotalInfoDto;
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
@@ -59,6 +60,14 @@ public interface FundingService {
 
 
 	FundingTotalInfoDto getFundingTotalInfo(Long fundingNo);
+
+
+
+	void openInfoSave(Long fundingNo, FundingOpenInfoView fundingOpenInfoView);
+
+
+
+	FundingOpenInfoView openInfo(Long fundingNo);
 
 	
 }
