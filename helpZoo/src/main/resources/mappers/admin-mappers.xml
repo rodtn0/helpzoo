@@ -27,4 +27,8 @@
     <update id="deleteFunding" parameterType="string">
     	UPDATE FUNDING_PROJECT SET FUNDING_STATUS='N' WHERE FUNDING_ID=#{fundingNo}
     </update>
+    
+    <select id="selectFSList" parameterType="string" resultMap="AFundingResultSet">
+    	SELECT * FROM A_FUNDING WHERE FUNDING_STATUS = #{listStatus}
+    </select>
 </mapper>

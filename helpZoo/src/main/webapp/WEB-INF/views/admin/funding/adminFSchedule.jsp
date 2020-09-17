@@ -30,17 +30,40 @@
 	width: 70%; /* Could be more or less, depending on screen size */
 	}
 	
-/* 	.fc-ltr .fc-h-event.fc-not-end, .fc-rtl .fc-h-event.fc-not-start{
-	background-color: #7fcdcd !important;
-	border-color: #7fcdcd !important;
-	}
-	.fc-ltr .fc-h-event.fc-not-start, .fc-rtl .fc-h-event.fc-not-end{
-	background-color: #7fcdcd !important;
-	border-color: #7fcdcd !important;
-	} */
-	
 	.btn-outline-info{
 	width: 50%;
+	}
+	body {
+    margin: 40px 10px;
+    padding: 0;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 14px;
+  }
+
+  #calendar {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  	select {
+	width: 200px;
+	padding: .8em .5em;
+	border: 1px solid #999;
+	font-family: inherit;
+	background: url('arrow.jpg') no-repeat 95% 50%;
+	border-radius: 0px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	border-radius: 10px;
+	}
+	
+	select::-ms-expand {
+	    display: none;
+	    border-radius: 10px;
+	}
+	
+	#selectBox{
+	margin-bottom: 10px;
 	}
 	</style>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
@@ -140,19 +163,6 @@ function myfunction(){
        
   
 </script>
-<style>
-    body {
-    margin: 40px 10px;
-    padding: 0;
-    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-    font-size: 14px;
-  }
-
-  #calendar {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-</style>
 </head>
 <script src="https://kit.fontawesome.com/13be1766f6.js" crossorigin="anonymous"></script>
 <body>
@@ -189,18 +199,70 @@ function myfunction(){
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                  
                 </div>
               </div>
             </div>
+            
           </div>
-
+          
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Answer Table</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                
+                <select id="selectBox">
+					<option value='Y'>진행중인 프로젝트</option>
+					<option value='S'>성공한 프로젝트</option>
+					<option value='N'>마감 & 삭제한 프로젝트</option>
+				</select>
+				
+                  <thead>
+                    <tr>
+                  	<th><input type="checkbox" class="checkAll"></th>
+                      <th>글번호</th>
+                      <th>제목</th>
+                      <th>글쓴이</th>
+                      <th>좋아요</th>
+                      <<!-- th>펀딩 시작</th>
+                      <th>펀딩 마감</th>
+                      <th>목표 금액</th>
+                      <th>현재 금액</th>
+                      <th>달성률</th>
+                      <th>수수료</th> -->
+                    </tr>
+                  </thead>
+                  <tfoot>
+	                  <tr>
+	                  <th><input type="checkbox" class="checkAll"></th>
+                      <th>글번호</th>
+                      <th>제목</th>
+                      <th>글쓴이</th>
+                      <th>좋아요</th>
+                      <!-- <th>펀딩 시작</th>
+                      <th>펀딩 마감</th>
+                      <th>목표 금액</th>
+                      <th>현재 금액</th>
+                      <th>달성률</th>
+                      <th>수수료</th> -->
+                    </tr>
+                  </tfoot>
+                  <!-- <tbody>
+                  </tbody> -->
+                </table>
+              </div>
+            </div>
+          </div>
+			
         </div>
         <!-- /.container-fluid -->
+       </div>
+        
 
-      </div>
       
-          <div id="modal" class="searchModal">
+     <div id="modal" class="searchModal">
       <div class="search-modal-content">
         <div class="page-header">
           <h1>프로젝트 날짜 수정</h1>
@@ -235,6 +297,84 @@ function myfunction(){
       <jsp:include page="../../common/adfooter.jsp"/>
       
       <script>
+      
+      var listStatus = 'Y';
+      
+      $(function(){
+    	 callList(listStatus);
+      })
+      
+      // 리스트 가져오기 레디함수
+    	  
+  	  $("#selectBox").on("change", function(){
+  		  
+  		  var listStatus = listStatus = $(this).val();
+  		  callList(listStatus);
+  		  
+  	  });
+      
+  	function callList(listStatus){
+  		
+		  /*$.ajax({
+			  url : "${contextPath}/admin/funding/listAction",
+			  type : "GET",
+			  data : {"listStatus" : listStatus},
+			  dataType : "JSON",
+			  success : function(funding){
+				  
+		  		$("#dataTable > tbody").html("");
+				  
+				  if(funding.length == 0){
+					  // $("#dataTable > tbody").append("<tr><td colspan='11'>존재하는 게시글이 없습니다.</td></tr>");
+				  }else{
+	 				$.each(funding, function(index, item){
+	 					console.log(funding);
+		 				var $tr = $("<tr>");
+		 				var $checkbox = $("<td><input type='checkbox' name='chk'>").attr({value :"item.no"});
+		 				var $td1 = $("<td>").text(item.fundingNo).attr("name", item.boardType);
+		 				var $td2 = $("<td>").text(item.fundingTitle);
+		 				var $td3 = $("<td>").text(item.memberName);
+		 				var $td4 = $("<td>").text(item.likeCount);
+		 				var $td5 = $("<td>").text(item.fundingSD);			
+		 				var $td6 = $("<td>").text(item.fundingED);			
+		 				var $td7 = $("<td>").text(item.fundingGoal.toLocaleString());		
+		 				var $td8 = $("<td>").text(item.currentAmount.toLocaleString());	
+		 				var $td9 = $("<td>").text( (parseInt(item.currentAmount)/parseInt(item.fundingGoal) * 100).toFixed(2) + "%");	
+		 				var $td10 = $("<td>").text(item.fees.toLocaleString());	
+		 				$tr.append($checkbox,$td1,$td2,$td3,$td4,$td5,$td6,
+		 						$td7,$td8,$td9,$td10);
+		 				
+		 				$("#dataTable > tbody").append($tr);
+		 				
+	 				});
+				  }
+				  
+			  },error : function(){
+				  
+				  
+			  }
+		  })*/
+		  
+		  
+		  $("#dataTable").DataTable({
+			  ajax : {
+				  type : "GET",
+				  data : {"listStatus" : listStatus},
+				  dataType : "JSON"
+			 	},
+			 	
+                columns : [
+                    {data: "fundingNo"},
+                    {data: "fundingTitle"},
+                    {data: "memberName"},
+                    {data: "likeCount"}
+                ]
+
+		  });
+		  
+		}
+      
+      
       $("#updateBtn").on("click",function(){
    	   var fundingNo = $("input[name='fundingNo']").val();
    	   var fundingSD = $("input[name='fundingSD']").val();
@@ -327,6 +467,8 @@ function myfunction(){
     			  }
     		  });
     	  });
+      
+   
       </script>
 </body>
 

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.project.helpzoo.admin.model.service.AFundingService;
 import com.project.helpzoo.admin.model.vo.AFunding;
 
@@ -59,6 +60,20 @@ public class AFundingController {
 		int result = afundingService.deleteFunding(fundingNo);
 		
 		return result+"";
+	}
+	
+	@ResponseBody
+	@RequestMapping("listAction")
+	public String fundingList(String listStatus, ModelAndView mv) {
+		
+		
+		List<AFunding> funding = afundingService.selectFSList(listStatus);
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		
+		return gson.toJson(funding);
 		
 	}
+	
+	
 }

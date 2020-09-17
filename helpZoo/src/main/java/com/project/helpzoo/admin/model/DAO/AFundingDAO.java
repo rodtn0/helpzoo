@@ -27,4 +27,8 @@ public class AFundingDAO {
 		return sqlSession.update("adminMapper.deleteFunding", fundingNo);
 	}
 
+	public List<AFunding> selectFSList(String listStatus) {
+		return sqlSession.selectList("adminMapper.selectFSList", listStatus);
+	}
+
 }
