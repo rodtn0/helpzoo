@@ -8,14 +8,23 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<link href="${contextPath}/resources/css/noticeView.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/eventView.css" rel="stylesheet" />
 <title>공지사항 상세페이지</title>
+<c:if test="${!empty files}">
+	<style>
+		.event .images{
+			text-align: center;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+	</style>
+</c:if>
 </head>
 
 <body>
 	<jsp:include page="../common/header.jsp"/>
 	
-    <main class="board notice">
+    <main class="board event">
         
         <!-- 상세페이지 헤더 -->
         <div data-aos="fade-down" class="header">
@@ -36,12 +45,12 @@
         <p class="hr"/>
 		
 		<!-- 이미지 -->
-		<c:if test="${!empty files }">
+		<c:if test="${!empty files}">
             <c:forEach var="at" items="${files}" varStatus="vs">
                 <c:set var="src" value="${contextPath}${at.filePath}/${at.fileChangeName}"/>
 
                 <div class="images <c:if test="${vs.index == 0}"> active</c:if>">
-                    <img class="image${vs.index}" src="${src}" style="max-width: 100%; height: auto;"/>
+                    <img class="image${vs.index}" src="${src}" style="max-width: 800px; height: auto;"/>
                     <input type="hidden" value="${at.fileNo}">
                 </div>
             </c:forEach>

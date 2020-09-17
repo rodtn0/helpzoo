@@ -7,7 +7,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<link href="${contextPath}/resources/css/notice.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/event.css" rel="stylesheet" />
 <script src="https://kit.fontawesome.com/6473591abd.js" crossorigin="anonymous"></script>
 <title>도와zoo 이벤트 게시판</title>
 </head>
@@ -52,6 +52,13 @@
 								<span class="boardNo">${event.boardNo}</span>
 								<em class="category">${event.boardName}</em>
 								<div class="info">
+									<!-- <div class="thumb" style="background-image:url(https://cdn.wadiz.kr/ft/images/green001/2020/0914/20200914151925930_0.png/wadiz/resize/400/format/jpg/quality/80/optimize)"></div> -->
+									<c:forEach items="${thumList}" var="th">
+										<c:if test="${th.parentBoardNo==event.boardNo}">
+											<c:set var="src" value="${contextPath}${th.filePath}/${th.fileChangeName}"/>
+											<div class="thumb" style="background-image:url(${src})"></div>
+										</c:if>
+									</c:forEach>
 									<!-- JSTL/JSP 개행문자 처리 -->
 									<% pageContext.setAttribute("newLine", "\n"); %>
 									<h3 class="title">${fn:replace(event.boardTitle, newLine, "<br>")}</h3>
