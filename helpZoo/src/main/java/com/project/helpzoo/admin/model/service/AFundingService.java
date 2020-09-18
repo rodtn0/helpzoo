@@ -12,4 +12,8 @@ public interface AFundingService {
 
 	int deleteFunding(String fundingNo);
 
+	List<AFunding> selectFSList(String listStatus);
+
+	/* List<AFunding> selectFundingStatus(); */
+
 }

@@ -334,8 +334,9 @@
             <div class="col-md-2 col-lg-2 col-sm-2">
   
           </div>
-          
+         
 
+	 <form action="${contextPath}/funding/fundingOpenInfoSubmit/${fundingNo}" method="GET">
           <div class="col-md-9 col-lg-9 col-sm-9">
             <div class="container project_open_ready">
               <h1 class="title_msg">기본 정보</h1>
@@ -348,7 +349,7 @@
 
 
                 프로젝트 제목 <span class="star">*</span> <br>
-                <input class="form-control form-control-lg" type="text" placeholder="제목 입력">
+                <input class="form-control form-control-lg" type="text" placeholder="제목 입력" name="fundingTitle">
                 <small>40자 남음</small>
                 <br>
                 <br>
@@ -357,7 +358,7 @@
 
                 목표 금액 <span class="star">*</span><br>
                 <small>최소 50만 원 ~ 최대 1억 원으로 설정하세요.</small>
-                <input class="form-control form-control-lg" type="number" placeholder="제목 입력">
+                <input class="form-control form-control-lg" type="number" placeholder="제목 입력" name="goalAmount">
                 
               
                 <br>
@@ -381,8 +382,12 @@
 
                 
                카테고리 <span class="star">*</span><br>
-               <select class="form-control form-control-lg">
-                <option>Large select</option>
+               <select class="form-control form-control-lg" name="category">
+                <option>장난감</option>
+                <option>운동기구</option>
+                <option>사료</option>
+                <option>옷</option>
+                <option>간식</option>
               </select>
                 <br>  
                 <br>
@@ -401,7 +406,7 @@
                 
                 검색용 태그 <span class="star">*</span><br>
                 <small>엔터를 누르면 태그가 등록됩니다. (최대 10개까지 입력 가능)</small>
-                <input class="form-control form-control-lg" type="number" placeholder="제목 입력">
+                <input class="form-control form-control-lg" type="number" placeholder="제목 입력" name ="fundingTag">
 
 
 
@@ -409,10 +414,11 @@
                 <br>
                 <br>
                 <button
-                type="button"
+                type="submit"
                 class="btn btn-primary col-md-4 col-sm-4 col-xs-4 btn-lg funding_btn mintclick"
-                onclick="location.href = '${contextPath}/funding/fundingOpenDetail' "
               >저장하기</button>
+
+</form>
 
 
      <script>

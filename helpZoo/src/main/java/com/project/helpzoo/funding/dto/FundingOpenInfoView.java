@@ -9,7 +9,7 @@ public class FundingOpenInfoView {
 	
 	private int fundingGoal;
 	
-	private String category;
+	private Long category;
 	
 	private Timestamp fundingEndDay;
 	
@@ -41,11 +41,11 @@ public class FundingOpenInfoView {
 		this.fundingGoal = fundingGoal;
 	}
 
-	public String getCategory() {
+	public Long getCategory() {
 		return category;
 	}
 
-	public void setCategory(String category) {
+	public void setCategory(Long category) {
 		this.category = category;
 	}
 
@@ -96,7 +96,7 @@ public class FundingOpenInfoView {
 	
 	
 
-	public FundingOpenInfoView(String fundingTitle, int fundingGoal, String category, Timestamp fundingEndDay,
+	public FundingOpenInfoView(String fundingTitle, int fundingGoal, Long category, Timestamp fundingEndDay,
 			String fundingTag) {
 		super();
 		this.fundingTitle = fundingTitle;
