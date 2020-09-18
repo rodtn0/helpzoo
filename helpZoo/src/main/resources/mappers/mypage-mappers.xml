@@ -18,12 +18,14 @@
 	</resultMap>
 	
 	
-	 <resultMap type="project" id="fundingResultSet">
-	 	<id property="projectNo" column="FUNDING_ID"/>
-	 	<result property="memberNo" column="MEMBER_NO"/>
+	  <resultMap id="fdResultSet" type="Member">
+	  	<result property="projectNo" column="FUNDING_ID"/>
 	  	<result property="projectTitle" column="FUNDING_TITLE"/>
 	  	<result property="projectSummay" column="FUNDING_SUMMARY"/>
-	  </resultMap>         
+	  	<result property="memberNo" column="MEMBER_NO"/>
+	  	<result property="filePath" column="FILE_PATH"/>
+	  	<result property="fileChangeName" column="FILE_CHANGE_NAME"/>
+	  </resultMap>      
 		
 		 
 	<!-- 회원 정보 수정 -->
@@ -62,7 +64,7 @@
 	</select>
 	
 	
-	<select id="selectList" parameterType="project" resultMap="fundingResultSet">
+	<select id="selectList" parameterType="Member" resultMap="fdResultSet">
 		SELECT FUNDING_ID, FUNDING_TITLE, FUNDING_SUMMARY
         FROM FUNDING_PROJECT
         WHERE MEMBER_NO=#{memberNo}

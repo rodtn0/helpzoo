@@ -1,6 +1,8 @@
 package com.project.helpzoo.mypage.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -64,17 +66,19 @@ public class MyPageDAO {
 	}
 
 	/** 내가 주최한 펀딩 리스트 조회
-	 * @param mInfo
+	 * @param map
 	 * @return mInfo
 	 */
+
 	public List<FundingProject> selectList(mPageInfo mInfo, Member loginMember) {
 		
 		int offset = (mInfo.getCurrentPage()-1)*mInfo.getLimit();
 
 		RowBounds rowBounds = new RowBounds(offset, mInfo.getLimit());
 		
-		return sqlSession.selectList("mypageMapper.selectList", null, rowBounds);
+		System.out.println("loginMember :" + loginMember);
 		
+		return sqlSession.selectList("mypageMapper.selectList", loginMember, rowBounds);
 	}
 
 

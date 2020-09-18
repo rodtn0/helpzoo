@@ -14,19 +14,22 @@
 	font-size : 50px;
 	}
 </style>
-<body>
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
-<!--  
-<script>
-	swal({
-		  icon: "success",
-		  text : "이메일이 발송되었습니다. 인증번호를 입력해주세요."
-		});
-</script>
--->
-<div>
+<body style="overflow-x:hidden; overflow-y:auto;">
+	<div class="row">
+		<div class="col-md-12">
+		<jsp:include page="/WEB-INF/views/common/header.jsp" />
+		<!--  
+		<script>
+			swal({
+				  icon: "success",
+				  text : "이메일이 발송되었습니다. 인증번호를 입력해주세요."
+				});
+		</script>
+		-->
+		</div>
+	</div>
+	<div class="container mt-5 mb-5 " style="padding-bottom:10em;">
     <div class="row justify-content-md-center">
-        <div style="position: absolute; top: 50%; height: 778.98px; margin-top: -389.49px;">
             <div class="card" style="width: 40rem;">
                 <div class="card-body">
                         <div class="col-12">
@@ -47,7 +50,11 @@
 			            </div>
 			        </div>
 			    </div>
-	</div>
+		    </div>
+	<div class="row">
+		<div class="col-md-12">
+		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+		</div>
 	</div>
 </body>
 </html>

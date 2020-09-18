@@ -2,7 +2,9 @@ package com.project.helpzoo.mypage.model.service;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.helpzoo.board.model.vo.PageInfo;
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
+import com.project.helpzoo.member.model.dao.MemberDAO;
 import com.project.helpzoo.member.model.vo.Member;
 import com.project.helpzoo.mypage.model.dao.MyPageDAO;
 import com.project.helpzoo.mypage.model.vo.mPageInfo;
@@ -101,8 +104,9 @@ public class MyPageServiceImpl implements MyPageService{
 	// 내가 주최한 리스트 출력 서비스 구현
 	@Override
 	public List<FundingProject> selectList(mPageInfo mInfo, Member loginMember) {
-		
+
 		return myPageDAO.selectList(mInfo, loginMember);
+		
 	}
 
 	

@@ -16,6 +16,12 @@ public class Member {
 	private String memberStatus;
 	private String memberGrade;
 	
+	private String projectNo;
+	private String projectTitle;
+	private String projectSummay;
+	private String filePath;
+	private String fileChangeName;
+	
 	// (1) 기본 생성자 작성
 	public Member() {
 		
@@ -135,6 +141,33 @@ public class Member {
 	public void setMemberGrade(String memberGrade) {
 		this.memberGrade = memberGrade;
 	}
+	
+	
+
+	public String getProjectTitle() {
+		return projectTitle;
+	}
+
+	public void setProjectTitle(String projectTitle) {
+		this.projectTitle = projectTitle;
+	}
+
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+	public String getFileChangeName() {
+		return fileChangeName;
+	}
+
+	public void setFileChangeName(String fileChangeName) {
+		this.fileChangeName = fileChangeName;
+	}
 
 	@Override
 	public String toString() {
@@ -142,7 +175,8 @@ public class Member {
 				+ memberName + ", memberPhone=" + memberPhone + ", memberEmail=" + memberEmail + ", memberAddress="
 				+ memberAddress + ", memberPetType=" + memberPetType + ", memberPetName=" + memberPetName
 				+ ", memberEnrollDate=" + memberEnrollDate + ", memberStatus=" + memberStatus + ", memberGrade="
-				+ memberGrade + "]";
+				+ memberGrade + ", projectNo=" + projectNo + ", projectTitle=" + projectTitle + ", projectSummay="
+				+ projectSummay + ", filePath=" + filePath + ", fileChangeName=" + fileChangeName + "]";
 	}
 	
 	

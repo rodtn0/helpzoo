@@ -87,6 +87,8 @@ public class MyPageController {
 		rdAttr.addFlashAttribute("msg", msg);
 		rdAttr.addFlashAttribute("text", text);
 		
+		System.out.println("upMember :" + upMember);
+		
 		// return "redirect:mypage"
 		return "redirect:" + request.getHeader("referer");
  	}
@@ -169,21 +171,18 @@ public class MyPageController {
 		
 		// (2) PageInfo 초기 세팅
 		Member loginMember = (Member)model.getAttribute("loginMember");
-		System.out.println(loginMember);
+		
+		System.out.println("초기 loginMember:"+loginMember);
+		
 		mPageInfo mInfo = mypageService.pagination(cp, loginMember);
-		System.out.println(mInfo);
 		
 		List<FundingProject> fdListbyMe = mypageService.selectList(mInfo, loginMember);
-		
-		System.out.println(fdListbyMe);
-		
 		
 		model.addAttribute("fdListbyMe", fdListbyMe);
 		model.addAttribute("mInfo", mInfo);
 		
-		System.out.println("fdListbyMe" + fdListbyMe);
-		System.out.println();
-		
+		System.out.println("fdListbyMe:" + fdListbyMe);
+		System.out.println("mInfo : " + mInfo);
 		
 		return "mypage/fundingList";
 		//return null;

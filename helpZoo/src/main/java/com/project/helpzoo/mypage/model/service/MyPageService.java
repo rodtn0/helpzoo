@@ -2,7 +2,6 @@ package com.project.helpzoo.mypage.model.service;
 
 import java.util.List;
 
-import com.project.helpzoo.board.model.vo.PageInfo;
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.member.model.vo.Member;
 import com.project.helpzoo.mypage.model.vo.mPageInfo;
