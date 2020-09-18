@@ -29,5 +29,18 @@ public class AFundingImpl implements AFundingService{
 		// TODO Auto-generated method stub
 		return fundingDAO.deleteFunding(fundingNo);
 	}
+	
+	/**
+	 * status 값에 따라서 값 가져오기
+	 */
+	@Override
+	public List<AFunding> selectFSList(String listStatus) {
+		return fundingDAO.selectFSList(listStatus);
+	}
+	
+	/*
+	 * @Override public List<AFunding> selectFundingStatus() { return
+	 * fundingDAO.selectselectFundingStatus; }
+	 */
 
 }

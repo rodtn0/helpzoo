@@ -1,5 +1,6 @@
 package com.project.helpzoo.funding.controller;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,7 +107,7 @@ public class FundingController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "fundingOpenDetail", method = RequestMethod.POST)
+	@RequestMapping(value = "fundingOpenDetailStart", method = RequestMethod.GET)
 	public String fundingOpenDetail(String makerName, String businessType, int phone,
 									
 			Model model) {
@@ -139,8 +140,6 @@ public class FundingController {
 		
 		model.addAttribute("allSatis", "작성 전");
 		
-		
-		System.out.println(fundingNo + "저는 펀딩넘버입니다.");
 		
 		
 		
@@ -178,7 +177,6 @@ public class FundingController {
 	private void openDetailViewMake(Long fundingNo, Model model) {
 		
 		
-			System.out.println(fundingNo + "저는 펀딩넘버입니다. 99999");
 		
 		
 			FundingTotalInfoDto fundingTotalInfoDto = service.getFundingTotalInfo(fundingNo);
@@ -267,11 +265,6 @@ public class FundingController {
 		
 		model.addAttribute("fundingOpenRequireView", fundingOpenRequireView);
 		
-		model.addAttribute("rewardDeliveryPlan", fundingOpenRequireView.getRewardDeliveryPlan());
-		
-		model.addAttribute("rewardMakePlan", fundingOpenRequireView.getRewardMakePlan());
-		
-		
 		
 		
 		return "funding/fundingOpenReq";
@@ -283,15 +276,13 @@ public class FundingController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value ="fundingOpenRequire/{fundingNo}", method = RequestMethod.POST)
-	public String fundingOpenRequireSave(Model model,@PathVariable Long fundingNo ,String rewardDeliveryPlan
-					,String rewardMakePlan
+	@RequestMapping(value ="fundingOpenRequireSubmit/{fundingNo}", method = RequestMethod.GET)
+	public String fundingOpenRequireSave(Model model,@PathVariable Long fundingNo ,
+			@RequestParam(value = "rewardDeliveryPlan", required = false)String rewardDeliveryPlan,
+			@RequestParam(value = "rewardMakePlan", required = false)String rewardMakePlan
 			) {
 		
 		
-		
-											
-		System.out.println("컨트롤러 딜리버리" + rewardDeliveryPlan);
 		
 		
 		
@@ -319,7 +310,59 @@ public class FundingController {
 	
 	
 	
+	/** 펀딩오픈 시 기본정보 입력 후 저장시 뷰 이동 컨트롤러
+	 * @param model
+	 * @return
+	 */						
+	@RequestMapping(value ="fundingOpenInfoSubmit/{fundingNo}", method = RequestMethod.GET)
+	public String fundingOpenInfoSave(Model model,@PathVariable Long fundingNo ,
+			@RequestParam(value = "fundingTitle", required = false)String fundingTitle,
+			@RequestParam(value = "fundingGoal", required = false)int fundingGoal,
+			@RequestParam(value = "category", required = false)String category,
+			@RequestParam(value = "fundingTag", required = false)String fundingTag, 
+			@RequestParam(value = "fundingEndDay", required = false)Timestamp fundingEndDay
+			) {
+		
 	
+			
+		Long categoryNo = 0L;
+		if(fundingTag.equals("장난감")) {
+			
+			categoryNo = 1L;
+			
+		}else if (fundingTag.equals("사료")) {
+			
+			categoryNo = 2L;
+		}else if(fundingTag.equals("운동기구")) {
+			
+			categoryNo = 3L;
+		}else if(fundingTag.equals("옷")) {
+			
+			categoryNo = 4L;
+		}else if(fundingTag.equals("간식")) {
+			
+			categoryNo = 5L;
+		}
+		
+		
+		
+		
+		FundingOpenInfoView fundingOpenInfoView = new FundingOpenInfoView(fundingTitle, fundingGoal, categoryNo, fundingEndDay, fundingTag);
+		
+		
+		service.openInfoSave(fundingNo,fundingOpenInfoView);
+		
+		
+		
+		
+		openDetailViewMake(fundingNo, model);
+		
+		
+		
+		
+		
+		return "funding/fundingOpenDetail";
+	}
 	
 	
 	
@@ -331,14 +374,34 @@ public class FundingController {
 	/** 펀딩오픈 시 기본정보 입력 뷰 이동 컨트롤러
 	 * @return
 	 */
-	@RequestMapping("fundingOpenInfo")
-	public String fundingOpenInfo() {
+	@RequestMapping(value = "fundingOpenInfo/{fundingNo}", method = RequestMethod.GET)
+	public String fundingOpenInfo(Model model ,@PathVariable Long fundingNo) {
 		
+		FundingOpenInfoView fundingOpenInfoView = service.openInfo(fundingNo);
+		
+		
+		model.addAttribute("fundingOpenInfoView", fundingOpenInfoView);
 
 		
 		
 		return "funding/fundingOpenInfo";
 	}
+	
+		
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
