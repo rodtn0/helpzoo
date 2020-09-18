@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="mypageMapper">
+
 	<resultMap type="Member" id="memberResultSet">
 	<id property="memberNo" column="MEMBER_NO"/>
 	<result property="memberId" column="MEMBER_ID"/>
@@ -15,7 +16,19 @@
 	<result property="memberStatus" column="MEMBER_STATUS"/>
 	<result property="memberGrade" column="MEMBER_GRADE"/>
 	</resultMap>
+	
+	
+	  <resultMap id="fdResultSet" type="Member">
+	  	<result property="projectNo" column="FUNDING_ID"/>
+	  	<result property="projectTitle" column="FUNDING_TITLE"/>
+	  	<result property="projectSummary" column="FUNDING_SUMMARY"/>
+	  	<result property="memberNo" column="MEMBER_NO"/>
+	  	<result property="filePath" column="FILE_PATH"/>
+	  	<result property="fileChangeName" column="FILE_CHANGE_NAME"/>
+	  	<result property="parentProjectNo" column="PARENT_PROJECT_NO"/>
+	  </resultMap>      
 		
+		 
 	<!-- 회원 정보 수정 -->
 	<update id="updateMember" parameterType="Member">
 	UPDATE MEMBER SET MEMBER_NM=#{memberName},
@@ -44,5 +57,29 @@
 		UPDATE MEMBER SET MEMBER_PWD=#{memberPwd}
 		WHERE MEMBER_NO=${memberNo}
 	</update>
+	
+	<select id="getListCount" resultType="_int">
+	SELECT COUNT(*)
+	FROM FUNDING_PROJECT
+	WHERE MEMBER_NO=#{memberNo}
+	</select>
+	
+	<!-- 내가 주최한 펀딩 리스트 출력 -->
+	<select id="selectList" parameterType="Member" resultMap="fdResultSet">
+    SELECT MEMBER_NO, FUNDING_ID, FUNDING_TITLE, FUNDING_SUMMARY
+    FROM FUNDING_PROJECT
+    WHERE MEMBER_NO=#{memberNo}
+    ORDER BY FUNDING_ID DESC
+	</select>
+	
+	<select id="selectThumbnailList" parameterType="list" resultMap="fdResultSet">
+	SELECT *
+	FROM FUNDING_IMAGE
+	WHERE FILE_LEVEL = 0
+	AND PARENT_PROJECT_NO IN
+	<foreach collection="list" index="i" item="fdListbyMe" open="(" close=")" separator=",">
+	#{fdListbyMe.projectNo}
+	</foreach>
+	</select>
 	
 </mapper>

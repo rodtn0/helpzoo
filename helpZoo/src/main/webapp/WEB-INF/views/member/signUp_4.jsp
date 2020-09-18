@@ -5,30 +5,63 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입 - 회원 정보 입력</title>
-<link rel="stylesheet" href="${contextPath}/resources/css/register.css">
+	 <link rel="stylesheet" href="${contextPath}/resources/css/register.css">
 <style>
+
 .form-title{
 font-family: "Recipekorea";
 text-align : center;
 font-size : 50px;
 }
+
 #postcodify_search_button{
 background-color: #7fcdcd;
 border: none;
 }
+
+.signup-content {
+    background: #fff;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -o-border-radius: 10px;
+    -ms-border-radius: 10px;
+    padding: 50px 85px;
+}
+
+#bodyArea {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #222;
+    font-weight: 400;
+    font-family: 'Montserrat';
+    background-repeat: no-repeat;
+    background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    background-position: center center;
+}
+
 </style>
 </head>
-<body>
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
- <div class="main">
+<body id="bodyArea">
+	<!-- 헤더 영역 -->
+	<div class="row">
+		<div class="col-md-12">
+		<jsp:include page="/WEB-INF/views/common/header.jsp" />
+		</div>
+	</div>
+	<!-- 내용 영역 -->
+	 <div class="main">
         <section class="signup">
             <!-- <img src="images/signup-bg.jpg" alt=""> -->
             <div class="container">
                 <div class="signup-content">
                     <form method="POST" action="../signUpAction" name="signUpForm" class="signup-form" onsubmit="return validate();">
-               
                         <h2 class="form-title">회원 정보 입력</h2><br>
-                       <!--  <h5 style="text-align:center;">정말 마지막 단계에요! 회원 정보를 입력하면 가입이 완료됩니다.</h5>-->
+                        <div class="col-md-6 mx-auto">
                         <div class="form-group">
                             <input type="text" class="form-input" name="memberId" id="id" placeholder="아이디를 입력해주세요." maxlength="12"/>
                         	<span id="checkId"></span>
@@ -81,7 +114,7 @@ border: none;
                         <div class="col-md-3">
                             <label for="email">이메일 </label>
                         </div>
-                            <h5 id="email">${memberEmail}</h5>
+                            <h6 id="email">${memberEmail}</h6><h6 style="color:red;">&nbsp;(인증완료)</h6>
                         </div>
                         </div>
                         
@@ -110,7 +143,7 @@ border: none;
                         <div class="col-md-3">
                             <label for="address2">상세주소</label>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-9 mb-5">
                             <input type="text" class="form-control postcodify_details" name="address2" id="address2">
                         </div>
                     </div>
@@ -128,12 +161,15 @@ border: none;
                             <label for="agree-term" class="label-agree-term"><span><span></span></span><a href="${contextPath}/member/signUp" class="term-service">서비스 약관</a> 의 모든 내용에 동의합니다.</label>
                         </div>
                         -->
-                        
-                        <hr><h5 class="form-title">선택사항</h5>
-                         <div class="form-group">
-                         <label for="inputEmail" 
-                         class="col-lg-2 control-label">애완동물 종류</label>
-							<select name=memberPetType id="pet-select">
+                       </div>
+                        <h5 style="text-align:center;">추가정보</h5>
+                        <div class="col-md-6 mx-auto mt-5">    
+                         <div class="row mb-3 form-row">
+                         <div class="col-md-3">
+                         <label for="pet-select">애완동물 종류</label>
+                         </div>
+                         <div class="col-md-9">
+							<select name=memberPetType id="pet-select" style="width:100%; height:100%;">
 							    <option value="">--애완동물 종류를 선택해주세요--</option>
 							    <option value="dog">강아지</option>
 							    <option value="cat">고양이</option>
@@ -142,21 +178,31 @@ border: none;
 							    <option value="rabbit">토끼</option>
 							    <option value="goldfish">금붕어</option>
 							</select>
+							</div>
                         </div>
+                     
                          <div class="form-group">
                             <input type="text" class="form-input" name="memberPetName" id="petName" placeholder="애완동물의 이름을 입력해주세요."/>
                         </div>
                         <div class="form-group">
                             <input type="submit" name="submit" id="submit" class="form-submit" value="회원가입"/>
                         </div>
+                        </div>
                     </form>
+                  </div>
                     <p class="loginhere">
                         	이미 계정이 있으신가요? <a href="${contextPath}/member/login" class="loginhere-link">로그인</a>
                     </p>
                 </div>
-            </div>
         </section>
-    </div>
+            </div>
+            
+    <!-- 푸터 영역 -->
+    <div class="row">
+		<div class="col-md-12">
+		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+		</div>
+	</div>
     <script>
     var signUpCheck = {
     		"id" : false,
@@ -323,11 +369,6 @@ border: none;
 		$("form[name='signUpForm']").append($memberPhone, $memberAddress);
 	}
     </script>
-    <!-- JS -->
-    <!--  
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="js/main.js"></script>-->
-	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
-	</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+	</body>
 </body>
 </html>

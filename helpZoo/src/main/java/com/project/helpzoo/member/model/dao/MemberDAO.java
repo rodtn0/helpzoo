@@ -1,14 +1,20 @@
 package com.project.helpzoo.member.model.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.SqlSession;
+import org.aspectj.bridge.context.PinpointingMessageHandler;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.member.model.vo.Member;
+import com.project.helpzoo.mypage.model.vo.mPageInfo;
 
 @Repository
 public class MemberDAO {
@@ -75,7 +81,6 @@ public class MemberDAO {
 		
 		return sqlSession.update("memberMapper.updatePwd2", member);
 	}
-	
 	
 
 }

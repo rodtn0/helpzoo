@@ -24,12 +24,22 @@
 	.section { grid-area: section; }
 	
 	.footer { grid-area: footer; }
+	
+	#footer {
+    position:absolute;
+    bottom:0;
+}
 </style>
-<body>
-	<jsp:include page="/WEB-INF/views/common/header.jsp" />
-    <div class="row justify-content-md-center">
-        <div style="position: absolute; top: 50%; height: 778.98px; margin-top: -389.49px;">
-            <div class="card" style="width: 40rem;">
+<body style="overflow-x:hidden; overflow-y:auto;">
+	<!-- 헤더 영역 -->
+	<div class="row">
+		<div class="col-md-12">
+		<jsp:include page="/WEB-INF/views/common/header.jsp" />
+		</div>
+	</div>
+	<div class="container mt-5 mb-5">
+		<div class="row justify-content-md-center">
+		<div class="card" style="width: 40rem;">
                 <div class="card-body">
                     <div class="text-center">
                     </div>
@@ -557,17 +567,23 @@
                                     <!-- <strong><input type="checkbox" name="agreement2"> 개인정보 수집 및 이용에 동의합니다.</strong> -->
                                 </div>
                             </div>
-                            <div class="col-12 text-center">
+                           <div class="col-12 text-center">
                                 <button type="submit" name="register" style="opacity: 90%; font-size: 16px; border: white;
                                 	background-color:#97ecec" 
                                     class="btn btn-lg btn-primary btn-block" value="register">회원가입</button>
+               </form>
                             </div>
 			                    </div>
-                        </form>
 			                </div>
 			            </div>
 			        </div>
 			    </div>
+    	<!-- 푸터 영역 -->
+		<div class="row">
+			<div class="col-md-12" id="footer">
+			<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+			</div>
+		</div>
 	    <script>
 	    	function validate(){
 	    		if(!$("#agree").prop("checked") || (!$("#agree2").prop("checked"))){

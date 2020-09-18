@@ -1,17 +1,24 @@
 package com.project.helpzoo.mypage.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.project.helpzoo.board.model.vo.PageInfo;
+import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.member.model.vo.Member;
 import com.project.helpzoo.mypage.model.service.MyPageService;
+import com.project.helpzoo.mypage.model.vo.mPageInfo;
 
 @SessionAttributes({"loginMember"})
 @Controller
@@ -79,6 +86,8 @@ public class MyPageController {
 		rdAttr.addFlashAttribute("status", status);
 		rdAttr.addFlashAttribute("msg", msg);
 		rdAttr.addFlashAttribute("text", text);
+		
+		System.out.println("upMember :" + upMember);
 		
 		// return "redirect:mypage"
 		return "redirect:" + request.getHeader("referer");
@@ -151,7 +160,43 @@ public class MyPageController {
 		rdAttr.addFlashAttribute("text", text);
 		
 		return "redirect:changePwd";
+	}
+	
+	// 내가 주최한 펀딩 리스트로 이동하는 Controller
+	@RequestMapping("fundingList/{type}")
+	public String fundingList(@PathVariable int type, @RequestParam(value="cp", required = false,
+			defaultValue = "1")int cp,Model model) {
 		
+		// (1) Pagination(페이징 처리)에 사용될 클래스 PageInfo 작성 후 bean 등록
+		
+		// (2) PageInfo 초기 세팅
+		Member loginMember = (Member)model.getAttribute("loginMember");
+		
+		System.out.println("초기 loginMember:"+loginMember.getMemberId());
+		
+		mPageInfo mInfo = mypageService.pagination(cp, loginMember);
+		
+		List<Member> fdListbyMe = mypageService.selectList(mInfo, loginMember);
+		
+		model.addAttribute("fdListbyMe", fdListbyMe);
+		model.addAttribute("mInfo", mInfo);
+		
+		for(Member m : fdListbyMe) {
+			System.out.println(m);
+		}
+		//System.out.println("fdListbyMe:" + fdListbyMe);
+		System.out.println("mInfo : " + mInfo);
+		
+		if(!fdListbyMe.isEmpty()) {
+			List<Member> thList = mypageService.selectThumbnailList(fdListbyMe);
+			System.out.println("thList :" + thList);
+			for(Member m : thList) {
+				System.out.println("m" + m);
+			}
+			model.addAttribute("thList",thList);
+		}
+		
+		return "mypage/fundingList";
 	}
 	
 }

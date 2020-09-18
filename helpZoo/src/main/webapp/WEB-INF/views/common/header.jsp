@@ -79,7 +79,11 @@
 
       <nav class="nav-menu d-none d-lg-block">
         <ul class="nav-inner">
+          <li class="drop-down"><a href="${contextPath}/funding/fundingMain">펀딩하기</a>
+          <ul>
           <li><a href="${contextPath}/funding/fundingMain">펀딩하기</a></li>
+          <li><a href="${contextPath}/funding/fundingOpen">펀딩프로젝트 만들기</a></li>
+          </ul>
           <li><a href="${contextPath}/donation/donationMain/2">기부하기</a></li>
            <li class="drop-down"><a href="${contextPath}/board/review">후기게시판</a>
             <ul>
@@ -94,6 +98,7 @@
             <ul>
 				<li><a href="${contextPath}/notice/noticeList">공지사항</a></li>
 				<li><a href="${contextPath}/event/eventList">이벤트</a></li>
+				<li><a href="${contextPath}/subscribe">구독하기</a></li>
             </ul>
           </li>
           <li class="drop-down"><a href="${contextPath}/faq/faqList">고객센터</a>
@@ -102,8 +107,6 @@
               <li><a href="${contextPath}/qna/qnaList">Q&A</a></li>
             </ul>
           </li>
-          <li><a href="${contextPath}/subscribe">구독하기</a></li>
-          <li><a href=" ${contextPath}/funding/fundingOpen">펀딩프로젝트 만들기</a></li>
           <c:if test="${!empty loginMember}">
           <li><a href=" ${contextPath}/mypage/updateMember">마이페이지</a></li>
           </c:if>

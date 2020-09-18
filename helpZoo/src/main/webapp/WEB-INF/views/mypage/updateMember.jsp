@@ -75,7 +75,7 @@ $('.navbar-light .dmenu').hover(function () {
 	              	펀딩 내역
 	            </a>
 	            <div class="dropdown-menu sm-menu">
-	              <a class="dropdown-item" href="#">내가 주최한</a>
+	              <a class="dropdown-item" href="${contextPath}/mypage/fundingList/1">내가 주최한</a>
 	              <a class="dropdown-item" href="#">내가 참여한</a>
 	            </div>
 	          </li>
@@ -171,7 +171,7 @@ $('.navbar-light .dmenu').hover(function () {
 								<label for="memberEmail">Email</label>
 							</div>
 							<div class="col-md-6">
-								<h5 id="email">${loginMember.memberEmail}</h5>
+								<h6 id="email">${loginMember.memberEmail}</h6>
 							</div>
 						</div>
 					<!-- 주소 -->

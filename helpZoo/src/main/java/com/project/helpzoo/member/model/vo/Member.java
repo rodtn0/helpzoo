@@ -16,6 +16,14 @@ public class Member {
 	private String memberStatus;
 	private String memberGrade;
 	
+	// 펀딩을 가져오기 위한 펀딩 멤버변수 추가
+	private String projectNo;
+	private String projectTitle;
+	private String projectSummary;
+	private String filePath;
+	private String fileChangeName;
+	private int parentProjectNo;
+	
 	// (1) 기본 생성자 작성
 	public Member() {
 		
@@ -24,7 +32,8 @@ public class Member {
 	// (2) 매개변수 있는 생성자
 	public Member(int memberNo, String memberId, String memberPwd, String memberName, String memberPhone,
 			String memberEmail, String memberAddress, String memberPetType, String memberPetName,
-			Timestamp memberEnrollDate, String memberStatus, String memberGrade) {
+			Timestamp memberEnrollDate, String memberStatus, String memberGrade, String projectNo, String projectTitle,
+			String projectSummary, String filePath, String fileChangeName, int parentProjectNo) {
 		super();
 		this.memberNo = memberNo;
 		this.memberId = memberId;
@@ -38,8 +47,14 @@ public class Member {
 		this.memberEnrollDate = memberEnrollDate;
 		this.memberStatus = memberStatus;
 		this.memberGrade = memberGrade;
+		this.projectNo = projectNo;
+		this.projectTitle = projectTitle;
+		this.projectSummary = projectSummary;
+		this.filePath = filePath;
+		this.fileChangeName = fileChangeName;
+		this.parentProjectNo = parentProjectNo;
 	}
-
+	
 	public int getMemberNo() {
 		return memberNo;
 	}
@@ -135,6 +150,56 @@ public class Member {
 	public void setMemberGrade(String memberGrade) {
 		this.memberGrade = memberGrade;
 	}
+	
+	
+
+	public String getProjectNo() {
+		return projectNo;
+	}
+
+	public void setProjectNo(String projectNo) {
+		this.projectNo = projectNo;
+	}
+
+	public String getProjectSummary() {
+		return projectSummary;
+	}
+
+	public void setProjectSummary(String projectSummary) {
+		this.projectSummary = projectSummary;
+	}
+
+	public String getProjectTitle() {
+		return projectTitle;
+	}
+
+	public void setProjectTitle(String projectTitle) {
+		this.projectTitle = projectTitle;
+	}
+
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+	public String getFileChangeName() {
+		return fileChangeName;
+	}
+
+	public void setFileChangeName(String fileChangeName) {
+		this.fileChangeName = fileChangeName;
+	}
+	public int getparentProjectNo() {
+		return parentProjectNo;
+	}
+
+	public void setparentProjectNo(int parentProjectNo) {
+		this.parentProjectNo = parentProjectNo;
+	}
 
 	@Override
 	public String toString() {
@@ -142,8 +207,10 @@ public class Member {
 				+ memberName + ", memberPhone=" + memberPhone + ", memberEmail=" + memberEmail + ", memberAddress="
 				+ memberAddress + ", memberPetType=" + memberPetType + ", memberPetName=" + memberPetName
 				+ ", memberEnrollDate=" + memberEnrollDate + ", memberStatus=" + memberStatus + ", memberGrade="
-				+ memberGrade + "]";
+				+ memberGrade + ", projectNo=" + projectNo + ", projectTitle=" + projectTitle + ", projectSummary="
+				+ projectSummary + ", filePath=" + filePath + ", fileChangeName=" + fileChangeName
+				+ ", parentProjectNo=" + parentProjectNo + "]";
 	}
-	
+
 	
 }
