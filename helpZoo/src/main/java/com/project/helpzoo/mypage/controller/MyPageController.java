@@ -172,20 +172,31 @@ public class MyPageController {
 		// (2) PageInfo 초기 세팅
 		Member loginMember = (Member)model.getAttribute("loginMember");
 		
-		System.out.println("초기 loginMember:"+loginMember);
+		System.out.println("초기 loginMember:"+loginMember.getMemberId());
 		
 		mPageInfo mInfo = mypageService.pagination(cp, loginMember);
 		
-		List<FundingProject> fdListbyMe = mypageService.selectList(mInfo, loginMember);
+		List<Member> fdListbyMe = mypageService.selectList(mInfo, loginMember);
 		
 		model.addAttribute("fdListbyMe", fdListbyMe);
 		model.addAttribute("mInfo", mInfo);
 		
-		System.out.println("fdListbyMe:" + fdListbyMe);
+		for(Member m : fdListbyMe) {
+			System.out.println(m);
+		}
+		//System.out.println("fdListbyMe:" + fdListbyMe);
 		System.out.println("mInfo : " + mInfo);
 		
+		if(!fdListbyMe.isEmpty()) {
+			List<Member> thList = mypageService.selectThumbnailList(fdListbyMe);
+			System.out.println("thList :" + thList);
+			for(Member m : thList) {
+				System.out.println("m" + m);
+			}
+			model.addAttribute("thList",thList);
+		}
+		
 		return "mypage/fundingList";
-		//return null;
 	}
 	
 }

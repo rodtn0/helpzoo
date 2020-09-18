@@ -70,7 +70,7 @@ public class MyPageDAO {
 	 * @return mInfo
 	 */
 
-	public List<FundingProject> selectList(mPageInfo mInfo, Member loginMember) {
+	public List<Member> selectList(mPageInfo mInfo, Member loginMember) {
 		
 		int offset = (mInfo.getCurrentPage()-1)*mInfo.getLimit();
 
@@ -79,6 +79,11 @@ public class MyPageDAO {
 		System.out.println("loginMember :" + loginMember);
 		
 		return sqlSession.selectList("mypageMapper.selectList", loginMember, rowBounds);
+	}
+
+	public List<Member> selectThumbnailList(List<Member> fdListbyMe) {
+		
+		return sqlSession.selectList("mypageMapper.selectThumbnailList", fdListbyMe);
 	}
 
 

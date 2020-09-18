@@ -567,7 +567,7 @@
                                     <!-- <strong><input type="checkbox" name="agreement2"> 개인정보 수집 및 이용에 동의합니다.</strong> -->
                                 </div>
                             </div>
-                           -<div class="col-12 text-center">
+                           <div class="col-12 text-center">
                                 <button type="submit" name="register" style="opacity: 90%; font-size: 16px; border: white;
                                 	background-color:#97ecec" 
                                     class="btn btn-lg btn-primary btn-block" value="register">회원가입</button>

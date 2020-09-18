@@ -114,7 +114,7 @@ border: none;
                         <div class="col-md-3">
                             <label for="email">이메일 </label>
                         </div>
-                            <h5 id="email">${memberEmail}</h5>
+                            <h6 id="email">${memberEmail}</h6><h6 style="color:red;">&nbsp;(인증완료)</h6>
                         </div>
                         </div>
                         
@@ -162,15 +162,14 @@ border: none;
                         </div>
                         -->
                        </div>
-
-                        <hr><h5 class="form-title">선택사항</h5>
-                        <div class="col-md-6 mx-auto">    
+                        <h5 style="text-align:center;">추가정보</h5>
+                        <div class="col-md-6 mx-auto mt-5">    
                          <div class="row mb-3 form-row">
                          <div class="col-md-3">
                          <label for="pet-select">애완동물 종류</label>
                          </div>
                          <div class="col-md-9">
-							<select name=memberPetType id="pet-select">
+							<select name=memberPetType id="pet-select" style="width:100%; height:100%;">
 							    <option value="">--애완동물 종류를 선택해주세요--</option>
 							    <option value="dog">강아지</option>
 							    <option value="cat">고양이</option>
@@ -188,15 +187,16 @@ border: none;
                         <div class="form-group">
                             <input type="submit" name="submit" id="submit" class="form-submit" value="회원가입"/>
                         </div>
+                        </div>
                     </form>
                   </div>
                     <p class="loginhere">
                         	이미 계정이 있으신가요? <a href="${contextPath}/member/login" class="loginhere-link">로그인</a>
                     </p>
                 </div>
-            </div>
         </section>
-    </div>
+            </div>
+            
     <!-- 푸터 영역 -->
     <div class="row">
 		<div class="col-md-12">

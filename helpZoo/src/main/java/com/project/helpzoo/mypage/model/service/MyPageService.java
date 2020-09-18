@@ -37,11 +37,19 @@ public interface MyPageService {
 	 */
 	public abstract mPageInfo pagination(int cp, Member loginMember);
 
-	/** 내가 주최한 게시글 리스트 Service
+	/** 내가 주최한 게시글 리스트 출력 Service
 	 * @param mInfo
 	 * @param loginMember 
 	 * @return fdListbyMe
 	 */
-	public abstract List<FundingProject> selectList(mPageInfo mInfo, Member loginMember);
+	public abstract List<Member> selectList(mPageInfo mInfo, Member loginMember);
+	
+	/** 내가 주최한 게시글 리스트 썸네일 출력 Service
+	 * @param thList
+	 * @return
+	 */
+	public abstract List<Member> selectThumbnailList(List<Member> fdListbyMe);
+
+
 
 }

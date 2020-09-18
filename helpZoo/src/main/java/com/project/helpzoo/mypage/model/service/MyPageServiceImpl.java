@@ -103,11 +103,19 @@ public class MyPageServiceImpl implements MyPageService{
 	
 	// 내가 주최한 리스트 출력 서비스 구현
 	@Override
-	public List<FundingProject> selectList(mPageInfo mInfo, Member loginMember) {
+	public List<Member> selectList(mPageInfo mInfo, Member loginMember) {
 
 		return myPageDAO.selectList(mInfo, loginMember);
 		
 	}
+
+	@Override
+	public List<Member> selectThumbnailList(List<Member> fdListbyMe) {
+		
+		return myPageDAO.selectThumbnailList(fdListbyMe);
+		
+	}
+
 
 	
 }

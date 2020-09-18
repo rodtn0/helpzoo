@@ -25,7 +25,7 @@
 	<!-- 바디 영역 -->
 	<div class="container mt-5 mb-5" style="padding-bottom:10em;">
     <div class="row justify-content-md-center">
-            <div class="card" style="width: 40rem;">
+            <div class="card" style="width:40rem;">
                 <div class="card-body">
                         <div class="col-12">
                         <form action="authEmail" method="POST" onsubmit="return validate(); ">

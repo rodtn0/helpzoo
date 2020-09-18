@@ -21,10 +21,11 @@
 	  <resultMap id="fdResultSet" type="Member">
 	  	<result property="projectNo" column="FUNDING_ID"/>
 	  	<result property="projectTitle" column="FUNDING_TITLE"/>
-	  	<result property="projectSummay" column="FUNDING_SUMMARY"/>
+	  	<result property="projectSummary" column="FUNDING_SUMMARY"/>
 	  	<result property="memberNo" column="MEMBER_NO"/>
 	  	<result property="filePath" column="FILE_PATH"/>
 	  	<result property="fileChangeName" column="FILE_CHANGE_NAME"/>
+	  	<result property="parentProjectNo" column="PARENT_PROJECT_NO"/>
 	  </resultMap>      
 		
 		 
@@ -63,12 +64,22 @@
 	WHERE MEMBER_NO=#{memberNo}
 	</select>
 	
-	
+	<!-- 내가 주최한 펀딩 리스트 출력 -->
 	<select id="selectList" parameterType="Member" resultMap="fdResultSet">
-		SELECT FUNDING_ID, FUNDING_TITLE, FUNDING_SUMMARY
-        FROM FUNDING_PROJECT
-        WHERE MEMBER_NO=#{memberNo}
+    SELECT MEMBER_NO, FUNDING_ID, FUNDING_TITLE, FUNDING_SUMMARY
+    FROM FUNDING_PROJECT
+    WHERE MEMBER_NO=#{memberNo}
+    ORDER BY FUNDING_ID DESC
 	</select>
 	
+	<select id="selectThumbnailList" parameterType="list" resultMap="fdResultSet">
+	SELECT *
+	FROM FUNDING_IMAGE
+	WHERE FILE_LEVEL = 0
+	AND PARENT_PROJECT_NO IN
+	<foreach collection="list" index="i" item="fdListbyMe" open="(" close=")" separator=",">
+	#{fdListbyMe.projectNo}
+	</foreach>
+	</select>
 	
 </mapper>
