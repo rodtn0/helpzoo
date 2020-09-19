@@ -77,7 +77,7 @@ public class MemberController {
 
 			}
 			response.addCookie(cookie);
-			response.addCookie(new Cookie("savePwd", member.getMemberPwd()));
+			//response.addCookie(new Cookie("savePwd", member.getMemberPwd()));
 
 		}
 		System.out.println(loginMember);

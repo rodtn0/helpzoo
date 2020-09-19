@@ -18,7 +18,8 @@
 			<h1 id="loginTxt">로그인</h1><br>
 		    <form class="login-form" action="loginAction" method="post">
 		      <input type="text" name="memberId" placeholder="아이디" required autofocus value="${cookie.saveId.value}"/>
-		      <input type="password" name="memberPwd" placeholder="비밀번호" value="${cookie.savePwd.value}"/>
+		      <!-- value="${cookie.savePwd.value}" -->
+		      <input type="password" name="memberPwd" placeholder="비밀번호"/>
 			<div class="checkbox mb-3">
 				<label> 
 				<!-- form 태그 안에 존재 -->
