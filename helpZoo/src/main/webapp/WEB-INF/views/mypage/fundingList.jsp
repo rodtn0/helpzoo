@@ -123,17 +123,26 @@ $('.navbar-light .dmenu').hover(function () {
 		     	<c:forEach var="fdList" items="${fdListbyMe}">
 		          <div class="card text-black">
 		            <p class="card-head mx-auto">${fdList.projectNo}번째 프로젝트</p>
-		           <c:forEach items="${thList}" var="th">
-		           	<c:choose>
-			           <c:when test="${th.parentProjectNo == fdList.projectNo}">
-			           <c:set var = "src" value="${contextPath}${th.filePath}/${th.fileChangeName}"/>
-			       		 <img style="height: 361px; width: 100%; display: block;" alt="" src="${src}" data-holder-rendered="true">
-			       		</c:when>
-			       		<c:otherwise>
-			           <img style="height: 361px; width: 100%; display: block;" alt="" src="/helpzoo/resources/images/not_thumbnail.png" data-holder-rendered="true">
-			           </c:otherwise>
-			         </c:choose>
-		           </c:forEach>
+		           <c:choose>
+		           	<c:when test="${!empty thList }">
+			           	<c:forEach items="${thList}" var="th">
+				           	<c:choose>
+					           <c:when test="${th.parentProjectNo == fdList.projectNo}">
+					           <c:set var = "src" value="${contextPath}${th.filePath}/${th.fileChangeName}"/>
+					       		 <img style="height: 361px; width: 100%; display: block;" alt="" src="${src}" data-holder-rendered="true">
+					       		</c:when>
+					       		<c:otherwise>
+					           <img style="height: 361px; width: 100%; display: block;" alt="" src="/helpzoo/resources/images/not_thumbnail.png" data-holder-rendered="true">
+					           </c:otherwise>
+					         </c:choose>
+		           		</c:forEach>
+		           	</c:when>
+		           	<c:otherwise>
+		           		<img style="height: 361px; width: 100%; display: block;" alt="" src="/helpzoo/resources/images/not_thumbnail.png" data-holder-rendered="true">
+		           	</c:otherwise>
+		           	
+		           </c:choose>
+		           
 		            <p class="card-text mx-auto">${fdList.projectTitle}</p>
 		            <p class="card-text mx-auto">${fdList.projectSummary}</p>
 		          </div>
@@ -151,7 +160,7 @@ $('.navbar-light .dmenu').hover(function () {
             	<c:if test="${mInfo.currentPage > mInfo.pagingBarSize }">
 	                <li>
 	                	<!-- 맨 처음으로(<<) -->			<!-- 1번 타입의 게시판 타입의 1페이지로 돌아가라 -->
-	                    <a class="page-link text-primary" href="${mInfo.boardType}?cp=1">&lt;&lt;</a>
+	                    <a class="page-link text-dark" href="${mInfo.boardType}?cp=1">&lt;&lt;</a>
 	                </li>
 	                <li>
 	                	<!-- 이전으로(<) -->
@@ -165,7 +174,7 @@ $('.navbar-light .dmenu').hover(function () {
 	                	<!-- 1.4 -->
 	                	<!-- 1 -->
 	                	<!-- 10 -->
-                   		<a class="page-link text-primary" href="${mInfo.boardType}?cp=${prev}">&lt;</a>
+                   		<a class="page-link text-dark" href="${mInfo.boardType}?cp=${prev}">&lt;</a>
 	                </li>
                 </c:if>
                 		<!-- 10개의 페이지 목록 -->
@@ -173,12 +182,12 @@ $('.navbar-light .dmenu').hover(function () {
                 			
                 			<c:choose>
                 				<c:when test="${p==mInfo.currentPage}">
-                			<li><a class="page-link">${p}</a></li>
+                			<li><a class="page-link text-warning">${p}</a></li>
                 				</c:when>
                 				
                 				<c:otherwise>
 	                		<li>
-	                			<a class="page-link text-primary" href="${mInfo.boardType}?cp=${p}">${p}</a>
+	                			<a class="page-link text-dark" href="${mInfo.boardType}?cp=${p}">${p}</a>
 		                	</li>
 		                		</c:otherwise>
                 			</c:choose>
@@ -192,12 +201,12 @@ $('.navbar-light .dmenu').hover(function () {
 	                	value="${(mInfo.currentPage + mInfo.pagingBarSize-1) / mInfo.pagingBarSize}"
 	                	integerOnly="true"/>
 	                	<c:set var="next" value="${operand2 *mInfo.pagingBarSize +1 }"/>
-						<a class="page-link text-primary" href="${mInfo.boardType}?cp=${next}">&gt;</a>
+						<a class="page-link text-dark" href="${mInfo.boardType}?cp=${next}">&gt;</a>
 	                </li>
 	                
 	                <!-- 맨 끝으로(>>) -->
 	                <li>
-	                    <a class="page-link text-primary" href="${mInfo.boardType}?cp=${mInfo.maxPage}">&gt;&gt;</a>
+	                    <a class="page-link text-dark" href="${mInfo.boardType}?cp=${mInfo.maxPage}">&gt;&gt;</a>
 	                </li>
                 </c:if>
             </ul>

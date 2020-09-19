@@ -185,13 +185,13 @@ public class MyPageController {
 			System.out.println(m);
 		}
 		//System.out.println("fdListbyMe:" + fdListbyMe);
-		System.out.println("mInfo : " + mInfo);
+		//System.out.println("mInfo : " + mInfo);
 		
 		if(!fdListbyMe.isEmpty()) {
 			List<Member> thList = mypageService.selectThumbnailList(fdListbyMe);
 			System.out.println("thList :" + thList);
 			for(Member m : thList) {
-				System.out.println("m" + m);
+				//System.out.println("m : " + m);
 			}
 			model.addAttribute("thList",thList);
 		}

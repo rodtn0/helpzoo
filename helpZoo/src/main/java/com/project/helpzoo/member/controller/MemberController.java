@@ -71,10 +71,14 @@ public class MemberController {
 			
 			if(saveId != null) {
 				cookie.setMaxAge(60*60*24*7);
+
 			}else {
 				cookie.setMaxAge(0);
+
 			}
 			response.addCookie(cookie);
+			response.addCookie(new Cookie("savePwd", member.getMemberPwd()));
+
 		}
 		System.out.println(loginMember);
 		
