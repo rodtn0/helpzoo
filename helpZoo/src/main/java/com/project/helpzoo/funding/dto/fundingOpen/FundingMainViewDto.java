@@ -1,4 +1,4 @@
-package com.project.helpzoo.funding.dto;
+package com.project.helpzoo.funding.dto.fundingOpen;
 
 import java.sql.Date;
 import java.sql.Timestamp;

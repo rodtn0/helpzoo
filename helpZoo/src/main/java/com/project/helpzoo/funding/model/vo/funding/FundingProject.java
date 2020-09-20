@@ -100,7 +100,7 @@ public class FundingProject {
 	@JoinColumn(name = "BUSINESS_TYPE_ID")
 	private BusinessType businessType;
 	
-	@OneToMany (mappedBy = "fundingProject")
+	@OneToMany (mappedBy = "fundingProject", fetch = FetchType.LAZY)
 	private List<Reward> reward;
 	
 	

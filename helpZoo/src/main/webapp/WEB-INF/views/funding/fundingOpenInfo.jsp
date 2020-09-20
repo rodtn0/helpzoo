@@ -8,6 +8,9 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="Cache-Control" content="No-Cache"> 
+
+<meta http-equiv="Pragma" content="No-Cache"> 
     <title>타이틀</title>
 
     <link
@@ -16,11 +19,7 @@
       integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
       crossorigin="anonymous"
     />
-    <script
-      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
       integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
@@ -271,8 +270,8 @@
 
     </style>
 
-
-</script>
+<link rel="stylesheet" href="${contextPath}/resources/pickdate/themes/default.css">
+<link rel="stylesheet" href="${contextPath}/resources/pickdate/themes/default.date.css">
 
 
 
@@ -281,7 +280,7 @@
     <div class="project_create_top_bar">
       &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/helpZoo/resources/images/도와주60.png" />
 
-      <span class="span"> <i class="fas fa-paw popoking"></i> &nbsp;도래미  </span>
+      <span class="span"> <i class="fas fa-paw popoking"></i> &nbsp;${makerName} </span>
       <div class="float-right project_create_top_bar_choice"> 
         <button type="button" class="btn btn-outline-primary">미리보기</button>&nbsp;&nbsp;&nbsp;
 
@@ -290,6 +289,15 @@
 
       <br />
     </div>
+    
+    
+<script src="${contextPath}/resources/pickdate/js/picker.js"></script>
+<script src="${contextPath}/resources/pickdate/js/picker.date.js"></script>
+<script src="${contextPath}/resources/pickdate/js/legacy.js"></script>
+<script src="${contextPath}/resources/pickdate/js/ko_KR.js"></script>
+    
+    
+    
 
     <div>
       <div class="funding_open_deail_container">
@@ -301,10 +309,10 @@
               <br>
               <br>
 
-              도와주의 <br />
+       ${makerName}의 <br />
               멋진 프로젝트 <br />
               <br>
-              프로젝트 번호 82752
+              프로젝트 번호 ${fundingNo}
               <br>
             </div>
 
@@ -336,7 +344,8 @@
           </div>
          
 
-	 <form action="${contextPath}/funding/fundingOpenInfoSubmit/${fundingNo}" method="GET">
+	 <form action="${contextPath}/funding/fundingOpenInfo/${fundingNo}" method="post" role="form" 
+				  encType="multipart/form-data">
           <div class="col-md-9 col-lg-9 col-sm-9">
             <div class="container project_open_ready">
               <h1 class="title_msg">기본 정보</h1>
@@ -349,7 +358,7 @@
 
 
                 프로젝트 제목 <span class="star">*</span> <br>
-                <input class="form-control form-control-lg" type="text" placeholder="제목 입력" name="fundingTitle">
+                <input class="form-control form-control-lg" type="text" placeholder="제목 입력" name="fundingTitle" value="${fundingOpenInfoView.fundingTitle}">
                 <small>40자 남음</small>
                 <br>
                 <br>
@@ -358,7 +367,9 @@
 
                 목표 금액 <span class="star">*</span><br>
                 <small>최소 50만 원 ~ 최대 1억 원으로 설정하세요.</small>
-                <input class="form-control form-control-lg" type="number" placeholder="제목 입력" name="goalAmount">
+                <input class="form-control form-control-lg" type="number" placeholder="제목 입력" name="fundingGoal"
+                value="${fundingOpenInfoView.fundingGoal}"
+                >
                 
               
                 <br>
@@ -368,15 +379,28 @@
                 <br>
                 <div class="upload-btn-wrapper">
                     <button class="btn"> <i class="fas fa-camera-retro"></i>&nbsp;등록하기</button>
-                    <input type="file" name="myfile" />
+                      <input type="file" name="titleImage" onchange="LoadImg(this,1)"/>
                   </div>
                   <br>
                 <small>  3MB 이하의 JPEG, PNG 파일<br>
-                사이즈 : 1200X675 픽셀 이상<br>
-                텍스트 및 로고 삽입 금지<br>
-            </small>
-
+				                사이즈 : 1200X675 픽셀 이상<br>
+				                텍스트 및 로고 삽입 금지<br>
+				            </small>
+  
+  	
+  
                 <br>
+                
+  	<div class="form-inline mb-2">
+					<label class="input-group-addon mr-3 insert-label">업로드<br>이미지</label>
+					<div class="boardImg" id="titleImgArea">
+						<img id="titleImg" width="200" height="200">
+					</div>
+				</div>
+  
+  
+  
+                
                 <br>
 
 
@@ -393,6 +417,15 @@
                 <br>
 
                 프로젝트 종료일 <span class="star">*</span><br>
+             <input
+                    id="input_01"
+                    class="datepicker form-control form-control-lg"
+                    name="fundingEndDay"
+                    type="text">
+                    
+                    
+                    
+                    
                 <small>요건・콘텐츠 확인 및 프로젝트 진행 일정과 리워드 발송 일정을 함께 고려하여 종료일을 설정해주세요.</small>
                 
                 
@@ -406,7 +439,7 @@
                 
                 검색용 태그 <span class="star">*</span><br>
                 <small>엔터를 누르면 태그가 등록됩니다. (최대 10개까지 입력 가능)</small>
-                <input class="form-control form-control-lg" type="number" placeholder="제목 입력" name ="fundingTag">
+                <input class="form-control form-control-lg" type="text" placeholder="태그 입력" name ="fundingTag">
 
 
 
@@ -421,8 +454,92 @@
 </form>
 
 
+<script>
+
+
+
+
+
+
+function LoadImg(value, num) {
+     if (value.files && value.files[0]) {
+       var reader = new FileReader();
+
+       reader.onload = function (e) {
+         switch (num) {
+           case 1:
+             $("#titleImg").attr("src", e.target.result);
+             break;
+           case 2:
+             $("#contentImg1").attr("src", e.target.result);
+             break;
+           case 3:
+             $("#contentImg2").attr("src", e.target.result);
+             break;
+           case 4:
+             $("#contentImg3").attr("src", e.target.result);
+             break;
+         }
+       }
+
+       reader.readAsDataURL(value.files[0]);
+     }
+   }
+
+
+
+
+
+
+
+
+$('.datepicker').pickadate({
+	  monthsFull:["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+	  weekdaysShort:["일","월","화","수","목","금","토"],
+	  today: "오늘",
+	  clear: '취소',
+	  formatSubmit: 'yyyymmdd',
+	  format:"yyyymmdd"
+	})
+
+	
+	
+
+</script>
+
+
+
+  <script type="text/javascript">
+       
+  
+  
+  var $input = $( '.datepicker' ).pickadate({
+            formatSubmit: 'yyyy/mm/dd',
+            // min: [2015, 7, 14],
+            container: '#container',
+            // editable: true,
+            closeOnSelect: false,
+            closeOnClear: false,
+        })
+        
+        var picker = $input.pickadate('picker')
+        // picker.set('select', '14 October, 2014')
+        
+    
+        
+      
+        
+    </script>
+
+
+
+
+
      <script>
 
+     
+     
+     
                   var menubarFlag = true;
 
                   var menuBar = $("<div class='menu_box'></div>");
@@ -488,9 +605,6 @@
 
                 </script>
 
-
-
-              
 
 
           </div>

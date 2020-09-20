@@ -7,6 +7,8 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="Cache-Control" content="No-Cache"> 
+<meta http-equiv="Pragma" content="No-Cache"> 
     <title>DowaZoo</title>
     <link
       rel="stylesheet"
