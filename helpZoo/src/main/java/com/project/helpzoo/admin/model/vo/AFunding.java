@@ -1,7 +1,10 @@
 package com.project.helpzoo.admin.model.vo;
 
 import java.sql.Date;
-import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.querydsl.core.util.CollectionUtils;
 
 public class AFunding {
 
@@ -124,6 +127,7 @@ public class AFunding {
 	public void setFees(int fees) {
 		this.fees = fees;
 	}
+
 
 	@Override
 	public String toString() {

@@ -49,4 +49,10 @@ public interface QNAService {
 	 */
 	public abstract List<QNABoard> selectSearchList(String id);
 
+	/** 수정 가능 여부
+	 * @param qnaNo
+	 * @return
+	 */
+	public abstract int selectAnswer2(int qnaNo);
+
 }
