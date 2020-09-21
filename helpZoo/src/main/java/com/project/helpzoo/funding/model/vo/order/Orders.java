@@ -46,7 +46,7 @@ public class Orders {
 	private long memberId;
 
 	
-	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	 private List<OrderReward> orderRewards = new ArrayList<>();
 	
 	

@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.project.helpzoo.board.model.vo.PageInfo;
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.member.model.vo.Member;
+import com.project.helpzoo.model.vo.Donation;
 import com.project.helpzoo.mypage.model.service.MyPageService;
 import com.project.helpzoo.mypage.model.vo.mPageInfo;
 
@@ -185,18 +186,43 @@ public class MyPageController {
 			System.out.println(m);
 		}
 		//System.out.println("fdListbyMe:" + fdListbyMe);
-		System.out.println("mInfo : " + mInfo);
+		//System.out.println("mInfo : " + mInfo);
 		
 		if(!fdListbyMe.isEmpty()) {
 			List<Member> thList = mypageService.selectThumbnailList(fdListbyMe);
 			System.out.println("thList :" + thList);
 			for(Member m : thList) {
-				System.out.println("m" + m);
+				//System.out.println("m : " + m);
 			}
 			model.addAttribute("thList",thList);
 		}
 		
 		return "mypage/fundingList";
+	}
+	
+	// 내가 주최한 기부 리스트로 이동되는 Controller
+	@RequestMapping("donationList/{type}")
+	public String donationList(@PathVariable int type, @RequestParam(value="cp", required = false,
+	defaultValue = "1")int cp, Model model) {
+		
+		Member loginMember = (Member)model.getAttribute("loginMember");
+		
+		mPageInfo mInfo = mypageService.pagination(cp, loginMember);
+		
+		List<Donation> doListByme = mypageService.donaSelectList1(mInfo, loginMember);
+		
+		model.addAttribute("doListByme", doListByme);
+		model.addAttribute("mInfo", mInfo);
+		
+		for(Donation d : doListByme) {
+			System.out.println("doListByme : " + d);
+		}
+		
+		if(!doListByme.isEmpty()) {
+			//List<Member> doList = mypageService.selectThumbnailList2(doListByme);
+			//model.addAttribute("doList", doList);
+		}
+		return "mypage/donationList";
 	}
 	
 }

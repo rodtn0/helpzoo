@@ -14,6 +14,7 @@ import com.project.helpzoo.board.model.vo.PageInfo;
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.member.model.dao.MemberDAO;
 import com.project.helpzoo.member.model.vo.Member;
+import com.project.helpzoo.model.vo.Donation;
 import com.project.helpzoo.mypage.model.dao.MyPageDAO;
 import com.project.helpzoo.mypage.model.vo.mPageInfo;
 
@@ -101,7 +102,7 @@ public class MyPageServiceImpl implements MyPageService{
 		return mInfo;
 	}
 	
-	// 내가 주최한 리스트 출력 서비스 구현
+	// 내가 주최한 펀딩 리스트 출력 서비스 구현
 	@Override
 	public List<Member> selectList(mPageInfo mInfo, Member loginMember) {
 
@@ -109,11 +110,20 @@ public class MyPageServiceImpl implements MyPageService{
 		
 	}
 
+	
+	// 내가 주최한 펀딩 리스트 썸네일 출력 서비스 구현
 	@Override
 	public List<Member> selectThumbnailList(List<Member> fdListbyMe) {
 		
 		return myPageDAO.selectThumbnailList(fdListbyMe);
 		
+	}
+
+	// 내가 주최한 기부 리스트 출력 서비스 구현
+	@Override
+	public List<Donation> donaSelectList1(mPageInfo mInfo, Member loginMember) {
+		
+		return myPageDAO.donaSelectList1(mInfo, loginMember);
 	}
 
 

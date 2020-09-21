@@ -1,6 +1,8 @@
-package com.project.helpzoo.funding.dto;
+package com.project.helpzoo.funding.dto.fundingOpen;
 
 import java.sql.Timestamp;
+
+import com.project.helpzoo.funding.model.vo.funding.FundingAttachment;
 
 public class FundingOpenInfoView {
 	
@@ -15,10 +17,25 @@ public class FundingOpenInfoView {
 	
 	private String fundingTag;
 
+	private FundingAttachment IntroAttachment;
 	
 	
 	
 	
+	
+	
+	public FundingAttachment getIntroAttachment() {
+		return IntroAttachment;
+	}
+
+
+
+	public void setIntroAttachment(FundingAttachment introAttachment) {
+		IntroAttachment = introAttachment;
+	}
+
+
+
 	public FundingOpenInfoView() {
 		
 	}

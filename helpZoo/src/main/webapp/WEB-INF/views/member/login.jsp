@@ -18,6 +18,7 @@
 			<h1 id="loginTxt">로그인</h1><br>
 		    <form class="login-form" action="loginAction" method="post">
 		      <input type="text" name="memberId" placeholder="아이디" required autofocus value="${cookie.saveId.value}"/>
+		      <!-- value="${cookie.savePwd.value}" -->
 		      <input type="password" name="memberPwd" placeholder="비밀번호"/>
 			<div class="checkbox mb-3">
 				<label> 
@@ -26,7 +27,7 @@
 						<c:if test="${!empty cookie.saveId.value}">
 							checked
 						</c:if>
-					> 아이디 저장
+					> 로그인 정보 저장
 				</label>
 			</div>
 		      <button id="loginBtn" class="btn btn-lg btn-primary btn-block">로그인</button>

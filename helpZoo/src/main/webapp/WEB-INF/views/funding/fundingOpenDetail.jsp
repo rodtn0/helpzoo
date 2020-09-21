@@ -11,6 +11,9 @@
     <meta charset="UTF-8" />
     <title>타이틀</title>
 <meta http-equiv="expires" content="-1" >
+<meta http-equiv="Cache-Control" content="No-Cache"> 
+
+<meta http-equiv="Pragma" content="No-Cache"> 
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -370,24 +373,24 @@
                 <br>
                 <div class="temp_box2 title_msg container">
                   기본 정보 	&nbsp;	<small class="smallMint"> ${OpenInfoStatus} </small>
-                  <div class="btn btn-outline-secondary float-right" onclick="location.href='${contextPath}/funding/fundingOpenInfo'">작성하기</div>
+                  <div class="btn btn-outline-secondary float-right" onclick="location.href='${contextPath}/funding/fundingOpenInfo/${fundingNo}'">작성하기</div>
 
                 </div>
                 <br>
                 <div class="temp_box2 title_msg container">
                   스토리 작성	&nbsp;	 <small class="smallMint"> ${OpenStory} </small>
-                  <div class="btn btn-outline-secondary float-right" onclick="location.href='${contextPath}/funding/fundingOpenStory'">작성하기</div>
+                  <div class="btn btn-outline-secondary float-right" onclick="location.href='${contextPath}/funding/fundingOpenStory/${fundingNo}'">작성하기</div>
 
                 </div>
                 <br>
                 <div class="temp_box2 title_msg container">
                   리워드 설계	&nbsp;	<small class="smallMint">${OpenReward} </small>
-                  <div class="btn btn-outline-secondary float-right" onclick="location.href='${contextPath}/funding/fundingOpenReward'">작성하기</div>
+                  <div class="btn btn-outline-secondary float-right" onclick="location.href='${contextPath}/funding/fundingOpenReward/${fundingNo}'">작성하기</div>
 
                 </div>
 
                 <br>
-                <div class="temp_box2 title_msg container" onclick="location.href='${contextPath}/funding/fundingOpenRequire'">
+                <div class="temp_box2 title_msg container" onclick="location.href='${contextPath}/funding/fundingOpenMakerInfo/${fundingNo}'">
                   메이커 정보	&nbsp;	<small class="smallMint">${OpenMakerInfo} </small>
                   <div class="btn btn-outline-secondary float-right">작성하기</div>
 

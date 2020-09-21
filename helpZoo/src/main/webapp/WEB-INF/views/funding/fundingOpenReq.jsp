@@ -9,6 +9,9 @@
     <meta charset="UTF-8" />
     <title>타이틀</title>
 <meta http-equiv="expires" content="-1" >
+<meta http-equiv="Cache-Control" content="No-Cache"> 
+
+<meta http-equiv="Pragma" content="No-Cache"> 
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -239,7 +242,7 @@
     <div class="project_create_top_bar">
       &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/helpZoo/resources/images/도와주60.png" />
 
-      <span class="span"> <i class="fas fa-paw popoking"></i> &nbsp;도래미  </span>
+      <span class="span"> <i class="fas fa-paw popoking"></i> &nbsp;${makerName}  </span>
       <div class="float-right project_create_top_bar_choice"> 
         <button type="button" class="btn btn-outline-primary">미리보기</button>&nbsp;&nbsp;&nbsp;
 
@@ -259,10 +262,10 @@
               <br>
               <br>
 
-              도와주의 <br />
+             ${makerName}의 <br />
               멋진 프로젝트 <br />
               <br>
-              프로젝트 번호 82752
+              프로젝트 번호 ${fundingNo}
               <br>
             </div>
 
@@ -292,7 +295,7 @@
             <div class="col-md-2 col-lg-2 col-sm-2">
   
           </div>		
-	  <form action="${contextPath}/funding/fundingOpenRequireSubmit/${fundingNo}" method="GET">
+	  <form action="${contextPath}/funding/fundingOpenRequire/${fundingNo}" method="POST">
           <div class="col-md-9 col-lg-9 col-sm-9">
             <div class="container project_open_ready">
               <h1 class="title_msg">기본 요건</h1>

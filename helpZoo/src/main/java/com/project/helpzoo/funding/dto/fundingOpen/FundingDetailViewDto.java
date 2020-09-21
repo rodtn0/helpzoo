@@ -1,8 +1,10 @@
-package com.project.helpzoo.funding.dto;
+package com.project.helpzoo.funding.dto.fundingOpen;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 public class FundingDetailViewDto {
@@ -26,7 +28,7 @@ public class FundingDetailViewDto {
 	
 	private int achievementRate;
 	
-	Optional<String[]> suppoterName;
+	private List<String> suppoterName = new ArrayList<String>();
 	
 	private String makerName;
 	
@@ -59,7 +61,7 @@ public class FundingDetailViewDto {
 
 	public FundingDetailViewDto(String fundingStroy, Integer fundingRewardSeq, String rewardContent, String rewardTitle,
 			int rewardPrice, int rewardAmount, int goalAmount, int totalOrderAmount, int achievementRate,
-			Optional<String[]> suppoterName, String makerName, String snsUrl, String kakaoUrl, int like, Timestamp endDay,
+			List<String> suppoterName, String makerName, String snsUrl, String kakaoUrl, int like, Timestamp endDay,
 			Timestamp startDay) {
 		super();
 		this.fundingStroy = fundingStroy;
@@ -84,7 +86,7 @@ public class FundingDetailViewDto {
 
 	public FundingDetailViewDto(String fundingStroy, Integer fundingRewardSeq, String rewardContent, String rewardTitle,
 			int rewardPrice, int rewardAmount, int totalOrderAmount, int achievementRate,
-			Optional<String[]> suppoterName, String makerName, String snsUrl, String kakaoUrl, int like, Timestamp endDay,
+			List<String> suppoterName, String makerName, String snsUrl, String kakaoUrl, int like, Timestamp endDay,
 			Timestamp startDay) {
 		super();
 		this.fundingStroy = fundingStroy;
@@ -120,7 +122,7 @@ public class FundingDetailViewDto {
 
 	public FundingDetailViewDto(String fundingStroy, Integer fundingRewardSeq, String rewardContent, String rewardTitle,
 			int rewardPrice, int rewardAmount, int totalOrderAmount, int achievementRate,
-			Optional<String[]> suppoterName, String makerName, String snsUrl, String kakaoUrl, int like, Timestamp endDay) {
+			List<String> suppoterName, String makerName, String snsUrl, String kakaoUrl, int like, Timestamp endDay) {
 		super();
 		this.fundingStroy = fundingStroy;
 		this.fundingRewardSeq = fundingRewardSeq;
@@ -172,7 +174,7 @@ public class FundingDetailViewDto {
 
 	public FundingDetailViewDto(String fundingStroy, Integer fundingRewardSeq, String rewardContent, String rewardTitle,
 			int rewardPrice, int rewardAmount, int totalOrderAmount, int achievementRate,
-			Optional<String[]> suppoterName, String makerName, String snsUrl, String kakaoUrl, int like) {
+			List<String> suppoterName, String makerName, String snsUrl, String kakaoUrl, int like) {
 		super();
 		this.fundingStroy = fundingStroy;
 		this.fundingRewardSeq = fundingRewardSeq;
@@ -287,13 +289,13 @@ public class FundingDetailViewDto {
 
 
 
-	public Optional<String[]> getSuppoterName() {
+	public List<String> getSuppoterName() {
 		return suppoterName;
 	}
 
 
 
-	public void setSuppoterName(Optional<String[]> suppoterName) {
+	public void setSuppoterName(List<String> suppoterName) {
 		this.suppoterName = suppoterName;
 	}
 
@@ -337,7 +339,7 @@ public class FundingDetailViewDto {
 
 	public FundingDetailViewDto(String fundingStroy, Integer integer, String rewardContent, String rewardTitle,
 			int rewardPrice, int rewardAmount, int totalOrderAmount, int achievementRate,
-			Optional<String[]> suppoterName, String makerName, String snsUrl, String kakaoUrl) {
+			List<String> suppoterName, String makerName, String snsUrl, String kakaoUrl) {
 		super();
 		this.fundingStroy = fundingStroy;
 		this.fundingRewardSeq = integer;
