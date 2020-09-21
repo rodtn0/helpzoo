@@ -1,10 +1,8 @@
 package com.project.helpzoo.admin.controller;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -73,6 +71,14 @@ public class AFundingController {
 		
 		return gson.toJson(funding);
 		
+	}
+	
+	@RequestMapping("chart")
+	public ModelAndView fundingChart(ModelAndView mv) {
+		
+		mv.setViewName("admin/funding/adminFChart");
+		
+		return mv;
 	}
 	
 	

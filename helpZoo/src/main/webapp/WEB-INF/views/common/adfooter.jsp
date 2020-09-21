@@ -47,7 +47,7 @@
   </div>
   
   <!-- Bootstrap core JavaScript-->
-  <script src="${contextPath}/resources/vendor/jquery/jquery.min.js"></script>
+ <%--  <script src="${contextPath}/resources/vendor/jquery/jquery.min.js"></script> --%>
   <script src="${contextPath}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
@@ -57,10 +57,10 @@
   <script src="${contextPath}/resources/js/sb-admin-2.min.js"></script>
 
   <!-- Page level plugins -->
-  <script src="${contextPath}/resources/vendor/datatables/jquery.dataTables.min.js"></script>
+<%--   <script src="${contextPath}/resources/vendor/datatables/jquery.dataTables.min.js"></script>
   <script src="${contextPath}/resources/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
+ --%>
   <!-- Page level custom scripts -->
-  <script src="${contextPath}/resources/js/demo/datatables-demo.js"></script>
+  <%-- <script src="${contextPath}/resources/js/demo/datatables-demo.js"></script> --%>
 </body>
 </html>

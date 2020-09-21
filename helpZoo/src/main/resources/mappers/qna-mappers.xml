@@ -140,4 +140,8 @@
   	<select id="selectEmail" parameterType="string" resultType="string">
   	SELECT MEMBER_EMAIL FROM MEMBER WHERE MEMBER_ID=#{writer}
   	</select>
+  	
+  	<select id="selectAnswer2" parameterType="_int"  resultType="_int">
+  	SELECT COUNT(*) FROM QNA_BOARD WHERE QNA_ORIGIN_NO=#{qnaNo}
+  	</select>
 </mapper>
