@@ -384,9 +384,196 @@ public void insertAction(FundingOpenStoryView fundingStory,
 			
 
 }
+
+
+
+@RequestMapping(value = "fundingOpenSubmit/{fundingNo}" , method = RequestMethod.GET)
+public String fundingOpenSubmit(@PathVariable Long fundingNo, 
+		Model model,
+		HttpServletResponse response	) {
 	
 	
 	
+
+	response.setHeader("Pragma", "no-cache"); 
+
+	response.setHeader("Cache-Control", "no-cache"); 
+	
+	
+	dao.fundingStart(fundingNo);
+	
+	
+	
+	
+	
+	
+	
+	
+	return "redirect:/";
+}
+	
+
+
+
+
+
+
+
+
+
+@RequestMapping(value = "fundingOpenMakerInfo/{fundingNo}" , method = RequestMethod.POST)
+public String fundingOpenMakerInfoSave(Model model,@PathVariable Long fundingNo,
+		HttpServletResponse response,HttpServletRequest request,
+		String name,
+		String email,
+		int phone,
+		String kakaoId,
+		String kakaoUrl,
+		String homepage1,
+		String homepage2,
+		String sns1,
+		String sns2,
+		String sns3,
+		String businessType,
+		String agentName,
+		String agentEmail,
+		int agentPhone,
+		String bank,
+		int accountNumber,
+		String accountHolder,
+		@RequestParam(value="makerImage",required=false) MultipartFile makerImage
+		
+		) {
+	
+	
+	
+	response.setHeader("Pragma", "no-cache"); 
+
+	response.setHeader("Cache-Control", "no-cache"); 
+	
+	
+	
+
+	System.out.println("메이커 컨트롤러 펀딩넘버 : " + fundingNo);
+	
+	FundingOpenMakerInfoView fundingOpenMakerView = new FundingOpenMakerInfoView(
+	name, email, phone, kakaoId, kakaoUrl, homepage1, homepage2, sns1, 
+	sns2, sns3, businessType, agentName, agentEmail, agentPhone, bank, accountNumber, accountHolder);
+	
+	
+	
+	
+	
+	Long fileCategory = 3L; // 메이커 사진파일 카테고리 id번호.
+	
+	
+	
+	insertImage(fundingNo, request,makerImage, new ArrayList<MultipartFile>(),fileCategory);
+	
+	
+	
+	service.openMakerSave(fundingOpenMakerView,fundingNo);
+	
+	
+	
+
+	String makerName = dao.getMakerName(fundingNo);
+	
+	model.addAttribute("fundingNo", fundingNo);
+	
+	model.addAttribute("makerName", makerName);
+	
+	
+	openDetailViewMake(fundingNo, model);
+	
+	
+	
+	return "funding/fundingOpenDetail";
+	
+}
+
+
+	
+	
+	
+
+@RequestMapping(value = "fundingOpenReward/{fundingNo}", method = RequestMethod.POST)
+public String fundingOpenRewardSave(@PathVariable Long fundingNo, Model model, HttpServletResponse response,
+		int price,
+		String title,
+		String content,
+		String option,
+		int deleveryPrice,
+		int rewardAmount,
+		String deliveryDay
+		
+		) {
+	
+	
+	
+	Timestamp deliDay = null;
+	
+	
+	
+	
+	
+	
+	if(deliveryDay != null && !deliveryDay.trim().isEmpty()) {
+	Calendar cal;
+	
+	SimpleDateFormat sd = new SimpleDateFormat("yyyyMMdd");
+
+	String date = new String(deliveryDay);
+	
+	Timestamp time = null;
+	
+	try {
+		   sd.parse(date);
+		   cal=sd.getCalendar();
+		   time = new Timestamp(cal.getTime().getTime());
+		   System.out.println(time);
+		  } catch (ParseException e) {
+		   e.printStackTrace();
+		  }
+
+	deliDay = time;
+	
+	}
+	
+	FundingOpenRewardView rewardView = new FundingOpenRewardView(price, title, content, option, deleveryPrice, rewardAmount, deliDay);
+	
+	System.out.println("rewardView" + rewardView);
+	
+	response.setHeader("Pragma", "no-cache"); 
+
+	response.setHeader("Cache-Control", "no-cache"); 
+	
+	
+	
+	
+	service.openRewardSave(fundingNo, rewardView);
+	
+	
+	
+	
+	
+	
+	
+	
+	String makerName = 	dao.getMakerName(fundingNo);
+	
+	
+	model.addAttribute("fundingNo", fundingNo);
+	
+	model.addAttribute("makerName", makerName);
+	
+
+	
+	
+	
+	return "funding/fundingRewardDesign";
+}
+
 	
 	
 
@@ -413,7 +600,7 @@ public String fundingOpenStorySave(@PathVariable Long fundingNo,
 	
 	
 	
-	String makerName = 	dao.getMakerName(fundingNo);
+	String makerName = dao.getMakerName(fundingNo);
 	
 	model.addAttribute("fundingNo", fundingNo);
 	
@@ -657,7 +844,7 @@ public String fundingOpenStorySave(@PathVariable Long fundingNo,
 			if(fundingOpenRewardView.isEmpty()) {
 				rewardStatus = "작성 전";
 			}else {
-				rewardStatus = "작성 후";
+				rewardStatus = "작성 완료";
 			}
 			
 			

@@ -9,7 +9,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingDetailViewDto;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingMainViewDto;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenInfoView;
+import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenMakerInfoView;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenRequireView;
+import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenRewardView;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenStoryView;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingTotalInfoDto;
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
@@ -101,6 +103,14 @@ public interface FundingService {
 
 
 	void insertfundingFile(FundingProject funding, ArrayList<MultipartFile> images, String savePath, Long fileCategory);
+
+
+
+	void openRewardSave(Long fundingNo, FundingOpenRewardView rewardView);
+
+
+
+	void openMakerSave(FundingOpenMakerInfoView fundingOpenMakerView, Long fundingNo);
 	
 	
 }

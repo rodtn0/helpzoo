@@ -99,7 +99,7 @@ public class FundingOpenInfoView {
 		return "작성 전";
 	}
 	
-	else if (!titleEmpty||fundingGoalIsEmpty||fundingEndDayEmpty||tagIsEmpty){
+	else if (titleEmpty||fundingGoalIsEmpty||fundingEndDayEmpty||tagIsEmpty){
 		return "작성 중";
 	}else {
 		return "작성 완료";

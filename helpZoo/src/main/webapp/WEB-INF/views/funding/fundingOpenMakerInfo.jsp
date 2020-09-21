@@ -342,7 +342,8 @@
             <div class="col-md-2 col-lg-2 col-sm-2">
   
           </div>
-<form action="${contextPath}/funding/fundingOpenMakerInfo/${fundingNo}" method="POST">
+          <form action="${contextPath}/funding/fundingOpenMakerInfo/${fundingNo}" method="post" role="form" 
+          encType="multipart/form-data">
           <div class="col-md-9 col-lg-9 col-sm-9">
             <div class="container project_open_ready">
               <h1 class="title_msg">메이커 정보</h1>
@@ -360,7 +361,7 @@
 
        <div class="info_discription_title">     메이커명 <span class="star">*</span></div>
             <small>법인사업자는 법인등기부상 법인명 / 개인 사업자는 주민등록상 성명 또는 상호 / 개인은 주민등록상 성명을 입력하세요.</small>
-                <input class="form-control form-control-lg" type="text" placeholder="메이커 명 입력">
+                <input class="form-control form-control-lg" type="text" placeholder="메이커 명 입력" name="name">
                 <small>40자 남음</small>
                 <br>
                 <br>
@@ -371,26 +372,37 @@
                 <br>
                 <div class="upload-btn-wrapper">
                     <button class="btn"> <i class="fas fa-camera-retro"></i>&nbsp;등록하기</button>
-                    <input type="file" name="myfile" />
+                      <input type="file" name="makerImage" onchange="LoadImg(this,1)"/>
                   </div>
                   <br>
-                <small>  3MB 이하의 JPEG, PNG 파일
+                <small>   3MB 이하의 JPEG, PNG 파일
                 사이즈 : 300X300  픽셀 이상
-            </small>
-
+				            </small>
+  
+  	
+  
                 <br>
-                <br>
-
+                
+  	<div class="form-inline mb-2">
+					<div class="boardImg" id="titleImgArea">
+						<img id="titleImg" width="200" height="200">
+					</div>
+				</div>
+  
+		
+		<br>
+		<br>
 
 
     
                 문의 이메일 <span class="star">*</span><br>
-                <input class="form-control form-control-lg" type="number" placeholder="제목 입력">
+                <input class="form-control form-control-lg" type="text" placeholder="이메일 입력" name="email">
                 <br>
                 <br>
 
                 문의 전화번호 <span class="star">*</span><br>
-                <input class="form-control form-control-lg" type="number" placeholder="제목 입력">
+                <input class="form-control form-control-lg" type="number" placeholder="전화번호 입력" name="phone">
+                <small>특수문자(-)없이 숫자만 입력해주세요.</small>
                 <br>
                 <br>
 
@@ -399,23 +411,23 @@
 
                 카카오톡 채널(선택사항)<span class="star">*</span><br>
                 <small>엔터를 누르면 태그가 등록됩니다. (최대 10개까지 입력 가능)</small>
-                <input class="form-control form-control-lg" type="number" placeholder="제목 입력">
-                <input class="form-control form-control-lg" type="number" placeholder="제목 입력">
+                <input class="form-control form-control-lg" type="text" placeholder="검색용 아이디 입력" name="kakaoId">
+                <input class="form-control form-control-lg" type="text" placeholder="홈페이지 URL 입력" name="kakaoUrl">
                 <br><br>
 
 
                 홈페이지(선택사항)<span class="star">*</span><br>
                 <small>엔터를 누르면 태그가 등록됩니다. (최대 10개까지 입력 가능)</small>
-                <input class="form-control form-control-lg" type="number" placeholder="제목 입력">
-                <input class="form-control form-control-lg" type="number" placeholder="제목 입력">
+                <input class="form-control form-control-lg" type="text" placeholder="홈페이지 URL 입력" name="homepage1">
+                <input class="form-control form-control-lg" type="text" placeholder="홈페이지 URL 입력" name="homepage2">
                 <br><br>
 
 
                 SNS(선택사항) <span class="star">*</span><br>
                 <small>엔터를 누르면 태그가 등록됩니다. (최대 10개까지 입력 가능)</small>
-                <input class="form-control form-control-lg" type="number" placeholder="제목 입력">
-                <input class="form-control form-control-lg" type="number" placeholder="제목 입력">
-                <input class="form-control form-control-lg" type="number" placeholder="제목 입력">
+                <input class="form-control form-control-lg" type="text" placeholder="https://www.facebook.com/" name="sns1">
+                <input class="form-control form-control-lg" type="text" placeholder="https://twitter.com/" name="sns2">
+                <input class="form-control form-control-lg" type="text" placeholder="https://www.instagram.com/" name="sns3">
                 <br><br>
 
 
@@ -425,18 +437,7 @@
                   정산과 관련된 전자 약정 체결을 위한 정보이니, 정확하게 입력해주세요.
                   <br>
                   <br>
-              </div>        
-              정산 정책 확인 <span class="star">*</span><br>
-              <small>와디즈 정산 정책을 반드시 확인하세요.</small>
-                <br>
-
-
-              <div class="upload-btn-wrapper">
-                <button class="btn"> <i class="fas fa-check"></i>&nbsp; 정책 확인하기</button>
-                <input type="file" name="myfile" />
-              </div>
-
-
+              </div>       
               
 
 
@@ -450,11 +451,11 @@
                 <br>
                 
                 사업자 구분 <span class="star">*</span><br>
-               <select class="form-control form-control-lg">
-                 <option>개인</option>
-                <option>사업자 구분 선택</option>
-                <option>개인사업자</option>
-                <option>법인사업자</option>
+               <select class="form-control form-control-lg" name="businessType">
+                   <option disabled="disabled">사업자 구분 선택</option>
+                 <option value="개인">개인</option>
+                <option value="개인 사업자">개인사업자</option>
+                <option value="법인 사업자">법인사업자</option>
               </select>
                 <br>  
                 <br>
@@ -463,7 +464,7 @@
                 
                 대표자명 <span class="star">*</span><br>
                 <small>사업자등록증에 등록된 대표자의 이름과 일치해야 합니다.</small>
-                <input class="form-control form-control-lg" type="number" placeholder="대표자명 입력">
+                <input class="form-control form-control-lg" type="text" placeholder="대표자명 입력" name="agentName">
                 
               
 
@@ -473,7 +474,7 @@
               
                 대표자 이메일 <span class="star">*</span><br>
                 <small>대표자의 이메일로 전자 약정서가 발송됩니다. 전자 약정은 대표자가 직접 진행해야 합니다.</small>
-                <input class="form-control form-control-lg" type="number" placeholder="대표자 이메일 입력">
+                <input class="form-control form-control-lg" type="text" placeholder="대표자 이메일 입력" name="agentEmail">
                 
               
 
@@ -485,7 +486,7 @@
                 
                 대표자 휴대폰 번호 <span class="star">*</span><br>
                 <small>약정의 체결 시 본인확인을 위해 휴대전화 본인인증을 진행합니다. 휴대전화 본인인증이 불가한 경우, 약정의 체결 및 서비스 제공이 불가하니, 반드시 대표자(본인) 명의 휴대폰 번호를 입력하세요.</small>
-                <input class="form-control form-control-lg" type="number" placeholder="대표자 휴대폰 번호 입력">
+                <input class="form-control form-control-lg" type="number" placeholder="대표자 휴대폰 번호 입력" name="agentPhone">
                 특수문자(-)없이 숫자만 입력해주세요.
 
                 <br>
@@ -494,14 +495,8 @@
 
 
 
-                <div class="important_info">세금계산서 발행 및 정산 계좌 정보</div>
+                <div class="important_info">정산 계좌 정보</div>
                 <br>
-                <div>
-                  세금계산서 발행 이메일 <span class="star">*</span><br>
-                  <small>세금계산서 발행 시, 입력되는 이메일 주소를 입력하세요. (본인의 이메일 주소 또는 세무 대리인의 이메일 주소)</small>
-                  <input class="form-control form-control-lg" type="number" placeholder="이메일 입력">
-                  <br>
-                  <br>
                   
                   
                   계좌 정보 <span class="star">*</span><br>
@@ -512,25 +507,21 @@
                     
                     </small>
 
-                    <select class="form-control form-control-lg">
-                      <option>은행 선택</option>
-                     <option>사업자 구분 선택</option>
-                     <option>개인사업자</option>
-                     <option>법인사업자</option>
+                    <select class="form-control form-control-lg" name="bank">
+                      <option disabled="disabled">은행 선택</option>
+                     <option>우리 은행</option>
+                     <option>신한 은행</option>
+                     <option>농협 은행</option>
                    </select>
 
-                  <input class="form-control form-control-lg" type="number" placeholder="계좌번호 입력">
+                  <input class="form-control form-control-lg" type="number" placeholder="계좌번호 입력" name="accountNumber">
                   <small>특수문자(-)없이 숫자만 입력해주세요.</small>
-                  <input class="form-control form-control-lg" type="number" placeholder="예금주 명 입력"> 
+                  <input class="form-control form-control-lg" type="text" placeholder="예금주 명 입력" name="accountHolder"> 
                   <small>예금주 명은 계좌의 예금주와 정확하게 일치해야 합니다.</small>
 
 
                 <br>
                 <br>
-                <br>
-
-                통장 사본<span class="star">*</span><br>
-                <small>위 계좌 정보와 동일한 명의의 통장 사본을 제출해야 합니다. JPG, JPEG, PNG, PDF / 10MB 이하 파일 1개만 업로드 가능합니다.</small> 
 
  <br>
                 <br>
@@ -542,9 +533,8 @@
                 <br>
 
                 <button
-                type="button"
+                type="submit"
                 class="btn btn-primary col-md-4 col-sm-4 col-xs-4 btn-lg funding_btn mintclick"
-                onclick="location.href = '${contextPath}/funding/fundingOpenDetail' "
               >저장하기</button>
 
 
@@ -554,15 +544,43 @@
 
      <script>
 
+function LoadImg(value, num) {
+     if (value.files && value.files[0]) {
+       var reader = new FileReader();
+
+       reader.onload = function (e) {
+         switch (num) {
+           case 1:
+             $("#titleImg").attr("src", e.target.result);
+             break;
+           case 2:
+             $("#contentImg1").attr("src", e.target.result);
+             break;
+           case 3:
+             $("#contentImg2").attr("src", e.target.result);
+             break;
+           case 4:
+             $("#contentImg3").attr("src", e.target.result);
+             break;
+         }
+       }
+
+       reader.readAsDataURL(value.files[0]);
+     }
+   }
+
+
+
+
                   var menubarFlag = true;
 
                   var menuBar = $("<div class='menu_box'></div>");
 
-              var require = $("<a class='box funding_require' href='${contextPath}/funding/fundingOpenRequire' >기본 요건</a>");
-              var fundingInfo = $("<a class='box funding_info' href='${contextPath}/funding/fundingOpenInfo'>기본 정보</a>");
-              var story = $("<a class='box funding_story' href='${contextPath}/funding/fundingOpenStory'>스토리 작성</a>");
-              var reward = $("<a class='box funding_reward_build' href='${contextPath}/funding/fundingOpenReward'>리워드 설계</a>");
-              var makerInfo = $("<a class='box funding_maker_info' href='${contextPath}/funding/fundingOpenMakerInfo'>메이커 정보</a>");
+                  var require = $("<a class='box funding_require' href='${contextPath}/funding/fundingOpenRequire/${fundingNo}' >기본 요건</a>");
+                  var fundingInfo = $("<a class='box funding_info' href='${contextPath}/funding/fundingOpenInfo/${fundingNo}'>기본 정보</a>");
+                  var story = $("<a class='box funding_story' href='${contextPath}/funding/fundingOpenStory/${fundingNo}'>스토리 작성</a>");
+                  var reward = $("<a class='box funding_reward_build' href='${contextPath}/funding/fundingOpenReward/${fundingNo}'>리워드 설계</a>");
+                  var makerInfo = $("<a class='box funding_maker_info' href='${contextPath}/funding/fundingOpenMakerInfo/${fundingNo}'>메이커 정보</a>");
 
                     $(".funding_ready_menubar").on("click", function() {
                       console.log( $( this ).text() );

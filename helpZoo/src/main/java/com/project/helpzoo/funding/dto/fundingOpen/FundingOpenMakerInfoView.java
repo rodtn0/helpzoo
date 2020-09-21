@@ -1,4 +1,4 @@
-package com.project.helpzoo.funding.dto.fundingOpen;
+	package com.project.helpzoo.funding.dto.fundingOpen;
 
 public class FundingOpenMakerInfoView {
 	
@@ -35,14 +35,16 @@ public class FundingOpenMakerInfoView {
 	
 	private int agentPhone;
 	
-	private String taxEmail;
-	
 	private String bank;
 	
 	private int accountNumber;
 	
 	private String accountHolder;
 
+	
+	
+	
+	
 	
 	
 	
@@ -67,19 +69,18 @@ public class FundingOpenMakerInfoView {
 		Boolean agentNameIsEmpty = agentName.trim().isEmpty();
 		Boolean agentEmailIsEmpty = agentEmail.trim().isEmpty();
 		Boolean agentPhoneIsEmpty = agentPhone ==0;
-		Boolean taxEmailIsEmpty = taxEmail.trim().isEmpty();
 		Boolean bankIsEmpty = bank.trim().isEmpty();
 		Boolean accountIsEmpty = accountNumber ==0;
 		Boolean accountHolderIsEmpty = accountHolder.trim().isEmpty();
 		
 		
 		if(emailIsEmpty&&agentNameIsEmpty&&agentEmailIsEmpty&&agentPhoneIsEmpty
-				&&taxEmailIsEmpty&&bankIsEmpty&&accountIsEmpty&&accountHolderIsEmpty) {
+				&&bankIsEmpty&&accountIsEmpty&&accountHolderIsEmpty) {
 			
 			return "작성 전";
 			
 		}else if(emailIsEmpty||agentNameIsEmpty||agentEmailIsEmpty||agentPhoneIsEmpty
-				||taxEmailIsEmpty||bankIsEmpty||accountIsEmpty||accountHolderIsEmpty) {
+				||bankIsEmpty||accountIsEmpty||accountHolderIsEmpty) {
 			
 			return "작성 중";
 		}else {
@@ -99,7 +100,7 @@ public class FundingOpenMakerInfoView {
 	
 	public FundingOpenMakerInfoView(String name, String email, int phone, String kakaoId, String kakaoUrl,
 			String homepage1, String homepage2, String sns1, String sns2, String sns3, String businessType,
-			String agentName, String agentEmail, int agentPhone, String taxEmail, String bank, int accountNumber,
+			String agentName, String agentEmail, int agentPhone,  String bank, int accountNumber,
 			String accountHolder) {
 		super();
 		this.name = name;
@@ -116,7 +117,6 @@ public class FundingOpenMakerInfoView {
 		this.agentName = agentName;
 		this.agentEmail = agentEmail;
 		this.agentPhone = agentPhone;
-		this.taxEmail = taxEmail;
 		this.bank = bank;
 		this.accountNumber = accountNumber;
 		this.accountHolder = accountHolder;
@@ -235,14 +235,6 @@ public class FundingOpenMakerInfoView {
 		this.agentPhone = agentPhone;
 	}
 
-	public String getTaxEmail() {
-		return taxEmail;
-	}
-
-	public void setTaxEmail(String taxEmail) {
-		this.taxEmail = taxEmail;
-	}
-
 	public String getBank() {
 		return bank;
 	}
@@ -273,7 +265,7 @@ public class FundingOpenMakerInfoView {
 				+ kakaoId + ", kakaoUrl=" + kakaoUrl + ", homepage1=" + homepage1 + ", homepage2=" + homepage2
 				+ ", sns1=" + sns1 + ", sns2=" + sns2 + ", sns3=" + sns3 + ", businessType=" + businessType
 				+ ", agentName=" + agentName + ", agentEmail=" + agentEmail + ", agentPhone=" + agentPhone
-				+ ", taxEmail=" + taxEmail + ", bank=" + bank + ", accountNumber=" + accountNumber + ", accountHolder="
+				+ ",   bank=" + bank + ", accountNumber=" + accountNumber + ", accountHolder="
 				+ accountHolder + "]";
 	}
 	

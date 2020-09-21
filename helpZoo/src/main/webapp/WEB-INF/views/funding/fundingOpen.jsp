@@ -132,18 +132,21 @@ pageEncoding="UTF-8"%>
 
         <br />
         <br />
+        
         개인 · 사업자 구분 <span class="star">*</span>
         <br />
         <div class="input-group input-group-lg">
           <div class="input-group-prepend"></div>
-          <input
-            type="text"
-            class="form-control"
-             name ="businessType"
-            id = "businessType"
-            aria-label="Large"
-            aria-describedby="inputGroup-sizing-sm"
-          />
+          <select class="form-control form-control-lg" name="businessType">
+            <option disabled="disabled">사업자 구분 선택</option>
+          <option value="개인">개인</option>
+          <option value="법인">법인</option>
+         <option value="개인사업자">개인사업자</option>
+       </select>
+
+
+
+
         </div>
 
         <br />
