@@ -355,7 +355,7 @@
                   <br>
                   <br>
 
-                  <i class="fas fa-paw popoking"></i>    펀딩 준비 &nbsp; <small class="smallMint">작성 중 </small>	 <br>
+                  <i class="fas fa-paw popoking"></i>    펀딩 준비 &nbsp; <small class="smallMint">${allSatis} </small>	 <br>
      <small>   필수 항목을 모두 작성 후 저장하기 버튼을 클릭해주세요. 작성 중 > 작성 완료 상태로 변경되어야 최종 제출이 가능합니다. </small>
                 </div>
 
@@ -401,7 +401,10 @@
                 <button
                 type="button"
                 class="btn btn-primary col-md-4 col-sm-4 col-xs-4 btn-lg funding_btn mintclick"
-                onclick="location.href = '${contextPath}/funding/fundingOpenDetail' "
+                onclick="location.href ='${contextPath}/funding/fundingOpenSubmit/${fundingNo}'"
+ <c:if test="${allSatis ne '작성 완료'}">
+	disabled
+</c:if>
               >제출하기</button>
 
 

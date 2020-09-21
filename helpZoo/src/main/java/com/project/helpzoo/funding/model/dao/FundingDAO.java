@@ -1,7 +1,9 @@
 package com.project.helpzoo.funding.model.dao;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,6 +44,7 @@ import com.project.helpzoo.funding.model.vo.search.SearchStatus;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import oracle.net.aso.e;
@@ -85,7 +88,7 @@ public class FundingDAO {
 						orderReward.count.sum())
 				
 				.from(funding)
-				.leftJoin(funding.reward, reward)
+				.leftJoin(funding.rewards, reward)
 				.leftJoin(orderReward).on(reward.id.eq(orderReward.reward.id))
 				.leftJoin(funding.category, category)
 				.leftJoin(funding.fundingMaker, maker)
@@ -247,7 +250,7 @@ public class FundingDAO {
 							orderReward.count.sum())
 					
 					.from(funding)
-					.leftJoin(funding.reward, reward)
+					.leftJoin(funding.rewards, reward)
 					.leftJoin(funding.fundingMaker, maker)
 					.leftJoin(orderReward).on(reward.id.eq(orderReward.reward.id))
 					.where(funding.id.eq(no))
@@ -329,9 +332,11 @@ public class FundingDAO {
 	 * @param type
 	 * @param phone
 	 * @param memberNo
+	 * @param managerName 
+	 * @param managerEmail 
 	 * @return
 	 */
-	public Long openFunding(String makerName, Long type, int phone, int memberNo) {
+	public Long openFunding(String makerName, Long type, int phone, int memberNo, String managerEmail, String managerName) {
 		
 		
 		
@@ -341,6 +346,12 @@ public class FundingDAO {
 		
 	    BusinessType businessType = em.find(BusinessType.class, type);
 		
+	    
+	    
+	    
+	    funding.setManagerEmail(managerEmail);
+	    
+	    funding.setManagerName(managerName);
 	  
 	    FundingMaker maker = new FundingMaker();
 	    
@@ -374,10 +385,6 @@ public class FundingDAO {
 		em.persist(funding);
 		
 		
-		System.out.println(funding.getBusinessType() + "저는 펀딩의 비즈니스 타입입니다.");
-		
-		System.out.println(funding.getBusinessType().getBusinessType() + "저는 펀딩의 비즈니스 타입2입니다.");
-		
 		
 		
 		
@@ -392,7 +399,6 @@ public class FundingDAO {
 	public FundingOpenRequireView openRequire(Long fundingNo) {
 		
 		
-		System.out.println(fundingNo);
 		
 		FundingProject fundingProject = em.find(FundingProject.class, fundingNo);
 		
@@ -440,9 +446,13 @@ public class FundingDAO {
 	public FundingTotalInfoDto getFundingTotalInfo(Long fundingNo) {
 		
 		
-		FundingProject fundingProject = em.find(FundingProject.class, fundingNo);
+		System.out.println("토탈인포 펀딩넘버 : " + fundingNo);
 		
-		System.out.println(fundingProject);
+		
+		
+		
+		
+		FundingProject fundingProject = em.find(FundingProject.class, fundingNo);
 		
 		
 		//기본 정보의 view에 표시될 정보 -작성 확인용-
@@ -526,7 +536,6 @@ public class FundingDAO {
 		
 		FundingProject funding = em.find(FundingProject.class, fundingNo);
 		
-		
 		List<Reward> rewardList = new ArrayList<Reward>();
 		
 		rewardList = funding.getReward();
@@ -540,12 +549,15 @@ public class FundingDAO {
 		
 		for( Reward reward : rewardList ) {
 			rewardView = new FundingOpenRewardView
-		
 		(reward.getPrice(), reward.getTitle(), reward.getContent(), 
 		 reward.getOption(), reward.getDeliveryPrice(), reward.getAmount(), reward.getDeliveryDay());
+			
 			fundingOpenRewardView.add(rewardView);
 		
 		}
+		
+		
+		
 		return fundingOpenRewardView;
 	}
 
@@ -582,7 +594,7 @@ public class FundingDAO {
 					
 			maker.getSns(), maker.getSns2(), maker.getSns3(), funding.getBusinessType().getBusinessType(), agent.getName(), agent.getEmail(), agent.getPhone(), 
 			
-			agent.getTexEmail(), agent.getBank(), agent.getAccountNumber(),  agent.getAccountHolder());
+			 agent.getBank(), agent.getAccountNumber(),  agent.getAccountHolder());
 		return fundingOpenMakerInfoView;
 	}
 
@@ -776,6 +788,154 @@ public class FundingDAO {
 		
 		
 		return em.find(FundingProject.class, fundingNo);
+	}
+
+
+
+
+	public void openRewardSave(Long fundingNo, FundingOpenRewardView rewardView) {
+		
+		QFundingProject funding = QFundingProject.fundingProject;
+		QReward reward = QReward.reward;
+		JPAQueryFactory query = new JPAQueryFactory(em);
+		
+		
+		Long rewardSeq =	query.select(reward.count()).from(reward).where(reward.fundingProject.id.eq(fundingNo)).fetchFirst();
+		
+		
+	
+		rewardSeq = rewardSeq+1L;
+	
+	
+		FundingProject fundingProject = em.find(FundingProject.class, fundingNo);		
+				
+		
+		Reward insertReward = new Reward(rewardSeq,rewardView.getContent(), rewardView.getTitle(), rewardView.getPrice(), 
+				rewardView.getRewardAmount(), rewardView.getDeleveryPrice(), rewardView.getDeliveryDay());
+		
+		
+		System.out.println("insertReward = : " + insertReward);
+		
+		
+		insertReward.setFundingProject(fundingProject);
+		
+		em.persist(insertReward);
+		
+		
+		fundingProject.addReward(insertReward);
+	
+		
+		
+		
+		
+		
+		
+	}
+
+
+
+
+	public void openMakerSave(FundingOpenMakerInfoView fundingOpenMakerView, Long fundingNo) {
+	
+		
+		FundingProject fundingProject = em.find(FundingProject.class, fundingNo);		
+		
+		
+		FundingMaker maker = fundingProject.getFundingMaker();
+		
+		MakerAgent agent = maker.getMakerAgent();
+		
+		
+		
+		String businessTypeId = fundingOpenMakerView.getBusinessType();
+		//입력된 비즈니스 키 탐색
+		
+		Long type = 0L;
+		
+		if(businessTypeId.equals("개인")) {
+			type = 1L;
+			
+		}else if (businessTypeId.equals("법인")){
+			type = 2L;
+			
+		}else if (businessTypeId.equals("개인사업자")){
+			type = 3L;
+			
+		}
+		
+		
+		
+		BusinessType businessType = em.find(BusinessType.class, type);
+		
+		
+		
+		
+		fundingProject.setBusinessType(businessType);
+		
+		
+		
+		maker.setName(fundingOpenMakerView.getName());
+		
+		maker.setEmail(fundingOpenMakerView.getEmail());
+		
+		maker.setPhone(fundingOpenMakerView.getPhone());
+		
+		maker.setKakaoId(fundingOpenMakerView.getKakaoId());
+		
+		maker.setKakaoURL(fundingOpenMakerView.getKakaoUrl());
+		
+		maker.setHomepage1(fundingOpenMakerView.getHomepage1());
+		
+		maker.setHomepage2(fundingOpenMakerView.getHomepage2());
+		
+		maker.setSns(fundingOpenMakerView.getSns1());
+		
+		maker.setSns2(fundingOpenMakerView.getSns2());
+		
+		maker.setSns3(fundingOpenMakerView.getSns3());
+		
+		
+		
+		
+		// 대표자 정보 세팅
+		agent.setName(fundingOpenMakerView.getAgentName());
+		
+		agent.setEmail(fundingOpenMakerView.getAgentEmail());
+		
+		agent.setPhone(fundingOpenMakerView.getAgentPhone());
+		
+		agent.setBank(fundingOpenMakerView.getBank());
+		
+		agent.setAccountNumber(fundingOpenMakerView.getAccountNumber());
+		
+		agent.setAccountHolder(fundingOpenMakerView.getAccountHolder());
+		
+		
+		
+		
+	}
+
+
+
+
+	public void fundingStart(Long fundingNo) {
+		
+		
+		SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
+		Calendar cal = Calendar.getInstance();
+		String today = null;
+		today = formatter.format(cal.getTime());
+		Timestamp ts = Timestamp.valueOf(today);
+		
+		
+		FundingProject funding = em.find(FundingProject.class, fundingNo);
+		
+		funding.setStatus("Y");
+		
+		funding.setStartDay(ts);
+		
+		
+		
 	}
 	
 	

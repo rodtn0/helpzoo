@@ -25,12 +25,12 @@ import com.project.helpzoo.funding.exception.NotEnoughStockException;
 public class Reward {
 
 	@Id@GeneratedValue(strategy = GenerationType.SEQUENCE,
-			generator = "FUNDING_PROJECT_SEQ_GENERATOR")
+			generator = "REWARD_SEQ_GENERATOR")
 	@Column(name="REWARD_ID")
 	private Long id;
 	
 	@Column(name="FUNDING_REWARD_SEQ")
-	private int rewardSeq;
+	private Long rewardSeq;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="FUNDING_ID")
@@ -64,11 +64,41 @@ public class Reward {
 	
 	
 	
+	public Reward() {
+		
+	}
 	
 	
 	
 	
-	
+	public Reward(Long rewardSeq, String content, String title, int price, int amount, int deliveryPrice,
+			Timestamp deliveryDay) {
+		super();
+		this.rewardSeq = rewardSeq;
+		this.content = content;
+		this.title = title;
+		this.price = price;
+		this.amount = amount;
+		this.deliveryPrice = deliveryPrice;
+		this.deliveryDay = deliveryDay;
+	}
+
+
+
+
+	public Reward(String content, String title, int price, int amount, int deliveryPrice, Timestamp deliveryDay) {
+		super();
+		this.content = content;
+		this.title = title;
+		this.price = price;
+		this.amount = amount;
+		this.deliveryPrice = deliveryPrice;
+		this.deliveryDay = deliveryDay;
+	}
+
+
+
+
 	public void addStock(int amount) {
 		this.amount += amount;
 	}
@@ -160,14 +190,14 @@ public class Reward {
 
 
 
-	public int getRewardSeq() {
+	public Long getRewardSeq() {
 		return rewardSeq;
 	}
 
 
 
 
-	public void setRewardSeq(int rewardSeq) {
+	public void setRewardSeq(Long rewardSeq) {
 		this.rewardSeq = rewardSeq;
 	}
 
@@ -246,7 +276,7 @@ public class Reward {
 
 	@Override
 	public String toString() {
-		return "Reward [id=" + id + ", rewardSeq=" + rewardSeq + ", fundingProject=" + fundingProject + ", content="
+		return "Reward [id=" + id + ", rewardSeq=" + rewardSeq + ",  content="
 				+ content + ", title=" + title + ", price=" + price + ", amount=" + amount + "]";
 	}
 	

@@ -70,14 +70,13 @@ public class FundingOpenStoryView {
 		Boolean fundingStoryIsEmpty = fundingStory.trim().isEmpty();
 		
 		Boolean introAttachIsEmpty = IntroAttachment == null;
-		Boolean imagesIsEmpty = images.isEmpty();
 		
-	if	(fundingStoryIsEmpty&&fundingSummaryIsEmpty&&introAttachIsEmpty&&imagesIsEmpty) {
+	if	(fundingStoryIsEmpty&&fundingSummaryIsEmpty&&introAttachIsEmpty) {
 		
 		return "작성 전";
 	}
 	
-	else if (fundingStoryIsEmpty||fundingSummaryIsEmpty||introAttachIsEmpty||imagesIsEmpty){
+	else if (fundingStoryIsEmpty||fundingSummaryIsEmpty||introAttachIsEmpty){
 		return "작성 중";
 	}else {
 		return "작성 완료";

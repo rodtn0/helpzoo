@@ -12,7 +12,7 @@ public class FundingDetailViewDto {
 	
 	private String fundingStroy;
 	
-	private Integer fundingRewardSeq;
+	private Long fundingRewardSeq;
 	
 	private String rewardContent;
 	
@@ -59,7 +59,7 @@ public class FundingDetailViewDto {
 
 
 
-	public FundingDetailViewDto(String fundingStroy, Integer fundingRewardSeq, String rewardContent, String rewardTitle,
+	public FundingDetailViewDto(String fundingStroy, Long fundingRewardSeq, String rewardContent, String rewardTitle,
 			int rewardPrice, int rewardAmount, int goalAmount, int totalOrderAmount, int achievementRate,
 			List<String> suppoterName, String makerName, String snsUrl, String kakaoUrl, int like, Timestamp endDay,
 			Timestamp startDay) {
@@ -84,7 +84,7 @@ public class FundingDetailViewDto {
 
 
 
-	public FundingDetailViewDto(String fundingStroy, Integer fundingRewardSeq, String rewardContent, String rewardTitle,
+	public FundingDetailViewDto(String fundingStroy, Long fundingRewardSeq, String rewardContent, String rewardTitle,
 			int rewardPrice, int rewardAmount, int totalOrderAmount, int achievementRate,
 			List<String> suppoterName, String makerName, String snsUrl, String kakaoUrl, int like, Timestamp endDay,
 			Timestamp startDay) {
@@ -120,7 +120,7 @@ public class FundingDetailViewDto {
 
 
 
-	public FundingDetailViewDto(String fundingStroy, Integer fundingRewardSeq, String rewardContent, String rewardTitle,
+	public FundingDetailViewDto(String fundingStroy, Long fundingRewardSeq, String rewardContent, String rewardTitle,
 			int rewardPrice, int rewardAmount, int totalOrderAmount, int achievementRate,
 			List<String> suppoterName, String makerName, String snsUrl, String kakaoUrl, int like, Timestamp endDay) {
 		super();
@@ -172,7 +172,7 @@ public class FundingDetailViewDto {
 
 
 
-	public FundingDetailViewDto(String fundingStroy, Integer fundingRewardSeq, String rewardContent, String rewardTitle,
+	public FundingDetailViewDto(String fundingStroy, Long fundingRewardSeq, String rewardContent, String rewardTitle,
 			int rewardPrice, int rewardAmount, int totalOrderAmount, int achievementRate,
 			List<String> suppoterName, String makerName, String snsUrl, String kakaoUrl, int like) {
 		super();
@@ -205,13 +205,13 @@ public class FundingDetailViewDto {
 
 
 
-	public Integer getFundingRewardSeq() {
+	public Long getFundingRewardSeq() {
 		return fundingRewardSeq;
 	}
 
 
 
-	public void setFundingRewardSeq(Integer fundingRewardSeq) {
+	public void setFundingRewardSeq(Long fundingRewardSeq) {
 		this.fundingRewardSeq = fundingRewardSeq;
 	}
 
@@ -337,7 +337,7 @@ public class FundingDetailViewDto {
 
 
 
-	public FundingDetailViewDto(String fundingStroy, Integer integer, String rewardContent, String rewardTitle,
+	public FundingDetailViewDto(String fundingStroy, Long integer, String rewardContent, String rewardTitle,
 			int rewardPrice, int rewardAmount, int totalOrderAmount, int achievementRate,
 			List<String> suppoterName, String makerName, String snsUrl, String kakaoUrl) {
 		super();

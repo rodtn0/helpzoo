@@ -459,11 +459,11 @@
 
                   var menuBar = $("<div class='menu_box'></div>");
 
-              var require = $("<a class='box funding_require' href='${contextPath}/funding/fundingOpenRequire' >기본 요건</a>");
-              var fundingInfo = $("<a class='box funding_info' href='${contextPath}/funding/fundingOpenInfo'>기본 정보</a>");
-              var story = $("<a class='box funding_story' href='${contextPath}/funding/fundingOpenStory'>스토리 작성</a>");
-              var reward = $("<a class='box funding_reward_build' href='${contextPath}/funding/fundingOpenReward'>리워드 설계</a>");
-              var makerInfo = $("<a class='box funding_maker_info' href='${contextPath}/funding/fundingOpenMakerInfo'>메이커 정보</a>");
+                  var require = $("<a class='box funding_require' href='${contextPath}/funding/fundingOpenRequire/${fundingNo}' >기본 요건</a>");
+                  var fundingInfo = $("<a class='box funding_info' href='${contextPath}/funding/fundingOpenInfo/${fundingNo}'>기본 정보</a>");
+                  var story = $("<a class='box funding_story' href='${contextPath}/funding/fundingOpenStory/${fundingNo}'>스토리 작성</a>");
+                  var reward = $("<a class='box funding_reward_build' href='${contextPath}/funding/fundingOpenReward/${fundingNo}'>리워드 설계</a>");
+                  var makerInfo = $("<a class='box funding_maker_info' href='${contextPath}/funding/fundingOpenMakerInfo/${fundingNo}'>메이커 정보</a>");
 
                     $(".funding_ready_menubar").on("click", function() {
                       console.log( $( this ).text() );

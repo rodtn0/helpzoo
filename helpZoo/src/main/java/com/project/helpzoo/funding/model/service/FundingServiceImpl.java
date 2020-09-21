@@ -20,7 +20,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingDetailViewDto;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingMainViewDto;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenInfoView;
+import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenMakerInfoView;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenRequireView;
+import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenRewardView;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenStoryView;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingTotalInfoDto;
 import com.project.helpzoo.funding.model.dao.FundingDAO;
@@ -93,7 +95,7 @@ public class FundingServiceImpl implements FundingService {
 	
 
 	@Override
-	public Long openFunding(String makerName, String businessType, int phone, int memberNo) {
+	public Long openFunding(String makerName, String businessType, int phone, int memberNo,String managerEmail, String managerName) {
 		
 		
 		Long type = 0L;
@@ -114,7 +116,7 @@ public class FundingServiceImpl implements FundingService {
 		
 		
 		
-		return dao.openFunding(makerName, type, phone, memberNo);
+		return dao.openFunding(makerName, type, phone, memberNo, managerEmail, managerName);
 	}
 
 
@@ -413,6 +415,27 @@ public class FundingServiceImpl implements FundingService {
 			savaAttachment(images, savePath, files,funding );
 			
 					
+			
+		}
+
+
+		@Override
+		public void openRewardSave(Long fundingNo, FundingOpenRewardView rewardView) {
+			
+			
+			
+			dao.openRewardSave(fundingNo, rewardView);
+			
+		}
+
+
+		@Override
+		public void openMakerSave(FundingOpenMakerInfoView fundingOpenInfoView, Long fundingNo) {
+			
+			
+			
+			
+			dao.openMakerSave(fundingOpenInfoView, fundingNo);
 			
 		}
 		

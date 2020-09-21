@@ -36,12 +36,18 @@ public Boolean isSatisfied() {
 		Boolean requireSatis = fundingOpenRequireView.isSatisfied().equals("작성 완료");
 		Boolean rewardSatis = !fundingOpenRewardView.isEmpty();
 		Boolean storySatis = fundingOpenStoryView.isSatisfied().equals("작성 완료");
+		
+		
 		Boolean allSatis = null;
 		
 		if(infoSatis&&makerInfoSatis&&requireSatis&&rewardSatis&&storySatis) {
+			
 			allSatis = true;
+		
 		}else {
+		
 			allSatis = false;
+		
 		}
 		return allSatis;
 		

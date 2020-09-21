@@ -100,8 +100,8 @@ public class FundingProject {
 	@JoinColumn(name = "BUSINESS_TYPE_ID")
 	private BusinessType businessType;
 	
-	@OneToMany (mappedBy = "fundingProject", fetch = FetchType.LAZY)
-	private List<Reward> reward;
+	@OneToMany (mappedBy = "fundingProject", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+	private List<Reward> rewards;
 	
 	
 	@OneToOne (fetch = FetchType.LAZY)
@@ -116,7 +116,16 @@ public class FundingProject {
 	
 
 	
-
+	public void addReward(Reward reward) {
+		
+		rewards.add(reward);
+		if(reward.getFundingProject()!=this) {
+			reward.setFundingProject(this);
+		}
+		
+		
+		
+	}
 	
 	
 
@@ -184,13 +193,13 @@ public class FundingProject {
 
 
 	public List<Reward> getReward() {
-		return reward;
+		return rewards;
 	}
 
 
 
-	public void setReward(List<Reward> reward) {
-		this.reward = reward;
+	public void setRewards(List<Reward> rewards) {
+		this.rewards = rewards;
 	}
 
 
@@ -510,7 +519,7 @@ if(status == null) {
 				+ tag + ", summary=" + summary + ", story=" + story + ", startDay=" + startDay + ", status=" + status
 				+ ", memberNo=" + memberNo + ", readCount=" + readCount + ", likeCount=" + likeCount
 				+ ", rewardMakePlan=" + rewardMakePlan + ", rewardDeliveryPlan=" + rewardDeliveryPlan + ", category="
-				+ category + ", businessType=" + businessType + ", reward=" + reward + ", fundingMaker=" + fundingMaker
+				+ category + ", businessType=" + businessType + ", reward=" + rewards + ", fundingMaker=" + fundingMaker
 				+ "]";
 	}
 	
