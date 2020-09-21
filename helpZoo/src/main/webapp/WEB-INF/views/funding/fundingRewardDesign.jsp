@@ -8,6 +8,8 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="Cache-Control" content="No-Cache"> 
+<meta http-equiv="Pragma" content="No-Cache"> 
     <title>타이틀</title>
 
     <link
@@ -279,7 +281,7 @@
     <div class="project_create_top_bar">
       &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/helpZoo/resources/images/도와주60.png" />
 
-      <span class="span"> <i class="fas fa-paw popoking"></i> &nbsp;도래미  </span>
+      <span class="span"> <i class="fas fa-paw popoking"></i> &nbsp;${makerName}  </span>
       <div class="float-right project_create_top_bar_choice"> 
         <button type="button" class="btn btn-outline-primary">미리보기</button>&nbsp;&nbsp;&nbsp;
 
@@ -299,10 +301,10 @@
               <br>
               <br>
 
-              도와주의 <br />
+              ${makerName}의 <br />
               멋진 프로젝트 <br />
               <br>
-              프로젝트 번호 82752
+              프로젝트 번호 ${fundingNo}
               <br>
             </div>
 

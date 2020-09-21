@@ -8,6 +8,11 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="Cache-Control" content="No-Cache"> 
+<meta http-equiv="Pragma" content="No-Cache"> 
+
+
+
     <title>타이틀</title>
 
     <link
@@ -16,11 +21,7 @@
       integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
       crossorigin="anonymous"
     />
-    <script
-      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-      crossorigin="anonymous"
-    ></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
       integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
@@ -38,6 +39,11 @@
       integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc"
       crossorigin="anonymous"
     />
+
+
+
+
+
 
     <style>
       .project_create_top_bar {
@@ -272,12 +278,13 @@
         color: black;
       }
 
-
     </style>
 
 
-</script>
 
+<!------------------ Summernote ------------------>
+<link rel="stylesheet" href="${contextPath}/resources/summernote/css/summernote-lite.css">
+<!------------------------------------------------>
 
 
   </head>
@@ -285,7 +292,7 @@
     <div class="project_create_top_bar">
       &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/helpZoo/resources/images/도와주60.png" />
 
-      <span class="span"> <i class="fas fa-paw popoking"></i> &nbsp;도래미  </span>
+      <span class="span"> <i class="fas fa-paw popoking"></i> &nbsp;${makerName}  </span>
       <div class="float-right project_create_top_bar_choice"> 
         <button type="button" class="btn btn-outline-primary">미리보기</button>&nbsp;&nbsp;&nbsp;
 
@@ -295,6 +302,16 @@
       <br />
     </div>
 
+
+	<script src="${contextPath}/resources/summernote/js/summernote-lite.js"></script>
+	<script src="${contextPath}/resources/summernote/js/summernote-ko-KR.js"></script>
+	<script src="${contextPath}/resources/summernote/js/summernote.js"></script>
+	
+	
+	
+	
+	
+	
     <div>
       <div class="funding_open_deail_container">
         <div class="row">
@@ -305,10 +322,10 @@
               <br>
               <br>
 
-              도와주의 <br />
+              ${makerName}의 <br />
               멋진 프로젝트 <br />
               <br>
-              프로젝트 번호 82752
+              프로젝트 번호 ${fundingNo}
               <br>
             </div>
 
@@ -339,7 +356,8 @@
             <div class="col-md-2 col-lg-2 col-sm-2">
   
           </div>
-
+		<form action="${contextPath}/funding/fundingOpenStory/${fundingNo}" method="post" role="form" 
+				  encType="multipart/form-data">
           <div class="col-md-9 col-lg-9 col-sm-9">
             <div class="container project_open_ready">
               <h1 class="title_msg">스토리 작성</h1>
@@ -356,12 +374,7 @@
             <br>
             <br>
 
-            <div class="form-check">
-             <input class="form-check-input mint" type="radio" name="circulation" id="circulation" value="option1" >
-              <label class="form-check-label" for="exampleRadios1">
-                  &nbsp;   소개 영상
-              </label>
-            </div>
+         
             <br>
 
             
@@ -379,13 +392,26 @@
                 <br>
                 <div class="upload-btn-wrapper">
                     <button class="btn"> <i class="fas fa-camera-retro"></i>&nbsp;등록하기</button>
-                    <input type="file" name="myfile" />
+                    <input type="file" name="introPhoto" onchange="LoadImg(this,1)"/>
+                  
                   </div>
                   <br>
                 <small>  2MB 이하의 JPEG, JPG, GIF, PNG 파일<br>
                   사이즈 : 최소 630X400 픽셀 이상<br>
                   여러 장 등록 가능<br>
             </small>
+
+					<div class="form-inline mb-2">
+					<label class="input-group-addon mr-3 insert-label">업로드<br>이미지</label>
+					<div class="boardImg" id="titleImgArea">
+						<img id="titleImg" width="200" height="200">
+					</div>
+				</div>
+
+				
+
+
+
 
                 <br>
                 <br>
@@ -404,10 +430,10 @@
                   <br>
   
                 <br>
-  
+  	
                 <div class="form-group">
                   <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" 
-                  placeholder="내용을 입력하세요."
+                  placeholder="내용을 입력하세요." name="fundingSummary"
                   ></textarea>
                   <small>100자 남음</small>
               </div>        
@@ -435,7 +461,8 @@
                 
                 프로젝트 스토리<span class="star">*</span><br>
                 <small>진정성 있고 매력적인 스토리로 서포터의 마음을 움직여볼까요?</small>
-                <input class="form-control form-control-lg" type="number" placeholder="제목 입력">
+					<textarea class="form-control" id="summernote" name="fundingStory"></textarea>
+				
 
 
 
@@ -443,15 +470,63 @@
                 <br>
                 <br>
                 <button
-                type="button"
+                type="submit"
                 class="btn btn-primary col-md-4 col-sm-4 col-xs-4 btn-lg funding_btn mintclick"
                 onclick="location.href = '${contextPath}/funding/fundingOpenDetail' "
               >저장하기</button>
 
 
+	</form>
+
+
+
 
      <script>
 
+     
+     
+     
+     
+     
+     
+     
+     
+     function LoadImg(value, num) {
+	      if (value.files && value.files[0]) {
+	        var reader = new FileReader();
+
+	        reader.onload = function (e) {
+	          switch (num) {
+	            case 1:
+	              $("#titleImg").attr("src", e.target.result);
+	              break;
+	            case 2:
+	              $("#contentImg1").attr("src", e.target.result);
+	              break;
+	            case 3:
+	              $("#contentImg2").attr("src", e.target.result);
+	              break;
+	            case 4:
+	              $("#contentImg3").attr("src", e.target.result);
+	              break;
+	          }
+	        }
+
+	        reader.readAsDataURL(value.files[0]);
+	      }
+	    }
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
                   var menubarFlag = true;
 
                   var menuBar = $("<div class='menu_box'></div>");

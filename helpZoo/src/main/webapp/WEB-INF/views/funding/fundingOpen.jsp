@@ -31,7 +31,9 @@ pageEncoding="UTF-8"%>
       integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc"
       crossorigin="anonymous"
     />
+<meta http-equiv="Cache-Control" content="No-Cache"> 
 
+<meta http-equiv="Pragma" content="No-Cache"> 
     <meta charset="UTF-8" />
     <title>프로젝트 오픈</title>
 
@@ -113,7 +115,7 @@ pageEncoding="UTF-8"%>
         메이커(기업)명 <span class="star">*</span>
         <br />
         
-        <form action="${contextPath}/funding/fundingOpenDetailStart" method="GET">
+        <form action="${contextPath}/funding/fundingOpenDetail" method="POST">
         
         
         <div class="input-group input-group-lg">
@@ -155,7 +157,7 @@ pageEncoding="UTF-8"%>
             class="form-control"
             aria-label="Large"
             aria-describedby="inputGroup-sizing-sm"
-            placeholder="${member.memberName}"
+            placeholder="${loginMember.memberName}"
             readonly
           />
         </div>
@@ -171,7 +173,7 @@ pageEncoding="UTF-8"%>
             class="form-control"
             aria-label="Large"
             aria-describedby="inputGroup-sizing-sm"
-            placeholder="${member.memberAddress}"
+            placeholder="${loginMember.memberAddress}"
             readonly
           />
         </div>
@@ -192,6 +194,8 @@ pageEncoding="UTF-8"%>
             id = "phone"
             aria-label="Large"
             aria-describedby="inputGroup-sizing-sm"
+            readonly
+            placeholder="${loginMember.memberPhone}"
           />
         </div>
         <small class="certificationCheck"> 인증을 완료한 회원입니다 </small>

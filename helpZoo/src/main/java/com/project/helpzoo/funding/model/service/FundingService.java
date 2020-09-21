@@ -1,12 +1,17 @@
 package com.project.helpzoo.funding.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-import com.project.helpzoo.funding.dto.FundingDetailViewDto;
-import com.project.helpzoo.funding.dto.FundingMainViewDto;
-import com.project.helpzoo.funding.dto.FundingOpenInfoView;
-import com.project.helpzoo.funding.dto.FundingOpenRequireView;
-import com.project.helpzoo.funding.dto.FundingTotalInfoDto;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.project.helpzoo.funding.dto.fundingOpen.FundingDetailViewDto;
+import com.project.helpzoo.funding.dto.fundingOpen.FundingMainViewDto;
+import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenInfoView;
+import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenRequireView;
+import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenStoryView;
+import com.project.helpzoo.funding.dto.fundingOpen.FundingTotalInfoDto;
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.funding.model.vo.search.FundingSearch;
 
@@ -69,5 +74,33 @@ public interface FundingService {
 
 	FundingOpenInfoView openInfo(Long fundingNo);
 
+
+
+	void insertfundingStoryFile(FundingProject funding, List<MultipartFile> images, String savePath);
+
+	
+	//-----------------------------------------Summernote-----------------------------------------
+	/** Summernote 이미지 업로드 Service
+	 * @param uploadFile
+	 * @param savePath
+	 * @return map
+	 */
+	public abstract Map<String, String> insertImage(MultipartFile uploadFile, String savePath);
+
+		
+	/** DB에 저장된 파일 목록 조회 Service
+	 * @return dbFileList
+	 */
+	public abstract List<String> selectDbFileList();
+	//---------------------------------------------------------------------------------------------
+
+
+
+	FundingOpenStoryView openStory(Long fundingNo);
+
+
+
+	void insertfundingFile(FundingProject funding, ArrayList<MultipartFile> images, String savePath, Long fileCategory);
+	
 	
 }

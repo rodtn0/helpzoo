@@ -1,29 +1,36 @@
 package com.project.helpzoo.funding.model.dao;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.project.helpzoo.funding.dto.FundingDetailViewDto;
-import com.project.helpzoo.funding.dto.FundingMainViewDto;
-import com.project.helpzoo.funding.dto.FundingOpenInfoView;
-import com.project.helpzoo.funding.dto.FundingOpenMakerInfoView;
-import com.project.helpzoo.funding.dto.FundingOpenRequireView;
-import com.project.helpzoo.funding.dto.FundingOpenRewardView;
-import com.project.helpzoo.funding.dto.FundingOpenStoryView;
-import com.project.helpzoo.funding.dto.FundingTotalInfoDto;
 import com.project.helpzoo.funding.model.vo.funding.FundingMaker;
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.funding.model.vo.funding.MakerAgent;
+import com.project.helpzoo.funding.model.vo.funding.QFundingAttachment;
+import com.project.helpzoo.funding.dto.fundingOpen.FundingDetailViewDto;
+import com.project.helpzoo.funding.dto.fundingOpen.FundingMainViewDto;
+import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenInfoView;
+import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenMakerInfoView;
+import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenRequireView;
+import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenRewardView;
+import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenStoryView;
+import com.project.helpzoo.funding.dto.fundingOpen.FundingTotalInfoDto;
 import com.project.helpzoo.funding.model.vo.funding.BusinessType;
+import com.project.helpzoo.funding.model.vo.funding.FundingAttachment;
 import com.project.helpzoo.funding.model.vo.funding.FundingCategory;
+import com.project.helpzoo.funding.model.vo.funding.FundingFileCategory;
 import com.project.helpzoo.funding.model.vo.funding.QFundingCategory;
+import com.project.helpzoo.funding.model.vo.funding.QFundingFileCategory;
 import com.project.helpzoo.funding.model.vo.funding.QFundingMaker;
 import com.project.helpzoo.funding.model.vo.funding.QFundingProject;
 import com.project.helpzoo.funding.model.vo.funding.QReward;
@@ -36,6 +43,8 @@ import com.querydsl.core.Tuple;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+
+import oracle.net.aso.e;
 
 @Repository
 @Transactional
@@ -262,7 +271,7 @@ public class FundingDAO {
 		
 			
 			
-			Optional<String[]> member = Optional.empty();  //서포터
+			List<String> suppoter = new ArrayList<String>();  // 서포터를 아직 만들지 않아 빈공간으로 만들어둠.
 			
 			FundingDetailViewDto detailView = null;
 			
@@ -292,7 +301,7 @@ public class FundingDAO {
 					
 					totalOrderAmount, (int)(((double)totalOrderAmount/tuple.get(funding.goalAmount))*100), 
 					
-					member, //현재 서포터 값을 선언하지 않았기 때문에 Optional로 널처리 함.
+					suppoter, // 서포터를 아직 만들지 않아 빈공간으로 만들어둠.
 					
 					tuple.get(maker.name), 
 					tuple.get(maker.sns), 
@@ -484,10 +493,29 @@ public class FundingDAO {
 	private FundingOpenStoryView getFundingOpenStoryView(long fundingNo) {
 		
 		
+		
+		QFundingAttachment fundingAttachment = QFundingAttachment.fundingAttachment;
+		
+		JPAQueryFactory query = new JPAQueryFactory(em);
+		
+		
 		FundingProject funding = em.find(FundingProject.class, fundingNo);
 		
-		FundingOpenStoryView fundingOpenStoryView = 
-				new FundingOpenStoryView(funding.getSummary(), funding.getstory());
+		
+		
+		FundingAttachment attachment = query.select(fundingAttachment).
+				from(fundingAttachment)
+				.where(fundingAttachment.fundingFileCategory.id.eq(6L)
+				.and(fundingAttachment.parentFunding.id.eq(funding.getId())))
+				.fetchFirst();
+		
+		
+		
+		FundingOpenStoryView fundingOpenStoryView = new FundingOpenStoryView
+				(funding.getSummary(), funding.getStory(), attachment);
+		
+		
+		
 		return fundingOpenStoryView;
 	}
 
@@ -612,4 +640,144 @@ public class FundingDAO {
 		return getFundingOpenInfoView(fundingNo);
 	}
 
+
+
+
+	/** 메이커 네임을 구하는 메소드.
+	 * @param fundingNo
+	 * @return
+	 */
+	public String getMakerName(Long fundingNo) {
+		
+		
+		FundingProject funding = em.find(FundingProject.class, fundingNo);
+		
+		String makerName = funding.getFundingMaker().getName();
+		
+		
+		
+			return makerName;
+		
+	}
+
+
+
+
+	public FundingProject findFundingOne(Long fundingNo, FundingOpenStoryView fundingStory) {
+		
+	FundingProject funding = em.find(FundingProject.class, fundingNo);
+	
+		
+		funding.setStory(fundingStory.getFundingStory());
+		
+		funding.setSummary(fundingStory.getFundingSummary());
+		
+		
+		return funding;
+	}
+
+
+
+
+	public FundingFileCategory getFundingCategory(Long fileCategoryType) {
+			
+		return em.find(FundingFileCategory.class, fileCategoryType);
+	}
+
+
+
+
+	public void insertAttachment(FundingAttachment at) {
+
+		
+		
+		em.persist(at);
+	}
+
+
+
+
+	public void deleteAttachment(FundingProject fundingProject) {
+		
+		
+		QFundingProject funding = QFundingProject.fundingProject;
+		QFundingAttachment attachment = QFundingAttachment.fundingAttachment;
+		
+		JPAQueryFactory query = new JPAQueryFactory(em);
+		
+		
+		
+		query.delete(attachment)
+		.where(attachment.fundingFileCategory.id.eq(6L)
+		.and(attachment.parentFunding.id.eq(fundingProject.getId())));
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+	//-----------------------------------------Summernote-----------------------------------------
+	/**   DB에 저장된 파일 목록 조회 DAO
+	 * @return dbFileList
+	 */
+	public List<String> selectDbFileList() {
+		
+	
+		
+	return 	em.createQuery("SELECT f.fileChangeName FROM FundingAttachment f "
+				+ "where TO_DATE(SUBSTR(FILE_CHANGE_NAME,1,8),'YYMMDDHH24') >= (SYSDATE - 3)").getResultList();
+		
+				
+		
+		
+		
+		
+	} 
+	//---------------------------------------------------------------------------------------------
+	
+	
+	public void fundingSave(FundingProject funding) {
+		
+				
+				if(funding.getId()== 0) {
+					
+					em.persist(funding);
+				}else {
+					em.merge(funding);
+				}
+		
+		
+	}
+
+
+
+
+
+
+	public FundingOpenStoryView openStory(Long fundingNo) {
+		
+		
+		
+		
+		
+		
+		return getFundingOpenStoryView(fundingNo);
+	}
+
+
+
+
+	public FundingProject findFunding(Long fundingNo) {
+		
+		
+		return em.find(FundingProject.class, fundingNo);
+	}
+	
+	
+	
 }

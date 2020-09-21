@@ -2,6 +2,7 @@ package com.project.helpzoo.funding.model.vo.funding;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -49,7 +50,7 @@ public class MakerAgent {
 	@Column(name="MAKER_AGENT_ACCOUNT_HOLDER")
 	private String accountHolder;
 	
-	@OneToOne(mappedBy = "makerAgent")
+	@OneToOne(mappedBy = "makerAgent", fetch = FetchType.LAZY)
 	private FundingMaker fundingMaker;
 
 	
