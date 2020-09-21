@@ -98,7 +98,7 @@
 							value :false
 						},
 						confirm:{
-							text : "Ok",
+							text : "OK",
 							value : true
 						}
 					}

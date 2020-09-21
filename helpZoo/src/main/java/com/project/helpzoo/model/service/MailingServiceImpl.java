@@ -20,9 +20,19 @@ public class MailingServiceImpl implements MailingService{
 	}
 
 	// 메일링 서비스 등록
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int regSubscribe(Mailing mailing) {
-		return mailingDAO.insertMailing(mailing);
+		
+		int iRtn = 0;
+		
+		if(mailing.getMailStatus() == null || mailing.getMailStatus() == "") {
+			iRtn = mailingDAO.insertMailing(mailing);
+		} else {
+			iRtn = mailingDAO.updateMailing(mailing);
+		}
+		
+		return iRtn;
 	}
 
 	// 메일링 서비스 구독하기
@@ -30,8 +40,15 @@ public class MailingServiceImpl implements MailingService{
 	@Override
 	public int subscribe(Mailing mailing) {
 		
-		return mailingDAO.updateMailing(mailing);
+		int iRtn = 0;
 		
+		if(mailing.getMailStatus() == null || mailing.getMailStatus() == "") {
+			iRtn = mailingDAO.insertMailing(mailing);
+		} else {
+			iRtn = mailingDAO.updateMailing(mailing);
+		}
+		
+		return iRtn;
 	}
 
 	// 메일링 서비스 구독 취소

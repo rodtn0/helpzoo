@@ -62,20 +62,10 @@
 						</div>
 					</c:when>
 					
-					<c:when test="${selMailing.mailStatus == 'N'}">
+					<c:otherwise>
 						<div class="submitBtn">
 							<button class="subscribe">구독하기</button>
 						</div>
-					</c:when>
-					
-					<c:otherwise>
-						<form action="regSubscribe" method="post">
-							<input type="number" name="memberNo" style="display:none" value="${loginMember.memberNo}">
-							<input type="text" name="mailStatus" style="display:none" value="N">
-							<div class="submitBtn">
-								<button class="subscribe">구독하기</button>
-							</div>
-						</form>
 					</c:otherwise>
 				</c:choose>
 				
@@ -88,8 +78,9 @@
 	
 	<script>
 	
-	let mailing = {memberNo:"${selMailing.memberNo}",
-				mailStatus:"${selMailing.mailStatus}"
+	let mailing = {
+			memberNo:"${loginMember.memberNo}"
+		,	mailStatus:"${selMailing.mailStatus}"
 	}
 	
 	console.log(mailing);
@@ -105,10 +96,38 @@
 				type : "post",
 				traditional : true,
 				success : function(result) {
-
-					alert(result)
 					
-					location.reload();
+					if(result > 0){
+						swal({
+							icon : "success",
+							title : "구독을 신청하셨습니다.",
+							buttons:{
+								confirm:{
+									text:"OK",
+									value : true
+								}
+							}
+						}).then((result)=>{
+							if(result){
+								location.reload();
+							}
+						})
+					}else{
+						swal({
+							icon : "error",
+							title : "구독 신청에 실패했습니다.",
+							buttons:{
+								confirm:{
+									text:"OK",
+									value : true
+								}
+							}
+						}).then((result)=>{
+							if(result){
+								location.reload();
+							}
+						})
+					}
 					
 				}, error : function() {
 					console.log("ajax통신 실패");
@@ -128,9 +147,39 @@
 				type : "post",
 				success : function(result) {
 
-					alert(result)
+					if(result > 0){
+						swal({
+							icon : "success",
+							title : "구독을 취소하셨습니다.",
+							buttons:{
+								confirm:{
+									text:"OK",
+									value : true
+								}
+							}
+						}).then((result)=>{
+							if(result){
+								location.reload();
+							}
+						})
+					}else{
+						swal({
+							icon : "error",
+							title : "구독 취소에 실패했습니다.",
+							buttons:{
+								confirm:{
+									text:"OK",
+									value : true
+								}
+							}
+						}).then((result)=>{
+							if(result){
+								location.reload();
+							}
+						})
+					}
 					
-					location.reload();
+					//location.reload();
 					
 				}, error : function() {
 					console.log("ajax통신 실패");

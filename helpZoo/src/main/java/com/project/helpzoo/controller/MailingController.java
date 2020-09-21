@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -87,8 +88,9 @@ public class MailingController {
 		// 리스트로 받은 메일 주소
 		List<String> test = new ArrayList<>();
 		test.add(email);
-		test.add("rodtn0@naver.com");
-		test.add("injoo25@gmail.com");
+		test.add("rodtn0@daum.net");
+		test.add("jjisanle@gmail.com");
+		test.add("a01041936838@gmail.com");
 		
 		// List에서 Array로 변환
 		String[] test2 = test.toArray(new String[test.size()]);
@@ -145,6 +147,7 @@ public class MailingController {
 	
 	// 구독하기 버튼 클릭
 	@RequestMapping("subscribeAction")
+	@ResponseBody
 	public int subscribe(@ModelAttribute Mailing mailing, RedirectAttributes rdAttr) {
 		String status = null;
 		String msg = null;
@@ -155,19 +158,20 @@ public class MailingController {
 		
 		System.out.println("result : " + result);
 		
-//		if(result > 0) {
-//			status = "success";
-//			msg = "구독 성공";
-//		}else {
-//			status = "error";
-//			msg = "구독 실패";
-//		}
+		if(result > 0) {
+			status = "success";
+			msg = "구독 성공";
+		}else {
+			status = "error";
+			msg = "구독 실패";
+		}
 		
 		return result;
 	}
 	
 	// 구독 취소하기
 	@RequestMapping("subscribeCancel")
+	@ResponseBody
 	public int subscribeCancel(@ModelAttribute Mailing mailing) {
 		String status = null;
 		String msg = null;
