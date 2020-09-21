@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="MailingMapper">
+
+	<resultMap type="Mailing" id="mailingResultSet">
+		<id property="memberNo" column="MEMBER_NO"/>
+		<result property="mailStatus" column="MAIL_STATUS"/>
+	</resultMap>
+
+	<!-- 메일링 가입 여부 확인 -->
+	<select id="selectMailing" parameterType="_int" resultMap="mailingResultSet">
+		SELECT *
+		FROM MAILING
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<!-- 메일링 서비스 등록(신규등록) -->
+	<insert id="insertMailing" parameterType="mailing">
+		INSERT INTO mailing
+		VALUES(#{memberNo}, DEFAULT)	
+	</insert>
+
+	<!-- 메일링 서비스 등록(수정) -->
+	<update id="updateMailing" parameterType="mailing">
+		UPDATE mailing
+		SET mail_status = 'Y'
+		WHERE member_no = #{memberNo}
+	</update>
+	
+	<update id="subscribeCancel" parameterType="mailing">
+		UPDATE mailing
+		SET mail_status = 'N'
+		WHERE member_no = #{memberNo}
+	</update>
+
+</mapper>
