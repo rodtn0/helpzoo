@@ -40,7 +40,7 @@
 	
 	<!-- 아이디 찾기 -->
 	<select id="findId" parameterType="String" resultType="String">
-		SELECT REPLACE(MEMBER_ID, SUBSTR(MEMBER_ID,-1), '*')
+        SELECT REPLACE(MEMBER_ID, SUBSTR(MEMBER_ID,-2), '**')
 		FROM MEMBER
 		WHERE MEMBER_EMAIL = #{memberEmail}
 		AND MEMBER_STATUS='Y'

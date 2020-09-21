@@ -87,7 +87,7 @@ $('.navbar-light .dmenu').hover(function () {
 	              	기부 내역
 	            </a>
 	            <div class="dropdown-menu sm-menu">
-	              <a class="dropdown-item" href="${contextPath}/mypage/fundingList/1">내가 주최한</a>
+	              <a class="dropdown-item" href="${contextPath}/mypage/donationList/1">내가 주최한</a>
 	              <a class="dropdown-item" href="#">내가 참여한</a>
 	            </div>
 	          </li>

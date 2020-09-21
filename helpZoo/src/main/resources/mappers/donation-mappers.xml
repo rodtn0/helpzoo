@@ -26,8 +26,6 @@
 		<result property="dBoardType" column="DONATION_BOARD_TYPE"/>
 	</resultMap>
 	
-	
-
 
 	<!-- 전체 게시글 수 조회 -->  
 	<!-- <select id="getListCount" parameterType="_int" resultType="_int">

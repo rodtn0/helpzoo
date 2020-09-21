@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.member.model.vo.Member;
+import com.project.helpzoo.model.vo.Donation;
 import com.project.helpzoo.mypage.model.vo.mPageInfo;
 
 @Repository
@@ -65,11 +66,12 @@ public class MyPageDAO {
 		return sqlSession.selectOne("mypageMapper.getListCount", loginMember);
 	}
 
-	/** 내가 주최한 펀딩 리스트 조회
-	 * @param map
-	 * @return mInfo
-	 */
 
+	/** 내가 주최한 펀딩 리스트 출력
+	 * @param mInfo
+	 * @param loginMember
+	 * @return fdListbyMe
+	 */
 	public List<Member> selectList(mPageInfo mInfo, Member loginMember) {
 		
 		int offset = (mInfo.getCurrentPage()-1)*mInfo.getLimit();
@@ -81,9 +83,27 @@ public class MyPageDAO {
 		return sqlSession.selectList("mypageMapper.selectList", loginMember, rowBounds);
 	}
 
+	/** 내가 주최한 펀딩 리스트의 썸네일 출력
+	 * @param fdListbyMe
+	 * @return thList
+	 */
 	public List<Member> selectThumbnailList(List<Member> fdListbyMe) {
 		
 		return sqlSession.selectList("mypageMapper.selectThumbnailList", fdListbyMe);
+	}
+
+	/** 내가 주최한 기부 리스트 조회
+	 * @param mInfo
+	 * @param loginMember
+	 * @return doListByme
+	 */
+	public List<Donation> donaSelectList1(mPageInfo mInfo, Member loginMember) {
+		
+		int offset = (mInfo.getCurrentPage()-1)*mInfo.getLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, mInfo.getLimit());
+		
+		return sqlSession.donaSelectList1("mypageMapper.donaSelectList1", loginMember, rowBounds);
 	}
 
 

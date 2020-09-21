@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.member.model.vo.Member;
+import com.project.helpzoo.model.vo.Donation;
 import com.project.helpzoo.mypage.model.vo.mPageInfo;
 
 public interface MyPageService {
@@ -44,11 +45,18 @@ public interface MyPageService {
 	 */
 	public abstract List<Member> selectList(mPageInfo mInfo, Member loginMember);
 	
-	/** 내가 주최한 게시글 리스트 썸네일 출력 Service
+	/** 내가 주최한 펀딩 게시글 리스트 썸네일 출력 Service
 	 * @param thList
 	 * @return
 	 */
 	public abstract List<Member> selectThumbnailList(List<Member> fdListbyMe);
+
+	/** 내가 주최한 게시글 리스트 출력 Service
+	 * @param mInfo
+	 * @param loginMember
+	 * @return doListByme
+	 */
+	public abstract List<Donation> donaSelectList1(mPageInfo mInfo, Member loginMember);
 
 
 
