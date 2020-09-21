@@ -48,9 +48,11 @@ public interface FundingService {
 	 * @param businessType
 	 * @param phone
 	 * @param memberNo
+	 * @param string2 
+	 * @param string 
 	 * @return
 	 */
-	Long openFunding(String makerName, String businessType, int phone,int memberNo);
+	Long openFunding(String makerName, String businessType, int phone,int memberNo, String string, String string2);
 
 
 

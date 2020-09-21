@@ -332,9 +332,11 @@ public class FundingDAO {
 	 * @param type
 	 * @param phone
 	 * @param memberNo
+	 * @param managerName 
+	 * @param managerEmail 
 	 * @return
 	 */
-	public Long openFunding(String makerName, Long type, int phone, int memberNo) {
+	public Long openFunding(String makerName, Long type, int phone, int memberNo, String managerEmail, String managerName) {
 		
 		
 		
@@ -344,6 +346,12 @@ public class FundingDAO {
 		
 	    BusinessType businessType = em.find(BusinessType.class, type);
 		
+	    
+	    
+	    
+	    funding.setManagerEmail(managerEmail);
+	    
+	    funding.setManagerName(managerName);
 	  
 	    FundingMaker maker = new FundingMaker();
 	    
