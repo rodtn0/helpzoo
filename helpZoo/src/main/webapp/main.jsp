@@ -43,7 +43,7 @@
 	
 	<div class="row">
 		<div class="col-md-12">
-			<h1  data-aos="fade-up">
+			<h1  data-aos="fade-up" style="font-family:Recipekorea;">
 				도와ZOO 펀딩
 			</h1>
 			
@@ -84,20 +84,21 @@
 						<thead>
 							<tr>
 								<th>
-									#
+									No.
 								</th>
 								<th>
-									Product
+									Title
 								</th>
 								<th>
-									Payment Taken
+									Date
 								</th>
 								<th>
-									Status
+									Views
 								</th>
+								
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="funding-rank">
 							<tr>
 								<td>
 									1
@@ -181,7 +182,7 @@
 	<section id="services" class="services">
 	<div class="row">
 		<div class="col-md-12">
-			<h1 data-aos="fade-up" class="float-right">
+			<h1 data-aos="fade-up" class="float-right" style="font-family:Recipekorea;">
 				도와ZOO 기부
 			</h1>
 			<br>
@@ -193,92 +194,23 @@
 					<br>
 					<table class="table">
 						<thead>
-							<tr>
+							<tr class="table-danger">
 								<th>
-									#
+									No.
 								</th>
 								<th>
-									Product
+									Title
 								</th>
 								<th>
-									Payment Taken
+									Date
 								</th>
 								<th>
-									Status
+									Views
 								</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td>
-									1
-								</td>
-								<td>
-									TB - Monthly
-								</td>
-								<td>
-									01/04/2012
-								</td>
-								<td>
-									Default
-								</td>
-							</tr>
-							<tr class="table-active">
-								<td>
-									1
-								</td>
-								<td>
-									TB - Monthly
-								</td>
-								<td>
-									01/04/2012
-								</td>
-								<td>
-									Approved
-								</td>
-							</tr>
-							<tr class="table-success">
-								<td>
-									2
-								</td>
-								<td>
-									TB - Monthly
-								</td>
-								<td>
-									02/04/2012
-								</td>
-								<td>
-									Declined
-								</td>
-							</tr>
-							<tr class="table-warning">
-								<td>
-									3
-								</td>
-								<td>
-									TB - Monthly
-								</td>
-								<td>
-									03/04/2012
-								</td>
-								<td>
-									Pending
-								</td>
-							</tr>
-							<tr class="table-danger">
-								<td>
-									4
-								</td>
-								<td>
-									TB - Monthly
-								</td>
-								<td>
-									04/04/2012
-								</td>
-								<td>
-									Call in to confirm
-								</td>
-							</tr>
+						<tbody id="donation-rank">
+							
 						</tbody>
 					</table>
 				</div>
@@ -318,7 +250,7 @@
 	<section id="featured" class="featured">
 	<div class="row">
 		<div class="col-md-12">
-			<h1 data-aos="fade-up">
+			<h1 data-aos="fade-up" style="font-family:Recipekorea;">
 				크라우드 펀딩 트렌드
 			</h1>
 			<br>
@@ -420,7 +352,7 @@
 	 <section>
 	<div class="row">
 		<div class="col-md-12">
-			<h1 data-aos="fade-up" class="float-right mb-4">
+			<h1 data-aos="fade-up" class="float-right mb-4" style="font-family:Recipekorea;">
 				기부 트렌드
 			</h1>
 			<br>
@@ -525,10 +457,51 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/scripts.js"></script>
 	
-	
-	
-	
-	
 	<jsp:include page="WEB-INF/views/common/footer.jsp"/>
+	
+<script>
+
+	$(function(){
+		topViews(2); // 함수 호출
+		
+		// 일정 시간(1분)마다 리스트 갱신
+		setInterval(function(){topViews(1)}, 60000);
+	});
+	
+	// 비동기식으로 펀딩 실시간 랭킹 조회
+	function topViews(type){
+		$.ajax({
+			url : "board/topViews/" + type,
+			dataType : "json",
+			success : function(list2){
+				console.log(list2);
+				
+				$("#donation-rank").html(""); // 리스트 갱신을 위해 이전 내용 삭제
+				
+				$.each(list2, function(index, item){
+					
+					var $tr = $("<tr>"); // 행
+					var $td1 = $("<td>").text(item.dBoardNo);
+					var $td2 = $("<td>").text(item.dBoardTitle);
+					var $td3 = $("<td>").text(item.dBoardEndDate);
+					var $td4 = $("<td>").text(item.dBoardReadCount);
+					
+					$tr.append($td1, $td2, $td3, $td4);
+					$("#donation-rank").append($tr);
+					
+				});
+				
+				
+				
+			}, error : function(){
+				console.log("ajax 통신 실패");
+			}
+			
+		});
+		
+	}
+
+
+</script>
 </body>
 </html>

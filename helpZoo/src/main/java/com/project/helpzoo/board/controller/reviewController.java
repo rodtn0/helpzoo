@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,16 +12,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.project.helpzoo.board.model.service.ReviewService;
 import com.project.helpzoo.board.model.vo.Attachment;
 import com.project.helpzoo.board.model.vo.PageInfo;
 import com.project.helpzoo.board.model.vo.Review;
+import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.member.model.vo.Member;
+import com.project.helpzoo.model.vo.Donation;
 
 @Controller
 @SessionAttributes({"loginMember"})
@@ -380,6 +384,32 @@ public class reviewController {
 		rdAttr.addFlashAttribute("msg", msg);
 				
 		return mv;
+	}
+	
+	// 실시간 랭킹 조회
+	@ResponseBody
+	@RequestMapping("topViews/{type}")
+	public String topViews(@PathVariable int type) {
+		System.out.println(type);
+		
+		List<FundingProject> list1 = null;
+		List<Donation> list2 = null;
+		Gson gson = null;
+		String path = null;
+		
+		if(type == 1) {
+			//list1 = reviewService.selectTopViewsF();
+			gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			path = gson.toJson(list1);
+			
+		}else if(type == 2) {
+			list2 = reviewService.selectTopViewsD();
+			gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			path = gson.toJson(list2);
+			
+			System.out.println(list2);
+		}
+		return path;
 	}
 	
 	
