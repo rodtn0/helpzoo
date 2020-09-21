@@ -1,5 +1,7 @@
 package com.project.helpzoo.model.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -38,6 +40,13 @@ public class MailingDAO {
 	 */
 	public int subscribeCancel(Mailing mailing) {
 		return sqlSession.update("MailingMapper.subscribeCancel", mailing);
+	}
+
+	/** 구독한 계정 메일 주소 목록
+	 * @return toSendMail
+	 */
+	public List<String> toSendMail() {
+		return sqlSession.selectList("MailingMapper.toSendMail");
 	}
 
 }

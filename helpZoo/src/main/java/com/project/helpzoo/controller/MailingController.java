@@ -59,6 +59,18 @@ public class MailingController {
 			// 가져온 값 출력
 			System.out.println(selMailing);
 			
+			// 임시 테스트용
+//			List<String> mailList = mailingService.toSendMail();
+//			for(Object i : mailList) {
+//				System.out.println(i);
+//			}
+//			String[] toSendMail = mailList.toArray(new String[mailList.size()]);
+//			for(int i=0; i<toSendMail.length; i++) {
+//				System.out.println("["+i+"] : " + toSendMail[i]);
+//			}
+			
+			
+			
 			model.addAttribute("selMailing", selMailing);
 			
 			url = "mailing/mailingMain";
@@ -73,7 +85,7 @@ public class MailingController {
 	
 	// 메일 보내기 기능
 	@RequestMapping(value = "sendMail", method = RequestMethod.POST)
-	public String sendMail(@RequestParam(value = "email", required = false) String email,
+	public String sendMail(//@RequestParam(value = "email", required = false) String email,
 						@RequestParam(value = "title", required = false) String title,
 						@RequestParam(value = "content", required = false) String content,
 						RedirectAttributes rdAttr) {
@@ -81,26 +93,30 @@ public class MailingController {
 		String setFrom = "helpzooFinal@gmail.com";	// 보내는 사람 메일
 		
 		// 파라미터값 받아오는지 출력
-		System.out.println("메일 주소 : " + email);
+//		System.out.println("메일 주소 : " + email);
 		System.out.println("메일 제목 : " + title);
 		System.out.println("메일 내용 : " + content);
 		
-		// 리스트로 받은 메일 주소
-		List<String> test = new ArrayList<>();
-		test.add(email);
-		test.add("rodtn0@daum.net");
-		test.add("jjisanle@gmail.com");
-		test.add("a01041936838@gmail.com");
+		// 구독한 계정 메일 주소 목록
+		List<String> mailList = mailingService.toSendMail();
+		
+//		for(String i : mailList) {
+//			System.out.println(i);
+//		}
+//		test.add(email);
+//		test.add("rodtn0@daum.net");
+//		test.add("jjisanle@gmail.com");
+//		test.add("a01041936838@gmail.com");
 		
 		// List에서 Array로 변환
-		String[] test2 = test.toArray(new String[test.size()]);
+		String[] toSendMail = mailList.toArray(new String[mailList.size()]);
 		
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 			
 			messageHelper.setFrom(setFrom); // 보내는 사람 이메일
-			messageHelper.setBcc(test2); // 받는 사람 이메일
+			messageHelper.setBcc(toSendMail); // 받는 사람 이메일
 			messageHelper.setSubject(title); // 메일 제목 (생략 가능)
 			messageHelper.setText(content); // 메일 내용
 			
@@ -116,55 +132,14 @@ public class MailingController {
 		return "redirect:/";
 	}
 	
-	// 구독하기 등록
-	@RequestMapping(value = "regSubscribe", method = RequestMethod.POST)
-	public String regSubscribe(@PathVariable Mailing mailing, ModelAndView mv,
-			RedirectAttributes rdAttr, HttpServletRequest request) {
-		
-		String status = null;
-		String msg = null;
-		String url = null;
-		
-		System.out.println("버튼 클릭 : " + mailing);
-		
-		int result = mailingService.regSubscribe(mailing);
-		
-		if(result > 0) {
-			status = "success";
-			msg = "구독 성공";
-			url = "subscribe";
-		}else {
-			status = "error";
-			msg = "구독 실패";
-			url = request.getHeader("referer");
-		}
-		
-		rdAttr.addFlashAttribute("status", status);
-		rdAttr.addFlashAttribute("msg", msg);
-		
-		return "redirect:" + url;
-	}
-	
-	// 구독하기 버튼 클릭
+	// 구독하기
 	@RequestMapping("subscribeAction")
 	@ResponseBody
 	public int subscribe(@ModelAttribute Mailing mailing, RedirectAttributes rdAttr) {
-		String status = null;
-		String msg = null;
-		int result = 0;
+		
 		System.out.println("버튼 클릭 : " + mailing);
 		
-		result = mailingService.subscribe(mailing);
-		
-		System.out.println("result : " + result);
-		
-		if(result > 0) {
-			status = "success";
-			msg = "구독 성공";
-		}else {
-			status = "error";
-			msg = "구독 실패";
-		}
+		int result = mailingService.subscribe(mailing);
 		
 		return result;
 	}
@@ -173,14 +148,10 @@ public class MailingController {
 	@RequestMapping("subscribeCancel")
 	@ResponseBody
 	public int subscribeCancel(@ModelAttribute Mailing mailing) {
-		String status = null;
-		String msg = null;
 		
 		System.out.println("버튼 클릭 : " + mailing);
 		
 		int result = mailingService.subscribeCancel(mailing);
-		
-		System.out.println("result : " + result);
 		
 		return result;
 	}

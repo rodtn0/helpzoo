@@ -1,5 +1,7 @@
 package com.project.helpzoo.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,22 +19,6 @@ public class MailingServiceImpl implements MailingService{
 	@Override
 	public Mailing selectMailing(int memberNo) {
 		return mailingDAO.selectMailing(memberNo);
-	}
-
-	// 메일링 서비스 등록
-	@Transactional(rollbackFor = Exception.class)
-	@Override
-	public int regSubscribe(Mailing mailing) {
-		
-		int iRtn = 0;
-		
-		if(mailing.getMailStatus() == null || mailing.getMailStatus() == "") {
-			iRtn = mailingDAO.insertMailing(mailing);
-		} else {
-			iRtn = mailingDAO.updateMailing(mailing);
-		}
-		
-		return iRtn;
 	}
 
 	// 메일링 서비스 구독하기
@@ -56,6 +42,12 @@ public class MailingServiceImpl implements MailingService{
 	@Override
 	public int subscribeCancel(Mailing mailing) {
 		return mailingDAO.subscribeCancel(mailing);
+	}
+	
+	// 구독한 계정 메일 주소 목록
+	@Override
+	public List<String> toSendMail() {
+		return mailingDAO.toSendMail();
 	}
 
 
