@@ -22,6 +22,7 @@
 	<typeAliases>
 		<typeAlias type="com.project.helpzoo.model.vo.Donation" alias="Donation" />
 		<typeAlias type="com.project.helpzoo.model.vo.DReply" alias="DReply" />
+		<typeAlias type="com.project.helpzoo.model.vo.Mailing" alias="Mailing"/>
 		<typeAlias type="com.project.helpzoo.board.model.vo.Board" alias="Board" />
 		<typeAlias type="com.project.helpzoo.board.model.vo.QNABoard" alias="QNABoard" />
 		<typeAlias type="com.project.helpzoo.member.model.vo.Member" alias="Member"/>
@@ -43,6 +44,7 @@
 		<mapper resource="/mappers/review-mappers.xml"/>
 		<mapper resource="/mappers/mypage-mappers.xml"/>
 		<mapper resource="/mappers/admin-mappers.xml"/>
+		<mapper resource="/mappers/mailing-mappers.xml"/>
 	</mappers>
 	
 </configuration>
