@@ -4,7 +4,7 @@ $(function(){
 	$('#summernote').summernote({
 		width : 1000,		// 에디터 넓이
 		height: 600,        // 에디터 높이
-		focus: true,        // 에디터 로딩후 포커스를 맞출지 여부
+		focus: false,        // 에디터 로딩후 포커스를 맞출지 여부
 		lang: 'ko-KR',		// 언어 : 한국어 설정
 		
 		

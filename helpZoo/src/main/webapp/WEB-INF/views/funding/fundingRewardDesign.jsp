@@ -274,8 +274,46 @@
         color: black;
       }
 
+      .inline-block{
+        display: inline-block;
+      }
+
+
+
+      .reward_form_container{
+        padding: 10% 10% 10%;
+      }
+
+
+      .top_margin{
+        margin-top: 1%;
+      }
+
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+    }
+
+
+    .font_black{
+
+      color: black;
+
+      font-weight: bold;
+
+    }
+
+
+
+
 
     </style>
+
+<link rel="stylesheet" href="${contextPath}/resources/pickdate/themes/default.css">
+<link rel="stylesheet" href="${contextPath}/resources/pickdate/themes/default.date.css">
+
+
   </head>
   <body>
     <div class="project_create_top_bar">
@@ -290,6 +328,15 @@
 
       <br />
     </div>
+
+    
+    
+<script src="${contextPath}/resources/pickdate/js/picker.js"></script>
+<script src="${contextPath}/resources/pickdate/js/picker.date.js"></script>
+<script src="${contextPath}/resources/pickdate/js/legacy.js"></script>
+<script src="${contextPath}/resources/pickdate/js/ko_KR.js"></script>
+    
+
 
     <div>
       <div class="funding_open_deail_container">
@@ -369,9 +416,204 @@
     <br>
 
     <div class="upload-btn-wrapper">
-      <button class="btn"> <i class="fas fa-plus"></i>&nbsp; 추가하기</button>
-      <input type="file" name="myfile" />
+      <button class="btn " data-toggle="modal" data-target="#exampleModal"> <i class="fas fa-plus"></i>&nbsp; 추가하기</button>
+
     </div>
+
+
+
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="container reward_form_container">
+        <div class="modal-header">
+          <h3 class="modal-title font_black" id="exampleModalLabel">리워드 추가</h3>
+        </div>
+        
+        <br>
+        <br>
+        <form action="${contextPath}/funding/fundingOpenReward/${fundingNo}" method="POST">
+          <div class="row">
+            <div class="col-md-2 col-lg-2 col-sm-2 top_margin">
+         <label class="font_black"> 금액 </label>
+              </div>
+              <div class="col-md-10 col-lg-10 col-sm-10">
+                <div class="input-group">
+
+                <input class="form-control form-control-lg" type="number" placeholder="제목 입력"  aria-label="Amount (to the nearest dollar)"
+                name="price"
+                >
+
+                <div class="input-group-append">
+                  <span class="input-group-text">원</span>
+                </div>
+              </div>
+
+
+
+          </div>
+
+          </div>
+
+
+
+
+          <br>
+          <br>
+
+          <div class="row">
+            <div class="col-md-2 col-lg-2 col-sm-2">
+         <label class="font_black"> 리워드명 </label>
+              </div>
+              <div class="col-md-10 col-lg-10 col-sm-10">
+         <input class="form-control form-control-lg" type="text" placeholder="타이틀 입력 ex) [얼리버드]기본 리워드"  name="title"
+          >
+          
+
+          </div>
+
+          </div>
+          
+          <br>
+          <br>
+
+          <div class="row">
+            <div class="col-md-2 col-lg-2 col-sm-2">
+         <label class="font_black"> 상세설명 </label>
+              </div>
+              <div class="col-md-10 col-lg-10 col-sm-10">
+                <textarea   placeholder="제공하는 리워드가 무엇인지 간략하게 제시해 주세요." class="form-control"  rows="3" 
+              
+                 name ="content"
+                > </textarea>
+                <small>500자</small>
+
+          </div>
+
+          </div>
+          
+          <br>
+          <br>
+
+         
+
+
+          <div class="row">
+            <div class="col-md-2 col-lg-2 col-sm-2">
+         <label class="font_black"> 배송료 </label>
+              </div>
+
+              <div class="col-md-10 col-lg-10 col-sm-10">
+                <div class="input-group">
+
+                <input class="form-control form-control-lg" type="number" placeholder="제목 입력"  aria-label="Amount (to the nearest dollar)" value="0"
+                name="deleveryPrice"
+                >
+
+                <div class="input-group-append">
+                  <span class="input-group-text">원</span>
+                </div>
+              </div>
+              <small>(배송비가 없는 경우, 0원 입력)</small>
+
+
+          </div>
+
+
+          </div>
+          
+          <br>
+          <br>
+
+
+          <div class="row">
+            <div class="col-md-2 col-lg-2 col-sm-2">
+         <label class="font_black"> 제한수량 </label>
+              </div>
+              <div class="col-md-10 col-lg-10 col-sm-10">
+                <div class="input-group">
+
+                <input class="form-control form-control-lg" type="number" placeholder="수량 입력"  aria-label="Amount (to the nearest dollar)"
+                name="rewardAmount"
+                >
+
+                <div class="input-group-append">
+                  <span class="input-group-text">개</span>
+                </div>
+              </div>
+
+          </div>
+
+          </div>
+          
+          <br>
+          <br>
+
+          <div class="row">
+            <div class="col-md-2 col-lg-2 col-sm-2">
+         <label class="font_black"> 발송시작일 </label>
+              </div>
+              <div class="col-md-10 col-lg-10 col-sm-10">
+     
+          <input
+          id="input_01"
+          class="datepicker form-control form-control-lg"
+          name="deliveryDay"
+          type="text">
+          
+          
+
+
+
+
+
+          </div>
+
+          </div>
+          
+          <br>
+          <br>
+
+
+
+
+        <br>
+         <br>
+         
+         
+     			
+     			
+     
+     
+     
+     
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">확인</button>
+
+        </form>
+
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
                 <br>
                 <br>
@@ -381,22 +623,36 @@
                 <button
                 type="button"
                 class="btn btn-primary col-md-4 col-sm-4 col-xs-4 btn-lg funding_btn mintclick"
-                onclick="location.href = '${contextPath}/funding/fundingOpenDetail' "
+                onclick="location.href = '${contextPath}/funding/fundingOpenDetail?fundingNo=${fundingNo}' "
               >저장하기</button>
 
 
 
      <script>
+     
+     			
+     $('.datepicker').pickadate({
+   	  monthsFull:["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+   	  weekdaysShort:["일","월","화","수","목","금","토"],
+   	  today: "오늘",
+   	  clear: '취소',
+   	  formatSubmit: 'yyyymmdd',
+   	  format:"yyyymmdd"
+   	})
+     			
+     
+     
+     
 
                   var menubarFlag = true;
 
                   var menuBar = $("<div class='menu_box'></div>");
 
-              var require = $("<a class='box funding_require' href='${contextPath}/funding/fundingOpenRequire' >기본 요건</a>");
-              var fundingInfo = $("<a class='box funding_info' href='${contextPath}/funding/fundingOpenInfo'>기본 정보</a>");
-              var story = $("<a class='box funding_story' href='${contextPath}/funding/fundingOpenStory'>스토리 작성</a>");
-              var reward = $("<a class='box funding_reward_build' href='${contextPath}/funding/fundingOpenReward'>리워드 설계</a>");
-              var makerInfo = $("<a class='box funding_maker_info' href='${contextPath}/funding/fundingOpenMakerInfo'>메이커 정보</a>");
+                  var require = $("<a class='box funding_require' href='${contextPath}/funding/fundingOpenRequire/${fundingNo}' >기본 요건</a>");
+                  var fundingInfo = $("<a class='box funding_info' href='${contextPath}/funding/fundingOpenInfo/${fundingNo}'>기본 정보</a>");
+                  var story = $("<a class='box funding_story' href='${contextPath}/funding/fundingOpenStory/${fundingNo}'>스토리 작성</a>");
+                  var reward = $("<a class='box funding_reward_build' href='${contextPath}/funding/fundingOpenReward/${fundingNo}'>리워드 설계</a>");
+                  var makerInfo = $("<a class='box funding_maker_info' href='${contextPath}/funding/fundingOpenMakerInfo/${fundingNo}'>메이커 정보</a>");
 
                     $(".funding_ready_menubar").on("click", function() {
                       console.log( $( this ).text() );
@@ -452,6 +708,33 @@
 
 
                 </script>
+
+
+					 <script type="text/javascript">
+       
+  
+  
+  var $input = $( '.datepicker' ).pickadate({
+            formatSubmit: 'yyyy/mm/dd',
+            // min: [2015, 7, 14],
+            container: '#container',
+            // editable: true,
+            closeOnSelect: false,
+            closeOnClear: false,
+        })
+        
+        var picker = $input.pickadate('picker')
+        // picker.set('select', '14 October, 2014')
+        
+    
+        
+      
+        
+    </script>
+
+
+
+
 
           </div>
         </div>

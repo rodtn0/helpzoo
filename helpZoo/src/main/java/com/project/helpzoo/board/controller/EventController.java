@@ -142,12 +142,12 @@ public class EventController {
 		
 		if(result > 0) {
 			status = "success";
-			msg = "공지사항이 성공적으로 등록되었습니다.";
+			msg = "이벤트 게시물이 성공적으로 등록되었습니다.";
 			url = board.getBoardNo() + "?cp=1";
 		}else {
 			status = "error";
-			msg = "공지사항 등록에 실패했습니다.";
-			url = "/noticeList"; 
+			msg = "이벤트 게시물 등록에 실패했습니다.";
+			url = "/eventList"; 
 		}
 		
 		rdAttr.addFlashAttribute("status", status);
@@ -171,11 +171,11 @@ public class EventController {
 		
 		if(result > 0) {
 			status = "success";
-			msg = "공지사항이 삭제되었습니다.";
+			msg = "이벤트 게시물이 삭제되었습니다.";
 			url = "../../eventList";
 		}else {
 			status = "error";
-			msg = "공지사항 삭제에 실패했습니다.";
+			msg = "이벤트 게시물 삭제에 실패했습니다.";
 			url = request.getHeader("referer"); 
 		}
 		
@@ -235,11 +235,11 @@ public class EventController {
 		
 		if(result > 0) {
 			status = "success";
-			msg = "공지사항이 수정되었습니다.";
+			msg = "이벤트 게시물이 수정되었습니다.";
 			url = "../../eventList";
 		}else {
 			status = "error";
-			msg = "공지사항 수정에 실패했습니다.";
+			msg = "이벤트 게시물 수정에 실패했습니다.";
 			url = request.getHeader("referer"); 
 		}
 		
@@ -270,7 +270,7 @@ public class EventController {
 			System.out.println(e);
 		}
 		
-		model.addAttribute("noticeList", eventList);
+		model.addAttribute("eventList", eventList);
 		model.addAttribute("pInfo", pInfo);
 		
 		return "event/eventMain";

@@ -98,7 +98,7 @@
             <ul>
 				<li><a href="${contextPath}/notice/noticeList">공지사항</a></li>
 				<li><a href="${contextPath}/event/eventList">이벤트</a></li>
-				<li><a href="${contextPath}/subscribe">구독하기</a></li>
+				<li><a href="${contextPath}/subscribe/mailing">구독하기</a></li>
             </ul>
           </li>
           <li class="drop-down"><a href="${contextPath}/faq/faqList">고객센터</a>
