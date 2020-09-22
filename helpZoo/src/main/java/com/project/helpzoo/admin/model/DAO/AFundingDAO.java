@@ -40,4 +40,8 @@ public class AFundingDAO {
 		return sqlSession.selectList("adminMapper.selectCategory", yymm);
 	}
 
+	public List<AFunding> selectSuccess(String yymm) {
+		return sqlSession.selectList("adminMapper.selectSuccess", yymm);
+	}
+
 }

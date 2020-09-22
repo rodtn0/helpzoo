@@ -19,4 +19,6 @@ public interface AFundingService {
 
 	List<AFundingCategory> selectCategory(String yymm);
 
+	List<AFunding> selectSuccess(String yymm);
+
 }

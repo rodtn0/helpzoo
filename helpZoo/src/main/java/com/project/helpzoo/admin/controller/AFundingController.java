@@ -110,4 +110,19 @@ public class AFundingController {
 		return gson.toJson(monthCategory);
 	}
 	
+	@ResponseBody
+	@RequestMapping("MonthSuccess")
+	public String MonthSuccess(String yymm) {
+		System.out.println(yymm);
+		
+		List<AFunding> monthSuccess = afundingService.selectSuccess(yymm);
+		
+		System.out.println(monthSuccess);
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		
+		return gson.toJson(monthSuccess);
+		
+	}
+	
 }
