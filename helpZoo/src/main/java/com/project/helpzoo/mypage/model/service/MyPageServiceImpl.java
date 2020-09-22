@@ -118,12 +118,35 @@ public class MyPageServiceImpl implements MyPageService{
 		return myPageDAO.selectThumbnailList(fdListbyMe);
 		
 	}
+	
+	// 내가 주최한 기부 리스트 출력 구현 서비스
+	@Override
+	public mPageInfo pagination(int cp, int memberNo) {
+		
+		int listCount = myPageDAO.getListCount(memberNo);
+		System.out.println("listCount:" +listCount);
+		int type = 1;
+		System.out.println("cp:"+cp);
+		System.out.println("listCount:"+listCount);
+		System.out.println("type:"+type);
+		
+		mInfo.setPageInfo(cp, listCount, type);
+		
+		return mInfo;
+	}
 
 	// 내가 주최한 기부 리스트 출력 서비스 구현
 	@Override
-	public List<Donation> donaSelectList1(mPageInfo mInfo, Member loginMember) {
+	public List<Donation> selectdoList(mPageInfo dInfo, int memberNo) {
 		
-		return myPageDAO.donaSelectList1(mInfo, loginMember);
+		return myPageDAO.selectdoList(dInfo, memberNo);
+	}
+	
+	// 내가 주최한 기부 썸네일 리스트 출력 서비스 구현
+	@Override
+	public List<Donation> selectDoThumbnailList(List<Donation> doListByme) {
+		
+		return myPageDAO.selectDoThumbnailList(doListByme);
 	}
 
 
