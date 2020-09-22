@@ -80,7 +80,7 @@
 		</div>
 			<div class="row">
 		<div class="col-md-12">
-		  <nav class="navbar navbar-expand-sm navbar-light bg-light">
+ <nav class="navbar navbar-expand-sm navbar-light bg-light">
 	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
 	          <span class="navbar-toggler-icon"></span>
 	        </button>
@@ -97,8 +97,8 @@
 	              	펀딩 내역
 	            </a>
 	            <div class="dropdown-menu sm-menu">
-	              <a class="dropdown-item" href="#">내가 주최한</a>
-	              <a class="dropdown-item" href="#">내가 참여한</a>
+				  <a class="dropdown-item" href="${contextPath}/mypage/fundingList/1">내가 주최한</a>
+	              <a class="dropdown-item" href="${contextPath}/mypage/partiFundingList/1">내가 참여한</a>
 	            </div>
 	          </li>
 	            <li class="nav-item dropdown dmenu">
@@ -106,17 +106,8 @@
 	              	기부 내역
 	            </a>
 	            <div class="dropdown-menu sm-menu">
-	              <a class="dropdown-item" href="#">내가 주최한</a>
-	              <a class="dropdown-item" href="#">내가 참여한</a>
-	            </div>
-	          </li>
-	            <li class="nav-item dropdown dmenu">
-	            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-	              	좋아한
-	            </a>
-	            <div class="dropdown-menu sm-menu">
-	              <a class="dropdown-item" href="#">펀딩</a>
-	              <a class="dropdown-item" href="#">기부</a>
+	              <a class="dropdown-item" href="${contextPath}/mypage/donationList/1">내가 주최한</a>
+	              <a class="dropdown-item" href="${contextPath}/mypage/donationListPt/1">내가 참여한</a>
 	            </div>
 	          </li>
 	          <li class="nav-item">

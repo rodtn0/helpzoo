@@ -109,14 +109,27 @@ public class MyPageServiceImpl implements MyPageService{
 		return myPageDAO.selectList(mInfo, loginMember);
 		
 	}
-
 	
+	// 내가 참여한 펀딩 리스트 출력 서비스 구현
+	@Override
+	public List<Member> selectFdList(mPageInfo pfInfo, int memberNo) {
+		
+		return myPageDAO.selectFdList(pfInfo, memberNo);
+	}
+
 	// 내가 주최한 펀딩 리스트 썸네일 출력 서비스 구현
 	@Override
 	public List<Member> selectThumbnailList(List<Member> fdListbyMe) {
 		
 		return myPageDAO.selectThumbnailList(fdListbyMe);
 		
+	}
+
+	// 내가 참여한 펀딩 리스트 썸네일 출력 서비스 구현
+	@Override
+	public List<Member> selectFdPtThumbnailList(List<Member> fdListbyPt) {
+		
+		return myPageDAO.selectFdPtThumbnailList(fdListbyPt);
 	}
 	
 	// 내가 주최한 기부 리스트 출력 구현 서비스
@@ -148,6 +161,23 @@ public class MyPageServiceImpl implements MyPageService{
 		
 		return myPageDAO.selectDoThumbnailList(doListByme);
 	}
+
+	// 내가 참여한 기부 리스트 출력 서비스 구현
+	@Override
+	public List<Donation> selectdoPtList(mPageInfo dInfo, int memberNo) {
+		
+		return myPageDAO.selectdoPtList(dInfo, memberNo);
+	}
+	
+	// 내가 참여한 기부 썸네일 리스트 출력 서비스 구현
+	@Override
+	public List<Donation> selectDoPtThumbnailList(List<Donation> doListPtme) {
+		
+		return myPageDAO.selectDoPtThumbnailList(doListPtme);
+	}
+
+
+
 
 
 	

@@ -31,17 +31,23 @@ public class Donation {
 	private int dParentBoardNo;
 	private int memberNo;
 	
+	// DONATION_INFO 테이블 컬럼값 추가
+	private int infoDonationNo;
+	private int infoDonationCurrentAmount;
+	
 	public Donation() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	
 
 	public Donation(int dBoardNo, String dBoardPlan, String dBoardTitle, String dBoardQuestion1, String dBoardQuestion2,
 			String dBoardQuestion3, String dBoardQuestion4, String dBoardQuestion5, int dBoardTargetAmount,
 			int dBoardCurrentAmount, int dBoardReadCount, Date dBoardCrateDate, Date dBoardModifyDate,
 			Date dBoardEndDate, Date dBoardStartDate, int dBoardLikeButton, String dBoardStatus, int organizationNo,
 			int dBoardWriter, int dBoardCategory, int dBoardType, String dfilePath, String dfileChangeName,
-			int dParentBoardNo) {
+			int dParentBoardNo, int memberNo, int infoDonationNo, int infoDonationCurrentAmount) {
 		super();
 		this.dBoardNo = dBoardNo;
 		this.dBoardPlan = dBoardPlan;
@@ -67,7 +73,12 @@ public class Donation {
 		this.dfilePath = dfilePath;
 		this.dfileChangeName = dfileChangeName;
 		this.dParentBoardNo = dParentBoardNo;
+		this.memberNo = memberNo;
+		this.infoDonationNo = infoDonationNo;
+		this.infoDonationCurrentAmount = infoDonationCurrentAmount;
 	}
+
+
 
 	public int getdBoardNo() {
 		return dBoardNo;
@@ -260,6 +271,34 @@ public class Donation {
 	public void setdParentBoardNo(int dParentBoardNo) {
 		this.dParentBoardNo = dParentBoardNo;
 	}
+	
+	
+
+	public int getMemberNo() {
+		return memberNo;
+	}
+
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
+
+	public int getInfoDonationNo() {
+		return infoDonationNo;
+	}
+
+	public void setInfoDonationNo(int infoDonationNo) {
+		this.infoDonationNo = infoDonationNo;
+	}
+
+	public int getInfoDonationCurrentAmount() {
+		return infoDonationCurrentAmount;
+	}
+
+	public void setInfoDonationCurrentAmount(int infoDonationCurrentAmount) {
+		this.infoDonationCurrentAmount = infoDonationCurrentAmount;
+	}
+
+
 
 	@Override
 	public String toString() {
@@ -272,7 +311,9 @@ public class Donation {
 				+ dBoardStartDate + ", dBoardLikeButton=" + dBoardLikeButton + ", dBoardStatus=" + dBoardStatus
 				+ ", organizationNo=" + organizationNo + ", dBoardWriter=" + dBoardWriter + ", dBoardCategory="
 				+ dBoardCategory + ", dBoardType=" + dBoardType + ", dfilePath=" + dfilePath + ", dfileChangeName="
-				+ dfileChangeName + ", dParentBoardNo=" + dParentBoardNo + "]";
+				+ dfileChangeName + ", dParentBoardNo=" + dParentBoardNo + ", memberNo=" + memberNo
+				+ ", infoDonationNo=" + infoDonationNo + ", infoDonationCurrentAmount=" + infoDonationCurrentAmount
+				+ "]";
 	}
 	
 	

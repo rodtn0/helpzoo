@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,500i,700,800i" rel="stylesheet">
-<title>My page - 기부 내역(내가 주최한)</title>
+<title>My page - 펀딩 내역(내가 참여한)</title>
 <link rel="stylesheet" href="${contextPath}/resources/css/funding.css">
 <style>
    .social-part .fa{
@@ -51,8 +51,7 @@ $('.navbar-light .dmenu').hover(function () {
 });
 </script>
 </head>
-<body>
-	<body style="overflow-x:hidden; overflow-y:auto;">
+<body style="overflow-x:hidden; overflow-y:auto;">
       <div class="row">
       <div class="col-md-12">
          <div class="row">
@@ -64,7 +63,7 @@ $('.navbar-light .dmenu').hover(function () {
       </div>
          <div class="row">
       <div class="col-md-12">
-		 <nav class="navbar navbar-expand-sm navbar-light bg-light">
+ 		<nav class="navbar navbar-expand-sm navbar-light bg-light">
 	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
 	          <span class="navbar-toggler-icon"></span>
 	        </button>
@@ -107,24 +106,23 @@ $('.navbar-light .dmenu').hover(function () {
       <!-- 바디 영역 -->
       <div class="album text-muted">
             <div class="container">
-               <h1 id="mainTxt">내가 주최한(기부)</h1><br>
+               <h1 id="mainTxt">내가 참여한(펀딩)</h1><br>
             <c:choose>
-               <c:when test="${empty doListByme}">
- 				<p class="text-center" style="font-size:30px;">내가 주최한 기부가 없습니다. 기부를 주최해보세요!</p>
-               <!-- <a href="${contextPath}/funding/fundingOpen">펀딩 주최하기</a> -->
+               <c:when test="${empty fdListbyPt}">
+               <p class="text-center" style="font-size:30px;">내가 참여한 펀딩이 없습니다. 펀딩에 참여해보세요!</p>
                 </c:when>
            <c:otherwise>
-              <c:forEach var="doList" items="${doListByme}">
+              <c:forEach var="fdList" items="${fdListbyPt}">
                 <div class="card text-black">
-                  <p class="card-head mx-auto">${doList.dBoardNo}번째 프로젝트</p>
+                  <p class="card-head mx-auto">${fdList.projectNo}번째 프로젝트</p>
                  <c:choose>
-                    <c:when test="${!empty doThList }">
+                    <c:when test="${!empty fdList }">
                       <c:set var = "src" value="/helpzoo/resources/images/not_thumbnail.png"/>
                        
-                       <c:forEach items="${doThList}" var="th">
+                       <c:forEach items="${ptThList}" var="th">
                           <%-- <c:set var = "src" value="${contextPath}${th.filePath}/${th.fileChangeName}"/> --%>
-                          	<c:if test="${th.dParentBoardNo == doList.dBoardNo}">
-                             	<c:set var = "src" value="${contextPath}${th.dfilePath}/${th.dfileChangeName}"/>
+                          	<c:if test="${th.parentProjectNo == ptList.projectNo}">
+                             	<c:set var = "src" value="${contextPath}${th.filePath}/${th.fileChangeName}"/>
                             </c:if>
                        </c:forEach>
                        
@@ -136,7 +134,8 @@ $('.navbar-light .dmenu').hover(function () {
                     
                  </c:choose>
                  
-                  <p class="card-text mx-auto">${doList.dBoardTitle}</p>
+                  <p class="card-text mx-auto">${fdList.projectTitle}</p>
+                  <p class="card-text mx-auto">${fdList.projectSummary}</p>
                 </div>
                 </c:forEach>
              </c:otherwise>
@@ -149,56 +148,56 @@ $('.navbar-light .dmenu').hover(function () {
             <div class="row justify-content-center">
                <ul class="pagination">
                         <!-- 11페이지부터 -->      <!-- 기본값 : 10 -->
-               <c:if test="${dInfo.currentPage > dInfo.pagingBarSize }">
+               <c:if test="${pfInfo.currentPage > pfInfo.pagingBarSize }">
                    <li>
                       <!-- 맨 처음으로(<<) -->         <!-- 1번 타입의 게시판 타입의 1페이지로 돌아가라 -->
-                       <a class="page-link text-dark" href="${dInfo.boardType}?cp=1">&lt;&lt;</a>
+                       <a class="page-link text-dark" href="${pfInfo.boardType}?cp=1">&lt;&lt;</a>
                    </li>
                    <li>
                       <!-- 이전으로(<) -->
                       <!-- prev 생성식 : (현재페이지 -1) / 페이징바 사이즈(10) * 10-->
                       <!-- fmt 태그를 이용한 소수점 제거 -->
                       <fmt:parseNumber var="operand1"
-                      value="${(dInfo.currentPage-1)/dInfo.pagingBarSize}" integerOnly="true"/>
+                      value="${(pfInfo.currentPage-1)/pfInfo.pagingBarSize}" integerOnly="true"/>
                       <c:set var="prev" value="${operand1 * 10 }"/>
                       <!-- 현재 페이지가 15일때 15-1 / 10 -->      
                       <!-- 14/100  -->
                       <!-- 1.4 -->
                       <!-- 1 -->
                       <!-- 10 -->
-                         <a class="page-link text-dark" href="${dInfo.boardType}?cp=${prev}">&lt;</a>
+                         <a class="page-link text-dark" href="${pfInfo.boardType}?cp=${prev}">&lt;</a>
                    </li>
                 </c:if>
                       <!-- 10개의 페이지 목록 -->
-                      <c:forEach var="p" begin="${dInfo.startPage}" end="${dInfo.endPage}">
+                      <c:forEach var="p" begin="${pfInfo.startPage}" end="${pfInfo.endPage}">
                          
                          <c:choose>
-                            <c:when test="${p==dInfo.currentPage}">
+                            <c:when test="${p==pfInfo.currentPage}">
                          <li><a class="page-link text-warning">${p}</a></li>
                             </c:when>
                             
                             <c:otherwise>
                          <li>
-                            <a class="page-link text-dark" href="${dInfo.boardType}?cp=${p}">${p}</a>
+                            <a class="page-link text-dark" href="${pfInfo.boardType}?cp=${p}">${p}</a>
                          </li>
                             </c:otherwise>
                          </c:choose>
                       </c:forEach>
                 <!-- 다음 페이지로(>) -->
                 <!-- next 생성식 : (현재페이지 + 9)/10 * 10 + 1 -->
-                <c:if test="${dInfo.maxPage > dInfo.endPage}">
+                <c:if test="${pfInfo.maxPage > pfInfo.endPage}">
                    <!-- 다음 페이지 (>) -->
                    <li>
                       <fmt:parseNumber var="operand2"
-                      value="${(dInfo.currentPage + dInfo.pagingBarSize-1) / dInfo.pagingBarSize}"
+                      value="${(pfInfo.currentPage + pfInfo.pagingBarSize-1) / pfInfo.pagingBarSize}"
                       integerOnly="true"/>
-                      <c:set var="next" value="${operand2 *dInfo.pagingBarSize +1 }"/>
-                  <a class="page-link text-dark" href="${dInfo.boardType}?cp=${next}">&gt;</a>
+                      <c:set var="next" value="${operand2 *pfInfo.pagingBarSize +1 }"/>
+                  <a class="page-link text-dark" href="${pfInfo.boardType}?cp=${next}">&gt;</a>
                    </li>
                    
                    <!-- 맨 끝으로(>>) -->
                    <li>
-                       <a class="page-link text-dark" href="${dInfo.boardType}?cp=${dInfo.maxPage}">&gt;&gt;</a>
+                       <a class="page-link text-dark" href="${pfInfo.boardType}?cp=${pfInfo.maxPage}">&gt;&gt;</a>
                    </li>
                 </c:if>
             </ul>

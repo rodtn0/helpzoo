@@ -76,7 +76,7 @@ $('.navbar-light .dmenu').hover(function () {
 	            </a>
 	            <div class="dropdown-menu sm-menu">
 				  <a class="dropdown-item" href="${contextPath}/mypage/fundingList/1">내가 주최한</a>
-	              <a class="dropdown-item" href="#">내가 참여한</a>
+	              <a class="dropdown-item" href="${contextPath}/mypage/partiFundingList/1">내가 참여한</a>
 	            </div>
 	          </li>
 	            <li class="nav-item dropdown dmenu">
@@ -85,16 +85,7 @@ $('.navbar-light .dmenu').hover(function () {
 	            </a>
 	            <div class="dropdown-menu sm-menu">
 	              <a class="dropdown-item" href="${contextPath}/mypage/donationList/1">내가 주최한</a>
-	              <a class="dropdown-item" href="#">내가 참여한</a>
-	            </div>
-	          </li>
-	            <li class="nav-item dropdown dmenu">
-	            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-	              	좋아한
-	            </a>
-	            <div class="dropdown-menu sm-menu">
-	              <a class="dropdown-item" href="#">펀딩</a>
-	              <a class="dropdown-item" href="#">기부</a>
+	              <a class="dropdown-item" href="${contextPath}/mypage/donationListPt/1">내가 참여한</a>
 	            </div>
 	          </li>
 	          <li class="nav-item">

@@ -56,6 +56,8 @@ public class MyPageController {
 	@RequestMapping("updateAction")
 	public String updateAction(Member upMember, Model model, RedirectAttributes rdAttr, HttpServletRequest request) {
 		
+		System.out.println("수정 정보를 받아오기 :" + upMember);
+		
 		// session scope에 있는 로그인 회원 정보를 얻어와 id, name, grade를 추출해서 upMember에 세팅한다.
 		// model은 object 타입이므로 형변환이 필요하다.
 		Member loginMember = (Member)model.getAttribute("loginMember");
@@ -63,7 +65,6 @@ public class MyPageController {
 		upMember.setMemberEnrollDate(loginMember.getMemberEnrollDate());
 		upMember.setMemberId(loginMember.getMemberId());
 		upMember.setMemberEmail(loginMember.getMemberEmail());
-		upMember.setMemberName(loginMember.getMemberName());
 		upMember.setMemberGrade(loginMember.getMemberGrade());
 		
 		int result = mypageService.updateMember(upMember);
@@ -163,7 +164,7 @@ public class MyPageController {
 		
 		return "redirect:changePwd";
 	}
-	
+	// ************************ 펀딩 리스트 ********************************
 	// 내가 주최한 펀딩 리스트로 이동하는 Controller
 	@RequestMapping("fundingList/{type}")
 	public String fundingList(@PathVariable int type, @RequestParam(value="cp", required = false,
@@ -201,6 +202,37 @@ public class MyPageController {
 		return "mypage/fundingList";
 	}
 	
+	// 내가 참여한 펀딩 리스트로 이동하는 Controller
+	@RequestMapping("partiFundingList/{type}")
+	public String partiFundingList(@PathVariable int type, @RequestParam(value = "cp",required = false,
+	defaultValue = "1") int cp, Model model) {
+		
+		Member loginMember = (Member)model.getAttribute("loginMember");
+		int memberNo = loginMember.getMemberNo();
+		
+		mPageInfo pfInfo = mypageService.pagination(cp, memberNo);
+		
+		List<Member> fdListbyPt = mypageService.selectFdList(pfInfo, memberNo);
+		model.addAttribute("fdListbyPt", fdListbyPt);
+		model.addAttribute("pfInfo", pfInfo);
+		
+		for(Member m : fdListbyPt) {
+			System.out.println("fdListbyPt :" + m);
+		}
+		
+		if(!fdListbyPt.isEmpty()) {
+			
+			List<Member> ptThList = mypageService.selectFdPtThumbnailList(fdListbyPt);
+			System.out.println("ptThList :" +ptThList);
+			model.addAttribute("ptThList", ptThList);
+		}
+		
+		return "mypage/particiFundingList";
+	}
+	
+	
+	// ************************ 기부 리스트 ********************************
+	
 	// 내가 주최한 기부 리스트로 이동되는 Controller
 	@RequestMapping("donationList/{type}")
 	public String donationList(@PathVariable int type, @RequestParam(value="cp", required = false,
@@ -230,6 +262,33 @@ public class MyPageController {
 		return "mypage/donationList";
 	}
 	
-	
+	// 내가 참여한 기부 리스트로 이동되는 Controller
+	@RequestMapping("donationListPt/{type}")
+	public String donationListPt(@PathVariable int type, @RequestParam(value="cp", required = false,
+	defaultValue = "1")int cp, Model model) {
+		
+		Member loginMember = (Member)model.getAttribute("loginMember");
+		int memberNo = loginMember.getMemberNo();
+		
+		mPageInfo dInfo = mypageService.pagination(cp, memberNo);
+		System.out.println(dInfo);
+		
+		List<Donation> doListPtme = mypageService.selectdoPtList(dInfo, memberNo);
+		
+		System.out.println("doListPtme : " + doListPtme);
+		
+		model.addAttribute("doListPtme", doListPtme);
+		model.addAttribute("dInfo", dInfo);
+		
+		if(!doListPtme.isEmpty()) {
+			List<Donation> doPtThList = mypageService.selectDoPtThumbnailList(doListPtme);
+			System.out.println("doPtThList : " + doPtThList );
+			model.addAttribute("doPtThList");
+		}
+		
+		
+		return "mypage/particiDonationList";
+	}
 	
 }
+

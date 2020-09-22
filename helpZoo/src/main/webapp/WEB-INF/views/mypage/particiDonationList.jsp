@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,500i,700,800i" rel="stylesheet">
-<title>My page - 기부 내역(내가 주최한)</title>
+<title>My page - 기부 내역(내가 참여한)</title>
 <link rel="stylesheet" href="${contextPath}/resources/css/funding.css">
 <style>
    .social-part .fa{
@@ -64,7 +64,7 @@ $('.navbar-light .dmenu').hover(function () {
       </div>
          <div class="row">
       <div class="col-md-12">
-		 <nav class="navbar navbar-expand-sm navbar-light bg-light">
+ <nav class="navbar navbar-expand-sm navbar-light bg-light">
 	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
 	          <span class="navbar-toggler-icon"></span>
 	        </button>
@@ -107,21 +107,21 @@ $('.navbar-light .dmenu').hover(function () {
       <!-- 바디 영역 -->
       <div class="album text-muted">
             <div class="container">
-               <h1 id="mainTxt">내가 주최한(기부)</h1><br>
+               <h1 id="mainTxt">내가 참여한(기부)</h1><br>
             <c:choose>
-               <c:when test="${empty doListByme}">
- 				<p class="text-center" style="font-size:30px;">내가 주최한 기부가 없습니다. 기부를 주최해보세요!</p>
+               <c:when test="${empty doListPtme}">
+ 				<p class="text-center" style="font-size:30px;">내가 참여한 기부가 없습니다. 기부에 참여해보세요!</p>
                <!-- <a href="${contextPath}/funding/fundingOpen">펀딩 주최하기</a> -->
                 </c:when>
            <c:otherwise>
-              <c:forEach var="doList" items="${doListByme}">
+              <c:forEach var="doList" items="${doListPtme}">
                 <div class="card text-black">
-                  <p class="card-head mx-auto">${doList.dBoardNo}번째 프로젝트</p>
+                  <p class="card-head mx-auto">${doList.infoDonationNo}번째 기부내역</p>
                  <c:choose>
-                    <c:when test="${!empty doThList }">
+                    <c:when test="${!empty doPtThList }">
                       <c:set var = "src" value="/helpzoo/resources/images/not_thumbnail.png"/>
                        
-                       <c:forEach items="${doThList}" var="th">
+                       <c:forEach items="${doPtThList}" var="th">
                           <%-- <c:set var = "src" value="${contextPath}${th.filePath}/${th.fileChangeName}"/> --%>
                           	<c:if test="${th.dParentBoardNo == doList.dBoardNo}">
                              	<c:set var = "src" value="${contextPath}${th.dfilePath}/${th.dfileChangeName}"/>
@@ -132,11 +132,10 @@ $('.navbar-light .dmenu').hover(function () {
                     </c:when>
                     <c:otherwise>
                        <img style="height: 361px; width: 100%; display: block;" alt="" src="/helpzoo/resources/images/not_thumbnail.png" data-holder-rendered="true">
-                    </c:otherwise>
-                    
+                    </c:otherwise>     
                  </c:choose>
-                 
                   <p class="card-text mx-auto">${doList.dBoardTitle}</p>
+                  <p class="card-text mx-auto">기부 금액 : ${doList.infoDonationCurrentAmount}원</p>
                 </div>
                 </c:forEach>
              </c:otherwise>

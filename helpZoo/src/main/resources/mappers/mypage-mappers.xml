@@ -37,13 +37,24 @@
 	  <result property="dfileChangeName" column="DONATION_FILE_CHANGE_NAME"/>
 	  <result property="dParentBoardNo" column="DONATION_PARENT_BOARD_NO"/>
 	  </resultMap>   
+	  
+	  <resultMap type="Donation" id="doResultSet2">
+	  <id property="dBoardNo" column="DONATION_BOARD_NO"/>
+	  <result property="dBoardTitle" column="DONATION_BOARD_TITLE"/>
+	  <result property="dBoardWriter" column="DONATION_BOARD_WRITER"/>
+	  <result property="infoDonationNo" column="INFO_DONATION_NO"/>
+	  <result property="infoDonationCurrentAmount" column="INFO_DONATION_CURRENT_AMOUNT"/>
+	  <result property="dfilePath" column="DONATION_FILE_PATH"/>
+	  <result property="dfileChangeName" column="DONATION_FILE_CHANGE_NAME"/>
+	  <result property="dParentBoardNo" column="DONATION_PARENT_BOARD_NO"/>
+	  </resultMap> 
 		
 		 
 	<!-- 회원 정보 수정 -->
 	<update id="updateMember" parameterType="Member">
 	UPDATE MEMBER SET MEMBER_NM=#{memberName},
 	MEMBER_PHONE=#{memberPhone},
-	MEMBER_EMAIL=#{memberEmail},
+	MEMBER_ADDR=#{memberAddress},
 	MEMBER_PET_TYPE=#{memberPetType},
 	MEMBER_PET_NAME=#{memberPetName}
 	WHERE MEMBER_NO = #{memberNo}
@@ -95,6 +106,18 @@
 	</foreach>
 	</select>
 	
+	<!-- 내가 참여한 펀딩 리스트 출력 -->
+	<select id="selectFdList" parameterType="Member" resultMap="fdResultSet">
+	SELECT F.FUNDING_ID, FUNDING_TITLE, FUNDING_SUMMARY
+	FROM FUNDING_PROJECT F
+	JOIN ORDERS O ON(O.FUNDING_ID = F.FUNDING_ID)
+	WHERE O.MEMBER_NO=#{memberNo}
+	ORDER BY FUNDING_ID DESC
+	</select>
+	
+
+	
+	
 	<!-- **************************기부 게시글 리스트 출력********************************* -->
 	
 	<!-- 내가 주최한 기부 리스트 출력 -->
@@ -124,5 +147,13 @@
 	</foreach>
 	</select>
 	
+	<!-- 내가 참여한 기부 리스트 출력 -->
+	<select id="selectdoPtList" parameterType="Donation" resultMap="doResultSet2">
+	SELECT INFO_DONATION_NO, INFO_DONATION_CURRENT_AMOUNT, DONATION_BOARD_TITLE
+    FROM DONATION_BOARD
+    JOIN DONATION_INFO ON (INFO_BOARD_NO=DONATION_BOARD_NO)
+    WHERE INFO_MEMBER_NO = #{memberNo}
+    ORDER BY INFO_DONATION_NO DESC
+	</select>
 	
 </mapper>
