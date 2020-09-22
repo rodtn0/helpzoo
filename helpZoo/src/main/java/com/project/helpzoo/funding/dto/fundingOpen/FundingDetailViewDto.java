@@ -12,6 +12,8 @@ public class FundingDetailViewDto {
 	
 	private String fundingStroy;
 	
+	private String fundingTitle;
+	
 	private Long fundingRewardSeq;
 	
 	private String rewardContent;
@@ -42,6 +44,8 @@ public class FundingDetailViewDto {
 	
 	private Timestamp startDay;
 	
+	private String category;
+	
 	
 	
 	
@@ -59,17 +63,11 @@ public class FundingDetailViewDto {
 
 
 
-	public FundingDetailViewDto(String fundingStroy, Long fundingRewardSeq, String rewardContent, String rewardTitle,
-			int rewardPrice, int rewardAmount, int goalAmount, int totalOrderAmount, int achievementRate,
+	public FundingDetailViewDto(String fundingStroy, int goalAmount, int totalOrderAmount, int achievementRate,
 			List<String> suppoterName, String makerName, String snsUrl, String kakaoUrl, int like, Timestamp endDay,
-			Timestamp startDay) {
+			Timestamp startDay, String fundingTitle,String category) {
 		super();
 		this.fundingStroy = fundingStroy;
-		this.fundingRewardSeq = fundingRewardSeq;
-		this.rewardContent = rewardContent;
-		this.rewardTitle = rewardTitle;
-		this.rewardPrice = rewardPrice;
-		this.rewardAmount = rewardAmount;
 		this.goalAmount = goalAmount;
 		this.totalOrderAmount = totalOrderAmount;
 		this.achievementRate = achievementRate;
@@ -80,6 +78,32 @@ public class FundingDetailViewDto {
 		this.like = like;
 		this.endDay = endDay;
 		this.startDay = startDay;
+		this.fundingTitle = fundingTitle;
+		this.category = category;
+	}
+
+
+
+	public String getCategory() {
+		return category;
+	}
+
+
+
+	public void setCategoryId(String category) {
+		this.category = category;
+	}
+
+
+
+	public String getFundingTitle() {
+		return fundingTitle;
+	}
+
+
+
+	public void setFundingTitle(String fundingTitle) {
+		this.fundingTitle = fundingTitle;
 	}
 
 

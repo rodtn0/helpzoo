@@ -27,6 +27,7 @@ import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenRequireView;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenRewardView;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenStoryView;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingTotalInfoDto;
+import com.project.helpzoo.funding.dto.viewDetail.FundingDetailRewardView;
 import com.project.helpzoo.funding.model.vo.funding.BusinessType;
 import com.project.helpzoo.funding.model.vo.funding.FundingAttachment;
 import com.project.helpzoo.funding.model.vo.funding.FundingCategory;
@@ -97,7 +98,7 @@ public class FundingDAO {
 						,funding.summary)
 				.orderBy(orderby(fundingSearch.getSearchSort()))
 				.offset(0)
-				.limit(10)
+				.limit(20)
 				.fetch();
 		
 		
@@ -233,13 +234,9 @@ public class FundingDAO {
 			
 			List<Tuple> result  = query
 					.select(funding.id,
+							funding.title,
 							funding.story, 
 							funding.goalAmount,
-							reward.id,
-							reward.title, 
-							reward.content, 
-							reward.price, 
-							reward.amount,
 							maker.name,
 							maker.sns,
 							funding.readCount,
@@ -247,28 +244,27 @@ public class FundingDAO {
 							maker.kakaoURL,
 							funding.endDay,
 							funding.startDay,
+							category.category_name,
 							orderReward.count.sum())
 					
 					.from(funding)
 					.leftJoin(funding.rewards, reward)
 					.leftJoin(funding.fundingMaker, maker)
 					.leftJoin(orderReward).on(reward.id.eq(orderReward.reward.id))
+					.leftJoin(funding.category,category)
 					.where(funding.id.eq(no))
 					
 					.groupBy(funding.id,
 							funding.story, 
 							funding.goalAmount,
-							reward.id,
-							reward.title, 
-							reward.content, 
-							reward.price, 
-							reward.amount,
+							funding.title,
 							maker.name,
 							maker.sns,
 							funding.readCount,
 							funding.likeCount,
 							maker.kakaoURL,
 							funding.endDay,
+							category.category_name,
 							funding.startDay)
 					.fetch();
 		
@@ -291,14 +287,8 @@ public class FundingDAO {
 			tuple.get(orderReward.count.sum())
 			);
 			
-			
-			
 			detailView = new FundingDetailViewDto(
-					tuple.get(funding.story), tuple.get(reward.rewardSeq), 
-					
-					tuple.get(reward.content)	, tuple.get(reward.title), 
-					
-					tuple.get(reward.price),tuple.get(reward.amount),
+					tuple.get(funding.story),
 					
 					tuple.get(funding.goalAmount),
 					
@@ -311,8 +301,22 @@ public class FundingDAO {
 					tuple.get(maker.kakaoURL)
 					,tuple.get(funding.likeCount)
 					,tuple.get(funding.endDay),
-					tuple.get(funding.startDay)
+					tuple.get(funding.startDay),
+					tuple.get(funding.title),
+					tuple.get(funding.category.category_name)
 					);
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		
 			
 		}
@@ -811,7 +815,7 @@ public class FundingDAO {
 				
 		
 		Reward insertReward = new Reward(rewardSeq,rewardView.getContent(), rewardView.getTitle(), rewardView.getPrice(), 
-				rewardView.getRewardAmount(), rewardView.getDeleveryPrice(), rewardView.getDeliveryDay());
+				rewardView.getRewardAmount(), rewardView.getDeleveryPrice(), rewardView.getDeliveryDay(), rewardView.getRewardAmount());
 		
 		
 		System.out.println("insertReward = : " + insertReward);
@@ -820,6 +824,13 @@ public class FundingDAO {
 		insertReward.setFundingProject(fundingProject);
 		
 		em.persist(insertReward);
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		fundingProject.addReward(insertReward);
@@ -936,6 +947,51 @@ public class FundingDAO {
 		
 		
 		
+	}
+
+
+
+
+	public List<FundingDetailRewardView> selectReward(Long fundingNo) {
+		
+		JPAQueryFactory query = new JPAQueryFactory(em);
+
+		QFundingProject funding = QFundingProject.fundingProject;
+		
+		QReward reward = QReward.reward;
+		
+		
+		List<Tuple> result  = 
+				query.select(reward.price, reward.title, reward.deliveryPrice, 
+						
+						reward.amount, reward.originRewardAmount, reward.deliveryDay)
+				.from(reward)
+				.where(reward.fundingProject.id.eq(fundingNo))
+				.fetch();
+		
+		
+		
+		
+		
+		FundingDetailRewardView rewardView = null;
+		
+		List<FundingDetailRewardView> rewardViewList = new ArrayList<FundingDetailRewardView>();
+		for(Tuple re : result) {
+			
+			
+			rewardView = new FundingDetailRewardView(re.get(reward.price), re.get(reward.title), re.get(reward.deliveryPrice), re.get(reward.amount), 
+					
+					re.get(reward.originRewardAmount), re.get(reward.deliveryDay));
+			
+			rewardViewList.add(rewardView);
+		}
+		
+		
+		
+		
+		
+		
+		return rewardViewList;
 	}
 	
 	

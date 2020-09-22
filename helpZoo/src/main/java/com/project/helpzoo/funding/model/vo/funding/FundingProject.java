@@ -42,9 +42,6 @@ public class FundingProject {
 	@Column(name="FUNDING_TITLE")
 	private String title;
 	
-	@Column(name="FUNDING_PLAN")
-	private String plan;
-	
 	@Column(name="FUNDING_GOAL")
 	private int goalAmount;
 	
@@ -250,23 +247,8 @@ public class FundingProject {
 
 
 
-	public String getPlan() {
-		
-		if(plan == null) {
-			
-			plan = "";
-		}
-		
-		
-		
-		return plan;
-	}
 
 
-
-	public void setPlan(String plan) {
-		this.plan = plan;
-	}
 
 
 
@@ -482,13 +464,12 @@ if(status == null) {
 
 
 
-	public FundingProject(long id, String title, String plan, int goalAmount, String managerName, String managerEmail,
+	public FundingProject(long id, String title,  int goalAmount, String managerName, String managerEmail,
 			Timestamp endDay, String tag, String summary, String story, Timestamp startDay, String status, int memberNo,
 			FundingCategory category, BusinessType indiOrCoparation, FundingMaker fundingMaker) {
 		super();
 		this.id = id;
 		this.title = title;
-		this.plan = plan;
 		this.goalAmount = goalAmount;
 		this.managerName = managerName;
 		this.managerEmail = managerEmail;
@@ -514,7 +495,7 @@ if(status == null) {
 
 	@Override
 	public String toString() {
-		return "FundingProject [id=" + id + ", title=" + title + ", plan=" + plan + ", goalAmount=" + goalAmount
+		return "FundingProject [id=" + id + ", title=" + title + "," + ", goalAmount=" + goalAmount
 				+ ", managerName=" + managerName + ", managerEmail=" + managerEmail + ", endDay=" + endDay + ", tag="
 				+ tag + ", summary=" + summary + ", story=" + story + ", startDay=" + startDay + ", status=" + status
 				+ ", memberNo=" + memberNo + ", readCount=" + readCount + ", likeCount=" + likeCount
