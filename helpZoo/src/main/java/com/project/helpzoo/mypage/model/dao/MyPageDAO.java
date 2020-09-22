@@ -92,21 +92,38 @@ public class MyPageDAO {
 		return sqlSession.selectList("mypageMapper.selectThumbnailList", fdListbyMe);
 	}
 
-	/** 내가 주최한 기부 리스트 조회
-	 * @param mInfo
-	 * @param loginMember
-	 * @return doListByme
+	
+	/** 내가 주최한 기부 리스트 게시글 수 조회
+	 * @param memberNo
+	 * @return listCount
 	 */
-	public List<Donation> donaSelectList1(mPageInfo mInfo, Member loginMember) {
+	public int getListCount(int memberNo) {
 		
-		int offset = (mInfo.getCurrentPage()-1)*mInfo.getLimit();
-
-		RowBounds rowBounds = new RowBounds(offset, mInfo.getLimit());
-		
-		return sqlSession.donaSelectList1("mypageMapper.donaSelectList1", loginMember, rowBounds);
+		return sqlSession.selectOne("mypageMapper.getListCount2", memberNo);
 	}
 
+	/** 내가 주최한 기부 리스트 출력
+	 * @param dInfo
+	 * @param memberNo
+	 * @return doListByme
+	 */
+	public List<Donation> selectdoList(mPageInfo dInfo, int memberNo) {
+		
+		
+		int offset = (dInfo.getCurrentPage()-1)*dInfo.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, dInfo.getLimit());
+		System.out.println("memberNo :" + memberNo);
+		return sqlSession.selectList("mypageMapper.doSelectList", memberNo, rowBounds);
+	}
 
-	
+	/** 내가 주최한 기부 썸네일 리스트 출력
+	 * @param doListByme
+	 * @return doThList
+	 */
+	public List<Donation> selectDoThumbnailList(List<Donation> doListByme) {
+		
+		return sqlSession.selectList("mypageMapper.selectDoThumbnailList", doListByme);
+	}
+
 	
 }

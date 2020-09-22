@@ -28,20 +28,16 @@
 			<%-- 관리자 메일 전송 화면 --%>
 			<c:when test="${loginMember.memberNo == 1}">
 				<form method="post" action="sendMail">
-					<div class="mail">
-						<label>받는사람 이메일</label><br>
-						<input type="email" name="email" size="60">
-					</div>
 					<div class="mailTitle">
-						<label>이메일 제목</label><br>
+						<label>구독 메일 제목</label><br>
 						<input type="text" name="title" size="60">
 					</div>
 					<div class="mailContent">
-						<label>이메일 내용</label><br>
+						<label>구독 메일 내용</label><br>
 						<textarea name="content" rows="20" cols="60"></textarea>
 					</div>
 					<div class="submitBtn">
-						<button>메일 보내기</button>
+						<button>구독 메일 보내기</button>
 					</div>
 				</form>
 			</c:when>

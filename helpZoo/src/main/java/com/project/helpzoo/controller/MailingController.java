@@ -1,25 +1,23 @@
 package com.project.helpzoo.controller;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
+import org.hibernate.mapping.Array;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.helpzoo.member.model.vo.Member;
@@ -59,18 +57,6 @@ public class MailingController {
 			// 가져온 값 출력
 			System.out.println(selMailing);
 			
-			// 임시 테스트용
-//			List<String> mailList = mailingService.toSendMail();
-//			for(Object i : mailList) {
-//				System.out.println(i);
-//			}
-//			String[] toSendMail = mailList.toArray(new String[mailList.size()]);
-//			for(int i=0; i<toSendMail.length; i++) {
-//				System.out.println("["+i+"] : " + toSendMail[i]);
-//			}
-			
-			
-			
 			model.addAttribute("selMailing", selMailing);
 			
 			url = "mailing/mailingMain";
@@ -85,31 +71,22 @@ public class MailingController {
 	
 	// 메일 보내기 기능
 	@RequestMapping(value = "sendMail", method = RequestMethod.POST)
-	public String sendMail(//@RequestParam(value = "email", required = false) String email,
-						@RequestParam(value = "title", required = false) String title,
+	public String sendMail(@RequestParam(value = "title", required = false) String title,
 						@RequestParam(value = "content", required = false) String content,
 						RedirectAttributes rdAttr) {
 		
 		String setFrom = "helpzooFinal@gmail.com";	// 보내는 사람 메일
 		
 		// 파라미터값 받아오는지 출력
-//		System.out.println("메일 주소 : " + email);
-		System.out.println("메일 제목 : " + title);
-		System.out.println("메일 내용 : " + content);
+		System.out.println("구독 메일 제목 : " + title);
+		System.out.println("구독 메일 내용 : " + content);
 		
 		// 구독한 계정 메일 주소 목록
 		List<String> mailList = mailingService.toSendMail();
 		
-//		for(String i : mailList) {
-//			System.out.println(i);
-//		}
-//		test.add(email);
-//		test.add("rodtn0@daum.net");
-//		test.add("jjisanle@gmail.com");
-//		test.add("a01041936838@gmail.com");
-		
 		// List에서 Array로 변환
 		String[] toSendMail = mailList.toArray(new String[mailList.size()]);
+		System.out.println("받는사람 이메일 목록 : " + Arrays.toString(toSendMail));
 		
 		try {
 			MimeMessage message = mailSender.createMimeMessage();

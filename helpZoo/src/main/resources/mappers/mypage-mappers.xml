@@ -26,6 +26,7 @@
 	  	<result property="filePath" column="FILE_PATH"/>
 	  	<result property="fileChangeName" column="FILE_CHANGE_NAME"/>
 	  	<result property="parentProjectNo" column="PARENT_PROJECT_NO"/>
+	  	<result property="fundingFileCategoryId" column="FUNDING_FILE_CATEGORY_ID"/>
 	  </resultMap>   
 	  
 	  <resultMap type="Donation" id="doResultSet">
@@ -67,6 +68,8 @@
 		WHERE MEMBER_NO=${memberNo}
 	</update>
 	
+	<!--   ***********************펀딩 게시글 리스트 출력******************** -->
+	
 	<select id="getListCount" resultType="_int">
 	SELECT COUNT(*)
 	FROM FUNDING_PROJECT
@@ -85,19 +88,40 @@
 	<select id="selectThumbnailList" parameterType="list" resultMap="fdResultSet">
 	SELECT *
 	FROM FUNDING_IMAGE
-	WHERE FILE_LEVEL = 0
+	WHERE FUNDING_FILE_CATEGORY_ID = 1
 	AND PARENT_PROJECT_NO IN
 	<foreach collection="list" index="i" item="fdListbyMe" open="(" close=")" separator=",">
 	#{fdListbyMe.projectNo}
 	</foreach>
 	</select>
 	
+	<!-- **************************기부 게시글 리스트 출력********************************* -->
+	
 	<!-- 내가 주최한 기부 리스트 출력 -->
-	<select id="donaSelectList1" parameterType="Donation" resultMap="doResultSet">
+	<select id="doSelectList" parameterType="Donation" resultMap="doResultSet">
     SELECT DONATION_BOARD_NO, DONATION_BOARD_TITLE
     FROM DONATION_BOARD
+    JOIN MEMBER ON(DONATION_BOARD_WRITER=MEMBER_NO)
     WHERE DONATION_BOARD_WRITER=#{memberNo}
     ORDER BY DONATION_BOARD_NO DESC
+	</select>
+	
+	<!-- 내가 주최한 기부 리스트 게시글 수 조회 -->
+	<select id="getListCount2" resultType="_int">
+	SELECT COUNT(*)
+	FROM DONATION_BOARD
+	WHERE DONATION_BOARD_WRITER=#{memberNo}
+	</select>
+	
+	<!-- 내가 주최한 기부 썸네일 리스트 출력 -->
+	<select id="selectDoThumbnailList" parameterType="list" resultMap="doResultSet">
+	SELECT *
+	FROM DONATION_ATTACHMENT
+	WHERE DONATION_FILE_LEVEL = 0
+	AND DONATION_PARENT_BOARD_NO IN
+	<foreach collection="list" index="i" item="doListByme" open="(" close=")" separator=",">
+	#{doListByme.dBoardNo}
+	</foreach>
 	</select>
 	
 	
