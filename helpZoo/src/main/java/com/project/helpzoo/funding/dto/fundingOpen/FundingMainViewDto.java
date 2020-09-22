@@ -23,7 +23,9 @@ public class FundingMainViewDto {
 
 	private int achievementRate;
 	
+	private String filePath;
 	
+	private String fileChangeName;
 	
 	
 	
@@ -47,6 +49,55 @@ public class FundingMainViewDto {
 		this.fundingEndDate = fundingEndDate;
 		this.achievementRate = achievementRate;
 	}
+
+
+	
+	
+	
+	
+	
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+
+
+
+
+
+
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+
+
+
+
+
+
+
+	public String getFileChangeName() {
+		return fileChangeName;
+	}
+
+
+
+
+
+
+
+
+	public void setFileChangeName(String fileChangeName) {
+		this.fileChangeName = fileChangeName;
+	}
+
+
+
+
+
 
 
 
@@ -170,16 +221,6 @@ public class FundingMainViewDto {
 
 
 
-	@Override
-	public String toString() {
-		return "FundingMainViewDto [fundingTitle=" + fundingTitle + ", category=" + category + ", fundingSummary="
-				+ fundingSummary + ", fundingMaker=" + fundingMaker + ", totalOrderAmount=" + totalOrderAmount
-				+ ", reachAmount=" + reachAmount + ", fundingEndDate=" + fundingEndDate + ", achievementRate="
-				+ achievementRate + "]";
-	}
-
-
-
 	public int getAchievementRate() {
 		return achievementRate;
 	}
@@ -203,6 +244,46 @@ public class FundingMainViewDto {
 		this.reachAmount = reachAmount;
 		this.fundingEndDate = fundingEndDate;
 		this.achievementRate = achievementRate;
+	}
+
+
+
+
+
+
+
+
+	@Override
+	public String toString() {
+		return "FundingMainViewDto [fundingNo=" + fundingNo + ", fundingTitle=" + fundingTitle + ", category="
+				+ category + ", fundingSummary=" + fundingSummary + ", fundingMaker=" + fundingMaker
+				+ ", totalOrderAmount=" + totalOrderAmount + ", reachAmount=" + reachAmount + ", fundingEndDate="
+				+ fundingEndDate + ", achievementRate=" + achievementRate + ", filePath=" + filePath
+				+ ", fileChangeName=" + fileChangeName + "]";
+	}
+
+
+
+
+
+
+
+
+	public FundingMainViewDto(long fundingNo, String fundingTitle, String category, String fundingSummary,
+			String fundingMaker, int totalOrderAmount, int reachAmount, Timestamp fundingEndDate, int achievementRate,
+			String filePath, String fileChangeName) {
+		super();
+		this.fundingNo = fundingNo;
+		this.fundingTitle = fundingTitle;
+		this.category = category;
+		this.fundingSummary = fundingSummary;
+		this.fundingMaker = fundingMaker;
+		this.totalOrderAmount = totalOrderAmount;
+		this.reachAmount = reachAmount;
+		this.fundingEndDate = fundingEndDate;
+		this.achievementRate = achievementRate;
+		this.filePath = filePath;
+		this.fileChangeName = fileChangeName;
 	}
 	
 

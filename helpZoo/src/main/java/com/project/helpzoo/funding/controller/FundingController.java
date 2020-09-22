@@ -96,6 +96,7 @@ public class FundingController {
 		
 		model.addAttribute("funding", funding);
 		
+		model.addAttribute("fundingNo", fundingNo);
 		
 		
 		

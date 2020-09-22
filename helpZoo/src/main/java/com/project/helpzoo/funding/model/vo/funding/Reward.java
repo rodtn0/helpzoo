@@ -61,6 +61,8 @@ public class Reward {
 	@Column(name = "DELIVERY_STARTDAY")
 	private Timestamp deliveryDay;
 	
+	@Column(name = "ORIGIN_REWARD_AMOUNT")
+	private int originRewardAmount;
 	
 	
 	
@@ -71,6 +73,26 @@ public class Reward {
 	
 	
 	
+	
+	
+	public int getOriginRewardAmount() {
+		return originRewardAmount;
+	}
+
+
+
+
+
+
+	public void setOriginRewardAmount(int originRewardAmount) {
+		this.originRewardAmount = originRewardAmount;
+	}
+
+
+
+
+
+
 	public Reward(Long rewardSeq, String content, String title, int price, int amount, int deliveryPrice,
 			Timestamp deliveryDay) {
 		super();
@@ -96,6 +118,20 @@ public class Reward {
 		this.deliveryDay = deliveryDay;
 	}
 
+
+	public Reward(Long rewardSeq, String content, String title, int price, int amount, int deliveryPrice,
+			Timestamp deliveryDay, int originRewardAmount) {
+		super();
+		this.rewardSeq = rewardSeq;
+		this.content = content;
+		this.title = title;
+		this.price = price;
+		this.amount = amount;
+		this.deliveryPrice = deliveryPrice;
+		this.deliveryDay = deliveryDay;
+		this.originRewardAmount = originRewardAmount;
+
+	}
 
 
 

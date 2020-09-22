@@ -58,7 +58,7 @@
         color: white;
         font-weight: bold;
         position: absolute;
-        top: 17%;
+        top: 24%;
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 2;
@@ -93,6 +93,11 @@
         border: 1px solid white;
         
       }
+
+      .div{
+          display: inline-block;
+          margin-top: 7%;
+      }
     </style>
   </head>
   <body>
@@ -110,7 +115,7 @@
  Timestamp t1 = new Timestamp(System.currentTimeMillis());
  
   
- long nowTime = (t1.getTime() - dto.getEndDay().getTime());
+ long nowTime = (dto.getEndDay().getTime() - t1.getTime() );
  
  long minute = (nowTime / 1000 ) /60 ; //minute
  long second = (nowTime / 1000 ) % 60 ; //second
@@ -141,8 +146,8 @@
 
 
       <div class="funding_item_text">
-        <p>사료 / 식이용품</p>
-        <h1>찹쌀같은 식감! 최고의 강아지 사료! 에어 코듀라 스페셜사료</h1>
+        <p>${funding.category}</p>
+        <h1> ${funding.fundingTitle}</h1>
       </div>
     </div>
     <hr />
@@ -169,9 +174,9 @@
        
 
         <div class="project_info">
-          목표 금액 ${funding.goalAmount }원 펀딩기간 ${funding.startDay}-${funding.endDay}100% 이상 모이면
+     <small>     목표 금액 ${funding.goalAmount}원 펀딩기간 ${funding.startDay} &nbsp;&nbsp;~&nbsp;&nbsp;${funding.endDay} <br>100% 이상 모이면
           펀딩이 성공되는 프로젝트 이 프로젝트는 펀딩 마감일까지 목표 금액이
-          100% 모이지 않으면 결제가 진행되지 않습니다.
+          100% 모이지 않으면 결제가 진행되지 않습니다.</small>
         </div>
       </div>
       <div class="col-lg-4 col-sm-4 col-md-4">
@@ -208,7 +213,7 @@
 
            <hr>
            <br>
-           메이커 정보
+          <small>메이커 정보</small>
 
            <div class="card" style="width: 18rem;">
 
@@ -221,28 +226,24 @@
 
 
           <br>
-         리워드 정보
+         <small>리워드 선택</small>
 
-          <div class="card" style="width: 18rem;">
 
-           <img src="/helpZoo/resources/images/dodo5.jpg" class="card-img-top" alt="...">
+            <div class="rewardList">
 
-           <div class="card-body">
-             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-           </div>
-         </div>
 
-         <br>
-         메이커 정보
+            </div>
 
-         <div class="card" style="width: 18rem;">
+            
 
-          <img src="/helpZoo/resources/images/dodo5.jpg" class="card-img-top" alt="...">
+          <!--ajax로 동적로딩할 reward 들-->
+       
 
-          <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-        </div>
+         <!--ajax로 동적로딩할 reward 들-->
+  
+
+
+
 
 
 
@@ -253,6 +254,72 @@
     </div>
         </div>
     </div>
+
+    <script>
+
+$(document).ready(function() {
+		
+		$.ajax({
+			url:"${contextPath}/fundingApi/selectReward",
+			dataType : "json",
+            data :  { fundingNo : '${fundingNo}'},
+			success : function(list) {
+			
+			$.each(list,function(index,item){
+				
+				
+				console.log(item);
+				
+				
+				var $card = $("<div class='card' style='width: 18rem;'>");
+                var $container = $("<div class='container'>");
+                var $cardBody = $("<div class='card-body'>");
+				var $cardText = $("<p class='card-text'>");
+
+                var $price = $("<b class='div reward_price'>").text(item.price);
+                var $title = $("<b class='div reward_title'>").text(item.title);
+
+                var $deliveryPrice = $("<small class='div delivery_price'>").text('배송비').after("<span>" + item.deliveryPrice+ "<span>")
+                var $deliveryDay = $("<small class='div delivery_day'>").text('리워드 발송 시작일').after("<span>" + item.deliveryPrice+ "<span>");
+                var $amount = $("<small class='reward_amount'>").text('제한수량' + item.originAmount +'개' + '현재' + item.amount + '개 남음!');
+
+                var $explain = $("<small class='div'>").text('한정수량으로 제공하는 리워드 입니다.')
+
+
+                var $rewardList = $(".rewardList")
+
+                $cardText.append($price, $title, $deliveryPrice, $deliveryDay, $amount, $explain);
+
+                $container.append($cardText);
+
+                $cardBody.append($container);
+
+                $card.append($cardBody);
+
+                $rewardList.append($card);
+
+			
+			
+					
+				
+			});
+
+
+			
+				
+				
+			}, error : function(){
+				console.log("ajax 통신 실패");
+			}
+				});
+		
+		
+		
+	});
+
+
+    </script>
+
     
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
