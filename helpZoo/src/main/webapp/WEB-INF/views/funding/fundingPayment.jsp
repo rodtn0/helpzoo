@@ -172,6 +172,8 @@
     </style>
   </head>
   <body>
+  
+  <jsp:include page="/WEB-INF/views/common/header.jsp"/>
     <div class="container">
       <div class="d-flex justify-content-around">
         <br />
@@ -471,5 +473,6 @@
     <br />
     <br />
     <br />
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
   </body>
 </html>
