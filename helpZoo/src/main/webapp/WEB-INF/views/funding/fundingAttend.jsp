@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -131,6 +135,12 @@
           background-color:  #20b2aa;
         border-color: white;
       }
+      
+       .size_size{
+        width: 200px;
+      }
+      
+      
     </style>
   </head>
   <body>
@@ -166,22 +176,9 @@
           >
         </div>
 
-        <div class="card text-center bmi">
-          <div class="card-header">
-            <input type="checkbox" class="float-left littlebig" /> 38,400원
-            펀딩합니다.
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">
-              [울트라얼리버드]장튼튼 한정세트 (58개 남음)
-            </h5>
-            <p class="card-text small">
-              POST TRUST+(60ml) * 3개 96,000원 -> 38,400원(60%혜택)★한정수량
-              <br />
-            </p>
-            배송비 2,500원 | 리워드 제공 예상일 : 2020년 09월 말 (21~말일) 예정
-          </div>
-        </div>
+
+        <c:forEach var="item" items="${rewardList}">
+
 
         <div class="card text-center bmi">
           <div class="card-header">
@@ -190,32 +187,48 @@
           </div>
           <div class="card-body">
             <h5 class="card-title">
-              [울트라얼리버드]장튼튼 한정세트 (58개 남음)
+              
+              <c:choose>
+
+          <c:when test="${item.seq eq 1}"> <c:set var="bird" value="얼리버드"/>  </c:when>
+
+          <c:when test="${item.seq eq 2}"><c:set var="bird" value="슈퍼버드"/> </c:when>
+
+          <c:when test="${item.seq eq 3}"> <c:set var="bird" value="울트라버드"/> </c:when>
+
+          <c:when test="${item.seq eq 4}"> <c:set var="bird" value="울트라오메가버드"/> </c:when>
+
+           </c:choose>
+
+
+
+              ${bird} ${item.title} (${item.rewardAmount}개 남음)
+           
+           
             </h5>
             <p class="card-text small">
-              POST TRUST+(60ml) * 3개 96,000원 -> 38,400원(60%혜택)★한정수량
+              ${item.content}
               <br />
             </p>
-            배송비 2,500원 | 리워드 제공 예상일 : 2020년 09월 말 (21~말일) 예정
+            ${item.deleveryPrice} | 리워드 제공 예상일 : ${item.deliveryDay} 예정
+            
+            
+              <div class="size_size">
+              <br>
+                수량 : <input type="number" class="form-control form-control-sm d-flex justify-content-center" id="colFormLabelSm" placeholder="col-form-label-sm">
+            </div>
+            
+            
           </div>
         </div>
 
-        <div class="card text-center bmi">
-          <div class="card-header">
-            <input type="checkbox" class="float-left littlebig" /> 38,400원
-            펀딩합니다.
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">
-              [울트라얼리버드]장튼튼 한정세트 (58개 남음)
-            </h5>
-            <p class="card-text small">
-              POST TRUST+(60ml) * 3개 96,000원 -> 38,400원(60%혜택)★한정수량
-              <br />
-            </p>
-            배송비 2,500원 | 리워드 제공 예상일 : 2020년 09월 말 (21~말일) 예정
-          </div>
-        </div>
+
+      </c:forEach>
+
+
+
+
+
 
         <div class="card text-center lasttt">
           <div class="card-body">
