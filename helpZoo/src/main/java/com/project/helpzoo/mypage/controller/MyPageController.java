@@ -111,14 +111,15 @@ public class MyPageController {
 		
 		if(result >0) {
 			status = "success";
-			msg = "회원 탈퇴 성공";
+			msg = "회원 탈퇴에 성공하셨습니다.";
+			text= "그동안 이용해 주셔서 감사합니다.";
 			SessionStatus.setComplete();
-			path = "redirect:secessionComplete";
+			path = "redirect:/";
 		}else {
 			status = "error";
 			msg = "회원 탈퇴 실패";
 			text = "올바른 비밀번호가 입력되었는지 확인해주세요.";
-			path = "redirect:secession";
+			path = "redirect:/secession";
 
 		}
 		rdAttr.addFlashAttribute("status", status);
@@ -173,7 +174,7 @@ public class MyPageController {
 		// (2) PageInfo 초기 세팅
 		Member loginMember = (Member)model.getAttribute("loginMember");
 		
-		System.out.println("초기 loginMember:"+loginMember.getMemberId());
+		//System.out.println("초기 loginMember:"+loginMember.getMemberId());
 		
 		mPageInfo mInfo = mypageService.pagination(cp, loginMember);
 		
@@ -206,23 +207,29 @@ public class MyPageController {
 	defaultValue = "1")int cp, Model model) {
 		
 		Member loginMember = (Member)model.getAttribute("loginMember");
+		int memberNo = loginMember.getMemberNo();
+		System.out.println("memberNo :" + memberNo);
 		
-		mPageInfo mInfo = mypageService.pagination(cp, loginMember);
+		mPageInfo dInfo = mypageService.pagination(cp, memberNo);
+		System.out.println("dInfo :" + dInfo);
 		
-		List<Donation> doListByme = mypageService.donaSelectList1(mInfo, loginMember);
+		List<Donation> doListByme = mypageService.selectdoList(dInfo, memberNo);
 		
 		model.addAttribute("doListByme", doListByme);
-		model.addAttribute("mInfo", mInfo);
+		model.addAttribute("dInfo",dInfo);
 		
-		for(Donation d : doListByme) {
-			System.out.println("doListByme : " + d);
-		}
+		System.out.println("dInfo" + dInfo);
+		System.out.println("doListByme" + doListByme);
 		
 		if(!doListByme.isEmpty()) {
-			//List<Member> doList = mypageService.selectThumbnailList2(doListByme);
-			//model.addAttribute("doList", doList);
+			List<Donation> doThList = mypageService.selectDoThumbnailList(doListByme);
+			System.out.println("doThList : " + doThList);
+			model.addAttribute("doThList",doThList);
 		}
+		
 		return "mypage/donationList";
 	}
+	
+	
 	
 }

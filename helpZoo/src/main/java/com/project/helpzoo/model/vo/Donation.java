@@ -29,6 +29,7 @@ public class Donation {
 	private String dfilePath;
 	private String dfileChangeName;
 	private int dParentBoardNo;
+	private int memberNo;
 	
 	public Donation() {
 		super();

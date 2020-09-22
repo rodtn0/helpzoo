@@ -14,7 +14,9 @@ import com.project.helpzoo.board.model.DAO.ReviewDAO;
 import com.project.helpzoo.board.model.vo.Attachment;
 import com.project.helpzoo.board.model.vo.PageInfo;
 import com.project.helpzoo.board.model.vo.Review;
+import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.member.model.vo.Member;
+import com.project.helpzoo.model.vo.Donation;
 
 @Service
 public class ReviewServiceImpl implements ReviewService{
@@ -291,6 +293,12 @@ public class ReviewServiceImpl implements ReviewService{
 		}
 		
 		return result;
+	}
+
+	// 펀딩 top5 랭킹 조회 Service 구현
+	@Override
+	public List<Donation> selectTopViewsD() {
+		return reviewDAO.selectTopViewsD();
 	}
 		
 		
