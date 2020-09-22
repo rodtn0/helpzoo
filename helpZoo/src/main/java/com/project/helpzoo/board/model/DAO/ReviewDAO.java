@@ -11,6 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.project.helpzoo.board.model.vo.Attachment;
 import com.project.helpzoo.board.model.vo.PageInfo;
 import com.project.helpzoo.board.model.vo.Review;
+import com.project.helpzoo.funding.dto.fundingOpen.FundingMainViewDto;
+import com.project.helpzoo.funding.model.vo.funding.FundingAttachment;
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.member.model.vo.Member;
 import com.project.helpzoo.model.vo.Donation;
@@ -241,6 +243,22 @@ public class ReviewDAO {
 	 */
 	public List<FundingProject> selectTopViewsF() {
 		return sqlSession.selectList("reviewMapper.selectTopViews");
+	}
+
+
+	/** 펀딩 랜덤 3개 조회 DAO
+	 * @return list1
+	 */
+	public List<FundingMainViewDto> selectRandomF() {
+		return sqlSession.selectList("reviewMapper.selectRandomF");
+	}
+
+
+	/** 기부 랜덤 3개 조회 DAO
+	 * @return list2
+	 */
+	public List<Donation> selectRandomD() {
+		return sqlSession.selectList("donationMapper.selectRandomD");
 	}
 
 

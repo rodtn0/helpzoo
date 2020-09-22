@@ -58,19 +58,19 @@
 						<div class="col-md-4 funding">
 							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" class="rounded">
 							<h5 class="mt-3">
-								h3. Lorem ipsum dolor sit amet.
+								펀딩프로젝트1
 							</h5>
 						</div>
 						<div class="col-md-4 funding">
 							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" class="rounded">
 							<h5 class="mt-3">
-								h3. Lorem ipsum dolor sit amet.
+								펀딩프로젝트2
 							</h5>
 						</div>
 						<div class="col-md-4 funding">
 							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" class="rounded">
 							<h5 class="mt-3">
-								h3. Lorem ipsum dolor sit amet.
+								펀딩프로젝트3
 							</h5>
 						</div>
 					</div>
@@ -87,13 +87,13 @@
 									No.
 								</th>
 								<th>
-									프로젝트명
+									Title
 								</th>
 								<th>
-									만료일
+									EndDate
 								</th>
 								<th>
-									조회수
+									Views
 								</th>
 								
 							</tr>
@@ -130,13 +130,13 @@
 									No.
 								</th>
 								<th>
-									프로젝트명
+									Title
 								</th>
 								<th>
-									만료일
+									EndDate
 								</th>
 								<th>
-									조회수
+									Views
 								</th>
 							</tr>
 						</thead>
@@ -396,11 +396,15 @@
 		topViews1(1);
 		topViews2(2); // 함수 호출
 		
+		randomBoard(1);
+		
 		// 일정 시간(1분)마다 리스트 갱신
 		setInterval(function(){
 			topViews1(1);
 			topViews2(2);
 		}, 60000);
+		
+		
 	});
 	
 	// 비동기식으로 펀딩 실시간 랭킹 조회
@@ -467,6 +471,25 @@
 			
 		});
 		
+	}
+	
+	
+	function randomBoard(type){
+		console.log(type);
+		$.ajax({
+			url : "board/random/" + type,
+			dataType : "json",
+			success : function(list1){
+				console.log(list1)
+				
+				
+				
+			}, error : function(){
+				console.log("ajax 통신 실패");
+			}
+		
+			
+		});
 	}
 
 
