@@ -45,6 +45,7 @@
 		<mapper resource="/mappers/mypage-mappers.xml"/>
 		<mapper resource="/mappers/admin-mappers.xml"/>
 		<mapper resource="/mappers/mailing-mappers.xml"/>
+		<mapper resource="/mappers/adminconf-mappers.xml"/>
 	</mappers>
 	
 </configuration>
