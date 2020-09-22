@@ -246,14 +246,12 @@ public class FundingDAO {
 							funding.startDay,
 							category.category_name,
 							orderReward.count.sum())
-					
 					.from(funding)
 					.leftJoin(funding.rewards, reward)
 					.leftJoin(funding.fundingMaker, maker)
 					.leftJoin(orderReward).on(reward.id.eq(orderReward.reward.id))
 					.leftJoin(funding.category,category)
 					.where(funding.id.eq(no))
-					
 					.groupBy(funding.id,
 							funding.story, 
 							funding.goalAmount,
@@ -964,9 +962,10 @@ public class FundingDAO {
 		List<Tuple> result  = 
 				query.select(reward.price, reward.title, reward.deliveryPrice, 
 						
-						reward.amount, reward.originRewardAmount, reward.deliveryDay)
+						reward.amount, reward.originRewardAmount, reward.deliveryDay,reward.rewardSeq, reward.content)
 				.from(reward)
 				.where(reward.fundingProject.id.eq(fundingNo))
+				.orderBy(reward.rewardSeq.asc())
 				.fetch();
 		
 		
@@ -981,7 +980,7 @@ public class FundingDAO {
 			
 			rewardView = new FundingDetailRewardView(re.get(reward.price), re.get(reward.title), re.get(reward.deliveryPrice), re.get(reward.amount), 
 					
-					re.get(reward.originRewardAmount), re.get(reward.deliveryDay));
+					re.get(reward.originRewardAmount), re.get(reward.deliveryDay), re.get(reward.rewardSeq), re.get(reward.content));
 			
 			rewardViewList.add(rewardView);
 		}
