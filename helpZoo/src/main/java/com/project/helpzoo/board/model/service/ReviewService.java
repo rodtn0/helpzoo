@@ -84,10 +84,15 @@ public interface ReviewService {
 	public abstract int updateReview(int type, Review review, String savePath, List<MultipartFile> images,
 			boolean[] deleteImages);
 
-	/** 펀딩 top5 랭킹 조회 Service
+	/** 기부 top5 랭킹 조회 Service
 	 * @return list
 	 */
 	public abstract List<Donation> selectTopViewsD();
+
+	/** 펀딩 top5 랭킹 조회 Service
+	 * @return
+	 */
+	public abstract List<FundingProject> selectTopViewsF();
 
 
 	

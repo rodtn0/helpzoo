@@ -295,10 +295,16 @@ public class ReviewServiceImpl implements ReviewService{
 		return result;
 	}
 
-	// 펀딩 top5 랭킹 조회 Service 구현
+	// 기부 top5 랭킹 조회 Service 구현
 	@Override
 	public List<Donation> selectTopViewsD() {
 		return reviewDAO.selectTopViewsD();
+	}
+
+	// 펀딩 top5 랭킹 조회 Service 구현
+	@Override
+	public List<FundingProject> selectTopViewsF() {
+		return reviewDAO.selectTopViewsF();
 	}
 		
 		
