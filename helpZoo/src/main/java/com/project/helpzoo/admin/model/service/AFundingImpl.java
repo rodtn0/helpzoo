@@ -46,6 +46,10 @@ public class AFundingImpl implements AFundingService{
 	public List<AFundingCategory> selectCategory(String yymm) {
 		return fundingDAO.selectCategory(yymm);
 	}
+	@Override
+	public List<AFunding> selectSuccess(String yymm) {
+		return fundingDAO.selectSuccess(yymm);
+	}
 	
 
 }

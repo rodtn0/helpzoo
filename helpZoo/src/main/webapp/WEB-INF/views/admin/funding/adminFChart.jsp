@@ -117,7 +117,9 @@
 		                  <div id="chart-age"></div>
 		              </div>
 		              <div id="middle-2">
+		              	<div id="chart-area2"></div>
 		              </div>
+		              
 		             </div>
 		             
               </div>
@@ -151,6 +153,8 @@
     		monthFees(mFee); // 집어 넣기
     		var mCategory = getMonthCategory(yymm);
     		monthCategory(mCategory);
+    		var mSuccess = getMonthSuccess(yymm);
+    		monthSuccess(mSuccess);
     		
     	}).on("mouseenter",function(){
     		  $(this).parent().css("cursor","pointer");
@@ -183,6 +187,7 @@
 	     	console.log(feesList);
 			var data = {
 			    categories: edList,
+			    
 			    series: [
 			        {
 			            name: 'Fees',
@@ -194,6 +199,7 @@
 			    chart: {
 			        width: 1160,
 			        height: 540,
+			        title: '펀딩 월별 수수료',
 			    },
 			    yAxis: {
 			        title: 'Price',
@@ -226,81 +232,139 @@
 	   	}
 	
 	function monthCategory(mCategory){
-	var container = document.getElementById('chart-area');
-	container.innerHTML = "";
- 	console.log(mCategory);
-	var data = {
-	    categories: ['Browser'],
-	    series: [
-	        {
-	            name: 'Chrome',
-	            data: 46.02
-	        },
-	        {
-	            name: 'IE',
-	            data: 20.47
-	        },
-	        {
-	            name: 'Firefox',
-	            data: 17.71
-	        },
-	        {
-	            name: 'Safari',
-	            data: 5.45
-	        },
-	        {
-	            name: 'Opera',
-	            data: 3.10
-	        },
-	        {
-	            name: 'Etc',
-	            data: 7.25
-	        }
-	    ]
-	};
-	var options = {
-	    chart: {
-	        width: 500,
-	        height: 500,
-	        title: 'Usage share of web browsers',
-	        format: function(value, chartType, areaType, valuetype, legendName) {
-	            if (areaType === 'makingSeriesLabel') { // formatting at series area
-	                value = value + '%';
-	            }
-
-	            return value;
-	        }
-	    },
-	    series: {
-	        radiusRange: ['40%', '100%'],
-	        showLabel: true
-	    },
-	    tooltip: {
-	        suffix: '%'
-	    },
-	    legend: {
-	        align: 'bottom'
-	    }
-	};
-	var theme = {
-	    series: {
-	        series: {
-	            colors: [
-	                '#83b14e', '#458a3f', '#295ba0', '#2a4175', '#289399',
-	                '#289399', '#617178', '#8a9a9a', '#516f7d', '#dddddd'
-	            ]
-	        },
-	        label: {
-	            color: '#fff',
-	            fontFamily: 'sans-serif'
-	        }
-	    }
-	};
-
-		// For apply theme
-
-		tui.chart.registerTheme('myTheme', theme);
-		options.theme = 'myTheme';
+		var container = document.getElementById('chart-age');
+		container.innerHTML = "";
+	 	console.log(mCategory);
+	 	
+	 	if(mCategory.length != 0){
+	 	
+		 	var amountList = [];
+		 	for(var i=0; i<mCategory.length ; i++){
+		 		var amount = {};
+		 		amount.name = mCategory[i].category;
+		 		amount.data = mCategory[i].proportion;
+		 		
+		 		amountList.push(amount);
+		 	}
+		 	
+		 	
+		 	
+		 	// 1. 장난감 2. 사료 3. 운동기구. 4. 옷 5. 간식
+			var data = {
+			    categories: ['Browser'],
+			    series: amountList
+			};
+			var options = {
+			    chart: {
+			        width: 500,
+			        height: 500,
+			        title: '펀딩 카테고리별 매출',
+			        format: function(value, chartType, areaType, valuetype, legendName) {
+			            if (areaType === 'makingSeriesLabel') { // formatting at series area
+			                value = value+ '원';
+			            }
+		
+			            return value;
+			        }
+			    },
+			    series: {
+			        radiusRange: ['40%', '100%'],
+			        showLabel: true
+			    },
+			    tooltip: {
+			        suffix: '원'
+			    },
+			    legend: {
+			        align: 'bottom'
+			    }
+			};
+			var theme = {
+			    series: {
+			        series: {
+			            colors: [
+			                '#83b14e', '#458a3f', '#295ba0', '#2a4175', '#289399',
+			                '#289399', '#617178', '#8a9a9a', '#516f7d', '#dddddd'
+			            ]
+			        },
+			        label: {
+			            color: '#fff',
+			            fontFamily: 'sans-serif'
+			        }
+			    }
+			};
+		
+				// For apply theme
+		
+				tui.chart.registerTheme('myTheme', theme);
+				options.theme = 'myTheme';
+			
+				tui.chart.pieChart(container, data, options);
+	 	}
+	 	else{
+	 		container.innerHTML = "<h2>데이터가 없습니다.</h2>";	
+	 	}
+	}
+	
+	function monthSuccess(mSuccess){
+		var container = document.getElementById('chart-area2');
+		console.log(mSuccess);
+		console.log(mSucces[0]);
+ 	 	 /* if(mSuccess.length != 0){ 
+		 	for(var i=0; i<mSuccess.length ; i++){
+		 		var amount = {};
+		 		amount.name = mCategory[i].category;
+		 		amount.data = mCategory[i].proportion;
+		 		
+		 		amountList.push(amount);
+		  	} */
+		var data = {
+		    categories: ['Browser'],
+		    series: [
+		        {
+		            name: '성공한 펀딩',
+		            data: mSuccess[0]
+		        },
+		        {
+		            name: '진행중 or 실패한 펀딩',
+		            data: 20.47
+		        },
+		        {
+		            name: 'Firefox',
+		            data: 17.71
+		        },
+		        {
+		            name: 'Safari',
+		            data: 5.45
+		        },
+		        {
+		            name: 'Opera',
+		            data: 3.10
+		        },
+		        {
+		            name: 'Etc',
+		            data: 7.25
+		        }
+		    ]
+		};
+		var options = {
+		    chart: {
+		        width: 500,
+		        height: 500,
+		        title: 'Usage share of web browsers'
+		    },
+		    tooltip: {
+		        suffix: '%'
+		    }
+		};
+		var theme = {
+		    series: {
+		        colors: [
+		            '#83b14e', '#458a3f', '#295ba0', '#2a4175', '#289399',
+		            '#289399', '#617178', '#8a9a9a', '#516f7d', '#dddddd'
+		        ]
+		    }
+		};
+	
 	
 		tui.chart.pieChart(container, data, options);
 	}
@@ -331,6 +395,25 @@
 		$.ajax({
 			type: "POST",
 			url : "MonthCategory",
+			data : {"yymm" : yymm},
+			async : false,
+			dataType: "json",
+			success : function(json){
+				console.log(json);
+				result = json;
+			},error : function(){
+				console.log("ajax 통신 실패");
+			}
+		});
+		
+		return result;
+	}
+	
+	function getMonthSuccess(yymm){
+		var result;
+		$.ajax({
+			type: "POST",
+			url : "MonthSuccess",
 			data : {"yymm" : yymm},
 			async : false,
 			dataType: "json",
