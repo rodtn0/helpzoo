@@ -12,6 +12,7 @@ import com.project.helpzoo.funding.model.vo.funding.FundingAttachment;
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.member.model.vo.Member;
 import com.project.helpzoo.model.vo.Donation;
+import com.project.helpzoo.model.vo.Donation2;
 
 public interface ReviewService {
 
@@ -104,7 +105,7 @@ public interface ReviewService {
 	/** 기부 랜덤 3개 조회
 	 * @return list2
 	 */
-	public abstract List<Donation> selectRandomD();
+	public abstract List<Donation2> selectRandomD();
 
 
 

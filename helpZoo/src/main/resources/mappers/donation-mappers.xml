@@ -35,6 +35,12 @@
 		<result property="dBoardStartDate" column="DONATION_BOARD_END_DT"/>
 	</resultMap>
 	
+	<resultMap type="Donation2" id="donationRandom">
+		<result property="dBoardTitle" column="DONATION_BOARD_TITLE"/>
+		<result property="dFilePath" column="DONATION_FILE_PATH"/>
+		<result property="dFileChangeName" column="DONATION_FILE_CHANGE_NAME"/>
+	</resultMap>
+	
 
 	<!-- 전체 게시글 수 조회 -->  
 	<!-- <select id="getListCount" parameterType="_int" resultType="_int">
@@ -83,7 +89,7 @@
 	
 	
 
-
+	<!-- 기부 랭킹 조회 -->
 	<select id="selectTopViews" resultMap="donationRank">
 		SELECT * FROM
 		(SELECT DONATION_BOARD_NO, DONATION_BOARD_TITLE, DONATION_BOARD_START_DT,
@@ -96,4 +102,19 @@
 		WHERE ROWNUM <= 5
 		]]>
 	</select>
+	
+	<!-- 기부 랜덤 조회 -->
+	<select id="selectRandomD" resultMap="donationRandom">
+		SELECT * FROM
+		(SELECT DONATION_BOARD_TITLE, DONATION_FILE_PATH, DONATION_FILE_CHANGE_NAME
+		FROM DONATION_BOARD DB
+		LEFT JOIN DONATION_ATTACHMENT DA ON(DB.DONATION_BOARD_NO = DA.DONATION_PARENT_BOARD_NO)
+		WHERE DONATION_FILE_LEVEL = 0
+		ORDER BY DBMS_RANDOM.RANDOM())
+		<![CDATA[
+		WHERE ROWNUM <= 3
+		]]>
+	</select>
+	
+	
 </mapper>

@@ -33,6 +33,7 @@
 		<typeAlias type="com.project.helpzoo.funding.model.vo.funding.FundingProject" alias="project"/>
 		<typeAlias type="com.project.helpzoo.funding.dto.fundingOpen.FundingMainViewDto" alias="fundingDto"/>
 		<typeAlias type="com.project.helpzoo.admin.model.vo.AFundingCategory" alias="AFundingCategory"/>
+		<typeAlias type="com.project.helpzoo.model.vo.Donation2" alias="Donation2" />
 	</typeAliases>
 	
 	<!-- mapper.xml 파일을 등록하는 태그  -->

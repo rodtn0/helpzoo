@@ -25,10 +25,10 @@ import com.project.helpzoo.board.model.vo.Attachment;
 import com.project.helpzoo.board.model.vo.PageInfo;
 import com.project.helpzoo.board.model.vo.Review;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingMainViewDto;
-import com.project.helpzoo.funding.model.vo.funding.FundingAttachment;
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.member.model.vo.Member;
 import com.project.helpzoo.model.vo.Donation;
+import com.project.helpzoo.model.vo.Donation2;
 
 @Controller
 @SessionAttributes({"loginMember"})
@@ -423,19 +423,24 @@ public class reviewController {
 		System.out.println(type);
 		
 		List<FundingMainViewDto> list1 = null;
-		List<Donation> list2 = null;
+		List<Donation2> list2 = null;
 		Gson gson = null;
 		String path = null;
 		
 		if(type == 1) {
 			list1 = reviewService.selectRandomF();
-			gson = new GsonBuilder().create();
+			System.out.println("list1 : " + list1);
 			
-			System.out.println(list1);
+			gson = new GsonBuilder().create();
 			path = gson.toJson(list1);
 			
 		}else {
 			list2 = reviewService.selectRandomD();
+			System.out.println("list2 : " + list2);
+			
+			gson = new GsonBuilder().create();
+			path = gson.toJson(list2);
+
 		}
 		
 		return path;
