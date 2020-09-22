@@ -25,6 +25,7 @@ import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenRequireView;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenRewardView;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenStoryView;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingTotalInfoDto;
+import com.project.helpzoo.funding.dto.viewDetail.FundingDetailRewardView;
 import com.project.helpzoo.funding.model.dao.FundingDAO;
 import com.project.helpzoo.funding.model.vo.funding.FundingAttachment;
 import com.project.helpzoo.funding.model.vo.funding.FundingCategory;
@@ -437,6 +438,16 @@ public class FundingServiceImpl implements FundingService {
 			
 			dao.openMakerSave(fundingOpenInfoView, fundingNo);
 			
+		}
+
+
+		@Override
+		public List<FundingDetailRewardView> selectReward(Long fundingNo) {
+			
+			
+			
+			
+			return dao.selectReward(fundingNo);
 		}
 		
 	

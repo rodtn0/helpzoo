@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingMainViewDto;
+import com.project.helpzoo.funding.dto.viewDetail.FundingDetailRewardView;
 import com.project.helpzoo.funding.model.service.FundingService;
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.funding.model.vo.search.FundingSearch;
@@ -43,6 +44,31 @@ public class FundingApiController {
 		
 		return gson.toJson(mainViewList);
 	}
+	
+
+	@ResponseBody
+	@RequestMapping(value =  "selectReward")
+	public String selectRewardList(int fundingNo) {
+	
+		
+		Long fundingNo2 = ((Integer)fundingNo).longValue();
+		
+		
+		List<FundingDetailRewardView> rewardList = service.selectReward(fundingNo2);
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd").create();
+		
+		
+		System.out.println(rewardList);
+		
+		return gson.toJson(rewardList);
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 }

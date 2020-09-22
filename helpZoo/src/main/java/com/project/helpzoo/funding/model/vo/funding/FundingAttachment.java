@@ -58,6 +58,8 @@ public class FundingAttachment {
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name= "AGENT_ID")
 	private MakerAgent agent;
+	
+	
 
 	
 	
