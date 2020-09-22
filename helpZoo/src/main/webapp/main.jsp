@@ -462,6 +462,7 @@
 <script>
 
 	$(function(){
+		topViews(1);
 		topViews(2); // 함수 호출
 		
 		// 일정 시간(1분)마다 리스트 갱신
