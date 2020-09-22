@@ -19,6 +19,7 @@ import com.project.helpzoo.funding.model.vo.funding.FundingAttachment;
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.member.model.vo.Member;
 import com.project.helpzoo.model.vo.Donation;
+import com.project.helpzoo.model.vo.Donation2;
 
 @Service
 public class ReviewServiceImpl implements ReviewService{
@@ -317,7 +318,7 @@ public class ReviewServiceImpl implements ReviewService{
 
 	// 기부 랜덤 3개 조회 Service구현
 	@Override
-	public List<Donation> selectRandomD() {
+	public List<Donation2> selectRandomD() {
 		return reviewDAO.selectRandomD();
 	}
 		
