@@ -150,19 +150,41 @@ public class QNAController {
 	// Q&A 수정하기로 이동
 	@RequestMapping("{qnaNo}/update")
 	public ModelAndView updateView(@PathVariable int qnaNo,
-							ModelAndView mv) {
+							ModelAndView mv, int cp, RedirectAttributes rdAttr) {
 		
-		QNABoard board = qnaService.selectBoard(qnaNo);
+		System.out.println("sAqnaNo: " + qnaNo);
+		int selectAnswer = qnaService.selectAnswer2(qnaNo);
 		
-		if(board != null) {
-			List<Attachment> files = qnaService.selectFiles(qnaNo);
+		String status = null;
+		String msg = null;
+		String url = null;
+		
+		if(selectAnswer < 2) {
 			
-			System.out.println(files);
+			System.out.println("sA:" + selectAnswer);
+			QNABoard board = qnaService.selectBoard(qnaNo);
 			
-			mv.addObject("files", files);
+			if(board != null) {
+				List<Attachment> files = qnaService.selectFiles(qnaNo);
+				
+				System.out.println(files);
+				
+				mv.addObject("files", files);
+			}
+			
+			mv.addObject("qnaBoard", board);
+			mv.setViewName("board/qnaUpdate");
+			
+		}else {
+			
+			url = "../" + qnaNo + "?cp=" + cp;
+			status = "error";
+			msg = "답변이 있는 게시물은 수정이 불가능합니다.";
+			mv.setViewName("redirect:" + url);
+			
+			rdAttr.addFlashAttribute("status",status);
+	        rdAttr.addFlashAttribute("msg",msg);
 		}
-		mv.addObject("qnaBoard", board);
-		mv.setViewName("board/qnaUpdate");
 		
 		return mv;
 	}
@@ -180,6 +202,7 @@ public class QNAController {
 		// 이미지 수정
 		// -------------------------------------------------------------
 		// 파일 이름이 출력된 경우 == 이미지가 수정된 경우
+		
 		for(int i=0; i<images.size(); i++) {
 			System.out.println("images[" + i + "] :" + images.get(i).getOriginalFilename());
 		}
@@ -217,24 +240,37 @@ public class QNAController {
 	@RequestMapping("{qnaNo}/delete")
 	public ModelAndView deleteBoard(@PathVariable int qnaNo,
 										ModelAndView mv, RedirectAttributes rdAttr,
-										HttpServletRequest request) {
+										HttpServletRequest request, int cp) {
 		
-		int result = qnaService.deleteBoard(qnaNo);
+		System.out.println(cp);
+		
+		int selectAnswer = qnaService.selectAnswer2(qnaNo);
+		
+		System.out.println("deleNo:" + qnaNo);
 		
 		String status = null;
 		String msg = null;
 		String url = null;
 		
-		if(result > 0) {
-			status = "success";
-			msg = "게시글이 삭제되었습니다.";
-			url = "../qnaList";
+		if(selectAnswer < 2) {
+			
+			int result = qnaService.deleteBoard(qnaNo);
+			
+			if(result > 0) {
+				status = "success";
+				msg = "게시글이 삭제되었습니다.";
+				url = "../qnaList";
+			}else {
+				status = "error";
+				msg = "게시글 삭제 실패";
+				url = request.getHeader("referer");
+			}
+			
 		}else {
 			status = "error";
-			msg = "게시글 삭제 실패";
-			url = request.getHeader("referer");
+			msg = "답변이 있는 게시물은 삭제가 불가능합니다.";
+			url = "../" + qnaNo + "?cp=" + cp;
 		}
-		
 		rdAttr.addFlashAttribute("status", status);
 		rdAttr.addFlashAttribute("msg", msg);
 		

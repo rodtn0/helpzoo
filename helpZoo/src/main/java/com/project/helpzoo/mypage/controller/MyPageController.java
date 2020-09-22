@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.project.helpzoo.board.model.vo.PageInfo;
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.member.model.vo.Member;
+import com.project.helpzoo.model.vo.Donation;
 import com.project.helpzoo.mypage.model.service.MyPageService;
 import com.project.helpzoo.mypage.model.vo.mPageInfo;
 
@@ -110,14 +111,15 @@ public class MyPageController {
 		
 		if(result >0) {
 			status = "success";
-			msg = "회원 탈퇴 성공";
+			msg = "회원 탈퇴에 성공하셨습니다.";
+			text= "그동안 이용해 주셔서 감사합니다.";
 			SessionStatus.setComplete();
-			path = "redirect:secessionComplete";
+			path = "redirect:/";
 		}else {
 			status = "error";
 			msg = "회원 탈퇴 실패";
 			text = "올바른 비밀번호가 입력되었는지 확인해주세요.";
-			path = "redirect:secession";
+			path = "redirect:/secession";
 
 		}
 		rdAttr.addFlashAttribute("status", status);
@@ -172,7 +174,7 @@ public class MyPageController {
 		// (2) PageInfo 초기 세팅
 		Member loginMember = (Member)model.getAttribute("loginMember");
 		
-		System.out.println("초기 loginMember:"+loginMember.getMemberId());
+		//System.out.println("초기 loginMember:"+loginMember.getMemberId());
 		
 		mPageInfo mInfo = mypageService.pagination(cp, loginMember);
 		
@@ -198,5 +200,36 @@ public class MyPageController {
 		
 		return "mypage/fundingList";
 	}
+	
+	// 내가 주최한 기부 리스트로 이동되는 Controller
+	@RequestMapping("donationList/{type}")
+	public String donationList(@PathVariable int type, @RequestParam(value="cp", required = false,
+	defaultValue = "1")int cp, Model model) {
+		
+		Member loginMember = (Member)model.getAttribute("loginMember");
+		int memberNo = loginMember.getMemberNo();
+		System.out.println("memberNo :" + memberNo);
+		
+		mPageInfo dInfo = mypageService.pagination(cp, memberNo);
+		System.out.println("dInfo :" + dInfo);
+		
+		List<Donation> doListByme = mypageService.selectdoList(dInfo, memberNo);
+		
+		model.addAttribute("doListByme", doListByme);
+		model.addAttribute("dInfo",dInfo);
+		
+		System.out.println("dInfo" + dInfo);
+		System.out.println("doListByme" + doListByme);
+		
+		if(!doListByme.isEmpty()) {
+			List<Donation> doThList = mypageService.selectDoThumbnailList(doListByme);
+			System.out.println("doThList : " + doThList);
+			model.addAttribute("doThList",doThList);
+		}
+		
+		return "mypage/donationList";
+	}
+	
+	
 	
 }

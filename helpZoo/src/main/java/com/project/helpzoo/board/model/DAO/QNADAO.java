@@ -154,6 +154,14 @@ public class QNADAO {
 	public List<QNABoard> selectSearchList(String id) {
 		return sqlSession.selectList("qnaMapper.selectSearchList", id);
 	}
+
+	/** 수정 가능 여부
+	 * @param qnaNo
+	 * @return
+	 */
+	public int selectAnswer2(int qnaNo) {
+		return sqlSession.selectOne("qnaMapper.selectAnswer2", qnaNo);
+	}
 	
 
 }

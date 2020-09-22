@@ -24,8 +24,9 @@
     	FUNDING_END_DAY=#{fundingED} WHERE FUNDING_ID=#{fundingNo}
     </update>
     
+    <!--  $가  Statement 같은 것-->
     <update id="deleteFunding" parameterType="string">
-    	UPDATE FUNDING_PROJECT SET FUNDING_STATUS='N' WHERE FUNDING_ID=#{fundingNo}
+    	UPDATE FUNDING_PROJECT SET FUNDING_STATUS='N' WHERE FUNDING_ID IN ( ${fundingNo} )
     </update>
     
     <select id="selectFSList" parameterType="string" resultMap="AFundingResultSet">

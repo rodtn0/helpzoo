@@ -66,7 +66,12 @@
 	margin-bottom: 10px;
 	}
 	</style>
+	
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
+<!-- <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script> -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<!-- <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script> -->
 <script>
 
 function myfunction(){
@@ -100,11 +105,13 @@ function myfunction(){
     		    		   id : "${fun.fundingNo}",
     		    		   title: "${fun.fundingNo}"+". "+"${fun.fundingTitle}",
     		    		   start: "${fundingSD}",
-    		    		   end: new Date(${parseED})
+    		    		   end: new Date(${parseED}),
     		    		  /*  end: "${fundingED}" */
+    		    		  color:"#"+Math.round(Math.random()*0xffffff).toString(16),
+    		    		  textColor: "white"
     		    	   },
     	    		</c:forEach>
-    	      ], eventColor : "#7fcdcd",
+    	      ],
     	      	  eventClick: function(info) {
     	      	
     	          var eventFullDate = info.event.start;
@@ -171,8 +178,7 @@ function myfunction(){
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Question And Answer</h1>
-          <p class="mb-4">관리자가 사용자 질문에 답변해주는 페이지입니다.</p>
+          <h1 class="h3 mb-2 text-gray-800">Funding Schedule</h1>
 
           <!-- DataTales Example -->
           <div class="row">
@@ -199,6 +205,18 @@ function myfunction(){
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
+                	<h2> 오늘 시작하는 펀딩 </h2>
+                </div>
+              </div>
+              
+             <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                	<h2> 오늘 끝나는 펀딩 </h2>
                 </div>
               </div>
             </div>
@@ -211,42 +229,40 @@ function myfunction(){
             </div>
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                
                 <select id="selectBox">
 					<option value='Y'>진행중인 프로젝트</option>
 					<option value='S'>성공한 프로젝트</option>
 					<option value='N'>마감 & 삭제한 프로젝트</option>
 				</select>
-				
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <button type="button" class="btn btn-outline-secondary" id="deleteFunding">삭제</button>
                   <thead>
                     <tr>
-                  	<th><input type="checkbox" class="checkAll"></th>
+                  		<th>선택</th>
                       <th>글번호</th>
                       <th>제목</th>
                       <th>글쓴이</th>
-                      <th>좋아요</th>
-                      <<!-- th>펀딩 시작</th>
+                      <th>펀딩 시작</th>
                       <th>펀딩 마감</th>
                       <th>목표 금액</th>
                       <th>현재 금액</th>
                       <th>달성률</th>
-                      <th>수수료</th> -->
+                      <th>수수료</th>
                     </tr>
                   </thead>
+                  
                   <tfoot>
 	                  <tr>
-	                  <th><input type="checkbox" class="checkAll"></th>
+	                  <th>선택</th>
                       <th>글번호</th>
                       <th>제목</th>
                       <th>글쓴이</th>
-                      <th>좋아요</th>
-                      <!-- <th>펀딩 시작</th>
+                      <th>펀딩 시작</th>
                       <th>펀딩 마감</th>
                       <th>목표 금액</th>
                       <th>현재 금액</th>
                       <th>달성률</th>
-                      <th>수수료</th> -->
+                      <th>수수료</th>
                     </tr>
                   </tfoot>
                   <!-- <tbody>
@@ -296,84 +312,73 @@ function myfunction(){
 
       <jsp:include page="../../common/adfooter.jsp"/>
       
-      <script>
+     <script>
       
-      var listStatus = 'Y';
+     var listStatus = 'Y';
+    	  
+	
       
-      $(function(){
+	  var dataTable;
+	  
+  	/* function callList(listStatus){ */
+  	/* $(document).ready(function(){ */
+  	// 문서가 다 로딩된 다음에
+  		function callList(listStatus){
+  			
+  		console.log("listStatus : " + listStatus)
+  		
+  			dataTable = $("#dataTable").DataTable({
+			  ajax : {
+				  url : "${contextPath}/admin/funding/listAction",
+				  type : "POST",
+				  data : {"listStatus" : listStatus},
+				  dataType : "JSON",
+				  "dataSrc": function(json){
+						console.log(json);
+						var list = json;
+
+						for ( var i=0 ; i < json.length ; i++ ) {
+							json[i].checkBox = "<input type='checkbox' name='chk'>";
+							json[i].calGoal = list[i].fundingGoal.toLocaleString();
+							json[i].calCurrent = list[i].currentAmount.toLocaleString();
+							json[i].calResult = (parseInt(list[i].currentAmount) / parseInt(list[i].fundingGoal) * 100).toFixed(2) + "%";
+		  					json[i].calFees = list[i].fees.toLocaleString();
+						}
+
+						return json;
+					}
+
+			 	},
+                columns : [
+                    {data: "checkBox"},
+                    {data: "fundingNo"},
+                    {data: "fundingTitle"},
+                    {data: "memberName"},
+                    {data: "fundingSD"},
+                    {data: "fundingED"},
+                    {data: "calGoal"},
+                    {data: "calCurrent"},
+                    {data: "calResult"},
+                    {data: "calFees"}
+                ]
+		  });
+		} 
+  	
+  	
+  	$("#selectBox").on("change", function(){
+		  
+		  var listStatus = $(this).val();
+		  dataTable.destroy();
+		  callList(listStatus);
+		  
+	  });
+  	
+  	  $(function(){
+  		  console.log("listStatus : " + listStatus);
     	 callList(listStatus);
       })
       
       // 리스트 가져오기 레디함수
-    	  
-  	  $("#selectBox").on("change", function(){
-  		  
-  		  var listStatus = listStatus = $(this).val();
-  		  callList(listStatus);
-  		  
-  	  });
-      
-  	function callList(listStatus){
-  		
-		  /*$.ajax({
-			  url : "${contextPath}/admin/funding/listAction",
-			  type : "GET",
-			  data : {"listStatus" : listStatus},
-			  dataType : "JSON",
-			  success : function(funding){
-				  
-		  		$("#dataTable > tbody").html("");
-				  
-				  if(funding.length == 0){
-					  // $("#dataTable > tbody").append("<tr><td colspan='11'>존재하는 게시글이 없습니다.</td></tr>");
-				  }else{
-	 				$.each(funding, function(index, item){
-	 					console.log(funding);
-		 				var $tr = $("<tr>");
-		 				var $checkbox = $("<td><input type='checkbox' name='chk'>").attr({value :"item.no"});
-		 				var $td1 = $("<td>").text(item.fundingNo).attr("name", item.boardType);
-		 				var $td2 = $("<td>").text(item.fundingTitle);
-		 				var $td3 = $("<td>").text(item.memberName);
-		 				var $td4 = $("<td>").text(item.likeCount);
-		 				var $td5 = $("<td>").text(item.fundingSD);			
-		 				var $td6 = $("<td>").text(item.fundingED);			
-		 				var $td7 = $("<td>").text(item.fundingGoal.toLocaleString());		
-		 				var $td8 = $("<td>").text(item.currentAmount.toLocaleString());	
-		 				var $td9 = $("<td>").text( (parseInt(item.currentAmount)/parseInt(item.fundingGoal) * 100).toFixed(2) + "%");	
-		 				var $td10 = $("<td>").text(item.fees.toLocaleString());	
-		 				$tr.append($checkbox,$td1,$td2,$td3,$td4,$td5,$td6,
-		 						$td7,$td8,$td9,$td10);
-		 				
-		 				$("#dataTable > tbody").append($tr);
-		 				
-	 				});
-				  }
-				  
-			  },error : function(){
-				  
-				  
-			  }
-		  })*/
-		  
-		  
-		  $("#dataTable").DataTable({
-			  ajax : {
-				  type : "GET",
-				  data : {"listStatus" : listStatus},
-				  dataType : "JSON"
-			 	},
-			 	
-                columns : [
-                    {data: "fundingNo"},
-                    {data: "fundingTitle"},
-                    {data: "memberName"},
-                    {data: "likeCount"}
-                ]
-
-		  });
-		  
-		}
-      
       
       $("#updateBtn").on("click",function(){
    	   var fundingNo = $("input[name='fundingNo']").val();
@@ -467,6 +472,56 @@ function myfunction(){
     			  }
     		  });
     	  });
+      
+      $(document).on("click","#deleteFunding",function(e){
+    	  										// 이벤트의 정보
+    	  var table = $(this).parent().attr("id");
+    	  										
+    	  //console.log( $(this).parent().attr("id") );
+    	  
+    	  
+    	  // console.log($("input[name=chk]:checked"));
+    	  
+/*     	  $("input[name=chk]:checked").each(function(index, item){
+    		  console.log($(item).parent().next().text());
+    	  }); */
+    	  
+    	  var checkArr = $("input[name=chk]:checked").parent().next("td");
+    	  // 글 번호들이 담김
+    	  console.log("Arr:"+checkArr);
+    	  var boardNumbers = [];
+    	  
+   		for(var i=0 ; i<checkArr.length ; i++){
+ 			boardNumbers.push($(checkArr[i]).text());
+ 		}
+   		console.log(boardNumbers);
+    	  if(boardNumbers.length==0){
+    		  alert("삭제할 게시물을 선택하세요.");
+    	  }else{
+			$.ajax({
+				url : "deleteAction",
+				data: { "fundingNo" : boardNumbers.join()},
+				type: "POST",
+				success : function(result){
+					
+					if(result > 0){
+						
+						swal({
+							  title: "삭제 성공했습니다.",
+							  icon: "success"
+							});
+					var currentStatus = $("#selectBox").val();
+					
+					dataTable.destroy();
+					callList(currentStatus);
+					
+					}
+					}
+					
+				});
+    	  }
+    	  
+	 });
       
    
       </script>

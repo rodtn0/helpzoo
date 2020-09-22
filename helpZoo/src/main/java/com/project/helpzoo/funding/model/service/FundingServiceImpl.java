@@ -96,7 +96,7 @@ public class FundingServiceImpl implements FundingService {
 	
 
 	@Override
-	public Long openFunding(String makerName, String businessType, int phone, int memberNo) {
+	public Long openFunding(String makerName, String businessType, int phone, int memberNo,String managerEmail, String managerName) {
 		
 		
 		Long type = 0L;
@@ -117,7 +117,7 @@ public class FundingServiceImpl implements FundingService {
 		
 		
 		
-		return dao.openFunding(makerName, type, phone, memberNo);
+		return dao.openFunding(makerName, type, phone, memberNo, managerEmail, managerName);
 	}
 
 

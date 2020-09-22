@@ -23,17 +23,20 @@ public class Member {
 	private String filePath;
 	private String fileChangeName;
 	private int parentProjectNo;
+	private int fundingFileCategoryId;
 	
 	// (1) 기본 생성자 작성
 	public Member() {
 		
 	}
 	
-	// (2) 매개변수 있는 생성자
+
+	
 	public Member(int memberNo, String memberId, String memberPwd, String memberName, String memberPhone,
 			String memberEmail, String memberAddress, String memberPetType, String memberPetName,
 			Timestamp memberEnrollDate, String memberStatus, String memberGrade, String projectNo, String projectTitle,
-			String projectSummary, String filePath, String fileChangeName, int parentProjectNo) {
+			String projectSummary, String filePath, String fileChangeName, int parentProjectNo,
+			int fundingFileCategoryId) {
 		super();
 		this.memberNo = memberNo;
 		this.memberId = memberId;
@@ -53,8 +56,11 @@ public class Member {
 		this.filePath = filePath;
 		this.fileChangeName = fileChangeName;
 		this.parentProjectNo = parentProjectNo;
+		this.fundingFileCategoryId = fundingFileCategoryId;
 	}
-	
+
+
+
 	public int getMemberNo() {
 		return memberNo;
 	}
@@ -200,6 +206,22 @@ public class Member {
 	public void setparentProjectNo(int parentProjectNo) {
 		this.parentProjectNo = parentProjectNo;
 	}
+	
+	public int getParentProjectNo() {
+		return parentProjectNo;
+	}
+
+	public void setParentProjectNo(int parentProjectNo) {
+		this.parentProjectNo = parentProjectNo;
+	}
+
+	public int getFundingFileCategoryId() {
+		return fundingFileCategoryId;
+	}
+
+	public void setFundingFileCategoryId(int fundingFileCategoryId) {
+		this.fundingFileCategoryId = fundingFileCategoryId;
+	}
 
 	@Override
 	public String toString() {
@@ -209,8 +231,9 @@ public class Member {
 				+ ", memberEnrollDate=" + memberEnrollDate + ", memberStatus=" + memberStatus + ", memberGrade="
 				+ memberGrade + ", projectNo=" + projectNo + ", projectTitle=" + projectTitle + ", projectSummary="
 				+ projectSummary + ", filePath=" + filePath + ", fileChangeName=" + fileChangeName
-				+ ", parentProjectNo=" + parentProjectNo + "]";
+				+ ", parentProjectNo=" + parentProjectNo + ", fundingFileCategoryId=" + fundingFileCategoryId + "]";
 	}
 
+	
 	
 }

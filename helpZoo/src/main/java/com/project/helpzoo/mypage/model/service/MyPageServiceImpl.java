@@ -14,6 +14,7 @@ import com.project.helpzoo.board.model.vo.PageInfo;
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.member.model.dao.MemberDAO;
 import com.project.helpzoo.member.model.vo.Member;
+import com.project.helpzoo.model.vo.Donation;
 import com.project.helpzoo.mypage.model.dao.MyPageDAO;
 import com.project.helpzoo.mypage.model.vo.mPageInfo;
 
@@ -101,7 +102,7 @@ public class MyPageServiceImpl implements MyPageService{
 		return mInfo;
 	}
 	
-	// 내가 주최한 리스트 출력 서비스 구현
+	// 내가 주최한 펀딩 리스트 출력 서비스 구현
 	@Override
 	public List<Member> selectList(mPageInfo mInfo, Member loginMember) {
 
@@ -109,11 +110,43 @@ public class MyPageServiceImpl implements MyPageService{
 		
 	}
 
+	
+	// 내가 주최한 펀딩 리스트 썸네일 출력 서비스 구현
 	@Override
 	public List<Member> selectThumbnailList(List<Member> fdListbyMe) {
 		
 		return myPageDAO.selectThumbnailList(fdListbyMe);
 		
+	}
+	
+	// 내가 주최한 기부 리스트 출력 구현 서비스
+	@Override
+	public mPageInfo pagination(int cp, int memberNo) {
+		
+		int listCount = myPageDAO.getListCount(memberNo);
+		System.out.println("listCount:" +listCount);
+		int type = 1;
+		System.out.println("cp:"+cp);
+		System.out.println("listCount:"+listCount);
+		System.out.println("type:"+type);
+		
+		mInfo.setPageInfo(cp, listCount, type);
+		
+		return mInfo;
+	}
+
+	// 내가 주최한 기부 리스트 출력 서비스 구현
+	@Override
+	public List<Donation> selectdoList(mPageInfo dInfo, int memberNo) {
+		
+		return myPageDAO.selectdoList(dInfo, memberNo);
+	}
+	
+	// 내가 주최한 기부 썸네일 리스트 출력 서비스 구현
+	@Override
+	public List<Donation> selectDoThumbnailList(List<Donation> doListByme) {
+		
+		return myPageDAO.selectDoThumbnailList(doListByme);
 	}
 
 

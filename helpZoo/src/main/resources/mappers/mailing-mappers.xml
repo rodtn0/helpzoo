@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="MailingMapper">
+
+	<resultMap type="Mailing" id="mailingResultSet">
+		<id property="memberNo" column="MEMBER_NO"/>
+		<result property="mailStatus" column="MAIL_STATUS"/>
+	</resultMap>
+	
+	<resultMap type="Member" id="memberResultSet">
+	<id property="memberNo" column="MEMBER_NO"/>
+	<result property="memberId" column="MEMBER_ID"/>
+	<result property="memberPwd" column="MEMBER_PWD"/>
+	<result property="memberName" column="MEMBER_NM"/>
+	<result property="memberPhone" column="MEMBER_PHONE"/>
+	<result property="memberEmail" column="MEMBER_EMAIL"/>
+	<result property="memberAddress" column="MEMBER_ADDR"/>
+	<result property="memberPetType" column="MEMBER_PET_TYPE"/>
+	<result property="memberPetName" column="MEMBER_PET_NAME"/>
+	<result property="memberEnrollDate" column="MEMBER_ENROLL_DATE"/>
+	<result property="memberStatus" column="MEMBER_STATUS"/>
+	<result property="memberGrade" column="MEMBER_GRADE"/>
+	</resultMap>
+
+	<!-- 메일링 가입 여부 확인 -->
+	<select id="selectMailing" parameterType="_int" resultMap="mailingResultSet">
+		SELECT *
+		FROM MAILING
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<!-- 메일링 서비스 등록(신규등록) -->
+	<insert id="insertMailing" parameterType="mailing">
+		INSERT INTO mailing
+		VALUES(#{memberNo}, DEFAULT)	
+	</insert>
+
+	<!-- 메일링 서비스 등록(수정) -->
+	<update id="updateMailing" parameterType="mailing">
+		UPDATE mailing
+		SET mail_status = 'Y'
+		WHERE member_no = #{memberNo}
+	</update>
+
+	<!-- 메일링 서비스 구독 취소 -->	
+	<update id="subscribeCancel" parameterType="mailing">
+		UPDATE mailing
+		SET mail_status = 'N'
+		WHERE member_no = #{memberNo}
+	</update>
+
+	<!-- 구독한 계정 메일 주소 목록 -->
+	<select id="toSendMail" resultType="string">
+		SELECT MEMBER_EMAIL
+		FROM mailing
+		JOIN member
+		USING (MEMBER_NO)
+		WHERE mail_status = 'Y'
+	</select>
+</mapper>

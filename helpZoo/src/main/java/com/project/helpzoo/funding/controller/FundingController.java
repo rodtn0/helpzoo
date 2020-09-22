@@ -154,9 +154,9 @@ public class FundingController {
 		
 		
 		int memberNo = loginMember.getMemberNo();
+		
 
-
-		Long fundingNo = service.openFunding(makerName,businessType,phoneNum,memberNo);
+		Long fundingNo = service.openFunding(makerName,businessType,phoneNum,memberNo,loginMember.getMemberName(),loginMember.getMemberEmail());
 		
 		
 		

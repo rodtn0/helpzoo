@@ -129,6 +129,7 @@
 	                			<c:param name="cp" value="${param.cp}"/>
 	                		</c:url>
 	                		<c:url var="deleteUrl" value="${qnaBoard.qnaNo}/delete">
+	                			<c:param name="cp" value="${param.cp}"/>
 	                		</c:url>
 							<a href="${updateUrl}" class="btn btn-info ml-1 mr-1">수정</a>
 							<a href="${deleteUrl}" class="btn btn-info">삭제</a>

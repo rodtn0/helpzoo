@@ -16,8 +16,8 @@
 		<result property="dBoardReadCount" column="DONATION_BOARD_READ_COUNT"/>
 		<result property="dBoardCrateDate" column="DONATION_BOARD_CREATE_DT"/>
 		<result property="dBoardModifyDate" column="DONATION_BOARD_MODIFY_DT"/>
-		<result property="dBoardEndDate" column="DONATION_BOARD_START_DT"/>
-		<result property="dBoardStartDate" column="DONATION_BOARD_END_DT"/>
+		<result property="dBoardEndDate" column="DONATION_BOARD_END_DT"/>
+		<result property="dBoardStartDate" column="DONATION_BOARD_START_DT"/>
 		<result property="dBoardLikeButton" column="DONATION_BOARD_LIKE_BUTTON"/>
 		<result property="dBoardStatus" column="DONATION_BOARD_STATUS"/>
 		<result property="organizationNo" column="ORGANIZATION_NO"/>
@@ -26,8 +26,15 @@
 		<result property="dBoardType" column="DONATION_BOARD_TYPE"/>
 	</resultMap>
 	
+	<resultMap type="Donation" id="donationRank">
+        <id property="dBoardNo" column="DONATION_BOARD_NO"/>
+        <result property="dBoardTitle" column="DONATION_BOARD_TITLE"/>
+		<result property="dBoardReadCount" column="DONATION_BOARD_READ_COUNT"/>
+		<result property="dBoardCrateDate" column="DONATION_BOARD_CREATE_DT"/>
+		<result property="dBoardEndDate" column="DONATION_BOARD_START_DT"/>
+		<result property="dBoardStartDate" column="DONATION_BOARD_END_DT"/>
+	</resultMap>
 	
-
 
 	<!-- 전체 게시글 수 조회 -->  
 	<!-- <select id="getListCount" parameterType="_int" resultType="_int">
@@ -73,4 +80,20 @@
 		DONATION_REPLY_CONTENT = #{dReplyContent}
 		WHERE DONATION_REPLY_NO = #{dReplyNo}
 	</update>
+	
+	
+
+
+	<select id="selectTopViews" resultMap="donationRank">
+		SELECT * FROM
+		(SELECT DONATION_BOARD_NO, DONATION_BOARD_TITLE, DONATION_BOARD_START_DT,
+		            DONATION_BOARD_END_DT, DONATION_BOARD_READ_COUNT FROM DONATION_BOARD
+		WHERE DONATION_BOARD_CREATE_DT BETWEEN
+		TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD')) - 1
+		AND SYSDATE
+		ORDER BY DONATION_BOARD_READ_COUNT DESC)
+		<![CDATA[
+		WHERE ROWNUM <= 5
+		]]>
+	</select>
 </mapper>

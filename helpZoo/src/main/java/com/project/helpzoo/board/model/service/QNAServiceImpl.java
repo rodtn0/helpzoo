@@ -268,6 +268,11 @@ public class QNAServiceImpl implements QNAService{
 		// TODO Auto-generated method stub
 		return qnaDAO.selectSearchList(id);
 	}
+	
+	@Override
+	public int selectAnswer2(int qnaNo) {
+		return qnaDAO.selectAnswer2(qnaNo);
+	}
     // 파일명 변경
     // 200821152611_12345.jpg
     public String rename(String originFileName) {
@@ -297,6 +302,7 @@ public class QNAServiceImpl implements QNAService{
     	
     	return result;
     }
+
 
 
 }

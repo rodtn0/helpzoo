@@ -11,7 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.project.helpzoo.board.model.vo.Attachment;
 import com.project.helpzoo.board.model.vo.PageInfo;
 import com.project.helpzoo.board.model.vo.Review;
+import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.member.model.vo.Member;
+import com.project.helpzoo.model.vo.Donation;
 
 @Repository
 public class ReviewDAO {
@@ -223,6 +225,22 @@ public class ReviewDAO {
 		if(type == 1) mapperId = "reviewMapper.increaseCountF";
 		else		  mapperId = "reviewMapper.increaseCountD";
 		return sqlSession.delete(mapperId, rBoardNo);
+	}
+
+
+	/** 기부 top5 랭킹 조회 DAO
+	 * @return list2
+	 */
+	public List<Donation> selectTopViewsD() {
+		return sqlSession.selectList("donationMapper.selectTopViews");
+	}
+
+
+	/** 펀딩 top5 랭킹 조회 DAO
+	 * @return list1
+	 */
+	public List<FundingProject> selectTopViewsF() {
+		return sqlSession.selectList("reviewMapper.selectTopViews");
 	}
 
 
