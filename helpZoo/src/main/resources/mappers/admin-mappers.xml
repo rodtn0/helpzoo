@@ -15,6 +15,11 @@
         <result property="fees" column="FEES"/>
     </resultMap>
     
+   	<resultMap type="AFundingCategory" id="AFundingCategoryResultSet">
+        <result property="category" column="CATEGORY_ID"/>
+        <result property="proportion" column="CATEGORY_SUM"/>
+    </resultMap>
+    
     <select id="selectFunding" resultMap="AFundingResultSet">
     	SELECT * FROM A_FUNDING WHERE FUNDING_STATUS IN ('Y','S')
     </select>
@@ -32,4 +37,26 @@
     <select id="selectFSList" parameterType="string" resultMap="AFundingResultSet">
     	SELECT * FROM A_FUNDING WHERE FUNDING_STATUS = #{listStatus}
     </select>
+    
+    <select id="selectMonthFee" parameterType="string" resultMap="AFundingResultSet">
+		SELECT TO_DATE(SUBSTR( TO_CHAR (FUNDING_END_DAY, 'YYYY-MM-DD'), 1, 7), 'YYYY-MM') FUNDING_END_DAY, SUM(FEES) FEES
+		FROM A_FUNDING 
+		WHERE SUBSTR( TO_CHAR(FUNDING_END_DAY, 'YYYY-MM-DD' ) , 3, 2) = #{yy}
+		GROUP BY TO_DATE(SUBSTR( TO_CHAR (FUNDING_END_DAY, 'YYYY-MM-DD'), 1, 7), 'YYYY-MM')
+		ORDER BY FUNDING_END_DAY
+    </select>
+    
+    <select id="selectCategory" parameterType="string" resultMap="AFundingCategoryResultSet">
+    	SELECT SUM(CATEGORY_SUM) CATEGORY_SUM ,CATEGORY_ID
+		FROM(
+			SELECT REWARD_PRICE * SUM(ORDER_REWARD_AMOUNT) CATEGORY_SUM ,CATEGORY_ID, REWARD_PRICE
+			From FUNDING_PROJECT F
+			LEFT JOIN ORDER_REWARD O ON (F.FUNDING_ID = O.FUNDING_ID)
+			LEFT JOIN REWARD R ON (O.REWARD_ID = R.REWARD_ID)
+			WHERE SUBSTR( TO_CHAR(FUNDING_END_DAY, 'YYYY-MM-DD' ) , 3, 5) = '20-10'
+			GROUP BY CATEGORY_ID,REWARD_PRICE
+		)
+		GROUP BY CATEGORY_ID
+    </select>
+    
 </mapper>
