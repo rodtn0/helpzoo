@@ -14,6 +14,8 @@ import com.project.helpzoo.board.model.DAO.ReviewDAO;
 import com.project.helpzoo.board.model.vo.Attachment;
 import com.project.helpzoo.board.model.vo.PageInfo;
 import com.project.helpzoo.board.model.vo.Review;
+import com.project.helpzoo.funding.dto.fundingOpen.FundingMainViewDto;
+import com.project.helpzoo.funding.model.vo.funding.FundingAttachment;
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.member.model.vo.Member;
 import com.project.helpzoo.model.vo.Donation;
@@ -305,6 +307,18 @@ public class ReviewServiceImpl implements ReviewService{
 	@Override
 	public List<FundingProject> selectTopViewsF() {
 		return reviewDAO.selectTopViewsF();
+	}
+
+	// 펀딩 랜덤 3개 조회 Service구현
+	@Override
+	public List<FundingMainViewDto> selectRandomF() {
+		return reviewDAO.selectRandomF();
+	}
+
+	// 기부 랜덤 3개 조회 Service구현
+	@Override
+	public List<Donation> selectRandomD() {
+		return reviewDAO.selectRandomD();
 	}
 		
 		

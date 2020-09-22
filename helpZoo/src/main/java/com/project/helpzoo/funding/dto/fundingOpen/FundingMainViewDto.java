@@ -36,6 +36,20 @@ public class FundingMainViewDto {
 	
 
 
+	public FundingMainViewDto(String fundingTitle, String filePath, String fileChangeName) {
+		super();
+		this.fundingTitle = fundingTitle;
+		this.filePath = filePath;
+		this.fileChangeName = fileChangeName;
+	}
+
+
+
+
+
+
+
+
 	public FundingMainViewDto(long fundingNo, String fundingTitle, String category, String fundingSummary,
 			String fundingMaker, int totalOrderAmount, int reachAmount, Timestamp fundingEndDate, int achievementRate) {
 		super();
