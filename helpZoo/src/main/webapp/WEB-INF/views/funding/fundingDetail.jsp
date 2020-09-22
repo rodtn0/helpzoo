@@ -95,9 +95,11 @@
       }
 
       .div{
-          display: inline-block;
+          display: block;
           margin-top: 7%;
       }
+      
+      
     </style>
   </head>
   <body>
@@ -257,6 +259,41 @@
 
     <script>
 
+    
+    
+    $(document)
+	  .ajaxStart(function () {
+	  })
+	  .ajaxStop(function () {
+	    
+	    $(".rewardcard").click(function(){
+
+	        
+	        var url = "${contextPath}/fundingAttend/rewardChoice/"+${fundingNo};
+	        
+	        
+	        location.href = url;
+	        
+	        
+	        
+	        
+
+	     })
+	    
+	    
+	  });
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 $(document).ready(function() {
 		
 		$.ajax({
@@ -271,17 +308,17 @@ $(document).ready(function() {
 				console.log(item);
 				
 				
-				var $card = $("<div class='card' style='width: 18rem;'>");
+				var $card = $("<div class='card rewardcard' style='width: 18rem;'>");
                 var $container = $("<div class='container'>");
                 var $cardBody = $("<div class='card-body'>");
 				var $cardText = $("<p class='card-text'>");
 
-                var $price = $("<b class='div reward_price'>").text(item.price);
+                var $price = $("<b class='div reward_price'>").html('<b>' +item.price + '</b> <small class="div"></small>');
                 var $title = $("<b class='div reward_title'>").text(item.title);
 
-                var $deliveryPrice = $("<small class='div delivery_price'>").text('배송비').after("<span>" + item.deliveryPrice+ "<span>")
-                var $deliveryDay = $("<small class='div delivery_day'>").text('리워드 발송 시작일').after("<span>" + item.deliveryPrice+ "<span>");
-                var $amount = $("<small class='reward_amount'>").text('제한수량' + item.originAmount +'개' + '현재' + item.amount + '개 남음!');
+                var $deliveryPrice = $("<small class='div delivery_price'>").html('<small class="div">배송비 <div></div>'+ item.deleveryPrice +  '</small>')
+                var $deliveryDay = $("<small class='div delivery_day'>").html('<small class="div">리워드 발송 시작일<div></div>' + item.deliveryDay +  '</small> ')
+                var $amount = $("<small class='reward_amount'>").text('제한수량' + item.rewardOriginAmount +'개  ' + '현재' + item.rewardAmount + '개 남음!');
 
                 var $explain = $("<small class='div'>").text('한정수량으로 제공하는 리워드 입니다.')
 
