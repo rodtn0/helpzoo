@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.project.helpzoo.admin.model.service.AFundingService;
 import com.project.helpzoo.admin.model.vo.AFunding;
+import com.project.helpzoo.admin.model.vo.AFundingCategory;
 
 @Controller
 @RequestMapping("/admin/funding/*")
@@ -81,5 +82,47 @@ public class AFundingController {
 		return mv;
 	}
 	
+	@ResponseBody
+	@RequestMapping("MonthFee")
+	public String MonthFee(String yy) {
+		System.out.println(yy);
+		
+		List<AFunding> monthFee = afundingService.selectMonthFee(yy);
+		
+		System.out.println(monthFee);
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		
+		return gson.toJson(monthFee);
+	}
+	
+	@ResponseBody
+	@RequestMapping("MonthCategory")
+	public String MonthCategory(String yymm) {
+		System.out.println(yymm);
+		
+		List<AFundingCategory> monthCategory =afundingService.selectCategory(yymm);
+		
+		System.out.println(monthCategory);
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+
+		return gson.toJson(monthCategory);
+	}
+	
+	@ResponseBody
+	@RequestMapping("MonthSuccess")
+	public String MonthSuccess(String yymm) {
+		System.out.println(yymm);
+		
+		List<AFunding> monthSuccess = afundingService.selectSuccess(yymm);
+		
+		System.out.println(monthSuccess);
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		
+		return gson.toJson(monthSuccess);
+		
+	}
 	
 }

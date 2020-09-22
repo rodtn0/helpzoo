@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -15,9 +16,10 @@
 	}
 </style>
 </head>
-<script src="https://kit.fontawesome.com/13be1766f6.js" crossorigin="anonymous"></script>
 <body>
 	<jsp:include page="../../common/adheader.jsp"/>
+	<script src="https://kit.fontawesome.com/13be1766f6.js" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
@@ -92,8 +94,10 @@
 
       </div>
       <!-- End of Main Content -->
-      <jsp:include page="../../common/adfooter.jsp"/>
       
+      <jsp:include page="../../common/adfooter.jsp"/>
+      <!-- Page level custom scripts -->
+	  <script src="${contextPath}/resources/js/demo/datatables-demo.js"></script>
       <script>
       // 게시글 상세보기 기능 구현
       // 동적

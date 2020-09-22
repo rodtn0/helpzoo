@@ -308,7 +308,7 @@ function myfunction(){
 	      <span class="pop_bt modalCloseBtn" style="font-size: 13pt;">닫기</span>
 	        </div>
 	      </div>
-	    </div>
+	    </div> 
 
       <jsp:include page="../../common/adfooter.jsp"/>
       

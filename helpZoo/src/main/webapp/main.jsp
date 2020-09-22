@@ -54,20 +54,20 @@
 						펀딩 프로젝트, 이런 것도 있어요!
 					</h4>
 					<br>
-					<div class="row">
-						<div class="col-md-4 funding">
+					<div class="row" >
+						<div class="col-md-4 funding fDiv">
 							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" class="rounded">
 							<h5 class="mt-3">
 								펀딩프로젝트1
 							</h5>
 						</div>
-						<div class="col-md-4 funding">
+						<div class="col-md-4 funding fDiv">
 							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" class="rounded">
 							<h5 class="mt-3">
 								펀딩프로젝트2
 							</h5>
 						</div>
-						<div class="col-md-4 funding">
+						<div class="col-md-4 funding fDiv">
 							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" class="rounded">
 							<h5 class="mt-3">
 								펀딩프로젝트3
@@ -151,19 +151,19 @@
 					</h4>
 					<br>
 					<div class="row">
-						<div class="col-md-4">
+						<div class="col-md-4 dDiv">
 							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" class="rounded">
 							<h5 class="mt-3">
 								h3. Lorem ipsum dolor sit amet.
 							</h5>
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-4 dDiv">
 							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" class="rounded">
 							<h5 class="mt-3">
 								h3. Lorem ipsum dolor sit amet.
 							</h5>
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-4 dDiv">
 							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" class="rounded">
 							<h5 class="mt-3">
 								h3. Lorem ipsum dolor sit amet.
@@ -396,7 +396,8 @@
 		topViews1(1);
 		topViews2(2); // 함수 호출
 		
-		randomBoard(1);
+		randomBoard1(1);
+		randomBoard2(2);
 		
 		// 일정 시간(1분)마다 리스트 갱신
 		setInterval(function(){
@@ -474,15 +475,65 @@
 	}
 	
 	
-	function randomBoard(type){
+	function randomBoard1(type){
 		console.log(type);
 		$.ajax({
 			url : "board/random/" + type,
 			dataType : "json",
 			success : function(list1){
-				console.log(list1)
 				
+				var fDiv = $(".fDiv");
+				$.each(list1, function(index, item){
+					
+					$(fDiv[index]).html("");
+					
+					var $img = $("<img>");
+					var $h5 = $("<h5>").text(item.fundingTitle);
+					var $br = $("<br>");
+					
+					console.log(item.fundingTitle);
+					
+					$img.attr("src", "${contextPath}" + item.filePath + "/" + item.fileChangeName).addClass("rounded");
+					$(fDiv[index]).append($img);
+					
+					$(fDiv[index]).append($h5);
+					
+					
+				});
 				
+			}, error : function(){
+				console.log("ajax 통신 실패");
+			}
+		
+			
+		});
+	}
+	
+	
+	function randomBoard2(type){
+		console.log(type);
+		$.ajax({
+			url : "board/random/" + type,
+			dataType : "json",
+			success : function(list2){
+				
+				var dDiv = $(".dDiv");
+				$.each(list2, function(index, item){
+					
+					$(dDiv[index]).html("");
+					
+					var $img = $("<img>");
+					var $h5 = $("<h5>").text(item.dBoardTitle);
+					
+					console.log(item.dBoardTitle);
+					
+					$img.attr("src", "${contextPath}" + item.dFilePath + "/" + item.dFileChangeName).addClass("rounded");
+					$(dDiv[index]).append($img);
+					
+					$(dDiv[index]).append($h5);
+					
+					
+				});
 				
 			}, error : function(){
 				console.log("ajax 통신 실패");

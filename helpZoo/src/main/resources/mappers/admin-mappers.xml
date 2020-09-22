@@ -15,6 +15,17 @@
         <result property="fees" column="FEES"/>
     </resultMap>
     
+   	<resultMap type="AFundingCategory" id="AFundingCategoryResultSet">
+        <result property="category" column="CATEGORY_NAME"/>
+        <result property="proportion" column="CATEGORY_SUM"/>
+    </resultMap>
+    
+    <resultMap type="AFundingSuccess" id="AFundingSuccessResultSet">
+        <result property="fundingSuccess" column="FUNDING_SUCCESS"/>
+        <result property="fundingFailure" column="FUNDING_FAILURE"/>
+        <result property="fundingProgress" column="FUNDING_PROGRESS"/>
+    </resultMap>
+    
     <select id="selectFunding" resultMap="AFundingResultSet">
     	SELECT * FROM A_FUNDING WHERE FUNDING_STATUS IN ('Y','S')
     </select>
@@ -32,4 +43,41 @@
     <select id="selectFSList" parameterType="string" resultMap="AFundingResultSet">
     	SELECT * FROM A_FUNDING WHERE FUNDING_STATUS = #{listStatus}
     </select>
+    
+    <select id="selectMonthFee" parameterType="string" resultMap="AFundingResultSet">
+		SELECT TO_DATE(SUBSTR( TO_CHAR (FUNDING_END_DAY, 'YYYY-MM-DD'), 1, 7), 'YYYY-MM') FUNDING_END_DAY, SUM(FEES) FEES
+		FROM A_FUNDING 
+		WHERE SUBSTR( TO_CHAR(FUNDING_END_DAY, 'YYYY-MM-DD' ) , 3, 2) = #{yy}
+		GROUP BY TO_DATE(SUBSTR( TO_CHAR (FUNDING_END_DAY, 'YYYY-MM-DD'), 1, 7), 'YYYY-MM')
+		ORDER BY FUNDING_END_DAY
+    </select>
+    
+    <select id="selectCategory" parameterType="string" resultMap="AFundingCategoryResultSet">
+    	SELECT SUM(CATEGORY_SUM) CATEGORY_SUM , CATEGORY_NAME
+		FROM(
+			SELECT REWARD_PRICE * SUM(ORDER_REWARD_AMOUNT) CATEGORY_SUM ,CATEGORY_ID, CATEGORY_NAME, REWARD_PRICE
+			From FUNDING_PROJECT F
+			LEFT JOIN ORDER_REWARD O ON (F.FUNDING_ID = O.FUNDING_ID)
+			LEFT JOIN REWARD R ON (O.REWARD_ID = R.REWARD_ID)
+			JOIN FUNDING_CATEGORY USING(CATEGORY_ID)
+			WHERE SUBSTR( TO_CHAR(FUNDING_END_DAY, 'YYYY-MM-DD' ) , 3, 5) = #{yymm}
+			GROUP BY CATEGORY_ID, CATEGORY_NAME, REWARD_PRICE
+		)
+		GROUP BY CATEGORY_NAME
+		ORDER BY 1 DESC
+    </select>
+    
+    <select id="selectSuccess" parameterType="string" resultMap="AFundingSuccessResultSet">
+	SELECT ( SELECT COUNT(*)
+        FROM A_FUNDING
+        WHERE FUNDING_STATUS='Y' AND SUBSTR( TO_CHAR(FUNDING_END_DAY, 'YYYY-MM-DD' ) , 3, 5) = #{yymm}) FUNDING_PROGRESS,
+        (SELECT COUNT(*)
+        FROM A_FUNDING
+        WHERE FUNDING_STATUS='S' AND SUBSTR( TO_CHAR(FUNDING_END_DAY, 'YYYY-MM-DD' ) , 3, 5) = #{yymm}) FUNDING_SUCCESS,
+        (SELECT COUNT(*)
+        FROM A_FUNDING
+        WHERE FUNDING_STATUS='N' AND SUBSTR( TO_CHAR(FUNDING_END_DAY, 'YYYY-MM-DD' ) , 3, 5) = #{yymm}) FUNDING_FAILURE
+	FROM DUAL
+    </select>
+    
 </mapper>

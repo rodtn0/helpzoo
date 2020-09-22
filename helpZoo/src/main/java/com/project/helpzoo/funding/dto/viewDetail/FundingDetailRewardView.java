@@ -9,6 +9,10 @@ public class FundingDetailRewardView {
 
 	private String title;
 	
+	
+	
+	private Long seq;
+	
 	private int deleveryPrice;
 	
 	private int rewardAmount;
@@ -16,6 +20,8 @@ public class FundingDetailRewardView {
 	private int rewardOriginAmount;
 	
 	private Timestamp deliveryDay;
+	
+	private String content;
 
 	public int getPrice() {
 		return price;
@@ -37,8 +43,28 @@ public class FundingDetailRewardView {
 		return deleveryPrice;
 	}
 
+	
+	
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
 	public void setDeleveryPrice(int deleveryPrice) {
 		this.deleveryPrice = deleveryPrice;
+	}
+	
+	
+
+	public Long getSeq() {
+		return seq;
+	}
+
+	public void setSeq(Long seq) {
+		this.seq = seq;
 	}
 
 	public int getRewardAmount() {
@@ -66,7 +92,7 @@ public class FundingDetailRewardView {
 	}
 
 	public FundingDetailRewardView(int price, String title, int deleveryPrice, int rewardAmount, int rewardOriginAmount,
-			Timestamp deliveryDay) {
+			Timestamp deliveryDay,Long seq, String content) {
 		super();
 		this.price = price;
 		this.title = title;
@@ -74,13 +100,20 @@ public class FundingDetailRewardView {
 		this.rewardAmount = rewardAmount;
 		this.rewardOriginAmount = rewardOriginAmount;
 		this.deliveryDay = deliveryDay;
+		this.seq = seq;
+		this.content = content;
 	}
+	
+	
+	
+	
+	
 
 	@Override
 	public String toString() {
-		return "FundingDetailRewardView [price=" + price + ", title=" + title + ", deleveryPrice=" + deleveryPrice
-				+ ", rewardAmount=" + rewardAmount + ", rewardOriginAmount=" + rewardOriginAmount + ", deliveryDay="
-				+ deliveryDay + "]";
+		return "FundingDetailRewardView [price=" + price + ", title=" + title + ", seq=" + seq + ", deleveryPrice="
+				+ deleveryPrice + ", rewardAmount=" + rewardAmount + ", rewardOriginAmount=" + rewardOriginAmount
+				+ ", deliveryDay=" + deliveryDay + "]";
 	}
 
 	
