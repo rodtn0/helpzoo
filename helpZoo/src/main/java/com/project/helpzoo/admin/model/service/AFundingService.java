@@ -3,6 +3,7 @@ package com.project.helpzoo.admin.model.service;
 import java.util.List;
 
 import com.project.helpzoo.admin.model.vo.AFunding;
+import com.project.helpzoo.admin.model.vo.AFundingCategory;
 
 public interface AFundingService {
 
@@ -14,6 +15,8 @@ public interface AFundingService {
 
 	List<AFunding> selectFSList(String listStatus);
 
-	/* List<AFunding> selectFundingStatus(); */
+	List<AFunding> selectMonthFee(String yy);
+
+	List<AFundingCategory> selectCategory(String yymm);
 
 }

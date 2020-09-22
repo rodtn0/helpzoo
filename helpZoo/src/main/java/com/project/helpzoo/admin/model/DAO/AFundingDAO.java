@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.helpzoo.admin.model.vo.AFunding;
+import com.project.helpzoo.admin.model.vo.AFundingCategory;
 
 @Repository
 public class AFundingDAO {
@@ -29,6 +30,14 @@ public class AFundingDAO {
 
 	public List<AFunding> selectFSList(String listStatus) {
 		return sqlSession.selectList("adminMapper.selectFSList", listStatus);
+	}
+
+	public List<AFunding> selectMonthFee(String yy) {
+		return sqlSession.selectList("adminMapper.selectMonthFee", yy);
+	}
+
+	public List<AFundingCategory> selectCategory(String yymm) {
+		return sqlSession.selectList("adminMapper.selectCategory", yymm);
 	}
 
 }

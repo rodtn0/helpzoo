@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.helpzoo.admin.model.DAO.AFundingDAO;
 import com.project.helpzoo.admin.model.vo.AFunding;
+import com.project.helpzoo.admin.model.vo.AFundingCategory;
 
 @Service
 public class AFundingImpl implements AFundingService{
@@ -37,10 +38,14 @@ public class AFundingImpl implements AFundingService{
 	public List<AFunding> selectFSList(String listStatus) {
 		return fundingDAO.selectFSList(listStatus);
 	}
+	@Override
+	public List<AFunding> selectMonthFee(String yy) {
+		return fundingDAO.selectMonthFee(yy);
+	}
+	@Override
+	public List<AFundingCategory> selectCategory(String yymm) {
+		return fundingDAO.selectCategory(yymm);
+	}
 	
-	/*
-	 * @Override public List<AFunding> selectFundingStatus() { return
-	 * fundingDAO.selectselectFundingStatus; }
-	 */
 
 }
