@@ -15,18 +15,20 @@
 <style>
 	#wrapper{width: 100%; height: 100%;}
 	
+	#top, #md{
+    border: 1px solid black;
+    box-sizing: border-box;
+	}
+	
 	#top{width: 100%; height: 50%;}
-      #top-1{ margin-left: 30px; height: 100%; float: left; text-align: center;}
-      #top-2{width: 60%; height: 100%; margin-left: 50px;}
-      
-      #date-area{width: 100%; height: 3%;}
-
-	  #monthly-expense{width: 100%; height: 17%;}
-	  #monthly-expense2{width: 100%; height: 12%;}
+	    #top-1{width:30%; height: 100%; text-align: center; float: left;}
+	    #top-2{width:70%; height: 100%; margin-left: 50px; float: left;}
+	      	#date-area{width: 100%; height: 15%;}
+	      	#chart-area{ width: 100%; height: 85%;}   
 	  
-      #middle{width: 100%; height: 50%;}
-      #middle-1{width: 50%; height: 50%;float: left;}
-      #middle-2{width: 50%; height: 50%;float: left;}
+    #md{width: 100%; height: 50%; clear:both !important;}
+      #middle-1{width: 50%; height: 50%; float: left;}
+      #middle-2{width: 50%; height: 50%; float: left;}
 
 
       #bottom{width: 100%; height: 35%; text-align:center;}
@@ -71,58 +73,58 @@
             </div>
             <div class="card-body">
             	<div id="wrapper">
-		             <div id="top-1">
-		              <a id="a1"> <i class="fas fa-won-sign"></i> 월별 조회 </a> 
-			             <table id="list">
-			             		<tr>
-			             			<td><a class="Year-Month"><span name="year"></span>-01</a></td>
-			             			<td><a class="Year-Month"><span name="year"></span>-02</a></td>
-			             			<td><a class="Year-Month"><span name="year"></span>-03</a></td>
-			             		</tr>
-			             		<tr>
-			             			<td><a class="Year-Month"><span name="year"></span>-04</a></td>
-			             			<td><a class="Year-Month"><span name="year"></span>-05</a></td>
-			             			<td><a class="Year-Month"><span name="year"></span>-06</a></td>
-			             		</tr>
-			             		<tr>
-			             			<td><a class="Year-Month"><span name="year"></span>-07</a></td>
-			             			<td><a class="Year-Month"><span name="year"></span>-08</a></td>
-			             			<td><a class="Year-Month"><span name="year"></span>-09</a></td>
-			             		</tr>
-			             		<tr>
-			             			<td><a class="Year-Month"><span name="year"></span>-10</a></td>
-			             			<td><a class="Year-Month"><span name="year"></span>-11</a></td>
-			             			<td><a class="Year-Month"><span name="year"></span>-12</a></td>
-			             		</tr>
-			             </table>
-		             	<!-- 페이징 바 -->
-		             	<div id="paging">
-		             	 <a id ="month-prev"><i class="fas fa-angle-left"></i></a> 
-                         <a id ="month-next"><i class="fas fa-angle-right"></i></a>
-                        </div>
-		             </div>		 
+	            	<div id="top">
+			             <div id="top-1">
+				               <a id="a1"> <i class="fas fa-won-sign"></i> 월별 조회 </a> 
+					             <table id="list">
+					             		<tr>
+					             			<td><a class="Year-Month"><span name="year"></span>-01</a></td>
+					             			<td><a class="Year-Month"><span name="year"></span>-02</a></td>
+					             			<td><a class="Year-Month"><span name="year"></span>-03</a></td>
+					             		</tr>
+					             		<tr>
+					             			<td><a class="Year-Month"><span name="year"></span>-04</a></td>
+					             			<td><a class="Year-Month"><span name="year"></span>-05</a></td>
+					             			<td><a class="Year-Month"><span name="year"></span>-06</a></td>
+					             		</tr>
+					             		<tr>
+					             			<td><a class="Year-Month"><span name="year"></span>-07</a></td>
+					             			<td><a class="Year-Month"><span name="year"></span>-08</a></td>
+					             			<td><a class="Year-Month"><span name="year"></span>-09</a></td>
+					             		</tr>
+					             		<tr>
+					             			<td><a class="Year-Month"><span name="year"></span>-10</a></td>
+					             			<td><a class="Year-Month"><span name="year"></span>-11</a></td>
+					             			<td><a class="Year-Month"><span name="year"></span>-12</a></td>
+					             		</tr>
+					             </table>
+				             	페이징 바
+				             	<div id="paging">
+				             	 <a id ="month-prev"><i class="fas fa-angle-left"></i></a> 
+		                         <a id ="month-next"><i class="fas fa-angle-right"></i></a>
+		                        </div> 
+			             </div>		 
+			             
+			             <!-- 월별 그래프 -->      
+			             <div id="top-2">
+				             <div id="date-area">
+				             <a style="font-size: 25px; font-weight: bold;" id="YYMM-text"></a>
+				          	 </div>
+			             	<div id="chart-area"></div>
+			             </div>
+			     </div>
 		             
-		                 
-		             <!-- 월별 그래프 -->      
-		             <div id="top-2">
-		             <div id="date-area">
-		             <a style="font-size: 25px; font-weight: bold;" id="YYMM-text"></a>
-		          	</div>
-		             	<div id="chart-area"></div>
-		             </div>
-		             
-		             <div id="#middle">
+		     <div id="md">
 		             <!-- 도넛 -->
-		             	<div id="middle-1">
-		                  <div id="chart-age"></div>
-		              </div>
-		              <div id="middle-2">
-		              	<div id="chart-area2"></div>
-		              </div>
-		              
-		             </div>
+	             <div id="middle-1">
+	                  <div id="chart-age"></div>
+	              </div>
+	              <div id="middle-2">
+	              	<div id="chart-area2"></div>
+	              </div>
+		     </div>
 		             
-              </div>
+            </div>
               
             </div>
           </div>
@@ -247,8 +249,6 @@
 		 		amountList.push(amount);
 		 	}
 		 	
-		 	
-		 	
 		 	// 1. 장난감 2. 사료 3. 운동기구. 4. 옷 5. 간식
 			var data = {
 			    categories: ['Browser'],
@@ -307,42 +307,21 @@
 	
 	function monthSuccess(mSuccess){
 		var container = document.getElementById('chart-area2');
-		console.log(mSuccess);
-		console.log(mSucces[0]);
- 	 	 /* if(mSuccess.length != 0){ 
-		 	for(var i=0; i<mSuccess.length ; i++){
-		 		var amount = {};
-		 		amount.name = mCategory[i].category;
-		 		amount.data = mCategory[i].proportion;
-		 		
-		 		amountList.push(amount);
-		  	} */
+		container.innerHTML = "";
 		var data = {
 		    categories: ['Browser'],
 		    series: [
 		        {
+		            name: '실패한 펀딩',
+		            data: mSuccess[0].fundingFailure
+		        },
+		        {
+		            name: '진행중인 펀딩',
+		            data: mSuccess[0].fundingProgress
+		        },
+		        {
 		            name: '성공한 펀딩',
-		            data: mSuccess[0]
-		        },
-		        {
-		            name: '진행중 or 실패한 펀딩',
-		            data: 20.47
-		        },
-		        {
-		            name: 'Firefox',
-		            data: 17.71
-		        },
-		        {
-		            name: 'Safari',
-		            data: 5.45
-		        },
-		        {
-		            name: 'Opera',
-		            data: 3.10
-		        },
-		        {
-		            name: 'Etc',
-		            data: 7.25
+		            data: mSuccess[0].fundingSuccess
 		        }
 		    ]
 		};
@@ -350,7 +329,7 @@
 		    chart: {
 		        width: 500,
 		        height: 500,
-		        title: 'Usage share of web browsers'
+		        title: '펀딩 성공률'
 		    },
 		    tooltip: {
 		        suffix: '%'
@@ -364,9 +343,9 @@
 		        ]
 		    }
 		};
-	
-	
+		
 		tui.chart.pieChart(container, data, options);
+		
 	}
 		
 		

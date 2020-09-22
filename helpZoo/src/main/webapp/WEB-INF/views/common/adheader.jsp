@@ -103,7 +103,7 @@
             <a class="collapse-item" href="${contextPath}/admin/funding/main"> <i class="fas fa-fw fa-table"></i> Schedule</a>
             <a class="collapse-item" href="${contextPath}/admin/funding/chart"><i class="fas fa-fw fa-chart-area"></i> Chart</a>
             <h6 class="collapse-header">Donation</h6>
-            <a class="collapse-item" href="buttons.html"> <i class="fas fa-fw fa-table"></i> Schedule</a>
+            <a class="collapse-item" href="${contextPath}/admin/donation/main"> <i class="fas fa-fw fa-table"></i> Schedule</a>
           </div>
         </div>
       </li>
