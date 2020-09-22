@@ -50,7 +50,7 @@
 	</update>
 
 	<!-- 구독한 계정 메일 주소 목록 -->
-	<select id="toSendMail" resultMap="memberResultSet">
+	<select id="toSendMail" resultType="string">
 		SELECT MEMBER_EMAIL
 		FROM mailing
 		JOIN member
