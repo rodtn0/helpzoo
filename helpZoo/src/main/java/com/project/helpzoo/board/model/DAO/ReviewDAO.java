@@ -229,10 +229,18 @@ public class ReviewDAO {
 
 
 	/** 기부 top5 랭킹 조회 DAO
-	 * @return list
+	 * @return list2
 	 */
 	public List<Donation> selectTopViewsD() {
 		return sqlSession.selectList("donationMapper.selectTopViews");
+	}
+
+
+	/** 펀딩 top5 랭킹 조회 DAO
+	 * @return list1
+	 */
+	public List<FundingProject> selectTopViewsF() {
+		return sqlSession.selectList("reviewMapper.selectTopViews");
 	}
 
 

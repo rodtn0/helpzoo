@@ -16,8 +16,8 @@
 		<result property="dBoardReadCount" column="DONATION_BOARD_READ_COUNT"/>
 		<result property="dBoardCrateDate" column="DONATION_BOARD_CREATE_DT"/>
 		<result property="dBoardModifyDate" column="DONATION_BOARD_MODIFY_DT"/>
-		<result property="dBoardEndDate" column="DONATION_BOARD_START_DT"/>
-		<result property="dBoardStartDate" column="DONATION_BOARD_END_DT"/>
+		<result property="dBoardEndDate" column="DONATION_BOARD_END_DT"/>
+		<result property="dBoardStartDate" column="DONATION_BOARD_START_DT"/>
 		<result property="dBoardLikeButton" column="DONATION_BOARD_LIKE_BUTTON"/>
 		<result property="dBoardStatus" column="DONATION_BOARD_STATUS"/>
 		<result property="organizationNo" column="ORGANIZATION_NO"/>

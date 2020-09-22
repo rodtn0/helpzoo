@@ -398,9 +398,11 @@ public class reviewController {
 		String path = null;
 		
 		if(type == 1) {
-			//list1 = reviewService.selectTopViewsF();
+			list1 = reviewService.selectTopViewsF();
 			gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			path = gson.toJson(list1);
+			
+			System.out.println(list1);
 			
 		}else if(type == 2) {
 			list2 = reviewService.selectTopViewsD();
