@@ -8,6 +8,15 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자 멤버 관리 페이지</title>
+<style>
+	table{
+		cursor : pointer;
+	}
+	.tbody .odd:hover, .tbody .even:hover{
+		background-color: lightblue;
+	}
+	
+</style>
 </head>
 <body>
 	<jsp:include page="../../common/adheader.jsp"/>
@@ -24,7 +33,7 @@
 						<table class="table table-striped" id="dataTable">
 							<thead class="thead text-white bg-info mb-3">
 								<tr>
-									<th><input type="checkbox"></th>
+									<th><input type="checkbox" id="all"></th>
 									<th>글번호</th>
 									<th>아이디</th>
 									<th>이름</th>
@@ -37,7 +46,7 @@
 								</tr>
 							</thead>
 							
-							<tbody class="">
+							<tbody class="tbody">
 								<c:choose>
 									<c:when test="${empty memberList}">
 										<tr><td colspan="9">존재하는 계정이 없습니다.</td></tr>
@@ -46,7 +55,7 @@
 									<c:otherwise>
 										<c:forEach var="board" items="${memberList}" varStatus="vs">
 											<tr>
-												<td><input type="checkbox"></td>
+												<td><input type="checkbox" id="chk"></td>
 												<td>${board.memberNo}</td>
 												<td>${board.memberId}</td>
 												<td>${board.memberName}</td>
@@ -70,6 +79,19 @@
 		
 		</main>
 	<jsp:include page="../../common/adfooter.jsp"/>
-	<script src="${contextPath}/resources/js/demo/datatables-demo.js"></script>
+	<script src="${contextPath}/resources/js/demo/datatables-demo.js">
+		$(function() {
+			$(document).on('change', '#all', function() {
+				let all = $(document).prop('#all', 'checked');
+				
+				if(all == true){
+					$(document).prop('checked', '#chk', true);
+				}else{
+					$('#chk').prop('checked', '#chk', false);
+				}
+			})
+			
+		});
+	</script>
 </body>
 </html>
