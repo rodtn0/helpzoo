@@ -23,6 +23,10 @@
 			width : 290px;
 			height : 496px;
 		}
+		
+		.table tr, .pointerDiv{
+			cursor : pointer;
+		}
 	</style>
 </head>
 <body style="overflow-x:hidden; overflow-y:auto;">
@@ -62,7 +66,7 @@
 						펀딩 프로젝트, 이런 것도 있어요!
 					</h4>
 					<br>
-					<div class="row" >
+					<div class="row pointerDiv">
 						<div class="col-md-4 funding fDiv">
 							
 						</div>
@@ -149,7 +153,7 @@
 						기부 프로젝트, 이런 것도 있어요!
 					</h4>
 					<br>
-					<div class="row">
+					<div class="row pointerDiv">
 						<div class="col-md-4 dDiv">
 							
 						</div>
@@ -181,7 +185,7 @@
 						#급상승 프로젝트
 					</h4>
 					<br>
-					<div class="row">
+					<div class="row pointerDiv">
 						<div class="col-md-6 increaseF">
 							
 						</div>
@@ -240,7 +244,7 @@
 						#급상승 프로젝트
 					</h4>
 					<br>
-					<div class="row">
+					<div class="row pointerDiv">
 						<div class="col-md-6 increaseD">
 							
 							<p> </p>
@@ -308,6 +312,7 @@
 				
 				$.each(list1, function(index, item){
 					
+					var $a = $("<a>").attr("href", "${contextPath}/funding/fundingView/"+item.id).css({"color" : "black"});
 					var $tr = $("<tr>"); // 행
 					var $td1 = $("<td>").text(item.id);
 					var $td2 = $("<td>").text(item.title);
@@ -376,14 +381,15 @@
 					$(fDiv[index]).html("");
 					
 					var $img = $("<img>");
-					var $h5 = $("<h5>").text(item.fundingTitle);
+					var $h5 = $("<h5>").text(item.fundingTitle).css("padding-top", "20px");
+					var $a = $("<a>").attr("href", "${contextPath}/funding/fundingView/"+item.fundingNo).css({"color" : "black"});
 					
 					console.log(item.fundingTitle);
 					
 					$img.attr("src", "${contextPath}" + item.filePath + "/" + item.fileChangeName).addClass("rounded");
-					$(fDiv[index]).append($img);
-					
-					$(fDiv[index]).append($h5);
+					$a.append($img);
+					$a.append($h5);
+					$(fDiv[index]).append($a).css({"text-align" : "center"});
 					
 					
 				});
@@ -410,14 +416,14 @@
 					$(dDiv[index]).html("");
 					
 					var $img = $("<img>");
-					var $h5 = $("<h5>").text(item.dBoardTitle);
+					var $h5 = $("<h5>").text(item.dBoardTitle).css("padding-top", "20px");
 					
 					console.log(item.dBoardTitle);
 					
 					$img.attr("src", "${contextPath}" + item.dFilePath + "/" + item.dFileChangeName).addClass("rounded");
 					$(dDiv[index]).append($img);
 					
-					$(dDiv[index]).append($h5);
+					$(dDiv[index]).append($h5).css({"text-align" : "center"});
 					
 					
 				});
@@ -446,12 +452,13 @@
 					
 					var $img = $("<img>");
 					var $h5 = $("<h5>").text(item.fundingTitle);
-					var $p = $("<p>").text(item.achievementRate);
-					
+					var $p = $("<p>").text(item.achievementRate + " %");
+					var $a = $("<a>").attr("href", "${contextPath}/funding/fundingView/"+item.fundingNo).css({"color" : "black"});
 					
 					$img.attr("src", "${contextPath}" + item.filePath + "/" + item.fileChangeName).addClass("rounded");
-					$(increaseF[index]).append($img);
-					$(increaseF[index]).append($h5);
+					$a.append($img);
+					$a.append($h5);
+					$(increaseF[index]).append($a);
 					$(increaseF[index]).append($p);
 					
 				});
@@ -478,7 +485,7 @@
 					
 					var $img = $("<img>");
 					var $h5 = $("<h5>").text(item.dBoardTitle);
-					var $p = $("<p>").text(item.achivement);
+					var $p = $("<p>").text(item.achivement + " %");
 					
 					
 					$img.attr("src", "${contextPath}" + item.dFilePath + "/" + item.dFileChangeName).addClass("rounded");
@@ -508,9 +515,11 @@
 					$(eventImg[index]).html("");
 					
 					var $img = $("<img>");
+					var $a = $("<a>").attr("href", "${contextPath}/event/" + item.boardType + "/" + item.parentBoardNo).css({"color" : "black"});
 					$img.attr("src", "${contextPath}" + item.filePath + "/" + item.fileChangeName);
 					
-					$(eventImg[index]).append($img);
+					$a.append($img);
+					$(eventImg[index]).append($a);
 					
 				});
 				

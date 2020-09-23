@@ -27,6 +27,7 @@
     	<result property="parentBoardNo" column="PARENT_BOARD_NO"/>
     	<result property="filePath" column="FILE_PATH"/>
     	<result property="fileChangeName" column="FILE_CHANGE_NAME"/>
+    	<result property="boardType" column="BOARD_CD"/>
     </resultMap>
     
     <!-- 전체 게시글 수 조회 -->
@@ -202,7 +203,7 @@
     
     <!-- 이벤트 이미지 랜덤 조회(메인페이지) -->
     <select id="selectEventImg" resultMap="randomEventImg">
-    	SELECT PARENT_BOARD_NO, FILE_PATH, FILE_CHANGE_NAME
+    	SELECT PARENT_BOARD_NO, FILE_PATH, FILE_CHANGE_NAME, BOARD_CD
 		FROM BOARD B
 		LEFT JOIN ATTACHMENT A ON(A.PARENT_BOARD_NO = B.BOARD_NO)
 		LEFT JOIN BOARD_TYPE T ON(T.BOARD_CD = B.BOARD_TYPE)
