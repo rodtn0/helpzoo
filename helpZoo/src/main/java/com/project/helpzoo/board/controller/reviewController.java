@@ -22,6 +22,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.project.helpzoo.board.model.service.ReviewService;
 import com.project.helpzoo.board.model.vo.Attachment;
+import com.project.helpzoo.board.model.vo.Board;
 import com.project.helpzoo.board.model.vo.PageInfo;
 import com.project.helpzoo.board.model.vo.Review;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingMainViewDto;
@@ -471,12 +472,21 @@ public class reviewController {
 			gson = new GsonBuilder().create();
 			path = gson.toJson(list2);
 		}
-		
-		
-		
 		return path;
 	}
 	
+	// 이벤트 랜덤 조회
+	@ResponseBody
+	@RequestMapping("event")
+	public String eventImg() {
+		
+		List<Board> eventList = reviewService.selectEventImg();
+		System.out.println(eventList);
+		
+		Gson gson = new GsonBuilder().create();
+	
+		return gson.toJson(eventList);
+	}
 	
 	
 	

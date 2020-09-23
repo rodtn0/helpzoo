@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.helpzoo.board.model.vo.Attachment;
+import com.project.helpzoo.board.model.vo.Board;
 import com.project.helpzoo.board.model.vo.PageInfo;
 import com.project.helpzoo.board.model.vo.Review;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingMainViewDto;
@@ -276,6 +277,14 @@ public class ReviewDAO {
 	 */
 	public List<FundingMainViewDto> increaseFunding() {
 		return sqlSession.selectList("reviewMapper.selectIncreaseF");
+	}
+
+
+	/** 이벤트 이미지 조회 DAO
+	 * @return eventList
+	 */
+	public List<Board> selectEventImg() {
+		return sqlSession.selectList("eventMapper.selectEventImg");
 	}
 
 
