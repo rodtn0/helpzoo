@@ -108,7 +108,7 @@ $('.navbar-light .dmenu').hover(function () {
          <div class="row">
             <div class="col-md-12">
       <!-- 바디 영역 -->
-      <div class="album text-muted">
+		<div class="album bg-white text-muted">
             <div class="container">
                <h1 id="mainTxt">내가 참여한(펀딩)</h1><br>
             <c:choose>
