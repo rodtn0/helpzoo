@@ -13,6 +13,12 @@
 			width : 300px;
 			height : 300px;
 		}
+		
+		#moveBtn{
+			margin: 20px 0px 0px 125px;
+			border : 1px #7fcdcd;
+			background-color:  #7fcdcd;
+		}
 	
 	</style>
   <meta charset="utf-8">
@@ -147,7 +153,7 @@
 
         <!-- Categories Widget -->
         <div class="card my-4">
-          <h5 class="card-header">Crowd Funding</h5>
+          <h5 class="card-header">참여한 펀딩 프로젝트</h5>
           <div class="card-body">
             <div class="row">
                	<div class="card">
@@ -164,12 +170,12 @@
 					<br>
 					
 					<div class="card-block">
-						<h5 class="card-title" style="text-align:center;">
+						<h5 class="card-title" style="text-align:center; font-family:Recipekorea;">
 							${fReviewView.projectTitle}
 						</h5>
 						
 						<p>
-							<a class="btn btn-primary" href="#">이동하기</a>
+							<a class="btn btn-primary" href="${contextPath}/funding/fundingView/${fReviewView.projectNo}" id="moveBtn">이동하기</a>
 						</p>
 					</div>
 				</div>

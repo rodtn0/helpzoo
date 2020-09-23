@@ -42,10 +42,10 @@
 		border : 1px solid #fff;
 	}
 	
-	.card{
+	/* .card{
 		width : 100%;
 		height : 300px;
-	}
+	} */
 	
 	#imgBlock{
 		margin : 0px 0px 30px 15px; 
@@ -89,7 +89,6 @@
 				</div>
 				<div class="col-md-4">
 					<div class="row">
-							<div class="card">
 								<select id="selectProject" name="projectNo" onchange="selectProejct(this);">
 									<option selected>리뷰할 프로젝트를 선택해주세요.</option>
 									<c:if test="${!empty fInfo}">
@@ -100,6 +99,10 @@
 									
 								</select>
 								
+							<div class="card my-4">
+							<h5 class="card-header">참여한 펀딩 프로젝트</h5>
+							<div class="card-body">
+							<div class="card">
 								<img id="imgDiv" name="projectImg" class="card-img-top" />
 								<%-- <img id="imgDiv" class="card-img-top" alt="프로젝트 이미지가 존재하지않습니다." 
 									<c:if test="${!empty fInfo[0].fileChangeName}">
@@ -112,11 +115,15 @@
 									<h4 class="card-text" id="pTitle">
 										
 									</h4>
+									<br>
 									<!-- <p>
 										<a class="btn btn-primary" href="#">Action</a>
 									</p> -->
 								</div>
 							</div>
+							</div>
+						</div>
+						
 					</div>
 				</div>
 			
