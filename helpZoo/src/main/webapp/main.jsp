@@ -331,6 +331,7 @@
 		randomBoard1(1);
 		randomBoard2(2);
 		
+		increaseBoard1(1);
 		increaseBoard2(2);
 		
 		// 일정 시간(1분)마다 리스트 갱신
@@ -423,7 +424,6 @@
 					
 					var $img = $("<img>");
 					var $h5 = $("<h5>").text(item.fundingTitle);
-					var $br = $("<br>");
 					
 					console.log(item.fundingTitle);
 					
@@ -492,11 +492,11 @@
 					$(increaseF[index]).html("");
 					
 					var $img = $("<img>");
-					var $h5 = $("<h5>").text(item.dBoardTitle);
-					var $p = $("<p>").text(item.achivement);
+					var $h5 = $("<h5>").text(item.fundingTitle);
+					var $p = $("<p>").text(item.achievementRate);
 					
 					
-					$img.attr("src", "${contextPath}" + item.dFilePath + "/" + item.dFileChangeName).addClass("rounded");
+					$img.attr("src", "${contextPath}" + item.filePath + "/" + item.fileChangeName).addClass("rounded");
 					$(increaseF[index]).append($img);
 					$(increaseF[index]).append($h5);
 					$(increaseF[index]).append($p);

@@ -29,11 +29,29 @@ public class FundingMainViewDto {
 	
 	
 	
+	public FundingMainViewDto() {
+	}
 	
 	
 	
 	
-	
+
+
+	public FundingMainViewDto(long fundingNo, String fundingTitle, int achievementRate, String filePath,
+			String fileChangeName) {
+		super();
+		this.fundingNo = fundingNo;
+		this.fundingTitle = fundingTitle;
+		this.achievementRate = achievementRate;
+		this.filePath = filePath;
+		this.fileChangeName = fileChangeName;
+	}
+
+
+
+
+
+
 
 
 	public FundingMainViewDto(String fundingTitle, String filePath, String fileChangeName) {
@@ -64,6 +82,14 @@ public class FundingMainViewDto {
 		this.achievementRate = achievementRate;
 	}
 
+	
+	public FundingMainViewDto(long fundingNo, String fundingTitle, String filePath, String fileChangeName) {
+		super();
+		this.fundingNo = fundingNo;
+		this.fundingTitle = fundingTitle;
+		this.filePath = filePath;
+		this.fileChangeName = fileChangeName;
+	}
 
 	
 	
@@ -180,13 +206,29 @@ public class FundingMainViewDto {
 
 
 
+
+
 	public String getFundingTitle() {
 		return fundingTitle;
 	}
 
+
+
+
+
+
+
+
 	public void setFundingTitle(String fundingTitle) {
 		this.fundingTitle = fundingTitle;
 	}
+
+
+
+
+
+
+
 
 	public String getCategory() {
 		return category;

@@ -271,6 +271,14 @@ public class ReviewDAO {
 	}
 
 
+	/** 급상승 펀딩 조회 DAO
+	 * @return list1
+	 */
+	public List<FundingMainViewDto> increaseFunding() {
+		return sqlSession.selectList("reviewMapper.selectIncreaseF");
+	}
+
+
 
 	
 	
