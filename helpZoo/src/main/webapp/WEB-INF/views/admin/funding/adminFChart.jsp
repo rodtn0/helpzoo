@@ -13,16 +13,11 @@
     <link rel='stylesheet' type='text/css' href='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.43.0/addon/lint/lint.css'/>
     <link rel='stylesheet' type='text/css' href='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.43.0/theme/neo.css'/>
 <style>
-	#wrapper{width: 100%; height: 100%;}
-	
-	#top, #md{
-    border: 1px solid black;
-    box-sizing: border-box;
-	}
+	#wrapper1{width: 100%; height: 100%;}
 	
 	#top{width: 100%; height: 50%;}
 	    #top-1{width:30%; height: 100%; text-align: center; float: left;}
-	    #top-2{width:70%; height: 100%; margin-left: 50px; float: left;}
+	    #top-2{width:70%; height: 100%; padding-left: 30px; float: left;}
 	      	#date-area{width: 100%; height: 15%;}
 	      	#chart-area{ width: 100%; height: 85%;}   
 	  
@@ -72,7 +67,7 @@
               <h6 class="m-0 font-weight-bold text-primary">Answer Table</h6>
             </div>
             <div class="card-body">
-            	<div id="wrapper">
+            	<div id="wrapper1">
 	            	<div id="top">
 			             <div id="top-1">
 				               <a id="a1"> <i class="fas fa-won-sign"></i> 월별 조회 </a> 
@@ -98,7 +93,7 @@
 					             			<td><a class="Year-Month"><span name="year"></span>-12</a></td>
 					             		</tr>
 					             </table>
-				             	페이징 바
+				             	<!-- 페이징 바 -->
 				             	<div id="paging">
 				             	 <a id ="month-prev"><i class="fas fa-angle-left"></i></a> 
 		                         <a id ="month-next"><i class="fas fa-angle-right"></i></a>
@@ -199,8 +194,8 @@
 			};
 			var options = {
 			    chart: {
-			        width: 1160,
-			        height: 540,
+			        width: 800,
+			        height: 340,
 			        title: '펀딩 월별 수수료',
 			    },
 			    yAxis: {
@@ -332,7 +327,7 @@
 		        title: '펀딩 성공률'
 		    },
 		    tooltip: {
-		        suffix: '%'
+		        suffix: '건'
 		    }
 		};
 		var theme = {

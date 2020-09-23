@@ -1,5 +1,7 @@
 package com.project.helpzoo.model.vo;
 
+import java.sql.Date;
+
 public class Donation2 {
 	private int dFileNo;
 	private int dBoardNo;
@@ -11,10 +13,33 @@ public class Donation2 {
 	private int dBoardTargetAmount; // 목표 금액
 	private int achivement; // 달성률
 	
+	// 이슬이 추가
+	private Date dBoardCD; // 시작
+	private Date dBoardED; // 끝
+	private String dWriter; //  글쓴이
+	
 	public Donation2() {
 	}
 
 	
+	public Donation2(int dFileNo, int dBoardNo, String dBoardTitle, String dFilePath, String dFileChangeName,
+			int dBoardCurrentAmount, int dBoardTargetAmount, int achivement, Date dBoardCD, Date dBoardED,
+			String dWriter) {
+		super();
+		this.dFileNo = dFileNo;
+		this.dBoardNo = dBoardNo;
+		this.dBoardTitle = dBoardTitle;
+		this.dFilePath = dFilePath;
+		this.dFileChangeName = dFileChangeName;
+		this.dBoardCurrentAmount = dBoardCurrentAmount;
+		this.dBoardTargetAmount = dBoardTargetAmount;
+		this.achivement = achivement;
+		this.dBoardCD = dBoardCD;
+		this.dBoardED = dBoardED;
+		this.dWriter = dWriter;
+	}
+
+
 	public Donation2(int dFileNo, String dBoardTitle, String dFilePath, String dFileChangeName) {
 		super();
 		this.dFileNo = dFileNo;
@@ -141,19 +166,45 @@ public class Donation2 {
 	}
 
 
+	public Date getdBoardCD() {
+		return dBoardCD;
+	}
+
+
+	public void setdBoardCD(Date dBoardCD) {
+		this.dBoardCD = dBoardCD;
+	}
+
+
+	public Date getdBoardED() {
+		return dBoardED;
+	}
+
+
+	public void setdBoardED(Date dBoardED) {
+		this.dBoardED = dBoardED;
+	}
+
+
+	public String getdWriter() {
+		return dWriter;
+	}
+
+
+	public void setdWriter(String dWriter) {
+		this.dWriter = dWriter;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Donation2 [dFileNo=" + dFileNo + ", dBoardNo=" + dBoardNo + ", dBoardTitle=" + dBoardTitle
 				+ ", dFilePath=" + dFilePath + ", dFileChangeName=" + dFileChangeName + ", dBoardCurrentAmount="
 				+ dBoardCurrentAmount + ", dBoardTargetAmount=" + dBoardTargetAmount + ", achivement=" + achivement
-				+ "]";
+				+ ", dBoardCD=" + dBoardCD + ", dBoardED=" + dBoardED + ", dWriter=" + dWriter + "]";
 	}
 
 
-
-
-	
-	
 	
 	
 	
