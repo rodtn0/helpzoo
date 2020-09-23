@@ -26,6 +26,29 @@
         <result property="fundingProgress" column="FUNDING_PROGRESS"/>
     </resultMap>
     
+    <resultMap type="Donation2" id="ADonationResultSet">
+        <id property="dBoardNo" column="DONATION_BOARD_NO"/>
+        <result property="dBoardTitle" column="DONATION_BOARD_TITLE"/>
+        <result property="dWriter" column="MEMBER_ID"/>
+        <result property="dBoardCD" column="DONATION_BOARD_START_DT"/>
+        <result property="dBoardED" column="DONATION_BOARD_END_DT"/>
+        <result property="dBoardTargetAmount" column="DONATION_BOARD_TARGET_AMOUNT"/>
+        <result property="dBoardCurrentAmount" column="DONATION_BOARD_CURRENT_AMOUNT"/>
+        <result property="achivement" column="ACHIEVEMENT"/>
+    </resultMap>
+    
+     <resultMap type="Board" id="AboardResultSet">
+        <id property="boardNo" column="BOARD_NO"/>
+        <result property="boardTitle" column="BOARD_TITLE"/>
+        <result property="boardContent" column="BOARD_CONTENT"/>
+        <result property="readCount" column="READ_COUNT"/>
+        <result property="boardCreateDate" column="BOARD_CREATE_DT"/>
+        <result property="boardModifyDate" column="BOARD_MODIFY_DT"/>
+        <result property="boardWriter" column="MEMBER_ID"/>
+        <result property="boardType" column="BOARD_TYPE"/>
+        <result property="boardName" column="BOARD_NM"/>
+    </resultMap>
+    
     <select id="selectFunding" resultMap="AFundingResultSet">
     	SELECT * FROM A_FUNDING WHERE FUNDING_STATUS IN ('Y','S')
     </select>
@@ -80,4 +103,19 @@
 	FROM DUAL
     </select>
     
+    <select id="selectDonation" resultMap="ADonationResultSet">
+       SELECT DONATION_BOARD_NO, DONATION_BOARD_TITLE, ROUND(((DONATION_BOARD_CURRENT_AMOUNT / DONATION_BOARD_TARGET_AMOUNT) * 100)) AS ACHIEVEMENT,
+               MEMBER_ID, DONATION_BOARD_START_DT, DONATION_BOARD_END_DT, DONATION_BOARD_TARGET_AMOUNT, DONATION_BOARD_CURRENT_AMOUNT
+       FROM DONATION_BOARD DB
+       LEFT JOIN MEMBER ME ON(DB.DONATION_BOARD_WRITER=ME.MEMBER_NO)
+       WHERE DONATION_BOARD_STATUS = 'Y'
+    </select>
+    
+    <update id="deleteDonation" parameterType="string">
+    	UPDATE DONATION_BOARD SET DONATION_BOARD_STATUS = 'N' WHERE DONATION_BOARD_NO IN( ${donationNo})
+    </update>
+    
+    <select id="selectFaqList" parameterType="_int" resultMap="AboardResultSet">
+    	SELECT * FROM BOARD WHERE BOARD_TYPE=#{type}
+    </select>
 </mapper>

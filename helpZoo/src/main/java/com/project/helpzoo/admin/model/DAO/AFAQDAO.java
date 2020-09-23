@@ -6,20 +6,16 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.project.helpzoo.model.vo.Donation2;
+import com.project.helpzoo.board.model.vo.Board;
 
 @Repository
-public class ADonationDAO {
+public class AFAQDAO {
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public List<Donation2> selectList() {
-		return sqlSession.selectList("adminMapper.selectDonation",null);
+	public List<Board> selectFaqList(int type) {
+		return sqlSession.selectList("adminMapper.selectFaqList", type);
 	}
-
-	public int deleteDonation(String donationNo) {
-		return sqlSession.update("adminMapper.deleteDonation", donationNo);
-	} 
 
 }
