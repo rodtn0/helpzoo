@@ -119,9 +119,18 @@
     </resultMap>
     
     <resultMap type="fundingDto" id="fundingRandom">
+   		<id property="fundingNo" column="FUNDING_ID"/>
         <result property="fundingTitle" column="FUNDING_TITLE"/>
         <result property="filePath" column="FILE_PATH"/>
         <result property="fileChangeName" column="FILE_CHANGE_NAME"/>
+    </resultMap>
+    
+    <resultMap type="fundingDto" id="increaseFunding">
+    	<id property="fundingNo" column="FUNDING_ID"/>
+        <result property="fundingTitle" column="FUNDING_TITLE"/>
+        <result property="filePath" column="FILE_PATH"/>
+        <result property="fileChangeName" column="FILE_CHANGE_NAME"/>
+        <result property="achievementRate" column="ACHIVEMENT"/>
     </resultMap>
     
     
@@ -394,7 +403,7 @@
       <!-- 펀딩 랜덤 조회 -->	
 	  <select id="selectRandomF" resultMap="fundingRandom">
 	  	SELECT * FROM
-		(SELECT FUNDING_TITLE, FILE_PATH, FILE_CHANGE_NAME
+		(SELECT FP.FUNDING_ID, FP.FUNDING_TITLE, FI.FILE_PATH, FI.FILE_CHANGE_NAME
 		FROM FUNDING_PROJECT FP
 		LEFT JOIN FUNDING_IMAGE FI ON(FP.FUNDING_ID = FI.PARENT_PROJECT_NO)
 		WHERE FUNDING_FILE_CATEGORY_ID = 1
@@ -404,7 +413,28 @@
 		]]>
 	  </select>
 	  
+	  <!-- 급상승 펀딩 조회 -->
+	  <select id="selectIncreaseF" resultMap="increaseFunding">
+	  	SELECT * FROM
+		(SELECT F.FUNDING_ID, NVL(ROUND((SUM(TOTAL_PRICE)/FUNDING_GOAL) * 100), 0) AS ACHIVEMENT, F.FUNDING_TITLE , F.FILE_PATH, F.FILE_CHANGE_NAME
+		FROM(
+			SELECT F.FUNDING_ID, F.FUNDING_TITLE , F.FUNDING_GOAL, SUM(ORDER_REWARD_AMOUNT), REWARD_PRICE, SUM(ORDER_REWARD_AMOUNT)*REWARD_PRICE AS TOTAL_PRICE,
+			           FI.FILE_PATH, FI.FILE_CHANGE_NAME
+			FROM FUNDING_PROJECT F
+			LEFT JOIN ORDER_REWARD O ON (F.FUNDING_ID = O.FUNDING_ID)
+			LEFT JOIN REWARD R ON (F.FUNDING_ID = R.FUNDING_ID)
+			LEFT JOIN FUNDING_IMAGE FI ON(FI.PARENT_PROJECT_NO = F.FUNDING_ID)
+			WHERE FUNDING_FILE_CATEGORY_ID = 1
+			GROUP BY F.FUNDING_ID, F.FUNDING_TITLE, REWARD_PRICE, FUNDING_GOAL, FI.FILE_PATH, FI.FILE_CHANGE_NAME) F
+		GROUP BY F.FUNDING_ID, F.FUNDING_TITLE, FUNDING_GOAL, F.FILE_PATH, F.FILE_CHANGE_NAME
+		ORDER BY ACHIVEMENT DESC NULLS LAST)
+		<![CDATA[
+		WHERE ROWNUM <= 4
+		]]>
+	  </select>
 	  
+	  
+	 
 	  
 	  
 </mapper>

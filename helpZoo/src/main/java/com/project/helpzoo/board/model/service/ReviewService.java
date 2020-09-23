@@ -112,6 +112,12 @@ public interface ReviewService {
 	 */
 	public abstract List<Donation2> increaseDonation();
 
+	
+	/** 급상승 펀딩 조회 Service
+	 * @return list1
+	 */
+	public abstract List<FundingMainViewDto> increaseFunding();
+
 
 
 	

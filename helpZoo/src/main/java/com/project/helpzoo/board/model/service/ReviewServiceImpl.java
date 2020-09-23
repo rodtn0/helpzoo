@@ -327,6 +327,12 @@ public class ReviewServiceImpl implements ReviewService{
 	public List<Donation2> increaseDonation() {
 		return reviewDAO.increaseDonation();
 	}
+
+	// 급상승 펀딩 조회 Service 구현
+	@Override
+	public List<FundingMainViewDto> increaseFunding() {
+		return reviewDAO.increaseFunding();
+	}
 		
 		
 		
