@@ -7,10 +7,23 @@ public class Attachment {
 	private String fileChangeName;
 	private String filePath;
 	private int fileLevel;
+	private int boardType;
 	
 	public Attachment() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+
+	public Attachment(int parentBoardNo, String fileChangeName, String filePath, int boardType) {
+		super();
+		this.parentBoardNo = parentBoardNo;
+		this.fileChangeName = fileChangeName;
+		this.filePath = filePath;
+		this.boardType = boardType;
+	}
+
+
 
 	public Attachment(int fileNo, int parentBoardNo, String fileOriginName, String fileChangeName, String filePath,
 			int fileLevel) {
@@ -79,14 +92,31 @@ public class Attachment {
 	public void setFileLevel(int fileLevel) {
 		this.fileLevel = fileLevel;
 	}
+	
+	
+
+	public int getBoardType() {
+		return boardType;
+	}
+
+
+
+	public void setBoardType(int boardType) {
+		this.boardType = boardType;
+	}
+
+
 
 	@Override
 	public String toString() {
 		return "Attachment [fileNo=" + fileNo + ", parentBoardNo=" + parentBoardNo + ", fileOriginName="
 				+ fileOriginName + ", fileChangeName=" + fileChangeName + ", filePath=" + filePath + ", fileLevel="
-				+ fileLevel + "]";
+				+ fileLevel + ", boardType=" + boardType + "]";
 	}
-	
+
+
+
+
 	
 	
 }
