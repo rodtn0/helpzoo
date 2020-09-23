@@ -73,7 +73,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${contextPath}">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-cat"></i><i class="fas fa-dog"></i>
         </div>
@@ -116,12 +116,13 @@
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="utilities-color.html">후기</a>
-            <a class="collapse-item" href="utilities-color.html">FAQ</a>
+            <a class="collapse-item" href="#">후기</a>
+            <a class="collapse-item" href="${contextPath}/faq/faqList">FAQ</a>
             <a class="collapse-item" href="${contextPath}/admin/qna/qnaList">Q&A</a>
-            <a class="collapse-item" href="utilities-animation.html">공지사항</a>
-            <a class="collapse-item" href="utilities-other.html">이벤트</a>
-            <a class="collapse-item" href="utilities-other.html">구독하기</a>
+            <a class="collapse-item" href="${contextPath}/notice/noticeList">공지사항</a>
+            <a class="collapse-item" href="${contextPath}/event/eventList">이벤트</a>
+            <a class="collapse-item" href="${contextPath}/subscribe/mailing">구독메일 보내기</a>
+            <a class="collapse-item" href="${contextPath}/admin/member/aMemberList">멤버관리</a>
           </div>
         </div>
       </li>
