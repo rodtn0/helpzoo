@@ -18,6 +18,11 @@
 		p{
 			color :  #7fcdcd;
 		}
+		
+		.eventImg img{
+			width : 290px;
+			height : 496px;
+		}
 	</style>
 </head>
 <body style="overflow-x:hidden; overflow-y:auto;">
@@ -196,28 +201,16 @@
 					<br>
 					<div class="row">
 						<div class="col-md-6 increaseF">
-							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" >
-							<h5 class="mt-2">
-								h3. Lorem ipsum dolor sit amet.
-							</h5>
+							
 						</div>
 						<div class="col-md-6 increaseF">
-							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg">
-							<h5 class="mt-2">
-								h3. Lorem ipsum dolor sit amet.
-							</h5>
+							
 						</div>
 						<div class="col-md-6 increaseF">
-							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg">
-							<h5 class="mt-2">
-								h3. Lorem ipsum dolor sit amet.
-							</h5>
+							
 						</div>
 						<div class="col-md-6 increaseF">
-							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg">
-							<h5 class="mt-2">
-								h3. Lorem ipsum dolor sit amet.
-							</h5>
+							
 						</div>
 					</div>
 					
@@ -230,17 +223,8 @@
 						Event!
 					</h3>
 					<br>
-					<div class="card">
-						<h5 class="card-header">
-							Card title
-						</h5>
-						<div class="card-body">
-							<p class="card-text">
-								Card content
-							</p>
-						</div>
-						<div class="card-footer">
-							Card footer
+					<div>
+						<div class="eventImg">
 						</div>
 					</div>
 				</div>
@@ -264,17 +248,8 @@
 						Event!
 					</h4>
 					<br>
-					<div class="card">
-						<h5 class="card-header">
-							Card title
-						</h5>
-						<div class="card-body">
-							<p class="card-text">
-								Card content
-							</p>
-						</div>
-						<div class="card-footer">
-							Card footer
+					<div>
+						<div class="eventImg">
 						</div>
 					</div>
 				</div>
@@ -289,19 +264,13 @@
 							<p> </p>
 						</div>
 						<div class="col-md-6 increaseD">
-							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg">
-							<h5 class="mt-2">
-							</h5>
+							
 						</div>
 						<div class="col-md-6 increaseD">
-							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg">
-							<h5 class="mt-2">
-							</h5>
+							
 						</div>
 						<div class="col-md-6 increaseD">
-							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg">
-							<h5 class="mt-2">
-							</h5>
+							
 						</div>
 					</div>
 					
@@ -333,6 +302,8 @@
 		
 		increaseBoard1(1);
 		increaseBoard2(2);
+		
+		eventImg();
 		
 		// 일정 시간(1분)마다 리스트 갱신
 		setInterval(function(){
@@ -537,6 +508,34 @@
 			}, error : function(){
 				console.log("ajax 통신 실패");
 			}
+		});
+		
+	}
+	
+	
+	/* 이벤트 이미지 조회 */
+	function eventImg(){
+		$.ajax({
+			url : "board/event",
+			dataType : "json",
+			success : function(list){
+				
+				var eventImg = $(".eventImg");
+				$.each(list, function(index, item){
+					
+					$(eventImg[index]).html("");
+					
+					var $img = $("<img>");
+					$img.attr("src", "${contextPath}" + item.filePath + "/" + item.fileChangeName);
+					
+					$(eventImg[index]).append($img);
+					
+				});
+				
+			}, error : function(){
+				console.log("ajax 통신 실패");
+			}
+			
 		});
 		
 	}

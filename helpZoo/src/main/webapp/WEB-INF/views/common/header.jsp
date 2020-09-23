@@ -85,7 +85,7 @@
           <li><a href="${contextPath}/funding/fundingOpen">펀딩프로젝트 만들기</a></li>
           </ul>
           <li><a href="${contextPath}/donation/donationMain/2">기부하기</a></li>
-           <li class="drop-down"><a href="${contextPath}/board/review">후기게시판</a>
+           <li class="drop-down"><a href="${contextPath}/board/review/1">후기게시판</a>
             <ul>
               <li><a href="${contextPath}/board/review/1">펀딩 후기게시판</a></li>
               <li><a href="${contextPath}/board/review/2">기부 후기게시판</a></li>
