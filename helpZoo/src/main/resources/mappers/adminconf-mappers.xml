@@ -17,6 +17,7 @@
 	<result property="memberGrade" column="MEMBER_GRADE"/>
 	</resultMap>
 	
+	<!-- 멤버 목록 -->
 	<select id="memberList" resultMap="memberResultSet">
 		SELECT member_no, member_id, member_nm,
             member_phone, member_email,
@@ -25,5 +26,20 @@
 		FROM member
 		WHERE MEMBER_NO NOT IN(1)
 	</select>
+	
+	<!-- 멤버 계정 상태 확인 -->
+	<select id="selMember" parameterType="_int" resultType="_int">
+		SELECT COUNT(*)
+		FROM member
+		WHERE MEMBER_NO = #{memberNo}
+		AND MEMBER_STATUS = 'Y'
+	</select>
+	
+	<!-- 멤버 계정 정지 -->
+	<update id="delMember" parameterType="_int">
+		UPDATE member
+		SET member_status = 'N'
+		WHERE member_no = #{memberNo}
+	</update>
 
 </mapper>
