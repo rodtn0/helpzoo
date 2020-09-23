@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.project.helpzoo.board.model.DAO.ReviewDAO;
 import com.project.helpzoo.board.model.vo.Attachment;
+import com.project.helpzoo.board.model.vo.Board;
 import com.project.helpzoo.board.model.vo.PageInfo;
 import com.project.helpzoo.board.model.vo.Review;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingMainViewDto;
@@ -326,6 +327,18 @@ public class ReviewServiceImpl implements ReviewService{
 	@Override
 	public List<Donation2> increaseDonation() {
 		return reviewDAO.increaseDonation();
+	}
+
+	// 급상승 펀딩 조회 Service 구현
+	@Override
+	public List<FundingMainViewDto> increaseFunding() {
+		return reviewDAO.increaseFunding();
+	}
+
+	// 이벤트 이미지 조회 Service 구현
+	@Override
+	public List<Board> selectEventImg() {
+		return reviewDAO.selectEventImg();
 	}
 		
 		

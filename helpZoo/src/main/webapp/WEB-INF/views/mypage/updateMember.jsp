@@ -97,7 +97,7 @@ $('.navbar-light .dmenu').hover(function () {
 				</div>
 			</div>
 			<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-6 mx-auto">
 			<br><h1 id="mainTxt">${loginMember.memberName}님의 회원 정보 수정</h1>
 			<div class="bg-white rounded shadow-sm container p-3">
 					<form method="POST" action="updateAction" name="updateForm" onsubmit="return validate();" class="form-horizontal" role="form">
@@ -233,8 +233,10 @@ $('.navbar-light .dmenu').hover(function () {
 							<input type="text" class="form-control" name="memberPetName" id="petName" value="${loginMember.memberPetName}">
 						</div>
 					</div>
+					<div class="col-md-6 mx-auto">
 						<hr class="mb-4">
 						<button class="btn btn-primary btn-lg btn-block" type="submit" id="submitBtn">수정</button><br>
+					</div>
 					</form>
 				</div>
 			</div>

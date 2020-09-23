@@ -22,6 +22,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.project.helpzoo.board.model.service.ReviewService;
 import com.project.helpzoo.board.model.vo.Attachment;
+import com.project.helpzoo.board.model.vo.Board;
 import com.project.helpzoo.board.model.vo.PageInfo;
 import com.project.helpzoo.board.model.vo.Review;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingMainViewDto;
@@ -402,16 +403,16 @@ public class reviewController {
 		if(type == 1) {
 			list1 = reviewService.selectTopViewsF();
 			gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-			path = gson.toJson(list1);
 			
-			System.out.println(list1);
+			System.out.println("펀딩 랭킹 조회 : " + list1);
+			path = gson.toJson(list1);
 			
 		}else if(type == 2) {
 			list2 = reviewService.selectTopViewsD();
 			gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-			path = gson.toJson(list2);
 			
-			System.out.println(list2);
+			System.out.println("기부 랭킹 조회 : " + list2);
+			path = gson.toJson(list2);
 		}
 		return path;
 	}
@@ -429,14 +430,14 @@ public class reviewController {
 		
 		if(type == 1) {
 			list1 = reviewService.selectRandomF();
-			System.out.println("list1 : " + list1);
+			System.out.println("펀딩 랜덤 조회 : " + list1);
 			
 			gson = new GsonBuilder().create();
 			path = gson.toJson(list1);
 			
 		}else {
 			list2 = reviewService.selectRandomD();
-			System.out.println("list2 : " + list2);
+			System.out.println("기부 랜덤 조회 : " + list2);
 			
 			gson = new GsonBuilder().create();
 			path = gson.toJson(list2);
@@ -453,13 +454,17 @@ public class reviewController {
 	public String increaseBoard(@PathVariable int type) {
 		System.out.println(type);
 		
-		//List<FundingMainViewDto> list1 = null;
+		List<FundingMainViewDto> list1 = null;
 		List<Donation2> list2 = null;
 		Gson gson = null;
 		String path = null;
 		
 		if(type == 1) {
+			list1 = reviewService.increaseFunding();
+			System.out.println("급상승 펀딩 : " + list1);
 			
+			gson = new GsonBuilder().create();
+			path = gson.toJson(list1);
 		}else {
 			list2 = reviewService.increaseDonation();
 			System.out.println("급상승 기부 : " + list2);
@@ -467,12 +472,21 @@ public class reviewController {
 			gson = new GsonBuilder().create();
 			path = gson.toJson(list2);
 		}
-		
-		
-		
 		return path;
 	}
 	
+	// 이벤트 랜덤 조회
+	@ResponseBody
+	@RequestMapping("event")
+	public String eventImg() {
+		
+		List<Board> eventList = reviewService.selectEventImg();
+		System.out.println(eventList);
+		
+		Gson gson = new GsonBuilder().create();
+	
+		return gson.toJson(eventList);
+	}
 	
 	
 	

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.helpzoo.board.model.vo.Attachment;
+import com.project.helpzoo.board.model.vo.Board;
 import com.project.helpzoo.board.model.vo.PageInfo;
 import com.project.helpzoo.board.model.vo.Review;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingMainViewDto;
@@ -111,6 +112,17 @@ public interface ReviewService {
 	 * @return list2
 	 */
 	public abstract List<Donation2> increaseDonation();
+
+	
+	/** 급상승 펀딩 조회 Service
+	 * @return list1
+	 */
+	public abstract List<FundingMainViewDto> increaseFunding();
+
+	/** 이벤트 이미지 조회 Service
+	 * @return eventList
+	 */
+	public abstract List<Board> selectEventImg();
 
 
 

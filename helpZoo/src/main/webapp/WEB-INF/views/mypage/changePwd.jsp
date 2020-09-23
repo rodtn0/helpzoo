@@ -53,7 +53,7 @@
 	
 	} 	
 	.pass_show .ptxt:hover{color: #333333;} 
-	
+
 	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
@@ -80,7 +80,7 @@
 		</div>
 			<div class="row">
 		<div class="col-md-12">
- <nav class="navbar navbar-expand-sm navbar-light bg-light">
+ 		<nav class="navbar navbar-expand-sm navbar-light bg-light">
 	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
 	          <span class="navbar-toggler-icon"></span>
 	        </button>
@@ -123,7 +123,7 @@
 			<br><h1 id="mainTxt">비밀번호 변경</h1>
 			</div>
 			</div>
-			<div class="row">
+			<div class="col-md-6 mx-auto">
 			<div class="bg-white rounded shadow-sm container p-3">
 			<div class="row mb-3 form-row">
 			<form method="POST" action="updatePwd" onsubmit="return validate();" class="form-horizontal" role="form">
@@ -167,7 +167,9 @@
 							- 이전에 사용했던 비밀번호나 타 사이트와 다른 비밀번호를 사용하고 비밀번호는 주기적으로 변경해주세요.
 						</div>
 						<hr class="mb-4">
-						<button class="btn btn-primary btn-lg btn-block" id="modifyBtn" type="submit">변경하기</button>
+						<div id="bottom" class="col-md-6 mx-auto mb-5">
+						<button style="margin-bottom:100px;"class="btn btn-primary btn-lg btn-block" id="modifyBtn" type="submit">변경하기</button>
+						</div>
 			</form>
 				</div>
 			<!-- 여기까지 -->
