@@ -138,6 +138,8 @@
       
        .size_size{
         width: 200px;
+
+        display: none;
       }
       
       
@@ -182,7 +184,7 @@
 
         <div class="card text-center bmi">
           <div class="card-header">
-            <input type="checkbox" class="float-left littlebig" /> 38,400원
+            <input type="checkbox" class="float-left littlebig" data-name="${item.price}" /> ${item.price}원
             펀딩합니다.
           </div>
           <div class="card-body">
@@ -214,8 +216,8 @@
             
             
               <div class="size_size">
-              <br>
                 수량 : <input type="number" class="form-control form-control-sm d-flex justify-content-center" id="colFormLabelSm" placeholder="col-form-label-sm">
+                <br>
             </div>
             
             
@@ -321,7 +323,7 @@
         <br><br>
         <br>
         <div class="d-flex justify-content-around">
-        [차세대 유산균]포스트 바이오틱스 반려동물 유산균 POST TRUST+에 0 원을 펀딩합니다.
+        [차세대 유산균]포스트 바이오틱스 반려동물 유산균 POST TRUST+에 <span class="final_amount"></span> 원을 펀딩합니다.
 
       </div>
 
@@ -330,7 +332,8 @@
   <button
       type="button"
       class="btn btn-primary col-md-4 col-sm-4 col-xs-4 btn-lg funding_btn mintclick "
-      onclick="location.href = '${contextPath}/funding/fundingOpenDetail' "
+      onclick="goToPay()"
+
     > 다음단계로</button>
 
       </div>
@@ -338,6 +341,95 @@
 
     </div>
 
+    
+    
+    
+    
+    <script>
+
+      var final_amount = $(".final_amount");
+
+
+        $('.littlebig').change(function(){
+
+          price = $(this).data("name");
+          
+          
+          if($(this).prop("checked")){
+
+            $(this).parent().parent().children().children().last("div").show();
+
+
+            
+            $(this).parent().parent().children().children().last("div").children().change(function(){
+
+              console.log ($(this).val()*price);
+
+
+             var beforeValue = $(".final_amount").text();
+
+             $(".final_amount").text('');
+             $(".final_amount").text(  $(".final_amount").text() + ($(this).val()*price)      );
+
+              var totalPrice = $(this).val()*price;
+
+
+            })
+
+            
+
+            console.log($(this).data("name"));
+
+            console.log($(this).parent().parent().children().children().last("div").children().val());
+              
+          
+
+
+
+
+
+          }else{
+
+            price = $(this).data("name");
+
+            amount = $(this).parent().parent().children().children().last("div").children().val();
+
+
+
+            $(".final_amount").text(  $(".final_amount").text() - (amount*price)      );
+            
+
+
+
+            $(this).parent().parent().children().children().last("div").hide();
+
+            $(this).parent().parent().children().children().last("div").children().val("");
+
+         
+          }
+
+        })
+
+
+
+        function goToPay(){
+
+          var finalAmount = $(".final_amount").text();
+
+          location.href="${contextPath}/fundingAttend/pay/" + ${fundingNo}  +"/?finalAmount="  + finalAmount;
+
+        }
+
+
+
+
+
+    </script>
+
+    
+    
+    
+    
     <br />
     <br />
     <br />
@@ -349,5 +441,19 @@
     <br />
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
   </body>
 </html>

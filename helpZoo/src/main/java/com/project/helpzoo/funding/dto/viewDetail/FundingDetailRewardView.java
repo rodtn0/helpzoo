@@ -5,6 +5,8 @@ import java.sql.Timestamp;
 public class FundingDetailRewardView {
 
 	
+	private Long id;
+	
 	private int price;
 
 	private String title;
@@ -45,6 +47,16 @@ public class FundingDetailRewardView {
 
 	
 	
+	
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getContent() {
 		return content;
 	}
@@ -92,7 +104,7 @@ public class FundingDetailRewardView {
 	}
 
 	public FundingDetailRewardView(int price, String title, int deleveryPrice, int rewardAmount, int rewardOriginAmount,
-			Timestamp deliveryDay,Long seq, String content) {
+			Timestamp deliveryDay,Long seq, String content, long id) {
 		super();
 		this.price = price;
 		this.title = title;
@@ -102,6 +114,7 @@ public class FundingDetailRewardView {
 		this.deliveryDay = deliveryDay;
 		this.seq = seq;
 		this.content = content;
+		this.id = id;
 	}
 	
 	

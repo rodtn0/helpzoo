@@ -38,6 +38,7 @@ import com.project.helpzoo.funding.model.vo.funding.QFundingMaker;
 import com.project.helpzoo.funding.model.vo.funding.QFundingProject;
 import com.project.helpzoo.funding.model.vo.funding.QReward;
 import com.project.helpzoo.funding.model.vo.funding.Reward;
+import com.project.helpzoo.funding.model.vo.order.Orders;
 import com.project.helpzoo.funding.model.vo.order.QOrderReward;
 import com.project.helpzoo.funding.model.vo.search.FundingSearch;
 import com.project.helpzoo.funding.model.vo.search.SearchSort;
@@ -962,7 +963,7 @@ public class FundingDAO {
 		List<Tuple> result  = 
 				query.select(reward.price, reward.title, reward.deliveryPrice, 
 						
-						reward.amount, reward.originRewardAmount, reward.deliveryDay,reward.rewardSeq, reward.content)
+						reward.amount, reward.originRewardAmount, reward.deliveryDay,reward.rewardSeq, reward.content, reward.id)
 				.from(reward)
 				.where(reward.fundingProject.id.eq(fundingNo))
 				.orderBy(reward.rewardSeq.asc())
@@ -980,7 +981,10 @@ public class FundingDAO {
 			
 			rewardView = new FundingDetailRewardView(re.get(reward.price), re.get(reward.title), re.get(reward.deliveryPrice), re.get(reward.amount), 
 					
-					re.get(reward.originRewardAmount), re.get(reward.deliveryDay), re.get(reward.rewardSeq), re.get(reward.content));
+					re.get(reward.originRewardAmount), re.get(reward.deliveryDay), re.get(reward.rewardSeq), re.get(reward.content)
+					, re.get(reward.id)
+					
+					);
 			
 			rewardViewList.add(rewardView);
 		}
@@ -991,6 +995,22 @@ public class FundingDAO {
 		
 		
 		return rewardViewList;
+	}
+
+
+
+
+	public Long makeOrder() {
+		
+	Orders order = new Orders();
+			
+	em.persist(order);
+		
+	
+	
+	
+	
+		return order.getId();
 	}
 	
 	

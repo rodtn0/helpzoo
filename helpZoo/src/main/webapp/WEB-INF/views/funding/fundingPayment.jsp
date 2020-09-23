@@ -453,6 +453,13 @@
 
 
 
+	<form method="post" action="${contextPath}/fundingAttend/kakaoPay">
+    <button>카카오페이로 결제하기</button>
+</form>
+
+
+
+
   <button
       type="button"
       class="btn btn-primary col-md-4 col-sm-4 col-xs-4 btn-lg funding_btn mintclick "
