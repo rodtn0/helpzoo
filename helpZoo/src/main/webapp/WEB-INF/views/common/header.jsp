@@ -110,6 +110,9 @@
           <c:if test="${!empty loginMember}">
           <li><a href=" ${contextPath}/mypage/updateMember">마이페이지</a></li>
           </c:if>
+          <c:if test="${loginMember.memberNo == 1}">
+          <li><a href=" ${contextPath}/admin/main">관리자페이지</a></li>
+          </c:if>
         </ul>
       </nav><!-- .nav-menu -->
     </div>

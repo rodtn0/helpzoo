@@ -12,7 +12,7 @@ import com.project.helpzoo.member.model.vo.Member;
 
 @Controller
 @RequestMapping("/admin/member/*")
-public class AMember {
+public class AMemberController {
 
 	@Autowired
 	private AMemberService amService;
