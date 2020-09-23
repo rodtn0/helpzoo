@@ -64,22 +64,13 @@
 					<br>
 					<div class="row" >
 						<div class="col-md-4 funding fDiv">
-							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" class="rounded">
-							<h5 class="mt-3">
-								펀딩프로젝트1
-							</h5>
+							
 						</div>
 						<div class="col-md-4 funding fDiv">
-							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" class="rounded">
-							<h5 class="mt-3">
-								펀딩프로젝트2
-							</h5>
+							
 						</div>
 						<div class="col-md-4 funding fDiv">
-							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" class="rounded">
-							<h5 class="mt-3">
-								펀딩프로젝트3
-							</h5>
+							
 						</div>
 					</div>
 				</div>
@@ -160,22 +151,13 @@
 					<br>
 					<div class="row">
 						<div class="col-md-4 dDiv">
-							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" class="rounded">
-							<h5 class="mt-3">
-								h3. Lorem ipsum dolor sit amet.
-							</h5>
+							
 						</div>
 						<div class="col-md-4 dDiv">
-							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" class="rounded">
-							<h5 class="mt-3">
-								h3. Lorem ipsum dolor sit amet.
-							</h5>
+							
 						</div>
 						<div class="col-md-4 dDiv">
-							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" class="rounded">
-							<h5 class="mt-3">
-								h3. Lorem ipsum dolor sit amet.
-							</h5>
+							
 						</div>
 					</div>
 				</div>

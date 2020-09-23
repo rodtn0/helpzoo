@@ -92,6 +92,15 @@
 			box-shadow: inset 0 5px 10px rgba(0,0,0,.1), 0 2px 5px rgba(0,0,0,.5);
 			transition: all .3s ease;
 		}
+		
+		.paginationz li a.active{
+		color: #7fcdcd !important;
+		}
+		
+		.paginationz li a:hover{
+		color: #7fcdcd !important;
+		}
+		
 			
 		&:hover, &.active{
 			color: #fff;
@@ -126,10 +135,10 @@
 		<div class="main">
 				<div class="wrapper-demo">
 					<div id="dd" class="wrapper-dropdown-1" tabindex="1">
-						<span>분류 없음</span>
+						<span>선택하세요.</span>
 					    <ul class="dropdown" tabindex="1">
 					        <li><a href="#">펀딩 후기 게시판</a></li>
-					        <li><a href="${contextPath}/board/review/2">기부 후기 게시판</a></li>
+					        <li><a id="donationPage">기부 후기 게시판</a></li>
 					    </ul>
 					</div>
 				​</div>
@@ -257,6 +266,21 @@
 		
 		
 	});
+	
+	
+	$(function(){
+		$("#donationPage").on("click", function(){
+			alert("뜬다!");
+			var reviewListUrl = "${contextPath}/board/review/2";
+			
+			location.href = reviewListUrl;
+		});
+		
+		
+	});
+	
+	
+	
 	
 	</script>
 	
