@@ -8,4 +8,6 @@ public interface AFAQService {
 
 	List<Board> selectFaqList(int type);
 
+	int deleteFaq(String fAQNo);
+
 }

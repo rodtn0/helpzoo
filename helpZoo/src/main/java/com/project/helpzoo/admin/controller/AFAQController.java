@@ -33,6 +33,8 @@ public class AFAQController {
 	@RequestMapping("deleteFAQ")
 	public String deleteFAQ(String FAQNo) {
 		
+		int result = fService.deleteFaq(FAQNo);
+		
 		return result+"";
 	}
 	

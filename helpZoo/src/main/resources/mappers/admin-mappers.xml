@@ -116,6 +116,10 @@
     </update>
     
     <select id="selectFaqList" parameterType="_int" resultMap="AboardResultSet">
-    	SELECT * FROM BOARD WHERE BOARD_TYPE=#{type}
+    	SELECT * FROM BOARD WHERE BOARD_TYPE=#{type} AND BOARD_STATUS='Y'
     </select>
+    
+    <update id="deleteFaq" parameterType="string">
+    	UPDATE BOARD SET BOARD_STATUS='N' WHERE BOARD_NO IN(${fAQNo})
+    </update>
 </mapper>
