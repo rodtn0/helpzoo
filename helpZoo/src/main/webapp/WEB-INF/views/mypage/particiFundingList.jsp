@@ -37,6 +37,10 @@
    }
    
    .card{ height: 500px; }
+   
+  #clickImg{
+  	cursor: pointer;
+  }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
@@ -118,18 +122,19 @@ $('.navbar-light .dmenu').hover(function () {
                  <c:choose>
                     <c:when test="${!empty fdList }">
                       <c:set var = "src" value="/helpzoo/resources/images/not_thumbnail.png"/>
-                       
                        <c:forEach items="${ptThList}" var="th">
                           <%-- <c:set var = "src" value="${contextPath}${th.filePath}/${th.fileChangeName}"/> --%>
                           	<c:if test="${th.parentProjectNo == ptList.projectNo}">
                              	<c:set var = "src" value="${contextPath}${th.filePath}/${th.fileChangeName}"/>
                             </c:if>
                        </c:forEach>
-                       
-                       <img style="height: 361px; width: 100%; display: block;" alt="" src="${src}" data-holder-rendered="true">
+                       <c:set var="link" value="${contextPath}/funding/fundingView/${fdList.projectNo}"/>
+                       <a href="${link}">
+                       <img id="clickImg" style="height: 361px; width: 100%; display: block;" src="${src}" data-holder-rendered="true">
+                    	</a>
                     </c:when>
                     <c:otherwise>
-                       <img style="height: 361px; width: 100%; display: block;" alt="" src="/helpzoo/resources/images/not_thumbnail.png" data-holder-rendered="true">
+                       <img id="clickImg" style="height: 361px; width: 100%; display: block;" src="/helpzoo/resources/images/not_thumbnail.png" data-holder-rendered="true">
                     </c:otherwise>
                     
                  </c:choose>
