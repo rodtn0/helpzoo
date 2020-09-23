@@ -15,6 +15,9 @@
 			height : 200px;
 		}
 		
+		p{
+			color :  #7fcdcd;
+		}
 	</style>
 </head>
 <body style="overflow-x:hidden; overflow-y:auto;">
@@ -186,74 +189,42 @@
 			</h1>
 			<br>
 			<div class="row">
-				<div class="col-md-4" data-aos="fade-up">
+				<div class="col-md-8" data-aos="fade-up">
 					<h4>
 						#급상승 프로젝트
 					</h4>
 					<br>
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-6 increaseF">
 							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" >
 							<h5 class="mt-2">
 								h3. Lorem ipsum dolor sit amet.
 							</h5>
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-6 increaseF">
+							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg">
+							<h5 class="mt-2">
+								h3. Lorem ipsum dolor sit amet.
+							</h5>
+						</div>
+						<div class="col-md-6 increaseF">
+							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg">
+							<h5 class="mt-2">
+								h3. Lorem ipsum dolor sit amet.
+							</h5>
+						</div>
+						<div class="col-md-6 increaseF">
 							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg">
 							<h5 class="mt-2">
 								h3. Lorem ipsum dolor sit amet.
 							</h5>
 						</div>
 					</div>
-					<div class="row" >
-						<div class="col-md-6">
-							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg">
-							<h5 class="mt-2">
-								h3. Lorem ipsum dolor sit amet.
-							</h5>
-						</div>
-						<div class="col-md-6">
-							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg">
-							<h5 class="mt-2">
-								h3. Lorem ipsum dolor sit amet.
-							</h5>
-						</div>
-					</div>
+					
+					
+					
 				</div>
-				<div class="col-md-4" data-aos="fade-up">
-					<h4>
-						오늘 가장 많이 #좋아한 프로젝트
-					</h4>
-					<br>
-					<div class="row">
-						<div class="col-md-6">
-							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg">
-							<h5 class="mt-2">
-								h3. Lorem ipsum dolor sit amet.
-							</h5>
-						</div>
-						<div class="col-md-6">
-							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg">
-							<h5 class="mt-2">
-								h3. Lorem ipsum dolor sit amet.
-							</h5>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6">
-							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg">
-							<h5 class="mt-2">
-								h3. Lorem ipsum dolor sit amet.
-							</h5>
-						</div>
-						<div class="col-md-6">
-							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg">
-							<h5 class="mt-2">
-								h3. Lorem ipsum dolor sit amet.
-							</h5>
-						</div>
-					</div>
-				</div>
+				
 				<div class="col-md-4" data-aos="fade-left">
 					<h3>
 						Event!
@@ -307,74 +278,35 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4" data-aos="fade-up">
+				<div class="col-md-8" data-aos="fade-up">
 					<h4>
 						#급상승 프로젝트
 					</h4>
 					<br>
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-6 increaseD">
+							
+							<p> </p>
+						</div>
+						<div class="col-md-6 increaseD">
 							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg">
 							<h5 class="mt-2">
-								h3. Lorem ipsum dolor sit amet.
 							</h5>
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-6 increaseD">
 							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg">
 							<h5 class="mt-2">
-								h3. Lorem ipsum dolor sit amet.
 							</h5>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-6 increaseD">
 							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg">
 							<h5 class="mt-2">
-								h3. Lorem ipsum dolor sit amet.
-							</h5>
-						</div>
-						<div class="col-md-6">
-							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg">
-							<h5 class="mt-2">
-								h3. Lorem ipsum dolor sit amet.
 							</h5>
 						</div>
 					</div>
+					
 				</div>
-				<div class="col-md-4" data-aos="fade-up">
-					<h4>
-						오늘 가장 많이 #좋아한 프로젝트
-					</h4>
-					<br>
-					<div class="row">
-						<div class="col-md-6">
-							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg">
-							<h5 class="mt-2">
-								h3. Lorem ipsum dolor sit amet.
-							</h5>
-						</div>
-						<div class="col-md-6">
-							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg">
-							<h5 class="mt-2">
-								h3. Lorem ipsum dolor sit amet.
-							</h5>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6">
-							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg">
-							<h5 class="mt-2">
-								h3. Lorem ipsum dolor sit amet.
-							</h5>
-						</div>
-						<div class="col-md-6">
-							<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg">
-							<h5 class="mt-2">
-								h3. Lorem ipsum dolor sit amet.
-							</h5>
-						</div>
-					</div>
-				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -398,6 +330,8 @@
 		
 		randomBoard1(1);
 		randomBoard2(2);
+		
+		increaseBoard2(2);
 		
 		// 일정 시간(1분)마다 리스트 갱신
 		setInterval(function(){
@@ -474,7 +408,7 @@
 		
 	}
 	
-	
+	/* 펀딩 랜덤 조회 */
 	function randomBoard1(type){
 		console.log(type);
 		$.ajax({
@@ -509,7 +443,7 @@
 		});
 	}
 	
-	
+	/* 기부 랜덤 조회 */
 	function randomBoard2(type){
 		console.log(type);
 		$.ajax({
@@ -541,6 +475,70 @@
 		
 			
 		});
+	}
+	
+	
+	/* 급상승 펀딩 프로젝트 조회 */
+	function increaseBoard1(type){
+		$.ajax({
+			url: "board/increase/" + type,
+			dataType: "json",
+			success : function(list1){
+				console.log(list1);
+				
+				var increaseF = $(".increaseF");
+				$.each(list1, function(index, item){
+					
+					$(increaseF[index]).html("");
+					
+					var $img = $("<img>");
+					var $h5 = $("<h5>").text(item.dBoardTitle);
+					var $p = $("<p>").text(item.achivement);
+					
+					
+					$img.attr("src", "${contextPath}" + item.dFilePath + "/" + item.dFileChangeName).addClass("rounded");
+					$(increaseF[index]).append($img);
+					$(increaseF[index]).append($h5);
+					$(increaseF[index]).append($p);
+					
+				});
+			}, error : function(){
+				console.log("ajax 통신 실패");
+			}
+		});
+		
+	}
+	
+	
+	/* 급상승 기부 프로젝트 조회 */
+	function increaseBoard2(type){
+		$.ajax({
+			url: "board/increase/" + type,
+			dataType: "json",
+			success : function(list2){
+				console.log(list2);
+				
+				var increaseD = $(".increaseD");
+				$.each(list2, function(index, item){
+					
+					$(increaseD[index]).html("");
+					
+					var $img = $("<img>");
+					var $h5 = $("<h5>").text(item.dBoardTitle);
+					var $p = $("<p>").text(item.achivement);
+					
+					
+					$img.attr("src", "${contextPath}" + item.dFilePath + "/" + item.dFileChangeName).addClass("rounded");
+					$(increaseD[index]).append($img);
+					$(increaseD[index]).append($h5);
+					$(increaseD[index]).append($p);
+					
+				});
+			}, error : function(){
+				console.log("ajax 통신 실패");
+			}
+		});
+		
 	}
 
 

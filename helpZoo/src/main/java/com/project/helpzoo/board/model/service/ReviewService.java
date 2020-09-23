@@ -107,6 +107,11 @@ public interface ReviewService {
 	 */
 	public abstract List<Donation2> selectRandomD();
 
+	/** 급상승 기부 조회 Service
+	 * @return list2
+	 */
+	public abstract List<Donation2> increaseDonation();
+
 
 
 	
