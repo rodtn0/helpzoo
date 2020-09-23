@@ -168,7 +168,7 @@
 						</div>
 						<hr class="mb-4">
 						<div id="bottom" class="col-md-6 mx-auto mb-5">
-						<button style="margin-bottom:100px;"class="btn btn-primary btn-lg btn-block" id="modifyBtn" type="submit">변경하기</button>
+						<button style="margin-bottom:180px;"class="btn btn-primary btn-lg btn-block" id="modifyBtn" type="submit">변경하기</button>
 						</div>
 			</form>
 				</div>
