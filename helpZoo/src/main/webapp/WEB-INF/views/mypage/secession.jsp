@@ -120,8 +120,7 @@ $('.navbar-light .dmenu').hover(function () {
 						</div>
 						<div class="panel panel-default">
 							<div class="panel-body">
-								<div class="form-group pull-left col-md">
-									<label class="control-label" id="text"> 회원 탈퇴 약관 </label>
+								<div class="form-group">
 									<div class="col-xs-12">
 						<textarea class="form-control" readonly rows="10" cols="100">
 					제1조

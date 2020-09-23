@@ -37,10 +37,10 @@
 		</div>
 	</div>
 	<!-- footer -->
-	<div class="row">
-		<div class="col-md-12">
+	<!-- <div class="row"> -->
+<!-- 		<div class="col-md-12"> -->
 			<jsp:include page="/WEB-INF/views/common/footer.jsp" />
-		</div>
-	</div>
+<!-- 		</div> -->
+	<!-- </div> -->
 </body>
 </html>

@@ -80,7 +80,6 @@ public class MemberController {
 			//response.addCookie(new Cookie("savePwd", member.getMemberPwd()));
 
 		}
-		System.out.println(loginMember);
 		
 		return "redirect:/";
 	}

@@ -21,13 +21,13 @@
 		      <!-- value="${cookie.savePwd.value}" -->
 		      <input type="password" name="memberPwd" placeholder="비밀번호"/>
 			<div class="checkbox mb-3">
-				<label> 
 				<!-- form 태그 안에 존재 -->
+				<label> 
 					<input type="checkbox" name="saveId"
 						<c:if test="${!empty cookie.saveId.value}">
 							checked
 						</c:if>
-					> 로그인 정보 저장
+					> 아이디 저장
 				</label>
 			</div>
 		      <button id="loginBtn" class="btn btn-lg btn-primary btn-block">로그인</button>
