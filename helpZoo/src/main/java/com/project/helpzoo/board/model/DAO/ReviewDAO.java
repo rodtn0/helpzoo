@@ -263,6 +263,14 @@ public class ReviewDAO {
 	}
 
 
+	/** 급상승 기부 조회 DAO
+	 * @return list2
+	 */
+	public List<Donation2> increaseDonation() {
+		return sqlSession.selectList("donationMapper.selectIncreaseD");
+	}
+
+
 
 	
 	

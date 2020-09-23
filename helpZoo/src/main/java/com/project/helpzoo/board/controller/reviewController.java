@@ -447,6 +447,33 @@ public class reviewController {
 	}
 	
 	
+	// 급상승 프로젝트 조회
+	@ResponseBody
+	@RequestMapping("increase/{type}")
+	public String increaseBoard(@PathVariable int type) {
+		System.out.println(type);
+		
+		//List<FundingMainViewDto> list1 = null;
+		List<Donation2> list2 = null;
+		Gson gson = null;
+		String path = null;
+		
+		if(type == 1) {
+			
+		}else {
+			list2 = reviewService.increaseDonation();
+			System.out.println("급상승 기부 : " + list2);
+			
+			gson = new GsonBuilder().create();
+			path = gson.toJson(list2);
+		}
+		
+		
+		
+		return path;
+	}
+	
+	
 	
 	
 	

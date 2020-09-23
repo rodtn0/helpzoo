@@ -321,6 +321,12 @@ public class ReviewServiceImpl implements ReviewService{
 	public List<Donation2> selectRandomD() {
 		return reviewDAO.selectRandomD();
 	}
+
+	// 급상승 기부 조회 Service 구현
+	@Override
+	public List<Donation2> increaseDonation() {
+		return reviewDAO.increaseDonation();
+	}
 		
 		
 		
