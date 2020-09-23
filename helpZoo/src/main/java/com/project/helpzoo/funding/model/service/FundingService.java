@@ -15,7 +15,9 @@ import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenRewardView;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenStoryView;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingTotalInfoDto;
 import com.project.helpzoo.funding.dto.viewDetail.FundingDetailRewardView;
+import com.project.helpzoo.funding.model.vo.KakaoPayApiItem;
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
+import com.project.helpzoo.funding.model.vo.order.Orders;
 import com.project.helpzoo.funding.model.vo.search.FundingSearch;
 
 public interface FundingService {
@@ -118,6 +120,16 @@ public interface FundingService {
 
 
 	List<FundingDetailRewardView> selectReward(Long fundingNo);
+
+
+
+	
+	
+	String kakaoPayReady(KakaoPayApiItem item);
+
+
+
+	Long makerOrder();
 	
 	
 }

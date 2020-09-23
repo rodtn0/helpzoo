@@ -68,6 +68,20 @@ public class Orders {
 	
 	
 	
+	public Orders(Timestamp orderDate, String status, Delivery delivery, long memberId,
+			List<OrderReward> orderRewards) {
+		super();
+		this.orderDate = orderDate;
+		this.status = status;
+		this.delivery = delivery;
+		this.memberId = memberId;
+		this.orderRewards = orderRewards;
+	}
+
+
+
+
+
 	public long getId() {
 		return id;
 	}

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
@@ -13,8 +15,15 @@ import java.util.regex.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.helpzoo.funding.dto.fundingOpen.FundingDetailViewDto;
@@ -27,11 +36,16 @@ import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenStoryView;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingTotalInfoDto;
 import com.project.helpzoo.funding.dto.viewDetail.FundingDetailRewardView;
 import com.project.helpzoo.funding.model.dao.FundingDAO;
+import com.project.helpzoo.funding.model.vo.KakaoPayApiItem;
+import com.project.helpzoo.funding.model.vo.KakaoPayReadyVO;
 import com.project.helpzoo.funding.model.vo.funding.FundingAttachment;
 import com.project.helpzoo.funding.model.vo.funding.FundingCategory;
 import com.project.helpzoo.funding.model.vo.funding.FundingFileCategory;
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.funding.model.vo.search.FundingSearch;
+
+
+
 
 @Service
 @Transactional
@@ -41,6 +55,9 @@ public class FundingServiceImpl implements FundingService {
 	private FundingDAO dao;
 	
 	private Logger logger = LoggerFactory.getLogger(FundingServiceImpl.class);
+	
+	
+	
 	
 	
 	@Override
@@ -449,6 +466,79 @@ public class FundingServiceImpl implements FundingService {
 			
 			return dao.selectReward(fundingNo);
 		}
+		
+		
+		
+		
+					
+		public String kakaoPayReady(KakaoPayApiItem item) {
+			
+			String HOST = "https://kapi.kakao.com";
+			
+			KakaoPayReadyVO kakaoPayReadyVO;
+			 
+			
+			
+	        RestTemplate restTemplate = new RestTemplate();
+	 
+	        HttpHeaders headers = new HttpHeaders();
+	        headers.add("Authorization","KakaoAK " + "86f3aba00269f94be10433033258192c");
+	        headers.add("Accept", MediaType.APPLICATION_JSON_VALUE);
+	        headers.add("Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=UTF-8");
+	        
+	        // 서버로 요청할 Body
+	        MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+	        params.add("cid", "TC0ONETIME");
+	        params.add("partner_order_id", "" +item.getOrderId());
+	        params.add("partner_user_id", "" + item.getUserId());
+	        params.add("item_name", item.getName());
+	        params.add("quantity", "" + item.getQuantity());
+	        params.add("total_amount", "" +item.getTotalAmount());
+	        params.add("tax_free_amount", "0");
+	        params.add("approval_url", "http://localhost:8025/fundingAttend/kakaoPaySuccess");
+	        params.add("cancel_url", "http://localhost:8025/fundingAttend/kakaoPayCancel");
+	        params.add("fail_url", "http://localhost:8025/fundingAttend/kakaoPaySuccessFail");
+	        
+	        
+	         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
+	 
+	         
+	        try {
+	        	
+	            kakaoPayReadyVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/ready"), body, KakaoPayReadyVO.class);
+	              
+	            System.out.println(kakaoPayReadyVO);
+	            
+	            return kakaoPayReadyVO.getNext_redirect_pc_url();
+	 
+	        } catch (RestClientException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        } catch (URISyntaxException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }
+	        
+	        return "/pay";
+	        
+	    }
+
+
+		@Override
+		public Long makerOrder() {
+			
+			return dao.makeOrder();
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 	
 	
