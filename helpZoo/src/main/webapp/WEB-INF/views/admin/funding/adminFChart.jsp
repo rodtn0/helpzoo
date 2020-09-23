@@ -144,7 +144,6 @@
     		var yy = YYMM.substring(2,4); //20
     		var mm = YYMM.substring(5,7); //06
     		var yymm = yy+"-"+ mm;
-    		alert(yymm);
     		
     		var mFee = getMonthFees(yy); // ajax로 값 불러오기
     		monthFees(mFee); // 집어 넣기
@@ -303,6 +302,10 @@
 	function monthSuccess(mSuccess){
 		var container = document.getElementById('chart-area2');
 		container.innerHTML = "";
+		console.log(mSuccess)
+		console.log(mSuccess.length)
+		if(!(mSuccess[0].fundingFailure == 0 && mSuccess[0].fundingProgress == 0 && mSuccess[0].fundingSuccess == 0)){
+			
 		var data = {
 		    categories: ['Browser'],
 		    series: [
@@ -341,7 +344,10 @@
 		
 		tui.chart.pieChart(container, data, options);
 		
+	}else{
+		container.innerHTML = "<h2>데이터가 없습니다.</h2>";
 	}
+}
 		
 		
 	// 월별 함수
@@ -413,6 +419,12 @@
 		$("#YYMM-text").text(str);
 		$("span[name='year']").text(thisyear);
 
+		// 바로 시작하게 하기
+		$(".Year-Month").each(function(index, item){
+			if($(item).text() == str){
+				$(item).click();
+			}
+		});
 	});
 
 	//페이징 바

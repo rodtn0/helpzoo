@@ -18,4 +18,8 @@ public class AFAQDAO {
 		return sqlSession.selectList("adminMapper.selectFaqList", type);
 	}
 
+	public int deleteFaq(String fAQNo) {
+		return sqlSession.update("adminMapper.deleteFaq", fAQNo);
+	}
+
 }

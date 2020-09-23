@@ -18,5 +18,9 @@ public class AFAQServiceImpl implements AFAQService{
 	public List<Board> selectFaqList(int type) {
 		return fDao.selectFaqList(type);
 	}
+	@Override
+	public int deleteFaq(String fAQNo) {
+		return fDao.deleteFaq(fAQNo);
+	}
 
 }
