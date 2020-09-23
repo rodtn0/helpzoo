@@ -21,4 +21,20 @@ public class AMemberDAO {
 		return sqlSession.selectList("adminConfMapper.memberList");
 	}
 	
+	/** 멤버 계정 상태 확인
+	 * @param memberNo
+	 * @return confirm
+	 */
+	public int selMember(int memberNo) {
+		return sqlSession.selectOne("adminConfMapper.selMember", memberNo);
+	}
+
+	/** 멤버 계정 정지
+	 * @param memberNo
+	 * @return result
+	 */
+	public int delMember(int memberNo) {
+		return sqlSession.update("adminConfMapper.delMember", memberNo);
+	}
+	
 }

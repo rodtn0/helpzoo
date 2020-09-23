@@ -14,6 +14,19 @@ public interface AMemberService {
 	 * @return memberList
 	 */
 	public abstract List<Member> memberList();
+
+	/** 멤버 계정 상태 확인
+	 * @param memberNo
+	 * @return confirm
+	 */
+	public abstract int selMember(int memberNo);
+
+	/** 멤버 계정 정지
+	 * @param memberNo
+	 * @return result
+	 */
+	public abstract int delMember(int memberNo);
+
 	
 	
 

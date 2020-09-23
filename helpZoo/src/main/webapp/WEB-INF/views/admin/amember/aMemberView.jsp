@@ -33,8 +33,7 @@
 						<table class="table table-striped" id="dataTable">
 							<thead class="thead text-white bg-info mb-3">
 								<tr>
-									<th><input type="checkbox" id="all"></th>
-									<th>글번호</th>
+									<th>멤버번호</th>
 									<th>아이디</th>
 									<th>이름</th>
 									<th>전화번호</th>
@@ -55,7 +54,6 @@
 									<c:otherwise>
 										<c:forEach var="board" items="${memberList}" varStatus="vs">
 											<tr>
-												<td><input type="checkbox" id="chk"></td>
 												<td>${board.memberNo}</td>
 												<td>${board.memberId}</td>
 												<td>${board.memberName}</td>
@@ -79,19 +77,36 @@
 		
 		</main>
 	<jsp:include page="../../common/adfooter.jsp"/>
-	<script src="${contextPath}/resources/js/demo/datatables-demo.js">
-		$(function() {
-			$(document).on('change', '#all', function() {
-				let all = $(document).prop('#all', 'checked');
-				
-				if(all == true){
-					$(document).prop('checked', '#chk', true);
-				}else{
-					$('#chk').prop('checked', '#chk', false);
-				}
-			})
-			
-		});
+	<script src="${contextPath}/resources/js/demo/datatables-demo.js"></script>
+	
+	<script>
+		$('.tbody td').on('click', function() {
+			let memberNo =$(this).parent().children().eq(0).text();
+    		
+			console.log(memberNo);
+    		
+    		swal({
+    				title : "정말 " + memberNo + "번 계정을 정지시키겠습니까?",
+    				icon : "warning",
+    				buttons : {
+    					cancel:{
+    						text : "Cancel",
+    						visible : true,
+    						value : false
+    					},
+    					confirm : {
+    						text : "OK",
+    						value : true
+    					}
+    				}
+    		}).then((result) =>{
+    			if(result){
+	    			location.href="${contextPath}/admin/member/delMember/" + memberNo;
+    			}
+    		})
+    		 
+    	});
+		
 	</script>
 </body>
 </html>
