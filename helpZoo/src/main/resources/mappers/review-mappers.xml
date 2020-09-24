@@ -188,7 +188,7 @@
                FI.FILE_PATH, FI.FILE_CHANGE_NAME, RF.FUNDING_REVIEW_NO, RF.FUNDING_BOARD_NO
 		FROM REVIEW_FUNDING RF
 		LEFT JOIN MEMBER M ON(RF.FUNDING_REVIEW_WRITER = M.MEMBER_NO)
-		LEFT JOIN FUNDING_IMAGE  FI ON(RF.FUNDING_BOARD_NO = FI.FUNDING_ID)
+		LEFT JOIN FUNDING_IMAGE  FI ON(RF.FUNDING_BOARD_NO = FI.PARENT_PROJECT_NO)
 		LEFT JOIN FUNDING_PROJECT FP ON(RF.FUNDING_BOARD_NO = FP.FUNDING_ID)
 		WHERE FUNDING_REVIEW_NO = #{reviewNo}
 		AND FUNDING_REVIEW_STATUS = 'Y'
@@ -213,7 +213,7 @@
 		FROM MEMBER M
 		LEFT JOIN ORDERS O ON (O.MEMBER_NO = M.MEMBER_NO)
 		LEFT JOIN FUNDING_PROJECT F ON(F.FUNDING_ID = O.FUNDING_ID)
-		LEFT JOIN FUNDING_IMAGE I ON(F.FUNDING_ID = I.FUNDING_ID)
+		LEFT JOIN FUNDING_IMAGE I ON(F.FUNDING_ID = I.PARENT_PROJECT_NO)
 		WHERE ORDER_STATUS = 'Y' AND M.MEMBER_NO = #{memberNo} AND FUNDING_STATUS = 'Y'
   	  </select>
   	  
@@ -434,6 +434,38 @@
 		]]>
 	  </select>
 	  
+	  <!-- 펀딩리뷰 '좋아요(도움이 됐나요)' 수 카운팅 -->
+	  <select id="selectLikeCount" parameterType="_int" resultType="_int">
+	  	SELECT COUNT(*)
+		FROM F_REVIEW_LIKE
+		WHERE F_REVIEW_BOARD_NO = #{reviewNo}
+	  </select>
+	  
+	  <!-- 기부리뷰 '좋아요(도움이 됐나요)' 수 카운팅  -->
+	  <select id="selectLikeCount2" parameterType="_int" resultType="_int">
+	  	SELECT COUNT(*)
+		FROM D_REVIEW_LIKE
+		WHERE D_REVIEW_BOARD_NO = #{reviewNo}
+	  </select>
+	  
+	  <!-- 펀딩 리뷰 삽입 -->
+	  <insert id="insertLikeCount" parameterType="map">
+	  	INSERT INTO F_REVIEW_LIKE VALUES(#{mNo}, #{reviewNo})
+	  </insert>
+	  
+	  <insert id="insertLikeCount2" parameterType="map">
+	  	INSERT INTO D_REVIEW_LIKE VALUES(#{mNo}, #{reviewNo})
+	  </insert>
+	  
+	  <delete id="deleteLikeCount" parameterType="map">
+	  	DELETE FROM F_REVIEW_LIKE
+		WHERE MEMBER_NO= #{mNo} AND F_REVIEW_BOARD_NO =#{reviewNo}
+	  </delete>
+	  
+	  <delete id="deleteLikeCount2" parameterType="map">
+	  	DELETE FROM D_REVIEW_LIKE
+		WHERE MEMBER_NO= #{mNo} AND D_REVIEW_BOARD_NO =#{reviewNo}
+	  </delete>
 	  
 	 
 	  
