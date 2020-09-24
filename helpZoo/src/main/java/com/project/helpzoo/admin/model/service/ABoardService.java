@@ -19,4 +19,28 @@ public interface ABoardService {
 	 */
 	public abstract List<Board> eventList();
 
+	/** 공지사항 게시물 상태 확인
+	 * @param boardNo
+	 * @return confirm
+	 */
+	public abstract int confirmNotice(int boardNo);
+
+	/** 공지사항 게시물 삭제
+	 * @param boardNo
+	 * @return result
+	 */
+	public abstract int delNotice(int boardNo);
+
+	/** 이벤트 게시물 상태 확인
+	 * @param boardNo
+	 * @return confirm
+	 */
+	public abstract int confirmEvent(int boardNo);
+
+	/** 이벤트 게시물 삭제
+	 * @param boardNo
+	 * @return result
+	 */
+	public abstract int delEvent(int boardNo);
+
 }

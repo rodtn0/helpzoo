@@ -13,7 +13,7 @@
 		cursor : pointer;
 	}
 	.tbody .odd:hover, .tbody .even:hover{
-		background-color: lightblue;
+		background-color: lightpink;
 	}
 	
 </style>
@@ -31,7 +31,7 @@
 					<div class="table-responsive">
 			
 						<table class="table table-striped" id="dataTable">
-							<thead class="thead text-white bg-info mb-3">
+							<thead class="thead text-white bg-danger mb-3">
 								<tr>
 									<th>번호</th>
 									<th>제목</th>
@@ -80,7 +80,7 @@
 			console.log(boardNo);
     		
     		swal({
-    				title : boardNo + "번 게시물을 삭제시키겠습니까?",
+    				title : boardNo + "번 게시물을 삭제하겠습니까?",
     				icon : "warning",
     				buttons : {
     					cancel:{
@@ -95,7 +95,7 @@
     				}
     		}).then((result) =>{
     			if(result){
-	    			//location.href="${contextPath}/admin/member/delMember/" + memberNo;
+	    			location.href="${contextPath}/admin/board/delEvent/" + boardNo;
     			}
     		})
     		 

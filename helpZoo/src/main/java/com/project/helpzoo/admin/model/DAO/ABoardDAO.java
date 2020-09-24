@@ -27,5 +27,37 @@ public class ABoardDAO {
 	public List<Board> eventList() {
 		return sqlSession.selectList("adminConfMapper.eventList");
 	}
+
+	/** 공지사항 게시물 상태 확인
+	 * @param boardNo
+	 * @return confirm
+	 */
+	public int confirmNotice(int boardNo) {
+		return sqlSession.selectOne("adminConfMapper.confirmNotice", boardNo);
+	}
+
+	/** 공지사항 게시물 삭제
+	 * @param boardNo
+	 * @return result
+	 */
+	public int delNotice(int boardNo) {
+		return sqlSession.update("adminConfMapper.delNotice", boardNo);
+	}
+
+	/** 이벤트 게시물 상태 확인
+	 * @param boardNo
+	 * @return confirm
+	 */
+	public int confirmEvent(int boardNo) {
+		return sqlSession.selectOne("adminConfMapper.confirmEvent", boardNo);
+	}
+
+	/** 이벤트 게시물 삭제
+	 * @param boardNo
+	 * @return result
+	 */
+	public int delEvent(int boardNo) {
+		return sqlSession.update("adminConfMapper.delEvent", boardNo);
+	}
 	
 }
