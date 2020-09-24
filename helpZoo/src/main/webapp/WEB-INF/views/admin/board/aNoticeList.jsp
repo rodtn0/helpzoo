@@ -80,7 +80,7 @@
 			console.log(boardNo);
     		
     		swal({
-    				title : boardNo + "번 게시물을 삭제시키겠습니까?",
+    				title : boardNo + "번 게시물을 삭제하겠습니까?",
     				icon : "warning",
     				buttons : {
     					cancel:{
