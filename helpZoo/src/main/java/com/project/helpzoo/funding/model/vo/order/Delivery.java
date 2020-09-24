@@ -7,29 +7,39 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="DELIVERY")
+@SequenceGenerator(
+		name = "DELIVERY_SEQ_GENERATOR",
+		sequenceName = "DELIVERY_SEQ",
+		initialValue = 1, allocationSize = 1)
 public class Delivery {
 
 	
 	
 	
-	@Id @GeneratedValue
-	@Column(name = "delivery_id")
+	@Id @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "DELIVERY_SEQ_GENERATOR")
+	@Column(name = "DELIVERY_ID")
 	private Long id;
-	
-	@OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY)
-	private Orders order;
 	
 	@Embedded
 	private Address address;
 	
-	@Enumerated(EnumType.STRING)
-	private DeliveryStatus status;
+	
+	
+	public Delivery() {
+		
+	}
+	
+	
+	@Column(name = "DELIVERY_STATUS")
+	private String status;
 
 	public Long getId() {
 		return id;
@@ -39,13 +49,6 @@ public class Delivery {
 		this.id = id;
 	}
 
-	public Orders getOrder() {
-		return order;
-	}
-
-	public void setOrder(Orders order) {
-		this.order = order;
-	}
 
 	public Address getAddress() {
 		return address;
@@ -55,22 +58,22 @@ public class Delivery {
 		this.address = address;
 	}
 
-	public DeliveryStatus getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(DeliveryStatus status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
 	@Override
 	public String toString() {
-		return "Delivery [id=" + id + ", order=" + order + ", address=" + address + ", status=" + status + "]";
+		return "Delivery [id=" + id + ", order=" +  ", address=" + address + ", status=" + status + "]";
 	}
 
-	public Delivery(Orders order, Address address, DeliveryStatus status) {
+	public Delivery(Address address, String status) {
 		super();
-		this.order = order;
+
 		this.address = address;
 		this.status = status;
 	}

@@ -15,8 +15,12 @@ import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenRewardView;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenStoryView;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingTotalInfoDto;
 import com.project.helpzoo.funding.dto.viewDetail.FundingDetailRewardView;
+import com.project.helpzoo.funding.dto.viewDetail.OrderRewardView;
 import com.project.helpzoo.funding.model.vo.KakaoPayApiItem;
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
+import com.project.helpzoo.funding.model.vo.order.Address;
+import com.project.helpzoo.funding.model.vo.order.Delivery;
+import com.project.helpzoo.funding.model.vo.order.OrderReward;
 import com.project.helpzoo.funding.model.vo.order.Orders;
 import com.project.helpzoo.funding.model.vo.search.FundingSearch;
 
@@ -130,6 +134,34 @@ public interface FundingService {
 
 
 	Long makerOrder();
+
+
+
+	void saveDelivery(Delivery delivery);
+
+
+
+	Long saveOrder(Orders order, Address addressObject, Long fundingNo);
+
+
+
+	List<OrderReward> persisOrderReward(OrderRewardView orderReward, Long ordersId);
+
+
+
+	int getPrice(int i);
+
+
+
+	String getRewardName(int i);
+
+
+
+	void permitOrder(Long ordersId);
+
+
+
+	Object kakaoPayInfo(String pg_token);
 	
 	
 }

@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -40,21 +41,27 @@ public class Orders {
 	
 	
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "DELIVERY_ID")
 	private Delivery delivery;
 	
 	@Column(name = "MEMBER_NO")
 	private long memberId;
 
 	
-	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
 	 private List<OrderReward> orderRewards = new ArrayList<>();
 	
+	
+	@Column(name = "FUNDING_ID")
+	private Long FundingNo;
 	
 	
 	public void addOrderReward(OrderReward orderReward) {
 		orderRewards.add(orderReward);
-		orderReward.setOrder(this);
 		
+		if(orderReward.getOrder()!=this) {
+		orderReward.setOrder(this);
+		}
 	}
 	
 	
@@ -67,7 +74,22 @@ public class Orders {
 	
 	
 	
-	
+	public Long getFundingNo() {
+		return FundingNo;
+	}
+
+
+
+
+
+	public void setFundingNo(Long fundingNo) {
+		FundingNo = fundingNo;
+	}
+
+
+
+
+
 	public Orders(Timestamp orderDate, String status, Delivery delivery, long memberId,
 			List<OrderReward> orderRewards) {
 		super();
@@ -76,6 +98,18 @@ public class Orders {
 		this.delivery = delivery;
 		this.memberId = memberId;
 		this.orderRewards = orderRewards;
+	}
+
+
+
+
+
+	public Orders(Timestamp orderDate, String status, Delivery delivery, long memberId) {
+		super();
+		this.orderDate = orderDate;
+		this.status = status;
+		this.delivery = delivery;
+		this.memberId = memberId;
 	}
 
 
@@ -166,19 +200,16 @@ public class Orders {
 
 
 
+
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", orderDate=" + orderDate + ", status=" + status + ", deliveryId="
-				+ ", deliveryId2=" + ", member_no=" + memberId + "]";
+		return "Orders [id=" + id + ", orderDate=" + orderDate + ", status=" + status + ", delivery=" + delivery
+				+ ", memberId=" + memberId + ", orderRewards=" + orderRewards + "]";
 	}
 
-	public Orders(long id, Timestamp orderDate, String status, long deliveryId, long deliveryId2, long member_no) {
-		super();
-		this.id = id;
-		this.orderDate = orderDate;
-		this.status = status;
-		this.memberId = member_no;
-	}
+
+
+
 
 
 

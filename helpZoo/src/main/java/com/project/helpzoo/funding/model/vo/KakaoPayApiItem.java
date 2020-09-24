@@ -7,7 +7,7 @@ public class KakaoPayApiItem {
 	
 	private int quantity;
 	
-	private int userId;
+	private String userId;
 	
 	private long orderId;
 	
@@ -15,6 +15,8 @@ public class KakaoPayApiItem {
 
 	
 	
+
+
 	public int getTotalAmount() {
 		return totalAmount;
 	}
@@ -39,11 +41,11 @@ public class KakaoPayApiItem {
 		this.quantity = quantity;
 	}
 
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
@@ -61,7 +63,7 @@ public class KakaoPayApiItem {
 	
 	
 	
-	public KakaoPayApiItem(String name, int quantity, int userId, long orderId, int totalAmount) {
+	public KakaoPayApiItem(String name, int quantity, String userId, long orderId, int totalAmount) {
 		super();
 		this.name = name;
 		this.quantity = quantity;
