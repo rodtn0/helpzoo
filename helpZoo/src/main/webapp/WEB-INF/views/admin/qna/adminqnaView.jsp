@@ -49,6 +49,10 @@
     font-size: small !important;
 	}
 	
+	.fa-cat{
+	font-size: 50px;
+	}
+	
 </style>
 </head>
 <script src="https://kit.fontawesome.com/13be1766f6.js" crossorigin="anonymous"></script>
@@ -64,7 +68,6 @@
         		<h6 class="m-0 font-weight-bold text-primary">Question</h6>
         	</div>
         	<div class="card-body">
-        		<div class="container" id="content-main">
 
 					<div>
 						<i class="fas fa-cat"></i>
@@ -130,7 +133,6 @@
 						<!-- 답글 영역 -->
 						<jsp:include page="adminqnaAnswer.jsp"/>
 						
-					</div>
 				</div>
         	</div>
         </div>

@@ -22,4 +22,14 @@ public class AFAQDAO {
 		return sqlSession.update("adminMapper.deleteFaq", fAQNo);
 	}
 
+	public int selectNextNo() {
+		return sqlSession.selectOne("adminMapper.selectNextNo", null);
+	}
+	
+	public int insertFaq(Board board) {
+		return sqlSession.insert("adminMapper.insertFaq", board);
+	}
+
+
 }
+

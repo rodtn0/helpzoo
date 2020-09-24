@@ -10,4 +10,6 @@ public interface AFAQService {
 
 	int deleteFaq(String fAQNo);
 
+	int insertBoard(Board board);
+
 }

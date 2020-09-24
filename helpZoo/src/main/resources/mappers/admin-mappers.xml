@@ -122,4 +122,19 @@
     <update id="deleteFaq" parameterType="string">
     	UPDATE BOARD SET BOARD_STATUS='N' WHERE BOARD_NO IN(${fAQNo})
     </update>
+    
+    <select id="selectNextNo" resultType="_int">
+    SELECT SEQ_BNO.NEXTVAL FROM DUAL
+    </select>
+    
+    <insert id="insertFaq" parameterType="Board">
+    INSERT INTO BOARD
+    	VALUES(
+    		#{boardNo},
+    		#{boardTitle},
+    		#{boardContent},
+    		DEFAULT, DEFAULT, DEFAULT, DEFAULT,
+    		#{boardWriter},
+    		3)
+    </insert>
 </mapper>

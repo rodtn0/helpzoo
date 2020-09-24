@@ -34,7 +34,7 @@
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Answer Table</h6>
+              <h6 class="m-0 font-weight-bold text-primary">FAQ Table</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -81,7 +81,7 @@
                   </c:choose>
                   
                   </tbody>
-                  <button type="button" class="btn btn-outline-secondary" id="createFAQ">FAQ 작성</button>
+                  <a class="btn btn-outline-secondary" href="createFAQ" id="createFAQ"><i class="fas fa-pencil-alt"></i> FAQ 작성</a>
                   <button type="button" class="btn btn-outline-secondary" id="deleteFAQ">삭제</button>
                 </table>
               </div>

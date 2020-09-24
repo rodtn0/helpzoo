@@ -141,10 +141,18 @@
 	
 	<div class="container">
 	<br>
-		<div class="section-title" data-aos="fade-up" style="margin-top: 40px;">
+		<div class="section" data-aos="fade-up" style="margin-top: 20px; margin-bottom: 20px;">
 	          <h2>Question And Answer</h2>
 	    </div>
 	</div>
+	
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" style="margin-bottom: 20px;">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="img-fluid" src="/helpzoo/resources/images/qna4.png" alt="First slide">
+    </div>
+  </div>
+</div>
 	
 <%-- 	<div style="text-align:center; min-height:320px;">
 		<img class="d-block w-100" src="<%=request.getContextPath()%>/resources/images/QNA배너.png">
