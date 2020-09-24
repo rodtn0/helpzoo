@@ -454,7 +454,35 @@
 
 
 	<form method="post" action="${contextPath}/fundingAttend/kakaoPay">
+	
+
+	<c:forEach var="itemId" items="${orderReward.id}">
+	 <input type="hidden" value="${itemId}" name="id">
+	 
+	 
+    </c:forEach>
+	 
+	 <c:forEach var="itemAm" items="${orderReward.amount}">
+	 <input type="hidden" value="${itemAm}" name="amount">
+	 </c:forEach>
+	 
+	 
+	 
     <button>카카오페이로 결제하기</button>
+    
+  
+	 <script>
+	 
+	 
+	 	console.log($("[name=id]").val());	
+	 
+	 	console.log("야호");
+	 	
+	 </script>
+	 
+    
+    
+    
 </form>
 
 

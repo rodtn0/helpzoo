@@ -28,6 +28,7 @@ import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenRewardView;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenStoryView;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingTotalInfoDto;
 import com.project.helpzoo.funding.dto.viewDetail.FundingDetailRewardView;
+import com.project.helpzoo.funding.dto.viewDetail.OrderRewardView;
 import com.project.helpzoo.funding.model.vo.funding.BusinessType;
 import com.project.helpzoo.funding.model.vo.funding.FundingAttachment;
 import com.project.helpzoo.funding.model.vo.funding.FundingCategory;
@@ -38,12 +39,16 @@ import com.project.helpzoo.funding.model.vo.funding.QFundingMaker;
 import com.project.helpzoo.funding.model.vo.funding.QFundingProject;
 import com.project.helpzoo.funding.model.vo.funding.QReward;
 import com.project.helpzoo.funding.model.vo.funding.Reward;
+import com.project.helpzoo.funding.model.vo.order.Address;
+import com.project.helpzoo.funding.model.vo.order.Delivery;
+import com.project.helpzoo.funding.model.vo.order.OrderReward;
 import com.project.helpzoo.funding.model.vo.order.Orders;
 import com.project.helpzoo.funding.model.vo.order.QOrderReward;
 import com.project.helpzoo.funding.model.vo.search.FundingSearch;
 import com.project.helpzoo.funding.model.vo.search.SearchSort;
 import com.project.helpzoo.funding.model.vo.search.SearchStatus;
 import com.querydsl.core.Tuple;
+import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
@@ -1011,6 +1016,155 @@ public class FundingDAO {
 	
 	
 		return order.getId();
+	}
+
+
+
+
+	public int getPrice(int id) {
+		
+		
+		Long rewardId = ((Integer)id).longValue();
+		
+		Reward reward = em.find(Reward.class, rewardId);
+		
+		
+		
+		
+		
+		return reward.getPrice();
+	}
+
+
+
+
+	public String getRewardName(int id) {
+		
+		Long rewardId = ((Integer)id).longValue();
+		
+		Reward reward = em.find(Reward.class, rewardId);
+		
+		return reward.getTitle();
+	}
+
+
+
+
+	public List<OrderReward> persisOrderReward(OrderRewardView orderRewardView, Long orderId) {
+		
+		List<OrderReward> rewardOrderList = new ArrayList<OrderReward>();
+		
+		OrderReward orderReward = null;
+		
+		System.out.println(orderRewardView);
+		
+		Orders order = em.find(Orders.class, orderId);
+		
+		
+		for(int i = 0; i<orderRewardView.getId().length; i++) {
+			
+			
+			int id = orderRewardView.getId()[i];
+			
+			Long rewardId = ((Integer)id).longValue();
+			
+			
+			
+			Reward reward = em.find(Reward.class, rewardId);
+			
+			
+			int price = reward.getPrice();
+			
+			int aamount = orderRewardView.getAmount()[i];
+			
+			int orTotalPrice = price * aamount;
+			
+			orderReward = new OrderReward(reward, order,orderRewardView.getAmount()[i],orTotalPrice);
+			
+			
+			em.persist(orderReward);
+			
+			rewardOrderList.add(orderReward);
+			
+		}
+		
+		
+		System.out.println(rewardOrderList + "리와드오더리스트");
+		
+		
+		return rewardOrderList;
+	}
+
+
+
+
+	public Long orderSave(Orders order) {
+	
+		
+		
+		em.persist(order);
+		
+		
+		return order.getId();
+	}
+
+
+
+
+	public Long saveOrder(Orders order, Address address, Long fundingNo) {
+		
+		Delivery delivery = new Delivery(address , "Ready");
+		
+		
+		em.persist(delivery);
+		
+		System.out.println(delivery + "첫번째");
+		
+		System.out.println(order);
+		
+		order.setDelivery(delivery);
+		
+		order.setFundingNo(fundingNo);
+		
+		
+		em.persist(order);
+		
+		System.out.println(order);
+		
+		
+		Long id = order.getId();
+		
+		
+		System.out.println(id);
+		
+		
+		
+		
+		return id;
+	}
+
+
+
+
+	public void saveDelivery(Delivery delivery) {
+	
+
+		em.persist(delivery);
+		
+	}
+
+
+
+
+	public void permitOrder(Long ordersId) {
+		
+		
+		Orders order = em.find(Orders.class, ordersId);
+		
+		order.setStatus("Y");
+		
+		
+		
 	}
 	
 	

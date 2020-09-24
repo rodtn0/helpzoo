@@ -35,6 +35,7 @@ import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenRewardView;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenStoryView;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingTotalInfoDto;
 import com.project.helpzoo.funding.dto.viewDetail.FundingDetailRewardView;
+import com.project.helpzoo.funding.dto.viewDetail.OrderRewardView;
 import com.project.helpzoo.funding.model.dao.FundingDAO;
 import com.project.helpzoo.funding.model.vo.KakaoPayApiItem;
 import com.project.helpzoo.funding.model.vo.KakaoPayReadyVO;
@@ -42,6 +43,10 @@ import com.project.helpzoo.funding.model.vo.funding.FundingAttachment;
 import com.project.helpzoo.funding.model.vo.funding.FundingCategory;
 import com.project.helpzoo.funding.model.vo.funding.FundingFileCategory;
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
+import com.project.helpzoo.funding.model.vo.order.Address;
+import com.project.helpzoo.funding.model.vo.order.Delivery;
+import com.project.helpzoo.funding.model.vo.order.OrderReward;
+import com.project.helpzoo.funding.model.vo.order.Orders;
 import com.project.helpzoo.funding.model.vo.search.FundingSearch;
 
 
@@ -55,6 +60,10 @@ public class FundingServiceImpl implements FundingService {
 	private FundingDAO dao;
 	
 	private Logger logger = LoggerFactory.getLogger(FundingServiceImpl.class);
+	
+	  private KakaoPayReadyVO kakaoPayReadyVO;
+	   private KakaoPayApprovalVO kakaoPayApprovalVO;
+	
 	
 	
 	
@@ -507,7 +516,7 @@ public class FundingServiceImpl implements FundingService {
 	        	
 	            kakaoPayReadyVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/ready"), body, KakaoPayReadyVO.class);
 	              
-	            System.out.println(kakaoPayReadyVO);
+	           
 	            
 	            return kakaoPayReadyVO.getNext_redirect_pc_url();
 	 
@@ -529,10 +538,103 @@ public class FundingServiceImpl implements FundingService {
 			
 			return dao.makeOrder();
 		}
+
+
+		
+		
+		@Override
+		public void saveDelivery(Delivery delivery) {
+			
+			
+			dao.saveDelivery(delivery);
+			
+		}
+
+
+		
+		
+		@Override
+		public Long saveOrder(Orders order, Address address, Long fundingNo) {
+			
+			return dao.saveOrder(order, address, fundingNo);
+		}
+
+
+		@Override
+		public List<OrderReward> persisOrderReward(OrderRewardView orderReward, Long ordersId) {
+			
+			return dao.persisOrderReward(orderReward,ordersId);
+		}
+
+
+		@Override
+		public int getPrice(int i) {
+			
+			
+			
+			
+			return dao.getPrice(i);
+		}
+
+
+		@Override
+		public String getRewardName(int i) {
+			// TODO Auto-generated method stub
+			return dao.getRewardName(i);
+		}
 		
 		
 		
+		  public KakaoPayApprovalVO kakaoPayInfo(String pg_token) {
+			  
+			  String HOST = "https://kapi.kakao.com";
+			  
+			   
+		        
+		        RestTemplate restTemplate = new RestTemplate();
+		 
+		        // 서버로 요청할 Header
+		        HttpHeaders headers = new HttpHeaders();
+		        headers.add("Authorization", "KakaoAK " + "86f3aba00269f94be10433033258192c");
+		        headers.add("Accept", MediaType.APPLICATION_JSON_VALUE);
+		        headers.add("Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=UTF-8");
+		 
+		        // 서버로 요청할 Body
+		        MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+		        params.add("cid", "TC0ONETIME");
+		        params.add("tid", kakaoPayReadyVO.getTid());
+		        params.add("partner_order_id", "1001");
+		        params.add("partner_user_id", "gorany");
+		        params.add("pg_token", pg_token);
+		        params.add("total_amount", "2100");
+		        
+		        HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
+		        
+		        try {
+		            kakaoPayApprovalVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/approve"), body, KakaoPayApprovalVO.class);
+		      
+		          
+		            return kakaoPayApprovalVO;
+		        
+		        } catch (RestClientException e) {
+		            // TODO Auto-generated catch block
+		            e.printStackTrace();
+		        } catch (URISyntaxException e) {
+		            // TODO Auto-generated catch block
+		            e.printStackTrace();
+		        }
+		        
+		        return null;
+		    }
+
+
+		@Override
+		public void permitOrder(Long ordersId) {
 		
+			
+			dao.permitOrder(ordersId);
+			
+		}
 		
 		
 		
