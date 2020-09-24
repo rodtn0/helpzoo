@@ -52,5 +52,41 @@ public class ABoardServiceImpl implements ABoardService{
 	public int delEvent(int boardNo) {
 		return aBoardDAO.delEvent(boardNo);
 	}
+
+	// 펀딩 후기 관리 페이지 리스트 --------------------------------------------------------
+	@Override
+	public List<Board> fundingList() {
+		return aBoardDAO.fundingList();
+	}
+
+	// 기부 후기 관리 페이지 리스트 -----------------------------------------------------
+	@Override
+	public List<Board> donationList() {
+		return aBoardDAO.donationList();
+	}
+	
+	// 펀딩 후기 게시물 상태 확인 --------------------------------------------------------
+	@Override
+	public int confirmFunding(int boardNo) {
+		return aBoardDAO.confirmFunding(boardNo);
+	}
+
+	// 기부 후기 게시물 상태 확인 --------------------------------------------------------
+	@Override
+	public int confirmDonation(int boardNo) {
+		return aBoardDAO.confirmDonation(boardNo);
+	}
+
+	// 펀딩 후기 게시물 삭제 --------------------------------------------------------
+	@Override
+	public int delFunding(int boardNo) {
+		return aBoardDAO.delFunding(boardNo);
+	}
+
+	// 기부 후기 게시물 삭제 --------------------------------------------------------
+	@Override
+	public int delDonation(int boardNo) {
+		return aBoardDAO.delDonation(boardNo);
+	}
 	
 }

@@ -46,6 +46,30 @@ public class ABoardController {
 		return mv;
 	}
 	
+	// 펀딩 후기 관리 페이지 리스트 ------------------------------------------------------
+	@RequestMapping("aFundingList")
+	public ModelAndView ReviewList(ModelAndView mv) {
+		
+		List<Board> fundingList = abService.fundingList();
+		
+		mv.addObject("fundingList", fundingList);
+		mv.setViewName("/admin/board/aFundingList");
+		
+		return mv;
+	}
+		
+	// 기부 후기 관리 페이지 리스트 ------------------------------------------------------
+	@RequestMapping("aDonationList")
+	public ModelAndView donationList(ModelAndView mv) {
+		
+		List<Board> donationList = abService.donationList();
+		
+		mv.addObject("donationList", donationList);
+		mv.setViewName("/admin/board/aDonationList");
+		
+		return mv;
+	}
+	
 	// 공지사항 게시물 삭제 ----------------------------------------------------------
 	@RequestMapping("delNotice/{boardNo}")
 	public String delNotice(@PathVariable int boardNo, Model model,
@@ -103,6 +127,82 @@ public class ABoardController {
 				status = "success";
 				msg = "게시물이 삭제되었습니다.";
 				url = "../aEventList";
+				
+			}else {
+				status = "error";
+				msg = "게시물 삭제에 실패했습니다.";
+				url = request.getHeader("referer"); 
+			}
+			
+		}else {
+			status = "error";
+			msg = "이미 삭제된 게시물입니다.";
+			url = request.getHeader("referer"); 
+		}
+		
+		rdAttr.addFlashAttribute("status", status);
+		rdAttr.addFlashAttribute("msg", msg);
+		
+		return "redirect:" + url;
+	}
+	
+	// 펀딩 후기 게시물 삭제 ----------------------------------------------------------
+	@RequestMapping("delFunding/{boardNo}")
+	public String delFunding(@PathVariable int boardNo, Model model,
+			HttpServletRequest request, RedirectAttributes rdAttr) {
+		
+		String status = null;
+		String msg = null;
+		String url = null;
+		
+		int confirm = abService.confirmFunding(boardNo);
+		
+		if(confirm > 0) {
+			
+			int result = abService.delFunding(boardNo);
+			
+			if(result > 0) {
+				status = "success";
+				msg = "게시물이 삭제되었습니다.";
+				url = "../aFundingList";
+				
+			}else {
+				status = "error";
+				msg = "게시물 삭제에 실패했습니다.";
+				url = request.getHeader("referer"); 
+			}
+			
+		}else {
+			status = "error";
+			msg = "이미 삭제된 게시물입니다.";
+			url = request.getHeader("referer"); 
+		}
+		
+		rdAttr.addFlashAttribute("status", status);
+		rdAttr.addFlashAttribute("msg", msg);
+		
+		return "redirect:" + url;
+	}
+	
+	// 기부 후기 게시물 삭제 ----------------------------------------------------------
+	@RequestMapping("delDonation/{boardNo}")
+	public String delDonation(@PathVariable int boardNo, Model model,
+			HttpServletRequest request, RedirectAttributes rdAttr) {
+		
+		String status = null;
+		String msg = null;
+		String url = null;
+		
+		int confirm = abService.confirmDonation(boardNo);
+		
+		if(confirm > 0) {
+			
+			int result = abService.delDonation(boardNo);
+			
+			if(result > 0) {
+				status = "success";
+				msg = "게시물이 삭제되었습니다.";
+				url = "../aDonationList";
 				
 			}else {
 				status = "error";

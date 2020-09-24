@@ -43,4 +43,38 @@ public interface ABoardService {
 	 */
 	public abstract int delEvent(int boardNo);
 
+	/** 펀딩 후기 관리 페이지 리스트
+	 * @return ReviewList
+	 */
+	public abstract List<Board> fundingList();
+
+	/** 기부 후기 관리 페이지 리스트
+	 * @return donationList
+	 */
+	public abstract List<Board> donationList();
+
+	/** 펀딩 후기 게시물 상태 확인
+	 * @param boardNo
+	 * @return confirm
+	 */
+	public abstract int confirmFunding(int boardNo);
+
+	/** 기부 후기 게시물 상태 확인
+	 * @param boardNo
+	 * @return confirm
+	 */
+	public abstract int confirmDonation(int boardNo);
+
+	/** 펀딩 후기 게시물 삭제
+	 * @param boardNo
+	 * @return result
+	 */
+	public abstract int delFunding(int boardNo);
+
+	/** 기부 후기 게시물 삭제
+	 * @param boardNo
+	 * @return result
+	 */
+	public abstract int delDonation(int boardNo);
+
 }
