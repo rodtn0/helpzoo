@@ -33,7 +33,7 @@
 		<div class="board-main">
 			
 			<div class="img">
-				<img alt="" src="/helpzoo/resources/images/HelpZoo구독하기.png">
+				<img data-aos="fade-up" alt="" src="/helpzoo/resources/images/HelpZoo구독하기.png">
 			</div>
 		
 			<c:choose>
@@ -42,11 +42,11 @@
 				
 					<form method="post" action="sendMail">
 						<div class="mailTitle">
-							<label data-aos="zoom-in">메일 제목</label><br>
+							<label data-aos="fade-up" data-aos-delay="100">메일 제목</label><br>
 							<input type="text" name="title" size="60">
 						</div>
 						<div class="mailContent">
-							<label data-aos="fade-up">메일 내용</label><br>
+							<label data-aos="fade-up" data-aos-delay="200">메일 내용</label><br>
 							<textarea name="content" rows="20" cols="60"></textarea>
 						</div>
 						<div class="submitBtn">
