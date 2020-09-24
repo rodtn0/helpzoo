@@ -42,10 +42,9 @@
   </section><!-- End Hero -->
   
 	<jsp:include page="WEB-INF/views/common/header.jsp"/>
-	
-	
-	<!-- 메인 구조 시작 -->
 
+
+<!-- 메인 구조 시작 -->
 <div class="container">	
 	
 	<div class="container-fluid">
@@ -83,7 +82,7 @@
 						실시간 펀딩 랭킹
 					</h4>
 					<br>
-					<table class="table">
+					<table class="table" id="fundingRank-table">
 						<thead>
 							<tr class="table-success">
 								<th>
@@ -312,7 +311,6 @@
 				
 				$.each(list1, function(index, item){
 					
-					var $a = $("<a>").attr("href", "${contextPath}/funding/fundingView/"+item.id).css({"color" : "black"});
 					var $tr = $("<tr>"); // 행
 					var $td1 = $("<td>").text(item.id);
 					var $td2 = $("<td>").text(item.title);
@@ -324,6 +322,17 @@
 					
 				});
 				
+				// 펀딩 상세페이지로 이동
+				$(function(){
+					$("#fundingRank-table td").on("click", function(){
+						
+						var fBoardNo = $(this).parent().children().eq(0).text();
+						
+						var fundingViewUrl = "${contextPath}/funding/fundingView/" + fBoardNo;
+						
+						location.href = fundingViewUrl;
+					});
+				});
 				
 				
 			}, error : function(){
@@ -333,6 +342,8 @@
 		});
 		
 	}
+	
+	
 	
 	// 비동기식으로 기부 실시간 랭킹 조회
 	function topViews2(type){
@@ -356,6 +367,8 @@
 					$("#donation-rank").append($tr);
 					
 				});
+				
+				
 				
 				
 				
@@ -451,7 +464,7 @@
 					$(increaseF[index]).html("");
 					
 					var $img = $("<img>");
-					var $h5 = $("<h5>").text(item.fundingTitle);
+					var $h5 = $("<h5>").text(item.fundingTitle).css("padding-top", "10px");;
 					var $p = $("<p>").text(item.achievementRate + " %");
 					var $a = $("<a>").attr("href", "${contextPath}/funding/fundingView/"+item.fundingNo).css({"color" : "black"});
 					
@@ -484,7 +497,7 @@
 					$(increaseD[index]).html("");
 					
 					var $img = $("<img>");
-					var $h5 = $("<h5>").text(item.dBoardTitle);
+					var $h5 = $("<h5>").text(item.dBoardTitle).css("padding-top", "10px");;
 					var $p = $("<p>").text(item.achivement + " %");
 					
 					
