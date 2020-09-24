@@ -490,7 +490,7 @@ public class reviewController {
 		return gson.toJson(eventList);
 	}
 	
-	// 상세페이지 접속했을 때 좋아요 수 표시
+	// 펀딩 상세페이지 접속했을 때 좋아요 수 표시
 	@ResponseBody
 	@RequestMapping("likeReview/{reviewNo}")
 	public String likeCount(@PathVariable int reviewNo) {
@@ -502,6 +502,19 @@ public class reviewController {
 		return gson.toJson(likeCount);
 	}
 	
+	// 기부 상세페이지 접속했을 때 좋아요 수 표시
+		@ResponseBody
+		@RequestMapping("likeReview2/{reviewNo}")
+		public String likeCount2(@PathVariable int reviewNo) {
+			
+			int likeCount = reviewService.likeCount2(reviewNo);
+			System.out.println("도움이 됐나요 클릭 수 : " + likeCount);
+			Gson gson = new GsonBuilder().create();
+			
+			return gson.toJson(likeCount);
+		}
+	
+	// 펀딩 리뷰 좋아요 삽입
 	@ResponseBody
 	@RequestMapping("likeCount/{reviewNo}")
 	public String insertCount(@PathVariable int reviewNo, Model model) {
@@ -520,7 +533,26 @@ public class reviewController {
 		return gson.toJson(result);
 	}
 	
-	// 좋아요 삭제
+	// 기부 리뷰 좋아요 삽입
+	@ResponseBody
+	@RequestMapping("likeCount2/{reviewNo}")
+	public String insertCount2(@PathVariable int reviewNo, Model model) {
+		
+		Member loginMember = (Member)model.getAttribute("loginMember");
+		System.out.println(loginMember.getMemberNo());
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("mNo", loginMember.getMemberNo());
+		map.put("reviewNo", reviewNo);
+		int result = reviewService.insertCount2(map);
+		System.out.println("좋아요 삽입 결과 : " + result);
+		
+		Gson gson = new GsonBuilder().create();
+		
+		return gson.toJson(result);
+	}
+	
+	// 펀딩 리뷰 좋아요 삭제
 	@ResponseBody
 	@RequestMapping("likeDelete/{reviewNo}")
 	public String deleteCount(@PathVariable int reviewNo, Model model) {
@@ -539,7 +571,25 @@ public class reviewController {
 		return gson.toJson(result);
 	}
 	
-	
+	// 기부 리뷰 좋아요 삭제
+	@ResponseBody
+	@RequestMapping("likeDelete2/{reviewNo}")
+	public String deleteCount2(@PathVariable int reviewNo, Model model) {
+		
+		Member loginMember = (Member)model.getAttribute("loginMember");
+		System.out.println(loginMember.getMemberNo());
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("mNo", loginMember.getMemberNo());
+		map.put("reviewNo", reviewNo);
+		int result = reviewService.deleteCount2(map);
+		System.out.println("좋아요 삭제 결과 : " + result);
+		
+		Gson gson = new GsonBuilder().create();
+		
+		return gson.toJson(result);
+	}
+
 	
 	
 	

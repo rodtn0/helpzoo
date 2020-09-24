@@ -289,30 +289,62 @@ public class ReviewDAO {
 	}
 
 
-	/** 좋아요 수 조회 DAO
+	/** 펀딩 리뷰 좋아요 수 조회 DAO
 	 * @return listCount
 	 */
 	public int likeCount(int reviewNo) {
 		return sqlSession.selectOne("reviewMapper.selectLikeCount", reviewNo);
 	}
+	
+	/** 기부 리뷰 좋아요 수 조회 DAO
+	 * @param reviewNo
+	 * @return listCount
+	 */
+	public int likeCount2(int reviewNo) {
+		return sqlSession.selectOne("reviewMapper.selectLikeCount2", reviewNo);
+	}
+	
 
-
-	/** 클릭시 좋아요 수 삽입 DAO
+	/** 펀딩 리뷰 클릭시 좋아요 수 삽입 DAO
 	 * @param map
 	 * @return result
 	 */
 	public int likeCount(Map<String, Object> map) {
 		return sqlSession.insert("reviewMapper.insertLikeCount", map);
 	}
+	
+	
+	/** 기부 리뷰 클릭시 좋아요 수 삽입 DAO
+	 * @param map
+	 * @return result
+	 */
+	public int likeCount2(Map<String, Object> map) {
+		return sqlSession.insert("reviewMapper.insertLikeCount2", map);
+	}
 
 
-	/** 좋아요 삭제 DAO
+	/** 펀딩 리뷰 좋아요 삭제 DAO
 	 * @param map
 	 * @return result
 	 */
 	public int deleteCount(Map<String, Object> map) {
 		return sqlSession.delete("reviewMapper.deleteLikeCount", map);
 	}
+
+
+	/** 기부 리뷰 좋아요 삭제 DAO
+	 * @param map
+	 * @return result
+	 */
+	public int deleteCount2(Map<String, Object> map) {
+		return sqlSession.delete("reviewMapper.deleteLikeCount2", map);
+	}
+
+
+	
+
+
+	
 
 
 

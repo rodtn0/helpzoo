@@ -342,25 +342,50 @@ public class ReviewServiceImpl implements ReviewService{
 		return reviewDAO.selectEventImg();
 	}
 
-	// 좋아요 수 조회 Service 구현
+	// 펀딩 리뷰 좋아요 수 조회 Service 구현
 	@Override
 	public int likeCount(int reviewNo) {
 		return reviewDAO.likeCount(reviewNo);
 	}
+	
+	// 기부 리뷰 좋아요 수 조회 Service 구현
+	@Override
+	public int likeCount2(int reviewNo) {
+		return reviewDAO.likeCount2(reviewNo);
+	}
 
-	// 클릭시 좋아요 수 삽입 Service 구현
+	// 펀딩 리뷰 클릭시 좋아요 수 삽입 Service 구현
 	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int insertCount(Map<String, Object> map) {
 		return reviewDAO.likeCount(map);
 	}
+	
+	// 기부 리뷰 클릭시 좋아요 수 삽입 Service 구현
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int insertCount2(Map<String, Object> map) {
+		return reviewDAO.likeCount2(map);
+	}
 
-	// 좋아요 삭제 Service 구현
+	// 펀딩 리뷰 좋아요 삭제 Service 구현
 	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int deleteCount(Map<String, Object> map) {
 		return reviewDAO.deleteCount(map);
 	}
+
+	// 기부 리뷰 좋아요 삭제 Service 구현
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int deleteCount2(Map<String, Object> map) {
+		return reviewDAO.deleteCount2(map);
+	}
+
+
+
+
+
 		
 		
 		

@@ -441,13 +441,30 @@
 		WHERE F_REVIEW_BOARD_NO = #{reviewNo}
 	  </select>
 	  
+	  <!-- 기부리뷰 '좋아요(도움이 됐나요)' 수 카운팅  -->
+	  <select id="selectLikeCount2" parameterType="_int" resultType="_int">
+	  	SELECT COUNT(*)
+		FROM D_REVIEW_LIKE
+		WHERE D_REVIEW_BOARD_NO = #{reviewNo}
+	  </select>
+	  
+	  <!-- 펀딩 리뷰 삽입 -->
 	  <insert id="insertLikeCount" parameterType="map">
 	  	INSERT INTO F_REVIEW_LIKE VALUES(#{mNo}, #{reviewNo})
+	  </insert>
+	  
+	  <insert id="insertLikeCount2" parameterType="map">
+	  	INSERT INTO D_REVIEW_LIKE VALUES(#{mNo}, #{reviewNo})
 	  </insert>
 	  
 	  <delete id="deleteLikeCount" parameterType="map">
 	  	DELETE FROM F_REVIEW_LIKE
 		WHERE MEMBER_NO= #{mNo} AND F_REVIEW_BOARD_NO =#{reviewNo}
+	  </delete>
+	  
+	  <delete id="deleteLikeCount2" parameterType="map">
+	  	DELETE FROM D_REVIEW_LIKE
+		WHERE MEMBER_NO= #{mNo} AND D_REVIEW_BOARD_NO =#{reviewNo}
 	  </delete>
 	  
 	 

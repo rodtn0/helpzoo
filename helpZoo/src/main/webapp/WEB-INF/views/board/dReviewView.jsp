@@ -191,6 +191,7 @@
 				<button id="deleteBtn" class="btn btn-primary">삭제</button>
 			</c:if>
 				<a class="btn btn-primary" href="../2" style="background-color:#7fcdcd; border:none">목록으로</a>
+				<a class="btn btn-primary" id="likeBtn" style="background-color: pink; border:none;">도움이 됐어요</a>
 		</div>
 
       </div>
@@ -226,6 +227,64 @@
 		}
 		
 	});
+	
+	// 상세페이지 접속했을 때 
+	$(function(){
+		$.ajax({
+		url: "../../likeReview2/${dReviewView.reviewNo}",
+		dataType : "json",
+		success : function(likeCount){
+			$p = $("<p>");
+			
+			$p.text(likeCount);
+			$("#likeBtn").append($p);
+			
+		}, error : function(){
+			console.log("ajax 통신 실패");
+		}
+	  });
+	});
+	
+	
+	// 클릭했을때 비동기로 숫자 카운트
+	$("#likeBtn").on("click", function(){
+		if(${sessionScope.loginMember.memberId == null}){
+			swal({
+				  icon: "success",
+				  title : "로그인 후 이용하세요!"
+				});
+		}else{
+			$.ajax({
+				url: "../../likeCount2/${dReviewView.reviewNo}",
+				dataType : "json",
+				success : function(result){
+					
+					
+					var originNo = $("#likeBtn").children().text();
+					
+					$("#likeBtn").children().text(parseInt(originNo)+1);
+					
+					
+				}, error : function(){
+					//console.log("ajax 통신 실패");
+					
+					$.ajax({
+						url : "../../likeDelete2/${dReviewView.reviewNo}",
+						dataType : "json",
+						success : function(result){
+							var originNo = $("#likeBtn").children().text();
+							$("#likeBtn").children().text(parseInt(originNo)-1);
+						}, error : function(){
+							console.log("ajax 통신 실패");
+						}
+						
+					});
+				}
+			});
+		}
+		
+	});
+	
 </script>	
 </body>
 
