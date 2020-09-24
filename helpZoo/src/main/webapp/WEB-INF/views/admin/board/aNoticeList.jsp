@@ -13,7 +13,7 @@
 		cursor : pointer;
 	}
 	.tbody .odd:hover, .tbody .even:hover{
-		background-color: lightblue;
+		background-color: lightyellow;
 	}
 	
 </style>
@@ -31,7 +31,7 @@
 					<div class="table-responsive">
 			
 						<table class="table table-striped" id="dataTable">
-							<thead class="thead text-white bg-info mb-3">
+							<thead class="thead text-white bg-warning mb-3">
 								<tr>
 									<th>번호</th>
 									<th>제목</th>
