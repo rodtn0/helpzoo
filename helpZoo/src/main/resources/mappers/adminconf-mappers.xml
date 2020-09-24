@@ -30,15 +30,41 @@
         <result property="boardStatus" column="BOARD_STATUS"/>
     </resultMap>
 	
-	<resultMap type="Attachment" id="attachmentResultSet">
-    	<id property="fileNo" column="FILE_NO"/>
-    	<result property="parentBoardNo" column="PARENT_BOARD_NO"/>
-    	<result property="fileOriginName" column="FILE_ORIGIN_NAME"/>
-    	<result property="fileChangeName" column="FILE_CHANGE_NAME"/>
-    	<result property="filePath" column="FILE_PATH"/>
-    	<result property="fileLevel" column="FILE_LEVEL"/>
-    </resultMap>
-	
+	<resultMap id="fundingReviewResultSet" type="Review"> 
+	  	<id property="reviewNo" column="FUNDING_REVIEW_NO"/>
+	  	<result property="reviewTitle" column="FUNDING_REVIEW_TITLE"/>
+	  	<result property="reviewContent" column="FUNDING_REVIEW_CONTENT"/>
+	  	<result property="readCount" column="FUNDING_REVIEW_READ_COUNT"/>
+	  	<result property="reviewCreateDate" column="FUNDING_REVIEW_CREATE_DT"/>
+	  	<result property="reviewModifyDate" column="FUNDING_REVIEW_MODIFY_DT"/>
+	  	<result property="reviewStatus" column="FUNDING_REVIEW_STATUS"/>
+	  	<result property="projectNo" column="FUNDING_BOARD_NO"/>
+	  	<result property="reviewType" column="REVIEW_TYPE"/>
+	  	<result property="reviewWriter" column="FUNDING_REVIEW_WRITER"/>
+	  	
+	  	<result property="projectTitle" column="FUNDING_TITLE"/>
+	  	<result property="memberId" column="MEMBER_ID"/>
+	  	<result property="filePath" column="FILE_PATH"/>
+	  	<result property="fileChangeName" column="FILE_CHANGE_NAME"/>
+	  </resultMap>
+	  
+	  <resultMap id="donationReviewResultSet" type="Review">
+	  	<id property="reviewNo" column="DONATION_REVIEW_NO"/>
+	  	<result property="reviewTitle" column="DONATION_REVIEW_TITLE"/>
+	  	<result property="reviewContent" column="DONATION_REVIEW_CONTENT"/>
+	  	<result property="readCount" column="DONATION_REVIEW_READ_COUNT"/>
+	  	<result property="reviewCreateDate" column="DONATION_REVIEW_CREATE_DT"/>
+	  	<result property="reviewModifyDate" column="DONATION_REVIEW_MODIFY_DT"/>
+	  	<result property="reviewStatus" column="DONATION_REVIEW_STATUS"/>
+	  	<result property="projectNo" column="DONATION_BOARD_NO"/>
+	  	<result property="reviewType" column="REVIEW_TYPE"/>
+	  	<result property="reviewWriter" column="DONATION_REVIEW_WRITER"/>
+	  
+	  	<result property="projectTitle" column="DONATION_BOARD_TITLE"/>
+	  	<result property="memberId" column="MEMBER_ID"/>
+	  	<result property="filePath" column="DONATION_FILE_PATH"/>
+	  	<result property="fileChangeName" column="DONATION_FILE_CHANGE_NAME"/>
+	  </resultMap>
 	
 	<!-- 멤버 목록 -->
 	<select id="memberList" resultMap="memberResultSet">
@@ -69,6 +95,8 @@
 	<select id="noticeList" resultMap="boardResultSet">
 		SELECT *
 		FROM board
+		JOIN member
+		ON(BOARD_WRITER = MEMBER_NO)
 		WHERE board_type = 5
 	</select>
 	
@@ -76,6 +104,8 @@
 	<select id="eventList" resultMap="boardResultSet">
 		SELECT *
 		FROM board
+		JOIN member
+		ON(BOARD_WRITER = MEMBER_NO)
 		WHERE board_type = 6
 	</select>
 	
@@ -112,5 +142,51 @@
 		WHERE BOARD_NO = #{boardNo}
 		AND board_type = 6
 	</update>
-
+	
+	<!-- 펀딩 후기 관리 페이지 리스트 -->
+	<select id="fundingList" resultMap="fundingReviewResultSet">
+		SELECT * 
+		FROM review_funding
+		JOIN member
+		ON (FUNDING_REVIEW_WRITER = MEMBER_NO)
+	</select>
+	
+	<!-- 기부 후기 관리 페이지 리스트 -->
+	<select id="donationList" resultMap="donationReviewResultSet">
+		SELECT * 
+		FROM review_donation
+		JOIN member
+		ON (DONATION_REVIEW_WRITER = MEMBER_NO)
+	</select>
+	
+	<!-- 펀딩 후기 게시물 상태 확인 -->
+	<select id="confirmFunding" parameterType="_int" resultType="_int">
+		SELECT count(*)
+		FROM review_funding
+		WHERE funding_review_no = #{boardNo}
+		AND FUNDING_REVIEW_STATUS = 'Y'
+	</select>
+	
+	<!-- 기부 후기 게시물 상태 확인 -->
+	<select id="confirmDonation" parameterType="_int" resultType="_int">
+		SELECT count(*)
+		FROM review_donation
+		WHERE DONATION_REVIEW_NO = #{boardNo}
+		AND DONATION_REVIEW_STATUS = 'Y'
+	</select>
+	
+	<!-- 펀딩 후기 게시물 삭제 -->
+	<update id="delFunding" parameterType="_int">
+		UPDATE review_funding
+		SET funding_review_status = 'N'
+		WHERE funding_review_no = #{boardNo}
+	</update>
+	
+	<!-- 기부 후기 게시물 삭제 -->
+	<update id="delDonation" parameterType="_int">
+		UPDATE review_donation
+		SET donation_review_status = 'N'
+		WHERE donation_review_no = #{boardNo}
+	</update>
+	
 </mapper>

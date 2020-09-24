@@ -116,7 +116,8 @@
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="#">후기</a>
+            <a class="collapse-item" href="${contextPath}/admin/board/aFundingList">펀딩후기</a>
+            <a class="collapse-item" href="${contextPath}/admin/board/aDonationList">기부후기</a>
             <a class="collapse-item" href="${contextPath}/admin/faq/faqList">FAQ</a>
             <a class="collapse-item" href="${contextPath}/admin/qna/qnaList">Q&A</a>
             <a class="collapse-item" href="${contextPath}/admin/board/aNoticeList">공지사항</a>
