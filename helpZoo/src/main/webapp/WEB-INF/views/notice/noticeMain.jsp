@@ -27,6 +27,7 @@
 			<ul>
 				<li class="active"><a href="${contextPath}/notice/noticeList">공지사항</a></li>
 				<li><a href="${contextPath}/event/eventList">이벤트</a></li>
+				<li><a href="${contextPath}/subscribe/mailing">구독하기</a></li>
 			</ul>
 		</div>
 
