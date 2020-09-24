@@ -95,7 +95,7 @@
     				}
     		}).then((result) =>{
     			if(result){
-	    			//location.href="${contextPath}/admin/member/delMember/" + memberNo;
+	    			location.href="${contextPath}/admin/board/delEvent/" + boardNo;
     			}
     		})
     		 
