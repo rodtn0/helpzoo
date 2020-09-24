@@ -17,7 +17,10 @@
 			border : 1px #7fcdcd;
 			background-color:  #7fcdcd;
 		}
-	
+		
+		.card{
+			width : 100%;
+		}
 	</style>
 
   <meta charset="utf-8">

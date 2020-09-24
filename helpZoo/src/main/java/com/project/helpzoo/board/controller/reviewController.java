@@ -1,7 +1,9 @@
 package com.project.helpzoo.board.controller;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -486,6 +488,55 @@ public class reviewController {
 		Gson gson = new GsonBuilder().create();
 	
 		return gson.toJson(eventList);
+	}
+	
+	// 상세페이지 접속했을 때 좋아요 수 표시
+	@ResponseBody
+	@RequestMapping("likeReview/{reviewNo}")
+	public String likeCount(@PathVariable int reviewNo) {
+		
+		int likeCount = reviewService.likeCount(reviewNo);
+		System.out.println("도움이 됐나요 클릭 수 : " + likeCount);
+		Gson gson = new GsonBuilder().create();
+		
+		return gson.toJson(likeCount);
+	}
+	
+	@ResponseBody
+	@RequestMapping("likeCount/{reviewNo}")
+	public String insertCount(@PathVariable int reviewNo, Model model) {
+		
+		Member loginMember = (Member)model.getAttribute("loginMember");
+		System.out.println(loginMember.getMemberNo());
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("mNo", loginMember.getMemberNo());
+		map.put("reviewNo", reviewNo);
+		int result = reviewService.insertCount(map);
+		System.out.println("좋아요 삽입 결과 : " + result);
+		
+		Gson gson = new GsonBuilder().create();
+		
+		return gson.toJson(result);
+	}
+	
+	// 좋아요 삭제
+	@ResponseBody
+	@RequestMapping("likeDelete/{reviewNo}")
+	public String deleteCount(@PathVariable int reviewNo, Model model) {
+		
+		Member loginMember = (Member)model.getAttribute("loginMember");
+		System.out.println(loginMember.getMemberNo());
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("mNo", loginMember.getMemberNo());
+		map.put("reviewNo", reviewNo);
+		int result = reviewService.deleteCount(map);
+		System.out.println("좋아요 삭제 결과 : " + result);
+		
+		Gson gson = new GsonBuilder().create();
+		
+		return gson.toJson(result);
 	}
 	
 	

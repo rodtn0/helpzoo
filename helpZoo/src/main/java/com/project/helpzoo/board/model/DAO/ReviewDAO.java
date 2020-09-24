@@ -1,6 +1,7 @@
 package com.project.helpzoo.board.model.DAO;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -285,6 +286,32 @@ public class ReviewDAO {
 	 */
 	public List<Board> selectEventImg() {
 		return sqlSession.selectList("eventMapper.selectEventImg");
+	}
+
+
+	/** 좋아요 수 조회 DAO
+	 * @return listCount
+	 */
+	public int likeCount(int reviewNo) {
+		return sqlSession.selectOne("reviewMapper.selectLikeCount", reviewNo);
+	}
+
+
+	/** 클릭시 좋아요 수 삽입 DAO
+	 * @param map
+	 * @return result
+	 */
+	public int likeCount(Map<String, Object> map) {
+		return sqlSession.insert("reviewMapper.insertLikeCount", map);
+	}
+
+
+	/** 좋아요 삭제 DAO
+	 * @param map
+	 * @return result
+	 */
+	public int deleteCount(Map<String, Object> map) {
+		return sqlSession.delete("reviewMapper.deleteLikeCount", map);
 	}
 
 

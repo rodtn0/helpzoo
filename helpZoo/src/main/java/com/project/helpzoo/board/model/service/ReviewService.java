@@ -1,6 +1,7 @@
 package com.project.helpzoo.board.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -123,6 +124,24 @@ public interface ReviewService {
 	 * @return eventList
 	 */
 	public abstract List<Board> selectEventImg();
+
+	/** 좋아요 수 조회
+	 * @param reviewNo 
+	 * @return listCount
+	 */
+	public abstract int likeCount(int reviewNo);
+
+	/** 클릭시 좋아요 수 insert
+	 * @param map
+	 * @return result
+	 */
+	public abstract int insertCount(Map<String, Object> map);
+
+	/** 좋아요 삭제 Service
+	 * @param map
+	 * @return result
+	 */
+	public abstract int deleteCount(Map<String, Object> map);
 
 
 

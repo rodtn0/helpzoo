@@ -4,6 +4,7 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -339,6 +340,26 @@ public class ReviewServiceImpl implements ReviewService{
 	@Override
 	public List<Board> selectEventImg() {
 		return reviewDAO.selectEventImg();
+	}
+
+	// 좋아요 수 조회 Service 구현
+	@Override
+	public int likeCount(int reviewNo) {
+		return reviewDAO.likeCount(reviewNo);
+	}
+
+	// 클릭시 좋아요 수 삽입 Service 구현
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int insertCount(Map<String, Object> map) {
+		return reviewDAO.likeCount(map);
+	}
+
+	// 좋아요 삭제 Service 구현
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int deleteCount(Map<String, Object> map) {
+		return reviewDAO.deleteCount(map);
 	}
 		
 		
