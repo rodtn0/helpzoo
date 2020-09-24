@@ -119,8 +119,8 @@
             <a class="collapse-item" href="#">후기</a>
             <a class="collapse-item" href="${contextPath}/admin/faq/faqList">FAQ</a>
             <a class="collapse-item" href="${contextPath}/admin/qna/qnaList">Q&A</a>
-            <a class="collapse-item" href="${contextPath}/notice/noticeList">공지사항</a>
-            <a class="collapse-item" href="${contextPath}/event/eventList">이벤트</a>
+            <a class="collapse-item" href="${contextPath}/admin/board/aNoticeList">공지사항</a>
+            <a class="collapse-item" href="${contextPath}/admin/board/aEventList">이벤트</a>
             <a class="collapse-item" href="${contextPath}/subscribe/mailing">구독메일 보내기</a>
             <a class="collapse-item" href="${contextPath}/admin/member/aMemberList">멤버관리</a>
           </div>

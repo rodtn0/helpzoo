@@ -17,6 +17,29 @@
 	<result property="memberGrade" column="MEMBER_GRADE"/>
 	</resultMap>
 	
+	<resultMap type="ABoard" id="boardResultSet">
+        <id property="boardNo" column="BOARD_NO"/>
+        <result property="boardTitle" column="BOARD_TITLE"/>
+        <result property="boardContent" column="BOARD_CONTENT"/>
+        <result property="readCount" column="READ_COUNT"/>
+        <result property="boardCreateDate" column="BOARD_CREATE_DT"/>
+        <result property="boardModifyDate" column="BOARD_MODIFY_DT"/>
+        <result property="boardWriter" column="MEMBER_ID"/>
+        <result property="boardType" column="BOARD_TYPE"/>
+        <result property="boardName" column="BOARD_NM"/>
+        <result property="boardStatus" column="BOARD_STATUS"/>
+    </resultMap>
+	
+	<resultMap type="Attachment" id="attachmentResultSet">
+    	<id property="fileNo" column="FILE_NO"/>
+    	<result property="parentBoardNo" column="PARENT_BOARD_NO"/>
+    	<result property="fileOriginName" column="FILE_ORIGIN_NAME"/>
+    	<result property="fileChangeName" column="FILE_CHANGE_NAME"/>
+    	<result property="filePath" column="FILE_PATH"/>
+    	<result property="fileLevel" column="FILE_LEVEL"/>
+    </resultMap>
+	
+	
 	<!-- 멤버 목록 -->
 	<select id="memberList" resultMap="memberResultSet">
 		SELECT member_no, member_id, member_nm,
@@ -40,6 +63,54 @@
 		UPDATE member
 		SET member_status = 'N'
 		WHERE member_no = #{memberNo}
+	</update>
+	
+	<!-- 공지사항 관리 페이지 리스트 -->
+	<select id="noticeList" resultMap="boardResultSet">
+		SELECT *
+		FROM board
+		WHERE board_type = 5
+	</select>
+	
+	<!-- 이벤트 관리 페이지 리스트 -->
+	<select id="eventList" resultMap="boardResultSet">
+		SELECT *
+		FROM board
+		WHERE board_type = 6
+	</select>
+	
+	<!-- 공지사항 게시물 상태 확인 -->
+	<select id="confirmNotice" parameterType="_int" resultType="_int">
+		SELECT COUNT(*)
+		FROM board
+		WHERE BOARD_NO = #{boardNo}
+		AND BOARD_STATUS = 'Y'
+		AND board_type = 5 
+	</select>
+	
+	<!-- 공지사항 게시물 삭제 -->
+	<update id="delNotice" parameterType="_int">
+		UPDATE board
+		SET BOARD_STATUS = 'N'
+		WHERE BOARD_NO = #{boardNo}
+		AND board_type = 5
+	</update>
+	
+	<!-- 이벤트 게시물 상태 확인 -->
+	<select id="confirmEvent" parameterType="_int" resultType="_int">
+		SELECT COUNT(*)
+		FROM board
+		WHERE BOARD_NO = #{boardNo}
+		AND BOARD_STATUS = 'Y'
+		AND board_type = 6 
+	</select>
+	
+	<!-- 이벤트 게시물 삭제 -->
+	<update id="delEvent" parameterType="_int">
+		UPDATE board
+		SET BOARD_STATUS = 'N'
+		WHERE BOARD_NO = #{boardNo}
+		AND board_type = 6
 	</update>
 
 </mapper>

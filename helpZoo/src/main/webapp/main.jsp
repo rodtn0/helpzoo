@@ -27,6 +27,11 @@
 		.table tr, .pointerDiv{
 			cursor : pointer;
 		}
+		
+		#mainImg{
+			width : 100%;
+			height : 300px;
+		}
 	</style>
 </head>
 <body style="overflow-x:hidden; overflow-y:auto;">
@@ -43,9 +48,31 @@
   
 	<jsp:include page="WEB-INF/views/common/header.jsp"/>
 	
-	
-	<!-- 메인 구조 시작 -->
+<!-- 움직이는 이미지 -->
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner" id="mainImg">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="/helpzoo/resources/images/배너_1.png" alt="First slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="/helpzoo/resources/images/배너_2.png" alt="Second slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="/helpzoo/resources/images/배너_3.png" alt="Third slide">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
 
+
+<!-- 메인 구조 시작 -->
 <div class="container">	
 	
 	<div class="container-fluid">
@@ -83,7 +110,7 @@
 						실시간 펀딩 랭킹
 					</h4>
 					<br>
-					<table class="table">
+					<table class="table" id="fundingRank-table">
 						<thead>
 							<tr class="table-success">
 								<th>
@@ -312,7 +339,6 @@
 				
 				$.each(list1, function(index, item){
 					
-					var $a = $("<a>").attr("href", "${contextPath}/funding/fundingView/"+item.id).css({"color" : "black"});
 					var $tr = $("<tr>"); // 행
 					var $td1 = $("<td>").text(item.id);
 					var $td2 = $("<td>").text(item.title);
@@ -324,6 +350,17 @@
 					
 				});
 				
+				// 펀딩 상세페이지로 이동
+				$(function(){
+					$("#fundingRank-table td").on("click", function(){
+						
+						var fBoardNo = $(this).parent().children().eq(0).text();
+						
+						var fundingViewUrl = "${contextPath}/funding/fundingView/" + fBoardNo;
+						
+						location.href = fundingViewUrl;
+					});
+				});
 				
 				
 			}, error : function(){
@@ -333,6 +370,8 @@
 		});
 		
 	}
+	
+	
 	
 	// 비동기식으로 기부 실시간 랭킹 조회
 	function topViews2(type){
@@ -356,6 +395,8 @@
 					$("#donation-rank").append($tr);
 					
 				});
+				
+				
 				
 				
 				
@@ -451,7 +492,7 @@
 					$(increaseF[index]).html("");
 					
 					var $img = $("<img>");
-					var $h5 = $("<h5>").text(item.fundingTitle);
+					var $h5 = $("<h5>").text(item.fundingTitle).css("padding-top", "10px");;
 					var $p = $("<p>").text(item.achievementRate + " %");
 					var $a = $("<a>").attr("href", "${contextPath}/funding/fundingView/"+item.fundingNo).css({"color" : "black"});
 					
@@ -484,7 +525,7 @@
 					$(increaseD[index]).html("");
 					
 					var $img = $("<img>");
-					var $h5 = $("<h5>").text(item.dBoardTitle);
+					var $h5 = $("<h5>").text(item.dBoardTitle).css("padding-top", "10px");;
 					var $p = $("<p>").text(item.achivement + " %");
 					
 					
