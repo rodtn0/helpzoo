@@ -59,5 +59,51 @@ public class ABoardDAO {
 	public int delEvent(int boardNo) {
 		return sqlSession.update("adminConfMapper.delEvent", boardNo);
 	}
+
+	/** 펀딩 후기 관리 페이지 리스트
+	 * @return ReviewList
+	 */
+	public List<Board> fundingList() {
+		return sqlSession.selectList("adminConfMapper.fundingList");
+	}
+
+	/** 기부 후기 관리 페이지 리스트
+	 * @return donationList
+	 */
+	public List<Board> donationList() {
+		return sqlSession.selectList("adminConfMapper.donationList");
+	}
+
+	/** 펀딩 후기 게시물 상태 확인
+	 * @param boardNo
+	 * @return confirm
+	 */
+	public int confirmFunding(int boardNo) {
+		return sqlSession.selectOne("adminConfMapper.confirmFunding", boardNo);
+	}
+
+	/** 기부 후기 게시물 상태 확인
+	 * @param boardNo
+	 * @return confirm
+	 */
+	public int confirmDonation(int boardNo) {
+		return sqlSession.selectOne("adminConfMapper.confirmDonation", boardNo);
+	}
+
+	/** 펀딩 후기 게시물 삭제
+	 * @param boardNo
+	 * @return result
+	 */
+	public int delFunding(int boardNo) {
+		return sqlSession.update("adminConfMapper.delFunding", boardNo);
+	}
+
+	/** 기부 후기 게시물 삭제
+	 * @param boardNo
+	 * @return result
+	 */
+	public int delDonation(int boardNo) {
+		return sqlSession.update("adminConfMapper.delDonation", boardNo);
+	}
 	
 }
