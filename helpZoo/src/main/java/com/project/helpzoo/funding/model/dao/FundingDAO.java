@@ -1196,12 +1196,21 @@ public class FundingDAO {
 			
 			Reward reward = orList.getReward();
 			
+			System.out.println(reward);
+			
+			System.out.println(orList.getCount());
+			
 			try {
 			reward.minusStock(orList.getCount());
 			
 			order.setStatus("Y");
-			}catch (Exception e) {
 			
+			}
+			
+			
+			catch (Exception e) {
+			
+				e.printStackTrace();
 				
 			}
 			
@@ -1220,6 +1229,8 @@ public class FundingDAO {
 
 	public String findRewardName(Long id) {
 		
+		
+		System.out.println( id);
 		
 		Reward reward = em.find(Reward.class, id);
 		

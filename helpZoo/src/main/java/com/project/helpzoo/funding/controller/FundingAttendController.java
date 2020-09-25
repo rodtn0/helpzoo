@@ -75,6 +75,7 @@ import com.project.helpzoo.member.model.vo.Member;
 			Long fundingNo2 = ((Integer)fundingNo).longValue();
 			
 			
+		
 			
 			
 			
@@ -210,9 +211,13 @@ import com.project.helpzoo.member.model.vo.Member;
 		    public String kakaoPaySuccess(Model model , HttpServletRequest request , @RequestParam("pg_token") String pg_token) {
 			 
 		        
+		  	
+		  		
 		  	HttpSession session = request.getSession(false);	
 		  	
 		  	int orderId =  	(Integer)model.getAttribute("orderId");
+		  	
+		  	System.out.println("오더석세스");
 		  	
 		  	session.removeAttribute("orderId");
 		  	  
@@ -247,7 +252,7 @@ import com.project.helpzoo.member.model.vo.Member;
 				  
 				 tototo += ord.getPrice();
 				 
-				  rewardNameList[i] = service.findRewardName(ord.getId());
+				  rewardNameList[i] = service.findRewardName(ord.getReward().getId());
 				 
 				  amountList[i] = ord.getCount();
 				  
