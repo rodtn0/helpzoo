@@ -50,7 +50,7 @@
 	
 <!-- 움직이는 이미지 -->
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner mt-5" id="mainImg">
+  <div class="carousel-inner mt-1" id="mainImg">
     <div class="carousel-item active">
       <img class="d-block w-100" src="/helpzoo/resources/images/배너_1.png" alt="First slide">
     </div>
