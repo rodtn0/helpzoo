@@ -205,7 +205,22 @@ function myfunction(){
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                	<h2> 오늘 시작하는 펀딩 </h2>
+						<h3 align="center">급상승 펀딩 조회수 Top5</h3>
+			                <h5></h5>
+			                <table align="center">
+			                    <thead>
+				                    <tr>
+				                        <th>글번호</th>
+				                        <th>제목</th>
+				                        <th>작성자</th>
+				                        <th>조회수</th>
+			                        </tr>
+			                    </thead>
+			
+			                    <tbody id="funding-topViews">
+									
+			                    </tbody>
+			                </table>
                 </div>
               </div>
               
@@ -216,7 +231,22 @@ function myfunction(){
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                	<h2> 오늘 끝나는 펀딩 </h2>
+						<h3 align="center">오늘 마감 달성률 Top5</h3>
+			                <h5></h5>
+			                <table align="center">
+			                    <thead>
+				                    <tr>
+				                        <th>글번호</th>
+				                        <th>제목</th>
+				                        <th>작성자</th>
+				                        <th>달성률</th>
+			                        </tr>
+			                    </thead>
+			
+			                    <tbody id="funding-endtop">
+									
+			                    </tbody>
+			                </table>
                 </div>
               </div>
             </div>
@@ -313,10 +343,73 @@ function myfunction(){
       <jsp:include page="../../common/adfooter.jsp"/>
       
      <script>
+     
+     $(function(){
+    	 topViews();
+    	 
+    	 // 일정시간(1분)마다 리스트 갱신.
+    	 setInterval(function(){
+    	topViews();
+    	}, 60000);
+     });
+     
+     function topViews(){
+    	 $.ajax({
+    		 url : "topViews",
+    		 dataType: "json",
+    		 success : function(map){
+    			 
+    			 console.log(map.list);
+    			 console.log(map.list2);
+    			 console.log(map.list2.length);
+    			 
+    			 $("#funding-topViews").html("");
+    			 
+    			 $.each(map.list, function(index, item){
+ 					
+ 					var $tr = $("<tr>"); // 행
+ 					var $td1 = $("<td>").text(item.fundingNo);
+ 					var $td2 = $("<td>").text(item.fundingTitle);
+ 					var $td3 = $("<td>").text(item.memberName);
+ 					var $td4 = $("<td>").text(item.readCount);
+ 					
+ 					$tr.append($td1, $td2, $td3, $td4);
+ 					$("#funding-topViews").append($tr);
+ 					
+ 				});
+    			 
+    			 if(map.list2.length != 0){
+    				 
+    				 $("#funding-endtop").html("");
+    				 
+	    			 $.each(map.list2, function(index, item){
+	 					
+	    				$("#funding-endtop").append($tr);
+	 					var $tr = $("<tr>"); 
+	 					var $td1 = $("<td>").text(item.fundingNo);
+	 					var $td2 = $("<td>").text(item.fundingTitle);
+	 					var $td3 = $("<td>").text(item.memberName);
+	 					var $td4 = $("<td>").text(item.fees);
+	 					
+	 					$tr.append($td1, $td2, $td3, $td4);
+	 					
+	 					$("#funding-endtop").append($tr);
+	 				});
+    			 }else{
+    				 var $hr = $("<h3> 오늘 마감하는 펀딩이 없습니다.")
+    				 var $tr = $("<tr>"); 
+	 				 var $td1 = $("<td>").html("<h5> 오늘 마감하는 펀딩이 없습니다.</h5>").attr("colspan", "4");
+	 				 $tr.append($td1);
+    				 $("#funding-endtop").append($tr);
+    			 }
+    		 },error : function(){
+    			 console.log("ajax 통신 실패");
+    		 }
+    			
+    	 })
+     }
       
      var listStatus = 'Y';
-    	  
-	
       
 	  var dataTable;
 	  

@@ -1,9 +1,12 @@
 package com.project.helpzoo.admin.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -123,6 +126,24 @@ public class AFundingController {
 		
 		return gson.toJson(monthSuccess);
 		
+	}
+	
+	@ResponseBody
+	@RequestMapping("topViews")
+	public String topViews() {
+		
+		List<AFunding> list = afundingService.selectTopViews();
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		
+		List<AFunding> list2 = afundingService.selectEndTop();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("list", list);
+		map.put("list2", list2);
+		
+		return gson.toJson(map);
 	}
 	
 }

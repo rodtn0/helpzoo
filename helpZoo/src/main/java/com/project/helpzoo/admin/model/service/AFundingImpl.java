@@ -50,6 +50,14 @@ public class AFundingImpl implements AFundingService{
 	public List<AFunding> selectSuccess(String yymm) {
 		return fundingDAO.selectSuccess(yymm);
 	}
+	@Override
+	public List<AFunding> selectTopViews() {
+		return fundingDAO.selectTopViews();
+	}
+	@Override
+	public List<AFunding> selectEndTop() {
+		return fundingDAO.selectEndTop();
+	}
 	
 
 }
