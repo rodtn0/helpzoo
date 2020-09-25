@@ -65,6 +65,14 @@
 	#selectBox{
 	margin-bottom: 10px;
 	}
+	
+	table{
+	text-align: center;
+	}
+	
+	td {
+        padding: 10px;
+      }
 	</style>
 	
 <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
@@ -197,18 +205,18 @@ function myfunction(){
             </div>
 
             <!-- Pie Chart -->
-            <div class="col-xl-4 col-lg-5">
+            <div class="col-xl-4 col-lg-5" data-aos="fade-right">
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Top 5</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
 						<h3 align="center">급상승 펀딩 조회수 Top5</h3>
 			                <h5></h5>
-			                <table align="center">
-			                    <thead>
+			                <table align="center" class="table">
+			                    <thead class="thead-dark">
 				                    <tr>
 				                        <th>글번호</th>
 				                        <th>제목</th>
@@ -227,14 +235,14 @@ function myfunction(){
              <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Top 5</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
 						<h3 align="center">오늘 마감 달성률 Top5</h3>
 			                <h5></h5>
-			                <table align="center">
-			                    <thead>
+			                <table align="center" class="table">
+			                    <thead class="thead-dark">
 				                    <tr>
 				                        <th>글번호</th>
 				                        <th>제목</th>
@@ -396,6 +404,9 @@ function myfunction(){
 	 					$("#funding-endtop").append($tr);
 	 				});
     			 }else{
+    				 
+    				 $("#funding-endtop").html("");
+    				 
     				 var $hr = $("<h3> 오늘 마감하는 펀딩이 없습니다.")
     				 var $tr = $("<tr>"); 
 	 				 var $td1 = $("<td>").html("<h5> 오늘 마감하는 펀딩이 없습니다.</h5>").attr("colspan", "4");
