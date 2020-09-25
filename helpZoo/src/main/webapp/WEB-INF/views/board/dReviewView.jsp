@@ -39,7 +39,7 @@
 
 </head>
 
-<body>
+<body style="padding-top : 0px;">
 	<jsp:include page="../common/header.jsp"/>
 
 
@@ -82,12 +82,12 @@
 
         <!-- Post Content -->
 
-        <p>${dReviewView.reviewContent}</p>
+        <p style="height : 310px;">${dReviewView.reviewContent}</p>
 
 
 
         <!-- Comments Form -->
-        <div class="card my-4">
+        <div class="card my-4" style="border-top-width: 0px;">
           <!-- <h5 class="card-header">Leave a Comment:</h5>
           <div class="card-body">
             <form>
@@ -191,7 +191,7 @@
 				<button id="deleteBtn" class="btn btn-primary">삭제</button>
 			</c:if>
 				<a class="btn btn-primary" href="../2" style="background-color:#7fcdcd; border:none">목록으로</a>
-				<a class="btn btn-primary" id="likeBtn" style="background-color: pink; border:none;">도움이 됐어요</a>
+				<a class="btn btn-primary" id="likeBtn" style="background-color: pink; border:none;">도움이 됐어요&nbsp;&nbsp;</a>
 		</div>
 
       </div>
@@ -232,12 +232,11 @@
 	$(function(){
 		$.ajax({
 		url: "../../likeReview2/${dReviewView.reviewNo}",
-		dataType : "json",
 		success : function(likeCount){
-			$p = $("<p>");
+			$span = $("<span>");
 			
-			$p.text(likeCount);
-			$("#likeBtn").append($p);
+			$span.text(likeCount);
+			$("#likeBtn").append($span);
 			
 		}, error : function(){
 			console.log("ajax 통신 실패");
