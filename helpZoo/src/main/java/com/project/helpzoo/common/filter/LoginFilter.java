@@ -33,7 +33,7 @@ public class LoginFilter implements Filter{
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		System.out.println("로그인 필터 작동");
+		System.out.println("멤버 로그인 필터 작동");
 	}
 
 	@Override
