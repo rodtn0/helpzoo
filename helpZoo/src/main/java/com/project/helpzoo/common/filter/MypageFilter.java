@@ -20,7 +20,7 @@ public class MypageFilter implements Filter{
 
 		@Override
 		public void init(FilterConfig filterConfig) throws ServletException {
-			System.out.println("로그인 필터 작동");
+			System.out.println("마이페이지 로그인 필터 작동");
 		}
 
 		@Override
