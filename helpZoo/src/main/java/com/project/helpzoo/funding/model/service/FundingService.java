@@ -161,7 +161,12 @@ public interface FundingService {
 
 
 
-	Object kakaoPayInfo(String pg_token);
+
+	Orders findOrder(Long orderNo2);
+
+
+
+	String findRewardName(Long id);
 	
 	
 }

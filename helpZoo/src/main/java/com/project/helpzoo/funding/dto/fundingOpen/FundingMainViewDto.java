@@ -27,6 +27,8 @@ public class FundingMainViewDto {
 	
 	private String fileChangeName;
 	
+
+	
 	
 	
 	public FundingMainViewDto() {

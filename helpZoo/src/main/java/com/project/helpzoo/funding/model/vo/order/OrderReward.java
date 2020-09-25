@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.funding.model.vo.funding.Reward;
 
 @Entity
@@ -37,12 +38,30 @@ public class OrderReward {
 	@Column(name="ORDER_REWARD_AMOUNT")
 	private int count;
 	
+	
+	@Column(name = "PRICE")
 	private int price;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="funding_id")
+	private FundingProject funding;
 	
 	
 	
 	
+	
+	
+	
+	
+
+	public FundingProject getFunding() {
+		return funding;
+	}
+
+	public void setFunding(FundingProject funding) {
+		this.funding = funding;
+	}
+
 	public OrderReward(Reward reward, Orders order, int count, int price) {
 		super();
 		this.reward = reward;

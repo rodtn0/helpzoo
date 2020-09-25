@@ -82,7 +82,22 @@ public class Reward {
 
 
 
-
+	public void minusStock(int amount) {
+	
+		
+	   this.amount =- amount;
+	if(this.amount <= 0) {
+		
+		this.amount += amount;
+		
+		throw new NotEnoughStockException("재고가 충분하지 않습니다.");
+	}
+	   
+	   
+		
+	}
+	
+	
 
 	public void setOriginRewardAmount(int originRewardAmount) {
 		this.originRewardAmount = originRewardAmount;

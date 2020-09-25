@@ -62,7 +62,7 @@ public class FundingServiceImpl implements FundingService {
 	private Logger logger = LoggerFactory.getLogger(FundingServiceImpl.class);
 	
 	  private KakaoPayReadyVO kakaoPayReadyVO;
-	   private KakaoPayApprovalVO kakaoPayApprovalVO;
+	  private KakaoPayApprovalVO kakaoPayApprovalVO;
 	
 	
 	
@@ -504,9 +504,9 @@ public class FundingServiceImpl implements FundingService {
 	        params.add("quantity", "" + item.getQuantity());
 	        params.add("total_amount", "" +item.getTotalAmount());
 	        params.add("tax_free_amount", "0");
-	        params.add("approval_url", "http://localhost:8025/fundingAttend/kakaoPaySuccess");
-	        params.add("cancel_url", "http://localhost:8025/fundingAttend/kakaoPayCancel");
-	        params.add("fail_url", "http://localhost:8025/fundingAttend/kakaoPaySuccessFail");
+	        params.add("approval_url", "http://localhost:8025/helpZoo/fundingAttend/kakaoPaySuccess");
+	        params.add("cancel_url", "http://localhost:8025/helpZoo/fundingAttend/kakaoPayCancel");
+	        params.add("fail_url", "http://localhost:8025/helpZoo/fundingAttend/kakaoPayFail");
 	        
 	        
 	         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
@@ -584,49 +584,7 @@ public class FundingServiceImpl implements FundingService {
 		}
 		
 		
-		
-		  public KakaoPayApprovalVO kakaoPayInfo(String pg_token) {
-			  
-			  String HOST = "https://kapi.kakao.com";
-			  
-			   
-		        
-		        RestTemplate restTemplate = new RestTemplate();
-		 
-		        // 서버로 요청할 Header
-		        HttpHeaders headers = new HttpHeaders();
-		        headers.add("Authorization", "KakaoAK " + "86f3aba00269f94be10433033258192c");
-		        headers.add("Accept", MediaType.APPLICATION_JSON_VALUE);
-		        headers.add("Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=UTF-8");
-		 
-		        // 서버로 요청할 Body
-		        MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
-		        params.add("cid", "TC0ONETIME");
-		        params.add("tid", kakaoPayReadyVO.getTid());
-		        params.add("partner_order_id", "1001");
-		        params.add("partner_user_id", "gorany");
-		        params.add("pg_token", pg_token);
-		        params.add("total_amount", "2100");
-		        
-		        HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
-		        
-		        try {
-		            kakaoPayApprovalVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/approve"), body, KakaoPayApprovalVO.class);
-		      
-		          
-		            return kakaoPayApprovalVO;
-		        
-		        } catch (RestClientException e) {
-		            // TODO Auto-generated catch block
-		            e.printStackTrace();
-		        } catch (URISyntaxException e) {
-		            // TODO Auto-generated catch block
-		            e.printStackTrace();
-		        }
-		        
-		        return null;
-		    }
-
+	
 
 		@Override
 		public void permitOrder(Long ordersId) {
@@ -634,6 +592,22 @@ public class FundingServiceImpl implements FundingService {
 			
 			dao.permitOrder(ordersId);
 			
+		}
+
+
+		@Override
+		public Orders findOrder(Long orderNo2) {
+			
+			
+			return dao.findOrder(orderNo2);
+		}
+
+
+		@Override
+		public String findRewardName(Long id) {
+			
+			
+			return dao.findRewardName(id);
 		}
 		
 		

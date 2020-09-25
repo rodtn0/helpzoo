@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,10 +37,8 @@ import com.project.helpzoo.member.model.vo.Member;
 
 
 	
-	
-
 	@Controller
-	@SessionAttributes({"loginMember"})
+	@SessionAttributes({"loginMember" , "orderId"})
 	@RequestMapping("/fundingAttend/*")
 	public class FundingAttendController {
 
@@ -90,39 +91,19 @@ import com.project.helpzoo.member.model.vo.Member;
 		}
 		
 		
+		
+		
+		
+		
+		
 		@PostMapping("/kakaoPay")
-	    public String kakaoPay(Model model,OrderRewardView orderReward, Long fundingNo ) {
+	    public String kakaoPay(Model model,OrderRewardView orderReward, int fundingNo, HttpServletRequest request ) {
 				
+			Long fundingNo2 = ((Integer)fundingNo).longValue();
 			
+			System.out.println(fundingNo + "펀딩넘버");
 			
-			
-			/*
-			 * String[] ooid2 = (String[])model.getAttribute("id");
-			 * 
-			 * String[] ooamount2 = (String[])model.getAttribute("amount");
-			 * 
-			 * int[] ooid = new int [ooid2.length];
-			 * 
-			 * int[] ooamount = new int [ooamount2.length];
-			 * 
-			 * 
-			 * for(int i = 0; i<ooid2.length; i++) {
-			 * 
-			 * ooid[i] = Integer.parseInt(ooid2[i]);
-			 * 
-			 * ooamount[i] = Integer.parseInt(ooamount2[i]);
-			 * 
-			 * 
-			 * 
-			 * 
-			 * }
-			/*
-			 * orderReward.setAmount(ooamount); orderReward.setId(ooid);
-			 */
-			
-			System.out.println(orderReward + "카카오 페이 펀딩리와드");
-			
-
+		
 			Member member = (Member)model.getAttribute("loginMember");
 			
 			
@@ -149,9 +130,7 @@ import com.project.helpzoo.member.model.vo.Member;
 					   
 		  Address addressObject = new Address(addr[0], addr[1], addr[2]);
 			 
-		  System.out.println(addressObject);
-					   
-			
+	
 		
 		
 			
@@ -161,9 +140,8 @@ import com.project.helpzoo.member.model.vo.Member;
 			
 		
 			
-			System.out.println(order);
 			
-			Long ordersId = service.saveOrder(order, addressObject,fundingNo);
+			Long ordersId = service.saveOrder(order, addressObject,fundingNo2);
 			
 			
 			
@@ -201,16 +179,25 @@ import com.project.helpzoo.member.model.vo.Member;
 			
 			
 		  KakaoPayApiItem item = new KakaoPayApiItem(name, quantity, member.getMemberId(), ordersId, totalAmount);
+		  
+		  
 	        
+		  int ooderId = ordersId.intValue();
+		  System.out.println(ooderId + "오더아이디");
+		  
+		  
+		  HttpSession session = request.getSession();
+		  
+		  
+		  
+		  model.addAttribute("orderId", ooderId);
 		  
 		  String url = service.kakaoPayReady(item);
-					
-		 
-		  if(url.equals("kakaoPaysuccess")) {
-			  
-			  service.permitOrder(ordersId);
-			  
-		  }
+		
+		  
+
+		  
+		  
 		
 		
 		  return "redirect:" + url;
@@ -218,13 +205,74 @@ import com.project.helpzoo.member.model.vo.Member;
 			
 	    }
 	    
-		
-		  @GetMapping("/kakaoPaySuccess")
-		    public void kakaoPaySuccess(@RequestParam("pg_token") String pg_token, Model model) {
-		   
+					  
+		  	@RequestMapping("/kakaoPaySuccess")
+		    public String kakaoPaySuccess(Model model , HttpServletRequest request , @RequestParam("pg_token") String pg_token) {
+			 
 		        
-		        model.addAttribute("info", service.kakaoPayInfo(pg_token));
-		        
+		  	HttpSession session = request.getSession(false);	
+		  	
+		  	int orderId =  	(Integer)model.getAttribute("orderId");
+		  	
+		  	session.removeAttribute("orderId");
+		  	  
+		  	 
+		  	  
+			  Long orderNo2 = ((Integer)orderId).longValue();
+			  
+			  Orders order = null;
+			  
+			 
+				  order = service.findOrder(orderNo2);
+				  
+				  if(order.getStatus().equals("N")) {
+				  return "funding/notEnoughStock";
+				  }
+			  
+			  
+			  List<OrderReward> orderRewardList = order.getOrderRewards();
+		      
+			  
+			  int tototo = 0;
+			  OrderRewardView oriView = new OrderRewardView();
+			  
+			  int i = 0;
+			  
+			  String rewardNameList[] = new String[orderRewardList.size()];
+			  int[] idList = new int [orderRewardList.size()];
+			  int[] amountList = new int [orderRewardList.size()];
+			  int[] priceList = new int [orderRewardList.size()];
+			  
+			  for(OrderReward ord : orderRewardList) {
+				  
+				 tototo += ord.getPrice();
+				 
+				  rewardNameList[i] = service.findRewardName(ord.getId());
+				 
+				  amountList[i] = ord.getCount();
+				  
+				  priceList[i] = ord.getPrice();
+				  
+			  }
+			  
+			  OrderRewardView orderRewardView = new OrderRewardView();
+			  
+			  
+			  orderRewardView.setRewardName(rewardNameList);
+			  
+			  orderRewardView.setAmount(amountList);
+			  
+			  orderRewardView.setTotalAmount(tototo);
+			  
+			  orderRewardView.setPrice(priceList);
+			  
+			  
+			  
+			  model.addAttribute("orderRewardView", orderRewardView);
+			  
+			  
+			  
+		       return "funding/kakaoPaySuccess";
 		    }
 		
 		

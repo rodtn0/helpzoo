@@ -87,11 +87,16 @@ public class FundingDAO {
 
 		QOrderReward orderReward = QOrderReward.orderReward;
 		
+		QFundingAttachment attachment = QFundingAttachment.fundingAttachment;
+		
+		
+		
 		List<Tuple> result = query
 				.select(funding.id,
 						funding.title, category.category_name, maker.name, funding.goalAmount, reward.price,
 						funding.summary,
 						funding.readCount,funding.likeCount,
+						attachment.fileChangeName,
 						orderReward.count.sum())
 				
 				.from(funding)
@@ -99,9 +104,10 @@ public class FundingDAO {
 				.leftJoin(orderReward).on(reward.id.eq(orderReward.reward.id))
 				.leftJoin(funding.category, category)
 				.leftJoin(funding.fundingMaker, maker)
+				.leftJoin(attachment).on(funding.id.eq(attachment.parentFunding.id)).on(attachment.fundingFileCategory.id.eq(1L))
 				.groupBy(funding.id,funding.title, category.category_name, maker.name, funding.goalAmount, 
 						reward.price,funding.readCount,funding.likeCount
-						,funding.summary)
+						,funding.summary, attachment.fileChangeName)
 				.orderBy(orderby(fundingSearch.getSearchSort()))
 				.offset(0)
 				.limit(20)
@@ -128,8 +134,11 @@ public class FundingDAO {
 			tuple.get(funding.goalAmount), 
 			tuple.get(funding.endDay)
 			,(int)(((double)totalOrderAmount/tuple.get(funding.goalAmount))*100)
+			
+			
 			);
 		
+		mainView.setFileChangeName(tuple.get(attachment.fileChangeName));
 		
 		mainViewList.add(mainView);
 		}
@@ -1056,7 +1065,6 @@ public class FundingDAO {
 		
 		OrderReward orderReward = null;
 		
-		System.out.println(orderRewardView);
 		
 		Orders order = em.find(Orders.class, orderId);
 		
@@ -1081,6 +1089,7 @@ public class FundingDAO {
 			
 			orderReward = new OrderReward(reward, order,orderRewardView.getAmount()[i],orTotalPrice);
 			
+			orderReward.setFunding(order.getFunding());
 			
 			em.persist(orderReward);
 			
@@ -1088,8 +1097,6 @@ public class FundingDAO {
 			
 		}
 		
-		
-		System.out.println(rewardOrderList + "리와드오더리스트");
 		
 		
 		return rewardOrderList;
@@ -1113,18 +1120,22 @@ public class FundingDAO {
 
 	public Long saveOrder(Orders order, Address address, Long fundingNo) {
 		
+		
+		
+		
+		FundingProject fundingProject = em.find(FundingProject.class, fundingNo);
+		
 		Delivery delivery = new Delivery(address , "Ready");
 		
 		
 		em.persist(delivery);
 		
-		System.out.println(delivery + "첫번째");
 		
 		System.out.println(order);
 		
 		order.setDelivery(delivery);
 		
-		order.setFundingNo(fundingNo);
+		order.setFunding(fundingProject);
 		
 		
 		em.persist(order);
@@ -1165,6 +1176,59 @@ public class FundingDAO {
 		
 		
 		
+	}
+
+
+
+
+	public Orders findOrder(Long orderNo2) {
+		
+		
+		Orders order = em.find(Orders.class, orderNo2);
+		
+		
+		
+		
+		List<OrderReward> orderRewardList = order.getOrderRewards();
+		
+		
+		for(OrderReward orList : orderRewardList) {
+			
+			Reward reward = orList.getReward();
+			
+			try {
+			reward.minusStock(orList.getCount());
+			
+			order.setStatus("Y");
+			}catch (Exception e) {
+			
+				
+			}
+			
+			
+		}
+		
+	
+		
+		
+		
+		return order;
+	}
+
+
+
+
+	public String findRewardName(Long id) {
+		
+		
+		Reward reward = em.find(Reward.class, id);
+		
+		
+		
+			
+		
+		
+		return reward.getTitle();
 	}
 	
 	

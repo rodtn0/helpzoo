@@ -9,14 +9,48 @@ public class OrderRewardView {
 	
 	private int[] amount;
 	
+	private int[] price;
+	
+	private String[] rewardName;
+	
+	private int totalAmount;
 	
 	
+	
+	
+	public int[] getPrice() {
+		return price;
+	}
+
+	public void setPrice(int[] price) {
+		this.price = price;
+	}
+
 	public OrderRewardView() {
 		
 	}
 
 	public int[] getId() {
 		return id;
+	}
+	
+	
+	
+
+	public String[] getRewardName() {
+		return rewardName;
+	}
+
+	public void setRewardName(String[] rewardName) {
+		this.rewardName = rewardName;
+	}
+
+	public int getTotalAmount() {
+		return totalAmount;
+	}
+
+	public void setTotalAmount(int totalAmount) {
+		this.totalAmount = totalAmount;
 	}
 
 	public void setId(int[] id) {
@@ -37,9 +71,12 @@ public class OrderRewardView {
 		this.amount = amount;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "OrderRewardView [id=" + Arrays.toString(id) + ", amount=" + Arrays.toString(amount) + "]";
+		return "OrderRewardView [id=" + Arrays.toString(id) + ", amount=" + Arrays.toString(amount) + ", rewardName="
+				+ Arrays.toString(rewardName) + ", totalAmount=" + totalAmount + "]";
 	}
 
 	@Override
