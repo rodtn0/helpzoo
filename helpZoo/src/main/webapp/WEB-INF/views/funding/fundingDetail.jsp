@@ -293,7 +293,6 @@
     
     
     
-    
 $(document).ready(function() {
 		
 		$.ajax({

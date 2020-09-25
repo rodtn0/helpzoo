@@ -19,6 +19,14 @@
 			border : 1px #7fcdcd;
 			background-color:  #7fcdcd;
 		}
+		
+		.card{
+			width : 100%;
+		}
+		
+		#likeBtn{
+			width : 120px;
+		}
 	
 	</style>
   <meta charset="utf-8">
@@ -87,6 +95,7 @@
 
         <!-- Comments Form -->
        <div class="card my-4">
+       
           <!-- <h5 class="card-header">Leave a Comment:</h5>
           <div class="card-body">
             <form>
@@ -194,6 +203,7 @@
 						<!-- http://localhost:8095/helpzoo/board/review/1/881?cp=1 -->
 						<!-- http://localhost:8095/helpzoo/board/review/1 -->
 				<a class="btn btn-primary" href="../1" style="background-color:#7fcdcd; border:none;" >목록으로</a>
+				<a class="btn btn-primary" id="likeBtn" style="background-color: pink; border:none;">도움이 됐어요</a>
 		</div>
 
 
@@ -227,6 +237,62 @@
 			// http://localhost:8095/helpzoo/board/review/1/859?cp=1
 			// http://localhost:8095/helpzoo/board/review/1/deleteReview/510
 			location.href =	"deleteReview/${fReviewView.reviewNo}";	
+		}
+		
+	});
+	
+	// 상세페이지 접속했을 때 
+	$(function(){
+		$.ajax({
+		url: "../../likeReview/${fReviewView.reviewNo}",
+		dataType : "json",
+		success : function(likeCount){
+			$p = $("<p>");
+			
+			$p.text(likeCount);
+			$("#likeBtn").append($p);
+			
+		}, error : function(){
+			console.log("ajax 통신 실패");
+		}
+	  });
+	});
+	
+	// 클릭했을때 비동기로 숫자 카운트
+	$("#likeBtn").on("click", function(){
+		if(${sessionScope.loginMember.memberId == null}){
+			swal({
+				  icon: "success",
+				  title : "로그인 후 이용하세요!"
+				});
+		}else{
+			$.ajax({
+				url: "../../likeCount/${fReviewView.reviewNo}",
+				dataType : "json",
+				success : function(result){
+					
+					
+					var originNo = $("#likeBtn").children().text();
+					
+					$("#likeBtn").children().text(parseInt(originNo)+1);
+					
+					
+				}, error : function(){
+					//console.log("ajax 통신 실패");
+					
+					$.ajax({
+						url : "../../likeDelete/${fReviewView.reviewNo}",
+						dataType : "json",
+						success : function(result){
+							var originNo = $("#likeBtn").children().text();
+							$("#likeBtn").children().text(parseInt(originNo)-1);
+						}, error : function(){
+							console.log("ajax 통신 실패");
+						}
+						
+					});
+				}
+			});
 		}
 		
 	});

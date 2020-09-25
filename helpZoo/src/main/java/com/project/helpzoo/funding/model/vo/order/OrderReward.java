@@ -43,6 +43,14 @@ public class OrderReward {
 	
 	
 	
+	public OrderReward(Reward reward, Orders order, int count, int price) {
+		super();
+		this.reward = reward;
+		this.order = order;
+		this.count = count;
+		this.price = price;
+	}
+
 	public static OrderReward makeOrderReward(Reward reward, int price, int count) {
 		
 		OrderReward orderReward = new OrderReward();
@@ -70,8 +78,24 @@ public class OrderReward {
 	
 	
 	
-	
 
+
+	public OrderReward(Reward reward, Orders order, int count) {
+		super();
+		this.reward = reward;
+		this.order = order;
+		this.count = count;
+	}
+
+	public OrderReward() {
+		super();
+	}
+
+	public OrderReward(Reward reward, int count) {
+		super();
+		this.reward = reward;
+		this.count = count;
+	}
 
 	public Long getId() {
 		return id;

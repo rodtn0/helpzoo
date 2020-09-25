@@ -162,6 +162,8 @@
         <br />
         <br />
 
+
+
         <div class="div">
           &nbsp;&nbsp;&nbsp;리워드 <br />&nbsp;&nbsp;&nbsp;&nbsp;선택
         </div>
@@ -179,12 +181,13 @@
         </div>
 
 
+        <form action="${contextPath}/fundingAttend/pay/${fundingNo}" method="POST">
         <c:forEach var="item" items="${rewardList}">
 
 
         <div class="card text-center bmi">
           <div class="card-header">
-            <input type="checkbox" class="float-left littlebig" data-name="${item.price}" /> ${item.price}원
+            <input type="checkbox" class="float-left littlebig" data-name="${item.price}" data-id="${item.id}"/> ${item.price}원
             펀딩합니다.
           </div>
           <div class="card-body">
@@ -216,7 +219,9 @@
             
             
               <div class="size_size">
-                수량 : <input type="number" class="form-control form-control-sm d-flex justify-content-center" id="colFormLabelSm" placeholder="col-form-label-sm">
+                수량 : 
+                <input type="hidden" value="${item.id}" name="id">
+                <input type="number" class="form-control form-control-sm d-flex justify-content-center" id="colFormLabelSm" name="amount">
                 <br>
             </div>
             
@@ -327,15 +332,21 @@
 
       </div>
 
+      
+
+
       <br>
 
   <button
-      type="button"
+      type="submit"
       class="btn btn-primary col-md-4 col-sm-4 col-xs-4 btn-lg funding_btn mintclick "
-      onclick="goToPay()"
+
+    
 
     > 다음단계로</button>
 
+
+    </form>
       </div>
 
 
@@ -398,6 +409,10 @@
 
             $(".final_amount").text(  $(".final_amount").text() - (amount*price)      );
             
+          var itemid =   $(this).data("id");
+
+
+            $(".final_amount").data("id", itemid )
 
 
 
@@ -405,10 +420,13 @@
 
             $(this).parent().parent().children().children().last("div").children().val("");
 
-         
+            
           }
 
         })
+
+
+
 
 
 
@@ -419,6 +437,9 @@
           location.href="${contextPath}/fundingAttend/pay/" + ${fundingNo}  +"/?finalAmount="  + finalAmount;
 
         }
+
+
+
 
 
 

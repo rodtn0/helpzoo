@@ -7,66 +7,74 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
-	.mailing{
-		max-width: 800px;
-		margin: auto;
-	}
-	
-	.mail, .mailTitle, .mailContent, .submitBtn{
-		text-align: center;
-	}
-</style>
+<link href="${contextPath}/resources/css/mailing.css" rel="stylesheet" />
+<title>도와zoo 구독하기</title>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"/>
 	
-	<main class="mailing">
+	<main class="board zoo">
 		
-		<c:choose>
-			<%-- 관리자 메일 전송 화면 --%>
-			<c:when test="${loginMember.memberNo == 1}">
-				<form method="post" action="sendMail">
-					<div class="mailTitle">
-						<label>구독 메일 제목</label><br>
-						<input type="text" name="title" size="60">
-					</div>
-					<div class="mailContent">
-						<label>구독 메일 내용</label><br>
-						<textarea name="content" rows="20" cols="60"></textarea>
-					</div>
-					<div class="submitBtn">
-						<button>구독 메일 보내기</button>
-					</div>
-				</form>
-			</c:when>
+		<!--  -->
+		<div class="ui-header">
+			<h1 data-aos="fade-down" class="title">구독하기</h1>
+		</div>
+		
+		<!-- 공지 / 이벤트 / 구독메일 네비게이션 -->
+		<div class="ui-tabs">
+			<ul>
+				<li><a href="${contextPath}/notice/noticeList">공지사항</a></li>
+				<li><a href="${contextPath}/event/eventList">이벤트</a></li>
+				<li class="active"><a href="${contextPath}/subscribe/mailing">구독하기</a></li>
+			</ul>
+		</div>
+		
+		<!-- 게시판 리스트 -->
+		<div class="board-main">
 			
-			<c:otherwise>
-			<%-- 일반 사용자 구독 화면 --%>
-				<p>
-					<h1>HelpZoo</h1>
-					<h2>${loginMember.memberName}님, 지금 구독을 신청해보세요!</h2>
-					<h3>구독을 신청하고 고급정보를 빠르게 받아볼 수 있습니다.</h3>
-					<h4>${loginMember.memberEmail}</h4>
-				</p>
+			<div class="img">
+				<img data-aos="fade-up" alt="" src="/helpzoo/resources/images/HelpZoo구독하기.png">
+			</div>
+		
+			<c:choose>
+				<%-- 관리자 메일 전송 화면 --%>
+				<c:when test="${loginMember.memberNo == 1}">
 				
-				<c:choose>
-					<c:when test="${selMailing.mailStatus == 'Y'}">
-						<div class="submitBtn">
-							<button class="cancel">구독 취소하기</button>
+					<form method="post" action="sendMail">
+						<div class="mailTitle">
+							<label data-aos="fade-up" data-aos-delay="100">메일 제목</label><br>
+							<input type="text" name="title" size="60">
 						</div>
-					</c:when>
+						<div class="mailContent">
+							<label data-aos="fade-up" data-aos-delay="200">메일 내용</label><br>
+							<textarea name="content" rows="20" cols="60"></textarea>
+						</div>
+						<div class="submitBtn">
+							<button class="sendBtn" data-aos="zoom-in">메일 보내기</button>
+						</div>
+					</form>
+				</c:when>
+				
+				<%-- 일반 사용자 구독 화면 --%>
+				<c:otherwise>
+					<c:choose>
+						<c:when test="${selMailing.mailStatus == 'Y'}">
+							<div class="submitBtn">
+								<a data-aos="zoom-in" class="cancel">구독 취소하기</a>
+							</div>
+						</c:when>
+						
+						<c:otherwise>
+							<div class="submitBtn">
+								<a data-aos="zoom-in" class="subscribe">구독하기</a>
+							</div>
+						</c:otherwise>
+					</c:choose>
 					
-					<c:otherwise>
-						<div class="submitBtn">
-							<button class="subscribe">구독하기</button>
-						</div>
-					</c:otherwise>
-				</c:choose>
-				
-			</c:otherwise>
-		</c:choose>
+				</c:otherwise>
+			</c:choose>
+		
+		</div>
 		
 	</main>
 
