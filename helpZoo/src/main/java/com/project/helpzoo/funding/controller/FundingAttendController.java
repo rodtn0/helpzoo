@@ -38,7 +38,7 @@ import com.project.helpzoo.member.model.vo.Member;
 
 	
 	@Controller
-	@SessionAttributes({"loginMember" , "orderId"})
+	@SessionAttributes({"loginMember" })
 	@RequestMapping("/fundingAttend/*")
 	public class FundingAttendController {
 
@@ -100,7 +100,7 @@ import com.project.helpzoo.member.model.vo.Member;
 		
 		
 		@PostMapping("/kakaoPay")
-	    public String kakaoPay(Model model,OrderRewardView orderReward, int fundingNo, HttpServletRequest request ) {
+	    public String kakaoPay(Model model,OrderRewardView orderReward, int fundingNo, HttpServletRequest request, HttpSession session ) {
 				
 			Long fundingNo2 = ((Integer)fundingNo).longValue();
 			
@@ -189,11 +189,10 @@ import com.project.helpzoo.member.model.vo.Member;
 		  System.out.println(ooderId + "오더아이디");
 		  
 		  
-		  HttpSession session = request.getSession();
+		  //HttpSession session = request.getSession();
 		  
 		  
-		  
-		  model.addAttribute("orderId", ooderId);
+		  session.setAttribute("orderId", ooderId);
 		  
 		  
 		  
@@ -201,7 +200,7 @@ import com.project.helpzoo.member.model.vo.Member;
 		  
 		  
 		  
-		  String url = service.kakaoPayReady(item,ContextPath);
+		  String url = service.kakaoPayReady(item,ContextPath, ooderId);
 		
 		  
 
@@ -215,15 +214,16 @@ import com.project.helpzoo.member.model.vo.Member;
 	    }
 	    
 					  
-		  	@RequestMapping("/kakaoPaySuccess")
-		    public String kakaoPaySuccess(Model model , HttpServletRequest request , @RequestParam("pg_token") String pg_token) {
+		  	@RequestMapping("/kakaoPaySuccess/{ooderId}")
+		    public String kakaoPaySuccess(Model model , HttpServletRequest request , @RequestParam("pg_token") String pg_token, HttpSession session, @PathVariable int ooderId) {
 			 
 		        
 		  	
 		  		
-		  	HttpSession session = request.getSession(false);	
+		  	//HttpSession session = request.getSession(false);	
 		  	
-		  	int orderId =  	(Integer)model.getAttribute("orderId");
+		  	//int orderId =  	(Integer)session.getAttribute("orderId");
+		  	int orderId = ooderId;
 		  	
 		  	System.out.println("오더석세스");
 		  	
