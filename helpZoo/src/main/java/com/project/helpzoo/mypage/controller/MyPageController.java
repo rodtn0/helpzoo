@@ -46,12 +46,7 @@ public class MyPageController {
 	public String secession() {
 		return "mypage/secession";
 	}
-	// 회원 탈퇴 완료 페이지로 이동
-	@RequestMapping("secessionComplete")
-	public String secessionSuccess() {
-		return "mypage/secessionSuccess";
-	}
-	
+
 	// 회원 정보 수정
 	@RequestMapping("updateAction")
 	public String updateAction(Member upMember, Model model, RedirectAttributes rdAttr, HttpServletRequest request) {
