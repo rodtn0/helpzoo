@@ -44,9 +44,9 @@
 			float : right;
 		} */
 		
-		#dd{
+		/* #dd{
 			float : left;
-		}
+		} */
 		
 		.containers table{
 			
@@ -118,6 +118,11 @@
 		#list-table tr{
 			cursor : pointer;
 		}
+		
+		#selectReviewList a{
+			color : black;
+			padding-left : 20px;
+		}
         
         
 		
@@ -132,17 +137,29 @@
 	<div class="container">
 	
 		
-		<div class="main">
-				<div class="wrapper-demo">
-					<div id="dd" class="wrapper-dropdown-1" tabindex="1">
+		<!-- <div class="main">
+				<div class="wrapper-demo btn-group">
+					<div id="dd" class="wrapper-dropdown-1 dropdown-toggle"  data-toggle="dropdown" tabindex="1">
 						<span>선택하세요.</span>
-					    <ul class="dropdown" tabindex="1">
+					    <ul class="dropdown-menu" tabindex="1">
 					        <li><a href="#">펀딩 후기 게시판</a></li>
-					        <li><a id="donationPage">기부 후기 게시판</a></li>
+					        <li><a href="../review/2">기부 후기 게시판</a></li>
 					    </ul>
 					</div>
 				​</div>
+		</div> -->
+		
+		<!-- Single button -->
+		<div class="btn-group" id="selectReviewList">
+		  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+		   	선택하세요 <span class="caret"></span>
+		  </button>
+		  <ul class="dropdown-menu" role="menu">
+		    <li><a href="#">펀딩 후기 게시판</a></li>
+		    <li><a href="../review/2">기부 후기 게시판</a></li>
+		  </ul>
 		</div>
+		
 			
 		<br><br>
 			
@@ -268,16 +285,16 @@
 	});
 	
 	
-	$(function(){
-		$("#donationPage").on("click", function(){
-			alert("뜬다!");
-			var reviewListUrl = "${contextPath}/board/review/2";
-			
-			location.href = reviewListUrl;
-		});
+	
+	$("#donationPage").on("click", function(){
+		alert("뜬다!");
+		var reviewListUrl = "${contextPath}/board/review/2";
 		
-		
+		location.href = reviewListUrl;
 	});
+		
+		
+	
 	
 	
 	

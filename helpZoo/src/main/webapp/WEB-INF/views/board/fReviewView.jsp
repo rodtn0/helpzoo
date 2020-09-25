@@ -24,9 +24,6 @@
 			width : 100%;
 		}
 		
-		#likeBtn{
-			width : 120px;
-		}
 	
 	</style>
   <meta charset="utf-8">
@@ -47,7 +44,7 @@
 </head>
 
 
-<body>
+<body style="padding-top : 0px;">
 	<jsp:include page="../common/header.jsp"/>
 
 
@@ -89,12 +86,12 @@
 
         <!-- Post Content -->
 
-        <p>${fReviewView.reviewContent}</p>
+        <p style="height : 310px;">${fReviewView.reviewContent}</p>
 
 
 
         <!-- Comments Form -->
-       <div class="card my-4">
+       <div class="card my-4" style="border-top-width: 0px;">
        
           <!-- <h5 class="card-header">Leave a Comment:</h5>
           <div class="card-body">
@@ -203,7 +200,7 @@
 						<!-- http://localhost:8095/helpzoo/board/review/1/881?cp=1 -->
 						<!-- http://localhost:8095/helpzoo/board/review/1 -->
 				<a class="btn btn-primary" href="../1" style="background-color:#7fcdcd; border:none;" >목록으로</a>
-				<a class="btn btn-primary" id="likeBtn" style="background-color: pink; border:none;">도움이 됐어요</a>
+				<a class="btn btn-primary" id="likeBtn" style="background-color: pink; border:none;">도움이 됐어요&nbsp;&nbsp;</a>
 		</div>
 
 
@@ -245,12 +242,11 @@
 	$(function(){
 		$.ajax({
 		url: "../../likeReview/${fReviewView.reviewNo}",
-		dataType : "json",
 		success : function(likeCount){
-			$p = $("<p>");
+			$span = $("<span>");
 			
-			$p.text(likeCount);
-			$("#likeBtn").append($p);
+			$span.text(likeCount);
+			$("#likeBtn").append($span);      
 			
 		}, error : function(){
 			console.log("ajax 통신 실패");

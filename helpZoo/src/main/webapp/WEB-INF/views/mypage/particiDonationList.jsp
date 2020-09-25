@@ -36,6 +36,9 @@
    border:none;
    }
    
+   #clickImg{
+  	cursor: pointer;
+   }
    .card{ height: 500px; }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -128,10 +131,10 @@ $('.navbar-light .dmenu').hover(function () {
                             </c:if>
                        </c:forEach>
                        
-                       <img style="height: 361px; width: 100%; display: block;" alt="" src="${src}" data-holder-rendered="true">
+                       <img id="clickImg" style="height: 361px; width: 100%; display: block;" alt="" src="${src}" data-holder-rendered="true">
                     </c:when>
                     <c:otherwise>
-                       <img style="height: 361px; width: 100%; display: block;" alt="" src="/helpzoo/resources/images/not_thumbnail.png" data-holder-rendered="true">
+                       <img id="clickImg" style="height: 361px; width: 100%; display: block;" alt="" src="/helpzoo/resources/images/not_thumbnail.png" data-holder-rendered="true">
                     </c:otherwise>     
                  </c:choose>
                   <p class="card-text mx-auto">${doList.dBoardTitle}</p>

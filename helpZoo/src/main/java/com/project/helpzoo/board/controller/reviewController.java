@@ -493,26 +493,16 @@ public class reviewController {
 	// 펀딩 상세페이지 접속했을 때 좋아요 수 표시
 	@ResponseBody
 	@RequestMapping("likeReview/{reviewNo}")
-	public String likeCount(@PathVariable int reviewNo) {
-		
-		int likeCount = reviewService.likeCount(reviewNo);
-		System.out.println("도움이 됐나요 클릭 수 : " + likeCount);
-		Gson gson = new GsonBuilder().create();
-		
-		return gson.toJson(likeCount);
+	public int likeCount(@PathVariable int reviewNo) {
+		return reviewService.likeCount(reviewNo);
 	}
 	
 	// 기부 상세페이지 접속했을 때 좋아요 수 표시
-		@ResponseBody
-		@RequestMapping("likeReview2/{reviewNo}")
-		public String likeCount2(@PathVariable int reviewNo) {
-			
-			int likeCount = reviewService.likeCount2(reviewNo);
-			System.out.println("도움이 됐나요 클릭 수 : " + likeCount);
-			Gson gson = new GsonBuilder().create();
-			
-			return gson.toJson(likeCount);
-		}
+	@ResponseBody
+	@RequestMapping("likeReview2/{reviewNo}")
+	public int likeCount2(@PathVariable int reviewNo) {
+		return reviewService.likeCount2(reviewNo);
+	}
 	
 	// 펀딩 리뷰 좋아요 삽입
 	@ResponseBody

@@ -58,7 +58,7 @@ public class MemberController {
 		
 		Member loginMember = memberService.login(member);
 		
-		System.out.println(loginMember);
+		//System.out.println(loginMember);
 		
 		if(loginMember == null) {
 			rdAttr.addFlashAttribute("status", "error");
@@ -79,7 +79,7 @@ public class MemberController {
 			response.addCookie(cookie);
 			//response.addCookie(new Cookie("savePwd", member.getMemberPwd()));
 
-		}
+			}
 		
 		return "redirect:/";
 	}
