@@ -104,10 +104,12 @@ public class FundingDAO {
 				.leftJoin(orderReward).on(reward.id.eq(orderReward.reward.id))
 				.leftJoin(funding.category, category)
 				.leftJoin(funding.fundingMaker, maker)
-				.leftJoin(attachment).on(funding.id.eq(attachment.parentFunding.id)).on(attachment.fundingFileCategory.id.eq(1L))
+				.leftJoin(attachment).on(funding.id.eq(attachment.parentFunding.id))
+				
 				.groupBy(funding.id,funding.title, category.category_name, maker.name, funding.goalAmount, 
 						reward.price,funding.readCount,funding.likeCount
 						,funding.summary, attachment.fileChangeName)
+				.where(attachment.fundingFileCategory.id.eq(1L))
 				.orderBy(orderby(fundingSearch.getSearchSort()))
 				.offset(0)
 				.limit(20)

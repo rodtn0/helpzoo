@@ -84,7 +84,9 @@ import com.project.helpzoo.member.model.vo.Member;
 			model.addAttribute("fundingNo", fundingNo2);
 			
 			
-			System.out.println(orderReward + "페이 펀딩리와드");
+			
+			
+			
 			
 			return "funding/fundingPayment";
 			
@@ -193,7 +195,13 @@ import com.project.helpzoo.member.model.vo.Member;
 		  
 		  model.addAttribute("orderId", ooderId);
 		  
-		  String url = service.kakaoPayReady(item);
+		  
+		  
+		  String ContextPath = request.getContextPath();
+		  
+		  
+		  
+		  String url = service.kakaoPayReady(item,ContextPath);
 		
 		  
 

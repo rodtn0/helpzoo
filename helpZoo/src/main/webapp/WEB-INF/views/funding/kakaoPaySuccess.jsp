@@ -176,7 +176,7 @@
            </c:forEach>
 
            <br>
-           '
+           
            
            <c:forEach var="itemAmount" items="${orderRewardView.amount}">
          ${itemAmount}개 <br>
