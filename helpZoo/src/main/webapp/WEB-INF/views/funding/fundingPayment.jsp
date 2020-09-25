@@ -225,72 +225,13 @@
       <hr>
       최종결제금액   <div class="float-right">63,7000원</div>
 
-        <div class="card text-center bmi">
-        
-          <div class="card-body">
-            <h5 class="card-title">
-              펀딩 서포터
-            </h5>
-            <p class="card-text small">
-              이름
-              <br>
-              jisanjisan
-
-              이메일
-              <br>
-              jjisanle@gmail.com
-
-              휴대폰 번호
-              <br>
-              01050156408
-              <br />
-              <hr>
-
-              <input type="checkbox" class="float-left littlebig" />
-
-              (필수) 펀딩 진행에 대한 새소식 및 결제 관련 안내를 받습니다.
-
-            </p>
-          </div>
-        </div>
+    
 
 
 
 
 
-
-        <div class="card text-center bmi">
-        
-          <div class="card-body">
-            <h5 class="card-title">
-              리워드 배송지
-            </h5>
-            <hr>
-
-            <input type="checkbox" class="float-left littlebig"  name="delivery_new_input"/> <label for="delivery_new_input">새로 입력</label>
-            <br>
-
-            <input type="checkbox" class="float-left littlebig"  name="delivery_existing"/> <label for="delivery_existing">기존 배송지</label>
-            
-
-            <br>
-            이름
-            <input class="form-control" type="text" placeholder="Default input">
-
-            이름
-            <input class="form-control" type="text" placeholder="Default input">
-
-            주소
-            <input class="form-control" type="text" placeholder="Default input">
-            배송 시 요청사항
-            <input class="form-control" type="text" placeholder="Default input">
-            <small>
-
-              해당 요청사항은 배송에 관련된 내용만 적어주세요.
-            </small>
-            <hr>
-          </div>
-        </div>
+    
 
 
 
@@ -299,26 +240,7 @@
 
 
 
-
-        <div class="card text-center lasttt">
-          <div class="card-body">
-            <h4 class="card-title">결제 정보</h5>
-              <br>
-          <h5>결제 정보 입력</h4>
-            
-          <br>
-          <button type="button" class="btn btn-outline-secondary">간편결제</button>
-          <button type="button" class="btn btn-outline-secondary">직접 입력</button>
-          <br><br>
-결제 카드
-
-
-
-
-
-
-          </div>
-        </div>
+    
 
         <br><br>
         <br>
@@ -472,7 +394,7 @@
 	 
 	 
 	 
-    <button>카카오페이로 결제하기</button>
+    <button class="btn btn-primary col-md-4 col-sm-4 col-xs-4 btn-lg funding_btn mintclick ">카카오페이로 결제하기</button>
     
   
     
@@ -481,13 +403,6 @@
 </form>
 
 
-
-
-  <button
-      type="button"
-      class="btn btn-primary col-md-4 col-sm-4 col-xs-4 btn-lg funding_btn mintclick "
-      onclick="location.href = '${contextPath}/funding/fundingOpenDetail' "
-    > 결제 예약하기</button>
 
       </div>
 

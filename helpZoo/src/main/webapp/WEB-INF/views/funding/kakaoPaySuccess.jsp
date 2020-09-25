@@ -158,23 +158,32 @@
  		<h1 class="fofofofo"> 결제에 성공하였습니다.</h1>
 
 
-        <c:forEach var="item" items="${rewardList}">
 
 
         <div class="card text-center bmi">
           <div class="card-header">
-         ${item.price}원
-            
+          
+        <c:forEach var="itemPrice" items="${orderRewardView.price}">
+         ${itemPrice}원 <br>
+           </c:forEach>
           </div>
           <div class="card-body">
             <h5 class="card-title">
               
 
+		 <c:forEach var="itemRewardName" items="${orderRewardView.rewardName}">
+         ${itemRewardName} <br>
+           </c:forEach>
 
-
-           ${item.rewardName} 
            <br>
-           ${item. amount}개
+           
+           
+           <c:forEach var="itemAmount" items="${orderRewardView.amount}">
+         ${itemAmount}개 <br>
+      		
+           </c:forEach>
+      
+      
            
             </h5>
             
@@ -187,22 +196,22 @@
         </div>
 
 
-      </c:forEach>
 
 
 
 
-    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-    
     
 
-      <h5 class="fofofofo"> 총 ${rewardList.totalAmount} 원 결제에 성공하였습니다.</h5>
+      <h5 class="fofofofo"> 총 ${orderRewardView.totalAmount} 원 결제에 성공하였습니다.</h5>
 
 
 
       <button>뒤로가기</button>
 
 
+
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+    
 
 
 

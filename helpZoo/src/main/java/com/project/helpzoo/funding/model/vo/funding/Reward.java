@@ -84,8 +84,17 @@ public class Reward {
 
 	public void minusStock(int amount) {
 	
+		System.out.println(this.amount);
+		   
+		   System.out.println(amount);
 		
-	   this.amount =- amount;
+		
+	   this.amount = this.amount- amount;
+	   
+	   System.out.println(this.amount);
+	   
+	   System.out.println(amount);
+	   
 	if(this.amount <= 0) {
 		
 		this.amount += amount;
