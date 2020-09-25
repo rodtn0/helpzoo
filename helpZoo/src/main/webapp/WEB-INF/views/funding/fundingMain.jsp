@@ -303,9 +303,67 @@
     
 
 
-	
+  
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 	
 	<script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 	var z = new Array();
 
 	var y = 0;
@@ -317,9 +375,15 @@
 	$('#loadingDiv').fadeOut('fast')	
 	
 	
+	
+	
 	$(document)
 	  .ajaxStart(function () {
-	    $loading.show();
+	  
+		 
+		  $loading.show();
+	 
+	  
 	  })
 	  .ajaxStop(function () {
 	    $loading.hide();
@@ -349,13 +413,102 @@
 	
 		$(document).ready(function() {
 		
-		$.ajax({
+	
+		
+		
+		
+	});
+
+		window.onload = function() {
+
+	
+		$(".card").click(function(){
+
+       var a =  $(this).children().first().val;
+       
+       console.log(a);
+
+    })
+	
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+	
+	</script>
+  
+  
+  <script>
+
+$(document).ready(function(){
+    start.init();
+});
+var start = {
+        param : {
+            curPage : 1,
+            pageListSize : 8,
+        },
+        
+        init : function() {
+          start.testAjax();
+           this.testEvent();
+        },
+       testData : function() {
+            this.setListItems("${firstData}"); // 첫 진입시 데이터 셋팅
+        },
+       testEvent : function() {
+            // 무한 스크롤
+            $(window).scroll(function() {
+                // 맨 밑으로 스크롤이 갔을경우 if문을 탑니다.
+                if($(window).scrollTop() == $(document).height() - $(window).height()) { 
+                    start.param.curPage++; // 현재 페이지에서 +1 처리.
+                    
+                    start.testAjax(); //ajax 호출
+                } 
+            }); 
+        },
+        // 무한 스크롤 ajax 요청
+        testAjax : function() {
+            
+
+
+              $.ajax({
 			url:"${contextPath}/fundingApi/selectList",
 			dataType : "json",
-			success : function(list) {
-				console.log(list);
+			  data     :  {curPage : start.param.curPage,
+				  		   pageListSize : start.param.pageListSize	}, // 다음 페이지 번호와 페이지 사이즈를 가지고 갑니다..
+      success : successCallback,
+      error : errorCallback
+              });
+
+
+
+
+
+
+            // 성공
+            function successCallback(item) {
+              console.log(item);
 			
-			$.each(list,function(index,item){
+			$.each(item,function(index,item){
+				
+				
+				
+				
+				
+				
 				
 				var value = $("<input type='hidden' value= "+item.fundingNo+">")
 				
@@ -443,32 +596,41 @@
         
 
 			
+            }
+            
+            
+            
+            
+            
+            // 실패
+            function errorCallback() {
+                alert("실패");
+            }
+        },
+        
+        // 테스트 데이터 setting
+        setListItems : function (list) {
+            $.each(list, function(i, testData) {
+            	
+            	
+                
+               
+            	
+            	
+            })
+        }
+}
+ 
+
+
+
+
+		
 				
-				
-			}, error : function(){
-				console.log("ajax 통신 실패");
-			}
-				});
-		
-		
-		
-	});
 
-		window.onload = function() {
 
-	
-		$(".card").click(function(){
 
-       var a =  $(this).children().first().val;
-       
-       console.log(a);
-
-    })
-	
-	}
-	
-	</script>
-	
+ </script>
 
 
    
@@ -479,6 +641,27 @@
    
 <script type="text/javascript">
 </script>
+	
+	
+	
+	
+	
+	
+																									
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

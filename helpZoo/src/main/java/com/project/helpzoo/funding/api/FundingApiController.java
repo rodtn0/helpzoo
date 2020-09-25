@@ -28,12 +28,20 @@ public class FundingApiController {
 	
 	@ResponseBody
 	@RequestMapping(value =  "selectList" , produces="text/plain;charset=UTF-8")
-	public String selectList(@RequestParam(value="cp", required=false, defaultValue = "1") int cp
+	public String selectList(@RequestParam(value="curPage", required=false, defaultValue = "0") int curPage,
+			@RequestParam(value="pageListSize", required=false, defaultValue = "8") int pageListSize
 			,FundingSearch orderSearch) {
 	
 		
 		
-		List<FundingMainViewDto> mainViewList = service.selectList(cp, orderSearch);
+		
+		
+		
+		System.out.println(curPage + "커런트페이지");
+		
+		System.out.println(pageListSize + " 페이지 리스트 사이즈");
+		
+		List<FundingMainViewDto> mainViewList = service.selectList(orderSearch,curPage,pageListSize);
 		
 		
 		System.out.println(mainViewList);

@@ -206,7 +206,7 @@
 
 
 
-      <button>뒤로가기</button>
+      <button onclick="location.href ='${contextPath}'">메인으로 돌아가기</button>
 
 
 

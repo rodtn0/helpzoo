@@ -36,6 +36,7 @@ import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenStoryView;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingTotalInfoDto;
 import com.project.helpzoo.funding.model.dao.FundingDAO;
 import com.project.helpzoo.funding.model.service.FundingService;
+import com.project.helpzoo.funding.model.vo.funding.FundingCategory;
 import com.project.helpzoo.funding.model.vo.funding.FundingFileCategory;
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.member.model.vo.Member;
@@ -68,7 +69,7 @@ public class FundingController {
 		// Summernote 이미지 업로드
 		@ResponseBody
 		@RequestMapping("fundingOpenStory/insertImage")
-		public String insertImage(HttpServletRequest request,@RequestParam(value="uploadFile", required=false) MultipartFile uploadFile) {
+		public String insertImageStory(HttpServletRequest request,@RequestParam(value="uploadFile", required=false) MultipartFile uploadFile) {
 			
 		
 			String savePath =  request.getSession().getServletContext().getRealPath("resources/infoImages/");
@@ -714,20 +715,20 @@ public String fundingOpenStorySave(@PathVariable Long fundingNo,
 		response.setHeader("Cache-Control", "no-cache"); 
 			
 		Long categoryNo = 0L;
-		if(fundingTag.equals("장난감")) {
+		if(category.equals("장난감")) {
 			
 			categoryNo = 1L;
 			
-		}else if (fundingTag.equals("사료")) {
+		}else if (category.equals("사료")) {
 			
 			categoryNo = 2L;
-		}else if(fundingTag.equals("운동기구")) {
+		}else if(category.equals("운동기구")) {
 			
 			categoryNo = 3L;
-		}else if(fundingTag.equals("옷")) {
+		}else if(category.equals("옷")) {
 			
 			categoryNo = 4L;
-		}else if(fundingTag.equals("간식")) {
+		}else if(category.equals("간식")) {
 			
 			categoryNo = 5L;
 		}

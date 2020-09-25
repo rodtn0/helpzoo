@@ -31,9 +31,11 @@ public interface FundingService {
 	/** 펀딩 메인 뷰의 list를 가져오는 service.
 	 * @param cp
 	 * @param fundingSearch
+	 * @param startNo 
+	 * @param pageListSize 
 	 * @return
 	 */
-	List<FundingMainViewDto> selectList(int cp, FundingSearch fundingSearch);
+	List<FundingMainViewDto> selectList(FundingSearch fundingSearch, int startNo, int pageListSize);
 
 	
 	
