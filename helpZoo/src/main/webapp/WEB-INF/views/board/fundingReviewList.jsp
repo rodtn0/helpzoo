@@ -201,7 +201,7 @@
 		
 		<!-- 로그인 + 펀딩구매 내역이 있어야 작성 버튼 보임  -->
 		<c:if test="${!empty loginMember && fBuyCount >= 1}">
-		<a href="${contextPath}/board/writeView/1" class="btn-get-started scrollto">글작성</a>
+		<a href="${contextPath}/board/writeView/1" class="btn-get-started scrollto" style="font-family: LotteMartDream;">글작성</a>
 		</c:if>
 		
 		

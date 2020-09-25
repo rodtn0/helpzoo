@@ -178,7 +178,7 @@
 		</table>
 		
 		<c:if test="${!empty loginMember && dBuyCount >= 1}">
-		<a href="${contextPath}/board/writeView/2" class="btn-get-started scrollto">글작성</a>
+		<a href="${contextPath}/board/writeView/2" class="btn-get-started scrollto" style="font-family: LotteMartDream;">글작성</a>
 		</c:if>
 		
 		<br><br>

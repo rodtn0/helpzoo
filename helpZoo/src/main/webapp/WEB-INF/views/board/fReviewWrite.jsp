@@ -99,7 +99,7 @@
 									
 								</select>
 								
-							<div class="card my-4">
+							<div class="card my-4" style="width:100%;">
 							<h5 class="card-header">참여한 펀딩 프로젝트</h5>
 							<div class="card-body">
 							<div class="card">
