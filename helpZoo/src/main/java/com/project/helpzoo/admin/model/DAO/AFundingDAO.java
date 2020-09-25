@@ -44,4 +44,12 @@ public class AFundingDAO {
 		return sqlSession.selectList("adminMapper.selectSuccess", yymm);
 	}
 
+	public List<AFunding> selectTopViews() {
+		return sqlSession.selectList("adminMapper.selectTopViews", null);
+	}
+
+	public List<AFunding> selectEndTop() {
+		return sqlSession.selectList("adminMapper.selectEndTop", null);
+	}
+
 }

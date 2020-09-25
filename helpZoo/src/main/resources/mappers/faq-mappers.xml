@@ -15,6 +15,7 @@
     </resultMap>
 	
 	<select id="selectFAQ" parameterType="_int" resultMap="boardResultSet">
-		SELECT BOARD_TITLE, BOARD_CONTENT FROM BOARD WHERE BOARD_TYPE=#{type}
+		SELECT BOARD_TITLE, BOARD_CONTENT FROM BOARD WHERE BOARD_TYPE=#{type} AND
+		BOARD_STATUS='Y'
 	</select>
 </mapper>

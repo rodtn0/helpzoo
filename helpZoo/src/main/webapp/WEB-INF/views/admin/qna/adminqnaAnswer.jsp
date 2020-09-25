@@ -83,6 +83,35 @@ font-size: 40px;
 .btnAnswer{
 	width: 70px;
 	height: 70px;
+	margin-left: 14px;
+}
+.fa-dog{
+	font-size: 40px;
+}
+
+#admin{
+	border: 5px solid #7fcdcd;
+    background-color: white;
+    width: 100px;
+    height: 100px;
+    border-radius: 75px;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 12px;
+    vertical-align: middle;
+    line-height: 100px;
+    margin-right: 14px;
+}
+
+#replyContentArea>textarea {
+    resize: none;
+    width: 100%;
+    border-radius: 15px;
+    border: 1px solid gray;
+    }
+    
+textarea:focus {
+  outline: none;
 }
 </style>
 <div id="replyArea">
@@ -92,6 +121,8 @@ font-size: 40px;
 	<div class="replyWrite">
 		<table align="center">
 			<tr>
+			<td>
+			<div id="admin"><i class="fas fa-dog"></i>${loginMember.memberId }</div></td>
 				<td id="replyContentArea"><textArea rows="3" id="replyContent"></textArea>
 				</td>
 				<td id="replyBtnArea">
@@ -142,7 +173,7 @@ font-size: 40px;
 						"Content" : Content},
 				dataType : "text",
 				success : function(result){
-					alert(result);
+					alert("답변"+result);
 					location.reload();
 				},error : function(){
 					console.log("통신 실패");

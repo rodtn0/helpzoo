@@ -21,4 +21,8 @@ public interface AFundingService {
 
 	List<AFunding> selectSuccess(String yymm);
 
+	List<AFunding> selectTopViews();
+
+	List<AFunding> selectEndTop();
+
 }

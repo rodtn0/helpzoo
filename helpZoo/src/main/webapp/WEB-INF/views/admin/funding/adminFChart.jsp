@@ -58,13 +58,12 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Question And Answer</h1>
-          <p class="mb-4">관리자가 사용자 질문에 답변해주는 페이지입니다.</p>
+          <h1 class="h3 mb-2 text-gray-800">Funding Chart</h1>
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Answer Table</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Funding Chart</h6>
             </div>
             <div class="card-body">
             	<div id="wrapper1">

@@ -122,4 +122,44 @@
     <update id="deleteFaq" parameterType="string">
     	UPDATE BOARD SET BOARD_STATUS='N' WHERE BOARD_NO IN(${fAQNo})
     </update>
+    
+    <select id="selectNextNo" resultType="_int">
+    SELECT SEQ_BNO.NEXTVAL FROM DUAL
+    </select>
+    
+    <insert id="insertFaq" parameterType="Board">
+    INSERT INTO BOARD
+    	VALUES(
+    		#{boardNo},
+    		#{boardTitle},
+    		#{boardContent},
+    		DEFAULT, DEFAULT, DEFAULT, DEFAULT,
+    		#{boardWriter},
+    		3)
+    </insert>
+    
+    <select id="selectTopViews" resultMap="AFundingResultSet">
+    
+    SELECT * FROM
+		(SELECT FUNDING_NO, FUNDING_TITLE, FUNDING_START_DAY,
+		            FUNDING_END_DAY, READ_COUNT 
+		FROM A_FUNDING
+		WHERE FUNDING_START_DAY BETWEEN
+		TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD'))-2
+		AND SYSDATE
+		ORDER BY READ_COUNT DESC)
+		<![CDATA[
+		WHERE ROWNUM <= 5
+		]]>
+		
+	  </select>
+	  
+	  <select id="selectEndTop" resultMap="AFundingResultSet">
+	  SELECT FUNDING_NO, FUNDING_TITLE, MEMBER_NM, (CURRENT_AMOUNT/FUNDING_GOAL) * 100 AS FEES
+		FROM A_FUNDING
+		WHERE FUNDING_END_DAY BETWEEN
+		TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD'))
+		AND SYSDATE
+		ORDER BY FEES DESC
+	  </select>
 </mapper>

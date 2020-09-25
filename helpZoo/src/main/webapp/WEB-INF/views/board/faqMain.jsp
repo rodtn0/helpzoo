@@ -12,13 +12,23 @@
 
 <body>
 	<jsp:include page="../common/header.jsp"/>
+	
+	<div class="container">
+        <div class="section" data-aos="fade-up" style="margin-top: 40px; margin-bottom: 20px;">
+          <h2>Frequently Asked Questions</h2>
+        </div>
+    </div>
+    
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" style="margin-bottom: 20px;">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="img-fluid" src="/helpzoo/resources/images/faq2.png" alt="First slide">
+    </div>
+  </div>
+</div>
 			
 	 <section id="faq" class="faq">
       <div class="container">
-
-        <div class="section-title" data-aos="fade-up">
-          <h2>Frequently Asked Questions</h2>
-        </div>
 
         <ul class="faq-list">
 		<c:choose>
