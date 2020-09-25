@@ -101,6 +101,11 @@
 			cursor : pointer;
 		}
 		
+		#selectReviewList a{
+			color : black;
+			padding-left : 20px;
+		}
+		
 		
 	</style>
 </head>
@@ -112,7 +117,7 @@
 	<div class="container">
 	
 		
-		<div class="main">
+		<%-- <div class="main">
 				<div class="wrapper-demo">
 					<div id="dd" class="wrapper-dropdown-1" tabindex="1">
 						<span>분류 없음</span>
@@ -122,6 +127,17 @@
 					    </ul>
 					</div>
 				​</div>
+		</div> --%>
+		
+		<!-- Single button -->
+		<div class="btn-group" id="selectReviewList">
+		  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+		   	선택하세요 <span class="caret"></span>
+		  </button>
+		  <ul class="dropdown-menu" role="menu">
+		    <li><a href="../review/1">펀딩 후기 게시판</a></li>
+		    <li><a href="#">기부 후기 게시판</a></li>
+		  </ul>
 		</div>
 		
 		
