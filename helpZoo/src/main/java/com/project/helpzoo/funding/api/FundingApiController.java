@@ -36,6 +36,8 @@ public class FundingApiController {
 		List<FundingMainViewDto> mainViewList = service.selectList(cp, orderSearch);
 		
 		
+		System.out.println(mainViewList);
+		
 		
 			
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd").create();

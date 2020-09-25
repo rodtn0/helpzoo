@@ -359,8 +359,26 @@
 				
 				var value = $("<input type='hidden' value= "+item.fundingNo+">")
 				
+				var imgText = "";
 				
-				var $tempImg = $("<img src='${contextPath}/resources/images/dodo5.jpg' class='card-img-top' alt='...'>")
+				if(item.fileChangeName == undefined){
+					
+			    imgText += "'${contextPath}/resources/images/dodo5.jpg'";
+			
+				}else{
+					
+				imgText += 	"'${contextPath}/resources/uploadImages/" + item.fileChangeName+ "' ";
+				
+				}
+				console.log(imgText);
+				
+				
+				
+				var $tempImg = $("<img src=" +imgText + "class='card-img-top' alt='...'>")
+				
+				
+				
+				
 				var $card = $("<div class='card' >");
 				var $boardValue = value;
 				var $cardBody = $("<div class='card-body'>")

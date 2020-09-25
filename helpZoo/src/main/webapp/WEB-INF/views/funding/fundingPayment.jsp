@@ -459,8 +459,12 @@
 	<c:forEach var="itemId" items="${orderReward.id}">
 	 <input type="hidden" value="${itemId}" name="id">
 	 
-	 
+	
     </c:forEach>
+	 
+	 <input type="hidden" value="${fundingNo}" name="fundingNo">
+	 
+	 
 	 
 	 <c:forEach var="itemAm" items="${orderReward.amount}">
 	 <input type="hidden" value="${itemAm}" name="amount">
@@ -471,15 +475,6 @@
     <button>카카오페이로 결제하기</button>
     
   
-	 <script>
-	 
-	 
-	 	console.log($("[name=id]").val());	
-	 
-	 	console.log("야호");
-	 	
-	 </script>
-	 
     
     
     

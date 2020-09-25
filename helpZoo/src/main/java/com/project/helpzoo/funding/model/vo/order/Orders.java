@@ -13,10 +13,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 
 
 @Entity
@@ -52,8 +55,9 @@ public class Orders {
 	 private List<OrderReward> orderRewards = new ArrayList<>();
 	
 	
-	@Column(name = "FUNDING_ID")
-	private Long FundingNo;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="funding_id")
+	private FundingProject funding;
 	
 	
 	public void addOrderReward(OrderReward orderReward) {
@@ -73,20 +77,6 @@ public class Orders {
 	}
 	
 	
-	
-	public Long getFundingNo() {
-		return FundingNo;
-	}
-
-
-
-
-
-	public void setFundingNo(Long fundingNo) {
-		FundingNo = fundingNo;
-	}
-
-
 
 
 
@@ -98,6 +88,22 @@ public class Orders {
 		this.delivery = delivery;
 		this.memberId = memberId;
 		this.orderRewards = orderRewards;
+	}
+
+
+
+
+
+	public FundingProject getFunding() {
+		return funding;
+	}
+
+
+
+
+
+	public void setFunding(FundingProject funding) {
+		this.funding = funding;
 	}
 
 

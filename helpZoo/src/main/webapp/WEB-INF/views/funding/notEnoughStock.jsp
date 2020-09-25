@@ -141,10 +141,6 @@
 
         display: none;
       }
-
-      .fofofofo{
-      margin-left: 40%;
-      }
       
       
     </style>
@@ -155,7 +151,7 @@
   <jsp:include page="/WEB-INF/views/common/header.jsp"/>
   
  		
- 		<h1 class="fofofofo"> 결제에 성공하였습니다.</h1>
+ 		<h1> 결제에 성공하였습니다.</h1>
 
 
         <c:forEach var="item" items="${rewardList}">
@@ -163,22 +159,41 @@
 
         <div class="card text-center bmi">
           <div class="card-header">
-         ${item.price}원
-            
+            <input type="checkbox" class="float-left littlebig" data-name="${item.price}" data-id="${item.id}"/> ${item.price}원
+            펀딩합니다.
           </div>
           <div class="card-body">
             <h5 class="card-title">
               
+              <c:choose>
+
+          <c:when test="${item.seq eq 1}"> <c:set var="bird" value="얼리버드"/>  </c:when>
+
+          <c:when test="${item.seq eq 2}"><c:set var="bird" value="슈퍼버드"/> </c:when>
+
+          <c:when test="${item.seq eq 3}"> <c:set var="bird" value="울트라버드"/> </c:when>
+
+          <c:when test="${item.seq eq 4}"> <c:set var="bird" value="울트라오메가버드"/> </c:when>
+
+           </c:choose>
 
 
 
-           ${item.rewardName} 
-           <br>
-           ${item. amount}개
+              ${bird} ${item.title} (${item.rewardAmount}개 남음)
+           
            
             </h5>
+            <p class="card-text small">
+              ${item.content}
+              <br />
+            </p>
+            ${item.deleveryPrice} | 리워드 제공 예상일 : ${item.deliveryDay} 예정
+            
             
               <div class="size_size">
+                수량 : 
+                <input type="hidden" value="${item.id}" name="id">
+                <input type="number" class="form-control form-control-sm d-flex justify-content-center" id="colFormLabelSm" name="amount">
                 <br>
             </div>
             
@@ -196,11 +211,10 @@
     
     
 
-      <h5 class="fofofofo"> 총 ${rewardList.totalAmount} 원 결제에 성공하였습니다.</h5>
 
 
 
-      <button>뒤로가기</button>
+
 
 
 
