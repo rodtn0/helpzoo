@@ -480,7 +480,7 @@ public class FundingServiceImpl implements FundingService {
 		
 		
 					
-		public String kakaoPayReady(KakaoPayApiItem item) {
+		public String kakaoPayReady(KakaoPayApiItem item, String sisi) {
 			
 			String HOST = "https://kapi.kakao.com";
 			
@@ -504,9 +504,11 @@ public class FundingServiceImpl implements FundingService {
 	        params.add("quantity", "" + item.getQuantity());
 	        params.add("total_amount", "" +item.getTotalAmount());
 	        params.add("tax_free_amount", "0");
-	        params.add("approval_url", "http://localhost:8025/helpZoo/fundingAttend/kakaoPaySuccess");
-	        params.add("cancel_url", "http://localhost:8025/helpZoo/fundingAttend/kakaoPayCancel");
-	        params.add("fail_url", "http://localhost:8025/helpZoo/fundingAttend/kakaoPayFail");
+	        
+	        
+	        params.add("approval_url", "http://localhost:8080/helpZoo/fundingAttend/kakaoPaySuccess");
+	        params.add("cancel_url", "http://localhost:8080/helpZoo/fundingAttend/kakaoPayCancel");
+	        params.add("fail_url", "http://localhost:8080/helpZoo/fundingAttend/kakaoPayFail");
 	        
 	        
 	         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);

@@ -129,7 +129,7 @@ public interface FundingService {
 
 	
 	
-	String kakaoPayReady(KakaoPayApiItem item);
+	String kakaoPayReady(KakaoPayApiItem item, String contextPath);
 
 
 
