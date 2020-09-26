@@ -70,9 +70,9 @@ public class FundingServiceImpl implements FundingService {
 	
 	
 	@Override
-	public List<FundingMainViewDto> selectList(int cp, FundingSearch fundingSearch) {
+	public List<FundingMainViewDto> selectList(FundingSearch fundingSearch, int startNo,int pageListSize) {
 		
-		return dao.selectList(cp,fundingSearch);
+		return dao.selectList(fundingSearch, startNo, pageListSize);
 	}
 
 
@@ -327,7 +327,7 @@ public class FundingServiceImpl implements FundingService {
 			// transferTo(경로) : 지정한 경로에 업로드된 바이트 상태의 파일을 실제 파일로 변환해서 저장해라.
 			try {
 				images.get(i).transferTo(new File(savePath + "/" + files.get(i).getFileChangeName()));
-				System.out.println(savePath);
+				
 				
 			} catch (Exception e) {
 				
@@ -427,7 +427,6 @@ public class FundingServiceImpl implements FundingService {
 	
 			FundingFileCategory fileCategoryType = dao.getFundingCategory(fileCategory);
 			
-			System.out.println(images.get(0).toString());
 			
 				// 3) 파일정보 DB 저장
 			

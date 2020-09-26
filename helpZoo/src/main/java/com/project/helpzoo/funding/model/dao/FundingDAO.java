@@ -69,9 +69,11 @@ public class FundingDAO {
 	/** 처음 펀딩 페이지에 왔을때 검색 List를 반환하는 메소드 입니다.
 	 * @param cp
 	 * @param fundingSearch
+	 * @param startNo 
+	 * @param pageListSize 
 	 * @return
 	 */
-	public List<FundingMainViewDto> selectList(int cp, FundingSearch fundingSearch) {
+	public List<FundingMainViewDto> selectList(FundingSearch fundingSearch, int startNo, int pageListSize) {
 
 
 		
@@ -111,8 +113,8 @@ public class FundingDAO {
 						,funding.summary, attachment.fileChangeName)
 				.where(attachment.fundingFileCategory.id.eq(1L))
 				.orderBy(orderby(fundingSearch.getSearchSort()))
-				.offset(0)
-				.limit(20)
+				.offset(startNo)
+				.limit(pageListSize)
 				.fetch();
 		
 		
