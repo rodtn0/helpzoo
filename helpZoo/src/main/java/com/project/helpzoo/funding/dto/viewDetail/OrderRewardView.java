@@ -11,7 +11,7 @@ public class OrderRewardView {
 	
 	private int[] price;
 	
-	private String[] rewardName;
+	private String[] title;
 	
 	private int totalAmount;
 	
@@ -37,12 +37,12 @@ public class OrderRewardView {
 	
 	
 
-	public String[] getRewardName() {
-		return rewardName;
+	public String[] getTitle() {
+		return title;
 	}
 
-	public void setRewardName(String[] rewardName) {
-		this.rewardName = rewardName;
+	public void setTitle(String[] title) {
+		this.title = title;
 	}
 
 	public int getTotalAmount() {
@@ -76,7 +76,7 @@ public class OrderRewardView {
 	@Override
 	public String toString() {
 		return "OrderRewardView [id=" + Arrays.toString(id) + ", amount=" + Arrays.toString(amount) + ", rewardName="
-				+ Arrays.toString(rewardName) + ", totalAmount=" + totalAmount + "]";
+				+ Arrays.toString(title) + ", totalAmount=" + totalAmount + "]";
 	}
 
 	@Override

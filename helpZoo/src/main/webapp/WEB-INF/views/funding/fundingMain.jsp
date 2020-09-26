@@ -289,365 +289,70 @@
       <hr />
     </div>
     
-  	<div class='container justify-content-center' id='loadingDiv'>
-  	
-<div class="loadingio-spinner-magnify-6i1erl5311d"><div class="ldio-fh2riys9cfu">
-<div><div><div></div><div></div></div></div>
-</div></div>
 
-</div>
-    
-    <div id="cocoacard">
-    
-    </div>
-    
-
-
+   
   
-    
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-	
-	<script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-	var z = new Array();
-
-	var y = 0;
-	
-	
-	
-	var $loading = $('#loadingDiv').hide();
-	
-	$('#loadingDiv').fadeOut('fast')	
-	
-	
-	
-	
-	$(document)
-	  .ajaxStart(function () {
-	  
-		 
-		  $loading.show();
-	 
-	  
-	  })
-	  .ajaxStop(function () {
-	    $loading.hide();
-	    
-	    
-	    $(".card").click(function(){
-
-	        var a =  $(this).children().first().val();
-	        
-	       
-	        
-	        var url = "${contextPath}/funding/fundingView/"+a;
-	        
-	        
-	        location.href = url;
-	        
-	        
-	        
-	        
-
-	     })
-	    
-	    
-	  });
-	
-	
-	
-		$(document).ready(function() {
-		
-	
-		
-		
-		
-	});
-
-		window.onload = function() {
-
-	
-		$(".card").click(function(){
-
-       var a =  $(this).children().first().val;
-       
-       console.log(a);
-
-    })
-	
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-	
-	</script>
-  
-  
-  <script>
-
-$(document).ready(function(){
-    start.init();
-});
-var start = {
-        param : {
-            curPage : 1,
-            pageListSize : 8,
-        },
-        
-        init : function() {
-          start.testAjax();
-           this.testEvent();
-        },
-       testData : function() {
-            this.setListItems("${firstData}"); // 첫 진입시 데이터 셋팅
-        },
-       testEvent : function() {
-            // 무한 스크롤
-            $(window).scroll(function() {
-                // 맨 밑으로 스크롤이 갔을경우 if문을 탑니다.
-                if($(window).scrollTop() == $(document).height() - $(window).height()) { 
-                    start.param.curPage++; // 현재 페이지에서 +1 처리.
+                  
+                  
+                  <c:forEach var="funding"  varStatus="status" items="${fundingList}">
                     
-                    start.testAjax(); //ajax 호출
-                } 
-            }); 
-        },
-        // 무한 스크롤 ajax 요청
-        testAjax : function() {
-            
+                    <c:if test="${status.index%3 eq 0}">
+                      <div class='card-deck'>
+                      </c:if>
 
+      <div class='card' >
 
-              $.ajax({
-			url:"${contextPath}/fundingApi/selectList",
-			dataType : "json",
-			  data     :  {curPage : start.param.curPage,
-				  		   pageListSize : start.param.pageListSize	}, // 다음 페이지 번호와 페이지 사이즈를 가지고 갑니다..
-      success : successCallback,
-      error : errorCallback
-              });
+        <c:set var="src" value="${contextPath}/resources/uploadImages/${funding.fileChangeName}"/>
+        <img src="${src}" class='card-img-top' alt='...'>
 
+      <div class='card-body'>
 
+        <h5 class='card-title'>
+        ${funding.fundingTitle}
+          </h5>
 
+          <p class='card-text'>
 
-
-
-            // 성공
-            function successCallback(item) {
-              console.log(item);
-			
-			$.each(item,function(index,item){
-				
-				
-				
-				
-				
-				
-				
-				var value = $("<input type='hidden' value= "+item.fundingNo+">")
-				
-				var imgText = "";
-				
-				if(item.fileChangeName == undefined){
-					
-			    imgText += "'${contextPath}/resources/images/dodo5.jpg'";
-			
-				}else{
-					
-				imgText += 	"'${contextPath}/resources/uploadImages/" + item.fileChangeName+ "' ";
-				
-				}
-				console.log(imgText);
-				
-				
-				
-				var $tempImg = $("<img src=" +imgText + "class='card-img-top' alt='...'>")
-				
-				
-				
-				
-				var $card = $("<div class='card' >");
-				var $boardValue = value;
-				var $cardBody = $("<div class='card-body'>")
-				var $cardTitle = $("<h5 class='card-title'>").text(item.fundingTitle);
-				var $cardStory = $("<p class='card-text'>").text(item.fundingSummary);
-				var $cardSmallForm = $("<p class='card-text'>")
-				var $cardSmallCategory = $("<small class='text-muted'>").text(item.category)
-				var $cardSmallAchievement = $("<small class='text-muted'>").text("달성률 : " + item.achievementRate + "%")
-				var $cardSmallOrderAmount = $("<small class='text-muted'>").text("총 참여금액 :  " + item.totalOrderAmount)
-				
-				
-				
-				
-				$cardSmallForm.append($cardSmallCategory,$cardSmallAchievement,$cardSmallOrderAmount)
-				
-				$cardBody.append($cardTitle,$cardStory,$cardSmallForm)
-				
-				$card.append($boardValue,$tempImg,$cardBody);
-			
-				z[y++] = $card;
-					
-			
-					
-				
-			});
-
-				 // 행
-			
-			      var kk = 0;
-			      var xx = new Array();
-
-				for(var i = 0; i<z.length-2; i++){
-					
-					var $cardDeck = $("<div class='card-deck'>");
-					
-					if(i%3 == 0){
+            ${funding.fundingSummary}
+          </p>
+          <small class='text-muted'>
           
-						$cardDeck.append(z[(i)],z[(i+1)],z[(i+2)]);
-            			
-						
-						
-			          	xx[kk++] = $cardDeck;
-			          	
-			          	
-					}
-					console.log(xx[kk]);
-					
-				}
+            ${funding.category}
 
-        for(var i = 0; i<xx.length; i++ ){
+          </small>
+          <small class='text-muted'>
+            ${funding.achievementRate}
+          </small>
 
-          $("#cocoacard").append(xx[i]);
+          <small class='text-muted'>
 
-        }
-        
-        if(xx.length == 0){
-        	
-        	$("#cocoacard").after("<h1>헉..프로젝트가 등록되어 있지 않습니다!</h1>")
-        	
-        	
-        }
-        
+              ${funding.totalOrderAmount}
 
-			
-            }
-            
-            
-            
-            
-            
-            // 실패
-            function errorCallback() {
-                alert("실패");
-            }
-        },
-        
-        // 테스트 데이터 setting
-        setListItems : function (list) {
-            $.each(list, function(i, testData) {
-            	
-            	
-                
-               
-            	
-            	
-            })
-        }
-}
- 
+          </small>
+
+
+        </div>
+      </div>
+
+      <c:if test="${status.index%3 eq 0}">
+    </div>
+        </c:if>
 
 
 
 
-		
-				
+    </c:forEach>
 
 
 
- </script>
+    </div>
 
 
-   
-   
-   <ul id="list-guestbook">
-    </ul>
-   
-   
-<script type="text/javascript">
-</script>
 	
-	
-	
-	
-	
-	
-																									
+											
 	
 	
 	

@@ -389,6 +389,22 @@
 
 
 
+
+
+
+  <c:set var="at"
+			value="${file}"/>
+                
+                
+                
+                
+                
+  	
+
+
+
+
+
                 <br>
                 <div class="upload-btn-wrapper">
                     <button class="btn"> <i class="fas fa-camera-retro"></i>&nbsp;등록하기</button>
@@ -404,7 +420,11 @@
 					<div class="form-inline mb-2">
 					<label class="input-group-addon mr-3 insert-label">업로드<br>이미지</label>
 					<div class="boardImg" id="titleImgArea">
-						<img id="titleImg" width="200" height="200">
+						<img id="titleImg" width="200" height="200"
+						<c:if test="${!empty at }">
+								src="${contextPath}${at.filePath}/${at.fileChangeName }"
+							</c:if>
+						>
 					</div>
 				</div>
 
@@ -433,8 +453,9 @@
   	
                 <div class="form-group">
                   <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" 
-                  placeholder="내용을 입력하세요." name="fundingSummary"
-                  ></textarea>
+                  placeholder="내용을 입력하세요." name="fundingSummary"  
+                 
+                  >${fundingOpenStoryView.fundingSummary}</textarea>
                   <small>100자 남음</small>
               </div>        
   
@@ -461,7 +482,10 @@
                 
                 프로젝트 스토리<span class="star">*</span><br>
                 <small>진정성 있고 매력적인 스토리로 서포터의 마음을 움직여볼까요?</small>
-					<textarea class="form-control" id="summernote" name="fundingStory"></textarea>
+          <textarea class="form-control" id="summernote" name="fundingStory"
+      
+          
+          >${fundingOpenStoryView.fundingStory}</textarea>
 				
 
 
@@ -510,6 +534,13 @@
 	              $("#contentImg3").attr("src", e.target.result);
 	              break;
 	          }
+	          
+	          // 이미지가 업로드 된 경우 삭제 이미지 목록 (deleteImages) 에서
+	          // 해당 index값을 false로 변경해라.
+	          deleteImages[num-1] = false;
+	          console.log(deleteImages);
+	          
+	          
 	        }
 
 	        reader.readAsDataURL(value.files[0]);

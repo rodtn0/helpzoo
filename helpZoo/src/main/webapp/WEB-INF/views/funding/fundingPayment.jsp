@@ -192,41 +192,29 @@
         <div class="div2"><br />소문 내기</div>
       </div>
 
+      <c:forEach var="item" items="${rewardList}">
+      <hr>
+      ${item.title}
+
+      <div class="float-right">수량 : ${item.amount}개 ${item.price}원</div>
+
+
+
+
+
       
+    </c:forEach>
+    
+    <hr>
+    추가후원금   <div class="float-right">0원</div>
+    <hr>
+    배송비   <div class="float-right">2500원</div>
       <hr>
-      [슈퍼얼리버드] 흑당고 1개
-      <br>
-      흑당고 1개
-
-      <div class="float-right">수량 : 1개 10,2000원</div>
-
+      펀딩금액   <div class="float-right">${orderReward.totalAmount}</div>
       <hr>
-      [슈퍼얼리버드] 흑당고 2개
-      <br>
-      흑당고 2개
-
-      <div class="float-right">수량 : 1개 20,4000원</div>
-
-      <hr>
-      [슈퍼얼리버드] 흑당고 3개
-      <br>
-      흑당고 3개
-
-      <div class="float-right">수량 : 1개 30,6000원</div>
-
-      <hr>
-      추가후원금   <div class="float-right">0원</div>
-      <hr>
-      배송비   <div class="float-right">2500원</div>
-
-
-      <hr>
-      펀딩금액   <div class="float-right">61,2000원</div>
-      <hr>
-      최종결제금액   <div class="float-right">63,7000원</div>
+      최종결제금액   <div class="float-right">${orderReward.totalAmount}</div>
 
     
-
 
 
 
@@ -380,8 +368,6 @@
 
 	<c:forEach var="itemId" items="${orderReward.id}">
 	 <input type="hidden" value="${itemId}" name="id">
-	 
-	
     </c:forEach>
 	 
 	 <input type="hidden" value="${fundingNo}" name="fundingNo">

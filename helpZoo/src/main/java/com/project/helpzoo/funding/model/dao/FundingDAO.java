@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 
+import org.hibernate.cache.spi.QueryCache;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,6 +20,7 @@ import com.project.helpzoo.funding.model.vo.funding.FundingMaker;
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.funding.model.vo.funding.MakerAgent;
 import com.project.helpzoo.funding.model.vo.funding.QFundingAttachment;
+import com.project.helpzoo.board.model.vo.PageInfo;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingDetailViewDto;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingMainViewDto;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenInfoView;
@@ -44,13 +46,16 @@ import com.project.helpzoo.funding.model.vo.order.Delivery;
 import com.project.helpzoo.funding.model.vo.order.OrderReward;
 import com.project.helpzoo.funding.model.vo.order.Orders;
 import com.project.helpzoo.funding.model.vo.order.QOrderReward;
+import com.project.helpzoo.funding.model.vo.order.QOrders;
 import com.project.helpzoo.funding.model.vo.search.FundingSearch;
 import com.project.helpzoo.funding.model.vo.search.SearchSort;
 import com.project.helpzoo.funding.model.vo.search.SearchStatus;
 import com.querydsl.core.Tuple;
+import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.CaseBuilder;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
@@ -73,7 +78,7 @@ public class FundingDAO {
 	 * @param pageListSize 
 	 * @return
 	 */
-	public List<FundingMainViewDto> selectList(FundingSearch fundingSearch, int startNo, int pageListSize) {
+	public List<FundingMainViewDto> selectList(PageInfo pInfo) {
 
 
 		
@@ -91,32 +96,37 @@ public class FundingDAO {
 		
 		QFundingAttachment attachment = QFundingAttachment.fundingAttachment;
 		
+		QOrders order = QOrders.orders;
+		
+		
+		
+		
 		
 		
 		List<Tuple> result = query
 				.select(funding.id,
-						funding.title, category.category_name, maker.name, funding.goalAmount, reward.price,
+						funding.title, category.category_name, maker.name, funding.goalAmount, 
 						funding.summary,
 						funding.readCount,funding.likeCount,
 						attachment.fileChangeName,
-						orderReward.count.sum())
-				
+						order.status,
+			new CaseBuilder().when(order.status.ne("Y")).then(0L).otherwise(order.price).sum())
 				.from(funding)
-				.leftJoin(funding.rewards, reward)
-				.leftJoin(orderReward).on(reward.id.eq(orderReward.reward.id))
 				.leftJoin(funding.category, category)
 				.leftJoin(funding.fundingMaker, maker)
 				.leftJoin(attachment).on(funding.id.eq(attachment.parentFunding.id))
 				
+				.leftJoin(funding.rewards, reward)
+				.leftJoin(orderReward).on(reward.id.eq(orderReward.reward.id))
+				.leftJoin(orderReward.order, order)
 				.groupBy(funding.id,funding.title, category.category_name, maker.name, funding.goalAmount, 
-						reward.price,funding.readCount,funding.likeCount
-						,funding.summary, attachment.fileChangeName)
+						funding.readCount,funding.likeCount
+						,funding.summary, attachment.fileChangeName,order.status)
 				.where(attachment.fundingFileCategory.id.eq(1L))
-				.orderBy(orderby(fundingSearch.getSearchSort()))
-				.offset(startNo)
-				.limit(pageListSize)
-				.fetch();
-		
+				.orderBy()
+				.offset(pInfo.getCurrentPage())
+				.limit(pInfo.getLimit())
+				.fetch();		
 		
 		List<FundingMainViewDto> mainViewList = new ArrayList<FundingMainViewDto>();
 		
@@ -124,8 +134,12 @@ public class FundingDAO {
 		
 		for (Tuple tuple : result) {
 			int totalOrderAmount = 0;
-		if(  tuple.get(orderReward.count.sum())!= null && tuple.get(reward.price)!=null ) {
-		totalOrderAmount =  tuple.get(orderReward.count.sum())*tuple.get(reward.price);
+		if(  tuple.get(order.price.sum())!=null ) {
+			
+			
+		totalOrderAmount =  tuple.get(order.price.sum()).intValue();
+		
+		
 		}
 		FundingMainViewDto mainView = new FundingMainViewDto
 			(
@@ -158,20 +172,20 @@ public class FundingDAO {
 	 * @param searchSort
 	 * @return
 	 */
-	private OrderSpecifier<Integer> orderby(SearchSort searchSort) {
+	private OrderSpecifier<Long> orderby(SearchSort searchSort) {
 
-		if (searchSort == searchSort.LIKE) {
-
-			return QFundingProject.fundingProject.likeCount.desc();
-		} else if (searchSort == searchSort.VIEW) {
+		QOrders order = QOrders.orders;
+		
+		
+		 if (searchSort == searchSort.VIEW) {
 
 			return QFundingProject.fundingProject.readCount.desc();
 		} else if (searchSort == searchSort.TIME) {
 
-			return null;
+			return QFundingProject.fundingProject.id.desc();
 		}
-		return QFundingProject.fundingProject.likeCount.desc();
-
+		 
+		 return new CaseBuilder().when(order.status.ne("Y")).then(0L).otherwise(order.price).sum().desc();
 	}
 	
 
@@ -243,7 +257,9 @@ public class FundingDAO {
 		QFundingMaker maker = QFundingMaker.fundingMaker;
 
 		QReward reward = QReward.reward;
-
+		
+		QOrders order = QOrders.orders;
+		
 		QOrderReward orderReward = QOrderReward.orderReward;
 		
 		
@@ -264,12 +280,12 @@ public class FundingDAO {
 							funding.endDay,
 							funding.startDay,
 							category.category_name,
-							orderReward.count.sum())
+							order.price.sum())
 					.from(funding)
-					.leftJoin(funding.rewards, reward)
 					.leftJoin(funding.fundingMaker, maker)
-					.leftJoin(orderReward).on(reward.id.eq(orderReward.reward.id))
 					.leftJoin(funding.category,category)
+					.leftJoin(funding.rewards, reward)
+					.leftJoin(order).on(order.id.eq(funding.id))
 					.where(funding.id.eq(no))
 					.groupBy(funding.id,
 							funding.story, 
@@ -370,9 +386,10 @@ public class FundingDAO {
 	    
 	    
 	    
-	    funding.setManagerEmail(managerEmail);
+	    funding.setManagerEmail(managerName);
 	    
-	    funding.setManagerName(managerName);
+	    
+	    funding.setManagerName(managerEmail);
 	  
 	    FundingMaker maker = new FundingMaker();
 	    
@@ -998,7 +1015,7 @@ public class FundingDAO {
 			
 			
 			rewardView = new FundingDetailRewardView(re.get(reward.price), re.get(reward.title), re.get(reward.deliveryPrice), re.get(reward.amount), 
-					
+	
 					re.get(reward.originRewardAmount), re.get(reward.deliveryDay), re.get(reward.rewardSeq), re.get(reward.content)
 					, re.get(reward.id)
 					
@@ -1073,6 +1090,8 @@ public class FundingDAO {
 		Orders order = em.find(Orders.class, orderId);
 		
 		
+		int totalAmount = 0;
+		
 		for(int i = 0; i<orderRewardView.getId().length; i++) {
 			
 			
@@ -1091,7 +1110,7 @@ public class FundingDAO {
 			
 			int orTotalPrice = price * aamount;
 			
-			orderReward = new OrderReward(reward, order,orderRewardView.getAmount()[i],orTotalPrice);
+			orderReward = new OrderReward(reward, order,orderRewardView.getAmount()[i],((Integer)orTotalPrice).longValue());
 			
 			orderReward.setFunding(order.getFunding());
 			
@@ -1099,7 +1118,14 @@ public class FundingDAO {
 			
 			rewardOrderList.add(orderReward);
 			
+			totalAmount += orTotalPrice;
+			
+			
 		}
+		
+		order.setPrice(totalAmount);
+		
+		
 		
 		
 		
@@ -1245,7 +1271,135 @@ public class FundingDAO {
 		
 		return reward.getTitle();
 	}
+
+
+
+
+	public FundingOpenMakerInfoView openMaker(Long fundingNo) {
+	
+		
+		FundingProject funding = em.find(FundingProject.class, fundingNo);
+		
+	
+		FundingMaker maker = funding.getFundingMaker();
+		
+		Long makerNo = maker.getId();
+		
+		Long agentNo = maker.getMakerAgent().getId();
+		
+		
+		
+		return getFundingOpenMakerInfoView(fundingNo, makerNo, agentNo);
+	}
+
+
+
+
+	public FundingAttachment getAttachment(Long fundingNo, long categoryNo) {
+		
+		
+		QFundingAttachment attachment = QFundingAttachment.fundingAttachment;
+		
+		QFundingFileCategory fileCategory = QFundingFileCategory.fundingFileCategory;
+		
+		QFundingProject funding = QFundingProject.fundingProject;
+		
+		
+		JPAQueryFactory query = new JPAQueryFactory(em);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		return query.select(attachment).from(attachment)
+				.leftJoin(attachment.fundingFileCategory, fileCategory)
+				.leftJoin(attachment.parentFunding, funding)
+				.where(fileCategory.id.eq(categoryNo).and(funding.id.eq(fundingNo))).fetchOne();
+	}
+
+
+
+
+	public FundingFileCategory findFundingFileCategory(Long categoryId) {
+	
+		return em.find(FundingFileCategory.class, categoryId);
+	}
+
+
+
+
+	public void saveAttachment(FundingAttachment updatedattach) {
+		
+		
+		
+		em.persist(updatedattach);
+		
+	}
+
+
+
+
+	public void deleteAttachment(FundingProject funding, FundingFileCategory category) {
+		
+		
+		QFundingProject fundingProject = QFundingProject.fundingProject;
+		
+		QFundingFileCategory fileCategory = QFundingFileCategory.fundingFileCategory;
+		
+		QFundingAttachment attachment = QFundingAttachment.fundingAttachment;
+		
+		JPAQueryFactory query = new JPAQueryFactory(em);
+		
+		
+		
+		
+	query.delete(attachment).where(attachment.parentFunding.id.eq(funding.getId()).and(attachment.fundingFileCategory.id.eq(category.getId()))).execute();
+		
+		
+		
+		
+		
+	}
+
+
+
+
+	public int getListCount() {
+	
+		QFundingProject funding = QFundingProject.fundingProject;
+		
+		JPAQueryFactory query = new JPAQueryFactory(em);
+		
+		
+		
+		return query.select(funding.count()).from(funding).where(funding.status.eq("Y")).fetchFirst().intValue();
+	}
+
+
+
+
+	
+
+
+
+
+	
 	
 	
 	
 }
+
+
+
+
+
+
+
+
+

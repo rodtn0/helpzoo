@@ -60,6 +60,11 @@ public class Orders {
 	private FundingProject funding;
 	
 	
+	@Column(name = "PRICE")
+	private long price;
+	
+	
+	
 	public void addOrderReward(OrderReward orderReward) {
 		orderRewards.add(orderReward);
 		
@@ -77,6 +82,22 @@ public class Orders {
 	}
 	
 	
+
+
+
+	public long getPrice() {
+		return price;
+	}
+
+
+
+
+
+	public void setPrice(long price) {
+		this.price = price;
+	}
+
+
 
 
 

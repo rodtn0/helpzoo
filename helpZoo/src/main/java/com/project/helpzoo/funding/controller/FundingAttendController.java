@@ -2,6 +2,7 @@ package com.project.helpzoo.funding.controller;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -38,7 +39,7 @@ import com.project.helpzoo.member.model.vo.Member;
 
 	
 	@Controller
-	@SessionAttributes({"loginMember" })
+	@SessionAttributes({"loginMember" , "orderId"})
 	@RequestMapping("/fundingAttend/*")
 	public class FundingAttendController {
 
@@ -74,12 +75,37 @@ import com.project.helpzoo.member.model.vo.Member;
 			
 			Long fundingNo2 = ((Integer)fundingNo).longValue();
 			
-			
+		 RewardView reward = new RewardView();
+		 List<RewardView> rewardList = new ArrayList<RewardView>();
 		
+		 int totalAmount = 0;
+			for(int i = 0; i<orderReward.getTitle().length; i++) {
+				
+				reward.setTitle(orderReward.getTitle()[i]);
+				reward.setPrice(orderReward.getPrice()[i]);
+				reward.setAmount(orderReward.getAmount()[i]);
+				
+				
+				totalAmount += orderReward.getPrice()[i];
+				
+				rewardList.add(reward);
+			}
+			
+			
+			
+			orderReward.setTotalAmount(totalAmount);
 			
 			
 			
 			model.addAttribute("orderReward", orderReward);
+			
+			
+			
+			model.addAttribute("rewardList",rewardList);
+			
+			
+			
+			
 			
 			model.addAttribute("fundingNo", fundingNo2);
 			
@@ -100,7 +126,7 @@ import com.project.helpzoo.member.model.vo.Member;
 		
 		
 		@PostMapping("/kakaoPay")
-	    public String kakaoPay(Model model,OrderRewardView orderReward, int fundingNo, HttpServletRequest request, HttpSession session ) {
+	    public String kakaoPay(Model model,OrderRewardView orderReward, int fundingNo, HttpServletRequest request ) {
 				
 			Long fundingNo2 = ((Integer)fundingNo).longValue();
 			
@@ -141,7 +167,7 @@ import com.project.helpzoo.member.model.vo.Member;
 			
 			Orders order = new Orders(timestamp2, "N", null, member.getMemberNo());
 			
-		
+		 
 			
 			
 			Long ordersId = service.saveOrder(order, addressObject,fundingNo2);
@@ -186,13 +212,13 @@ import com.project.helpzoo.member.model.vo.Member;
 		  
 	        
 		  int ooderId = ordersId.intValue();
-		  System.out.println(ooderId + "오더아이디");
 		  
 		  
-		  //HttpSession session = request.getSession();
+		  HttpSession session = request.getSession();
 		  
 		  
-		  session.setAttribute("orderId", ooderId);
+		  
+		  model.addAttribute("orderId", ooderId);
 		  
 		  
 		  
@@ -200,7 +226,7 @@ import com.project.helpzoo.member.model.vo.Member;
 		  
 		  
 		  
-		  String url = service.kakaoPayReady(item,ContextPath, ooderId);
+		  String url = service.kakaoPayReady(item,ContextPath);
 		
 		  
 
@@ -214,16 +240,15 @@ import com.project.helpzoo.member.model.vo.Member;
 	    }
 	    
 					  
-		  	@RequestMapping("/kakaoPaySuccess/{ooderId}")
-		    public String kakaoPaySuccess(Model model , HttpServletRequest request , @RequestParam("pg_token") String pg_token, HttpSession session, @PathVariable int ooderId) {
+		  	@RequestMapping("/kakaoPaySuccess")
+		    public String kakaoPaySuccess(Model model , HttpServletRequest request , @RequestParam("pg_token") String pg_token) {
 			 
 		        
 		  	
 		  		
-		  	//HttpSession session = request.getSession(false);	
+		  	HttpSession session = request.getSession(false);	
 		  	
-		  	//int orderId =  	(Integer)session.getAttribute("orderId");
-		  	int orderId = ooderId;
+		  	int orderId =  	(Integer)model.getAttribute("orderId");
 		  	
 		  	System.out.println("오더석세스");
 		  	
@@ -264,14 +289,14 @@ import com.project.helpzoo.member.model.vo.Member;
 				 
 				  amountList[i] = ord.getCount();
 				  
-				  priceList[i] = ord.getPrice();
+				  priceList[i] = ord.getPrice().intValue();
 				  
 			  }
 			  
 			  OrderRewardView orderRewardView = new OrderRewardView();
 			  
 			  
-			  orderRewardView.setRewardName(rewardNameList);
+			  orderRewardView.setTitle(rewardNameList);
 			  
 			  orderRewardView.setAmount(amountList);
 			  

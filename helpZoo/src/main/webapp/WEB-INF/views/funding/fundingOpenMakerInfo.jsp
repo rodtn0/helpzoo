@@ -361,11 +361,23 @@
 
        <div class="info_discription_title">     메이커명 <span class="star">*</span></div>
             <small>법인사업자는 법인등기부상 법인명 / 개인 사업자는 주민등록상 성명 또는 상호 / 개인은 주민등록상 성명을 입력하세요.</small>
-                <input class="form-control form-control-lg" type="text" placeholder="메이커 명 입력" name="name">
+                <input class="form-control form-control-lg" type="text" placeholder="메이커 명 입력" name="name" value="${fundingOpenMakerInfoView.name}">
                 <small>40자 남음</small>
                 <br>
                 <br>
                 <br>
+
+
+
+
+
+
+  <c:set var="at"
+			value="${file}"/>
+                
+                
+                
+                
 
                 
                 메이커 프로필 이미지 <span class="star">*</span>
@@ -385,7 +397,11 @@
                 
   	<div class="form-inline mb-2">
 					<div class="boardImg" id="titleImgArea">
-						<img id="titleImg" width="200" height="200">
+						<img id="titleImg" width="200" height="200"
+						<c:if test="${!empty at }">
+								src="${contextPath}${at.filePath}/${at.fileChangeName }"
+							</c:if>
+						>
 					</div>
 				</div>
   
@@ -396,12 +412,12 @@
 
     
                 문의 이메일 <span class="star">*</span><br>
-                <input class="form-control form-control-lg" type="text" placeholder="이메일 입력" name="email">
+                <input class="form-control form-control-lg" type="text" placeholder="이메일 입력" name="email" value="${fundingOpenMakerInfoView.email}">
                 <br>
                 <br>
 
                 문의 전화번호 <span class="star">*</span><br>
-                <input class="form-control form-control-lg" type="number" placeholder="전화번호 입력" name="phone">
+                <input class="form-control form-control-lg" type="number" placeholder="전화번호 입력" name="phone" value="${fundingOpenMakerInfoView.phone}">
                 <small>특수문자(-)없이 숫자만 입력해주세요.</small>
                 <br>
                 <br>
@@ -411,23 +427,23 @@
 
                 카카오톡 채널(선택사항)<span class="star">*</span><br>
                 <small>엔터를 누르면 태그가 등록됩니다. (최대 10개까지 입력 가능)</small>
-                <input class="form-control form-control-lg" type="text" placeholder="검색용 아이디 입력" name="kakaoId">
-                <input class="form-control form-control-lg" type="text" placeholder="홈페이지 URL 입력" name="kakaoUrl">
+                <input class="form-control form-control-lg" type="text" placeholder="검색용 아이디 입력" name="kakaoId" value="${fundingOpenMakerInfoView.kakaoId}">
+                <input class="form-control form-control-lg" type="text" placeholder="홈페이지 URL 입력" name="kakaoUrl" value="${fundingOpenMakerInfoView.kakaoUrl}">
                 <br><br>
 
 
                 홈페이지(선택사항)<span class="star">*</span><br>
                 <small>엔터를 누르면 태그가 등록됩니다. (최대 10개까지 입력 가능)</small>
-                <input class="form-control form-control-lg" type="text" placeholder="홈페이지 URL 입력" name="homepage1">
-                <input class="form-control form-control-lg" type="text" placeholder="홈페이지 URL 입력" name="homepage2">
+                <input class="form-control form-control-lg" type="text" placeholder="홈페이지 URL 입력" name="homepage1" value="${fundingOpenMakerInfoView.homepage1}">
+                <input class="form-control form-control-lg" type="text" placeholder="홈페이지 URL 입력" name="homepage2" value="${fundingOpenMakerInfoView.homepage2}">
                 <br><br>
 
 
                 SNS(선택사항) <span class="star">*</span><br>
                 <small>엔터를 누르면 태그가 등록됩니다. (최대 10개까지 입력 가능)</small>
-                <input class="form-control form-control-lg" type="text" placeholder="https://www.facebook.com/" name="sns1">
-                <input class="form-control form-control-lg" type="text" placeholder="https://twitter.com/" name="sns2">
-                <input class="form-control form-control-lg" type="text" placeholder="https://www.instagram.com/" name="sns3">
+                <input class="form-control form-control-lg" type="text" placeholder="https://www.facebook.com/" name="sns1" value="${fundingOpenMakerInfoView.sns1}">
+                <input class="form-control form-control-lg" type="text" placeholder="https://twitter.com/" name="sns2" value="${fundingOpenMakerInfoView.sns2}">
+                <input class="form-control form-control-lg" type="text" placeholder="https://www.instagram.com/" name="sns3" value="${fundingOpenMakerInfoView.sns3}">
                 <br><br>
 
 
@@ -451,20 +467,34 @@
                 <br>
                 
                 사업자 구분 <span class="star">*</span><br>
-               <select class="form-control form-control-lg" name="businessType">
-                   <option disabled="disabled">사업자 구분 선택</option>
-                 <option value="개인">개인</option>
-                <option value="개인 사업자">개인사업자</option>
-                <option value="법인 사업자">법인사업자</option>
-              </select>
+              
+              
+              
+              <select class="form-control form-control-lg" name="businessType">
+	    <option value="개인" <c:if test="${fundingOpenMakerInfoView.businessType eq '개인'}">selected</c:if>>개인</option>
+    <option value="개인 사업자" <c:if test="${fundingOpenMakerInfoView.businessType eq '개인 사업자'}">selected</c:if>>개인 사업자</option>
+	    <option value="법인 사업자" <c:if test="${fundingOpenMakerInfoView.businessType eq '법인 사업자'}">selected</c:if>>법인 사업자</option>
+	</select>
+
+
+              
+              
+              
+              
                 <br>  
                 <br>
 
 
+
+
+
+
+
+                
                 
                 대표자명 <span class="star">*</span><br>
                 <small>사업자등록증에 등록된 대표자의 이름과 일치해야 합니다.</small>
-                <input class="form-control form-control-lg" type="text" placeholder="대표자명 입력" name="agentName">
+                <input class="form-control form-control-lg" type="text" placeholder="대표자명 입력" name="agentName" value="${fundingOpenMakerInfoView.agentName}">
                 
               
 
@@ -474,7 +504,7 @@
               
                 대표자 이메일 <span class="star">*</span><br>
                 <small>대표자의 이메일로 전자 약정서가 발송됩니다. 전자 약정은 대표자가 직접 진행해야 합니다.</small>
-                <input class="form-control form-control-lg" type="text" placeholder="대표자 이메일 입력" name="agentEmail">
+                <input class="form-control form-control-lg" type="text" placeholder="대표자 이메일 입력" name="agentEmail" value="${fundingOpenMakerInfoView.agentEmail}">
                 
               
 
@@ -486,7 +516,7 @@
                 
                 대표자 휴대폰 번호 <span class="star">*</span><br>
                 <small>약정의 체결 시 본인확인을 위해 휴대전화 본인인증을 진행합니다. 휴대전화 본인인증이 불가한 경우, 약정의 체결 및 서비스 제공이 불가하니, 반드시 대표자(본인) 명의 휴대폰 번호를 입력하세요.</small>
-                <input class="form-control form-control-lg" type="number" placeholder="대표자 휴대폰 번호 입력" name="agentPhone">
+                <input class="form-control form-control-lg" type="number" placeholder="대표자 휴대폰 번호 입력" name="agentPhone" value="${fundingOpenMakerInfoView.agentPhone}">
                 특수문자(-)없이 숫자만 입력해주세요.
 
                 <br>
@@ -514,9 +544,9 @@
                      <option>농협 은행</option>
                    </select>
 
-                  <input class="form-control form-control-lg" type="number" placeholder="계좌번호 입력" name="accountNumber">
+                  <input class="form-control form-control-lg" type="number" placeholder="계좌번호 입력" name="accountNumber" value="${fundingOpenMakerInfoView.accountNumber}">
                   <small>특수문자(-)없이 숫자만 입력해주세요.</small>
-                  <input class="form-control form-control-lg" type="text" placeholder="예금주 명 입력" name="accountHolder"> 
+                  <input class="form-control form-control-lg" type="text" placeholder="예금주 명 입력" name="accountHolder" value="${fundingOpenMakerInfoView.accountHolder}"> 
                   <small>예금주 명은 계좌의 예금주와 정확하게 일치해야 합니다.</small>
 
 
@@ -544,31 +574,37 @@
 
      <script>
 
-function LoadImg(value, num) {
-     if (value.files && value.files[0]) {
-       var reader = new FileReader();
+     function LoadImg(value, num) {
+	      if (value.files && value.files[0]) {
+	        var reader = new FileReader();
 
-       reader.onload = function (e) {
-         switch (num) {
-           case 1:
-             $("#titleImg").attr("src", e.target.result);
-             break;
-           case 2:
-             $("#contentImg1").attr("src", e.target.result);
-             break;
-           case 3:
-             $("#contentImg2").attr("src", e.target.result);
-             break;
-           case 4:
-             $("#contentImg3").attr("src", e.target.result);
-             break;
-         }
-       }
+	        reader.onload = function (e) {
+	          switch (num) {
+	            case 1:
+	              $("#titleImg").attr("src", e.target.result);
+	              break;
+	            case 2:
+	              $("#contentImg1").attr("src", e.target.result);
+	              break;
+	            case 3:
+	              $("#contentImg2").attr("src", e.target.result);
+	              break;
+	            case 4:
+	              $("#contentImg3").attr("src", e.target.result);
+	              break;
+	          }
+	          
+	          // 이미지가 업로드 된 경우 삭제 이미지 목록 (deleteImages) 에서
+	          // 해당 index값을 false로 변경해라.
+	          deleteImages[num-1] = false;
+	          console.log(deleteImages);
+	          
+	          
+	        }
 
-       reader.readAsDataURL(value.files[0]);
-     }
-   }
-
+	        reader.readAsDataURL(value.files[0]);
+	      }
+	    }
 
 
 

@@ -36,6 +36,7 @@ import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenStoryView;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingTotalInfoDto;
 import com.project.helpzoo.funding.model.dao.FundingDAO;
 import com.project.helpzoo.funding.model.service.FundingService;
+import com.project.helpzoo.funding.model.vo.funding.FundingAttachment;
 import com.project.helpzoo.funding.model.vo.funding.FundingCategory;
 import com.project.helpzoo.funding.model.vo.funding.FundingFileCategory;
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
@@ -146,12 +147,13 @@ public class FundingController {
 		
 		String phone = loginMember.getMemberPhone();
 	
+		char first = phone.charAt(0);
 		
 		phone = phone.replaceAll("-", "");
 		
 		phone = phone.trim();
 		
-		
+		phone = first + phone;
 		
 		int phoneNum = Integer.parseInt(phone);
 		
@@ -257,6 +259,12 @@ public class FundingController {
 		
 		FundingOpenInfoView fundingOpenInfoView = service.openInfo(fundingNo);
 		
+		long categoryNo = 1L;
+		
+		
+		FundingAttachment attachment = service.getAttachment(fundingNo,categoryNo);
+		
+		model.addAttribute("file",attachment);
 		
 		model.addAttribute("fundingOpenInfoView", fundingOpenInfoView);
 		
@@ -286,9 +294,18 @@ public class FundingController {
 		model.addAttribute("makerName", makerName);
 		
 		
+		long categoryNo = 6L;
+		
+		FundingAttachment attachment = service.getAttachment(fundingNo,categoryNo);
+		
+		model.addAttribute("file",attachment);
+		
 		FundingOpenStoryView fundingOpenStoryView = service.openStory(fundingNo);
 		
-		model.addAttribute("fundingOpenInfoView", fundingOpenStoryView);
+		
+		
+		
+		model.addAttribute("fundingOpenStoryView", fundingOpenStoryView);
 		
 		
 		return "funding/fundingOpenStory";
@@ -330,11 +347,21 @@ public class FundingController {
 		
 		String makerName = 	dao.getMakerName(fundingNo);
 		
+		
+		FundingOpenMakerInfoView fundingOpenMakerInfoView = service.openMaker(fundingNo);
+		
+		
+		model.addAttribute("fundingOpenMakerInfoView", fundingOpenMakerInfoView);
+		
 		model.addAttribute("fundingNo", fundingNo);
 		
 		model.addAttribute("makerName", makerName);
 		
+		long categoryNo = 3L;
 		
+		FundingAttachment attachment = service.getAttachment(fundingNo,categoryNo);
+		
+		model.addAttribute("file",attachment);
 		
 		
 
@@ -472,6 +499,32 @@ public String fundingOpenMakerInfoSave(Model model,@PathVariable Long fundingNo,
 	
 	
 	
+	
+	
+	
+	Boolean isUploaded = !makerImage.getOriginalFilename().equals("");
+	
+	if(isUploaded) {
+		
+		
+		
+		FundingAttachment attachment = service.getAttachment(fundingNo,fileCategory);
+		
+		if(attachment!=null ) {
+			
+			if(!attachment.getFileOriginName().isEmpty() || !attachment.getFileChangeName().isEmpty())
+			
+			service.deliteAttachment(attachment);
+			
+			System.out.println("삭제진행중");
+		}
+		
+		
+	}
+	
+	
+	
+	
 	insertImage(fundingNo, request,makerImage, new ArrayList<MultipartFile>(),fileCategory);
 	
 	
@@ -516,9 +569,6 @@ public String fundingOpenRewardSave(@PathVariable Long fundingNo, Model model, H
 	
 	
 	Timestamp deliDay = null;
-	
-	
-	
 	
 	
 	
@@ -598,6 +648,31 @@ public String fundingOpenStorySave(@PathVariable Long fundingNo,
 	response.setHeader("Pragma", "no-cache"); 
 
 	response.setHeader("Cache-Control", "no-cache"); 
+	
+	
+	
+	
+	
+	Boolean isUploaded = !introPhoto.getOriginalFilename().equals("");
+	
+	if(isUploaded) {
+		
+		
+		
+		FundingAttachment attachment = service.getAttachment(fundingNo,6L);
+		
+		if(attachment!=null ) {
+			
+			if(!attachment.getFileOriginName().isEmpty() || !attachment.getFileChangeName().isEmpty())
+			
+			service.deliteAttachment(attachment);
+			
+			System.out.println("삭제진행중");
+		}
+		
+		
+	}
+	
 	
 	insertAction(fundingStory, fundingNo, request,introPhoto, new ArrayList<MultipartFile>());
 	
@@ -743,6 +818,30 @@ public String fundingOpenStorySave(@PathVariable Long fundingNo,
 		
 		Long fileCategory = 1L;
 		
+		
+		
+		
+		
+		
+		Boolean isUploaded = !titleImage.getOriginalFilename().equals("");
+		
+		if(isUploaded) {
+			
+			
+			
+			FundingAttachment attachment = service.getAttachment(fundingNo,fileCategory);
+			
+			if(attachment!=null ) {
+				
+				if(!attachment.getFileOriginName().isEmpty() || !attachment.getFileChangeName().isEmpty())
+				
+				service.deliteAttachment(attachment);
+				
+				System.out.println("삭제진행중");
+			}
+			
+			
+		}
 		
 		
 		insertImage(fundingNo, request,titleImage, new ArrayList<MultipartFile>(),fileCategory);
