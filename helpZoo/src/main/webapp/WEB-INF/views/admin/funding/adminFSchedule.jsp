@@ -397,7 +397,7 @@ function myfunction(){
 	 					var $td1 = $("<td>").text(item.fundingNo);
 	 					var $td2 = $("<td>").text(item.fundingTitle);
 	 					var $td3 = $("<td>").text(item.memberName);
-	 					var $td4 = $("<td>").text(item.fees);
+	 					var $td4 = $("<td>").text(item.fees+"%");
 	 					
 	 					$tr.append($td1, $td2, $td3, $td4);
 	 					
