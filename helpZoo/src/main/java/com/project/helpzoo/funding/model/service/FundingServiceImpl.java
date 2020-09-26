@@ -480,7 +480,7 @@ public class FundingServiceImpl implements FundingService {
 		
 		
 					
-		public String kakaoPayReady(KakaoPayApiItem item, String sisi) {
+		public String kakaoPayReady(KakaoPayApiItem item, String sisi, int ooderId) {
 			
 			String HOST = "https://kapi.kakao.com";
 			
@@ -505,10 +505,13 @@ public class FundingServiceImpl implements FundingService {
 	        params.add("total_amount", "" +item.getTotalAmount());
 	        params.add("tax_free_amount", "0");
 	        
+	        params.add("approval_url", "http://localhost:8080/helpzoo/fundingAttend/kakaoPaySuccess/");
+	        params.add("cancel_url", "http://localhost:8080/helpzoo/fundingAttend/kakaoPayCancel/");
+	        params.add("fail_url", "http://localhost:8080/helpzoo/fundingAttend/kakaoPayFail/");
 	        
-	        params.add("approval_url", "http://localhost:8080/helpZoo/fundingAttend/kakaoPaySuccess");
-	        params.add("cancel_url", "http://localhost:8080/helpZoo/fundingAttend/kakaoPayCancel");
-	        params.add("fail_url", "http://localhost:8080/helpZoo/fundingAttend/kakaoPayFail");
+	       // 시연용 주소입니다. params.add("approval_url", "http://aclass.xyz:8083/helpzoo/fundingAttend/kakaoPaySuccess/"+ooderId);
+	       //시연용 주소입니다.  params.add("cancel_url", "http://aclass.xyz:8083/helpZoo/fundingAttend/kakaoPayCancel/"+ooderId);
+	      // 시연용 주소입니다.  params.add("fail_url", "http://aclass.xyz:8083/helpZoo/fundingAttend/kakaoPayFail/"+ooderId);
 	        
 	        
 	         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
