@@ -40,7 +40,7 @@ public class OrderReward {
 	
 	
 	@Column(name = "PRICE")
-	private int price;
+	private Long price;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="funding_id")
@@ -62,7 +62,7 @@ public class OrderReward {
 		this.funding = funding;
 	}
 
-	public OrderReward(Reward reward, Orders order, int count, int price) {
+	public OrderReward(Reward reward, Orders order, int count, Long price) {
 		super();
 		this.reward = reward;
 		this.order = order;
@@ -70,7 +70,7 @@ public class OrderReward {
 		this.price = price;
 	}
 
-	public static OrderReward makeOrderReward(Reward reward, int price, int count) {
+	public static OrderReward makeOrderReward(Reward reward, Long price, int count) {
 		
 		OrderReward orderReward = new OrderReward();
 		orderReward.setReward(reward);
@@ -165,11 +165,11 @@ public class OrderReward {
 		this.count = count;
 	}
 
-	public int getPrice() {
+	public Long getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(Long price) {
 		this.price = price;
 	}
 

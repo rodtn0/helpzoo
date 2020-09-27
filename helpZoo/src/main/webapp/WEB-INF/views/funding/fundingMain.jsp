@@ -289,22 +289,64 @@
       <hr />
     </div>
     
-  	<div class='container justify-content-center' id='loadingDiv'>
-  	
-<div class="loadingio-spinner-magnify-6i1erl5311d"><div class="ldio-fh2riys9cfu">
-<div><div><div></div><div></div></div></div>
-</div></div>
 
-</div>
-    
-    <div id="cocoacard">
-    
-    </div>
-    
-
-
+   
   
-    
+
+
+
+                  
+                  
+                  <c:forEach var="funding"  varStatus="status" items="${fundingList}">
+                    
+                    <c:if test="${status.index %3 eq 0}">
+                      <div class='card-deck'>
+                      </c:if>
+
+      <div class='card' >
+		
+		<input type="hidden" value="${funding.fundingNo}">
+	
+        <c:set var="src" value="${contextPath}/resources/uploadImages/${funding.fileChangeName}"/>
+        <img src="${src}" class='card-img-top' alt='...'>
+
+      <div class='card-body'>
+
+        <h5 class='card-title'>
+        ${funding.fundingTitle}
+          </h5>
+
+          <p class='card-text'>
+
+            ${funding.fundingSummary}
+          </p>
+          <small class='text-muted'>
+          
+            ${funding.category}
+
+          </small>
+          <small class='text-muted'>
+            ${funding.achievementRate}
+          </small>
+
+          <small class='text-muted'>
+
+              ${funding.totalOrderAmount}
+
+          </small>
+
+
+        </div>
+      </div>
+
+      <c:if test="${status.index %3 eq 2}">
+    </div>
+        </c:if>
+
+
+
+
+    </c:forEach>
 
 
 
@@ -313,6 +355,112 @@
 
 
 
+	  <%-- 검색 파라미터가 포함된 url 생성작업 --%> 
+	      <c:url var="searchParameter" value="${pInfo.boardType}">
+	      	<c:if test="${!empty paramValues.ct }">
+	      		<c:forEach var="ctName" items="${paramValues.ct}">
+	      			<c:param name="ct" value="${ctName}"/>
+	      		</c:forEach>
+	      	</c:if>
+	      	
+	      	<c:if test="${!empty param.sVal }">
+	      		<c:param name="sKey" value="${param.sKey}"/>
+	      		<c:param name="sVal" value="${param.sVal}"/>
+	      	</c:if>
+	      	
+	      
+	      </c:url>
+	      
+	     <%--------- 검색 파라미터가 있을 경우 / 없을 경우 url 가공  -----------%>
+	    <!--  검색 파라미터가 있을 경우 : search/1?ct=운동&ct=영화&sKey=tit&sVal=test&cp=2
+	     검색 파라미터가 없는 경우 : list/1?cp=2
+	   -->   
+	    <c:choose>
+	    	<%-- 검색 조건이 존재하는 경우(파라미터 cp가 쿼리스트링 제일 마지막에 추가될 수 있도록 '&' 기호 추가.) --%>
+	    	<c:when test="${!empty paramValues.ct || !empty param.sVal}">
+	    		<c:set var="url" value="&cp="/>
+	    		<c:set var="listUrl" value="../search/${url}${pInfo.currentPage}" scope="session"/>
+
+	    	</c:when>
+	   
+	   		<%-- 검색 조건이 존재하지 않는 경우 (파라미터 cp가 쿼리스트링 제일 앞에 추가될 수 있도록 '?' 기호 추가 --%>
+	   		<c:otherwise>
+	   			<c:set var="url" value="?cp="/>	
+				<c:set var="listUrl" value="../selectList/${url}${pInfo.currentPage}" scope="session"/>
+					   		
+	   		</c:otherwise>
+	   
+	    
+	    </c:choose>
+	    
+	    
+	     
+	     
+	     
+	     
+	     
+	     
+		<div class="my-4">
+            <ul class="pagination">
+            	<c:if test="${pInfo.currentPage > pInfo.pagingBarSize}">	
+            		
+            		
+	                <li>
+	                	<!-- 맨 처음으로(<<) -->
+	                    <a class="page-link text-primary" href="${url}1">&lt;&lt;</a>
+	                </li>
+	                
+	                <li>	
+	                	<!-- 이전으로(<) -->
+	                	<!--  prev 생성 식 : 현제페이지 -1 / 페이징바 사이즈(10) * 10 -->
+	                	<!--  fmt 태그를 이용한 소수점 제거 -->
+	                	<fmt:parseNumber var="operand1" value="${(pInfo.currentPage-1)/pInfo.pagingBarSize}" integerOnly="true"/>
+	               		
+	               		<c:set var ="prev" value="${operand1 * 10 }"/>
+	               	
+	              
+                   		<a class="page-link text-primary" href="${url}${prev}">&lt;</a>
+	                </li>
+                </c:if>
+                
+                <c:forEach var="p" begin="${pInfo.startPage}" end="${pInfo.endPage}">
+                
+                	<c:choose>
+                		<c:when test="${p==pInfo.currentPage}">
+                			<li><a class="page-link">${p}</a></li>
+                			</c:when>
+                			
+                			<c:otherwise>
+	                		<li>
+	                			<a class="page-link text-primary" href="?cp=${p}">${p}</a>
+		                	</li>
+		                	</c:otherwise>
+		            </c:choose>	
+                </c:forEach>
+                
+                
+                <!-- 다음 페이지로(>) -->
+                <!--  next 생성 식 : (현재 페이지 + (pInfo.pagingBarSize-1) ) /10 * 10 + 1  -->
+                <c:if test="${pInfo.maxPage > pInfo.endPage}">
+                
+               
+	                <li>
+	                <fmt:parseNumber var="operand2" value="${(pInfo.currentPage +(pInfo.pagingBarSize-1))/10 }" integerOnly="true"/>
+                	<c:set var="next" value="${operand2 * 10 + 1}"/>
+            
+						<a class="page-link text-primary" href="${url}${next}">&gt;</a>
+	                </li>
+	                
+	                <!-- 맨 끝으로(>>) -->
+	                <li>
+	                    <a class="page-link text-primary" href="${url}${pInfo.maxPage}">&gt;&gt;</a>
+	                </li>
+	            </c:if>
+	                
+	                
+                
+            </ul>
+        </div>	
 
 
 
@@ -321,75 +469,17 @@
 
 
 
+    </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
+	
 	
 	<script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-	var z = new Array();
-
-	var y = 0;
-	
-	
-	
-	var $loading = $('#loadingDiv').hide();
-	
-	$('#loadingDiv').fadeOut('fast')	
 	
 	
 	
 	
-	$(document)
-	  .ajaxStart(function () {
-	  
-		 
-		  $loading.show();
-	 
-	  
-	  })
-	  .ajaxStop(function () {
-	    $loading.hide();
-	    
-	    
-	    $(".card").click(function(){
+	 $(".card").click(function(){
 
 	        var a =  $(this).children().first().val();
 	        
@@ -404,250 +494,11 @@
 	        
 	        
 
-	     })
-	    
-	    
-	  });
+	     });
 	
-	
-	
-		$(document).ready(function() {
-		
-	
-		
-		
-		
-	});
-
-		window.onload = function() {
-
-	
-		$(".card").click(function(){
-
-       var a =  $(this).children().first().val;
-       
-       console.log(a);
-
-    })
-	
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
 	
 	</script>
-  
-  
-  <script>
-
-$(document).ready(function(){
-    start.init();
-});
-var start = {
-        param : {
-            curPage : 1,
-            pageListSize : 8,
-        },
-        
-        init : function() {
-          start.testAjax();
-           this.testEvent();
-        },
-       testData : function() {
-            this.setListItems("${firstData}"); // 첫 진입시 데이터 셋팅
-        },
-       testEvent : function() {
-            // 무한 스크롤
-            $(window).scroll(function() {
-                // 맨 밑으로 스크롤이 갔을경우 if문을 탑니다.
-                if($(window).scrollTop() == $(document).height() - $(window).height()) { 
-                    start.param.curPage++; // 현재 페이지에서 +1 처리.
-                    
-                    start.testAjax(); //ajax 호출
-                } 
-            }); 
-        },
-        // 무한 스크롤 ajax 요청
-        testAjax : function() {
-            
-
-
-              $.ajax({
-			url:"${contextPath}/fundingApi/selectList",
-			dataType : "json",
-			  data     :  {curPage : start.param.curPage,
-				  		   pageListSize : start.param.pageListSize	}, // 다음 페이지 번호와 페이지 사이즈를 가지고 갑니다..
-      success : successCallback,
-      error : errorCallback
-              });
-
-
-
-
-
-
-            // 성공
-            function successCallback(item) {
-              console.log(item);
-			
-			$.each(item,function(index,item){
-				
-				
-				
-				
-				
-				
-				
-				var value = $("<input type='hidden' value= "+item.fundingNo+">")
-				
-				var imgText = "";
-				
-				if(item.fileChangeName == undefined){
-					
-			    imgText += "'${contextPath}/resources/images/dodo5.jpg'";
-			
-				}else{
-					
-				imgText += 	"'${contextPath}/resources/uploadImages/" + item.fileChangeName+ "' ";
-				
-				}
-				console.log(imgText);
-				
-				
-				
-				var $tempImg = $("<img src=" +imgText + "class='card-img-top' alt='...'>")
-				
-				
-				
-				
-				var $card = $("<div class='card' >");
-				var $boardValue = value;
-				var $cardBody = $("<div class='card-body'>")
-				var $cardTitle = $("<h5 class='card-title'>").text(item.fundingTitle);
-				var $cardStory = $("<p class='card-text'>").text(item.fundingSummary);
-				var $cardSmallForm = $("<p class='card-text'>")
-				var $cardSmallCategory = $("<small class='text-muted'>").text(item.category)
-				var $cardSmallAchievement = $("<small class='text-muted'>").text("달성률 : " + item.achievementRate + "%")
-				var $cardSmallOrderAmount = $("<small class='text-muted'>").text("총 참여금액 :  " + item.totalOrderAmount)
-				
-				
-				
-				
-				$cardSmallForm.append($cardSmallCategory,$cardSmallAchievement,$cardSmallOrderAmount)
-				
-				$cardBody.append($cardTitle,$cardStory,$cardSmallForm)
-				
-				$card.append($boardValue,$tempImg,$cardBody);
-			
-				z[y++] = $card;
-					
-			
-					
-				
-			});
-
-				 // 행
-			
-			      var kk = 0;
-			      var xx = new Array();
-
-				for(var i = 0; i<z.length-2; i++){
-					
-					var $cardDeck = $("<div class='card-deck'>");
-					
-					if(i%3 == 0){
-          
-						$cardDeck.append(z[(i)],z[(i+1)],z[(i+2)]);
-            			
-						
-						
-			          	xx[kk++] = $cardDeck;
-			          	
-			          	
-					}
-					console.log(xx[kk]);
-					
-				}
-
-        for(var i = 0; i<xx.length; i++ ){
-
-          $("#cocoacard").append(xx[i]);
-
-        }
-        
-        if(xx.length == 0){
-        	
-        	$("#cocoacard").after("<h1>헉..프로젝트가 등록되어 있지 않습니다!</h1>")
-        	
-        	
-        }
-        
-
-			
-            }
-            
-            
-            
-            
-            
-            // 실패
-            function errorCallback() {
-                alert("실패");
-            }
-        },
-        
-        // 테스트 데이터 setting
-        setListItems : function (list) {
-            $.each(list, function(i, testData) {
-            	
-            	
-                
-               
-            	
-            	
-            })
-        }
-}
- 
-
-
-
-
-		
-				
-
-
-
- </script>
-
-
-   
-   
-   <ul id="list-guestbook">
-    </ul>
-   
-   
-<script type="text/javascript">
-</script>
-	
-	
-	
-	
-	
-	
-																									
+											
 	
 	
 	

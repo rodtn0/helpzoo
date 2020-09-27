@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.project.helpzoo.board.model.vo.PageInfo;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingDetailViewDto;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingMainViewDto;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenInfoView;
@@ -17,6 +18,7 @@ import com.project.helpzoo.funding.dto.fundingOpen.FundingTotalInfoDto;
 import com.project.helpzoo.funding.dto.viewDetail.FundingDetailRewardView;
 import com.project.helpzoo.funding.dto.viewDetail.OrderRewardView;
 import com.project.helpzoo.funding.model.vo.KakaoPayApiItem;
+import com.project.helpzoo.funding.model.vo.funding.FundingAttachment;
 import com.project.helpzoo.funding.model.vo.funding.FundingProject;
 import com.project.helpzoo.funding.model.vo.order.Address;
 import com.project.helpzoo.funding.model.vo.order.Delivery;
@@ -28,15 +30,6 @@ public interface FundingService {
 
 	
 	
-	/** 펀딩 메인 뷰의 list를 가져오는 service.
-	 * @param cp
-	 * @param fundingSearch
-	 * @param startNo 
-	 * @param pageListSize 
-	 * @return
-	 */
-	List<FundingMainViewDto> selectList(FundingSearch fundingSearch, int startNo, int pageListSize);
-
 	
 	
 	/** 24시 정각에 현재 등록된 펀딩프로젝트를 확인하여 종료일이 지난 프로젝트를 종료상태로 만드는 service.
@@ -131,7 +124,7 @@ public interface FundingService {
 
 	
 	
-	String kakaoPayReady(KakaoPayApiItem item, String contextPath, int ooderId);
+	String kakaoPayReady(KakaoPayApiItem item, String contextPath);
 
 
 
@@ -169,6 +162,28 @@ public interface FundingService {
 
 
 	String findRewardName(Long id);
-	
+
+
+
+	FundingOpenMakerInfoView openMaker(Long fundingNo);
+
+
+
+	FundingAttachment getAttachment(Long fundingNo, long categoryNo);
+
+
+
+	void deliteAttachment(FundingAttachment attachment);
+
+
+
+	PageInfo pagination(int cp);
+
+
+
+	List<FundingMainViewDto> selectList(PageInfo pInfo);
+
+
+
 	
 }

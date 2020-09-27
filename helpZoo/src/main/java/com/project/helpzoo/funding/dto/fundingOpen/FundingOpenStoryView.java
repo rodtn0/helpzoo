@@ -26,7 +26,6 @@ public class FundingOpenStoryView {
 	
 	
 	
-	
 	public FundingOpenStoryView(String fundingSummary, String fundingStory, FundingAttachment introAttachment) {
 		super();
 		this.fundingSummary = fundingSummary;

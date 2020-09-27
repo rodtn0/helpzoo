@@ -306,41 +306,15 @@
                 <br>
                 <br>
 
-              <div class="funding_open_question ">
-
-                Q1. 리워드가 타 크라우드펀딩사 및 온라인 커머스, 자사 홈페이지 등 다른 판매처에서 유통된 적이 있거나 현재 유통 <br>
-                중인가요? <span class="star">*</span>
-
-              </div>  
-
-              <br>
-
-              <div class="form-check">
-                <input class="form-check-input mint" type="radio" name="circulation" id="circulation" value="option1" checked>
-                <label class="form-check-label " for="exampleRadios1">
-                    &nbsp;    아니요. 다른 곳에서 유통한 적이 없으며 와디즈를 통해 처음 선보이는 제품입니다.
-                </label>
-              </div>
-
-              <br>
-
-             <div class="form-check">
-                <input class="form-check-input mint" type="radio" name="circulation" id="circulation" value="option1" >
-                <label class="form-check-label" for="exampleRadios1">
-                    &nbsp;   예, 다른 곳에서 유통한 적이 있습니다. 또는 현재 유통 중입니다.
-                </label>
-              </div>
+            
 
 
 
 
-
-              <br>
-              <br>
 
               <div class="funding_open_question ">
 
-                Q2. 현재까지 진행된 리워드의 준비 상태 및 앞으로의 계획을 구체적으로 설명해주세요. <span class="star">*</span>
+                Q1. 현재까지 진행된 리워드의 준비 상태 및 앞으로의 계획을 구체적으로 설명해주세요. <span class="star">*</span>
 
               </div>  
               <br>
@@ -368,7 +342,7 @@
 
             <div class="funding_open_question ">
 
-                Q3. 리워드의 전달 계획을 알려주세요.<span class="star">*</span>
+                Q2. 리워드의 전달 계획을 알려주세요.<span class="star">*</span>
 
               </div>  
               <br>
@@ -390,8 +364,7 @@
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" 
                 placeholder="내용을 입력하세요."
                 name ="rewardDeliveryPlan"
-                >
-                ${fundingOpenRequireView.rewardDeliveryPlan}
+                >${fundingOpenRequireView.rewardDeliveryPlan}
                 
                 
                 </textarea>

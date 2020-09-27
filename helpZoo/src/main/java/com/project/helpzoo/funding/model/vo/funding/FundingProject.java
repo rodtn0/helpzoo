@@ -73,7 +73,7 @@ public class FundingProject {
 	private int memberNo;
 	
 	@Column(name="READ_COUNT")
-	private int readCount;
+	private long readCount;
 	
 	@Column(name="LIKE_COUNT")
 	private int likeCount;
@@ -126,7 +126,7 @@ public class FundingProject {
 	
 	
 
-	public int getReadCount() {
+	public long getReadCount() {
 		return readCount;
 	}
 

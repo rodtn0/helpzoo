@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.project.helpzoo.board.model.vo.PageInfo;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingMainViewDto;
 import com.project.helpzoo.funding.dto.viewDetail.FundingDetailRewardView;
 import com.project.helpzoo.funding.model.service.FundingService;
@@ -26,34 +28,43 @@ public class FundingApiController {
 	private FundingService service;
 	
 	
-	@ResponseBody
-	@RequestMapping(value =  "selectList" , produces="text/plain;charset=UTF-8")
-	public String selectList(@RequestParam(value="curPage", required=false, defaultValue = "0") int curPage,
-			@RequestParam(value="pageListSize", required=false, defaultValue = "8") int pageListSize
-			,FundingSearch orderSearch) {
+	@RequestMapping(value =  "selectList")
+	public String selectList(
+			@RequestParam(value="cp", required=false, defaultValue = "1")int cp,
+			
+			
+			FundingSearch orderSearch , Model model) {
+		
+		
+		
+		System.out.println("펀딩셀렉트리스트");
+		
+		PageInfo pInfo = service.pagination(cp);
+		
+		
+		pInfo.setLimit(9);
+		
+		
+		List<FundingMainViewDto> fundingList = service.selectList(pInfo);
 	
 		
+		model.addAttribute("fundingList", fundingList);
+		
+		model.addAttribute("pInfo", pInfo);
 		
 		
 		
-		
-		System.out.println(curPage + "커런트페이지");
-		
-		System.out.println(pageListSize + " 페이지 리스트 사이즈");
-		
-		List<FundingMainViewDto> mainViewList = service.selectList(orderSearch,curPage,pageListSize);
-		
-		
-		System.out.println(mainViewList);
-		
-		
-			
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd").create();
-		
-		
-		
-		return gson.toJson(mainViewList);
+		return "funding/fundingMain";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
 	@ResponseBody

@@ -140,8 +140,8 @@ pageEncoding="UTF-8"%>
           <select class="form-control form-control-lg" name="businessType">
             <option disabled="disabled">사업자 구분 선택</option>
           <option value="개인">개인</option>
-          <option value="법인">법인</option>
-         <option value="개인사업자">개인사업자</option>
+          <option value="법인 사업자">법인 사업자</option>
+         <option value="개인 사업자">개인 사업자</option>
        </select>
 
 
@@ -161,6 +161,7 @@ pageEncoding="UTF-8"%>
             aria-label="Large"
             aria-describedby="inputGroup-sizing-sm"
             placeholder="${loginMember.memberName}"
+            
             readonly
           />
         </div>

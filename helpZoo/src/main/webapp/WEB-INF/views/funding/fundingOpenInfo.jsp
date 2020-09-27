@@ -375,6 +375,13 @@
                 <br>
                 <br>
                 
+                
+                
+                
+                
+                
+                
+                
                 대표 이미지 <span class="star">*</span>
                 <br>
                 <div class="upload-btn-wrapper">
@@ -391,10 +398,28 @@
   
                 <br>
                 
+                   <c:set var="at"
+			value="${file}"/>
+                
+                
+                
+                
+                
   	<div class="form-inline mb-2">
 					<label class="input-group-addon mr-3 insert-label">업로드<br>이미지</label>
 					<div class="boardImg" id="titleImgArea">
-						<img id="titleImg" width="200" height="200">
+						<img id="titleImg" width="200" height="200"
+						
+						<c:if test="${!empty at }">
+								src="${contextPath}${at.filePath}/${at.fileChangeName }"
+							</c:if>>
+						
+						
+						
+						
+						
+						
+						
 					</div>
 				</div>
   
@@ -421,7 +446,9 @@
                     id="input_01"
                     class="datepicker form-control form-control-lg"
                     name="fundingEndDay"
-                    type="text">
+                    type="text"
+                    value="${fundingOpenInfoView.fundingEndDay}"
+                    >
                     
                     
                     
@@ -457,34 +484,47 @@
 <script>
 
 
+var deleteImages = []; // 삭제될 이미지 정보를 담을 배열
 
+// 이미지 삭제 버튼의 수 만큼 배열을 만들고 모두 false로 초기화
+for(var i = 0; i<$(".deleteImg").length; i++){
+	deleteImages.push(false);
+	
+}
 
 
 
 function LoadImg(value, num) {
-     if (value.files && value.files[0]) {
-       var reader = new FileReader();
+    if (value.files && value.files[0]) {
+      var reader = new FileReader();
 
-       reader.onload = function (e) {
-         switch (num) {
-           case 1:
-             $("#titleImg").attr("src", e.target.result);
-             break;
-           case 2:
-             $("#contentImg1").attr("src", e.target.result);
-             break;
-           case 3:
-             $("#contentImg2").attr("src", e.target.result);
-             break;
-           case 4:
-             $("#contentImg3").attr("src", e.target.result);
-             break;
-         }
-       }
+      reader.onload = function (e) {
+        switch (num) {
+          case 1:
+            $("#titleImg").attr("src", e.target.result);
+            break;
+          case 2:
+            $("#contentImg1").attr("src", e.target.result);
+            break;
+          case 3:
+            $("#contentImg2").attr("src", e.target.result);
+            break;
+          case 4:
+            $("#contentImg3").attr("src", e.target.result);
+            break;
+        }
+        
+        // 이미지가 업로드 된 경우 삭제 이미지 목록 (deleteImages) 에서
+        // 해당 index값을 false로 변경해라.
+        deleteImages[num-1] = false;
+        console.log(deleteImages);
+        
+        
+      }
 
-       reader.readAsDataURL(value.files[0]);
-     }
-   }
+      reader.readAsDataURL(value.files[0]);
+    }
+  }
 
 
 

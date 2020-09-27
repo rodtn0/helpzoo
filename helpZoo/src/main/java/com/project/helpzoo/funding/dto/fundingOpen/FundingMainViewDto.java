@@ -15,9 +15,9 @@ public class FundingMainViewDto {
 	
 	private String fundingMaker;
 	
-	private int totalOrderAmount;
+	private long totalOrderAmount;
 	
-	private int reachAmount;
+	private long reachAmount;
 	
 	private Timestamp fundingEndDate;
 
@@ -248,7 +248,7 @@ public class FundingMainViewDto {
 		this.fundingMaker = fundingMaker;
 	}
 
-	public int getTotalOrderAmount() {
+	public long getTotalOrderAmount() {
 		return totalOrderAmount;
 	}
 
@@ -256,7 +256,7 @@ public class FundingMainViewDto {
 		this.totalOrderAmount = totalOrderAmount;
 	}
 
-	public int getReachAmount() {
+	public long getReachAmount() {
 		return reachAmount;
 	}
 

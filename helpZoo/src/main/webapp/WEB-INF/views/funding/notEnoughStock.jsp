@@ -141,6 +141,10 @@
 
         display: none;
       }
+
+      .fofofofo{
+      margin-left: 40%;
+      }
       
       
     </style>
@@ -151,72 +155,19 @@
   <jsp:include page="/WEB-INF/views/common/header.jsp"/>
   
  		
- 		<h1> 결제에 성공하였습니다.</h1>
-
-
-        <c:forEach var="item" items="${rewardList}">
-
-
-        <div class="card text-center bmi">
-          <div class="card-header">
-            <input type="checkbox" class="float-left littlebig" data-name="${item.price}" data-id="${item.id}"/> ${item.price}원
-            펀딩합니다.
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">
-              
-              <c:choose>
-
-          <c:when test="${item.seq eq 1}"> <c:set var="bird" value="얼리버드"/>  </c:when>
-
-          <c:when test="${item.seq eq 2}"><c:set var="bird" value="슈퍼버드"/> </c:when>
-
-          <c:when test="${item.seq eq 3}"> <c:set var="bird" value="울트라버드"/> </c:when>
-
-          <c:when test="${item.seq eq 4}"> <c:set var="bird" value="울트라오메가버드"/> </c:when>
-
-           </c:choose>
+ 		<h1 class="fofofofo"> 재고가 충분하지 않습니다.</h1>
 
 
 
-              ${bird} ${item.title} (${item.rewardAmount}개 남음)
-           
-           
-            </h5>
-            <p class="card-text small">
-              ${item.content}
-              <br />
-            </p>
-            ${item.deleveryPrice} | 리워드 제공 예상일 : ${item.deliveryDay} 예정
-            
-            
-              <div class="size_size">
-                수량 : 
-                <input type="hidden" value="${item.id}" name="id">
-                <input type="number" class="form-control form-control-sm d-flex justify-content-center" id="colFormLabelSm" name="amount">
-                <br>
-            </div>
-            
-            
-          </div>
-        </div>
 
 
-      </c:forEach>
 
+      <button  class="fofofofo btn btn-primary col-md-4 col-sm-4 col-xs-4 btn-lg funding_btn mintclick" onclick="location.href ='${contextPath}'">메인으로 돌아가기</button>
 
 
 
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     
-    
-
-
-
-
-
-
-
 
 
 

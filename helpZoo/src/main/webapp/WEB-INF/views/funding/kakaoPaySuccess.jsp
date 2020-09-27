@@ -50,7 +50,6 @@
         font-size: 0.9rem;
         padding-top: 1.57%;
       }
-
       .div2 {
         width: 5em;
         height: 5em;
@@ -60,11 +59,9 @@
         font-size: 0.9rem;
         font-weight: bold;
       }
-
       .container {
         padding: 5% 7.8% 5%;
       }
-
       h5 {
         display: inline;
       }
@@ -74,7 +71,6 @@
       .fa-info-circle {
         color: #20b2aa;
       }
-
       .bmi {
         /*my additional class name -for card*/
         margin-left: 18%;
@@ -82,7 +78,6 @@
         width: auto;
         margin-top: 6%;
       }
-
       .small {
         font-size: 0.8rem;
       }
@@ -90,46 +85,34 @@
         padding-top: 2%;
         padding-bottom: 2%;
       }
-
       .littlebig {
         -webkit-transform: scale(2); /* Safari and Chrome */
         color: #7fcdcd;
       }
-
       .lasttt {
         margin-top: 7%;
       }
-
       .checkboxSmallSize{
         -webkit-transform: scale(1.2);
       }
-
       .info_card{
-
-
         width: 160px;
         height: 100px;
-
         background-color: 			#E8E8E8;
         margin-left: 20%;
       }
-
       .fa-user-circle{
         -webkit-transform: scale(2); 
         padding-top: 10%;
       }
       .smallicon{
-
         width: 28px;
-
       }
       .col{
       }
-
       .add_Money{
         margin-top: 1%;
       }
-
       .mintclick{
         margin-left: 35%;
           background-color:  #20b2aa;
@@ -138,10 +121,8 @@
       
        .size_size{
         width: 200px;
-
         display: none;
       }
-
       .fofofofo{
       margin-left: 40%;
       }
@@ -165,13 +146,14 @@
           
         <c:forEach var="itemPrice" items="${orderRewardView.price}">
          ${itemPrice}원 <br>
-           </c:forEach>
+         
           </div>
           <div class="card-body">
             <h5 class="card-title">
               
+           </c:forEach>
 
-		 <c:forEach var="itemRewardName" items="${orderRewardView.rewardName}">
+		 <c:forEach var="itemRewardName" items="${orderRewardView.title}">
          ${itemRewardName} <br>
            </c:forEach>
 
@@ -204,9 +186,10 @@
 
       <h5 class="fofofofo"> 총 ${orderRewardView.totalAmount} 원 결제에 성공하였습니다.</h5>
 
+        <br>
+        <br>
 
-
-      <button onclick="location.href ='${contextPath}'">메인으로 돌아가기</button>
+      <button class="btn btn-primary col-md-4 col-sm-4 col-xs-4 btn-lg funding_btn mintclick">뒤로가기</button>
 
 
 

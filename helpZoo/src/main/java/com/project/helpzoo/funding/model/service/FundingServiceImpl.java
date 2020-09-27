@@ -12,6 +12,9 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +29,7 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.project.helpzoo.board.model.vo.PageInfo;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingDetailViewDto;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingMainViewDto;
 import com.project.helpzoo.funding.dto.fundingOpen.FundingOpenInfoView;
@@ -59,20 +63,24 @@ public class FundingServiceImpl implements FundingService {
 	@Autowired
 	private FundingDAO dao;
 	
+	@Autowired// 의존성 주입 (DI)
+	private PageInfo pInfo;
+	
 	private Logger logger = LoggerFactory.getLogger(FundingServiceImpl.class);
 	
 	  private KakaoPayReadyVO kakaoPayReadyVO;
 	  private KakaoPayApprovalVO kakaoPayApprovalVO;
 	
-	
+		@PersistenceContext
+		private EntityManager em;
 	
 	
 	
 	
 	@Override
-	public List<FundingMainViewDto> selectList(FundingSearch fundingSearch, int startNo,int pageListSize) {
+	public List<FundingMainViewDto> selectList(PageInfo page) {
 		
-		return dao.selectList(fundingSearch, startNo, pageListSize);
+		return dao.selectList(page);
 	}
 
 
@@ -479,7 +487,7 @@ public class FundingServiceImpl implements FundingService {
 		
 		
 					
-		public String kakaoPayReady(KakaoPayApiItem item, String sisi, int ooderId) {
+		public String kakaoPayReady(KakaoPayApiItem item, String sisi) {
 			
 			String HOST = "https://kapi.kakao.com";
 			
@@ -504,13 +512,10 @@ public class FundingServiceImpl implements FundingService {
 	        params.add("total_amount", "" +item.getTotalAmount());
 	        params.add("tax_free_amount", "0");
 	        
-	        params.add("approval_url", "http://localhost:8080/helpzoo/fundingAttend/kakaoPaySuccess/");
-	        params.add("cancel_url", "http://localhost:8080/helpzoo/fundingAttend/kakaoPayCancel/");
-	        params.add("fail_url", "http://localhost:8080/helpzoo/fundingAttend/kakaoPayFail/");
 	        
-	       // 시연용 주소입니다. params.add("approval_url", "http://aclass.xyz:8083/helpzoo/fundingAttend/kakaoPaySuccess/"+ooderId);
-	       //시연용 주소입니다.  params.add("cancel_url", "http://aclass.xyz:8083/helpZoo/fundingAttend/kakaoPayCancel/"+ooderId);
-	      // 시연용 주소입니다.  params.add("fail_url", "http://aclass.xyz:8083/helpZoo/fundingAttend/kakaoPayFail/"+ooderId);
+	        params.add("approval_url", "http://localhost:8080/helpZoo/fundingAttend/kakaoPaySuccess");
+	        params.add("cancel_url", "http://localhost:8080/helpZoo/fundingAttend/kakaoPayCancel");
+	        params.add("fail_url", "http://localhost:8080/helpZoo/fundingAttend/kakaoPayFail");
 	        
 	        
 	         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
@@ -612,6 +617,62 @@ public class FundingServiceImpl implements FundingService {
 			
 			
 			return dao.findRewardName(id);
+		}
+
+
+		@Override
+		public FundingOpenMakerInfoView openMaker(Long fundingNo) {
+		
+			return dao.openMaker(fundingNo);
+		}
+
+
+		@Override
+		public FundingAttachment getAttachment(Long fundingNo, long categoryNo) {
+			
+			
+			
+			
+			return dao.getAttachment(fundingNo, categoryNo);
+		}
+
+
+		@Override
+		public void deliteAttachment(FundingAttachment attachment) {
+			
+			
+			
+			
+			
+			FundingProject funding = em.find(FundingProject.class, attachment.getParentFunding().getId());
+			
+			FundingFileCategory category = em.find(FundingFileCategory.class, attachment.getFundingCategory().getId());
+			
+			
+			
+			dao.deleteAttachment(funding,category);
+			
+			
+		}
+
+
+		@Override
+		public PageInfo pagination(int cp) {
+
+
+			int listCount = dao.getListCount();
+			
+			// 2) setPageInfo
+			pInfo.setPageInfo(cp, listCount);
+			
+			
+			
+			
+			
+			
+			
+			
+			return pInfo;
 		}
 		
 		
