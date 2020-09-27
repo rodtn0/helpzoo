@@ -674,6 +674,18 @@ public class FundingServiceImpl implements FundingService {
 			
 			return pInfo;
 		}
+
+
+		@Override
+		public List<FundingMainViewDto> selectSearchList(FundingSearch search, PageInfo pInfo) {
+			
+			
+			
+			
+			return dao.selectList(pInfo,search);
+		}
+
+
 		
 		
 		
