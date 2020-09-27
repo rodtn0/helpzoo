@@ -199,7 +199,7 @@
 			    yAxis: {
 			        title: 'Price',
 			        min: 0,
-			        max: 25000000
+			        max: 2000000
 			    },
 			    xAxis: {
 			        title: 'Month',
