@@ -119,7 +119,7 @@ $('.navbar-light .dmenu').hover(function () {
            <c:otherwise>
               <c:forEach var="ptList" items="${doListPtme}">
                 <div class="card text-black">
-                  <p class="card-head mx-auto">${ptList.infoDonationNo}번째 기부내역</p>
+                  <p class="card-head mx-auto">${ptList.infoDonationNo}번째 글의 기부내역</p>
                  <c:choose>
                     <c:when test="${!empty doPtThList }">
                       	<c:set var = "src" value="/helpzoo/resources/images/not_thumbnail.png"/>
