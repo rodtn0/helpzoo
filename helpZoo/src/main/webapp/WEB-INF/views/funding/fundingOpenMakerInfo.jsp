@@ -539,9 +539,9 @@
 
                     <select class="form-control form-control-lg" name="bank">
                       <option disabled="disabled">은행 선택</option>
-                     <option>우리 은행</option>
-                     <option>신한 은행</option>
-                     <option>농협 은행</option>
+                     <option value="우리 은행" <c:if test="${fundingOpenMakerInfoView.bank eq '우리 은행'}">selected</c:if>>우리 은행</option>
+                     <option value="신한 은행" <c:if test="${fundingOpenMakerInfoView.bank eq '신한 은행'}">selected</c:if>>신한 은행</option>
+                     <option value="농협 은행" <c:if test="${fundingOpenMakerInfoView.bank eq '농협 은행'}">selected</c:if>>농협 은행</option>
                    </select>
 
                   <input class="form-control form-control-lg" type="number" placeholder="계좌번호 입력" name="accountNumber" value="${fundingOpenMakerInfoView.accountNumber}">

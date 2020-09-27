@@ -91,9 +91,7 @@ public class FundingDAO {
 
 		QFundingMaker maker = QFundingMaker.fundingMaker;
 
-		QReward reward = QReward.reward;
 
-		QOrderReward orderReward = QOrderReward.orderReward;
 		
 		QFundingAttachment attachment = QFundingAttachment.fundingAttachment;
 		
@@ -108,37 +106,34 @@ public class FundingDAO {
 				.select(funding.id,
 						funding.title, category.category_name, maker.name, funding.goalAmount, 
 						funding.summary,
-						funding.readCount,funding.likeCount,
 						attachment.fileChangeName,
+						attachment.fundingFileCategory.id,
 						funding.startDay,
-						order.status,
 						order.price.sum())
 				.from(funding)
 				.leftJoin(funding.category, category)
+				.leftJoin(attachment).on(attachment.parentFunding.id.eq(funding.id))
+				.leftJoin(order).on(order.funding.id.eq(funding.id))
 				.leftJoin(funding.fundingMaker, maker)
-				.leftJoin(attachment).on(funding.id.eq(attachment.parentFunding.id))
-				
-				.leftJoin(funding.rewards, reward)
-				.leftJoin(orderReward).on(reward.id.eq(orderReward.reward.id))
-				.leftJoin(orderReward.order, order)
-				.groupBy(funding.id,funding.title, category.category_name, maker.name, funding.goalAmount, 
-						funding.readCount,funding.likeCount
-						,funding.summary, attachment.fileChangeName,order.status,funding.startDay)
-				.where(attachment.fundingFileCategory.id.eq(1L).and(funding.status.eq("Y")))
-				.orderBy(funding.startDay.desc())
+				.groupBy(funding.id,funding.title, category.category_name, maker.name, funding.goalAmount
+						,funding.summary, attachment.fileChangeName,funding.startDay,attachment.fundingFileCategory.id)
+				.where(funding.status.eq("Y"))
+				.orderBy(funding.startDay.desc())	
 				.offset(pInfo.getCurrentPage())
 				.limit(pInfo.getLimit())
 				.fetch();		
+		
+		System.out.println(pInfo);
 		
 		List<FundingMainViewDto> mainViewList = new ArrayList<FundingMainViewDto>();
 		
 		
 		for(Tuple re : result) {
 			
-			System.out.println(re.toString());
+			System.out.println(re.toString() + "펀딩프로젝트");
 		}
 		
-		
+		System.out.println("펀딩프로젝트");
 		
 		for (Tuple tuple : result) {
 			int totalOrderAmount = 0;
@@ -908,10 +903,10 @@ public class FundingDAO {
 		if(businessTypeId.equals("개인")) {
 			type = 1L;
 			
-		}else if (businessTypeId.equals("법인")){
+		}else if (businessTypeId.equals("법인 사업자")){
 			type = 2L;
 			
-		}else if (businessTypeId.equals("개인사업자")){
+		}else if (businessTypeId.equals("개인 사업자")){
 			type = 3L;
 			
 		}
