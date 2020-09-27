@@ -165,7 +165,7 @@ import com.project.helpzoo.member.model.vo.Member;
 			
 			
 			
-			Orders order = new Orders(timestamp2, "N", null, member.getMemberNo());
+			Orders order = new Orders(timestamp2, "Y", null, member.getMemberNo());
 			
 		 
 			

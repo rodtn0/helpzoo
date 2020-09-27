@@ -183,6 +183,8 @@ public interface FundingService {
 
 	List<FundingMainViewDto> selectList(PageInfo pInfo);
 
+	List<FundingMainViewDto> selectSearchList(FundingSearch search, PageInfo pInfo);
+
 
 
 	

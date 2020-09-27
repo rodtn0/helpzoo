@@ -79,7 +79,7 @@
 
       <nav class="nav-menu d-none d-lg-block">
         <ul class="nav-inner">
-          <li class="drop-down"><a href="${contextPath}/funding/fundingMain">펀딩하기</a>
+          <li class="drop-down"><a href="${contextPath}/fundingApi/selectList">펀딩하기</a>
           <ul>
           <li><a href="${contextPath}/fundingApi/selectList">펀딩하기</a></li>
           <li><a href="${contextPath}/funding/fundingOpen">펀딩프로젝트 만들기</a></li>

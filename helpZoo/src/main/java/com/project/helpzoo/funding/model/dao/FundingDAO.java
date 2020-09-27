@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -109,8 +110,9 @@ public class FundingDAO {
 						funding.summary,
 						funding.readCount,funding.likeCount,
 						attachment.fileChangeName,
+						funding.startDay,
 						order.status,
-			new CaseBuilder().when(order.status.ne("Y")).then(0L).otherwise(order.price).sum())
+						order.price.sum())
 				.from(funding)
 				.leftJoin(funding.category, category)
 				.leftJoin(funding.fundingMaker, maker)
@@ -121,14 +123,20 @@ public class FundingDAO {
 				.leftJoin(orderReward.order, order)
 				.groupBy(funding.id,funding.title, category.category_name, maker.name, funding.goalAmount, 
 						funding.readCount,funding.likeCount
-						,funding.summary, attachment.fileChangeName,order.status)
-				.where(attachment.fundingFileCategory.id.eq(1L))
-				.orderBy()
+						,funding.summary, attachment.fileChangeName,order.status,funding.startDay)
+				.where(attachment.fundingFileCategory.id.eq(1L).and(funding.status.eq("Y")))
+				.orderBy(funding.startDay.desc())
 				.offset(pInfo.getCurrentPage())
 				.limit(pInfo.getLimit())
 				.fetch();		
 		
 		List<FundingMainViewDto> mainViewList = new ArrayList<FundingMainViewDto>();
+		
+		
+		for(Tuple re : result) {
+			
+			System.out.println(re.toString());
+		}
 		
 		
 		
@@ -1380,6 +1388,124 @@ public class FundingDAO {
 		
 		return query.select(funding.count()).from(funding).where(funding.status.eq("Y")).fetchFirst().intValue();
 	}
+
+
+
+	
+	
+	
+	
+
+	public List<FundingMainViewDto> selectList(PageInfo pInfo, FundingSearch search) {
+		
+		
+		
+		
+		
+		
+		JPAQueryFactory query = new JPAQueryFactory(em);
+
+		QFundingProject funding = QFundingProject.fundingProject;
+
+		QFundingCategory category = QFundingCategory.fundingCategory;
+
+		QFundingMaker maker = QFundingMaker.fundingMaker;
+
+		QReward reward = QReward.reward;
+
+		QOrderReward orderReward = QOrderReward.orderReward;
+		
+		QFundingAttachment attachment = QFundingAttachment.fundingAttachment;
+		
+		QOrders order = QOrders.orders;
+		
+		
+		
+		
+		
+		
+		List<Tuple> result = query
+				.select(funding.id,
+						funding.title, category.category_name, maker.name, funding.goalAmount, 
+						funding.summary,
+						funding.readCount,funding.likeCount,
+						attachment.fileChangeName,
+						funding.startDay,
+						order.status,
+						order.price.sum())
+				.from(funding)
+				.leftJoin(funding.category, category)
+				.leftJoin(funding.fundingMaker, maker)
+				.leftJoin(attachment).on(funding.id.eq(attachment.parentFunding.id))
+				
+				.leftJoin(funding.rewards, reward)
+				.leftJoin(orderReward).on(reward.id.eq(orderReward.reward.id))
+				.leftJoin(orderReward.order, order)
+				.groupBy(funding.id,funding.title, category.category_name, maker.name, funding.goalAmount, 
+						funding.readCount,funding.likeCount
+						,funding.summary, attachment.fileChangeName,order.status,funding.startDay)
+				.where(attachment.fundingFileCategory.id.eq(1L).and(funding.status.eq("Y")))
+				.orderBy(funding.startDay.desc())
+				.offset(pInfo.getCurrentPage())
+				.limit(pInfo.getLimit())
+				.fetch();		
+		
+		List<FundingMainViewDto> mainViewList = new ArrayList<FundingMainViewDto>();
+		
+		
+		for(Tuple re : result) {
+			
+			System.out.println(re.toString());
+		}
+		
+		
+		
+		for (Tuple tuple : result) {
+			int totalOrderAmount = 0;
+		if(  tuple.get(order.price.sum())!=null ) {
+			
+			
+		totalOrderAmount =  tuple.get(order.price.sum()).intValue();
+		
+		
+		}
+		FundingMainViewDto mainView = new FundingMainViewDto
+			(
+			tuple.get(funding.id),
+			tuple.get(funding.title),
+			tuple.get(category.category_name), 
+			tuple.get(funding.summary),
+			tuple.get(funding.fundingMaker.name), 
+			totalOrderAmount, 
+			tuple.get(funding.goalAmount), 
+			tuple.get(funding.endDay)
+			,(int)(((double)totalOrderAmount/tuple.get(funding.goalAmount))*100)
+			
+			
+			);
+		
+		mainView.setFileChangeName(tuple.get(attachment.fileChangeName));
+		
+		mainViewList.add(mainView);
+		}
+
+		return mainViewList;
+		
+		
+		
+		
+		
+		
+	}
+
+
+
+	
+	
+	
+	
+	
+
 
 
 

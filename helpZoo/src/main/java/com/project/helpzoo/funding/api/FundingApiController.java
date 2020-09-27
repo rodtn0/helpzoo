@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,8 +38,6 @@ public class FundingApiController {
 		
 		
 		
-		System.out.println("펀딩셀렉트리스트");
-		
 		PageInfo pInfo = service.pagination(cp);
 		
 		
@@ -56,6 +55,35 @@ public class FundingApiController {
 		
 		return "funding/fundingMain";
 	}
+	
+	
+	
+	
+	// 게시글 검색
+		// search/1?&sKey=tit&sVal=test
+		@RequestMapping("search")
+		public String search(@PathVariable int type, 
+							 @RequestParam(value="cp", required = false, defaultValue = "1") int cp,
+							 FundingSearch search, Model model) {
+			
+			
+			
+			
+			PageInfo pInfo = null;
+			
+			List<FundingMainViewDto> fundingList = service.selectSearchList(search,pInfo);
+			
+	
+			
+			model.addAttribute("fundingList", fundingList);
+			model.addAttribute("pInfo", pInfo);
+		
+			
+			return "funding/fundingMain";
+		
+		
+		}
+	
 	
 	
 	
