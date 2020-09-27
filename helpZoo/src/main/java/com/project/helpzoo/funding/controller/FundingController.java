@@ -806,6 +806,9 @@ public String fundingOpenStorySave(@PathVariable Long fundingNo,
 		}else if(category.equals("간식")) {
 			
 			categoryNo = 5L;
+		}else if(category.equals("기타")) {
+			
+			categoryNo = 6L;
 		}
 		
 		

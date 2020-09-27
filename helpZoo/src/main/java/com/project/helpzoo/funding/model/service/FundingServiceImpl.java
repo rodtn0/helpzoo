@@ -138,10 +138,10 @@ public class FundingServiceImpl implements FundingService {
 		if(businessType.equals("개인")) {
 			type = 1L;
 			
-		}else if (businessType.equals("법인")){
+		}else if (businessType.equals("법인 사업자")){
 			type = 2L;
 			
-		}else if (businessType.equals("개인사업자")){
+		}else if (businessType.equals("개인 사업자")){
 			type = 3L;
 			
 		}

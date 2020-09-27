@@ -432,11 +432,12 @@
                 
                카테고리 <span class="star">*</span><br>
                <select class="form-control form-control-lg" name="category">
-                <option>장난감</option>
-                <option>운동기구</option>
-                <option>사료</option>
-                <option>옷</option>
-                <option>간식</option>
+                <option <c:if test="${fundingOpenInfoView.category eq 1}">selected</c:if>>장난감</option>
+                <option <c:if test="${fundingOpenInfoView.category eq 3}">selected</c:if>>운동기구</option>
+                <option <c:if test="${fundingOpenInfoView.category eq 2}">selected</c:if>>사료</option>
+                <option <c:if test="${fundingOpenInfoView.category eq 4}">selected</c:if>>옷</option>
+                <option <c:if test="${fundingOpenInfoView.category eq 5}">selected</c:if>>간식</option>
+                <option <c:if test="${fundingOpenInfoView.category eq 6}">selected</c:if>>기타</option>
               </select>
                 <br>  
                 <br>
@@ -466,7 +467,9 @@
                 
                 검색용 태그 <span class="star">*</span><br>
                 <small>엔터를 누르면 태그가 등록됩니다. (최대 10개까지 입력 가능)</small>
-                <input class="form-control form-control-lg" type="text" placeholder="태그 입력" name ="fundingTag">
+                <input class="form-control form-control-lg" type="text" placeholder="태그 입력" name ="fundingTag"
+                   value="${fundingOpenInfoView.fundingTag}"
+                >
 
 
 
