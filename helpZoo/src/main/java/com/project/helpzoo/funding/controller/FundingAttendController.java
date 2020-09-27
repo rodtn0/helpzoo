@@ -79,7 +79,7 @@ import com.project.helpzoo.member.model.vo.Member;
 		 List<RewardView> rewardList = new ArrayList<RewardView>();
 		
 		 int totalAmount = 0;
-			for(int i = 0; i<orderReward.getTitle().length; i++) {
+			for(int i = 0; i<orderReward.getPrice().length; i++) {
 				
 				reward.setTitle(orderReward.getTitle()[i]);
 				reward.setPrice(orderReward.getPrice()[i]);
