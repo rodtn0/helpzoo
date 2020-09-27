@@ -33,6 +33,8 @@
 	  <id property="dBoardNo" column="DONATION_BOARD_NO"/>
 	  <result property="dBoardTitle" column="DONATION_BOARD_TITLE"/>
 	  <result property="dBoardWriter" column="DONATION_BOARD_WRITER"/>
+	  <result property="infoDonationNo" column="INFO_DONATION_NO"/>
+	  <result property="infoDonationCurrentAmount" column="INFO_DONATION_CURRENT_AMOUNT"/>
 	  <result property="dfilePath" column="DONATION_FILE_PATH"/>
 	  <result property="dfileChangeName" column="DONATION_FILE_CHANGE_NAME"/>
 	  <result property="dParentBoardNo" column="DONATION_PARENT_BOARD_NO"/>
@@ -40,6 +42,7 @@
 	  
 	  <resultMap type="Donation" id="doResultSet2">
 	  <id property="dBoardNo" column="DONATION_BOARD_NO"/>
+	  <result property="dBoardWriter" column="DONATION_BOARD_WRITER"/>
 	  <result property="dBoardTitle" column="DONATION_BOARD_TITLE"/>
 	  <result property="dBoardWriter" column="DONATION_BOARD_WRITER"/>
 	  <result property="infoDonationNo" column="INFO_DONATION_NO"/>
@@ -149,7 +152,7 @@
 	
 	<!-- 내가 참여한 기부 리스트 출력 -->
 	<select id="selectdoPtList" parameterType="Donation" resultMap="doResultSet2">
-	SELECT INFO_DONATION_NO, INFO_DONATION_CURRENT_AMOUNT, DONATION_BOARD_TITLE
+	SELECT DONATION_BOARD_NO, INFO_DONATION_NO, INFO_DONATION_CURRENT_AMOUNT, DONATION_BOARD_TITLE
     FROM DONATION_BOARD
     JOIN DONATION_INFO ON (INFO_BOARD_NO=DONATION_BOARD_NO)
     WHERE INFO_MEMBER_NO = #{memberNo}

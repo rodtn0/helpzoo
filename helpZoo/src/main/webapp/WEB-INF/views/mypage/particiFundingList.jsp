@@ -120,7 +120,7 @@ $('.navbar-light .dmenu').hover(function () {
                 <div class="card text-black">
                   <p class="card-head mx-auto">${fdList.projectNo}번째 프로젝트</p>
                  <c:choose>
-                    <c:when test="${!empty fdList }">
+                    <c:when test="${!empty ptThList }">
                       <c:set var = "src" value="/helpzoo/resources/images/not_thumbnail.png"/>
                        <c:forEach items="${ptThList}" var="th">
                           <%-- <c:set var = "src" value="${contextPath}${th.filePath}/${th.fileChangeName}"/> --%>

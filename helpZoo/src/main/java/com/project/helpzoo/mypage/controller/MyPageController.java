@@ -264,6 +264,7 @@ public class MyPageController {
 		
 		Member loginMember = (Member)model.getAttribute("loginMember");
 		int memberNo = loginMember.getMemberNo();
+		System.out.println("내가 참여한 기부 멤버 넘버 : " + memberNo);
 		
 		mPageInfo dInfo = mypageService.pagination(cp, memberNo);
 		System.out.println(dInfo);

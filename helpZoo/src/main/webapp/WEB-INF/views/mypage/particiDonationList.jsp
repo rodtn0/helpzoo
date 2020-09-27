@@ -117,28 +117,26 @@ $('.navbar-light .dmenu').hover(function () {
                <!-- <a href="${contextPath}/funding/fundingOpen">펀딩 주최하기</a> -->
                 </c:when>
            <c:otherwise>
-              <c:forEach var="doList" items="${doListPtme}">
+              <c:forEach var="ptList" items="${doListPtme}">
                 <div class="card text-black">
-                  <p class="card-head mx-auto">${doList.infoDonationNo}번째 기부내역</p>
+                  <p class="card-head mx-auto">${ptList.infoDonationNo}번째 기부내역</p>
                  <c:choose>
                     <c:when test="${!empty doPtThList }">
-                      <c:set var = "src" value="/helpzoo/resources/images/not_thumbnail.png"/>
-                       
-                       <c:forEach items="${doPtThList}" var="th">
-                          <%-- <c:set var = "src" value="${contextPath}${th.filePath}/${th.fileChangeName}"/> --%>
-                          	<c:if test="${th.dParentBoardNo == doList.dBoardNo}">
-                             	<c:set var = "src" value="${contextPath}${th.dfilePath}/${th.dfileChangeName}"/>
-                            </c:if>
-                       </c:forEach>
-                       
+                      	<c:set var = "src" value="/helpzoo/resources/images/not_thumbnail.png"/>
+                      	
+					  <c:forEach items="${doPtThList}" var="th">
+					  <c:if test="${th.dParentBoardNo == ptList.dBoardNo}">
+					  	<c:set var="src" value="${contextPath}${th.dfilePath}/${th.dfileChangeName}"/>
+					  </c:if>
+					  </c:forEach>
                        <img id="clickImg" style="height: 361px; width: 100%; display: block;" alt="" src="${src}" data-holder-rendered="true">
                     </c:when>
                     <c:otherwise>
                        <img id="clickImg" style="height: 361px; width: 100%; display: block;" alt="" src="/helpzoo/resources/images/not_thumbnail.png" data-holder-rendered="true">
                     </c:otherwise>     
                  </c:choose>
-                  <p class="card-text mx-auto">${doList.dBoardTitle}</p>
-                  <p class="card-text mx-auto">기부 금액 : ${doList.infoDonationCurrentAmount}원</p>
+                  <p class="card-text mx-auto">${ptList.dBoardTitle}</p>
+                  <p class="card-text mx-auto">기부 금액 : ${ptList.infoDonationCurrentAmount}원</p>
                 </div>
                 </c:forEach>
              </c:otherwise>
