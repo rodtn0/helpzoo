@@ -124,7 +124,7 @@ $('.navbar-light .dmenu').hover(function () {
                       <c:set var = "src" value="/helpzoo/resources/images/not_thumbnail.png"/>
                        <c:forEach items="${ptThList}" var="th">
                           <%-- <c:set var = "src" value="${contextPath}${th.filePath}/${th.fileChangeName}"/> --%>
-                          	<c:if test="${th.parentProjectNo == ptList.projectNo}">
+                          	<c:if test="${th.parentProjectNo == fdList.projectNo}">
                              	<c:set var = "src" value="${contextPath}${th.filePath}/${th.fileChangeName}"/>
                             </c:if>
                        </c:forEach>
