@@ -84,7 +84,13 @@
           <li><a href="${contextPath}/fundingApi/selectList">펀딩하기</a></li>
           <li><a href="${contextPath}/funding/fundingOpen">펀딩프로젝트 만들기</a></li>
           </ul>
-          <li><a href="${contextPath}/donation/donationMain/2">기부하기</a></li>
+          		  <li class="drop-down"><a href="${contextPath}/notice/noticeList">공지</a>
+            <ul>
+				<li><a href="${contextPath}/notice/noticeList">공지사항</a></li>
+				<li><a href="${contextPath}/event/eventList">이벤트</a></li>
+				<li><a href="${contextPath}/subscribe/mailing">구독하기</a></li>
+            </ul>
+          </li>
            <li class="drop-down"><a href="${contextPath}/board/review/1">후기게시판</a>
             <ul>
               <li><a href="${contextPath}/board/review/1">펀딩 후기게시판</a></li>
@@ -93,14 +99,6 @@
           </li>
 
           <li class="nav-logo active"><a href="${contextPath}"><img src="/helpzoo/resources/images/도와주100.png" alt="" class="img-fluid" id="logo"></a></li>
-
-		  <li class="drop-down"><a href="#">공지</a>
-            <ul>
-				<li><a href="${contextPath}/notice/noticeList">공지사항</a></li>
-				<li><a href="${contextPath}/event/eventList">이벤트</a></li>
-				<li><a href="${contextPath}/subscribe/mailing">구독하기</a></li>
-            </ul>
-          </li>
           <li class="drop-down"><a href="${contextPath}/faq/faqList">고객센터</a>
             <ul>
               <li><a href="${contextPath}/faq/faqList">FAQ</a></li>
