@@ -42,6 +42,7 @@ public class FundingApiController {
 		PageInfo pInfo = service.pagination(cp);
 		
 		
+		pInfo.setLimit(9);
 		
 		
 		List<FundingMainViewDto> fundingList = service.selectList(pInfo);
@@ -49,12 +50,21 @@ public class FundingApiController {
 		
 		model.addAttribute("fundingList", fundingList);
 		
-		
+		model.addAttribute("pInfo", pInfo);
 		
 		
 		
 		return "funding/fundingMain";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
 	@ResponseBody
