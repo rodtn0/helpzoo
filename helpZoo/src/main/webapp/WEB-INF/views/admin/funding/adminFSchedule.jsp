@@ -331,7 +331,7 @@ function myfunction(){
         </div>
       </div>
       <hr>
-    <form action="updateAction" method="post">
+    <form action="updateAction" method="post" style="text-align: center;">
     <input type='hidden' id='fundingNo' name='fundingNo'>
         펀딩 Start : <input type='date' id='fundingSD' name='fundingSD'/>
     <br>
@@ -339,7 +339,7 @@ function myfunction(){
     <br>
     <div>
 		<button type="button" class="btn btn-outline-info" id="updateBtn">수정</button>
-		<button type="button" class="btn btn-outline-info" id="deleteBtn">삭제</button>
+		<button type="button" class="btn btn-outline-info" id="deleteBtn" style="float: right;">삭제</button>
 	</div>
     </form>
 	    <div style="cursor:pointer; background-color:#DDDDDD; text-align: center; padding-bottom:10px; padding-top: 10px;" onClick="closeModal();">  
