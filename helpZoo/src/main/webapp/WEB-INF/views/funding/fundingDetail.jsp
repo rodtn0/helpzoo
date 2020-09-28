@@ -144,7 +144,7 @@
   
     <div class="co">
 
-      <img src="/helpZoo/resources/images/dodo5.jpg" class="funding_item_logo" />
+      <img src="/helpZoo/resources/uploadImages/${funding.fileChangeName}" class="funding_item_logo" />
 
 
       <div class="funding_item_text">
@@ -167,8 +167,8 @@
         <div class="row">
       <div class="col-lg-8 col-sm-8 col-md-8">
 
-        <img src="/helpZoo/resources/images/dodo5.jpg" class="funding_thumnail" />
-
+        <img src="/helpZoo/resources/uploadImages/${funding.fileChangeName}" class="funding_thumnail" />
+ <br> <br> <br> <br> <br> <br> <br> <br>
         <br />
         <br />
        
@@ -192,8 +192,6 @@
         <br>
         <h3>${funding.totalOrderAmount}원 펀딩 </h3>
         <br>
-        <h3>391명의 서포터</h3>
-        <br>
         
         <button type="button" class="btn btn-primary  col-md-12 col-sm-12 col-xs-12 btn-lg funding_btn">
             펀딩하기
@@ -201,31 +199,7 @@
 
             <br>
 
-         <button type="button" class="btn btn-primary">
-            <i class="fas fa-heart"></i>      ${funding.like}
-            </button>
-            <button type="button" class="btn btn-primary">
-                <i class="far fa-comment-dots"></i>  문의
-
-           </button>
-           <button type="button" class="btn btn-primary">
-
-                    공유하기
-           </button>
-
-           <hr>
-           <br>
-          <small>메이커 정보</small>
-
-           <div class="card" style="width: 18rem;">
-
-            <img src="/helpZoo/resources/images/dodo5.jpg" class="card-img-top" alt="...">
-
-            <div class="card-body">
-              <p class="card-text">${funding.makerName }</p>
-            </div>
-          </div>
-
+      
 
           <br>
          <small>리워드 선택</small>

@@ -290,9 +290,9 @@ public class FundingDAO {
 					.from(funding)
 					.leftJoin(funding.fundingMaker, maker)
 					.leftJoin(funding.category,category)
-					.leftJoin(funding.rewards, reward)
-					.leftJoin(order).on(order.id.eq(funding.id))
-					.where(funding.id.eq(no))
+					.leftJoin(order).on(order.funding.id.eq(funding.id))
+					.leftJoin(attachment).on(attachment.parentFunding.id.eq(funding.id))
+					.where(funding.id.eq(no).and(attachment.fundingFileCategory.id.eq(6L)))
 					.groupBy(funding.id,
 							funding.story, 
 							funding.goalAmount,
@@ -318,8 +318,8 @@ public class FundingDAO {
 		
 			int totalOrderAmount = 0;
 			
-			if(  tuple.get(orderReward.count.sum())!= null && tuple.get(reward.price)!=null ) {
-			totalOrderAmount =  tuple.get(orderReward.count.sum())*tuple.get(reward.price);
+			if(  tuple.get(order.price.sum())!= null) {
+			totalOrderAmount =  tuple.get(order.price.sum()).intValue();
 			}
 			
 			System.out.println(
@@ -343,7 +343,8 @@ public class FundingDAO {
 					,tuple.get(funding.endDay),
 					tuple.get(funding.startDay),
 					tuple.get(funding.title),
-					tuple.get(funding.category.category_name)
+					tuple.get(funding.category.category_name),
+					tuple.get(attachment.fileChangeName)
 					);
 			
 			
