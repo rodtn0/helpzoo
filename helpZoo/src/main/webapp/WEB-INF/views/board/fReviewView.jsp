@@ -43,7 +43,7 @@
 	
 </head>
 
-
+<script src="https://kit.fontawesome.com/13be1766f6.js" crossorigin="anonymous"></script>
 <body style="padding-top : 0px;">
 	<jsp:include page="../common/header.jsp"/>
 
@@ -200,7 +200,7 @@
 						<!-- http://localhost:8095/helpzoo/board/review/1/881?cp=1 -->
 						<!-- http://localhost:8095/helpzoo/board/review/1 -->
 				<a class="btn btn-primary" href="../1" style="background-color:#7fcdcd; border:none;" >목록으로</a>
-				<a class="btn btn-primary" id="likeBtn" style="background-color: pink; border:none;">도움이 됐어요&nbsp;&nbsp;</a>
+				<a class="btn btn-primary" id="likeBtn" style="background-color: pink; border:none;">도움이 됐어요 <i class="fas fa-heart"></i>&nbsp;&nbsp;</a>
 		</div>
 
 
