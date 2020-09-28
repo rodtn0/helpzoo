@@ -515,7 +515,8 @@ public class FundingServiceImpl implements FundingService {
 	        
 	        
 	        
-	        //
+	        //   http://aclass.xyz:8083
+	       // params.add("approval_url", "http://aclass.xyz:8083/helpZoo/fundingAttend/kakaoPaySuccess/" + orderId);
 	        params.add("approval_url", "http://localhost:8080/helpZoo/fundingAttend/kakaoPaySuccess/" + orderId);
 	        params.add("cancel_url", "http://localhost:8080/helpZoo/fundingAttend/kakaoPayCancel");
 	        params.add("fail_url", "http://localhost:8080/helpZoo/fundingAttend/kakaoPayFail");
