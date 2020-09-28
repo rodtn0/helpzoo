@@ -487,23 +487,7 @@ em{
       </span>
         <div class="float-right"> 
 
-          <i class="fas fa-search search_all" id="searchBtn"></i> &nbsp;
-          <input type="text" name="sVal" class="form-control" style="width:25%; display: inline-block;">
-          &nbsp; &nbsp; &nbsp; 
-
-          
-          
-
-
-
-
-
-          <select name="sKey2" class="form-control" style="width:100px; display: inline-block;">
-          	  <option value="time">최신순</option>
-              <option value="readCount">인기순</option>
-              <option value="totalAmount">모금액순</option>
-              <option value="endDay">마감임박순</option>
-          </select>
+         
 
         </span>
       </div>
