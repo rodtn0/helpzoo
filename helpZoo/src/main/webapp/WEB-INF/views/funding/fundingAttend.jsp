@@ -241,24 +241,6 @@
 
 
 
-        <div class="card text-center lasttt">
-          <div class="card-body">
-            <h5 class="card-title">후원금 더하기 (선택)</h5>
-            <p class="card-text small">
-              후원금을 더하여 펀딩할 수 있습니다. 추가 후원금을 입력하시겠습니까? 
-              <br>
-              <div class="row">
-                <div class="col">
-                  <input type="number" class="form-control" placeholder="0">
-                </div>
-                 <span class="add_Money"> 원을 추가로 후원합니다.</span>
-              </div>
-      
-
-
-          
-          </div>
-          </div>
         </div>
 
 
