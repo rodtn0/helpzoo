@@ -487,7 +487,7 @@ public class FundingServiceImpl implements FundingService {
 		
 		
 					
-		public String kakaoPayReady(KakaoPayApiItem item, String sisi) {
+		public String kakaoPayReady(KakaoPayApiItem item, String sisi, int orderId) {
 			
 			String HOST = "https://kapi.kakao.com";
 			
@@ -513,7 +513,10 @@ public class FundingServiceImpl implements FundingService {
 	        params.add("tax_free_amount", "0");
 	        
 	        
-	        params.add("approval_url", "http://localhost:8080/helpZoo/fundingAttend/kakaoPaySuccess");
+	        
+	        
+	        //
+	        params.add("approval_url", "http://localhost:8080/helpZoo/fundingAttend/kakaoPaySuccess/" + orderId);
 	        params.add("cancel_url", "http://localhost:8080/helpZoo/fundingAttend/kakaoPayCancel");
 	        params.add("fail_url", "http://localhost:8080/helpZoo/fundingAttend/kakaoPayFail");
 	        
