@@ -46,11 +46,29 @@ public class FundingDetailViewDto {
 	
 	private String category;
 	
+	private String fileChangeName;
 	
 	
 	
 	
-	
+	public String getFileChangeName() {
+		return fileChangeName;
+	}
+
+
+
+	public void setFileChangeName(String fileChangeName) {
+		this.fileChangeName = fileChangeName;
+	}
+
+
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+
+
 	public int getGoalAmount() {
 		return goalAmount;
 	}
@@ -65,7 +83,7 @@ public class FundingDetailViewDto {
 
 	public FundingDetailViewDto(String fundingStroy, int goalAmount, int totalOrderAmount, int achievementRate,
 			List<String> suppoterName, String makerName, String snsUrl, String kakaoUrl, int like, Timestamp endDay,
-			Timestamp startDay, String fundingTitle,String category) {
+			Timestamp startDay, String fundingTitle,String category,String fileChangeName) {
 		super();
 		this.fundingStroy = fundingStroy;
 		this.goalAmount = goalAmount;
@@ -80,6 +98,7 @@ public class FundingDetailViewDto {
 		this.startDay = startDay;
 		this.fundingTitle = fundingTitle;
 		this.category = category;
+		this.fileChangeName = fileChangeName;
 	}
 
 

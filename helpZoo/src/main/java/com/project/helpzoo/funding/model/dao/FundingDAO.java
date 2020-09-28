@@ -103,7 +103,7 @@ public class FundingDAO {
 		
 		
 		List<Tuple> result = query
-				.select(funding.id,
+				.selectDistinct(funding.id,
 						funding.title, category.category_name, maker.name, funding.goalAmount, 
 						funding.summary,
 						attachment.fileChangeName,
@@ -117,9 +117,9 @@ public class FundingDAO {
 				.leftJoin(funding.fundingMaker, maker)
 				.groupBy(funding.id,funding.title, category.category_name, maker.name, funding.goalAmount
 						,funding.summary, attachment.fileChangeName,funding.startDay,attachment.fundingFileCategory.id)
-				.where(funding.status.eq("Y"))
+				.where(funding.status.eq("Y").and(attachment.fundingFileCategory.id.eq(1L)))
 				.orderBy(funding.startDay.desc())	
-				.offset(pInfo.getCurrentPage())
+				.offset((pInfo.getCurrentPage()-1)*9)
 				.limit(pInfo.getLimit())
 				.fetch();		
 		
@@ -265,6 +265,7 @@ public class FundingDAO {
 		
 		QOrderReward orderReward = QOrderReward.orderReward;
 		
+		QFundingAttachment attachment = QFundingAttachment.fundingAttachment;
 		
 		
 			Long no = Long.valueOf(fundingNo);
@@ -283,13 +284,15 @@ public class FundingDAO {
 							funding.endDay,
 							funding.startDay,
 							category.category_name,
+							attachment.fileChangeName,
+							
 							order.price.sum())
 					.from(funding)
 					.leftJoin(funding.fundingMaker, maker)
 					.leftJoin(funding.category,category)
-					.leftJoin(funding.rewards, reward)
-					.leftJoin(order).on(order.id.eq(funding.id))
-					.where(funding.id.eq(no))
+					.leftJoin(order).on(order.funding.id.eq(funding.id))
+					.leftJoin(attachment).on(attachment.parentFunding.id.eq(funding.id))
+					.where(funding.id.eq(no).and(attachment.fundingFileCategory.id.eq(6L)))
 					.groupBy(funding.id,
 							funding.story, 
 							funding.goalAmount,
@@ -301,6 +304,7 @@ public class FundingDAO {
 							maker.kakaoURL,
 							funding.endDay,
 							category.category_name,
+							attachment.fileChangeName,
 							funding.startDay)
 					.fetch();
 		
@@ -314,8 +318,8 @@ public class FundingDAO {
 		
 			int totalOrderAmount = 0;
 			
-			if(  tuple.get(orderReward.count.sum())!= null && tuple.get(reward.price)!=null ) {
-			totalOrderAmount =  tuple.get(orderReward.count.sum())*tuple.get(reward.price);
+			if(  tuple.get(order.price.sum())!= null) {
+			totalOrderAmount =  tuple.get(order.price.sum()).intValue();
 			}
 			
 			System.out.println(
@@ -339,7 +343,8 @@ public class FundingDAO {
 					,tuple.get(funding.endDay),
 					tuple.get(funding.startDay),
 					tuple.get(funding.title),
-					tuple.get(funding.category.category_name)
+					tuple.get(funding.category.category_name),
+					tuple.get(attachment.fileChangeName)
 					);
 			
 			

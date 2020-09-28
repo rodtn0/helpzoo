@@ -279,7 +279,7 @@ public class MyPageController {
 		if(!doListPtme.isEmpty()) {
 			List<Donation> doPtThList = mypageService.selectDoPtThumbnailList(doListPtme);
 			System.out.println("doPtThList : " + doPtThList );
-			model.addAttribute("doPtThList");
+			model.addAttribute("doPtThList", doPtThList );
 		}
 		
 		

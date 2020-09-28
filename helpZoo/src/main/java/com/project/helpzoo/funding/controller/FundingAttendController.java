@@ -226,7 +226,7 @@ import com.project.helpzoo.member.model.vo.Member;
 		  
 		  
 		  
-		  String url = service.kakaoPayReady(item,ContextPath);
+		  String url = service.kakaoPayReady(item,ContextPath,ooderId);
 		
 		  
 
@@ -240,20 +240,15 @@ import com.project.helpzoo.member.model.vo.Member;
 	    }
 	    
 					  
-		  	@RequestMapping("/kakaoPaySuccess")
-		    public String kakaoPaySuccess(Model model , HttpServletRequest request , @RequestParam("pg_token") String pg_token) {
+		  	@RequestMapping("/kakaoPaySuccess/{orderId}")
+		    public String kakaoPaySuccess(Model model , HttpServletRequest request , @RequestParam("pg_token") String pg_token,  @PathVariable  int orderId) {
 			 
 		        
 		  	
 		  		
 		  	HttpSession session = request.getSession(false);	
 		  	
-		  	int orderId =  	(Integer)model.getAttribute("orderId");
-		  	
-		  	System.out.println("오더석세스");
-		  	
-		  	session.removeAttribute("orderId");
-		  	  
+		 
 		  	 
 		  	  
 			  Long orderNo2 = ((Integer)orderId).longValue();
