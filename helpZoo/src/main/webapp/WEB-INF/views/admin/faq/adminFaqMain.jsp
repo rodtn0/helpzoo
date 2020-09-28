@@ -28,8 +28,7 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Question And Answer</h1>
-          <p class="mb-4">관리자가 사용자 질문에 답변해주는 페이지입니다.</p>
+          <h1 class="h3 mb-2 text-gray-800">Frequency answer And Question</h1>
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">

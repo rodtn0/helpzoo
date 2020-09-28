@@ -121,8 +121,9 @@
 				<div>
 					<div class="float-right">
 						<a class="btn btn-info" 
-							href="">목록으로</a>
-	                	
+							href="<c:url value="../qna/qnaList">
+										<c:param name="cp" value="${param.cp}" />
+									</c:url>">목록으로</a>
 	                	<!-- 글 작성자와 로그인한 회원이 같을 경우 -->
 	                	<c:if test= "${qnaBoard.qnaWriter == sessionScope.loginMember.memberId }">
 	                		<c:url var="updateUrl" value ="${qnaBoard.qnaNo}/update">

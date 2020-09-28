@@ -198,8 +198,8 @@
 			    },
 			    yAxis: {
 			        title: 'Price',
-			        min: 0,
-			        max: 2000000
+			        min: 500000,
+			        max: 5000000
 			    },
 			    xAxis: {
 			        title: 'Month',
