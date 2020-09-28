@@ -125,6 +125,8 @@ $('.navbar-light .dmenu').hover(function () {
                       	<c:set var = "src" value="/helpzoo/resources/images/not_thumbnail.png"/>
                       	
 					  <c:forEach items="${doPtThList}" var="th">
+					  
+					  
 					  <c:if test="${th.dParentBoardNo == ptList.dBoardNo}">
 					  	<c:set var="src" value="${contextPath}${th.dfilePath}/${th.dfileChangeName}"/>
 					  </c:if>
