@@ -149,7 +149,7 @@
   
     <div class="co">
 
-      <img src="/helpZoo/resources/uploadImages/${funding.fileChangeName}" class="funding_item_logo" />
+      <img src="/helpzoo/resources/uploadImages/${funding.fileChangeName}" class="funding_item_logo" />
 
 
       <div class="funding_item_text">
@@ -172,7 +172,7 @@
         <div class="row">
       <div class="col-lg-8 col-sm-8 col-md-8">
 
-        <img src="/helpZoo/resources/uploadImages/${funding.fileChangeName}" class="funding_thumnail" />
+        <img src="/helpzoo/resources/uploadImages/${funding.fileChangeName}" class="funding_thumnail" />
  <br> <br> <br> <br> <br> <br> <br> <br>
         <br />
         <br />
@@ -198,7 +198,10 @@
         <h3>${funding.totalOrderAmount}원 펀딩 </h3>
         <br>
         
-        <button type="button" class="btn btn-primary  col-md-12 col-sm-12 col-xs-12 btn-lg funding_btn">
+        <button type="button" class="btn btn-primary  col-md-12 col-sm-12 col-xs-12 btn-lg funding_btn"
+        
+        onclick="location.href='${contextPath}/fundingAttend/rewardChoice/+${fundingNo}'"
+        >
             펀딩하기
          </button>
 
