@@ -199,8 +199,9 @@
         <br>
         
         <button type="button" class="btn btn-primary  col-md-12 col-sm-12 col-xs-12 btn-lg funding_btn"
-        
+        <c:if test="${!empty loginMember}">
         onclick="location.href='${contextPath}/fundingAttend/rewardChoice/+${fundingNo}'"
+        </c:if >
         >
             펀딩하기
          </button>
