@@ -247,7 +247,7 @@
   </head>
   <body>
     <div class="project_create_top_bar">
-      &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/helpZoo/resources/images/도와주60.png" />
+      &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/helpzoo/resources/images/도와주60.png" />
 
       <span class="span"> <i class="fas fa-paw popoking"></i> &nbsp;${makerName}  </span>
       <div class="float-right project_create_top_bar_choice"> 
