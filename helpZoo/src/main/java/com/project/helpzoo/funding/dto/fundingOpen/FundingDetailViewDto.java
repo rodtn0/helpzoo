@@ -46,7 +46,7 @@ public class FundingDetailViewDto {
 	
 	private String category;
 	
-	
+	private String fileChangeName;
 	
 	
 	

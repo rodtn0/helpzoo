@@ -103,7 +103,7 @@ public class FundingDAO {
 		
 		
 		List<Tuple> result = query
-				.select(funding.id,
+				.selectDistinct(funding.id,
 						funding.title, category.category_name, maker.name, funding.goalAmount, 
 						funding.summary,
 						attachment.fileChangeName,
@@ -117,9 +117,9 @@ public class FundingDAO {
 				.leftJoin(funding.fundingMaker, maker)
 				.groupBy(funding.id,funding.title, category.category_name, maker.name, funding.goalAmount
 						,funding.summary, attachment.fileChangeName,funding.startDay,attachment.fundingFileCategory.id)
-				.where(funding.status.eq("Y"))
+				.where(funding.status.eq("Y").and(attachment.fundingFileCategory.id.eq(1L)))
 				.orderBy(funding.startDay.desc())	
-				.offset(pInfo.getCurrentPage())
+				.offset((pInfo.getCurrentPage()-1)*9)
 				.limit(pInfo.getLimit())
 				.fetch();		
 		
@@ -265,6 +265,7 @@ public class FundingDAO {
 		
 		QOrderReward orderReward = QOrderReward.orderReward;
 		
+		QFundingAttachment attachment = QFundingAttachment.fundingAttachment;
 		
 		
 			Long no = Long.valueOf(fundingNo);
@@ -283,6 +284,8 @@ public class FundingDAO {
 							funding.endDay,
 							funding.startDay,
 							category.category_name,
+							attachment.fileChangeName,
+							
 							order.price.sum())
 					.from(funding)
 					.leftJoin(funding.fundingMaker, maker)
@@ -301,6 +304,7 @@ public class FundingDAO {
 							maker.kakaoURL,
 							funding.endDay,
 							category.category_name,
+							attachment.fileChangeName,
 							funding.startDay)
 					.fetch();
 		
