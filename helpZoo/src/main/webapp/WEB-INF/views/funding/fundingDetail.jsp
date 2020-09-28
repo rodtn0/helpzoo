@@ -53,6 +53,11 @@
         background-repeat: no-repeat;
         background-size: cover;
       }
+      
+      .card{
+      
+      cursor: pointer;
+      }
 
       .funding_item_text {
         color: white;
@@ -242,12 +247,12 @@
 	    
 	    $(".rewardcard").click(function(){
 
-	        
+	    	 <c:if test="${!empty loginMember}">
 	        var url = "${contextPath}/fundingAttend/rewardChoice/"+${fundingNo};
 	        
 	        
 	        location.href = url;
-	        
+	        </c:if>
 	        
 	        
 	        

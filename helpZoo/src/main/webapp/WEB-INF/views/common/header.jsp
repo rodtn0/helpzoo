@@ -82,7 +82,10 @@
           <li class="drop-down"><a href="${contextPath}/fundingApi/selectList">펀딩하기</a>
           <ul>
           <li><a href="${contextPath}/fundingApi/selectList">펀딩하기</a></li>
+          
+               <c:if test="${!empty loginMember}">
           <li><a href="${contextPath}/funding/fundingOpen">펀딩프로젝트 만들기</a></li>
+         		 </c:if>
           </ul>
           		  <li class="drop-down"><a href="${contextPath}/notice/noticeList">공지</a>
             <ul>
