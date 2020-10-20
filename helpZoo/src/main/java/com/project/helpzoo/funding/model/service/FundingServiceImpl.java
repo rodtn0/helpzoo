@@ -515,15 +515,15 @@ public class FundingServiceImpl implements FundingService {
 	        
 	        
 	        
+	        params.add("approval_url", "http://localhost:8080/helpZoo/fundingAttend/kakaoPaySuccess/" + orderId);
+	        params.add("cancel_url", "http://localhost:8080/helpZoo/fundingAttend/kakaoPayCancel");
+	        params.add("fail_url", "http://localhost:8080/helpZoo/fundingAttend/kakaoPayFail");
+	        
 	        //   http://aclass.xyz:8083
-	        params.add("approval_url", "http://aclass.xyz:8083/helpzoo/fundingAttend/kakaoPaySuccess/" + orderId);
-	       // params.add("approval_url", "http://localhost:8080/helpZoo/fundingAttend/kakaoPaySuccess/" + orderId);
+//	        params.add("approval_url", "http://aclass.xyz:8083/helpzoo/fundingAttend/kakaoPaySuccess/" + orderId);
+//	        params.add("cancel_url", "http://aclass.xyz:8083/helpzoo/fundingAttend/kakaoPayCancel/" + orderId);
+//	        params.add("fail_url", "http://aclass.xyz:8083/helpzoo/fundingAttend/kakaoPayFail/" + orderId);
 	        
-	        params.add("cancel_url", "http://aclass.xyz:8083/helpzoo/fundingAttend/kakaoPayCancel/" + orderId);
-	        params.add("fail_url", "http://aclass.xyz:8083/helpzoo/fundingAttend/kakaoPayFail/" + orderId);
-	        
-	      //  params.add("cancel_url", "http://localhost:8080/helpZoo/fundingAttend/kakaoPayCancel");
-	       // params.add("fail_url", "http://localhost:8080/helpZoo/fundingAttend/kakaoPayFail");
 	        
 	        
 	         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
